@@ -30,7 +30,7 @@ Python >= 3.6
 You can install directly using pip:
 
 ```sh
-pip install git+https://github.com/apache/airflow-client-python/airflow.git
+pip install git+https://github.com/apache/airflow-client-python.git#egg=airflow_client&subdirectory=airflow
 ````
 
 ### Setuptools
@@ -38,6 +38,8 @@ pip install git+https://github.com/apache/airflow-client-python/airflow.git
 Or install via [Setuptools](http://pypi.python.org/pypi/setuptools).
 
 ```sh
+git clone git@github.com:apache/airflow-client-python.git
+cd airflow-client-python/airflow
 python setup.py install --user
 ```
 (or `sudo python setup.py install` to install the package for all users)
@@ -109,5 +111,5 @@ cd airflow
 # bump up the version in python.sh & run the following command 
 ./clients/gen/python.sh airflow/api_connexion/openapi/v1.yaml ../airflow-client-python/airflow
 
-# raise a PR in github
+# raise a PR in github for both the repos (airflow & airflow-client-python)
 ```

@@ -36,6 +36,5 @@ jobs:
 
       - name: Run pytest
         run: |
-          pip install -r requirements.txt
-          pip install pytest
+          pip install -r airflow/test-requirements.txt
           pytest airflow/test

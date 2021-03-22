@@ -30,7 +30,7 @@ Python >= 3.6
 You can install directly using pip:
 
 ```sh
-pip install git+https://github.com/apache/airflow-client-python.git#egg=airflow_client&subdirectory=airflow
+pip install git+https://github.com/apache/airflow-client-python.git
 ````
 
 ### Setuptools
@@ -39,14 +39,14 @@ Or install via [Setuptools](http://pypi.python.org/pypi/setuptools).
 
 ```sh
 git clone git@github.com:apache/airflow-client-python.git
-cd airflow-client-python/airflow
+cd airflow-client-python
 python setup.py install --user
 ```
 (or `sudo python setup.py install` to install the package for all users)
 
 Then import the package:
 ```python
-import airflow_client
+import airflow_client.client
 ```
 
 ## Getting Started
@@ -56,14 +56,14 @@ Please follow the [installation procedure](#installation--usage) and then run th
 ```python
 
 import time
-import airflow_client
+import airflow_client.client
 from pprint import pprint
-from airflow_client.api import config_api
-from airflow_client.model.config import Config
-from airflow_client.model.error import Error
+from airflow_client.client.api import config_api
+from airflow_client.client.model.config import Config
+from airflow_client.client.model.error import Error
 # Defining the host is optional and defaults to http://localhost/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = airflow_client.Configuration(
+configuration = airflow_client.client.Configuration(
     host = "http://localhost/api/v1"
 )
 
@@ -73,7 +73,7 @@ configuration = airflow_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = airflow_client.Configuration(
+configuration = airflow_client.client.Configuration(
     host = "http://localhost/api/v1",
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
@@ -81,7 +81,7 @@ configuration = airflow_client.Configuration(
 
 
 # Enter a context with an instance of the API client
-with airflow_client.ApiClient(configuration) as api_client:
+with airflow_client.client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = config_api.ConfigApi(api_client)
     
@@ -89,7 +89,7 @@ with airflow_client.ApiClient(configuration) as api_client:
         # Get current configuration
         api_response = api_instance.get_config()
         pprint(api_response)
-    except airflow_client.ApiException as e:
+    except airflow_client.client.ApiException as e:
         print("Exception when calling ConfigApi->get_config: %s\n" % e)
 ```
 
@@ -109,7 +109,7 @@ git clone git@github.com:apache/airflow.git
 cd airflow
 
 # bump up the version in python.sh & run the following command 
-./clients/gen/python.sh airflow/api_connexion/openapi/v1.yaml ../airflow-client-python/airflow
+./clients/gen/python.sh airflow/api_connexion/openapi/v1.yaml ../airflow-client-python/airflow_client
 
 # raise a PR in github for both the repos (airflow & airflow-client-python)
 ```

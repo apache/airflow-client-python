@@ -17,7 +17,7 @@
  under the License.
  -->
 
-# airflow_client
+# Apache Airflow Python Client
 # Overview
 
 To facilitate management, Apache Airflow supports a range of REST API endpoints across its

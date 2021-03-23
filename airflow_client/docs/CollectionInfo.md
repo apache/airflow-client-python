@@ -20,6 +20,7 @@
 # CollectionInfo
 
 Metadata about collection.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

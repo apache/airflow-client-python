@@ -20,6 +20,7 @@
 # Variable
 
 Full representation of Variable
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

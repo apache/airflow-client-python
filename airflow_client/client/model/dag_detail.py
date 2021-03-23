@@ -206,7 +206,7 @@ class DAGDetail(ModelComposed):
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
             dag_id (str): The ID of the DAG.. [optional]  # noqa: E501
-            root_dag_id (str, none_type): If the DAG is SubDAG then it is the top level DAG identifier. Otherwise, nulll.. [optional]  # noqa: E501
+            root_dag_id (str, none_type): If the DAG is SubDAG then it is the top level DAG identifier. Otherwise, null.. [optional]  # noqa: E501
             is_paused (bool, none_type): Whether the DAG is paused.. [optional]  # noqa: E501
             is_subdag (bool): Whether the DAG is SubDAG.. [optional]  # noqa: E501
             fileloc (str): The absolute path to the file.. [optional]  # noqa: E501

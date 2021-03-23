@@ -20,6 +20,7 @@
 # DAGRunCollection
 
 Collection of DAG runs.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

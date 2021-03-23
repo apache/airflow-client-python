@@ -20,6 +20,7 @@
 # CronExpression
 
 Cron expression
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

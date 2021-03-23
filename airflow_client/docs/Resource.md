@@ -20,6 +20,7 @@
 # Resource
 
 A \"resource\" on which permissions are granted.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

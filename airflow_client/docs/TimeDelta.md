@@ -20,6 +20,7 @@
 # TimeDelta
 
 Time delta
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

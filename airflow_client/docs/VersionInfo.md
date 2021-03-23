@@ -20,6 +20,7 @@
 # VersionInfo
 
 Version information.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

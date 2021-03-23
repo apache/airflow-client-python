@@ -20,6 +20,7 @@
 # Color
 
 Color in hexadecimal notation.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

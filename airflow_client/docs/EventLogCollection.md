@@ -20,6 +20,7 @@
 # EventLogCollection
 
 Collection of event logs.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

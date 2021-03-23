@@ -20,6 +20,7 @@
 # XComCollectionItem
 
 XCom entry collection item.  The value field is only available when reading a single object due to the size of the value. 
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

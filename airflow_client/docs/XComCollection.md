@@ -20,6 +20,7 @@
 # XComCollection
 
 Collection of XCom entries.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

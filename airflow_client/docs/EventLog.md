@@ -20,6 +20,7 @@
 # EventLog
 
 Log of user operations via CLI or Web UI.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

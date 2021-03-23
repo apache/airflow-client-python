@@ -20,6 +20,7 @@
 # PoolCollection
 
 Collection of pools.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

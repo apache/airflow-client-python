@@ -17,7 +17,7 @@
  under the License.
  -->
 
-# airflow_client.XComApi
+# Apache Airflow Python Client.XComApi
 
 All URIs are relative to *http://localhost/api/v1*
 
@@ -89,6 +89,7 @@ with client.ApiClient(configuration) as api_client:
         print("Exception when calling XComApi->get_xcom_entries: %s\n" % e)
 ```
 
+
 ### Parameters
 
 Name | Type | Description  | Notes
@@ -111,6 +112,7 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -171,6 +173,7 @@ with client.ApiClient(configuration) as api_client:
         print("Exception when calling XComApi->get_xcom_entry: %s\n" % e)
 ```
 
+
 ### Parameters
 
 Name | Type | Description  | Notes
@@ -192,6 +195,7 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |

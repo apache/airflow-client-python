@@ -20,6 +20,7 @@
 # TaskInstanceCollection
 
 Collection of task instances.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

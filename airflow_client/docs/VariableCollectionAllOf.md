@@ -19,6 +19,7 @@
 
 # VariableCollectionAllOf
 
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

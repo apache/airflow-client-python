@@ -20,6 +20,7 @@
 # DAGCollection
 
 Collection of DAGs.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

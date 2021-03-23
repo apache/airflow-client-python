@@ -20,6 +20,7 @@
 # PluginCollection
 
 Plugin Collection
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

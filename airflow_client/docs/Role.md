@@ -20,6 +20,7 @@
 # Role
 
 Role item
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

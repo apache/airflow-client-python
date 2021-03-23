@@ -20,6 +20,7 @@
 # Pool
 
 The pool
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

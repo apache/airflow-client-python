@@ -20,6 +20,7 @@
 # RoleCollection
 
 Role Collections
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

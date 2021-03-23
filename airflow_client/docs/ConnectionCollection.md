@@ -20,6 +20,7 @@
 # ConnectionCollection
 
 Collection of connections.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

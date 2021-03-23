@@ -20,6 +20,7 @@
 # Error
 
 [RFC7807](https://tools.ietf.org/html/rfc7807) compliant response. 
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

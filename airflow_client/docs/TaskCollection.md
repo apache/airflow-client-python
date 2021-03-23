@@ -20,6 +20,7 @@
 # TaskCollection
 
 Collection of tasks.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

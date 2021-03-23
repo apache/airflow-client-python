@@ -20,6 +20,7 @@
 # ExtraLinkCollection
 
 The collection of extra links.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

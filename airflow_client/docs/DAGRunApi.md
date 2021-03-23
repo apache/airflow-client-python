@@ -17,7 +17,7 @@
  under the License.
  -->
 
-# airflow_client.DAGRunApi
+# Apache Airflow Python Client.DAGRunApi
 
 All URIs are relative to *http://localhost/api/v1*
 
@@ -76,6 +76,7 @@ with client.ApiClient(configuration) as api_client:
         print("Exception when calling DAGRunApi->delete_dag_run: %s\n" % e)
 ```
 
+
 ### Parameters
 
 Name | Type | Description  | Notes
@@ -95,6 +96,7 @@ void (empty response body)
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -155,6 +157,7 @@ with client.ApiClient(configuration) as api_client:
         print("Exception when calling DAGRunApi->get_dag_run: %s\n" % e)
 ```
 
+
 ### Parameters
 
 Name | Type | Description  | Notes
@@ -174,6 +177,7 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -251,6 +255,7 @@ with client.ApiClient(configuration) as api_client:
         print("Exception when calling DAGRunApi->get_dag_runs: %s\n" % e)
 ```
 
+
 ### Parameters
 
 Name | Type | Description  | Notes
@@ -277,6 +282,7 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -348,6 +354,7 @@ with client.ApiClient(configuration) as api_client:
         print("Exception when calling DAGRunApi->get_dag_runs_batch: %s\n" % e)
 ```
 
+
 ### Parameters
 
 Name | Type | Description  | Notes
@@ -366,6 +373,7 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -434,6 +442,7 @@ with client.ApiClient(configuration) as api_client:
         print("Exception when calling DAGRunApi->post_dag_run: %s\n" % e)
 ```
 
+
 ### Parameters
 
 Name | Type | Description  | Notes
@@ -453,6 +462,7 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |

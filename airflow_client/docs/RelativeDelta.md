@@ -20,6 +20,7 @@
 # RelativeDelta
 
 Relative delta
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

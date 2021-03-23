@@ -19,6 +19,7 @@
 
 # DAGDetailAllOf
 
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

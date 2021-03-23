@@ -19,6 +19,7 @@
 
 # ConnectionAllOf
 
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

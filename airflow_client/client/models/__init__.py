@@ -95,6 +95,12 @@ from airflow_client.client.model.task_state import TaskState
 from airflow_client.client.model.time_delta import TimeDelta
 from airflow_client.client.model.trigger_rule import TriggerRule
 from airflow_client.client.model.update_task_instances_state import UpdateTaskInstancesState
+from airflow_client.client.model.user import User
+from airflow_client.client.model.user_all_of import UserAllOf
+from airflow_client.client.model.user_collection import UserCollection
+from airflow_client.client.model.user_collection_all_of import UserCollectionAllOf
+from airflow_client.client.model.user_collection_item import UserCollectionItem
+from airflow_client.client.model.user_collection_item_roles import UserCollectionItemRoles
 from airflow_client.client.model.variable import Variable
 from airflow_client.client.model.variable_all_of import VariableAllOf
 from airflow_client.client.model.variable_collection import VariableCollection

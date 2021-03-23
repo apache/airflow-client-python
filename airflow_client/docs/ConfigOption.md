@@ -20,6 +20,7 @@
 # ConfigOption
 
 The option of configuration.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

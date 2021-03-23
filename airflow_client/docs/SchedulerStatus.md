@@ -20,6 +20,7 @@
 # SchedulerStatus
 
 The status and the latest scheduler heartbeat.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

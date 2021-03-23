@@ -364,6 +364,8 @@ Class | Method | HTTP request | Description
 *TaskInstanceApi* | [**get_task_instance**](docs/TaskInstanceApi.md#get_task_instance) | **GET** /dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id} | Get a task instance
 *TaskInstanceApi* | [**get_task_instances**](docs/TaskInstanceApi.md#get_task_instances) | **GET** /dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances | List task instances
 *TaskInstanceApi* | [**get_task_instances_batch**](docs/TaskInstanceApi.md#get_task_instances_batch) | **POST** /dags/~/dagRuns/~/taskInstances/list | List task instances (batch)
+*UserApi* | [**get_user**](docs/UserApi.md#get_user) | **GET** /users/{username} | Get a user
+*UserApi* | [**get_users**](docs/UserApi.md#get_users) | **GET** /users | List users
 *VariableApi* | [**delete_variable**](docs/VariableApi.md#delete_variable) | **DELETE** /variables/{variable_key} | Delete a variable
 *VariableApi* | [**get_variable**](docs/VariableApi.md#get_variable) | **GET** /variables/{variable_key} | Get a variable
 *VariableApi* | [**get_variables**](docs/VariableApi.md#get_variables) | **GET** /variables | List variables
@@ -444,6 +446,12 @@ Class | Method | HTTP request | Description
  - [TimeDelta](docs/TimeDelta.md)
  - [TriggerRule](docs/TriggerRule.md)
  - [UpdateTaskInstancesState](docs/UpdateTaskInstancesState.md)
+ - [User](docs/User.md)
+ - [UserAllOf](docs/UserAllOf.md)
+ - [UserCollection](docs/UserCollection.md)
+ - [UserCollectionAllOf](docs/UserCollectionAllOf.md)
+ - [UserCollectionItem](docs/UserCollectionItem.md)
+ - [UserCollectionItemRoles](docs/UserCollectionItemRoles.md)
  - [Variable](docs/Variable.md)
  - [VariableAllOf](docs/VariableAllOf.md)
  - [VariableCollection](docs/VariableCollection.md)

@@ -20,6 +20,7 @@
 # ConnectionCollectionItem
 
 Connection collection item. The password and extra fields are only available when retrieving a single object due to the sensitivity of this data. 
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

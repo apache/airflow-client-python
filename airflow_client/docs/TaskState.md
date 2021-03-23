@@ -20,6 +20,7 @@
 # TaskState
 
 Task state.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

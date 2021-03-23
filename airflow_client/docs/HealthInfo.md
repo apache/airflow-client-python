@@ -20,6 +20,7 @@
 # HealthInfo
 
 Instance status information.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

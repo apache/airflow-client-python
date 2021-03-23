@@ -17,7 +17,7 @@
  under the License.
  -->
 
-# airflow_client.ConnectionApi
+# Apache Airflow Python Client.ConnectionApi
 
 All URIs are relative to *http://localhost/api/v1*
 
@@ -75,6 +75,7 @@ with client.ApiClient(configuration) as api_client:
         print("Exception when calling ConnectionApi->delete_connection: %s\n" % e)
 ```
 
+
 ### Parameters
 
 Name | Type | Description  | Notes
@@ -93,6 +94,7 @@ void (empty response body)
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -152,6 +154,7 @@ with client.ApiClient(configuration) as api_client:
         print("Exception when calling ConnectionApi->get_connection: %s\n" % e)
 ```
 
+
 ### Parameters
 
 Name | Type | Description  | Notes
@@ -170,6 +173,7 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -230,6 +234,7 @@ with client.ApiClient(configuration) as api_client:
         print("Exception when calling ConnectionApi->get_connections: %s\n" % e)
 ```
 
+
 ### Parameters
 
 Name | Type | Description  | Notes
@@ -249,6 +254,7 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -319,6 +325,7 @@ with client.ApiClient(configuration) as api_client:
         print("Exception when calling ConnectionApi->patch_connection: %s\n" % e)
 ```
 
+
 ### Parameters
 
 Name | Type | Description  | Notes
@@ -339,6 +346,7 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -398,6 +406,7 @@ with client.ApiClient(configuration) as api_client:
         print("Exception when calling ConnectionApi->post_connection: %s\n" % e)
 ```
 
+
 ### Parameters
 
 Name | Type | Description  | Notes
@@ -416,6 +425,7 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |

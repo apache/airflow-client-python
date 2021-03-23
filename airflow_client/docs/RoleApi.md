@@ -17,7 +17,7 @@
  under the License.
  -->
 
-# airflow_client.RoleApi
+# Apache Airflow Python Client.RoleApi
 
 All URIs are relative to *http://localhost/api/v1*
 
@@ -74,6 +74,7 @@ with client.ApiClient(configuration) as api_client:
         print("Exception when calling RoleApi->get_role: %s\n" % e)
 ```
 
+
 ### Parameters
 
 Name | Type | Description  | Notes
@@ -92,6 +93,7 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -152,6 +154,7 @@ with client.ApiClient(configuration) as api_client:
         print("Exception when calling RoleApi->get_roles: %s\n" % e)
 ```
 
+
 ### Parameters
 
 Name | Type | Description  | Notes
@@ -171,6 +174,7 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |

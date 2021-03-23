@@ -20,6 +20,7 @@
 # VariableCollection
 
 Collection of variables.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

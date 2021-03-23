@@ -20,6 +20,7 @@
 # Connection
 
 Full representation of the connection.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -20,6 +20,7 @@
 # ConfigSection
 
 The section of configuration.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

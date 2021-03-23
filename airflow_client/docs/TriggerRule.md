@@ -20,6 +20,7 @@
 # TriggerRule
 
 Trigger rule.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

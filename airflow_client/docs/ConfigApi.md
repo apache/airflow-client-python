@@ -17,7 +17,7 @@
  under the License.
  -->
 
-# airflow_client.ConfigApi
+# Apache Airflow Python Client.ConfigApi
 
 All URIs are relative to *http://localhost/api/v1*
 
@@ -72,6 +72,7 @@ with client.ApiClient(configuration) as api_client:
         print("Exception when calling ConfigApi->get_config: %s\n" % e)
 ```
 
+
 ### Parameters
 This endpoint does not need any parameter.
 
@@ -87,6 +88,7 @@ This endpoint does not need any parameter.
 
  - **Content-Type**: Not defined
  - **Accept**: application/json, text/plain
+
 
 ### HTTP response details
 | Status code | Description | Response headers |

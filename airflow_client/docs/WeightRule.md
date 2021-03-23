@@ -20,6 +20,7 @@
 # WeightRule
 
 Weight rule.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

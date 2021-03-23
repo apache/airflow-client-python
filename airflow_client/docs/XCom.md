@@ -20,6 +20,7 @@
 # XCom
 
 Full representations of XCom entry.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

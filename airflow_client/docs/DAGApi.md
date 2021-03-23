@@ -17,7 +17,7 @@
  under the License.
  -->
 
-# airflow_client.DAGApi
+# Apache Airflow Python Client.DAGApi
 
 All URIs are relative to *http://localhost/api/v1*
 
@@ -83,6 +83,7 @@ with client.ApiClient(configuration) as api_client:
         print("Exception when calling DAGApi->get_dag: %s\n" % e)
 ```
 
+
 ### Parameters
 
 Name | Type | Description  | Notes
@@ -101,6 +102,7 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -161,6 +163,7 @@ with client.ApiClient(configuration) as api_client:
         print("Exception when calling DAGApi->get_dag_details: %s\n" % e)
 ```
 
+
 ### Parameters
 
 Name | Type | Description  | Notes
@@ -179,6 +182,7 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -239,6 +243,7 @@ with client.ApiClient(configuration) as api_client:
         print("Exception when calling DAGApi->get_dag_source: %s\n" % e)
 ```
 
+
 ### Parameters
 
 Name | Type | Description  | Notes
@@ -257,6 +262,7 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json, plain/text
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -318,6 +324,7 @@ with client.ApiClient(configuration) as api_client:
         print("Exception when calling DAGApi->get_dags: %s\n" % e)
 ```
 
+
 ### Parameters
 
 Name | Type | Description  | Notes
@@ -337,6 +344,7 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -394,6 +402,7 @@ with client.ApiClient(configuration) as api_client:
         print("Exception when calling DAGApi->get_task: %s\n" % e)
 ```
 
+
 ### Parameters
 
 Name | Type | Description  | Notes
@@ -413,6 +422,7 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -471,6 +481,7 @@ with client.ApiClient(configuration) as api_client:
         print("Exception when calling DAGApi->get_tasks: %s\n" % e)
 ```
 
+
 ### Parameters
 
 Name | Type | Description  | Notes
@@ -489,6 +500,7 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -580,6 +592,7 @@ with client.ApiClient(configuration) as api_client:
         print("Exception when calling DAGApi->patch_dag: %s\n" % e)
 ```
 
+
 ### Parameters
 
 Name | Type | Description  | Notes
@@ -600,6 +613,7 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -671,6 +685,7 @@ with client.ApiClient(configuration) as api_client:
         print("Exception when calling DAGApi->post_clear_task_instances: %s\n" % e)
 ```
 
+
 ### Parameters
 
 Name | Type | Description  | Notes
@@ -690,6 +705,7 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -761,6 +777,7 @@ with client.ApiClient(configuration) as api_client:
         print("Exception when calling DAGApi->post_set_task_instances_state: %s\n" % e)
 ```
 
+
 ### Parameters
 
 Name | Type | Description  | Notes
@@ -780,6 +797,7 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |

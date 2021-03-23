@@ -20,6 +20,7 @@
 # ImportErrorCollection
 
 Collection of import errors.
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

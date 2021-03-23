@@ -19,6 +19,7 @@
 
 # EventLogCollectionAllOf
 
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

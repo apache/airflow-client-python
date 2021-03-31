@@ -93,7 +93,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
         print("Exception when calling ConfigApi->get_config: %s\n" % e)
 ```
 
-See [README](./client/README.md#documentation-for-api-endpoints) for full client API documentation.
+See [README](./airflow_client/README.md#documentation-for-api-endpoints) for full client API documentation.
 
 ## Release Process
 

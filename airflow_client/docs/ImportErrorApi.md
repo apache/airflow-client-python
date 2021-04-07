@@ -106,7 +106,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_import_errors**
-> ImportErrorCollection get_import_errors()
+> object get_import_errors()
 
 List import errors
 
@@ -118,7 +118,6 @@ import time
 import airflow_client.client
 from airflow_client.client.api import import_error_api
 from airflow_client.client.model.error import Error
-from airflow_client.client.model.import_error_collection import ImportErrorCollection
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost/api/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -164,7 +163,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ImportErrorCollection**](ImportErrorCollection.md)
+**object**
 
 ### Authorization
 

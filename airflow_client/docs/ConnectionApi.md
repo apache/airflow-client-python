@@ -186,7 +186,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_connections**
-> ConnectionCollection get_connections()
+> object get_connections()
 
 List connections
 
@@ -197,7 +197,6 @@ List connections
 import time
 import airflow_client.client
 from airflow_client.client.api import connection_api
-from airflow_client.client.model.connection_collection import ConnectionCollection
 from airflow_client.client.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost/api/v1
@@ -244,7 +243,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ConnectionCollection**](ConnectionCollection.md)
+**object**
 
 ### Authorization
 

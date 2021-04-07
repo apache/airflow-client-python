@@ -28,7 +28,7 @@ Method | HTTP request | Description
 
 
 # **get_xcom_entries**
-> XComCollection get_xcom_entries(dag_id, dag_run_id, task_id)
+> object get_xcom_entries(dag_id, dag_run_id, task_id)
 
 List XCom entries
 
@@ -41,7 +41,6 @@ This endpoint allows specifying `~` as the dag_id, dag_run_id, task_id to retrie
 import time
 import airflow_client.client
 from airflow_client.client.api import x_com_api
-from airflow_client.client.model.x_com_collection import XComCollection
 from airflow_client.client.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost/api/v1
@@ -102,7 +101,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**XComCollection**](XComCollection.md)
+**object**
 
 ### Authorization
 

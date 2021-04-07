@@ -190,7 +190,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_dag_runs**
-> DAGRunCollection get_dag_runs(dag_id)
+> object get_dag_runs(dag_id)
 
 List DAG runs
 
@@ -203,7 +203,6 @@ This endpoint allows specifying `~` as the dag_id to retrieve DAG runs for all D
 import time
 import airflow_client.client
 from airflow_client.client.api import dag_run_api
-from airflow_client.client.model.dag_run_collection import DAGRunCollection
 from airflow_client.client.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost/api/v1
@@ -272,7 +271,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DAGRunCollection**](DAGRunCollection.md)
+**object**
 
 ### Authorization
 
@@ -293,7 +292,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_dag_runs_batch**
-> DAGRunCollection get_dag_runs_batch(list_dag_runs_form)
+> object get_dag_runs_batch(list_dag_runs_form)
 
 List DAG runs (batch)
 
@@ -307,7 +306,6 @@ import time
 import airflow_client.client
 from airflow_client.client.api import dag_run_api
 from airflow_client.client.model.list_dag_runs_form import ListDagRunsForm
-from airflow_client.client.model.dag_run_collection import DAGRunCollection
 from airflow_client.client.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost/api/v1
@@ -363,7 +361,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DAGRunCollection**](DAGRunCollection.md)
+**object**
 
 ### Authorization
 

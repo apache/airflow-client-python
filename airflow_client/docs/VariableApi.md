@@ -188,7 +188,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_variables**
-> VariableCollection get_variables()
+> object get_variables()
 
 List variables
 
@@ -201,7 +201,6 @@ The collection does not contain data. To get data, you must get a single entity.
 import time
 import airflow_client.client
 from airflow_client.client.api import variable_api
-from airflow_client.client.model.variable_collection import VariableCollection
 from airflow_client.client.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost/api/v1
@@ -248,7 +247,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VariableCollection**](VariableCollection.md)
+**object**
 
 ### Authorization
 

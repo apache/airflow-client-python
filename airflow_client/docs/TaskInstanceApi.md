@@ -297,7 +297,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_task_instances**
-> TaskInstanceCollection get_task_instances(dag_id, dag_run_id)
+> object get_task_instances(dag_id, dag_run_id)
 
 List task instances
 
@@ -310,7 +310,6 @@ This endpoint allows specifying `~` as the dag_id, dag_run_id to retrieve DAG ru
 import time
 import airflow_client.client
 from airflow_client.client.api import task_instance_api
-from airflow_client.client.model.task_instance_collection import TaskInstanceCollection
 from airflow_client.client.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost/api/v1
@@ -397,7 +396,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TaskInstanceCollection**](TaskInstanceCollection.md)
+**object**
 
 ### Authorization
 
@@ -419,7 +418,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_task_instances_batch**
-> TaskInstanceCollection get_task_instances_batch(list_task_instance_form)
+> object get_task_instances_batch(list_task_instance_form)
 
 List task instances (batch)
 
@@ -432,7 +431,6 @@ List task instances from all DAGs and DAG runs. This endpoint is a POST to allow
 import time
 import airflow_client.client
 from airflow_client.client.api import task_instance_api
-from airflow_client.client.model.task_instance_collection import TaskInstanceCollection
 from airflow_client.client.model.error import Error
 from airflow_client.client.model.list_task_instance_form import ListTaskInstanceForm
 from pprint import pprint
@@ -494,7 +492,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TaskInstanceCollection**](TaskInstanceCollection.md)
+**object**
 
 ### Authorization
 

@@ -25,7 +25,7 @@ DAG details.  For details see: (airflow.models.DAG)[https://airflow.apache.org/d
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **dag_id** | **str** | The ID of the DAG. | [optional] [readonly] 
-**root_dag_id** | **str, none_type** | If the DAG is SubDAG then it is the top level DAG identifier. Otherwise, null. | [optional] [readonly] 
+**root_dag_id** | **str, none_type** | If the DAG is SubDAG then it is the top level DAG identifier. Otherwise, nulll. | [optional] [readonly] 
 **is_paused** | **bool, none_type** | Whether the DAG is paused. | [optional] 
 **is_subdag** | **bool** | Whether the DAG is SubDAG. | [optional] [readonly] 
 **fileloc** | **str** | The absolute path to the file. | [optional] [readonly] 

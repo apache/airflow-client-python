@@ -106,7 +106,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_event_logs**
-> EventLogCollection get_event_logs()
+> object get_event_logs()
 
 List log entries
 
@@ -119,7 +119,6 @@ List log entries from event log.
 import time
 import airflow_client.client
 from airflow_client.client.api import event_log_api
-from airflow_client.client.model.event_log_collection import EventLogCollection
 from airflow_client.client.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost/api/v1
@@ -166,7 +165,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EventLogCollection**](EventLogCollection.md)
+**object**
 
 ### Authorization
 

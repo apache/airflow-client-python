@@ -17,7 +17,7 @@
  under the License.
  -->
 
-# v1.0.0
+# v2.0.0
 
 Apache Airflow API version: 2.0.x
 

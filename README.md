@@ -54,29 +54,27 @@ import airflow_client.client
 Please follow the [installation procedure](#installation--usage) and then run the following:
 
 ```python
-
-import time
 import airflow_client.client
 from pprint import pprint
 from airflow_client.client.api import config_api
-from airflow_client.client.model.config import Config
-from airflow_client.client.model.error import Error
-# Defining the host is optional and defaults to http://localhost/api/v1
-# See configuration.py for a list of all supported configuration parameters.
-configuration = airflow_client.client.Configuration(
-    host = "http://localhost/api/v1"
-)
 
-# The client must configure the authentication and authorization parameters
+# The client must use the authentication and authorization parameters
 # in accordance with the API server security policy.
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
+#
+# In case of the basic authentication below, make sure that Airflow is
+# configured with the basic_auth as backend:
+#
+# auth_backend = airflow.api.auth.backend.basic_auth
+#
+# Make sure that your user/name are configured properly
 
 # Configure HTTP basic authorization: Basic
 configuration = airflow_client.client.Configuration(
-    host = "http://localhost/api/v1",
-    username = 'YOUR_USERNAME',
-    password = 'YOUR_PASSWORD'
+    host="http://localhost/api/v1",
+    username='admin',
+    password='admin'
 )
 
 
@@ -84,7 +82,7 @@ configuration = airflow_client.client.Configuration(
 with airflow_client.client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = config_api.ConfigApi(api_client)
-    
+
     try:
         # Get current configuration
         api_response = api_instance.get_config()

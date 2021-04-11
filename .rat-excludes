@@ -1,0 +1,3 @@
+.rat-excludes
+.gitignore
+airflow_client/.gitignore

@@ -58,7 +58,7 @@ repos:
           - --fuzzy-match-generates-todo
       - id: insert-license
         name: Add license for all other files
-        exclude: ^\.github/.*$
+        exclude: ^\.github/.*$|\.*LICENSE.txt$
         args:
           - --comment-style
           - "|#|"
@@ -66,4 +66,4 @@ repos:
           - license-templates/LICENSE.txt
           - --fuzzy-match-generates-todo
         files: >
-          \.properties$|\.cfg$|\.conf$|\.ini$$
+          \.properties$|\.cfg$|\.conf$|\.ini$|\.txt$$

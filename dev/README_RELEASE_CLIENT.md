@@ -58,7 +58,7 @@ of this the version in the built artifacts that will become the official Apache 
 - Tarball the repo
 
     ```shell script
-    git archive --format=tar.gz ${VERSION} -o airflow-client-${VERSION}-source.tar.gz
+    git archive --format=tar.gz ${VERSION} --prefix=airflow-client-${VERSION}/ -o airflow-client-${VERSION}-source.tar.gz
     ```
 
 - Generate sdist

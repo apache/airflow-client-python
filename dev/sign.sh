@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # Licensed to the Apache Software Foundation (ASF) under one
 # or more contributor license agreements.  See the NOTICE file
 # distributed with this work for additional information
@@ -14,7 +15,20 @@
 # KIND, either express or implied.  See the License for the
 # specific language governing permissions and limitations
 # under the License.
+set -euo pipefail
 
-pytest-cov>=2.8.1
-python_dateutil >= 2.5.3
-urllib3 >= 1.25.3
+# Use this to sign the tar balls generated from
+# python setup.py sdist --formats=gztar
+# ie. sign.sh <my_tar_ball>
+# you will still be required to type in your signing key password
+# or it needs to be available in your keychain
+
+# Which key to sign releases with? This can be a (partial) email address or a
+# key id. By default use any apache.org key
+SIGN_WITH="${SIGN_WITH:-apache.org}"
+
+for name in "${@}"
+do
+    gpg --armor --local-user "$SIGN_WITH" --output "${name}.asc" --detach-sig "${name}"
+    shasum -a 512 "${name}" > "${name}.sha512"
+done

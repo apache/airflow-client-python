@@ -27,7 +27,7 @@ from os import path
 from setuptools import setup, find_packages  # noqa: H301
 
 
-NAME = "airflow-client"
+NAME = "apache-airflow-client"
 VERSION = "1.0.0"
 # To install the library, run the following
 #
@@ -48,11 +48,11 @@ with open(path.join(THIS_DIR, 'README.md'), encoding='utf-8') as f:
 setup(
     name=NAME,
     version=VERSION,
-    description="Airflow API (Stable)",
+    description="Apache Airflow API (Stable)",
     author="Apache Software Foundation",
     author_email="dev@airflow.apache.org",
     url="https://airflow.apache.org/",
-    keywords=["OpenAPI", "OpenAPI-Generator", "Airflow API (Stable)"],
+    keywords=["OpenAPI", "OpenAPI-Generator", "Apache Airflow API (Stable)"],
     python_requires=">=3.6",
     install_requires=REQUIRES,
     packages=find_packages(exclude=["test", "tests"]),

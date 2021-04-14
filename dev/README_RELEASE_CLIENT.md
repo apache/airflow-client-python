@@ -58,7 +58,7 @@ of this the version in the built artifacts that will become the official Apache 
 - Tarball the repo
 
     ```shell script
-    git archive --format=tar.gz ${VERSION} --prefix=airflow-client-${VERSION}/ -o airflow-client-${VERSION}-source.tar.gz
+    git archive --format=tar.gz ${VERSION} --prefix=apache-airflow-client-${VERSION}/ -o apache-airflow-client-${VERSION}-source.tar.gz
     ```
 
 - Generate sdist
@@ -73,17 +73,17 @@ of this the version in the built artifacts that will become the official Apache 
 - Rename the sdist
 
     ```shell script
-    mv dist/airflow-client-${VERSION%rc?}.tar.gz airflow-client-${VERSION}-bin.tar.gz
-    mv dist/airflow_client-${VERSION%rc?}-py3-none-any.whl airflow_client-${VERSION}-py3-none-any.whl
+    mv dist/apache-airflow-client-${VERSION%rc?}.tar.gz apache-airflow-client-${VERSION}-bin.tar.gz
+    mv dist/apache_airflow_client-${VERSION%rc?}-py3-none-any.whl apache_airflow_client-${VERSION}-py3-none-any.whl
     ```
 
 - Generate SHA512/ASC (If you have not generated a key yet, generate it by following instructions on
   http://www.apache.org/dev/openpgp.html#key-gen-generate-key)
 
     ```shell script
-    ${CLIENT_REPO_ROOT}/dev/sign.sh airflow-client-${VERSION}-source.tar.gz
-    ${CLIENT_REPO_ROOT}/dev/sign.sh airflow-client-${VERSION}-bin.tar.gz
-    ${CLIENT_REPO_ROOT}/dev/sign.sh airflow_client-${VERSION}-py3-none-any.whl
+    ${CLIENT_REPO_ROOT}/dev/sign.sh apache-airflow-client-${VERSION}-source.tar.gz
+    ${CLIENT_REPO_ROOT}/dev/sign.sh apache-airflow-client-${VERSION}-bin.tar.gz
+    ${CLIENT_REPO_ROOT}/dev/sign.sh apache_airflow_client-${VERSION}-py3-none-any.whl
     ```
 
 - Push the artifacts to ASF dev dist repo
@@ -97,10 +97,10 @@ cd airflow-dev/clients/python
 svn mkdir ${VERSION}
 
 # Move the artifacts to svn folder & commit
-mv ${CLIENT_REPO_ROOT}/airflow{-,_}client-${VERSION}* ${VERSION}/
+mv ${CLIENT_REPO_ROOT}/apache{-,_}*client-${VERSION}* ${VERSION}/
 cd ${VERSION}
 svn add *
-svn commit -m "Add artifacts for Airflow Python Client ${VERSION}"
+svn commit -m "Add artifacts for Apache Airflow Python Client ${VERSION}"
 ```
 
 ## Prepare PyPI convenience "snapshot" packages
@@ -131,16 +131,16 @@ To do this we need to
 
 - Verify that the test package looks good by downloading it and installing it into a virtual environment. The package
   download link is available at:
-  https://test.pypi.org/project/airflow-client/#files
+  https://test.pypi.org/project/apache-airflow-client/#files
 
   Or via pypi
-  pip install -i https://test.pypi.org/simple/ airflow-client==$(VERSION)
+  pip install -i https://test.pypi.org/simple/ apache-airflow-client==${VERSION}
 
 - Upload the package to PyPi's production environment:
   `twine upload -r pypi dist/*`
 
 - Again, confirm that the package is available here:
-  https://pypi.python.org/pypi/airflow-client
+  https://pypi.python.org/pypi/apache-airflow-client
 
 It is important to stress that this snapshot should not be named "release", and it
 is not supposed to be used by and advertised to the end-users who do not read the devlist.
@@ -176,15 +176,15 @@ the release candidate version of Airflow Client via simply (<VERSION> is 2.0.0 f
 release candidate number 1,2,3,....).
 
 ```shell script
-pip install airflow-client==<VERSION>rc<X>
+pip install apache-airflow-client==<VERSION>rc<X>
 ```
 
 Once you install and run Airflow Client, you should perform any verification you see as necessary to check
 that the client works as you expected.
 
-# Publish the final Airflow client release
+# Publish the final Apache Airflow client release
 
-## Summarize the voting for the Airflow client release
+## Summarize the voting for the Apache Airflow client release
 
 See Airflow process documented [here](https://github.com/apache/airflow/blob/master/dev/README_RELEASE_AIRFLOW.md#publish-the-final-apache-airflow-release) (just replace Airflow with Airflow Client).
 
@@ -203,7 +203,7 @@ cd ${VERSION}
 
 # Move the artifacts to svn folder & commit
 for f in ../../../airflow-dev/clients/python/$RC/*; do svn cp $f ${$(basename $f)/rc?/}; done
-svn commit -m "Release Airflow Client ${VERSION} from ${RC}"
+svn commit -m "Release Apache Airflow Python Client ${VERSION} from ${RC}"
 
 # Remove old release
 # http://www.apache.org/legal/release-policy.html#when-to-archive
@@ -238,7 +238,7 @@ At this point we release an official package:
     ```
 
 - Verify that the test package looks good by downloading it and installing it into a virtual environment.
-  The package download link is available at: https://test.pypi.org/project/airflow-client/#files
+  The package download link is available at: https://test.pypi.org/project/apache-airflow-client/#files
 
 - Upload the package to PyPi's production environment:
 
@@ -246,7 +246,7 @@ At this point we release an official package:
     twine upload -r pypi dist/*
     ```
 
-- Again, confirm that the package is available here: https://pypi.python.org/pypi/airflow-client
+- Again, confirm that the package is available here: https://pypi.python.org/pypi/apache-airflow-client
 
 ## Update CHANGELOG.md
 

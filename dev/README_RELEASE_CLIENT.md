@@ -202,7 +202,7 @@ svn mkdir ${VERSION}
 cd ${VERSION}
 
 # Move the artifacts to svn folder & commit
-for f in ../../../airflow-dev/clients/python/$RC/*; do svn cp $f ${$(basename $f)/rc?/}; done
+for f in ../../../../airflow-dev/clients/python/$RC/*; do svn cp $f ${$(basename $f)/rc?/}; done
 svn commit -m "Release Apache Airflow Python Client ${VERSION} from ${RC}"
 
 # Remove old release
@@ -219,9 +219,10 @@ Verify that the packages appear in [airflow](https://dist.apache.org/repos/dist/
 
 At this point we release an official package:
 
-- Build the package:
+- Clean & Build the package:
 
     ```shell script
+    git clean -fxd
     python setup.py sdist bdist_wheel
     ```
 
@@ -261,6 +262,7 @@ At this point we release an official package:
 - Push Tag for the final version
 
     ```shell script
+    git tag ${VERSION}
     git push origin ${VERSION}
     ```
 

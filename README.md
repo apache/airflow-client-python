@@ -30,7 +30,7 @@ Python >= 3.6
 You can install directly using pip:
 
 ```sh
-pip install git+https://github.com/apache/airflow-client-python.git
+pip install apache-airflow-client
 ````
 
 ### Setuptools

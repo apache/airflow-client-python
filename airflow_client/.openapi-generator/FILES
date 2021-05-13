@@ -81,7 +81,6 @@ client/model/x_com_collection.py
 client/model/x_com_collection_item.py
 client/model_utils.py
 client/models/__init__.py
-client/models/__init__.py
 client/rest.py
 docs/ClassReference.md
 docs/ClearTaskInstance.md

@@ -470,8 +470,12 @@ with client.ApiClient(configuration) as api_client:
         state=[
             "state_example",
         ],
-        pool=[],
-        queue=[],
+        pool=[
+            "pool_example",
+        ],
+        queue=[
+            "queue_example",
+        ],
     ) # ListTaskInstanceForm | 
 
     # example passing only required values which don't have defaults set

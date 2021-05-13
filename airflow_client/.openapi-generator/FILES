@@ -111,7 +111,6 @@ client/model/x_com_collection_all_of.py
 client/model/x_com_collection_item.py
 client/model_utils.py
 client/models/__init__.py
-client/models/__init__.py
 client/rest.py
 docs/Action.md
 docs/ActionCollection.md

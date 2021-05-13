@@ -550,25 +550,7 @@ with client.ApiClient(configuration) as api_client:
     api_instance = dag_api.DAGApi(api_client)
     dag_id = "dag_id_example" # str | The DAG ID.
     dag = DAG(
-        dag_id="dag_id_example",
-        root_dag_id="root_dag_id_example",
         is_paused=True,
-        is_subdag=True,
-        fileloc="fileloc_example",
-        file_token="file_token_example",
-        owners=[
-            "owners_example",
-        ],
-        description="description_example",
-        schedule_interval=ScheduleInterval(
-            type="CronExpression",
-            value="value_example",
-        ),
-        tags=[
-            Tag(
-                name="name_example",
-            ),
-        ],
     ) # DAG | 
     update_mask = [
         "update_mask_example",

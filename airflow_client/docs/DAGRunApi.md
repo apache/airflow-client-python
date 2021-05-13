@@ -424,12 +424,8 @@ with client.ApiClient(configuration) as api_client:
     dag_id = "dag_id_example" # str | The DAG ID.
     dag_run = DAGRun(
         dag_run_id="dag_run_id_example",
-        dag_id="dag_id_example",
         execution_date=dateutil_parser('1970-01-01T00:00:00.00Z'),
-        start_date=dateutil_parser('1970-01-01T00:00:00.00Z'),
-        end_date=dateutil_parser('1970-01-01T00:00:00.00Z'),
         state=DagState("success"),
-        external_trigger=True,
         conf={},
     ) # DAGRun | 
 

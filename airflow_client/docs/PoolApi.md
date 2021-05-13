@@ -305,10 +305,6 @@ with client.ApiClient(configuration) as api_client:
     pool = Pool(
         name="name_example",
         slots=1,
-        occupied_slots=1,
-        used_slots=1,
-        queued_slots=1,
-        open_slots=1,
     ) # Pool | 
     update_mask = [
         "update_mask_example",
@@ -406,10 +402,6 @@ with client.ApiClient(configuration) as api_client:
     pool = Pool(
         name="name_example",
         slots=1,
-        occupied_slots=1,
-        used_slots=1,
-        queued_slots=1,
-        open_slots=1,
     ) # Pool | 
 
     # example passing only required values which don't have defaults set

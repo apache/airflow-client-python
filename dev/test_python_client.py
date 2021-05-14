@@ -16,7 +16,7 @@
 # under the License.
 import airflow_client.client
 from pprint import pprint
-from airflow_client.client.api import config_api
+from airflow_client.client.api import config_api, dag_api
 
 # The client must use the authentication and authorization parameters
 # in accordance with the API server security policy.
@@ -38,14 +38,26 @@ configuration = airflow_client.client.Configuration(
 )
 
 
-# Enter a context with an instance of the API client
 with airflow_client.client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = config_api.ConfigApi(api_client)
+    dag_api_instance = dag_api.DAGApi(api_client)
 
     try:
         # Get current configuration
-        api_response = api_instance.get_config()
+        api_response = dag_api_instance.get_dags()
+        pprint(api_response)
+    except airflow_client.client.ApiException as e:
+        print("Exception when calling DagAPI->get_dags: %s\n" % e)
+
+
+# Enter a context with an instance of the API client
+with airflow_client.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    dag_api_instance = config_api.ConfigApi(api_client)
+
+    try:
+        # Get current configuration
+        api_response = dag_api_instance.get_config()
         pprint(api_response)
     except airflow_client.client.ApiException as e:
         print("Exception when calling ConfigApi->get_config: %s\n" % e)

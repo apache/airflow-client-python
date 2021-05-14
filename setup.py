@@ -26,7 +26,8 @@
 from setuptools import setup, find_packages  # noqa: H301
 
 
-VERSION = "2.1.0.dev"
+NAME = "apache-airflow-client"
+VERSION = "2.0.1"
 # To install the library, run the following
 #
 # python setup.py install

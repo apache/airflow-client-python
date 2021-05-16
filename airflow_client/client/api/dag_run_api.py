@@ -704,7 +704,9 @@ class DAGRunApi(object):
                 'enum': [
                 ],
                 'validation': [
-                ]
+                ],
+                'read_only': DAGRun.read_only_fields,
+                'create_only': DAGRun.create_only_fields
             },
             root_map={
                 'validations': {

@@ -893,7 +893,9 @@ class DAGApi(object):
                 'enum': [
                 ],
                 'validation': [
-                ]
+                ],
+                'read_only': DAG.read_only_fields,
+                'create_only': DAG.create_only_fields
             },
             root_map={
                 'validations': {

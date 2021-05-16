@@ -515,7 +515,9 @@ class PoolApi(object):
                 'enum': [
                 ],
                 'validation': [
-                ]
+                ],
+                'read_only': Pool.read_only_fields,
+                'create_only': Pool.create_only_fields
             },
             root_map={
                 'validations': {

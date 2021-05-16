@@ -72,6 +72,9 @@ class DAGRun(ModelNormal):
       additional_properties_type (tuple): A tuple of classes accepted
           as additional properties values.
     """
+    read_only_fields = ['dag_id', 'start_date', 'end_date', 'state', 'external_trigger']
+    create_only_fields = ['execution_date']
+
 
     allowed_values = {
     }

@@ -68,6 +68,8 @@ class Pool(ModelNormal):
       additional_properties_type (tuple): A tuple of classes accepted
           as additional properties values.
     """
+    read_only_fields = ['occupied_slots', 'used_slots','queued_slots','open_slots']
+    create_only_fields = []
 
     allowed_values = {
     }

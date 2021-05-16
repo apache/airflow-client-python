@@ -132,6 +132,20 @@ class ApiClient(object):
     def set_default_header(self, header_name, header_value):
         self.default_headers[header_name] = header_value
 
+    def __filter_request_body(self, body, method, read_only, create_only):
+        if method=='PATCH':
+            #remove all read_only fields and create_only
+            # TODO: raise error if create_only field in body and field is not required?
+            to_remove = read_only+create_only
+            for key in to_remove:
+                body.pop(key, None)
+            return body
+        if method == 'POST':
+            #remove all read_only fields
+            for key in read_only:
+                body.pop(key, None)
+            return body
+
     def __call_api(
         self,
         resource_path: str,
@@ -153,7 +167,7 @@ class ApiClient(object):
     ):
 
         config = self.configuration
-
+        model = body
         # header parameters
         header_params = header_params or {}
         header_params.update(self.default_headers)
@@ -195,7 +209,10 @@ class ApiClient(object):
 
         # body
         if body:
-            body = self.sanitize_for_serialization(body)
+            body = self.__filter_request_body(body=self.sanitize_for_serialization(body),
+                                              method=method,
+                                              read_only=model.read_only_fields,
+                                              create_only=model.create_only_fields)
 
         # auth setting
         self.update_params_for_auth(header_params, query_params,
@@ -836,7 +853,6 @@ class Endpoint(object):
         self.__validate_inputs(kwargs)
 
         params = self.__gather_params(kwargs)
-
         accept_headers_list = self.headers_map['accept']
         if accept_headers_list:
             params['header']['Accept'] = self.api_client.select_header_accept(

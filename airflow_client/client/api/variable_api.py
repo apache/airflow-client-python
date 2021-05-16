@@ -518,7 +518,9 @@ class VariableApi(object):
                 'enum': [
                 ],
                 'validation': [
-                ]
+                ],
+                'read_only': Variable.read_only_fields,
+                'write_only': Variable.write_only_fields
             },
             root_map={
                 'validations': {
@@ -647,7 +649,9 @@ class VariableApi(object):
                 'enum': [
                 ],
                 'validation': [
-                ]
+                ],
+                'read_only': Variable.read_only_fields,
+                'create_only': Variable.create_only_fields
             },
             root_map={
                 'validations': {

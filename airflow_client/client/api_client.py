@@ -137,14 +137,17 @@ class ApiClient(object):
             #remove all read_only fields and create_only
             # TODO: raise error if create_only field in body and field is not required?
             to_remove = read_only+create_only
-            for key in to_remove:
-                body.pop(key, None)
+            if len(to_remove):
+                for key in to_remove:
+                    body.pop(key, None)
             return body
-        if method == 'POST':
+        else: # 'POST'
             #remove all read_only fields
-            for key in read_only:
-                body.pop(key, None)
+            if len(read_only):
+                for key in read_only:
+                    body.pop(key, None)
             return body
+
 
     def __call_api(
         self,

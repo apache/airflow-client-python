@@ -515,7 +515,9 @@ class ConnectionApi(object):
                 'enum': [
                 ],
                 'validation': [
-                ]
+                ],
+                'readonly': Connection.read_only_fields,
+                'create_only': Connection.create_only_fields
             },
             root_map={
                 'validations': {
@@ -644,7 +646,9 @@ class ConnectionApi(object):
                 'enum': [
                 ],
                 'validation': [
-                ]
+                ],
+                'read_only': Connection.read_only_fields,
+                'create_only': Connection.create_only_fields
             },
             root_map={
                 'validations': {

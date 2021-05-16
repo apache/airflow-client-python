@@ -74,6 +74,8 @@ class Connection(ModelComposed):
       additional_properties_type (tuple): A tuple of classes accepted
           as additional properties values.
     """
+    read_only_fields = []
+    create_only_fields = []
 
     allowed_values = {
     }

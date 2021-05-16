@@ -75,6 +75,8 @@ class Variable(ModelComposed):
           as additional properties values.
     """
 
+    read_only_fields = []
+    create_only_fields = []
     allowed_values = {
     }
 

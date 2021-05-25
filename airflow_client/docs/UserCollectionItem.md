@@ -24,7 +24,6 @@ A user object
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**user_id** | **int** | The user id | [optional] [readonly] 
 **first_name** | **str** | The user firstname | [optional] 
 **last_name** | **str** | The user lastname | [optional] 
 **username** | **str** | The username | [optional] 

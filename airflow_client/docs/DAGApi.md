@@ -313,12 +313,13 @@ with client.ApiClient(configuration) as api_client:
     api_instance = dag_api.DAGApi(api_client)
     limit = 100 # int | The numbers of items to return. (optional) if omitted the server will use the default value of 100
     offset = 0 # int | The number of items to skip before starting to collect the result set. (optional)
+    order_by = "order_by_example" # str | The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order.  (optional)
 
     # example passing only required values which don't have defaults set
     # and optional values
     try:
         # List DAGs
-        api_response = api_instance.get_dags(limit=limit, offset=offset)
+        api_response = api_instance.get_dags(limit=limit, offset=offset, order_by=order_by)
         pprint(api_response)
     except client.ApiException as e:
         print("Exception when calling DAGApi->get_dags: %s\n" % e)
@@ -331,6 +332,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **int**| The numbers of items to return. | [optional] if omitted the server will use the default value of 100
  **offset** | **int**| The number of items to skip before starting to collect the result set. | [optional]
+ **order_by** | **str**| The name of the field to order the results by. Prefix a field name with &#x60;-&#x60; to reverse the sort order.  | [optional]
 
 ### Return type
 
@@ -471,11 +473,21 @@ with client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = dag_api.DAGApi(api_client)
     dag_id = "dag_id_example" # str | The DAG ID.
+    order_by = "order_by_example" # str | The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order.  (optional)
 
     # example passing only required values which don't have defaults set
     try:
         # Get tasks for DAG
         api_response = api_instance.get_tasks(dag_id)
+        pprint(api_response)
+    except client.ApiException as e:
+        print("Exception when calling DAGApi->get_tasks: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # Get tasks for DAG
+        api_response = api_instance.get_tasks(dag_id, order_by=order_by)
         pprint(api_response)
     except client.ApiException as e:
         print("Exception when calling DAGApi->get_tasks: %s\n" % e)
@@ -487,6 +499,7 @@ with client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **dag_id** | **str**| The DAG ID. |
+ **order_by** | **str**| The name of the field to order the results by. Prefix a field name with &#x60;-&#x60; to reverse the sort order.  | [optional]
 
 ### Return type
 
@@ -550,25 +563,7 @@ with client.ApiClient(configuration) as api_client:
     api_instance = dag_api.DAGApi(api_client)
     dag_id = "dag_id_example" # str | The DAG ID.
     dag = DAG(
-        dag_id="dag_id_example",
-        root_dag_id="root_dag_id_example",
         is_paused=True,
-        is_subdag=True,
-        fileloc="fileloc_example",
-        file_token="file_token_example",
-        owners=[
-            "owners_example",
-        ],
-        description="description_example",
-        schedule_interval=ScheduleInterval(
-            type="CronExpression",
-            value="value_example",
-        ),
-        tags=[
-            Tag(
-                name="name_example",
-            ),
-        ],
     ) # DAG | 
     update_mask = [
         "update_mask_example",
@@ -667,6 +662,9 @@ with client.ApiClient(configuration) as api_client:
     dag_id = "dag_id_example" # str | The DAG ID.
     clear_task_instance = ClearTaskInstance(
         dry_run=True,
+        task_ids=[
+            "task_ids_example",
+        ],
         start_date="start_date_example",
         end_date="end_date_example",
         only_failed=True,

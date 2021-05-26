@@ -17,6 +17,7 @@
 import airflow_client.client
 from pprint import pprint
 from airflow_client.client.api import config_api, dag_api, dag_run_api
+from airflow_client.client.model.dag_run import DAGRun
 
 # The client must use the authentication and authorization parameters
 # in accordance with the API server security policy.
@@ -37,25 +38,46 @@ configuration = airflow_client.client.Configuration(
     password='admin'
 )
 
+dag_id = "example_bash_operator"
 
 # Enter a context with an instance of the API client
 with airflow_client.client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
+    # Get current configuration
     conf_api_instance = config_api.ConfigApi(api_client)
-
     try:
-        # Get current configuration
         api_response = conf_api_instance.get_config()
         pprint(api_response)
-    except airflow_client.client.ApiException as e:
+    except airflow_client.client.OpenApiException as e:
         print("Exception when calling ConfigApi->get_config: %s\n" % e)
 
-    # Create an instance of the API class
-    dag_api_instance = dag_api.DAGApi(api_client)
 
+    # Get dag list
+    dag_api_instance = dag_api.DAGApi(api_client)
     try:
-        # Get dag list
         api_response = dag_api_instance.get_dags()
         pprint(api_response)
-    except airflow_client.client.ApiException as e:
+    except airflow_client.client.OpenApiException as e:
         print("Exception when calling DagAPI->get_dags: %s\n" % e)
+
+
+    # Get tasks for a DAG (TODO: issue#20)
+    try:
+        api_response = dag_api_instance.get_tasks(dag_id)
+        pprint(api_response)
+    except airflow_client.client.exceptions.OpenApiException as e:
+        print("Exception when calling DagAPI->get_tasks: %s\n" % e)
+
+
+    # Trigger a dag run (TODO: issue#21)
+    dag_run_api_instance = dag_run_api.DAGRunApi(api_client)
+    try:
+        # Create a DAGRun object
+        dag_run = DAGRun(
+            dag_run_id='some_test_run',
+            dag_id=dag_id,
+            external_trigger=True,
+        )
+        api_response = dag_run_api_instance.post_dag_run(dag_id, dag_run)
+        pprint(api_response)
+    except airflow_client.client.exceptions.OpenApiException as e:
+        print("Exception when calling DAGRunAPI->post_dag_run: %s\n" % e)

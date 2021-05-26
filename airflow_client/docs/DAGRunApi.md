@@ -236,6 +236,7 @@ with client.ApiClient(configuration) as api_client:
     start_date_lte = dateutil_parser('1970-01-01T00:00:00.00Z') # datetime | Returns objects less or equal the specified date.  This can be combined with start_date_gte parameter to receive only the selected period.  (optional)
     end_date_gte = dateutil_parser('1970-01-01T00:00:00.00Z') # datetime | Returns objects greater or equal the specified date.  This can be combined with start_date_lte parameter to receive only the selected period.  (optional)
     end_date_lte = dateutil_parser('1970-01-01T00:00:00.00Z') # datetime | Returns objects less than or equal to the specified date.  This can be combined with start_date_gte parameter to receive only the selected period.  (optional)
+    order_by = "order_by_example" # str | The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order.  (optional)
 
     # example passing only required values which don't have defaults set
     try:
@@ -249,7 +250,7 @@ with client.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # List DAG runs
-        api_response = api_instance.get_dag_runs(dag_id, limit=limit, offset=offset, execution_date_gte=execution_date_gte, execution_date_lte=execution_date_lte, start_date_gte=start_date_gte, start_date_lte=start_date_lte, end_date_gte=end_date_gte, end_date_lte=end_date_lte)
+        api_response = api_instance.get_dag_runs(dag_id, limit=limit, offset=offset, execution_date_gte=execution_date_gte, execution_date_lte=execution_date_lte, start_date_gte=start_date_gte, start_date_lte=start_date_lte, end_date_gte=end_date_gte, end_date_lte=end_date_lte, order_by=order_by)
         pprint(api_response)
     except client.ApiException as e:
         print("Exception when calling DAGRunApi->get_dag_runs: %s\n" % e)
@@ -269,6 +270,7 @@ Name | Type | Description  | Notes
  **start_date_lte** | **datetime**| Returns objects less or equal the specified date.  This can be combined with start_date_gte parameter to receive only the selected period.  | [optional]
  **end_date_gte** | **datetime**| Returns objects greater or equal the specified date.  This can be combined with start_date_lte parameter to receive only the selected period.  | [optional]
  **end_date_lte** | **datetime**| Returns objects less than or equal to the specified date.  This can be combined with start_date_gte parameter to receive only the selected period.  | [optional]
+ **order_by** | **str**| The name of the field to order the results by. Prefix a field name with &#x60;-&#x60; to reverse the sort order.  | [optional]
 
 ### Return type
 
@@ -332,6 +334,7 @@ with client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = dag_run_api.DAGRunApi(api_client)
     list_dag_runs_form = ListDagRunsForm(
+        order_by="order_by_example",
         page_offset=0,
         page_limit=100,
         dag_ids=[
@@ -424,12 +427,8 @@ with client.ApiClient(configuration) as api_client:
     dag_id = "dag_id_example" # str | The DAG ID.
     dag_run = DAGRun(
         dag_run_id="dag_run_id_example",
-        dag_id="dag_id_example",
         execution_date=dateutil_parser('1970-01-01T00:00:00.00Z'),
-        start_date=dateutil_parser('1970-01-01T00:00:00.00Z'),
-        end_date=dateutil_parser('1970-01-01T00:00:00.00Z'),
         state=DagState("success"),
-        external_trigger=True,
         conf={},
     ) # DAGRun | 
 

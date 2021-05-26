@@ -23,6 +23,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**order_by** | **str** | The name of the field to order the results by. Prefix a field name with &#x60;-&#x60; to reverse the sort order.  | [optional] 
 **page_offset** | **int** | The number of items to skip before starting to collect the result set. | [optional] 
 **page_limit** | **int** | The numbers of items to return. | [optional]  if omitted the server will use the default value of 100
 **dag_ids** | **[str]** | Return objects with specific DAG IDs. The value can be repeated to retrieve multiple matching values (OR condition). | [optional] 

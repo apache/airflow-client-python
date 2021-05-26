@@ -74,6 +74,8 @@ from airflow_client.client.model.plugin_collection_item import PluginCollectionI
 from airflow_client.client.model.pool import Pool
 from airflow_client.client.model.pool_collection import PoolCollection
 from airflow_client.client.model.pool_collection_all_of import PoolCollectionAllOf
+from airflow_client.client.model.provider import Provider
+from airflow_client.client.model.provider_collection import ProviderCollection
 from airflow_client.client.model.relative_delta import RelativeDelta
 from airflow_client.client.model.resource import Resource
 from airflow_client.client.model.role import Role

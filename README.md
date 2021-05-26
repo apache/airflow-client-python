@@ -19,6 +19,10 @@
 
 # Apache Airflow Python Client
 
+> **_NOTE:_**  The Apache Airflow Client is still under active development and some methods 
+> or APIs might be broken. Please raise an issue in github if you encounter any such issues. 
+
+
 
 ## Requirements.
 

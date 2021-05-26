@@ -12,6 +12,7 @@ client/api/monitoring_api.py
 client/api/permission_api.py
 client/api/plugin_api.py
 client/api/pool_api.py
+client/api/provider_api.py
 client/api/role_api.py
 client/api/task_instance_api.py
 client/api/user_api.py
@@ -70,6 +71,8 @@ client/model/plugin_collection_item.py
 client/model/pool.py
 client/model/pool_collection.py
 client/model/pool_collection_all_of.py
+client/model/provider.py
+client/model/provider_collection.py
 client/model/relative_delta.py
 client/model/resource.py
 client/model/role.py
@@ -110,7 +113,6 @@ client/model/x_com_collection.py
 client/model/x_com_collection_all_of.py
 client/model/x_com_collection_item.py
 client/model_utils.py
-client/models/__init__.py
 client/models/__init__.py
 client/rest.py
 docs/Action.md
@@ -171,6 +173,9 @@ docs/Pool.md
 docs/PoolApi.md
 docs/PoolCollection.md
 docs/PoolCollectionAllOf.md
+docs/Provider.md
+docs/ProviderApi.md
+docs/ProviderCollection.md
 docs/RelativeDelta.md
 docs/Resource.md
 docs/Role.md
@@ -274,6 +279,9 @@ test/test_pool.py
 test/test_pool_api.py
 test/test_pool_collection.py
 test/test_pool_collection_all_of.py
+test/test_provider.py
+test/test_provider_api.py
+test/test_provider_collection.py
 test/test_relative_delta.py
 test/test_resource.py
 test/test_role.py

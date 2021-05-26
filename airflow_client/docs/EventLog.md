@@ -24,7 +24,7 @@ Log of user operations via CLI or Web UI.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**event_log_id** | **int** | The evnet log ID | [optional] [readonly] 
+**event_log_id** | **int** | The event log ID | [optional] [readonly] 
 **when** | **datetime** | The time when these events happened. | [optional] [readonly] 
 **dag_id** | **str, none_type** | The DAG ID | [optional] [readonly] 
 **task_id** | **str, none_type** | The DAG ID | [optional] [readonly] 

@@ -41,6 +41,7 @@ from airflow_client.client.api.monitoring_api import MonitoringApi
 from airflow_client.client.api.permission_api import PermissionApi
 from airflow_client.client.api.plugin_api import PluginApi
 from airflow_client.client.api.pool_api import PoolApi
+from airflow_client.client.api.provider_api import ProviderApi
 from airflow_client.client.api.role_api import RoleApi
 from airflow_client.client.api.task_instance_api import TaskInstanceApi
 from airflow_client.client.api.user_api import UserApi

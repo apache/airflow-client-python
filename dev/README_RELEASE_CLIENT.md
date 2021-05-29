@@ -32,6 +32,7 @@ of this the version in the built artifacts that will become the official Apache 
     ```shell script
     # Set Version
     export VERSION=2.0.0rc1
+    export VERSION_WITHOUT_RC=${VERSION%rc?}
 
 
     # Example after cloning
@@ -58,7 +59,7 @@ of this the version in the built artifacts that will become the official Apache 
 - Tarball the repo
 
     ```shell script
-    git archive --format=tar.gz ${VERSION} --prefix=apache-airflow-client-${VERSION}/ -o apache-airflow-client-${VERSION}-source.tar.gz
+    git archive --format=tar.gz ${VERSION} --prefix=apache-airflow-client-${VERSION_WITHOUT_RC}/ -o apache-airflow-client-${VERSION_WITHOUT_RC}-source.tar.gz
     ```
 
 - Generate sdist
@@ -73,17 +74,17 @@ of this the version in the built artifacts that will become the official Apache 
 - Rename the sdist
 
     ```shell script
-    mv dist/apache-airflow-client-${VERSION%rc?}.tar.gz apache-airflow-client-${VERSION}-bin.tar.gz
-    mv dist/apache_airflow_client-${VERSION%rc?}-py3-none-any.whl apache_airflow_client-${VERSION}-py3-none-any.whl
+    mv dist/apache-airflow-client-${VERSION_WITHOUT_RC}.tar.gz apache-airflow-client-${VERSION_WITHOUT_RC}-bin.tar.gz
+    mv dist/apache_airflow_client-${VERSION_WITHOUT_RC}-py3-none-any.whl apache_airflow_client-${VERSION_WITHOUT_RC}-py3-none-any.whl
     ```
 
 - Generate SHA512/ASC (If you have not generated a key yet, generate it by following instructions on
   http://www.apache.org/dev/openpgp.html#key-gen-generate-key)
 
     ```shell script
-    ${CLIENT_REPO_ROOT}/dev/sign.sh apache-airflow-client-${VERSION}-source.tar.gz
-    ${CLIENT_REPO_ROOT}/dev/sign.sh apache-airflow-client-${VERSION}-bin.tar.gz
-    ${CLIENT_REPO_ROOT}/dev/sign.sh apache_airflow_client-${VERSION}-py3-none-any.whl
+    ${CLIENT_REPO_ROOT}/dev/sign.sh apache-airflow-client-${VERSION_WITHOUT_RC}-source.tar.gz
+    ${CLIENT_REPO_ROOT}/dev/sign.sh apache-airflow-client-${VERSION_WITHOUT_RC}-bin.tar.gz
+    ${CLIENT_REPO_ROOT}/dev/sign.sh apache_airflow_client-${VERSION_WITHOUT_RC}-py3-none-any.whl
     ```
 
 - Push the artifacts to ASF dev dist repo
@@ -97,7 +98,7 @@ cd airflow-dev/clients/python
 svn mkdir ${VERSION}
 
 # Move the artifacts to svn folder & commit
-mv ${CLIENT_REPO_ROOT}/apache{-,_}*client-${VERSION}* ${VERSION}/
+mv ${CLIENT_REPO_ROOT}/apache{-,_}*client-${VERSION_WITHOUT_RC}* ${VERSION}/
 cd ${VERSION}
 svn add *
 svn commit -m "Add artifacts for Apache Airflow Python Client ${VERSION}"

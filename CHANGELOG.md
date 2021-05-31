@@ -17,6 +17,26 @@
  under the License.
  -->
 
+# v2.1.0
+
+Apache Airflow API version: 2.1.x
+
+###Major changes:
+
+ - Client code is generated using OpenApi's 5.1.1 generator CLI
+
+###Major fixes:
+
+ - Fixed the iteration issue on array items caused by unsupported class 'object' (issue #15)
+
+###New API supported:
+
+ - Permissions
+ - Plugins
+ - Providers
+ - Roles
+ - Users
+
 # v2.0.0
 
 Apache Airflow API version: 2.0.x

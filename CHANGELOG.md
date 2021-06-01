@@ -21,15 +21,15 @@
 
 Apache Airflow API version: 2.1.x
 
-###Major changes:
+### Major changes:
 
  - Client code is generated using OpenApi's 5.1.1 generator CLI
 
-###Major fixes:
+### Major fixes:
 
  - Fixed the iteration issue on array items caused by unsupported class 'object' (issue #15)
 
-###New API supported:
+### New API supported:
 
  - Permissions
  - Plugins

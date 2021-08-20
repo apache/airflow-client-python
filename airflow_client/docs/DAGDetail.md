@@ -39,7 +39,7 @@ Name | Type | Description | Notes
 **orientation** | **str** |  | [optional] [readonly] 
 **concurrency** | **float** |  | [optional] [readonly] 
 **start_date** | **datetime, none_type** |  | [optional] [readonly] 
-**dag_run_timeout** | [**TimeDelta**](TimeDelta.md) |  | [optional] 
+**dag_run_timeout** | [**[TimeDelta], none_type**](TimeDelta.md) |  | [optional] 
 **doc_md** | **str, none_type** |  | [optional] [readonly] 
 **default_view** | **str** |  | [optional] [readonly] 
 **params** | **{str: (bool, date, datetime, dict, float, int, list, str, none_type)}** |  | [optional] [readonly] 

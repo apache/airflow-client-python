@@ -91,15 +91,16 @@ class VariableCollectionItem(ModelNormal):
         """
         return {
             'key': (str,),  # noqa: E501
+            'value': (str,),
         }
 
     @cached_property
     def discriminator():
         return None
 
-
     attribute_map = {
         'key': 'key',  # noqa: E501
+        'value': 'value',
     }
 
     _composed_schemas = {}
@@ -176,9 +177,9 @@ class VariableCollectionItem(ModelNormal):
 
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
-                        self._configuration is not None and \
-                        self._configuration.discard_unknown_keys and \
-                        self.additional_properties_type is None:
+                    self._configuration is not None and \
+                    self._configuration.discard_unknown_keys and \
+                    self.additional_properties_type is None:
                 # discard variable.
                 continue
             setattr(self, var_name, var_value)

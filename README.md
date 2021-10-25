@@ -62,17 +62,11 @@ import airflow_client.client
 from pprint import pprint
 from airflow_client.client.api import config_api
 
-# The client must use the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
 #
-# In case of the basic authentication below, make sure that Airflow is
-# configured with the basic_auth as backend:
-#
-# auth_backend = airflow.api.auth.backend.basic_auth
-#
-# Make sure that your user/name are configured properly
+# In case of the basic authentication below. Make sure:
+#  - Airflow is configured with the basic_auth as backend:
+#     auth_backend = airflow.api.auth.backend.basic_auth
+#  - Make sure that the client has been generated with securitySchema Basic.
 
 # Configure HTTP basic authorization: Basic
 configuration = airflow_client.client.Configuration(
@@ -108,6 +102,19 @@ git clone git@github.com:apache/airflow-client-python.git
 
 # clone Airflow repo (if not already)
 git clone git@github.com:apache/airflow.git
+```
+Edit the file `airflow/airflow/api_connexion/openapi/v1.yaml`
+Make sure it has the following `securitySchema`s listed under security `section`
+```yaml
+security: 
+  - Basic: []
+  - GoogleOpenId: []
+  - Kerberos: []
+```
+If your deployment of Airflow uses any different authentication mechanism than the three listed above, you might need to make further changes to the `v1.yaml` and generate your own client, see [OpenAPI Schema specification](https://swagger.io/docs/specification/authentication/) for details.
+(*These changes should not be commited to the upstream `v1.yaml` [as it will generate misleading openapi documentaion](https://github.com/apache/airflow/pull/17174)*)
+
+```bash 
 cd airflow
 
 # bump up the version in python.sh & run the following command 

@@ -18,7 +18,7 @@
 """
     Airflow API (Stable)
 
-    # Overview  To facilitate management, Apache Airflow supports a range of REST API endpoints across its objects. This section provides an overview of the API design, methods, and supported use cases.  Most of the endpoints accept `JSON` as input and return `JSON` responses. This means that you must usually add the following headers to your request: ``` Content-type: application/json Accept: application/json ```  ## Resources  The term `resource` refers to a single type of object in the Airflow metadata. An API is broken up by its endpoint's corresponding resource. The name of a resource is typically plural and expressed in camelCase. Example: `dagRuns`.  Resource names are used as part of endpoint URLs, as well as in API parameters and responses.  ## CRUD Operations  The platform supports **C**reate, **R**ead, **U**pdate, and **D**elete operations on most resources. You can review the standards for these operations and their standard parameters below.  Some endpoints have special behavior as exceptions.  ### Create  To create a resource, you typically submit an HTTP `POST` request with the resource's required metadata in the request body. The response returns a `201 Created` response code upon success with the resource's metadata, including its internal `id`, in the response body.  ### Read  The HTTP `GET` request can be used to read a resource or to list a number of resources.  A resource's `id` can be submitted in the request parameters to read a specific resource. The response usually returns a `200 OK` response code upon success, with the resource's metadata in the response body.  If a `GET` request does not include a specific resource `id`, it is treated as a list request. The response usually returns a `200 OK` response code upon success, with an object containing a list of resources' metadata in the response body.  When reading resources, some common query parameters are usually available. e.g.: ``` v1/connections?limit=25&offset=25 ```  |Query Parameter|Type|Description| |---------------|----|-----------| |limit|integer|Maximum number of objects to fetch. Usually 25 by default| |offset|integer|Offset after which to start returning objects. For use with limit query parameter.|  ### Update  Updating a resource requires the resource `id`, and is typically done using an HTTP `PATCH` request, with the fields to modify in the request body. The response usually returns a `200 OK` response code upon success, with information about the modified resource in the response body.  ### Delete  Deleting a resource requires the resource `id` and is typically executing via an HTTP `DELETE` request. The response usually returns a `204 No Content` response code upon success.  ## Conventions  - Resource names are plural and expressed in camelCase. - Names are consistent between URL parameter name and field name.  - Field names are in snake_case. ```json {     \"name\": \"string\",     \"slots\": 0,     \"occupied_slots\": 0,     \"used_slots\": 0,     \"queued_slots\": 0,     \"open_slots\": 0 } ```  ### Update Mask  Update mask is available as a query parameter in patch endpoints. It is used to notify the API which fields you want to update. Using `update_mask` makes it easier to update objects by helping the server know which fields to update in an object instead of updating all fields. The update request ignores any fields that aren't specified in the field mask, leaving them with their current values.  Example: ```   resource = request.get('/resource/my-id').json()   resource['my_field'] = 'new-value'   request.patch('/resource/my-id?update_mask=my_field', data=json.dumps(resource)) ```  ## Versioning and Endpoint Lifecycle  - API versioning is not synchronized to specific releases of the Apache Airflow. - APIs are designed to be backward compatible. - Any changes to the API will first go through a deprecation phase.  # Summary of Changes  | Airflow version | Description | |-|-| | v2.0 | Initial release | | v2.0.2    | Added /plugins endpoint | | v2.1 | New providers endpoint |  # Trying the API  You can use a third party client, such as [curl](https://curl.haxx.se/), [HTTPie](https://httpie.org/), [Postman](https://www.postman.com/) or [the Insomnia rest client](https://insomnia.rest/) to test the Apache Airflow API.  Note that you will need to pass credentials data.  For e.g., here is how to pause a DAG with [curl](https://curl.haxx.se/), when basic authorization is used: ```bash curl -X POST 'https://example.com/api/v1/dags/{dag_id}?update_mask=is_paused' \\ -H 'Content-Type: application/json' \\ --user \"username:password\" \\ -d '{     \"is_paused\": true }' ```  Using a graphical tool such as [Postman](https://www.postman.com/) or [Insomnia](https://insomnia.rest/), it is possible to import the API specifications directly:  1. Download the API specification by clicking the **Download** button at top of this document 2. Import the JSON specification in the graphical tool of your choice.   - In *Postman*, you can click the **import** button at the top   - With *Insomnia*, you can just drag-and-drop the file on the UI  Note that with *Postman*, you can also generate code snippets by selecting a request and clicking on the **Code** button.  ## Enabling CORS  [Cross-origin resource sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) is a browser security feature that restricts HTTP requests that are initiated from scripts running in the browser.  For details on enabling/configuring CORS, see [Enabling CORS](https://airflow.apache.org/docs/apache-airflow/stable/security/api.html).  # Authentication  To be able to meet the requirements of many organizations, Airflow supports many authentication methods, and it is even possible to add your own method.  If you want to check which auth backend is currently set, you can use `airflow config get-value api auth_backend` command as in the example below. ```bash $ airflow config get-value api auth_backend airflow.api.auth.backend.basic_auth ``` The default is to deny all requests.  For details on configuring the authentication, see [API Authorization](https://airflow.apache.org/docs/apache-airflow/stable/security/api.html).  # Errors  We follow the error response format proposed in [RFC 7807](https://tools.ietf.org/html/rfc7807) also known as Problem Details for HTTP APIs. As with our normal API responses, your client must be prepared to gracefully handle additional members of the response.  ## Unauthenticated  This indicates that the request has not been applied because it lacks valid authentication credentials for the target resource. Please check that you have valid credentials.  ## PermissionDenied  This response means that the server understood the request but refuses to authorize it because it lacks sufficient rights to the resource. It happens when you do not have the necessary permission to execute the action you performed. You need to get the appropriate permissions in other to resolve this error.  ## BadRequest  This response means that the server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing). To resolve this, please ensure that your syntax is correct.  ## NotFound  This client error response indicates that the server cannot find the requested resource.  ## MethodNotAllowed  Indicates that the request method is known by the server but is not supported by the target resource.  ## NotAcceptable  The target resource does not have a current representation that would be acceptable to the user agent, according to the proactive negotiation header fields received in the request, and the server is unwilling to supply a default representation.  ## AlreadyExists  The request could not be completed due to a conflict with the current state of the target resource, meaning that the resource already exists  ## Unknown  This means that the server encountered an unexpected condition that prevented it from fulfilling the request.   # noqa: E501
+    # Overview  To facilitate management, Apache Airflow supports a range of REST API endpoints across its objects. This section provides an overview of the API design, methods, and supported use cases.  Most of the endpoints accept `JSON` as input and return `JSON` responses. This means that you must usually add the following headers to your request: ``` Content-type: application/json Accept: application/json ```  ## Resources  The term `resource` refers to a single type of object in the Airflow metadata. An API is broken up by its endpoint's corresponding resource. The name of a resource is typically plural and expressed in camelCase. Example: `dagRuns`.  Resource names are used as part of endpoint URLs, as well as in API parameters and responses.  ## CRUD Operations  The platform supports **C**reate, **R**ead, **U**pdate, and **D**elete operations on most resources. You can review the standards for these operations and their standard parameters below.  Some endpoints have special behavior as exceptions.  ### Create  To create a resource, you typically submit an HTTP `POST` request with the resource's required metadata in the request body. The response returns a `201 Created` response code upon success with the resource's metadata, including its internal `id`, in the response body.  ### Read  The HTTP `GET` request can be used to read a resource or to list a number of resources.  A resource's `id` can be submitted in the request parameters to read a specific resource. The response usually returns a `200 OK` response code upon success, with the resource's metadata in the response body.  If a `GET` request does not include a specific resource `id`, it is treated as a list request. The response usually returns a `200 OK` response code upon success, with an object containing a list of resources' metadata in the response body.  When reading resources, some common query parameters are usually available. e.g.: ``` v1/connections?limit=25&offset=25 ```  |Query Parameter|Type|Description| |---------------|----|-----------| |limit|integer|Maximum number of objects to fetch. Usually 25 by default| |offset|integer|Offset after which to start returning objects. For use with limit query parameter.|  ### Update  Updating a resource requires the resource `id`, and is typically done using an HTTP `PATCH` request, with the fields to modify in the request body. The response usually returns a `200 OK` response code upon success, with information about the modified resource in the response body.  ### Delete  Deleting a resource requires the resource `id` and is typically executing via an HTTP `DELETE` request. The response usually returns a `204 No Content` response code upon success.  ## Conventions  - Resource names are plural and expressed in camelCase. - Names are consistent between URL parameter name and field name.  - Field names are in snake_case. ```json {     \"name\": \"string\",     \"slots\": 0,     \"occupied_slots\": 0,     \"used_slots\": 0,     \"queued_slots\": 0,     \"open_slots\": 0 } ```  ### Update Mask  Update mask is available as a query parameter in patch endpoints. It is used to notify the API which fields you want to update. Using `update_mask` makes it easier to update objects by helping the server know which fields to update in an object instead of updating all fields. The update request ignores any fields that aren't specified in the field mask, leaving them with their current values.  Example: ```   resource = request.get('/resource/my-id').json()   resource['my_field'] = 'new-value'   request.patch('/resource/my-id?update_mask=my_field', data=json.dumps(resource)) ```  ## Versioning and Endpoint Lifecycle  - API versioning is not synchronized to specific releases of the Apache Airflow. - APIs are designed to be backward compatible. - Any changes to the API will first go through a deprecation phase.  # Summary of Changes  | Airflow version | Description | |-|-| | v2.0 | Initial release | | v2.0.2    | Added /plugins endpoint | | v2.1 | New providers endpoint |  # Trying the API  You can use a third party client, such as [curl](https://curl.haxx.se/), [HTTPie](https://httpie.org/), [Postman](https://www.postman.com/) or [the Insomnia rest client](https://insomnia.rest/) to test the Apache Airflow API.  Note that you will need to pass credentials data.  For e.g., here is how to pause a DAG with [curl](https://curl.haxx.se/), when basic authorization is used: ```bash curl -X PATCH 'https://example.com/api/v1/dags/{dag_id}?update_mask=is_paused' \\ -H 'Content-Type: application/json' \\ --user \"username:password\" \\ -d '{     \"is_paused\": true }' ```  Using a graphical tool such as [Postman](https://www.postman.com/) or [Insomnia](https://insomnia.rest/), it is possible to import the API specifications directly:  1. Download the API specification by clicking the **Download** button at top of this document 2. Import the JSON specification in the graphical tool of your choice.   - In *Postman*, you can click the **import** button at the top   - With *Insomnia*, you can just drag-and-drop the file on the UI  Note that with *Postman*, you can also generate code snippets by selecting a request and clicking on the **Code** button.  ## Enabling CORS  [Cross-origin resource sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) is a browser security feature that restricts HTTP requests that are initiated from scripts running in the browser.  For details on enabling/configuring CORS, see [Enabling CORS](https://airflow.apache.org/docs/apache-airflow/stable/security/api.html).  # Authentication  To be able to meet the requirements of many organizations, Airflow supports many authentication methods, and it is even possible to add your own method.  If you want to check which auth backend is currently set, you can use `airflow config get-value api auth_backend` command as in the example below. ```bash $ airflow config get-value api auth_backend airflow.api.auth.backend.basic_auth ``` The default is to deny all requests.  For details on configuring the authentication, see [API Authorization](https://airflow.apache.org/docs/apache-airflow/stable/security/api.html).  # Errors  We follow the error response format proposed in [RFC 7807](https://tools.ietf.org/html/rfc7807) also known as Problem Details for HTTP APIs. As with our normal API responses, your client must be prepared to gracefully handle additional members of the response.  ## Unauthenticated  This indicates that the request has not been applied because it lacks valid authentication credentials for the target resource. Please check that you have valid credentials.  ## PermissionDenied  This response means that the server understood the request but refuses to authorize it because it lacks sufficient rights to the resource. It happens when you do not have the necessary permission to execute the action you performed. You need to get the appropriate permissions in other to resolve this error.  ## BadRequest  This response means that the server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing). To resolve this, please ensure that your syntax is correct.  ## NotFound  This client error response indicates that the server cannot find the requested resource.  ## MethodNotAllowed  Indicates that the request method is known by the server but is not supported by the target resource.  ## NotAcceptable  The target resource does not have a current representation that would be acceptable to the user agent, according to the proactive negotiation header fields received in the request, and the server is unwilling to supply a default representation.  ## AlreadyExists  The request could not be completed due to a conflict with the current state of the target resource, e.g. the resource it tries to create already exists.  ## Unknown  This means that the server encountered an unexpected condition that prevented it from fulfilling the request.   # noqa: E501
 
     The version of the OpenAPI document: 1.0.0
     Contact: dev@airflow.apache.org
@@ -27,6 +27,7 @@
 
 
 from datetime import date, datetime  # noqa: F401
+from copy import deepcopy
 import inspect
 import io
 import os
@@ -47,9 +48,25 @@ none_type = type(None)
 file_type = io.IOBase
 
 
+def convert_js_args_to_python_args(fn):
+    from functools import wraps
+    @wraps(fn)
+    def wrapped_init(_self, *args, **kwargs):
+        """
+        An attribute named `self` received from the api will conflicts with the reserved `self`
+        parameter of a class method. During generation, `self` attributes are mapped
+        to `_self` in models. Here, we name `_self` instead of `self` to avoid conflicts.
+        """
+        spec_property_naming = kwargs.get('_spec_property_naming', False)
+        if spec_property_naming:
+            kwargs = change_keys_js_to_python(kwargs, _self if isinstance(_self, type) else _self.__class__)
+        return fn(_self, *args, **kwargs)
+    return wrapped_init
+
+
 class cached_property(object):
     # this caches the result of the function call for fn with no inputs
-    # use this as a decorator on fuction methods that you want converted
+    # use this as a decorator on function methods that you want converted
     # into cached properties
     result_key = '_results'
 
@@ -188,6 +205,26 @@ class OpenApiModel(object):
         """get the value of an attribute using dot notation: `instance.attr`"""
         return self.__getitem__(attr)
 
+    def __copy__(self):
+        cls = self.__class__
+        if self.get("_spec_property_naming", False):
+            return cls._new_from_openapi_data(**self.__dict__)
+        else:
+            return new_cls.__new__(cls, **self.__dict__)
+
+    def __deepcopy__(self, memo):
+        cls = self.__class__
+
+        if self.get("_spec_property_naming", False):
+            new_inst = cls._new_from_openapi_data()
+        else:
+            new_inst = cls.__new__(cls)
+
+        for k, v in self.__dict__.items():
+            setattr(new_inst, k, deepcopy(v, memo))
+        return new_inst
+
+
     def __new__(cls, *args, **kwargs):
         # this function uses the discriminator to
         # pick a new schema/class to instantiate because a discriminator
@@ -297,8 +334,128 @@ class OpenApiModel(object):
             self_inst = super(OpenApiModel, cls).__new__(cls)
             self_inst.__init__(*args, **kwargs)
 
-        new_inst = new_cls.__new__(new_cls, *args, **kwargs)
-        new_inst.__init__(*args, **kwargs)
+        if kwargs.get("_spec_property_naming", False):
+            # when true, implies new is from deserialization
+            new_inst = new_cls._new_from_openapi_data(*args, **kwargs)
+        else:
+            new_inst = new_cls.__new__(new_cls, *args, **kwargs)
+            new_inst.__init__(*args, **kwargs)
+
+        return new_inst
+
+
+    @classmethod
+    @convert_js_args_to_python_args
+    def _new_from_openapi_data(cls, *args, **kwargs):
+        # this function uses the discriminator to
+        # pick a new schema/class to instantiate because a discriminator
+        # propertyName value was passed in
+
+        if len(args) == 1:
+            arg = args[0]
+            if arg is None and is_type_nullable(cls):
+                # The input data is the 'null' value and the type is nullable.
+                return None
+
+            if issubclass(cls, ModelComposed) and allows_single_value_input(cls):
+                model_kwargs = {}
+                oneof_instance = get_oneof_instance(cls, model_kwargs, kwargs, model_arg=arg)
+                return oneof_instance
+
+
+        visited_composed_classes = kwargs.get('_visited_composed_classes', ())
+        if (
+            cls.discriminator is None or
+            cls in visited_composed_classes
+        ):
+            # Use case 1: this openapi schema (cls) does not have a discriminator
+            # Use case 2: we have already visited this class before and are sure that we
+            # want to instantiate it this time. We have visited this class deserializing
+            # a payload with a discriminator. During that process we traveled through
+            # this class but did not make an instance of it. Now we are making an
+            # instance of a composed class which contains cls in it, so this time make an instance of cls.
+            #
+            # Here's an example of use case 2: If Animal has a discriminator
+            # petType and we pass in "Dog", and the class Dog
+            # allOf includes Animal, we move through Animal
+            # once using the discriminator, and pick Dog.
+            # Then in the composed schema dog Dog, we will make an instance of the
+            # Animal class (because Dal has allOf: Animal) but this time we won't travel
+            # through Animal's discriminator because we passed in
+            # _visited_composed_classes = (Animal,)
+
+            return cls._from_openapi_data(*args, **kwargs)
+
+        # Get the name and value of the discriminator property.
+        # The discriminator name is obtained from the discriminator meta-data
+        # and the discriminator value is obtained from the input data.
+        discr_propertyname_py = list(cls.discriminator.keys())[0]
+        discr_propertyname_js = cls.attribute_map[discr_propertyname_py]
+        if discr_propertyname_js in kwargs:
+            discr_value = kwargs[discr_propertyname_js]
+        elif discr_propertyname_py in kwargs:
+            discr_value = kwargs[discr_propertyname_py]
+        else:
+            # The input data does not contain the discriminator property.
+            path_to_item = kwargs.get('_path_to_item', ())
+            raise ApiValueError(
+                "Cannot deserialize input data due to missing discriminator. "
+                "The discriminator property '%s' is missing at path: %s" %
+                (discr_propertyname_js, path_to_item)
+            )
+
+        # Implementation note: the last argument to get_discriminator_class
+        # is a list of visited classes. get_discriminator_class may recursively
+        # call itself and update the list of visited classes, and the initial
+        # value must be an empty list. Hence not using 'visited_composed_classes'
+        new_cls = get_discriminator_class(
+                    cls, discr_propertyname_py, discr_value, [])
+        if new_cls is None:
+            path_to_item = kwargs.get('_path_to_item', ())
+            disc_prop_value = kwargs.get(
+                discr_propertyname_js, kwargs.get(discr_propertyname_py))
+            raise ApiValueError(
+                "Cannot deserialize input data due to invalid discriminator "
+                "value. The OpenAPI document has no mapping for discriminator "
+                "property '%s'='%s' at path: %s" %
+                (discr_propertyname_js, disc_prop_value, path_to_item)
+            )
+
+        if new_cls in visited_composed_classes:
+            # if we are making an instance of a composed schema Descendent
+            # which allOf includes Ancestor, then Ancestor contains
+            # a discriminator that includes Descendent.
+            # So if we make an instance of Descendent, we have to make an
+            # instance of Ancestor to hold the allOf properties.
+            # This code detects that use case and makes the instance of Ancestor
+            # For example:
+            # When making an instance of Dog, _visited_composed_classes = (Dog,)
+            # then we make an instance of Animal to include in dog._composed_instances
+            # so when we are here, cls is Animal
+            # cls.discriminator != None
+            # cls not in _visited_composed_classes
+            # new_cls = Dog
+            # but we know we know that we already have Dog
+            # because it is in visited_composed_classes
+            # so make Animal here
+            return cls._from_openapi_data(*args, **kwargs)
+
+        # Build a list containing all oneOf and anyOf descendants.
+        oneof_anyof_classes = None
+        if cls._composed_schemas is not None:
+            oneof_anyof_classes = (
+                cls._composed_schemas.get('oneOf', ()) +
+                cls._composed_schemas.get('anyOf', ()))
+        oneof_anyof_child = new_cls in oneof_anyof_classes
+        kwargs['_visited_composed_classes'] = visited_composed_classes + (cls,)
+
+        if cls._composed_schemas.get('allOf') and oneof_anyof_child:
+            # Validate that we can make self because when we make the
+            # new_cls it will not include the allOf validations in self
+            self_inst = cls._from_openapi_data(*args, **kwargs)
+
+
+        new_inst = new_cls._new_from_openapi_data(*args, **kwargs)
         return new_inst
 
 
@@ -333,7 +490,7 @@ class ModelSimple(OpenApiModel):
         )
 
     def __contains__(self, name):
-        """used by `in` operator to check if an attrbute value was set in an instance: `'attr' in instance`"""
+        """used by `in` operator to check if an attribute value was set in an instance: `'attr' in instance`"""
         if name in self.required_properties:
             return name in self.__dict__
 
@@ -388,7 +545,7 @@ class ModelNormal(OpenApiModel):
         )
 
     def __contains__(self, name):
-        """used by `in` operator to check if an attrbute value was set in an instance: `'attr' in instance`"""
+        """used by `in` operator to check if an attribute value was set in an instance: `'attr' in instance`"""
         if name in self.required_properties:
             return name in self.__dict__
 
@@ -452,27 +609,43 @@ class ModelComposed(OpenApiModel):
             self.__dict__[name] = value
             return
 
-        # set the attribute on the correct instance
-        model_instances = self._var_name_to_model_instances.get(
-            name, self._additional_properties_model_instances)
-        if model_instances:
-            for model_instance in model_instances:
-                if model_instance == self:
-                    self.set_attribute(name, value)
-                else:
-                    setattr(model_instance, name, value)
-                if name not in self._var_name_to_model_instances:
-                    # we assigned an additional property
-                    self.__dict__['_var_name_to_model_instances'][name] = (
-                        model_instance
-                    )
-            return None
+        """
+        Use cases:
+        1. additional_properties_type is None (additionalProperties == False in spec)
+            Check for property presence in self.openapi_types
+            if not present then throw an error
+            if present set in self, set attribute
+            always set on composed schemas
+        2.  additional_properties_type exists
+            set attribute on self
+            always set on composed schemas
+        """
+        if self.additional_properties_type is None:
+            """
+            For an attribute to exist on a composed schema it must:
+            - fulfill schema_requirements in the self composed schema not considering oneOf/anyOf/allOf schemas AND
+            - fulfill schema_requirements in each oneOf/anyOf/allOf schemas
 
-        raise ApiAttributeError(
-            "{0} has no attribute '{1}'".format(
-                type(self).__name__, name),
-            [e for e in [self._path_to_item, name] if e]
-        )
+            schema_requirements:
+            For an attribute to exist on a schema it must:
+            - be present in properties at the schema OR
+            - have additionalProperties unset (defaults additionalProperties = any type) OR
+            - have additionalProperties set
+            """
+            if name not in self.openapi_types:
+                raise ApiAttributeError(
+                    "{0} has no attribute '{1}'".format(
+                        type(self).__name__, name),
+                    [e for e in [self._path_to_item, name] if e]
+                )
+        # attribute must be set on self and composed instances
+        self.set_attribute(name, value)
+        for model_instance in self._composed_instances:
+            setattr(model_instance, name, value)
+        if name not in self._var_name_to_model_instances:
+            # we assigned an additional property
+            self.__dict__['_var_name_to_model_instances'][name] = self._composed_instances + [self]
+        return None
 
     __unset_attribute_value__ = object()
 
@@ -482,13 +655,12 @@ class ModelComposed(OpenApiModel):
             return self.__dict__[name]
 
         # get the attribute from the correct instance
-        model_instances = self._var_name_to_model_instances.get(
-            name, self._additional_properties_model_instances)
+        model_instances = self._var_name_to_model_instances.get(name)
         values = []
-        # A composed model stores child (oneof/anyOf/allOf) models under
-        # self._var_name_to_model_instances. A named property can exist in
-        # multiple child models. If the property is present in more than one
-        # child model, the value must be the same across all the child models.
+        # A composed model stores self and child (oneof/anyOf/allOf) models under
+        # self._var_name_to_model_instances.
+        # Any property must exist in self and all model instances
+        # The value stored in all model instances must be the same
         if model_instances:
             for model_instance in model_instances:
                 if name in model_instance._data_store:
@@ -520,7 +692,7 @@ class ModelComposed(OpenApiModel):
         return value
 
     def __contains__(self, name):
-        """used by `in` operator to check if an attrbute value was set in an instance: `'attr' in instance`"""
+        """used by `in` operator to check if an attribute value was set in an instance: `'attr' in instance`"""
 
         if name in self.required_properties:
             return name in self.__dict__
@@ -1211,14 +1383,14 @@ def deserialize_model(model_data, model_class, path_to_item, check_type,
                    _spec_property_naming=spec_property_naming)
 
     if issubclass(model_class, ModelSimple):
-        return model_class(model_data, **kw_args)
+        return model_class._new_from_openapi_data(model_data, **kw_args)
     elif isinstance(model_data, list):
-        return model_class(*model_data, **kw_args)
+        return model_class._new_from_openapi_data(*model_data, **kw_args)
     if isinstance(model_data, dict):
         kw_args.update(model_data)
-        return model_class(**kw_args)
+        return model_class._new_from_openapi_data(**kw_args)
     elif isinstance(model_data, PRIMITIVE_TYPES):
-        return model_class(model_data, **kw_args)
+        return model_class._new_from_openapi_data(model_data, **kw_args)
 
 
 def deserialize_file(response_data, configuration, content_disposition=None):
@@ -1351,6 +1523,9 @@ def is_valid_type(input_class_simple, valid_classes):
     Returns:
         bool
     """
+    if issubclass(input_class_simple, OpenApiModel) and \
+        valid_classes == (bool, date, datetime, dict, float, int, list, str, none_type,):
+        return True
     valid_type = input_class_simple in valid_classes
     if not valid_type and (
             issubclass(input_class_simple, OpenApiModel) or
@@ -1504,12 +1679,20 @@ def model_to_dict(model_instance, serialize=True):
     model_instances = [model_instance]
     if model_instance._composed_schemas:
         model_instances.extend(model_instance._composed_instances)
+    seen_json_attribute_names = set()
+    used_fallback_python_attribute_names = set()
+    py_to_json_map = {}
     for model_instance in model_instances:
         for attr, value in model_instance._data_store.items():
             if serialize:
                 # we use get here because additional property key names do not
                 # exist in attribute_map
-                attr = model_instance.attribute_map.get(attr, attr)
+                try:
+                    attr = model_instance.attribute_map[attr]
+                    py_to_json_map.update(model_instance.attribute_map)
+                    seen_json_attribute_names.add(attr)
+                except KeyError:
+                    used_fallback_python_attribute_names.add(attr)
             if isinstance(value, list):
                if not value:
                    # empty list or None
@@ -1537,6 +1720,16 @@ def model_to_dict(model_instance, serialize=True):
                 result[attr] = model_to_dict(value, serialize=serialize)
             else:
                 result[attr] = value
+    if serialize:
+        for python_key in used_fallback_python_attribute_names:
+            json_key = py_to_json_map.get(python_key)
+            if json_key is None:
+                continue
+            if python_key == json_key:
+                continue
+            json_key_assigned_no_need_for_python_key = json_key in seen_json_attribute_names
+            if json_key_assigned_no_need_for_python_key:
+                del result[python_key]
 
     return result
 
@@ -1580,30 +1773,19 @@ def get_valid_classes_phrase(input_classes):
     return "is one of [{0}]".format(", ".join(all_class_names))
 
 
-def convert_js_args_to_python_args(fn):
-    from functools import wraps
-    @wraps(fn)
-    def wrapped_init(_self, *args, **kwargs):
-        """
-        An attribute named `self` received from the api will conflicts with the reserved `self`
-        parameter of a class method. During generation, `self` attributes are mapped
-        to `_self` in models. Here, we name `_self` instead of `self` to avoid conflicts.
-        """
-        spec_property_naming = kwargs.get('_spec_property_naming', False)
-        if spec_property_naming:
-            kwargs = change_keys_js_to_python(kwargs, _self.__class__)
-        return fn(_self, *args, **kwargs)
-    return wrapped_init
-
-
 def get_allof_instances(self, model_args, constant_args):
     """
     Args:
         self: the class we are handling
         model_args (dict): var_name to var_value
             used to make instances
-        constant_args (dict): var_name to var_value
-            used to make instances
+        constant_args (dict):
+            metadata arguments:
+            _check_type
+            _path_to_item
+            _spec_property_naming
+            _configuration
+            _visited_composed_classes
 
     Returns
         composed_instances (list)
@@ -1611,20 +1793,11 @@ def get_allof_instances(self, model_args, constant_args):
     composed_instances = []
     for allof_class in self._composed_schemas['allOf']:
 
-        # no need to handle changing js keys to python because
-        # for composed schemas, allof parameters are included in the
-        # composed schema and were changed to python keys in __new__
-        # extract a dict of only required keys from fixed_model_args
-        kwargs = {}
-        var_names = set(allof_class.openapi_types.keys())
-        for var_name in var_names:
-            if var_name in model_args:
-                kwargs[var_name] = model_args[var_name]
-
-        # and use it to make the instance
-        kwargs.update(constant_args)
         try:
-            allof_instance = allof_class(**kwargs)
+            if constant_args.get('_spec_property_naming'):
+                allof_instance = allof_class._from_openapi_data(**model_args, **constant_args)
+            else:
+                allof_instance = allof_class(**model_args, **constant_args)
             composed_instances.append(allof_instance)
         except Exception as ex:
             raise ApiValueError(
@@ -1684,34 +1857,18 @@ def get_oneof_instance(cls, model_kwargs, constant_kwargs, model_arg=None):
 
         single_value_input = allows_single_value_input(oneof_class)
 
-        if not single_value_input:
-            # transform js keys from input data to python keys in fixed_model_args
-            fixed_model_args = change_keys_js_to_python(
-                model_kwargs, oneof_class)
-
-            # Extract a dict with the properties that are declared in the oneOf schema.
-            # Undeclared properties (e.g. properties that are allowed because of the
-            # additionalProperties attribute in the OAS document) are not added to
-            # the dict.
-            kwargs = {}
-            var_names = set(oneof_class.openapi_types.keys())
-            for var_name in var_names:
-                if var_name in fixed_model_args:
-                    kwargs[var_name] = fixed_model_args[var_name]
-
-            # do not try to make a model with no input args
-            if len(kwargs) == 0:
-                continue
-
-            # and use it to make the instance
-            kwargs.update(constant_kwargs)
-
         try:
             if not single_value_input:
-                oneof_instance = oneof_class(**kwargs)
+                if constant_kwargs.get('_spec_property_naming'):
+                    oneof_instance = oneof_class._from_openapi_data(**model_kwargs, **constant_kwargs)
+                else:
+                    oneof_instance = oneof_class(**model_kwargs, **constant_kwargs)
             else:
                 if issubclass(oneof_class, ModelSimple):
-                    oneof_instance = oneof_class(model_arg, **constant_kwargs)
+                    if constant_kwargs.get('_spec_property_naming'):
+                        oneof_instance = oneof_class._from_openapi_data(model_arg, **constant_kwargs)
+                    else:
+                        oneof_instance = oneof_class(model_arg, **constant_kwargs)
                 elif oneof_class in PRIMITIVE_TYPES:
                     oneof_instance = validate_and_convert_types(
                         model_arg,
@@ -1765,24 +1922,11 @@ def get_anyof_instances(self, model_args, constant_args):
             # none_type deserialization is handled in the __new__ method
             continue
 
-        # transform js keys to python keys in fixed_model_args
-        fixed_model_args = change_keys_js_to_python(model_args, anyof_class)
-
-        # extract a dict of only required keys from these_model_vars
-        kwargs = {}
-        var_names = set(anyof_class.openapi_types.keys())
-        for var_name in var_names:
-            if var_name in fixed_model_args:
-                kwargs[var_name] = fixed_model_args[var_name]
-
-        # do not try to make a model with no input args
-        if len(kwargs) == 0:
-            continue
-
-        # and use it to make the instance
-        kwargs.update(constant_args)
         try:
-            anyof_instance = anyof_class(**kwargs)
+            if constant_args.get('_spec_property_naming'):
+                anyof_instance = anyof_class._from_openapi_data(**model_args, **constant_args)
+            else:
+                anyof_instance = anyof_class(**model_args, **constant_args)
             anyof_instances.append(anyof_instance)
         except Exception:
             pass
@@ -1795,47 +1939,34 @@ def get_anyof_instances(self, model_args, constant_args):
     return anyof_instances
 
 
-def get_additional_properties_model_instances(
-        composed_instances, self):
-    additional_properties_model_instances = []
-    all_instances = [self]
-    all_instances.extend(composed_instances)
-    for instance in all_instances:
-        if instance.additional_properties_type is not None:
-            additional_properties_model_instances.append(instance)
-    return additional_properties_model_instances
-
-
-def get_var_name_to_model_instances(self, composed_instances):
-    var_name_to_model_instances = {}
-    all_instances = [self]
-    all_instances.extend(composed_instances)
-    for instance in all_instances:
-        for var_name in instance.openapi_types:
-            if var_name not in var_name_to_model_instances:
-                var_name_to_model_instances[var_name] = [instance]
-            else:
-                var_name_to_model_instances[var_name].append(instance)
-    return var_name_to_model_instances
-
-
-def get_unused_args(self, composed_instances, model_args):
-    unused_args = dict(model_args)
-    # arguments apssed to self were already converted to python names
+def get_discarded_args(self, composed_instances, model_args):
+    """
+    Gathers the args that were discarded by configuration.discard_unknown_keys
+    """
+    model_arg_keys = model_args.keys()
+    discarded_args = set()
+    # arguments passed to self were already converted to python names
     # before __init__ was called
-    for var_name_py in self.attribute_map:
-        if var_name_py in unused_args:
-            del unused_args[var_name_py]
     for instance in composed_instances:
         if instance.__class__ in self._composed_schemas['allOf']:
-            for var_name_py in instance.attribute_map:
-                if var_name_py in unused_args:
-                    del unused_args[var_name_py]
+            try:
+                keys = instance.to_dict().keys()
+                discarded_keys = model_args - keys
+                discarded_args.update(discarded_keys)
+            except Exception:
+                # allOf integer schema will throw exception
+                pass
         else:
-            for var_name_js in instance.attribute_map.values():
-                if var_name_js in unused_args:
-                    del unused_args[var_name_js]
-    return unused_args
+            try:
+                all_keys = set(model_to_dict(instance, serialize=False).keys())
+                js_keys = model_to_dict(instance, serialize=True).keys()
+                all_keys.update(js_keys)
+                discarded_keys = model_arg_keys - all_keys
+                discarded_args.update(discarded_keys)
+            except Exception:
+                # allOf integer schema will throw exception
+                pass
+    return discarded_args
 
 
 def validate_get_composed_info(constant_args, model_args, self):
@@ -1879,36 +2010,42 @@ def validate_get_composed_info(constant_args, model_args, self):
         composed_instances.append(oneof_instance)
     anyof_instances = get_anyof_instances(self, model_args, constant_args)
     composed_instances.extend(anyof_instances)
+    """
+    set additional_properties_model_instances
+    additional properties must be evaluated at the schema level
+    so self's additional properties are most important
+    If self is a composed schema with:
+    - no properties defined in self
+    - additionalProperties: False
+    Then for object payloads every property is an additional property
+    and they are not allowed, so only empty dict is allowed
+
+    Properties must be set on all matching schemas
+    so when a property is assigned toa composed instance, it must be set on all
+    composed instances regardless of additionalProperties presence
+    keeping it to prevent breaking changes in v5.0.1
+    TODO remove cls._additional_properties_model_instances in 6.0.0
+    """
+    additional_properties_model_instances = []
+    if self.additional_properties_type is not None:
+        additional_properties_model_instances = [self]
+
+    """
+    no need to set properties on self in here, they will be set in __init__
+    By here all composed schema oneOf/anyOf/allOf instances have their properties set using
+    model_args
+    """
+    discarded_args = get_discarded_args(self, composed_instances, model_args)
 
     # map variable names to composed_instances
-    var_name_to_model_instances = get_var_name_to_model_instances(
-        self, composed_instances)
-
-    # set additional_properties_model_instances
-    additional_properties_model_instances = (
-        get_additional_properties_model_instances(composed_instances, self)
-    )
-
-    # set any remaining values
-    unused_args = get_unused_args(self, composed_instances, model_args)
-    if len(unused_args) > 0 and \
-            len(additional_properties_model_instances) == 0 and \
-            (self._configuration is None or
-                not self._configuration.discard_unknown_keys):
-        raise ApiValueError(
-            "Invalid input arguments input when making an instance of "
-            "class %s. Not all inputs were used. The unused input data "
-            "is %s" % (self.__class__.__name__, unused_args)
-        )
-
-    # no need to add additional_properties to var_name_to_model_instances here
-    # because additional_properties_model_instances will direct us to that
-    # instance when we use getattr or setattr
-    # and we update var_name_to_model_instances in setattr
+    var_name_to_model_instances = {}
+    for prop_name in model_args:
+        if prop_name not in discarded_args:
+            var_name_to_model_instances[prop_name] = [self] + composed_instances
 
     return [
       composed_instances,
       var_name_to_model_instances,
       additional_properties_model_instances,
-      unused_args
+      discarded_args
     ]

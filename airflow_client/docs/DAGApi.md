@@ -23,6 +23,7 @@ All URIs are relative to *http://localhost/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**delete_dag**](DAGApi.md#delete_dag) | **DELETE** /dags/{dag_id} | Delete a DAG
 [**get_dag**](DAGApi.md#get_dag) | **GET** /dags/{dag_id} | Get basic information about a DAG
 [**get_dag_details**](DAGApi.md#get_dag_details) | **GET** /dags/{dag_id}/details | Get a simplified representation of DAG
 [**get_dag_source**](DAGApi.md#get_dag_source) | **GET** /dagSources/{file_token} | Get a source code
@@ -34,6 +35,77 @@ Method | HTTP request | Description
 [**post_set_task_instances_state**](DAGApi.md#post_set_task_instances_state) | **POST** /dags/{dag_id}/updateTaskInstancesState | Set a state of task instances
 
 
+# **delete_dag**
+> delete_dag(dag_id)
+
+Delete a DAG
+
+Deletes all metadata related to the DAG, including finished DAG Runs and Tasks. Logs are not deleted. This action cannot be undone. 
+
+### Example
+
+
+```python
+import time
+import airflow_client.client
+from airflow_client.client.api import dag_api
+from airflow_client.client.model.error import Error
+from pprint import pprint
+# Defining the host is optional and defaults to http://localhost/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = client.Configuration(
+    host = "http://localhost/api/v1"
+)
+
+
+# Enter a context with an instance of the API client
+with client.ApiClient() as api_client:
+    # Create an instance of the API class
+    api_instance = dag_api.DAGApi(api_client)
+    dag_id = "dag_id_example" # str | The DAG ID.
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Delete a DAG
+        api_instance.delete_dag(dag_id)
+    except client.ApiException as e:
+        print("Exception when calling DAGApi->delete_dag: %s\n" % e)
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **dag_id** | **str**| The DAG ID. |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Success. |  -  |
+**400** | Client specified an invalid argument. |  -  |
+**401** | Request not authenticated due to missing, invalid, authentication info. |  -  |
+**403** | Client does not have sufficient permission. |  -  |
+**404** | A specified resource is not found. |  -  |
+**409** | An existing resource conflicts with the request. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_dag**
 > DAG get_dag(dag_id)
 
@@ -43,7 +115,7 @@ Presents only information available in database (DAGModel). If you need detailed
 
 ### Example
 
-* Basic Authentication (Basic):
+
 ```python
 import time
 import airflow_client.client
@@ -57,19 +129,9 @@ configuration = client.Configuration(
     host = "http://localhost/api/v1"
 )
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = client.Configuration(
-    username = 'YOUR_USERNAME',
-    password = 'YOUR_PASSWORD'
-)
 
 # Enter a context with an instance of the API client
-with client.ApiClient(configuration) as api_client:
+with client.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = dag_api.DAGApi(api_client)
     dag_id = "dag_id_example" # str | The DAG ID.
@@ -96,7 +158,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 
@@ -105,6 +167,7 @@ Name | Type | Description  | Notes
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success. |  -  |
@@ -123,7 +186,7 @@ The response contains many DAG attributes, so the response can be large. If poss
 
 ### Example
 
-* Basic Authentication (Basic):
+
 ```python
 import time
 import airflow_client.client
@@ -137,19 +200,9 @@ configuration = client.Configuration(
     host = "http://localhost/api/v1"
 )
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = client.Configuration(
-    username = 'YOUR_USERNAME',
-    password = 'YOUR_PASSWORD'
-)
 
 # Enter a context with an instance of the API client
-with client.ApiClient(configuration) as api_client:
+with client.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = dag_api.DAGApi(api_client)
     dag_id = "dag_id_example" # str | The DAG ID.
@@ -176,7 +229,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 
@@ -185,6 +238,7 @@ Name | Type | Description  | Notes
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success. |  -  |
@@ -203,7 +257,7 @@ Get a source code using file token.
 
 ### Example
 
-* Basic Authentication (Basic):
+
 ```python
 import time
 import airflow_client.client
@@ -217,19 +271,9 @@ configuration = client.Configuration(
     host = "http://localhost/api/v1"
 )
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = client.Configuration(
-    username = 'YOUR_USERNAME',
-    password = 'YOUR_PASSWORD'
-)
 
 # Enter a context with an instance of the API client
-with client.ApiClient(configuration) as api_client:
+with client.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = dag_api.DAGApi(api_client)
     file_token = "file_token_example" # str | The key containing the encrypted path to the file. Encryption and decryption take place only on the server. This prevents the client from reading an non-DAG file. This also ensures API extensibility, because the format of encrypted data may change. 
@@ -256,7 +300,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 
@@ -265,6 +309,7 @@ Name | Type | Description  | Notes
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success. |  -  |
@@ -282,7 +327,7 @@ List DAGs
 
 ### Example
 
-* Basic Authentication (Basic):
+
 ```python
 import time
 import airflow_client.client
@@ -296,30 +341,24 @@ configuration = client.Configuration(
     host = "http://localhost/api/v1"
 )
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = client.Configuration(
-    username = 'YOUR_USERNAME',
-    password = 'YOUR_PASSWORD'
-)
 
 # Enter a context with an instance of the API client
-with client.ApiClient(configuration) as api_client:
+with client.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = dag_api.DAGApi(api_client)
     limit = 100 # int | The numbers of items to return. (optional) if omitted the server will use the default value of 100
     offset = 0 # int | The number of items to skip before starting to collect the result set. (optional)
     order_by = "order_by_example" # str | The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order.  (optional)
+    tags = [
+        "tags_example",
+    ] # [str] | List of tags to filter results (optional)
+    only_active = True # bool | Only return active DAGs. (optional) if omitted the server will use the default value of True
 
     # example passing only required values which don't have defaults set
     # and optional values
     try:
         # List DAGs
-        api_response = api_instance.get_dags(limit=limit, offset=offset, order_by=order_by)
+        api_response = api_instance.get_dags(limit=limit, offset=offset, order_by=order_by, tags=tags, only_active=only_active)
         pprint(api_response)
     except client.ApiException as e:
         print("Exception when calling DAGApi->get_dags: %s\n" % e)
@@ -333,6 +372,8 @@ Name | Type | Description  | Notes
  **limit** | **int**| The numbers of items to return. | [optional] if omitted the server will use the default value of 100
  **offset** | **int**| The number of items to skip before starting to collect the result set. | [optional]
  **order_by** | **str**| The name of the field to order the results by. Prefix a field name with &#x60;-&#x60; to reverse the sort order.  | [optional]
+ **tags** | **[str]**| List of tags to filter results | [optional]
+ **only_active** | **bool**| Only return active DAGs. | [optional] if omitted the server will use the default value of True
 
 ### Return type
 
@@ -340,7 +381,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 
@@ -349,6 +390,7 @@ Name | Type | Description  | Notes
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success. |  -  |
@@ -363,7 +405,7 @@ Get simplified representation of a task
 
 ### Example
 
-* Basic Authentication (Basic):
+
 ```python
 import time
 import airflow_client.client
@@ -377,19 +419,9 @@ configuration = client.Configuration(
     host = "http://localhost/api/v1"
 )
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = client.Configuration(
-    username = 'YOUR_USERNAME',
-    password = 'YOUR_PASSWORD'
-)
 
 # Enter a context with an instance of the API client
-with client.ApiClient(configuration) as api_client:
+with client.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = dag_api.DAGApi(api_client)
     dag_id = "dag_id_example" # str | The DAG ID.
@@ -418,7 +450,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 
@@ -427,6 +459,7 @@ Name | Type | Description  | Notes
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success. |  -  |
@@ -443,7 +476,7 @@ Get tasks for DAG
 
 ### Example
 
-* Basic Authentication (Basic):
+
 ```python
 import time
 import airflow_client.client
@@ -457,19 +490,9 @@ configuration = client.Configuration(
     host = "http://localhost/api/v1"
 )
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = client.Configuration(
-    username = 'YOUR_USERNAME',
-    password = 'YOUR_PASSWORD'
-)
 
 # Enter a context with an instance of the API client
-with client.ApiClient(configuration) as api_client:
+with client.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = dag_api.DAGApi(api_client)
     dag_id = "dag_id_example" # str | The DAG ID.
@@ -507,7 +530,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 
@@ -516,6 +539,7 @@ Name | Type | Description  | Notes
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success. |  -  |
@@ -532,7 +556,7 @@ Update a DAG
 
 ### Example
 
-* Basic Authentication (Basic):
+
 ```python
 import time
 import airflow_client.client
@@ -546,19 +570,9 @@ configuration = client.Configuration(
     host = "http://localhost/api/v1"
 )
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = client.Configuration(
-    username = 'YOUR_USERNAME',
-    password = 'YOUR_PASSWORD'
-)
 
 # Enter a context with an instance of the API client
-with client.ApiClient(configuration) as api_client:
+with client.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = dag_api.DAGApi(api_client)
     dag_id = "dag_id_example" # str | The DAG ID.
@@ -602,7 +616,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 
@@ -611,6 +625,7 @@ Name | Type | Description  | Notes
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success. |  -  |
@@ -629,7 +644,7 @@ Clears a set of task instances associated with the DAG for a specified date rang
 
 ### Example
 
-* Basic Authentication (Basic):
+
 ```python
 import time
 import airflow_client.client
@@ -644,19 +659,9 @@ configuration = client.Configuration(
     host = "http://localhost/api/v1"
 )
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = client.Configuration(
-    username = 'YOUR_USERNAME',
-    password = 'YOUR_PASSWORD'
-)
 
 # Enter a context with an instance of the API client
-with client.ApiClient(configuration) as api_client:
+with client.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = dag_api.DAGApi(api_client)
     dag_id = "dag_id_example" # str | The DAG ID.
@@ -697,7 +702,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 
@@ -706,6 +711,7 @@ Name | Type | Description  | Notes
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success. |  -  |
@@ -724,7 +730,7 @@ Updates the state for multiple task instances simultaneously.
 
 ### Example
 
-* Basic Authentication (Basic):
+
 ```python
 import time
 import airflow_client.client
@@ -739,19 +745,9 @@ configuration = client.Configuration(
     host = "http://localhost/api/v1"
 )
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = client.Configuration(
-    username = 'YOUR_USERNAME',
-    password = 'YOUR_PASSWORD'
-)
 
 # Enter a context with an instance of the API client
-with client.ApiClient(configuration) as api_client:
+with client.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = dag_api.DAGApi(api_client)
     dag_id = "dag_id_example" # str | The DAG ID.
@@ -789,7 +785,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 
@@ -798,6 +794,7 @@ Name | Type | Description  | Notes
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success. |  -  |

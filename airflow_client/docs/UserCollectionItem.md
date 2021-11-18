@@ -32,9 +32,10 @@ Name | Type | Description | Notes
 **last_login** | **str, none_type** | The last user login | [optional] [readonly] 
 **login_count** | **int, none_type** | The login count | [optional] [readonly] 
 **failed_login_count** | **int, none_type** | The number of times the login failed | [optional] [readonly] 
-**roles** | [**[UserCollectionItemRoles]**](UserCollectionItemRoles.md) | User roles | [optional] [readonly] 
+**roles** | [**[UserCollectionItemRoles]**](UserCollectionItemRoles.md) | User roles | [optional] 
 **created_on** | **str, none_type** | The date user was created | [optional] [readonly] 
 **changed_on** | **str, none_type** | The date user was changed | [optional] [readonly] 
+**any string name** | **bool, date, datetime, dict, float, int, list, str, none_type** | any string name can be used but the value must be the correct type | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

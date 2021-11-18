@@ -47,6 +47,7 @@ Name | Type | Description | Notes
 **template_fields** | **[str]** |  | [optional] [readonly] 
 **sub_dag** | [**DAG**](DAG.md) |  | [optional] 
 **downstream_task_ids** | **[str]** |  | [optional] [readonly] 
+**any string name** | **bool, date, datetime, dict, float, int, list, str, none_type** | any string name can be used but the value must be the correct type | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

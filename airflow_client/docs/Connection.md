@@ -30,7 +30,7 @@ Name | Type | Description | Notes
 **login** | **str, none_type** | Login of the connection. | [optional] 
 **schema** | **str, none_type** | Schema of the connection. | [optional] 
 **port** | **int, none_type** | Port of the connection. | [optional] 
-**password** | **str** | Paasword of the connection. | [optional] 
+**password** | **str** | Password of the connection. | [optional] 
 **extra** | **str, none_type** | Other values that cannot be put into another field, e.g. RSA keys. | [optional] 
 **any string name** | **bool, date, datetime, dict, float, int, list, str, none_type** | any string name can be used but the value must be the correct type | [optional]
 

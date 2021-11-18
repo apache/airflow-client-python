@@ -38,11 +38,12 @@ Name | Type | Description | Notes
 **pool_slots** | **int** |  | [optional] 
 **queue** | **str** |  | [optional] 
 **priority_weight** | **int** |  | [optional] 
-**operator** | **str** |  | [optional] 
+**operator** | **str, none_type** |  | [optional] 
 **queued_when** | **str, none_type** |  | [optional] 
 **pid** | **int, none_type** |  | [optional] 
 **executor_config** | **str** |  | [optional] 
 **sla_miss** | [**SLAMiss**](SLAMiss.md) |  | [optional] 
+**any string name** | **bool, date, datetime, dict, float, int, list, str, none_type** | any string name can be used but the value must be the correct type | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

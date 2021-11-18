@@ -42,6 +42,7 @@ from airflow_client.client.model.connection_all_of import ConnectionAllOf
 from airflow_client.client.model.connection_collection import ConnectionCollection
 from airflow_client.client.model.connection_collection_all_of import ConnectionCollectionAllOf
 from airflow_client.client.model.connection_collection_item import ConnectionCollectionItem
+from airflow_client.client.model.connection_test import ConnectionTest
 from airflow_client.client.model.cron_expression import CronExpression
 from airflow_client.client.model.dag import DAG
 from airflow_client.client.model.dag_collection import DAGCollection
@@ -96,6 +97,7 @@ from airflow_client.client.model.task_instance_reference_collection import TaskI
 from airflow_client.client.model.task_state import TaskState
 from airflow_client.client.model.time_delta import TimeDelta
 from airflow_client.client.model.trigger_rule import TriggerRule
+from airflow_client.client.model.update_dag_run_state import UpdateDagRunState
 from airflow_client.client.model.update_task_instances_state import UpdateTaskInstancesState
 from airflow_client.client.model.user import User
 from airflow_client.client.model.user_all_of import UserAllOf

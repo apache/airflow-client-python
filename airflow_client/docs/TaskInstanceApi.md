@@ -40,6 +40,7 @@ List extra links for task instance.
 ### Example
 
 * Basic Authentication (Basic):
+
 ```python
 import time
 import airflow_client.client
@@ -105,6 +106,7 @@ Name | Type | Description  | Notes
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success. |  -  |
@@ -124,6 +126,7 @@ Get logs for a specific task instance and its try number.
 ### Example
 
 * Basic Authentication (Basic):
+
 ```python
 import time
 import airflow_client.client
@@ -204,6 +207,7 @@ Name | Type | Description  | Notes
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success. |  -  |
@@ -222,6 +226,7 @@ Get a task instance
 ### Example
 
 * Basic Authentication (Basic):
+
 ```python
 import time
 import airflow_client.client
@@ -287,6 +292,7 @@ Name | Type | Description  | Notes
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success. |  -  |
@@ -306,6 +312,7 @@ This endpoint allows specifying `~` as the dag_id, dag_run_id to retrieve DAG ru
 ### Example
 
 * Basic Authentication (Basic):
+
 ```python
 import time
 import airflow_client.client
@@ -410,6 +417,7 @@ Name | Type | Description  | Notes
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success. |  -  |
@@ -428,6 +436,7 @@ List task instances from all DAGs and DAG runs. This endpoint is a POST to allow
 ### Example
 
 * Basic Authentication (Basic):
+
 ```python
 import time
 import airflow_client.client
@@ -511,6 +520,7 @@ Name | Type | Description  | Notes
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success. |  -  |

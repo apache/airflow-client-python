@@ -35,6 +35,7 @@ Get a log entry
 ### Example
 
 * Basic Authentication (Basic):
+
 ```python
 import time
 import airflow_client.client
@@ -96,6 +97,7 @@ Name | Type | Description  | Notes
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success. |  -  |
@@ -115,6 +117,7 @@ List log entries from event log.
 ### Example
 
 * Basic Authentication (Basic):
+
 ```python
 import time
 import airflow_client.client
@@ -181,6 +184,7 @@ Name | Type | Description  | Notes
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success. |  -  |

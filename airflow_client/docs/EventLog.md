@@ -32,6 +32,7 @@ Name | Type | Description | Notes
 **execution_date** | **datetime, none_type** | When the event was dispatched for an object having execution_date, the value of this field.  | [optional] [readonly] 
 **owner** | **str** | Name of the user who triggered these events a. | [optional] [readonly] 
 **extra** | **str, none_type** | Other information that was not included in the other fields, e.g. the complete CLI command.  | [optional] [readonly] 
+**any string name** | **bool, date, datetime, dict, float, int, list, str, none_type** | any string name can be used but the value must be the correct type | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

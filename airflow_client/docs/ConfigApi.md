@@ -34,6 +34,7 @@ Get current configuration
 ### Example
 
 * Basic Authentication (Basic):
+
 ```python
 import time
 import airflow_client.client
@@ -91,6 +92,7 @@ This endpoint does not need any parameter.
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success. |  -  |

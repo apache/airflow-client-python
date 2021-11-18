@@ -27,13 +27,14 @@ Method | HTTP request | Description
 
 
 # **get_providers**
-> object get_providers()
+> bool, date, datetime, dict, float, int, list, str, none_type get_providers()
 
 List providers
 
 ### Example
 
 * Basic Authentication (Basic):
+
 ```python
 import time
 import airflow_client.client
@@ -77,7 +78,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-**object**
+**bool, date, datetime, dict, float, int, list, str, none_type**
 
 ### Authorization
 
@@ -90,6 +91,7 @@ This endpoint does not need any parameter.
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of providers. |  -  |

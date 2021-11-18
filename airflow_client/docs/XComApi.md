@@ -37,6 +37,7 @@ This endpoint allows specifying `~` as the dag_id, dag_run_id, task_id to retrie
 ### Example
 
 * Basic Authentication (Basic):
+
 ```python
 import time
 import airflow_client.client
@@ -115,6 +116,7 @@ Name | Type | Description  | Notes
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success. |  -  |
@@ -131,6 +133,7 @@ Get an XCom entry
 ### Example
 
 * Basic Authentication (Basic):
+
 ```python
 import time
 import airflow_client.client
@@ -198,6 +201,7 @@ Name | Type | Description  | Notes
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success. |  -  |

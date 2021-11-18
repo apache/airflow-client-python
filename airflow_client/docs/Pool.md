@@ -30,6 +30,7 @@ Name | Type | Description | Notes
 **used_slots** | **int** | The number of slots used by running tasks at the moment. | [optional] [readonly] 
 **queued_slots** | **int** | The number of slots used by queued tasks at the moment. | [optional] [readonly] 
 **open_slots** | **int** | The number of free slots at the moment. | [optional] [readonly] 
+**any string name** | **bool, date, datetime, dict, float, int, list, str, none_type** | any string name can be used but the value must be the correct type | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

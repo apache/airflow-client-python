@@ -39,6 +39,7 @@ client/model/connection_all_of.py
 client/model/connection_collection.py
 client/model/connection_collection_all_of.py
 client/model/connection_collection_item.py
+client/model/connection_test.py
 client/model/cron_expression.py
 client/model/dag.py
 client/model/dag_collection.py
@@ -93,6 +94,7 @@ client/model/task_instance_reference_collection.py
 client/model/task_state.py
 client/model/time_delta.py
 client/model/trigger_rule.py
+client/model/update_dag_run_state.py
 client/model/update_task_instances_state.py
 client/model/user.py
 client/model/user_all_of.py
@@ -133,6 +135,7 @@ docs/ConnectionApi.md
 docs/ConnectionCollection.md
 docs/ConnectionCollectionAllOf.md
 docs/ConnectionCollectionItem.md
+docs/ConnectionTest.md
 docs/CronExpression.md
 docs/DAG.md
 docs/DAGApi.md
@@ -198,6 +201,7 @@ docs/TaskInstanceReferenceCollection.md
 docs/TaskState.md
 docs/TimeDelta.md
 docs/TriggerRule.md
+docs/UpdateDagRunState.md
 docs/UpdateTaskInstancesState.md
 docs/User.md
 docs/UserAllOf.md
@@ -239,6 +243,7 @@ test/test_connection_api.py
 test/test_connection_collection.py
 test/test_connection_collection_all_of.py
 test/test_connection_collection_item.py
+test/test_connection_test.py
 test/test_cron_expression.py
 test/test_dag.py
 test/test_dag_api.py
@@ -304,6 +309,7 @@ test/test_task_instance_reference_collection.py
 test/test_task_state.py
 test/test_time_delta.py
 test/test_trigger_rule.py
+test/test_update_dag_run_state.py
 test/test_update_task_instances_state.py
 test/test_user.py
 test/test_user_all_of.py

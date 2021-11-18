@@ -32,6 +32,7 @@ Name | Type | Description | Notes
 **include_subdags** | **bool** | Clear tasks in subdags and clear external tasks indicated by ExternalTaskMarker. | [optional] 
 **include_parentdag** | **bool** | Clear tasks in the parent dag of the subdag. | [optional] 
 **reset_dag_runs** | **bool** | Set state of DAG runs to RUNNING. | [optional] 
+**any string name** | **bool, date, datetime, dict, float, int, list, str, none_type** | any string name can be used but the value must be the correct type | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

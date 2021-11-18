@@ -37,6 +37,7 @@ Delete a variable
 
 ### Example
 
+* Basic Authentication (Basic):
 
 ```python
 import time
@@ -50,9 +51,19 @@ configuration = client.Configuration(
     host = "http://localhost/api/v1"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: Basic
+configuration = client.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
 
 # Enter a context with an instance of the API client
-with client.ApiClient() as api_client:
+with client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = variable_api.VariableApi(api_client)
     variable_key = "variable_key_example" # str | The variable Key.
@@ -78,7 +89,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
 
 ### HTTP request headers
 
@@ -107,6 +118,7 @@ Get a variable by key.
 
 ### Example
 
+* Basic Authentication (Basic):
 
 ```python
 import time
@@ -121,9 +133,19 @@ configuration = client.Configuration(
     host = "http://localhost/api/v1"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: Basic
+configuration = client.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
 
 # Enter a context with an instance of the API client
-with client.ApiClient() as api_client:
+with client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = variable_api.VariableApi(api_client)
     variable_key = "variable_key_example" # str | The variable Key.
@@ -150,7 +172,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
 
 ### HTTP request headers
 
@@ -178,6 +200,7 @@ The collection does not contain data. To get data, you must get a single entity.
 
 ### Example
 
+* Basic Authentication (Basic):
 
 ```python
 import time
@@ -192,9 +215,19 @@ configuration = client.Configuration(
     host = "http://localhost/api/v1"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: Basic
+configuration = client.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
 
 # Enter a context with an instance of the API client
-with client.ApiClient() as api_client:
+with client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = variable_api.VariableApi(api_client)
     limit = 100 # int | The numbers of items to return. (optional) if omitted the server will use the default value of 100
@@ -226,7 +259,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
 
 ### HTTP request headers
 
@@ -253,6 +286,7 @@ Update a variable by key.
 
 ### Example
 
+* Basic Authentication (Basic):
 
 ```python
 import time
@@ -267,9 +301,19 @@ configuration = client.Configuration(
     host = "http://localhost/api/v1"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: Basic
+configuration = client.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
 
 # Enter a context with an instance of the API client
-with client.ApiClient() as api_client:
+with client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = variable_api.VariableApi(api_client)
     variable_key = "variable_key_example" # str | The variable Key.
@@ -311,7 +355,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
 
 ### HTTP request headers
 
@@ -338,6 +382,7 @@ Create a variable
 
 ### Example
 
+* Basic Authentication (Basic):
 
 ```python
 import time
@@ -352,9 +397,19 @@ configuration = client.Configuration(
     host = "http://localhost/api/v1"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: Basic
+configuration = client.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
 
 # Enter a context with an instance of the API client
-with client.ApiClient() as api_client:
+with client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = variable_api.VariableApi(api_client)
     variable = Variable(None) # Variable | 
@@ -381,7 +436,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
 
 ### HTTP request headers
 

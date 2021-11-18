@@ -61,7 +61,10 @@ class TaskInstanceApi(object):
         self.get_extra_links_endpoint = _Endpoint(
             settings={
                 'response_type': (ExtraLinkCollection,),
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/links',
                 'operation_id': 'get_extra_links',
                 'http_method': 'GET',
@@ -122,7 +125,10 @@ class TaskInstanceApi(object):
         self.get_log_endpoint = _Endpoint(
             settings={
                 'response_type': (InlineResponse200,),
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/logs/{task_try_number}',
                 'operation_id': 'get_log',
                 'http_method': 'GET',
@@ -200,7 +206,10 @@ class TaskInstanceApi(object):
         self.get_task_instance_endpoint = _Endpoint(
             settings={
                 'response_type': (TaskInstance,),
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}',
                 'operation_id': 'get_task_instance',
                 'http_method': 'GET',
@@ -261,7 +270,10 @@ class TaskInstanceApi(object):
         self.get_task_instances_endpoint = _Endpoint(
             settings={
                 'response_type': (TaskInstanceCollection,),
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances',
                 'operation_id': 'get_task_instances',
                 'http_method': 'GET',
@@ -389,7 +401,10 @@ class TaskInstanceApi(object):
         self.get_task_instances_batch_endpoint = _Endpoint(
             settings={
                 'response_type': (TaskInstanceCollection,),
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/dags/~/dagRuns/~/taskInstances/list',
                 'operation_id': 'get_task_instances_batch',
                 'http_method': 'POST',

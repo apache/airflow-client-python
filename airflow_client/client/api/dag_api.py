@@ -65,7 +65,10 @@ class DAGApi(object):
         self.delete_dag_endpoint = _Endpoint(
             settings={
                 'response_type': None,
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/dags/{dag_id}',
                 'operation_id': 'delete_dag',
                 'http_method': 'DELETE',
@@ -114,7 +117,10 @@ class DAGApi(object):
         self.get_dag_endpoint = _Endpoint(
             settings={
                 'response_type': (DAG,),
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/dags/{dag_id}',
                 'operation_id': 'get_dag',
                 'http_method': 'GET',
@@ -163,7 +169,10 @@ class DAGApi(object):
         self.get_dag_details_endpoint = _Endpoint(
             settings={
                 'response_type': (DAGDetail,),
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/dags/{dag_id}/details',
                 'operation_id': 'get_dag_details',
                 'http_method': 'GET',
@@ -212,7 +221,10 @@ class DAGApi(object):
         self.get_dag_source_endpoint = _Endpoint(
             settings={
                 'response_type': (InlineResponse2001,),
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/dagSources/{file_token}',
                 'operation_id': 'get_dag_source',
                 'http_method': 'GET',
@@ -262,7 +274,10 @@ class DAGApi(object):
         self.get_dags_endpoint = _Endpoint(
             settings={
                 'response_type': (DAGCollection,),
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/dags',
                 'operation_id': 'get_dags',
                 'http_method': 'GET',
@@ -335,7 +350,10 @@ class DAGApi(object):
         self.get_task_endpoint = _Endpoint(
             settings={
                 'response_type': (Task,),
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/dags/{dag_id}/tasks/{task_id}',
                 'operation_id': 'get_task',
                 'http_method': 'GET',
@@ -390,7 +408,10 @@ class DAGApi(object):
         self.get_tasks_endpoint = _Endpoint(
             settings={
                 'response_type': (TaskCollection,),
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/dags/{dag_id}/tasks',
                 'operation_id': 'get_tasks',
                 'http_method': 'GET',
@@ -444,7 +465,10 @@ class DAGApi(object):
         self.patch_dag_endpoint = _Endpoint(
             settings={
                 'response_type': (DAG,),
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/dags/{dag_id}',
                 'operation_id': 'patch_dag',
                 'http_method': 'PATCH',
@@ -506,7 +530,10 @@ class DAGApi(object):
         self.post_clear_task_instances_endpoint = _Endpoint(
             settings={
                 'response_type': (TaskInstanceReferenceCollection,),
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/dags/{dag_id}/clearTaskInstances',
                 'operation_id': 'post_clear_task_instances',
                 'http_method': 'POST',
@@ -562,7 +589,10 @@ class DAGApi(object):
         self.post_set_task_instances_state_endpoint = _Endpoint(
             settings={
                 'response_type': (TaskInstanceReferenceCollection,),
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/dags/{dag_id}/updateTaskInstancesState',
                 'operation_id': 'post_set_task_instances_state',
                 'http_method': 'POST',

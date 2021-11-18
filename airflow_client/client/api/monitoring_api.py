@@ -57,7 +57,10 @@ class MonitoringApi(object):
         self.get_health_endpoint = _Endpoint(
             settings={
                 'response_type': (HealthInfo,),
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/health',
                 'operation_id': 'get_health',
                 'http_method': 'GET',
@@ -99,7 +102,10 @@ class MonitoringApi(object):
         self.get_version_endpoint = _Endpoint(
             settings={
                 'response_type': (VersionInfo,),
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/version',
                 'operation_id': 'get_version',
                 'http_method': 'GET',

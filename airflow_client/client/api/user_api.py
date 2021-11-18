@@ -60,7 +60,10 @@ class UserApi(object):
         self.delete_user_endpoint = _Endpoint(
             settings={
                 'response_type': None,
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/users/{username}',
                 'operation_id': 'delete_user',
                 'http_method': 'DELETE',
@@ -109,7 +112,10 @@ class UserApi(object):
         self.get_user_endpoint = _Endpoint(
             settings={
                 'response_type': (UserCollectionItem,),
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/users/{username}',
                 'operation_id': 'get_user',
                 'http_method': 'GET',
@@ -158,7 +164,10 @@ class UserApi(object):
         self.get_users_endpoint = _Endpoint(
             settings={
                 'response_type': (UserCollection,),
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/users',
                 'operation_id': 'get_users',
                 'http_method': 'GET',
@@ -220,7 +229,10 @@ class UserApi(object):
         self.patch_user_endpoint = _Endpoint(
             settings={
                 'response_type': (Role,),
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/users/{username}',
                 'operation_id': 'patch_user',
                 'http_method': 'PATCH',
@@ -282,7 +294,10 @@ class UserApi(object):
         self.post_user_endpoint = _Endpoint(
             settings={
                 'response_type': (User,),
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/users',
                 'operation_id': 'post_user',
                 'http_method': 'POST',

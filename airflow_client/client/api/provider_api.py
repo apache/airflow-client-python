@@ -56,7 +56,10 @@ class ProviderApi(object):
         self.get_providers_endpoint = _Endpoint(
             settings={
                 'response_type': (bool, date, datetime, dict, float, int, list, str, none_type,),
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/providers',
                 'operation_id': 'get_providers',
                 'http_method': 'GET',

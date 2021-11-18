@@ -58,7 +58,10 @@ class ImportErrorApi(object):
         self.get_import_error_endpoint = _Endpoint(
             settings={
                 'response_type': (ImportError,),
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/importErrors/{import_error_id}',
                 'operation_id': 'get_import_error',
                 'http_method': 'GET',
@@ -107,7 +110,10 @@ class ImportErrorApi(object):
         self.get_import_errors_endpoint = _Endpoint(
             settings={
                 'response_type': (ImportErrorCollection,),
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/importErrors',
                 'operation_id': 'get_import_errors',
                 'http_method': 'GET',

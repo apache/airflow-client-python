@@ -57,7 +57,10 @@ class ConfigApi(object):
         self.get_config_endpoint = _Endpoint(
             settings={
                 'response_type': (Config,),
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/config',
                 'operation_id': 'get_config',
                 'http_method': 'GET',

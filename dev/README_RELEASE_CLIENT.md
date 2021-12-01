@@ -203,7 +203,7 @@ svn mkdir ${VERSION}
 cd ${VERSION}
 
 # Move the artifacts to svn folder & commit
-for f in ../../../../airflow-dev/clients/python/$RC/*; do svn cp $f ${$(basename $f)/rc?/}; done
+for f in ../../../../airflow-dev/clients/python/$RC/*; do svn cp $f . ; done
 svn commit -m "Release Apache Airflow Python Client ${VERSION} from ${RC}"
 
 # Remove old release

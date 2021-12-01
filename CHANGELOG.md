@@ -17,6 +17,27 @@
  under the License.
  -->
 
+# v2.2.0
+
+Apache Airflow API version: 2.2.x
+
+### Major changes:
+
+- Client code is generated using OpenApi's 5.3.0 generator CLI
+
+### Major fixes:
+
+- NA
+
+### New API supported:
+
+- POST /connections/test | Test a connection
+- DELETE /dags/{dag_id} | Delete a DAG
+- PATCH /dags/{dag_id}/dagRuns/{dag_run_id} | Modify a DAG run
+- DELETE /users/{username} | Delete a user
+- PATCH /users/{username} | Update a user
+- POST /users | Create a user
+
 # v2.1.0
 
 Apache Airflow API version: 2.1.x

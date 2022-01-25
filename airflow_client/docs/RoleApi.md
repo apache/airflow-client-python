@@ -35,6 +35,8 @@ Method | HTTP request | Description
 
 Delete a role
 
+Delete a role.  *New in version 2.1.0* 
+
 ### Example
 
 * Basic Authentication (Basic):
@@ -113,6 +115,8 @@ void (empty response body)
 > Role get_role(role_name)
 
 Get a role
+
+Get a role.  *New in version 2.1.0* 
 
 ### Example
 
@@ -194,6 +198,8 @@ Name | Type | Description  | Notes
 
 List roles
 
+Get a list of roles.  *New in version 2.1.0* 
+
 ### Example
 
 * Basic Authentication (Basic):
@@ -228,7 +234,7 @@ with client.ApiClient(configuration) as api_client:
     api_instance = role_api.RoleApi(api_client)
     limit = 100 # int | The numbers of items to return. (optional) if omitted the server will use the default value of 100
     offset = 0 # int | The number of items to skip before starting to collect the result set. (optional)
-    order_by = "order_by_example" # str | The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order.  (optional)
+    order_by = "order_by_example" # str | The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order.  *New in version 2.1.0*  (optional)
 
     # example passing only required values which don't have defaults set
     # and optional values
@@ -247,7 +253,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **int**| The numbers of items to return. | [optional] if omitted the server will use the default value of 100
  **offset** | **int**| The number of items to skip before starting to collect the result set. | [optional]
- **order_by** | **str**| The name of the field to order the results by. Prefix a field name with &#x60;-&#x60; to reverse the sort order.  | [optional]
+ **order_by** | **str**| The name of the field to order the results by. Prefix a field name with &#x60;-&#x60; to reverse the sort order.  *New in version 2.1.0*  | [optional]
 
 ### Return type
 
@@ -277,6 +283,8 @@ Name | Type | Description  | Notes
 > Role patch_role(role_name, role)
 
 Update a role
+
+Update a role.  *New in version 2.1.0* 
 
 ### Example
 
@@ -385,6 +393,8 @@ Name | Type | Description  | Notes
 > Role post_role(role)
 
 Create a role
+
+Create a new role.  *New in version 2.1.0* 
 
 ### Example
 

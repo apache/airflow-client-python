@@ -479,7 +479,7 @@ with client.ApiClient(configuration) as api_client:
         duration_gte=3.14,
         duration_lte=3.14,
         state=[
-            "state_example",
+            TaskState("success"),
         ],
         pool=[
             "pool_example",

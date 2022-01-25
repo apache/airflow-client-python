@@ -51,15 +51,15 @@ def lazy_import():
     from airflow_client.client.model.class_reference import ClassReference
     from airflow_client.client.model.color import Color
     from airflow_client.client.model.dag import DAG
+    from airflow_client.client.model.nullable_time_delta import NullableTimeDelta
     from airflow_client.client.model.task_extra_links import TaskExtraLinks
-    from airflow_client.client.model.time_delta import TimeDelta
     from airflow_client.client.model.trigger_rule import TriggerRule
     from airflow_client.client.model.weight_rule import WeightRule
     globals()['ClassReference'] = ClassReference
     globals()['Color'] = Color
     globals()['DAG'] = DAG
+    globals()['NullableTimeDelta'] = NullableTimeDelta
     globals()['TaskExtraLinks'] = TaskExtraLinks
-    globals()['TimeDelta'] = TimeDelta
     globals()['TriggerRule'] = TriggerRule
     globals()['WeightRule'] = WeightRule
 
@@ -130,8 +130,8 @@ class Task(ModelNormal):
             'queue': (str,),  # noqa: E501
             'pool': (str,),  # noqa: E501
             'pool_slots': (float,),  # noqa: E501
-            'execution_timeout': (TimeDelta,),  # noqa: E501
-            'retry_delay': (TimeDelta,),  # noqa: E501
+            'execution_timeout': (NullableTimeDelta,),  # noqa: E501
+            'retry_delay': (NullableTimeDelta,),  # noqa: E501
             'retry_exponential_backoff': (bool,),  # noqa: E501
             'priority_weight': (float,),  # noqa: E501
             'weight_rule': (WeightRule,),  # noqa: E501
@@ -242,8 +242,8 @@ class Task(ModelNormal):
             queue (str): [optional]  # noqa: E501
             pool (str): [optional]  # noqa: E501
             pool_slots (float): [optional]  # noqa: E501
-            execution_timeout (TimeDelta): [optional]  # noqa: E501
-            retry_delay (TimeDelta): [optional]  # noqa: E501
+            execution_timeout (NullableTimeDelta): [optional]  # noqa: E501
+            retry_delay (NullableTimeDelta): [optional]  # noqa: E501
             retry_exponential_backoff (bool): [optional]  # noqa: E501
             priority_weight (float): [optional]  # noqa: E501
             weight_rule (WeightRule): [optional]  # noqa: E501
@@ -346,8 +346,8 @@ class Task(ModelNormal):
             queue (str): [optional]  # noqa: E501
             pool (str): [optional]  # noqa: E501
             pool_slots (float): [optional]  # noqa: E501
-            execution_timeout (TimeDelta): [optional]  # noqa: E501
-            retry_delay (TimeDelta): [optional]  # noqa: E501
+            execution_timeout (NullableTimeDelta): [optional]  # noqa: E501
+            retry_delay (NullableTimeDelta): [optional]  # noqa: E501
             retry_exponential_backoff (bool): [optional]  # noqa: E501
             priority_weight (float): [optional]  # noqa: E501
             weight_rule (WeightRule): [optional]  # noqa: E501

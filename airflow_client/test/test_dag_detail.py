@@ -32,14 +32,14 @@ import unittest
 import airflow_client.client
 from airflow_client.client.model.dag import DAG
 from airflow_client.client.model.dag_detail_all_of import DAGDetailAllOf
+from airflow_client.client.model.nullable_time_delta import NullableTimeDelta
 from airflow_client.client.model.schedule_interval import ScheduleInterval
 from airflow_client.client.model.tag import Tag
-from airflow_client.client.model.time_delta import TimeDelta
 globals()['DAG'] = DAG
 globals()['DAGDetailAllOf'] = DAGDetailAllOf
+globals()['NullableTimeDelta'] = NullableTimeDelta
 globals()['ScheduleInterval'] = ScheduleInterval
 globals()['Tag'] = Tag
-globals()['TimeDelta'] = TimeDelta
 from airflow_client.client.model.dag_detail import DAGDetail
 
 

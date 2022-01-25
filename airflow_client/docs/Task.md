@@ -19,7 +19,7 @@
 
 # Task
 
-For details see: (airflow.models.BaseOperator)[https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/index.html#airflow.models.BaseOperator] 
+For details see: [airflow.models.BaseOperator](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/index.html#airflow.models.BaseOperator) 
 
 ## Properties
 Name | Type | Description | Notes
@@ -37,8 +37,8 @@ Name | Type | Description | Notes
 **queue** | **str** |  | [optional] [readonly] 
 **pool** | **str** |  | [optional] [readonly] 
 **pool_slots** | **float** |  | [optional] [readonly] 
-**execution_timeout** | [**TimeDelta**](TimeDelta.md) |  | [optional] 
-**retry_delay** | [**TimeDelta**](TimeDelta.md) |  | [optional] 
+**execution_timeout** | [**NullableTimeDelta**](NullableTimeDelta.md) |  | [optional] 
+**retry_delay** | [**NullableTimeDelta**](NullableTimeDelta.md) |  | [optional] 
 **retry_exponential_backoff** | **bool** |  | [optional] [readonly] 
 **priority_weight** | **float** |  | [optional] [readonly] 
 **weight_rule** | [**WeightRule**](WeightRule.md) |  | [optional] 

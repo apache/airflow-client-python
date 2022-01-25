@@ -30,10 +30,10 @@ import sys
 import unittest
 
 import airflow_client.client
-from airflow_client.client.model.sla_miss import SLAMiss
-from airflow_client.client.model.task_state import TaskState
-globals()['SLAMiss'] = SLAMiss
-globals()['TaskState'] = TaskState
+from airflow_client.client.model.nullable_sla_miss import NullableSLAMiss
+from airflow_client.client.model.nullable_task_state import NullableTaskState
+globals()['NullableSLAMiss'] = NullableSLAMiss
+globals()['NullableTaskState'] = NullableTaskState
 from airflow_client.client.model.task_instance import TaskInstance
 
 

@@ -172,7 +172,7 @@ class ClearTaskInstance(ModelNormal):
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
             dry_run (bool): If set, don't actually run this operation. The response will contain a list of task instances planned to be cleaned, but not modified in any way. . [optional] if omitted the server will use the default value of True  # noqa: E501
-            task_ids ([str]): A list of task ids to clear.. [optional]  # noqa: E501
+            task_ids ([str]): A list of task ids to clear.  *New in version 2.1.0* . [optional]  # noqa: E501
             start_date (str): The minimum execution date to clear.. [optional]  # noqa: E501
             end_date (str): The maximum execution date to clear.. [optional]  # noqa: E501
             only_failed (bool): Only clear failed tasks.. [optional] if omitted the server will use the default value of True  # noqa: E501
@@ -262,7 +262,7 @@ class ClearTaskInstance(ModelNormal):
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
             dry_run (bool): If set, don't actually run this operation. The response will contain a list of task instances planned to be cleaned, but not modified in any way. . [optional] if omitted the server will use the default value of True  # noqa: E501
-            task_ids ([str]): A list of task ids to clear.. [optional]  # noqa: E501
+            task_ids ([str]): A list of task ids to clear.  *New in version 2.1.0* . [optional]  # noqa: E501
             start_date (str): The minimum execution date to clear.. [optional]  # noqa: E501
             end_date (str): The maximum execution date to clear.. [optional]  # noqa: E501
             only_failed (bool): Only clear failed tasks.. [optional] if omitted the server will use the default value of True  # noqa: E501

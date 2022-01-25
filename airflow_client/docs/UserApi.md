@@ -35,6 +35,8 @@ Method | HTTP request | Description
 
 Delete a user
 
+Delete a user with a specific username.  *New in version 2.2.0* 
+
 ### Example
 
 * Basic Authentication (Basic):
@@ -66,7 +68,7 @@ configuration = client.Configuration(
 with client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = user_api.UserApi(api_client)
-    username = "username_example" # str | The username of the user
+    username = "username_example" # str | The username of the user.  *New in version 2.1.0* 
 
     # example passing only required values which don't have defaults set
     try:
@@ -81,7 +83,7 @@ with client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **username** | **str**| The username of the user |
+ **username** | **str**| The username of the user.  *New in version 2.1.0*  |
 
 ### Return type
 
@@ -113,6 +115,8 @@ void (empty response body)
 > UserCollectionItem get_user(username)
 
 Get a user
+
+Get a user with a specific username.  *New in version 2.1.0* 
 
 ### Example
 
@@ -146,7 +150,7 @@ configuration = client.Configuration(
 with client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = user_api.UserApi(api_client)
-    username = "username_example" # str | The username of the user
+    username = "username_example" # str | The username of the user.  *New in version 2.1.0* 
 
     # example passing only required values which don't have defaults set
     try:
@@ -162,7 +166,7 @@ with client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **username** | **str**| The username of the user |
+ **username** | **str**| The username of the user.  *New in version 2.1.0*  |
 
 ### Return type
 
@@ -193,6 +197,8 @@ Name | Type | Description  | Notes
 > UserCollection get_users()
 
 List users
+
+Get a list of users.  *New in version 2.1.0* 
 
 ### Example
 
@@ -228,7 +234,7 @@ with client.ApiClient(configuration) as api_client:
     api_instance = user_api.UserApi(api_client)
     limit = 100 # int | The numbers of items to return. (optional) if omitted the server will use the default value of 100
     offset = 0 # int | The number of items to skip before starting to collect the result set. (optional)
-    order_by = "order_by_example" # str | The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order.  (optional)
+    order_by = "order_by_example" # str | The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order.  *New in version 2.1.0*  (optional)
 
     # example passing only required values which don't have defaults set
     # and optional values
@@ -247,7 +253,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **int**| The numbers of items to return. | [optional] if omitted the server will use the default value of 100
  **offset** | **int**| The number of items to skip before starting to collect the result set. | [optional]
- **order_by** | **str**| The name of the field to order the results by. Prefix a field name with &#x60;-&#x60; to reverse the sort order.  | [optional]
+ **order_by** | **str**| The name of the field to order the results by. Prefix a field name with &#x60;-&#x60; to reverse the sort order.  *New in version 2.1.0*  | [optional]
 
 ### Return type
 
@@ -277,6 +283,8 @@ Name | Type | Description  | Notes
 > Role patch_user(username, user)
 
 Update a user
+
+Update fields for a user.  *New in version 2.2.0* 
 
 ### Example
 
@@ -311,7 +319,7 @@ configuration = client.Configuration(
 with client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = user_api.UserApi(api_client)
-    username = "username_example" # str | The username of the user
+    username = "username_example" # str | The username of the user.  *New in version 2.1.0* 
     user = User() # User | 
     update_mask = [
         "update_mask_example",
@@ -340,7 +348,7 @@ with client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **username** | **str**| The username of the user |
+ **username** | **str**| The username of the user.  *New in version 2.1.0*  |
  **user** | [**User**](User.md)|  |
  **update_mask** | **[str]**| The fields to update on the resource. If absent or empty, all modifiable fields are updated. A comma-separated list of fully qualified names of fields.  | [optional]
 
@@ -374,6 +382,8 @@ Name | Type | Description  | Notes
 > User post_user(user)
 
 Create a user
+
+Create a new user with unique username and email.  *New in version 2.2.0* 
 
 ### Example
 

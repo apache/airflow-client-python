@@ -30,6 +30,8 @@ import sys
 import unittest
 
 import airflow_client.client
+from airflow_client.client.model.task_state import TaskState
+globals()['TaskState'] = TaskState
 from airflow_client.client.model.list_task_instance_form import ListTaskInstanceForm
 
 

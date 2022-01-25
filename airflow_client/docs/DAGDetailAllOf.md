@@ -27,11 +27,11 @@ Name | Type | Description | Notes
 **catchup** | **bool** |  | [optional] [readonly] 
 **orientation** | **str** |  | [optional] [readonly] 
 **concurrency** | **float** |  | [optional] [readonly] 
-**start_date** | **datetime, none_type** |  | [optional] [readonly] 
-**dag_run_timeout** | [**TimeDelta**](TimeDelta.md) |  | [optional] 
+**start_date** | **datetime, none_type** | The DAG&#39;s start date.  *Changed in version 2.0.1*&amp;#58; Field becomes nullable.  | [optional] [readonly] 
+**dag_run_timeout** | [**NullableTimeDelta**](NullableTimeDelta.md) |  | [optional] 
 **doc_md** | **str, none_type** |  | [optional] [readonly] 
 **default_view** | **str** |  | [optional] [readonly] 
-**params** | **{str: (bool, date, datetime, dict, float, int, list, str, none_type)}** |  | [optional] [readonly] 
+**params** | **{str: (bool, date, datetime, dict, float, int, list, str, none_type)}** | User-specified DAG params.  *New in version 2.0.1*  | [optional] [readonly] 
 **any string name** | **bool, date, datetime, dict, float, int, list, str, none_type** | any string name can be used but the value must be the correct type | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

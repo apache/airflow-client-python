@@ -196,6 +196,7 @@ class DAGRunApi(object):
                     'start_date_lte',
                     'end_date_gte',
                     'end_date_lte',
+                    'state',
                     'order_by',
                 ],
                 'required': [
@@ -237,6 +238,8 @@ class DAGRunApi(object):
                         (datetime,),
                     'end_date_lte':
                         (datetime,),
+                    'state':
+                        ([str],),
                     'order_by':
                         (str,),
                 },
@@ -250,6 +253,7 @@ class DAGRunApi(object):
                     'start_date_lte': 'start_date_lte',
                     'end_date_gte': 'end_date_gte',
                     'end_date_lte': 'end_date_lte',
+                    'state': 'state',
                     'order_by': 'order_by',
                 },
                 'location_map': {
@@ -262,9 +266,11 @@ class DAGRunApi(object):
                     'start_date_lte': 'query',
                     'end_date_gte': 'query',
                     'end_date_lte': 'query',
+                    'state': 'query',
                     'order_by': 'query',
                 },
                 'collection_format_map': {
+                    'state': 'multi',
                 }
             },
             headers_map={
@@ -617,7 +623,8 @@ class DAGRunApi(object):
             start_date_lte (datetime): Returns objects less or equal the specified date.  This can be combined with start_date_gte parameter to receive only the selected period. . [optional]
             end_date_gte (datetime): Returns objects greater or equal the specified date.  This can be combined with start_date_lte parameter to receive only the selected period. . [optional]
             end_date_lte (datetime): Returns objects less than or equal to the specified date.  This can be combined with start_date_gte parameter to receive only the selected period. . [optional]
-            order_by (str): The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order. . [optional]
+            state ([str]): The value can be repeated to retrieve multiple matching values (OR condition).. [optional]
+            order_by (str): The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order.  *New in version 2.1.0* . [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
             _preload_content (bool): if False, the urllib3.HTTPResponse object
@@ -810,7 +817,7 @@ class DAGRunApi(object):
     ):
         """Modify a DAG run  # noqa: E501
 
-        Modify a DAG run  # noqa: E501
+        Modify a DAG run.  *New in version 2.2.0*   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 

@@ -131,10 +131,10 @@ class TriggerRule(ModelSimple):
         Note that value can be passed either in args or in kwargs, but not in both.
 
         Args:
-            args[0] (str): Trigger rule.., must be one of ["all_success", "all_failed", "all_done", "one_success", "one_failed", "none_failed", "none_skipped", "none_failed_or_skipped", "none_failed_min_one_success", "dummy", ]  # noqa: E501
+            args[0] (str): Trigger rule.  *Changed in version 2.2.0*&#58; 'none_failed_min_one_success' is added as a possible value. ., must be one of ["all_success", "all_failed", "all_done", "one_success", "one_failed", "none_failed", "none_skipped", "none_failed_or_skipped", "none_failed_min_one_success", "dummy", ]  # noqa: E501
 
         Keyword Args:
-            value (str): Trigger rule.., must be one of ["all_success", "all_failed", "all_done", "one_success", "one_failed", "none_failed", "none_skipped", "none_failed_or_skipped", "none_failed_min_one_success", "dummy", ]  # noqa: E501
+            value (str): Trigger rule.  *Changed in version 2.2.0*&#58; 'none_failed_min_one_success' is added as a possible value. ., must be one of ["all_success", "all_failed", "all_done", "one_success", "one_failed", "none_failed", "none_skipped", "none_failed_or_skipped", "none_failed_min_one_success", "dummy", ]  # noqa: E501
             _check_type (bool): if True, values for parameters in openapi_types
                                 will be type checked and a TypeError will be
                                 raised if the wrong type is input.
@@ -221,10 +221,10 @@ class TriggerRule(ModelSimple):
         Note that value can be passed either in args or in kwargs, but not in both.
 
         Args:
-            args[0] (str): Trigger rule.., must be one of ["all_success", "all_failed", "all_done", "one_success", "one_failed", "none_failed", "none_skipped", "none_failed_or_skipped", "none_failed_min_one_success", "dummy", ]  # noqa: E501
+            args[0] (str): Trigger rule.  *Changed in version 2.2.0*&#58; 'none_failed_min_one_success' is added as a possible value. ., must be one of ["all_success", "all_failed", "all_done", "one_success", "one_failed", "none_failed", "none_skipped", "none_failed_or_skipped", "none_failed_min_one_success", "dummy", ]  # noqa: E501
 
         Keyword Args:
-            value (str): Trigger rule.., must be one of ["all_success", "all_failed", "all_done", "one_success", "one_failed", "none_failed", "none_skipped", "none_failed_or_skipped", "none_failed_min_one_success", "dummy", ]  # noqa: E501
+            value (str): Trigger rule.  *Changed in version 2.2.0*&#58; 'none_failed_min_one_success' is added as a possible value. ., must be one of ["all_success", "all_failed", "all_done", "one_success", "one_failed", "none_failed", "none_skipped", "none_failed_or_skipped", "none_failed_min_one_success", "dummy", ]  # noqa: E501
             _check_type (bool): if True, values for parameters in openapi_types
                                 will be type checked and a TypeError will be
                                 raised if the wrong type is input.

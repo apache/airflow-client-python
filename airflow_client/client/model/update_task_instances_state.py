@@ -106,6 +106,7 @@ class UpdateTaskInstancesState(ModelNormal):
             'dry_run': (bool,),  # noqa: E501
             'task_id': (str,),  # noqa: E501
             'execution_date': (str,),  # noqa: E501
+            'dag_run_id': (str,),  # noqa: E501
             'include_upstream': (bool,),  # noqa: E501
             'include_downstream': (bool,),  # noqa: E501
             'include_future': (bool,),  # noqa: E501
@@ -122,6 +123,7 @@ class UpdateTaskInstancesState(ModelNormal):
         'dry_run': 'dry_run',  # noqa: E501
         'task_id': 'task_id',  # noqa: E501
         'execution_date': 'execution_date',  # noqa: E501
+        'dag_run_id': 'dag_run_id',  # noqa: E501
         'include_upstream': 'include_upstream',  # noqa: E501
         'include_downstream': 'include_downstream',  # noqa: E501
         'include_future': 'include_future',  # noqa: E501
@@ -172,7 +174,8 @@ class UpdateTaskInstancesState(ModelNormal):
                                 _visited_composed_classes = (Animal,)
             dry_run (bool): If set, don't actually run this operation. The response will contain a list of task instances planned to be affected, but won't be modified in any way. . [optional] if omitted the server will use the default value of True  # noqa: E501
             task_id (str): The task ID.. [optional]  # noqa: E501
-            execution_date (str): The execution date.. [optional]  # noqa: E501
+            execution_date (str): The execution date. Either set this or dag_run_id but not both.. [optional]  # noqa: E501
+            dag_run_id (str): The task instance's DAG run ID. Either set this or execution_date but not both.  *New in version 2.3.0* . [optional]  # noqa: E501
             include_upstream (bool): If set to true, upstream tasks are also affected.. [optional]  # noqa: E501
             include_downstream (bool): If set to true, downstream tasks are also affected.. [optional]  # noqa: E501
             include_future (bool): If set to True, also tasks from future DAG Runs are affected.. [optional]  # noqa: E501
@@ -261,7 +264,8 @@ class UpdateTaskInstancesState(ModelNormal):
                                 _visited_composed_classes = (Animal,)
             dry_run (bool): If set, don't actually run this operation. The response will contain a list of task instances planned to be affected, but won't be modified in any way. . [optional] if omitted the server will use the default value of True  # noqa: E501
             task_id (str): The task ID.. [optional]  # noqa: E501
-            execution_date (str): The execution date.. [optional]  # noqa: E501
+            execution_date (str): The execution date. Either set this or dag_run_id but not both.. [optional]  # noqa: E501
+            dag_run_id (str): The task instance's DAG run ID. Either set this or execution_date but not both.  *New in version 2.3.0* . [optional]  # noqa: E501
             include_upstream (bool): If set to true, upstream tasks are also affected.. [optional]  # noqa: E501
             include_downstream (bool): If set to true, downstream tasks are also affected.. [optional]  # noqa: E501
             include_future (bool): If set to True, also tasks from future DAG Runs are affected.. [optional]  # noqa: E501

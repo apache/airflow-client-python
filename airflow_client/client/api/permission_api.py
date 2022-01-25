@@ -121,6 +121,7 @@ class PermissionApi(object):
     ):
         """List permissions  # noqa: E501
 
+        Get a list of permissions.  *New in version 2.1.0*   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 

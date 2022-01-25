@@ -80,6 +80,9 @@ class Role(ModelNormal):
     }
 
     validations = {
+        ('name',): {
+            'min_length': 1,
+        },
     }
 
     @cached_property
@@ -160,7 +163,7 @@ class Role(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            name (str): The name of the role. [optional]  # noqa: E501
+            name (str): The name of the role  *Changed in version 2.3.0*&#58; A minimum character length requirement ('minLength') is added. . [optional]  # noqa: E501
             actions ([ActionResource]): [optional]  # noqa: E501
         """
 
@@ -243,7 +246,7 @@ class Role(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            name (str): The name of the role. [optional]  # noqa: E501
+            name (str): The name of the role  *Changed in version 2.3.0*&#58; A minimum character length requirement ('minLength') is added. . [optional]  # noqa: E501
             actions ([ActionResource]): [optional]  # noqa: E501
         """
 

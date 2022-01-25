@@ -109,6 +109,7 @@ class ListDagRunsForm(ModelNormal):
             'page_offset': (int,),  # noqa: E501
             'page_limit': (int,),  # noqa: E501
             'dag_ids': ([str],),  # noqa: E501
+            'states': ([str],),  # noqa: E501
             'execution_date_gte': (datetime,),  # noqa: E501
             'execution_date_lte': (datetime,),  # noqa: E501
             'start_date_gte': (datetime,),  # noqa: E501
@@ -127,6 +128,7 @@ class ListDagRunsForm(ModelNormal):
         'page_offset': 'page_offset',  # noqa: E501
         'page_limit': 'page_limit',  # noqa: E501
         'dag_ids': 'dag_ids',  # noqa: E501
+        'states': 'states',  # noqa: E501
         'execution_date_gte': 'execution_date_gte',  # noqa: E501
         'execution_date_lte': 'execution_date_lte',  # noqa: E501
         'start_date_gte': 'start_date_gte',  # noqa: E501
@@ -176,10 +178,11 @@ class ListDagRunsForm(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            order_by (str): The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order. . [optional]  # noqa: E501
+            order_by (str): The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order.  *New in version 2.1.0* . [optional]  # noqa: E501
             page_offset (int): The number of items to skip before starting to collect the result set.. [optional]  # noqa: E501
             page_limit (int): The numbers of items to return.. [optional] if omitted the server will use the default value of 100  # noqa: E501
             dag_ids ([str]): Return objects with specific DAG IDs. The value can be repeated to retrieve multiple matching values (OR condition).. [optional]  # noqa: E501
+            states ([str]): Return objects with specific states. The value can be repeated to retrieve multiple matching values (OR condition).. [optional]  # noqa: E501
             execution_date_gte (datetime): Returns objects greater or equal to the specified date.  This can be combined with execution_date_lte key to receive only the selected period. . [optional]  # noqa: E501
             execution_date_lte (datetime): Returns objects less than or equal to the specified date.  This can be combined with execution_date_gte key to receive only the selected period. . [optional]  # noqa: E501
             start_date_gte (datetime): Returns objects greater or equal the specified date.  This can be combined with start_date_lte key to receive only the selected period. . [optional]  # noqa: E501
@@ -267,10 +270,11 @@ class ListDagRunsForm(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            order_by (str): The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order. . [optional]  # noqa: E501
+            order_by (str): The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order.  *New in version 2.1.0* . [optional]  # noqa: E501
             page_offset (int): The number of items to skip before starting to collect the result set.. [optional]  # noqa: E501
             page_limit (int): The numbers of items to return.. [optional] if omitted the server will use the default value of 100  # noqa: E501
             dag_ids ([str]): Return objects with specific DAG IDs. The value can be repeated to retrieve multiple matching values (OR condition).. [optional]  # noqa: E501
+            states ([str]): Return objects with specific states. The value can be repeated to retrieve multiple matching values (OR condition).. [optional]  # noqa: E501
             execution_date_gte (datetime): Returns objects greater or equal to the specified date.  This can be combined with execution_date_lte key to receive only the selected period. . [optional]  # noqa: E501
             execution_date_lte (datetime): Returns objects less than or equal to the specified date.  This can be combined with execution_date_gte key to receive only the selected period. . [optional]  # noqa: E501
             start_date_gte (datetime): Returns objects greater or equal the specified date.  This can be combined with start_date_lte key to receive only the selected period. . [optional]  # noqa: E501

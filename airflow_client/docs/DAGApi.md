@@ -40,7 +40,7 @@ Method | HTTP request | Description
 
 Delete a DAG
 
-Deletes all metadata related to the DAG, including finished DAG Runs and Tasks. Logs are not deleted. This action cannot be undone. 
+Deletes all metadata related to the DAG, including finished DAG Runs and Tasks. Logs are not deleted. This action cannot be undone.  *New in version 2.2.0* 
 
 ### Example
 
@@ -403,17 +403,18 @@ with client.ApiClient(configuration) as api_client:
     api_instance = dag_api.DAGApi(api_client)
     limit = 100 # int | The numbers of items to return. (optional) if omitted the server will use the default value of 100
     offset = 0 # int | The number of items to skip before starting to collect the result set. (optional)
-    order_by = "order_by_example" # str | The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order.  (optional)
+    order_by = "order_by_example" # str | The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order.  *New in version 2.1.0*  (optional)
     tags = [
         "tags_example",
-    ] # [str] | List of tags to filter results (optional)
-    only_active = True # bool | Only return active DAGs. (optional) if omitted the server will use the default value of True
+    ] # [str] | List of tags to filter results.  *New in version 2.2.0*  (optional)
+    only_active = True # bool | Only return active DAGs.  *New in version 2.1.1*  (optional) if omitted the server will use the default value of True
+    dag_id_pattern = "dag_id_pattern_example" # str | If set, only return DAGs with dag_ids matching this pattern.  *New in version 2.3.0*  (optional)
 
     # example passing only required values which don't have defaults set
     # and optional values
     try:
         # List DAGs
-        api_response = api_instance.get_dags(limit=limit, offset=offset, order_by=order_by, tags=tags, only_active=only_active)
+        api_response = api_instance.get_dags(limit=limit, offset=offset, order_by=order_by, tags=tags, only_active=only_active, dag_id_pattern=dag_id_pattern)
         pprint(api_response)
     except client.ApiException as e:
         print("Exception when calling DAGApi->get_dags: %s\n" % e)
@@ -426,9 +427,10 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **int**| The numbers of items to return. | [optional] if omitted the server will use the default value of 100
  **offset** | **int**| The number of items to skip before starting to collect the result set. | [optional]
- **order_by** | **str**| The name of the field to order the results by. Prefix a field name with &#x60;-&#x60; to reverse the sort order.  | [optional]
- **tags** | **[str]**| List of tags to filter results | [optional]
- **only_active** | **bool**| Only return active DAGs. | [optional] if omitted the server will use the default value of True
+ **order_by** | **str**| The name of the field to order the results by. Prefix a field name with &#x60;-&#x60; to reverse the sort order.  *New in version 2.1.0*  | [optional]
+ **tags** | **[str]**| List of tags to filter results.  *New in version 2.2.0*  | [optional]
+ **only_active** | **bool**| Only return active DAGs.  *New in version 2.1.1*  | [optional] if omitted the server will use the default value of True
+ **dag_id_pattern** | **str**| If set, only return DAGs with dag_ids matching this pattern.  *New in version 2.3.0*  | [optional]
 
 ### Return type
 
@@ -573,7 +575,7 @@ with client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = dag_api.DAGApi(api_client)
     dag_id = "dag_id_example" # str | The DAG ID.
-    order_by = "order_by_example" # str | The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order.  (optional)
+    order_by = "order_by_example" # str | The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order.  *New in version 2.1.0*  (optional)
 
     # example passing only required values which don't have defaults set
     try:
@@ -599,7 +601,7 @@ with client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **dag_id** | **str**| The DAG ID. |
- **order_by** | **str**| The name of the field to order the results by. Prefix a field name with &#x60;-&#x60; to reverse the sort order.  | [optional]
+ **order_by** | **str**| The name of the field to order the results by. Prefix a field name with &#x60;-&#x60; to reverse the sort order.  *New in version 2.1.0*  | [optional]
 
 ### Return type
 
@@ -865,6 +867,7 @@ with client.ApiClient(configuration) as api_client:
         dry_run=True,
         task_id="task_id_example",
         execution_date="execution_date_example",
+        dag_run_id="dag_run_id_example",
         include_upstream=True,
         include_downstream=True,
         include_future=True,

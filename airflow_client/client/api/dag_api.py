@@ -290,6 +290,7 @@ class DAGApi(object):
                     'order_by',
                     'tags',
                     'only_active',
+                    'dag_id_pattern',
                 ],
                 'required': [],
                 'nullable': [
@@ -320,6 +321,8 @@ class DAGApi(object):
                         ([str],),
                     'only_active':
                         (bool,),
+                    'dag_id_pattern':
+                        (str,),
                 },
                 'attribute_map': {
                     'limit': 'limit',
@@ -327,6 +330,7 @@ class DAGApi(object):
                     'order_by': 'order_by',
                     'tags': 'tags',
                     'only_active': 'only_active',
+                    'dag_id_pattern': 'dag_id_pattern',
                 },
                 'location_map': {
                     'limit': 'query',
@@ -334,6 +338,7 @@ class DAGApi(object):
                     'order_by': 'query',
                     'tags': 'query',
                     'only_active': 'query',
+                    'dag_id_pattern': 'query',
                 },
                 'collection_format_map': {
                     'tags': 'multi',
@@ -653,7 +658,7 @@ class DAGApi(object):
     ):
         """Delete a DAG  # noqa: E501
 
-        Deletes all metadata related to the DAG, including finished DAG Runs and Tasks. Logs are not deleted. This action cannot be undone.   # noqa: E501
+        Deletes all metadata related to the DAG, including finished DAG Runs and Tasks. Logs are not deleted. This action cannot be undone.  *New in version 2.2.0*   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -926,9 +931,10 @@ class DAGApi(object):
         Keyword Args:
             limit (int): The numbers of items to return.. [optional] if omitted the server will use the default value of 100
             offset (int): The number of items to skip before starting to collect the result set.. [optional]
-            order_by (str): The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order. . [optional]
-            tags ([str]): List of tags to filter results. [optional]
-            only_active (bool): Only return active DAGs.. [optional] if omitted the server will use the default value of True
+            order_by (str): The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order.  *New in version 2.1.0* . [optional]
+            tags ([str]): List of tags to filter results.  *New in version 2.2.0* . [optional]
+            only_active (bool): Only return active DAGs.  *New in version 2.1.1* . [optional] if omitted the server will use the default value of True
+            dag_id_pattern (str): If set, only return DAGs with dag_ids matching this pattern.  *New in version 2.3.0* . [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
             _preload_content (bool): if False, the urllib3.HTTPResponse object
@@ -1061,7 +1067,7 @@ class DAGApi(object):
             dag_id (str): The DAG ID.
 
         Keyword Args:
-            order_by (str): The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order. . [optional]
+            order_by (str): The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order.  *New in version 2.1.0* . [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
             _preload_content (bool): if False, the urllib3.HTTPResponse object

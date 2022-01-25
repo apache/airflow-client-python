@@ -350,6 +350,7 @@ class RoleApi(object):
     ):
         """Delete a role  # noqa: E501
 
+        Delete a role.  *New in version 2.1.0*   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -415,6 +416,7 @@ class RoleApi(object):
     ):
         """Get a role  # noqa: E501
 
+        Get a role.  *New in version 2.1.0*   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -479,6 +481,7 @@ class RoleApi(object):
     ):
         """List roles  # noqa: E501
 
+        Get a list of roles.  *New in version 2.1.0*   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -489,7 +492,7 @@ class RoleApi(object):
         Keyword Args:
             limit (int): The numbers of items to return.. [optional] if omitted the server will use the default value of 100
             offset (int): The number of items to skip before starting to collect the result set.. [optional]
-            order_by (str): The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order. . [optional]
+            order_by (str): The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order.  *New in version 2.1.0* . [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
             _preload_content (bool): if False, the urllib3.HTTPResponse object
@@ -544,6 +547,7 @@ class RoleApi(object):
     ):
         """Update a role  # noqa: E501
 
+        Update a role.  *New in version 2.1.0*   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -613,6 +617,7 @@ class RoleApi(object):
     ):
         """Create a role  # noqa: E501
 
+        Create a new role.  *New in version 2.1.0*   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 

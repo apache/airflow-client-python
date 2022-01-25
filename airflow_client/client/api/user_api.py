@@ -352,6 +352,7 @@ class UserApi(object):
     ):
         """Delete a user  # noqa: E501
 
+        Delete a user with a specific username.  *New in version 2.2.0*   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -359,7 +360,7 @@ class UserApi(object):
         >>> result = thread.get()
 
         Args:
-            username (str): The username of the user
+            username (str): The username of the user.  *New in version 2.1.0* 
 
         Keyword Args:
             _return_http_data_only (bool): response data without head status
@@ -417,6 +418,7 @@ class UserApi(object):
     ):
         """Get a user  # noqa: E501
 
+        Get a user with a specific username.  *New in version 2.1.0*   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -424,7 +426,7 @@ class UserApi(object):
         >>> result = thread.get()
 
         Args:
-            username (str): The username of the user
+            username (str): The username of the user.  *New in version 2.1.0* 
 
         Keyword Args:
             _return_http_data_only (bool): response data without head status
@@ -481,6 +483,7 @@ class UserApi(object):
     ):
         """List users  # noqa: E501
 
+        Get a list of users.  *New in version 2.1.0*   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -491,7 +494,7 @@ class UserApi(object):
         Keyword Args:
             limit (int): The numbers of items to return.. [optional] if omitted the server will use the default value of 100
             offset (int): The number of items to skip before starting to collect the result set.. [optional]
-            order_by (str): The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order. . [optional]
+            order_by (str): The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order.  *New in version 2.1.0* . [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
             _preload_content (bool): if False, the urllib3.HTTPResponse object
@@ -546,6 +549,7 @@ class UserApi(object):
     ):
         """Update a user  # noqa: E501
 
+        Update fields for a user.  *New in version 2.2.0*   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -553,7 +557,7 @@ class UserApi(object):
         >>> result = thread.get()
 
         Args:
-            username (str): The username of the user
+            username (str): The username of the user.  *New in version 2.1.0* 
             user (User):
 
         Keyword Args:
@@ -615,6 +619,7 @@ class UserApi(object):
     ):
         """Create a user  # noqa: E501
 
+        Create a new user with unique username and email.  *New in version 2.2.0*   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 

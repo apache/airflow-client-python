@@ -192,7 +192,7 @@ class DAG(ModelNormal):
             dag_id (str): The ID of the DAG.. [optional]  # noqa: E501
             root_dag_id (str, none_type): If the DAG is SubDAG then it is the top level DAG identifier. Otherwise, null.. [optional]  # noqa: E501
             is_paused (bool, none_type): Whether the DAG is paused.. [optional]  # noqa: E501
-            is_active (bool, none_type): Whether the DAG is currently seen by the scheduler(s).. [optional]  # noqa: E501
+            is_active (bool, none_type): Whether the DAG is currently seen by the scheduler(s).  *New in version 2.1.1*  *Changed in version 2.2.0*&#58; Field is read-only. . [optional]  # noqa: E501
             is_subdag (bool): Whether the DAG is SubDAG.. [optional]  # noqa: E501
             fileloc (str): The absolute path to the file.. [optional]  # noqa: E501
             file_token (str): The key containing the encrypted path to the file. Encryption and decryption take place only on the server. This prevents the client from reading an non-DAG file. This also ensures API extensibility, because the format of encrypted data may change. . [optional]  # noqa: E501
@@ -284,7 +284,7 @@ class DAG(ModelNormal):
             dag_id (str): The ID of the DAG.. [optional]  # noqa: E501
             root_dag_id (str, none_type): If the DAG is SubDAG then it is the top level DAG identifier. Otherwise, null.. [optional]  # noqa: E501
             is_paused (bool, none_type): Whether the DAG is paused.. [optional]  # noqa: E501
-            is_active (bool, none_type): Whether the DAG is currently seen by the scheduler(s).. [optional]  # noqa: E501
+            is_active (bool, none_type): Whether the DAG is currently seen by the scheduler(s).  *New in version 2.1.1*  *Changed in version 2.2.0*&#58; Field is read-only. . [optional]  # noqa: E501
             is_subdag (bool): Whether the DAG is SubDAG.. [optional]  # noqa: E501
             fileloc (str): The absolute path to the file.. [optional]  # noqa: E501
             file_token (str): The key containing the encrypted path to the file. Encryption and decryption take place only on the server. This prevents the client from reading an non-DAG file. This also ensures API extensibility, because the format of encrypted data may change. . [optional]  # noqa: E501

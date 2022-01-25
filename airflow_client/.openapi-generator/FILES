@@ -66,6 +66,9 @@ client/model/inline_response2001.py
 client/model/list_dag_runs_form.py
 client/model/list_task_instance_form.py
 client/model/metadatabase_status.py
+client/model/nullable_sla_miss.py
+client/model/nullable_task_state.py
+client/model/nullable_time_delta.py
 client/model/plugin_collection.py
 client/model/plugin_collection_all_of.py
 client/model/plugin_collection_item.py
@@ -167,6 +170,9 @@ docs/ListDagRunsForm.md
 docs/ListTaskInstanceForm.md
 docs/MetadatabaseStatus.md
 docs/MonitoringApi.md
+docs/NullableSLAMiss.md
+docs/NullableTaskState.md
+docs/NullableTimeDelta.md
 docs/PermissionApi.md
 docs/PluginApi.md
 docs/PluginCollection.md
@@ -275,6 +281,9 @@ test/test_list_dag_runs_form.py
 test/test_list_task_instance_form.py
 test/test_metadatabase_status.py
 test/test_monitoring_api.py
+test/test_nullable_sla_miss.py
+test/test_nullable_task_state.py
+test/test_nullable_time_delta.py
 test/test_permission_api.py
 test/test_plugin_api.py
 test/test_plugin_collection.py

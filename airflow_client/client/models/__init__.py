@@ -69,6 +69,9 @@ from airflow_client.client.model.inline_response2001 import InlineResponse2001
 from airflow_client.client.model.list_dag_runs_form import ListDagRunsForm
 from airflow_client.client.model.list_task_instance_form import ListTaskInstanceForm
 from airflow_client.client.model.metadatabase_status import MetadatabaseStatus
+from airflow_client.client.model.nullable_sla_miss import NullableSLAMiss
+from airflow_client.client.model.nullable_task_state import NullableTaskState
+from airflow_client.client.model.nullable_time_delta import NullableTimeDelta
 from airflow_client.client.model.plugin_collection import PluginCollection
 from airflow_client.client.model.plugin_collection_all_of import PluginCollectionAllOf
 from airflow_client.client.model.plugin_collection_item import PluginCollectionItem

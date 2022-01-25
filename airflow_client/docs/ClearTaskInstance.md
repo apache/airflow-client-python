@@ -24,7 +24,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **dry_run** | **bool** | If set, don&#39;t actually run this operation. The response will contain a list of task instances planned to be cleaned, but not modified in any way.  | [optional]  if omitted the server will use the default value of True
-**task_ids** | **[str]** | A list of task ids to clear. | [optional] 
+**task_ids** | **[str]** | A list of task ids to clear.  *New in version 2.1.0*  | [optional] 
 **start_date** | **str** | The minimum execution date to clear. | [optional] 
 **end_date** | **str** | The maximum execution date to clear. | [optional] 
 **only_failed** | **bool** | Only clear failed tasks. | [optional]  if omitted the server will use the default value of True

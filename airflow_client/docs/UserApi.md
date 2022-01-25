@@ -1,22 +1,3 @@
-<!--
- Licensed to the Apache Software Foundation (ASF) under one
- or more contributor license agreements.  See the NOTICE file
- distributed with this work for additional information
- regarding copyright ownership.  The ASF licenses this file
- to you under the Apache License, Version 2.0 (the
- "License"); you may not use this file except in compliance
- with the License.  You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing,
- software distributed under the License is distributed on an
- "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- KIND, either express or implied.  See the License for the
- specific language governing permissions and limitations
- under the License.
- -->
-
 # Apache Airflow Python Client.UserApi
 
 All URIs are relative to *http://localhost/api/v1*
@@ -35,9 +16,10 @@ Method | HTTP request | Description
 
 Delete a user
 
+Delete a user with a specific username.  *New in version 2.2.0* 
+
 ### Example
 
-* Basic Authentication (Basic):
 
 ```python
 import time
@@ -51,22 +33,12 @@ configuration = client.Configuration(
     host = "http://localhost/api/v1"
 )
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = client.Configuration(
-    username = 'YOUR_USERNAME',
-    password = 'YOUR_PASSWORD'
-)
 
 # Enter a context with an instance of the API client
-with client.ApiClient(configuration) as api_client:
+with client.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = user_api.UserApi(api_client)
-    username = "username_example" # str | The username of the user
+    username = "username_example" # str | The username of the user.  *New in version 2.1.0* 
 
     # example passing only required values which don't have defaults set
     try:
@@ -81,7 +53,7 @@ with client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **username** | **str**| The username of the user |
+ **username** | **str**| The username of the user.  *New in version 2.1.0*  |
 
 ### Return type
 
@@ -89,7 +61,7 @@ void (empty response body)
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 
@@ -114,9 +86,10 @@ void (empty response body)
 
 Get a user
 
+Get a user with a specific username.  *New in version 2.1.0* 
+
 ### Example
 
-* Basic Authentication (Basic):
 
 ```python
 import time
@@ -131,22 +104,12 @@ configuration = client.Configuration(
     host = "http://localhost/api/v1"
 )
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = client.Configuration(
-    username = 'YOUR_USERNAME',
-    password = 'YOUR_PASSWORD'
-)
 
 # Enter a context with an instance of the API client
-with client.ApiClient(configuration) as api_client:
+with client.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = user_api.UserApi(api_client)
-    username = "username_example" # str | The username of the user
+    username = "username_example" # str | The username of the user.  *New in version 2.1.0* 
 
     # example passing only required values which don't have defaults set
     try:
@@ -162,7 +125,7 @@ with client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **username** | **str**| The username of the user |
+ **username** | **str**| The username of the user.  *New in version 2.1.0*  |
 
 ### Return type
 
@@ -170,7 +133,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 
@@ -194,9 +157,10 @@ Name | Type | Description  | Notes
 
 List users
 
+Get a list of users.  *New in version 2.1.0* 
+
 ### Example
 
-* Basic Authentication (Basic):
 
 ```python
 import time
@@ -211,24 +175,14 @@ configuration = client.Configuration(
     host = "http://localhost/api/v1"
 )
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = client.Configuration(
-    username = 'YOUR_USERNAME',
-    password = 'YOUR_PASSWORD'
-)
 
 # Enter a context with an instance of the API client
-with client.ApiClient(configuration) as api_client:
+with client.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = user_api.UserApi(api_client)
     limit = 100 # int | The numbers of items to return. (optional) if omitted the server will use the default value of 100
     offset = 0 # int | The number of items to skip before starting to collect the result set. (optional)
-    order_by = "order_by_example" # str | The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order.  (optional)
+    order_by = "order_by_example" # str | The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order.  *New in version 2.1.0*  (optional)
 
     # example passing only required values which don't have defaults set
     # and optional values
@@ -247,7 +201,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **int**| The numbers of items to return. | [optional] if omitted the server will use the default value of 100
  **offset** | **int**| The number of items to skip before starting to collect the result set. | [optional]
- **order_by** | **str**| The name of the field to order the results by. Prefix a field name with &#x60;-&#x60; to reverse the sort order.  | [optional]
+ **order_by** | **str**| The name of the field to order the results by. Prefix a field name with &#x60;-&#x60; to reverse the sort order.  *New in version 2.1.0*  | [optional]
 
 ### Return type
 
@@ -255,7 +209,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 
@@ -278,9 +232,10 @@ Name | Type | Description  | Notes
 
 Update a user
 
+Update fields for a user.  *New in version 2.2.0* 
+
 ### Example
 
-* Basic Authentication (Basic):
 
 ```python
 import time
@@ -296,22 +251,12 @@ configuration = client.Configuration(
     host = "http://localhost/api/v1"
 )
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = client.Configuration(
-    username = 'YOUR_USERNAME',
-    password = 'YOUR_PASSWORD'
-)
 
 # Enter a context with an instance of the API client
-with client.ApiClient(configuration) as api_client:
+with client.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = user_api.UserApi(api_client)
-    username = "username_example" # str | The username of the user
+    username = "username_example" # str | The username of the user.  *New in version 2.1.0* 
     user = User() # User | 
     update_mask = [
         "update_mask_example",
@@ -340,7 +285,7 @@ with client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **username** | **str**| The username of the user |
+ **username** | **str**| The username of the user.  *New in version 2.1.0*  |
  **user** | [**User**](User.md)|  |
  **update_mask** | **[str]**| The fields to update on the resource. If absent or empty, all modifiable fields are updated. A comma-separated list of fully qualified names of fields.  | [optional]
 
@@ -350,7 +295,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 
@@ -375,9 +320,10 @@ Name | Type | Description  | Notes
 
 Create a user
 
+Create a new user with unique username and email.  *New in version 2.2.0* 
+
 ### Example
 
-* Basic Authentication (Basic):
 
 ```python
 import time
@@ -392,19 +338,9 @@ configuration = client.Configuration(
     host = "http://localhost/api/v1"
 )
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = client.Configuration(
-    username = 'YOUR_USERNAME',
-    password = 'YOUR_PASSWORD'
-)
 
 # Enter a context with an instance of the API client
-with client.ApiClient(configuration) as api_client:
+with client.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = user_api.UserApi(api_client)
     user = User() # User | 
@@ -431,7 +367,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 

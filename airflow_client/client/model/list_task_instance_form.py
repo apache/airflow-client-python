@@ -1,20 +1,3 @@
-# Licensed to the Apache Software Foundation (ASF) under one
-# or more contributor license agreements.  See the NOTICE file
-# distributed with this work for additional information
-# regarding copyright ownership.  The ASF licenses this file
-# to you under the Apache License, Version 2.0 (the
-# "License"); you may not use this file except in compliance
-# with the License.  You may obtain a copy of the License at
-#
-#   http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing,
-# software distributed under the License is distributed on an
-# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-# KIND, either express or implied.  See the License for the
-# specific language governing permissions and limitations
-# under the License.
-
 """
     Airflow API (Stable)
 
@@ -46,6 +29,10 @@ from airflow_client.client.model_utils import (  # noqa: F401
 from ..model_utils import OpenApiModel
 from airflow_client.client.exceptions import ApiAttributeError
 
+
+def lazy_import():
+    from airflow_client.client.model.task_state import TaskState
+    globals()['TaskState'] = TaskState
 
 
 class ListTaskInstanceForm(ModelNormal):
@@ -84,6 +71,7 @@ class ListTaskInstanceForm(ModelNormal):
         This must be a method because a model may have properties that are
         of type self, this must run after the class is loaded
         """
+        lazy_import()
         return (bool, date, datetime, dict, float, int, list, str, none_type,)  # noqa: E501
 
     _nullable = False
@@ -98,6 +86,7 @@ class ListTaskInstanceForm(ModelNormal):
             openapi_types (dict): The key is attribute name
                 and the value is attribute type.
         """
+        lazy_import()
         return {
             'dag_ids': ([str],),  # noqa: E501
             'execution_date_gte': (datetime,),  # noqa: E501
@@ -108,7 +97,7 @@ class ListTaskInstanceForm(ModelNormal):
             'end_date_lte': (datetime,),  # noqa: E501
             'duration_gte': (float,),  # noqa: E501
             'duration_lte': (float,),  # noqa: E501
-            'state': ([str],),  # noqa: E501
+            'state': ([TaskState],),  # noqa: E501
             'pool': ([str],),  # noqa: E501
             'queue': ([str],),  # noqa: E501
         }
@@ -183,7 +172,7 @@ class ListTaskInstanceForm(ModelNormal):
             end_date_lte (datetime): Returns objects less than or equal to the specified date.  This can be combined with start_date_gte parameter to receive only the selected period. . [optional]  # noqa: E501
             duration_gte (float): Returns objects greater than or equal to the specified values.  This can be combined with duration_lte parameter to receive only the selected period. . [optional]  # noqa: E501
             duration_lte (float): Returns objects less than or equal to the specified values.  This can be combined with duration_gte parameter to receive only the selected range. . [optional]  # noqa: E501
-            state ([str]): The value can be repeated to retrieve multiple matching values (OR condition).. [optional]  # noqa: E501
+            state ([TaskState]): The value can be repeated to retrieve multiple matching values (OR condition).. [optional]  # noqa: E501
             pool ([str]): The value can be repeated to retrieve multiple matching values (OR condition).. [optional]  # noqa: E501
             queue ([str]): The value can be repeated to retrieve multiple matching values (OR condition).. [optional]  # noqa: E501
         """
@@ -276,7 +265,7 @@ class ListTaskInstanceForm(ModelNormal):
             end_date_lte (datetime): Returns objects less than or equal to the specified date.  This can be combined with start_date_gte parameter to receive only the selected period. . [optional]  # noqa: E501
             duration_gte (float): Returns objects greater than or equal to the specified values.  This can be combined with duration_lte parameter to receive only the selected period. . [optional]  # noqa: E501
             duration_lte (float): Returns objects less than or equal to the specified values.  This can be combined with duration_gte parameter to receive only the selected range. . [optional]  # noqa: E501
-            state ([str]): The value can be repeated to retrieve multiple matching values (OR condition).. [optional]  # noqa: E501
+            state ([TaskState]): The value can be repeated to retrieve multiple matching values (OR condition).. [optional]  # noqa: E501
             pool ([str]): The value can be repeated to retrieve multiple matching values (OR condition).. [optional]  # noqa: E501
             queue ([str]): The value can be repeated to retrieve multiple matching values (OR condition).. [optional]  # noqa: E501
         """

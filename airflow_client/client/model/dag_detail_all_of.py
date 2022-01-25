@@ -1,20 +1,3 @@
-# Licensed to the Apache Software Foundation (ASF) under one
-# or more contributor license agreements.  See the NOTICE file
-# distributed with this work for additional information
-# regarding copyright ownership.  The ASF licenses this file
-# to you under the Apache License, Version 2.0 (the
-# "License"); you may not use this file except in compliance
-# with the License.  You may obtain a copy of the License at
-#
-#   http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing,
-# software distributed under the License is distributed on an
-# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-# KIND, either express or implied.  See the License for the
-# specific language governing permissions and limitations
-# under the License.
-
 """
     Airflow API (Stable)
 
@@ -48,8 +31,8 @@ from airflow_client.client.exceptions import ApiAttributeError
 
 
 def lazy_import():
-    from airflow_client.client.model.time_delta import TimeDelta
-    globals()['TimeDelta'] = TimeDelta
+    from airflow_client.client.model.nullable_time_delta import NullableTimeDelta
+    globals()['NullableTimeDelta'] = NullableTimeDelta
 
 
 class DAGDetailAllOf(ModelNormal):
@@ -110,7 +93,7 @@ class DAGDetailAllOf(ModelNormal):
             'orientation': (str,),  # noqa: E501
             'concurrency': (float,),  # noqa: E501
             'start_date': (datetime, none_type,),  # noqa: E501
-            'dag_run_timeout': (TimeDelta,),  # noqa: E501
+            'dag_run_timeout': (NullableTimeDelta,),  # noqa: E501
             'doc_md': (str, none_type,),  # noqa: E501
             'default_view': (str,),  # noqa: E501
             'params': ({str: (bool, date, datetime, dict, float, int, list, str, none_type)},),  # noqa: E501
@@ -185,11 +168,11 @@ class DAGDetailAllOf(ModelNormal):
             catchup (bool): [optional]  # noqa: E501
             orientation (str): [optional]  # noqa: E501
             concurrency (float): [optional]  # noqa: E501
-            start_date (datetime, none_type): [optional]  # noqa: E501
-            dag_run_timeout (TimeDelta): [optional]  # noqa: E501
+            start_date (datetime, none_type): The DAG's start date.  *Changed in version 2.0.1*&#58; Field becomes nullable. . [optional]  # noqa: E501
+            dag_run_timeout (NullableTimeDelta): [optional]  # noqa: E501
             doc_md (str, none_type): [optional]  # noqa: E501
             default_view (str): [optional]  # noqa: E501
-            params ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}): [optional]  # noqa: E501
+            params ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}): User-specified DAG params.  *New in version 2.0.1* . [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -275,11 +258,11 @@ class DAGDetailAllOf(ModelNormal):
             catchup (bool): [optional]  # noqa: E501
             orientation (str): [optional]  # noqa: E501
             concurrency (float): [optional]  # noqa: E501
-            start_date (datetime, none_type): [optional]  # noqa: E501
-            dag_run_timeout (TimeDelta): [optional]  # noqa: E501
+            start_date (datetime, none_type): The DAG's start date.  *Changed in version 2.0.1*&#58; Field becomes nullable. . [optional]  # noqa: E501
+            dag_run_timeout (NullableTimeDelta): [optional]  # noqa: E501
             doc_md (str, none_type): [optional]  # noqa: E501
             default_view (str): [optional]  # noqa: E501
-            params ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}): [optional]  # noqa: E501
+            params ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}): User-specified DAG params.  *New in version 2.0.1* . [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)

@@ -1,20 +1,3 @@
-# Licensed to the Apache Software Foundation (ASF) under one
-# or more contributor license agreements.  See the NOTICE file
-# distributed with this work for additional information
-# regarding copyright ownership.  The ASF licenses this file
-# to you under the Apache License, Version 2.0 (the
-# "License"); you may not use this file except in compliance
-# with the License.  You may obtain a copy of the License at
-#
-#   http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing,
-# software distributed under the License is distributed on an
-# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-# KIND, either express or implied.  See the License for the
-# specific language governing permissions and limitations
-# under the License.
-
 """
     Airflow API (Stable)
 
@@ -196,15 +179,15 @@ class UserCollectionItem(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            first_name (str): The user firstname. [optional]  # noqa: E501
-            last_name (str): The user lastname. [optional]  # noqa: E501
-            username (str): The username. [optional]  # noqa: E501
-            email (str): The user's email. [optional]  # noqa: E501
+            first_name (str): The user's first name.  *Changed in version 2.2.0*&#58; A minimum character length requirement ('minLength') is added. . [optional]  # noqa: E501
+            last_name (str): The user's last name.  *Changed in version 2.2.0*&#58; A minimum character length requirement ('minLength') is added. . [optional]  # noqa: E501
+            username (str): The username.  *Changed in version 2.2.0*&#58; A minimum character length requirement ('minLength') is added. . [optional]  # noqa: E501
+            email (str): The user's email.  *Changed in version 2.2.0*&#58; A minimum character length requirement ('minLength') is added. . [optional]  # noqa: E501
             active (bool, none_type): Whether the user is active. [optional]  # noqa: E501
             last_login (str, none_type): The last user login. [optional]  # noqa: E501
             login_count (int, none_type): The login count. [optional]  # noqa: E501
             failed_login_count (int, none_type): The number of times the login failed. [optional]  # noqa: E501
-            roles ([UserCollectionItemRoles]): User roles. [optional]  # noqa: E501
+            roles ([UserCollectionItemRoles]): User roles.  *Changed in version 2.2.0*&#58; Field is no longer read-only. . [optional]  # noqa: E501
             created_on (str, none_type): The date user was created. [optional]  # noqa: E501
             changed_on (str, none_type): The date user was changed. [optional]  # noqa: E501
         """
@@ -288,15 +271,15 @@ class UserCollectionItem(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            first_name (str): The user firstname. [optional]  # noqa: E501
-            last_name (str): The user lastname. [optional]  # noqa: E501
-            username (str): The username. [optional]  # noqa: E501
-            email (str): The user's email. [optional]  # noqa: E501
+            first_name (str): The user's first name.  *Changed in version 2.2.0*&#58; A minimum character length requirement ('minLength') is added. . [optional]  # noqa: E501
+            last_name (str): The user's last name.  *Changed in version 2.2.0*&#58; A minimum character length requirement ('minLength') is added. . [optional]  # noqa: E501
+            username (str): The username.  *Changed in version 2.2.0*&#58; A minimum character length requirement ('minLength') is added. . [optional]  # noqa: E501
+            email (str): The user's email.  *Changed in version 2.2.0*&#58; A minimum character length requirement ('minLength') is added. . [optional]  # noqa: E501
             active (bool, none_type): Whether the user is active. [optional]  # noqa: E501
             last_login (str, none_type): The last user login. [optional]  # noqa: E501
             login_count (int, none_type): The login count. [optional]  # noqa: E501
             failed_login_count (int, none_type): The number of times the login failed. [optional]  # noqa: E501
-            roles ([UserCollectionItemRoles]): User roles. [optional]  # noqa: E501
+            roles ([UserCollectionItemRoles]): User roles.  *Changed in version 2.2.0*&#58; Field is no longer read-only. . [optional]  # noqa: E501
             created_on (str, none_type): The date user was created. [optional]  # noqa: E501
             changed_on (str, none_type): The date user was changed. [optional]  # noqa: E501
         """

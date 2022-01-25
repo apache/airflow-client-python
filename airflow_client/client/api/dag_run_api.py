@@ -1,20 +1,3 @@
-# Licensed to the Apache Software Foundation (ASF) under one
-# or more contributor license agreements.  See the NOTICE file
-# distributed with this work for additional information
-# regarding copyright ownership.  The ASF licenses this file
-# to you under the Apache License, Version 2.0 (the
-# "License"); you may not use this file except in compliance
-# with the License.  You may obtain a copy of the License at
-#
-#   http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing,
-# software distributed under the License is distributed on an
-# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-# KIND, either express or implied.  See the License for the
-# specific language governing permissions and limitations
-# under the License.
-
 """
     Airflow API (Stable)
 
@@ -60,10 +43,7 @@ class DAGRunApi(object):
         self.delete_dag_run_endpoint = _Endpoint(
             settings={
                 'response_type': None,
-                'auth': [
-                    'Basic',
-                    'Kerberos'
-                ],
+                'auth': [],
                 'endpoint_path': '/dags/{dag_id}/dagRuns/{dag_run_id}',
                 'operation_id': 'delete_dag_run',
                 'http_method': 'DELETE',
@@ -118,10 +98,7 @@ class DAGRunApi(object):
         self.get_dag_run_endpoint = _Endpoint(
             settings={
                 'response_type': (DAGRun,),
-                'auth': [
-                    'Basic',
-                    'Kerberos'
-                ],
+                'auth': [],
                 'endpoint_path': '/dags/{dag_id}/dagRuns/{dag_run_id}',
                 'operation_id': 'get_dag_run',
                 'http_method': 'GET',
@@ -176,10 +153,7 @@ class DAGRunApi(object):
         self.get_dag_runs_endpoint = _Endpoint(
             settings={
                 'response_type': (DAGRunCollection,),
-                'auth': [
-                    'Basic',
-                    'Kerberos'
-                ],
+                'auth': [],
                 'endpoint_path': '/dags/{dag_id}/dagRuns',
                 'operation_id': 'get_dag_runs',
                 'http_method': 'GET',
@@ -196,6 +170,7 @@ class DAGRunApi(object):
                     'start_date_lte',
                     'end_date_gte',
                     'end_date_lte',
+                    'state',
                     'order_by',
                 ],
                 'required': [
@@ -237,6 +212,8 @@ class DAGRunApi(object):
                         (datetime,),
                     'end_date_lte':
                         (datetime,),
+                    'state':
+                        ([str],),
                     'order_by':
                         (str,),
                 },
@@ -250,6 +227,7 @@ class DAGRunApi(object):
                     'start_date_lte': 'start_date_lte',
                     'end_date_gte': 'end_date_gte',
                     'end_date_lte': 'end_date_lte',
+                    'state': 'state',
                     'order_by': 'order_by',
                 },
                 'location_map': {
@@ -262,9 +240,11 @@ class DAGRunApi(object):
                     'start_date_lte': 'query',
                     'end_date_gte': 'query',
                     'end_date_lte': 'query',
+                    'state': 'query',
                     'order_by': 'query',
                 },
                 'collection_format_map': {
+                    'state': 'multi',
                 }
             },
             headers_map={
@@ -278,10 +258,7 @@ class DAGRunApi(object):
         self.get_dag_runs_batch_endpoint = _Endpoint(
             settings={
                 'response_type': (DAGRunCollection,),
-                'auth': [
-                    'Basic',
-                    'Kerberos'
-                ],
+                'auth': [],
                 'endpoint_path': '/dags/~/dagRuns/list',
                 'operation_id': 'get_dag_runs_batch',
                 'http_method': 'POST',
@@ -331,10 +308,7 @@ class DAGRunApi(object):
         self.post_dag_run_endpoint = _Endpoint(
             settings={
                 'response_type': (DAGRun,),
-                'auth': [
-                    'Basic',
-                    'Kerberos'
-                ],
+                'auth': [],
                 'endpoint_path': '/dags/{dag_id}/dagRuns',
                 'operation_id': 'post_dag_run',
                 'http_method': 'POST',
@@ -390,10 +364,7 @@ class DAGRunApi(object):
         self.update_dag_run_state_endpoint = _Endpoint(
             settings={
                 'response_type': (DAGRun,),
-                'auth': [
-                    'Basic',
-                    'Kerberos'
-                ],
+                'auth': [],
                 'endpoint_path': '/dags/{dag_id}/dagRuns/{dag_run_id}',
                 'operation_id': 'update_dag_run_state',
                 'http_method': 'PATCH',
@@ -617,7 +588,8 @@ class DAGRunApi(object):
             start_date_lte (datetime): Returns objects less or equal the specified date.  This can be combined with start_date_gte parameter to receive only the selected period. . [optional]
             end_date_gte (datetime): Returns objects greater or equal the specified date.  This can be combined with start_date_lte parameter to receive only the selected period. . [optional]
             end_date_lte (datetime): Returns objects less than or equal to the specified date.  This can be combined with start_date_gte parameter to receive only the selected period. . [optional]
-            order_by (str): The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order. . [optional]
+            state ([str]): The value can be repeated to retrieve multiple matching values (OR condition).. [optional]
+            order_by (str): The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order.  *New in version 2.1.0* . [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
             _preload_content (bool): if False, the urllib3.HTTPResponse object
@@ -810,7 +782,7 @@ class DAGRunApi(object):
     ):
         """Modify a DAG run  # noqa: E501
 
-        Modify a DAG run  # noqa: E501
+        Modify a DAG run.  *New in version 2.2.0*   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 

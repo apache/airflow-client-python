@@ -1,20 +1,3 @@
-# Licensed to the Apache Software Foundation (ASF) under one
-# or more contributor license agreements.  See the NOTICE file
-# distributed with this work for additional information
-# regarding copyright ownership.  The ASF licenses this file
-# to you under the Apache License, Version 2.0 (the
-# "License"); you may not use this file except in compliance
-# with the License.  You may obtain a copy of the License at
-#
-#   http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing,
-# software distributed under the License is distributed on an
-# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-# KIND, either express or implied.  See the License for the
-# specific language governing permissions and limitations
-# under the License.
-
 """
     Airflow API (Stable)
 
@@ -192,7 +175,7 @@ class DAG(ModelNormal):
             dag_id (str): The ID of the DAG.. [optional]  # noqa: E501
             root_dag_id (str, none_type): If the DAG is SubDAG then it is the top level DAG identifier. Otherwise, null.. [optional]  # noqa: E501
             is_paused (bool, none_type): Whether the DAG is paused.. [optional]  # noqa: E501
-            is_active (bool, none_type): Whether the DAG is currently seen by the scheduler(s).. [optional]  # noqa: E501
+            is_active (bool, none_type): Whether the DAG is currently seen by the scheduler(s).  *New in version 2.1.1*  *Changed in version 2.2.0*&#58; Field is read-only. . [optional]  # noqa: E501
             is_subdag (bool): Whether the DAG is SubDAG.. [optional]  # noqa: E501
             fileloc (str): The absolute path to the file.. [optional]  # noqa: E501
             file_token (str): The key containing the encrypted path to the file. Encryption and decryption take place only on the server. This prevents the client from reading an non-DAG file. This also ensures API extensibility, because the format of encrypted data may change. . [optional]  # noqa: E501
@@ -284,7 +267,7 @@ class DAG(ModelNormal):
             dag_id (str): The ID of the DAG.. [optional]  # noqa: E501
             root_dag_id (str, none_type): If the DAG is SubDAG then it is the top level DAG identifier. Otherwise, null.. [optional]  # noqa: E501
             is_paused (bool, none_type): Whether the DAG is paused.. [optional]  # noqa: E501
-            is_active (bool, none_type): Whether the DAG is currently seen by the scheduler(s).. [optional]  # noqa: E501
+            is_active (bool, none_type): Whether the DAG is currently seen by the scheduler(s).  *New in version 2.1.1*  *Changed in version 2.2.0*&#58; Field is read-only. . [optional]  # noqa: E501
             is_subdag (bool): Whether the DAG is SubDAG.. [optional]  # noqa: E501
             fileloc (str): The absolute path to the file.. [optional]  # noqa: E501
             file_token (str): The key containing the encrypted path to the file. Encryption and decryption take place only on the server. This prevents the client from reading an non-DAG file. This also ensures API extensibility, because the format of encrypted data may change. . [optional]  # noqa: E501

@@ -1,22 +1,3 @@
-<!--
- Licensed to the Apache Software Foundation (ASF) under one
- or more contributor license agreements.  See the NOTICE file
- distributed with this work for additional information
- regarding copyright ownership.  The ASF licenses this file
- to you under the Apache License, Version 2.0 (the
- "License"); you may not use this file except in compliance
- with the License.  You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing,
- software distributed under the License is distributed on an
- "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- KIND, either express or implied.  See the License for the
- specific language governing permissions and limitations
- under the License.
- -->
-
 # Apache Airflow Python Client
 # Overview
 
@@ -294,16 +275,6 @@ configuration = client.Configuration(
     host = "http://localhost/api/v1"
 )
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = client.Configuration(
-    username = 'YOUR_USERNAME',
-    password = 'YOUR_PASSWORD'
-)
 
 
 # Enter a context with an instance of the API client
@@ -431,6 +402,9 @@ Class | Method | HTTP request | Description
  - [ListDagRunsForm](docs/ListDagRunsForm.md)
  - [ListTaskInstanceForm](docs/ListTaskInstanceForm.md)
  - [MetadatabaseStatus](docs/MetadatabaseStatus.md)
+ - [NullableSLAMiss](docs/NullableSLAMiss.md)
+ - [NullableTaskState](docs/NullableTaskState.md)
+ - [NullableTimeDelta](docs/NullableTimeDelta.md)
  - [PluginCollection](docs/PluginCollection.md)
  - [PluginCollectionAllOf](docs/PluginCollectionAllOf.md)
  - [PluginCollectionItem](docs/PluginCollectionItem.md)

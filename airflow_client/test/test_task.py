@@ -1,20 +1,3 @@
-# Licensed to the Apache Software Foundation (ASF) under one
-# or more contributor license agreements.  See the NOTICE file
-# distributed with this work for additional information
-# regarding copyright ownership.  The ASF licenses this file
-# to you under the Apache License, Version 2.0 (the
-# "License"); you may not use this file except in compliance
-# with the License.  You may obtain a copy of the License at
-#
-#   http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing,
-# software distributed under the License is distributed on an
-# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-# KIND, either express or implied.  See the License for the
-# specific language governing permissions and limitations
-# under the License.
-
 """
     Airflow API (Stable)
 
@@ -33,15 +16,15 @@ import airflow_client.client
 from airflow_client.client.model.class_reference import ClassReference
 from airflow_client.client.model.color import Color
 from airflow_client.client.model.dag import DAG
+from airflow_client.client.model.nullable_time_delta import NullableTimeDelta
 from airflow_client.client.model.task_extra_links import TaskExtraLinks
-from airflow_client.client.model.time_delta import TimeDelta
 from airflow_client.client.model.trigger_rule import TriggerRule
 from airflow_client.client.model.weight_rule import WeightRule
 globals()['ClassReference'] = ClassReference
 globals()['Color'] = Color
 globals()['DAG'] = DAG
+globals()['NullableTimeDelta'] = NullableTimeDelta
 globals()['TaskExtraLinks'] = TaskExtraLinks
-globals()['TimeDelta'] = TimeDelta
 globals()['TriggerRule'] = TriggerRule
 globals()['WeightRule'] = WeightRule
 from airflow_client.client.model.task import Task

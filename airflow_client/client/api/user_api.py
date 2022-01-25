@@ -1,20 +1,3 @@
-# Licensed to the Apache Software Foundation (ASF) under one
-# or more contributor license agreements.  See the NOTICE file
-# distributed with this work for additional information
-# regarding copyright ownership.  The ASF licenses this file
-# to you under the Apache License, Version 2.0 (the
-# "License"); you may not use this file except in compliance
-# with the License.  You may obtain a copy of the License at
-#
-#   http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing,
-# software distributed under the License is distributed on an
-# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-# KIND, either express or implied.  See the License for the
-# specific language governing permissions and limitations
-# under the License.
-
 """
     Airflow API (Stable)
 
@@ -60,10 +43,7 @@ class UserApi(object):
         self.delete_user_endpoint = _Endpoint(
             settings={
                 'response_type': None,
-                'auth': [
-                    'Basic',
-                    'Kerberos'
-                ],
+                'auth': [],
                 'endpoint_path': '/users/{username}',
                 'operation_id': 'delete_user',
                 'http_method': 'DELETE',
@@ -112,10 +92,7 @@ class UserApi(object):
         self.get_user_endpoint = _Endpoint(
             settings={
                 'response_type': (UserCollectionItem,),
-                'auth': [
-                    'Basic',
-                    'Kerberos'
-                ],
+                'auth': [],
                 'endpoint_path': '/users/{username}',
                 'operation_id': 'get_user',
                 'http_method': 'GET',
@@ -164,10 +141,7 @@ class UserApi(object):
         self.get_users_endpoint = _Endpoint(
             settings={
                 'response_type': (UserCollection,),
-                'auth': [
-                    'Basic',
-                    'Kerberos'
-                ],
+                'auth': [],
                 'endpoint_path': '/users',
                 'operation_id': 'get_users',
                 'http_method': 'GET',
@@ -229,10 +203,7 @@ class UserApi(object):
         self.patch_user_endpoint = _Endpoint(
             settings={
                 'response_type': (Role,),
-                'auth': [
-                    'Basic',
-                    'Kerberos'
-                ],
+                'auth': [],
                 'endpoint_path': '/users/{username}',
                 'operation_id': 'patch_user',
                 'http_method': 'PATCH',
@@ -294,10 +265,7 @@ class UserApi(object):
         self.post_user_endpoint = _Endpoint(
             settings={
                 'response_type': (User,),
-                'auth': [
-                    'Basic',
-                    'Kerberos'
-                ],
+                'auth': [],
                 'endpoint_path': '/users',
                 'operation_id': 'post_user',
                 'http_method': 'POST',
@@ -352,6 +320,7 @@ class UserApi(object):
     ):
         """Delete a user  # noqa: E501
 
+        Delete a user with a specific username.  *New in version 2.2.0*   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -359,7 +328,7 @@ class UserApi(object):
         >>> result = thread.get()
 
         Args:
-            username (str): The username of the user
+            username (str): The username of the user.  *New in version 2.1.0* 
 
         Keyword Args:
             _return_http_data_only (bool): response data without head status
@@ -417,6 +386,7 @@ class UserApi(object):
     ):
         """Get a user  # noqa: E501
 
+        Get a user with a specific username.  *New in version 2.1.0*   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -424,7 +394,7 @@ class UserApi(object):
         >>> result = thread.get()
 
         Args:
-            username (str): The username of the user
+            username (str): The username of the user.  *New in version 2.1.0* 
 
         Keyword Args:
             _return_http_data_only (bool): response data without head status
@@ -481,6 +451,7 @@ class UserApi(object):
     ):
         """List users  # noqa: E501
 
+        Get a list of users.  *New in version 2.1.0*   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -491,7 +462,7 @@ class UserApi(object):
         Keyword Args:
             limit (int): The numbers of items to return.. [optional] if omitted the server will use the default value of 100
             offset (int): The number of items to skip before starting to collect the result set.. [optional]
-            order_by (str): The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order. . [optional]
+            order_by (str): The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order.  *New in version 2.1.0* . [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
             _preload_content (bool): if False, the urllib3.HTTPResponse object
@@ -546,6 +517,7 @@ class UserApi(object):
     ):
         """Update a user  # noqa: E501
 
+        Update fields for a user.  *New in version 2.2.0*   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -553,7 +525,7 @@ class UserApi(object):
         >>> result = thread.get()
 
         Args:
-            username (str): The username of the user
+            username (str): The username of the user.  *New in version 2.1.0* 
             user (User):
 
         Keyword Args:
@@ -615,6 +587,7 @@ class UserApi(object):
     ):
         """Create a user  # noqa: E501
 
+        Create a new user with unique username and email.  *New in version 2.2.0*   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 

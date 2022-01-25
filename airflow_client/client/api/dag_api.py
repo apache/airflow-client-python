@@ -1,20 +1,3 @@
-# Licensed to the Apache Software Foundation (ASF) under one
-# or more contributor license agreements.  See the NOTICE file
-# distributed with this work for additional information
-# regarding copyright ownership.  The ASF licenses this file
-# to you under the Apache License, Version 2.0 (the
-# "License"); you may not use this file except in compliance
-# with the License.  You may obtain a copy of the License at
-#
-#   http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing,
-# software distributed under the License is distributed on an
-# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-# KIND, either express or implied.  See the License for the
-# specific language governing permissions and limitations
-# under the License.
-
 """
     Airflow API (Stable)
 
@@ -65,10 +48,7 @@ class DAGApi(object):
         self.delete_dag_endpoint = _Endpoint(
             settings={
                 'response_type': None,
-                'auth': [
-                    'Basic',
-                    'Kerberos'
-                ],
+                'auth': [],
                 'endpoint_path': '/dags/{dag_id}',
                 'operation_id': 'delete_dag',
                 'http_method': 'DELETE',
@@ -117,10 +97,7 @@ class DAGApi(object):
         self.get_dag_endpoint = _Endpoint(
             settings={
                 'response_type': (DAG,),
-                'auth': [
-                    'Basic',
-                    'Kerberos'
-                ],
+                'auth': [],
                 'endpoint_path': '/dags/{dag_id}',
                 'operation_id': 'get_dag',
                 'http_method': 'GET',
@@ -169,10 +146,7 @@ class DAGApi(object):
         self.get_dag_details_endpoint = _Endpoint(
             settings={
                 'response_type': (DAGDetail,),
-                'auth': [
-                    'Basic',
-                    'Kerberos'
-                ],
+                'auth': [],
                 'endpoint_path': '/dags/{dag_id}/details',
                 'operation_id': 'get_dag_details',
                 'http_method': 'GET',
@@ -221,10 +195,7 @@ class DAGApi(object):
         self.get_dag_source_endpoint = _Endpoint(
             settings={
                 'response_type': (InlineResponse2001,),
-                'auth': [
-                    'Basic',
-                    'Kerberos'
-                ],
+                'auth': [],
                 'endpoint_path': '/dagSources/{file_token}',
                 'operation_id': 'get_dag_source',
                 'http_method': 'GET',
@@ -274,10 +245,7 @@ class DAGApi(object):
         self.get_dags_endpoint = _Endpoint(
             settings={
                 'response_type': (DAGCollection,),
-                'auth': [
-                    'Basic',
-                    'Kerberos'
-                ],
+                'auth': [],
                 'endpoint_path': '/dags',
                 'operation_id': 'get_dags',
                 'http_method': 'GET',
@@ -290,6 +258,7 @@ class DAGApi(object):
                     'order_by',
                     'tags',
                     'only_active',
+                    'dag_id_pattern',
                 ],
                 'required': [],
                 'nullable': [
@@ -320,6 +289,8 @@ class DAGApi(object):
                         ([str],),
                     'only_active':
                         (bool,),
+                    'dag_id_pattern':
+                        (str,),
                 },
                 'attribute_map': {
                     'limit': 'limit',
@@ -327,6 +298,7 @@ class DAGApi(object):
                     'order_by': 'order_by',
                     'tags': 'tags',
                     'only_active': 'only_active',
+                    'dag_id_pattern': 'dag_id_pattern',
                 },
                 'location_map': {
                     'limit': 'query',
@@ -334,6 +306,7 @@ class DAGApi(object):
                     'order_by': 'query',
                     'tags': 'query',
                     'only_active': 'query',
+                    'dag_id_pattern': 'query',
                 },
                 'collection_format_map': {
                     'tags': 'multi',
@@ -350,10 +323,7 @@ class DAGApi(object):
         self.get_task_endpoint = _Endpoint(
             settings={
                 'response_type': (Task,),
-                'auth': [
-                    'Basic',
-                    'Kerberos'
-                ],
+                'auth': [],
                 'endpoint_path': '/dags/{dag_id}/tasks/{task_id}',
                 'operation_id': 'get_task',
                 'http_method': 'GET',
@@ -408,10 +378,7 @@ class DAGApi(object):
         self.get_tasks_endpoint = _Endpoint(
             settings={
                 'response_type': (TaskCollection,),
-                'auth': [
-                    'Basic',
-                    'Kerberos'
-                ],
+                'auth': [],
                 'endpoint_path': '/dags/{dag_id}/tasks',
                 'operation_id': 'get_tasks',
                 'http_method': 'GET',
@@ -465,10 +432,7 @@ class DAGApi(object):
         self.patch_dag_endpoint = _Endpoint(
             settings={
                 'response_type': (DAG,),
-                'auth': [
-                    'Basic',
-                    'Kerberos'
-                ],
+                'auth': [],
                 'endpoint_path': '/dags/{dag_id}',
                 'operation_id': 'patch_dag',
                 'http_method': 'PATCH',
@@ -530,10 +494,7 @@ class DAGApi(object):
         self.post_clear_task_instances_endpoint = _Endpoint(
             settings={
                 'response_type': (TaskInstanceReferenceCollection,),
-                'auth': [
-                    'Basic',
-                    'Kerberos'
-                ],
+                'auth': [],
                 'endpoint_path': '/dags/{dag_id}/clearTaskInstances',
                 'operation_id': 'post_clear_task_instances',
                 'http_method': 'POST',
@@ -589,10 +550,7 @@ class DAGApi(object):
         self.post_set_task_instances_state_endpoint = _Endpoint(
             settings={
                 'response_type': (TaskInstanceReferenceCollection,),
-                'auth': [
-                    'Basic',
-                    'Kerberos'
-                ],
+                'auth': [],
                 'endpoint_path': '/dags/{dag_id}/updateTaskInstancesState',
                 'operation_id': 'post_set_task_instances_state',
                 'http_method': 'POST',
@@ -653,7 +611,7 @@ class DAGApi(object):
     ):
         """Delete a DAG  # noqa: E501
 
-        Deletes all metadata related to the DAG, including finished DAG Runs and Tasks. Logs are not deleted. This action cannot be undone.   # noqa: E501
+        Deletes all metadata related to the DAG, including finished DAG Runs and Tasks. Logs are not deleted. This action cannot be undone.  *New in version 2.2.0*   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -926,9 +884,10 @@ class DAGApi(object):
         Keyword Args:
             limit (int): The numbers of items to return.. [optional] if omitted the server will use the default value of 100
             offset (int): The number of items to skip before starting to collect the result set.. [optional]
-            order_by (str): The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order. . [optional]
-            tags ([str]): List of tags to filter results. [optional]
-            only_active (bool): Only return active DAGs.. [optional] if omitted the server will use the default value of True
+            order_by (str): The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order.  *New in version 2.1.0* . [optional]
+            tags ([str]): List of tags to filter results.  *New in version 2.2.0* . [optional]
+            only_active (bool): Only return active DAGs.  *New in version 2.1.1* . [optional] if omitted the server will use the default value of True
+            dag_id_pattern (str): If set, only return DAGs with dag_ids matching this pattern.  *New in version 2.3.0* . [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
             _preload_content (bool): if False, the urllib3.HTTPResponse object
@@ -1061,7 +1020,7 @@ class DAGApi(object):
             dag_id (str): The DAG ID.
 
         Keyword Args:
-            order_by (str): The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order. . [optional]
+            order_by (str): The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order.  *New in version 2.1.0* . [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
             _preload_content (bool): if False, the urllib3.HTTPResponse object

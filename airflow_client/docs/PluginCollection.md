@@ -19,7 +19,7 @@
 
 # PluginCollection
 
-Plugin Collection
+A collection of plugin.  *New in version 2.1.0* 
 
 ## Properties
 Name | Type | Description | Notes

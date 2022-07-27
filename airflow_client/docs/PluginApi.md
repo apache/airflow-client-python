@@ -31,6 +31,8 @@ Method | HTTP request | Description
 
 Get a list of loaded plugins
 
+Get a list of loaded plugins.  *New in version 2.1.0* 
+
 ### Example
 
 * Basic Authentication (Basic):

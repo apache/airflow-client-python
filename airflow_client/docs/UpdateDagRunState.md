@@ -19,6 +19,7 @@
 
 # UpdateDagRunState
 
+Modify the state of a DAG run.  *New in version 2.2.0* 
 
 ## Properties
 Name | Type | Description | Notes

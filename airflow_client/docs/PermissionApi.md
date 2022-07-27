@@ -31,6 +31,8 @@ Method | HTTP request | Description
 
 List permissions
 
+Get a list of permissions.  *New in version 2.1.0* 
+
 ### Example
 
 * Basic Authentication (Basic):

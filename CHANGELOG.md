@@ -17,6 +17,24 @@
  under the License.
  -->
 
+# v2.3.0
+
+Apache Airflow API version: 2.3.x
+
+### Major changes:
+
+- NA
+
+### Major fixes:
+
+- NA
+
+### New API supported:
+
+- PATCH /dags | Update DAGs
+- GET /dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/{map_index} | Get a mapped task instance
+- GET /dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/listMapped | List mapped task instances
+
 # v2.2.0
 
 Apache Airflow API version: 2.2.x

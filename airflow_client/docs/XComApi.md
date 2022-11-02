@@ -166,11 +166,21 @@ with client.ApiClient(configuration) as api_client:
     dag_run_id = "dag_run_id_example" # str | The DAG run ID.
     task_id = "task_id_example" # str | The task ID.
     xcom_key = "xcom_key_example" # str | The XCom key.
+    deserialize = False # bool | Whether to deserialize an XCom value when using a custom XCom backend.  The XCom API endpoint calls `orm_deserialize_value` by default since an XCom may contain value that is potentially expensive to deserialize in the web server. Setting this to true overrides the consideration, and calls `deserialize_value` instead.  This parameter is not meaningful when using the default XCom backend.  *New in version 2.4.0*  (optional) if omitted the server will use the default value of False
 
     # example passing only required values which don't have defaults set
     try:
         # Get an XCom entry
         api_response = api_instance.get_xcom_entry(dag_id, dag_run_id, task_id, xcom_key)
+        pprint(api_response)
+    except client.ApiException as e:
+        print("Exception when calling XComApi->get_xcom_entry: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # Get an XCom entry
+        api_response = api_instance.get_xcom_entry(dag_id, dag_run_id, task_id, xcom_key, deserialize=deserialize)
         pprint(api_response)
     except client.ApiException as e:
         print("Exception when calling XComApi->get_xcom_entry: %s\n" % e)
@@ -185,6 +195,7 @@ Name | Type | Description  | Notes
  **dag_run_id** | **str**| The DAG run ID. |
  **task_id** | **str**| The task ID. |
  **xcom_key** | **str**| The XCom key. |
+ **deserialize** | **bool**| Whether to deserialize an XCom value when using a custom XCom backend.  The XCom API endpoint calls &#x60;orm_deserialize_value&#x60; by default since an XCom may contain value that is potentially expensive to deserialize in the web server. Setting this to true overrides the consideration, and calls &#x60;deserialize_value&#x60; instead.  This parameter is not meaningful when using the default XCom backend.  *New in version 2.4.0*  | [optional] if omitted the server will use the default value of False
 
 ### Return type
 

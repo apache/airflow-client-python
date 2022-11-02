@@ -35,7 +35,7 @@ Name | Type | Description | Notes
 **is_mapped** | **bool** |  | [optional] [readonly] 
 **wait_for_downstream** | **bool** |  | [optional] [readonly] 
 **retries** | **float** |  | [optional] [readonly] 
-**queue** | **str** |  | [optional] [readonly] 
+**queue** | **str, none_type** |  | [optional] [readonly] 
 **pool** | **str** |  | [optional] [readonly] 
 **pool_slots** | **float** |  | [optional] [readonly] 
 **execution_timeout** | [**TimeDelta**](TimeDelta.md) |  | [optional] 

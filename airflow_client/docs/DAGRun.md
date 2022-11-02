@@ -29,6 +29,10 @@ Name | Type | Description | Notes
 **execution_date** | **datetime, none_type** | The execution date. This is the same as logical_date, kept for backwards compatibility. If both this field and logical_date are provided but with different values, the request will fail with an BAD_REQUEST error.  *Changed in version 2.2.0*&amp;#58; Field becomes nullable.  *Deprecated since version 2.2.0*&amp;#58; Use &#39;logical_date&#39; instead.  | [optional] 
 **start_date** | **datetime, none_type** | The start time. The time when DAG run was actually created.  *Changed in version 2.1.3*&amp;#58; Field becomes nullable.  | [optional] [readonly] 
 **end_date** | **datetime, none_type** |  | [optional] [readonly] 
+**data_interval_start** | **datetime, none_type** |  | [optional] [readonly] 
+**data_interval_end** | **datetime, none_type** |  | [optional] [readonly] 
+**last_scheduling_decision** | **datetime, none_type** |  | [optional] [readonly] 
+**run_type** | **str** |  | [optional] [readonly] 
 **state** | [**DagState**](DagState.md) |  | [optional] 
 **external_trigger** | **bool** |  | [optional] [readonly]  if omitted the server will use the default value of True
 **conf** | **{str: (bool, date, datetime, dict, float, int, list, str, none_type)}** | JSON object describing additional configuration parameters.  The value of this field can be set only when creating the object. If you try to modify the field of an existing object, the request fails with an BAD_REQUEST error.  | [optional] 

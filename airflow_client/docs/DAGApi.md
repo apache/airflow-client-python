@@ -839,7 +839,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_clear_task_instances**
-> TaskInstanceReferenceCollection post_clear_task_instances(dag_id, clear_task_instance)
+> TaskInstanceReferenceCollection post_clear_task_instances(dag_id, clear_task_instances)
 
 Clear a set of task instances
 
@@ -853,9 +853,9 @@ Clears a set of task instances associated with the DAG for a specified date rang
 import time
 import airflow_client.client
 from airflow_client.client.api import dag_api
-from airflow_client.client.model.clear_task_instance import ClearTaskInstance
 from airflow_client.client.model.error import Error
 from airflow_client.client.model.task_instance_reference_collection import TaskInstanceReferenceCollection
+from airflow_client.client.model.clear_task_instances import ClearTaskInstances
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost/api/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -879,7 +879,7 @@ with client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = dag_api.DAGApi(api_client)
     dag_id = "dag_id_example" # str | The DAG ID.
-    clear_task_instance = ClearTaskInstance(
+    clear_task_instances = ClearTaskInstances(
         dry_run=True,
         task_ids=[
             "task_ids_example",
@@ -891,12 +891,17 @@ with client.ApiClient(configuration) as api_client:
         include_subdags=True,
         include_parentdag=True,
         reset_dag_runs=True,
-    ) # ClearTaskInstance | Parameters of action
+        dag_run_id="dag_run_id_example",
+        include_upstream=False,
+        include_downstream=False,
+        include_future=False,
+        include_past=False,
+    ) # ClearTaskInstances | Parameters of action
 
     # example passing only required values which don't have defaults set
     try:
         # Clear a set of task instances
-        api_response = api_instance.post_clear_task_instances(dag_id, clear_task_instance)
+        api_response = api_instance.post_clear_task_instances(dag_id, clear_task_instances)
         pprint(api_response)
     except client.ApiException as e:
         print("Exception when calling DAGApi->post_clear_task_instances: %s\n" % e)
@@ -908,7 +913,7 @@ with client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **dag_id** | **str**| The DAG ID. |
- **clear_task_instance** | [**ClearTaskInstance**](ClearTaskInstance.md)| Parameters of action |
+ **clear_task_instances** | [**ClearTaskInstances**](ClearTaskInstances.md)| Parameters of action |
 
 ### Return type
 

@@ -26,6 +26,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **connection_id** | **str** | The connection ID. | [optional] 
 **conn_type** | **str** | The connection type. | [optional] 
+**description** | **str, none_type** | The description of the connection. | [optional] 
 **host** | **str, none_type** | Host of the connection. | [optional] 
 **login** | **str, none_type** | Login of the connection. | [optional] 
 **schema** | **str, none_type** | Schema of the connection. | [optional] 

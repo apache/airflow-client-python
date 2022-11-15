@@ -162,6 +162,7 @@ with client.ApiClient(configuration) as api_client:
     task_id = "task_id_example" # str | The task ID.
     task_try_number = 1 # int | The task try number.
     full_content = True # bool | A full content will be returned. By default, only the first fragment will be returned.  (optional)
+    map_index = 1 # int | Filter on map index for mapped task. (optional)
     token = "token_example" # str | A token that allows you to continue fetching logs. If passed, it will specify the location from which the download should be continued.  (optional)
 
     # example passing only required values which don't have defaults set
@@ -176,7 +177,7 @@ with client.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # Get logs
-        api_response = api_instance.get_log(dag_id, dag_run_id, task_id, task_try_number, full_content=full_content, token=token)
+        api_response = api_instance.get_log(dag_id, dag_run_id, task_id, task_try_number, full_content=full_content, map_index=map_index, token=token)
         pprint(api_response)
     except client.ApiException as e:
         print("Exception when calling TaskInstanceApi->get_log: %s\n" % e)
@@ -192,6 +193,7 @@ Name | Type | Description  | Notes
  **task_id** | **str**| The task ID. |
  **task_try_number** | **int**| The task try number. |
  **full_content** | **bool**| A full content will be returned. By default, only the first fragment will be returned.  | [optional]
+ **map_index** | **int**| Filter on map index for mapped task. | [optional]
  **token** | **str**| A token that allows you to continue fetching logs. If passed, it will specify the location from which the download should be continued.  | [optional]
 
 ### Return type
@@ -309,7 +311,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_mapped_task_instances**
-> TaskInstance get_mapped_task_instances(dag_id, dag_run_id, task_id)
+> TaskInstanceCollection get_mapped_task_instances(dag_id, dag_run_id, task_id)
 
 List mapped task instances
 
@@ -323,7 +325,7 @@ Get details of all mapped task instances.  *New in version 2.3.0*
 import time
 import airflow_client.client
 from airflow_client.client.api import task_instance_api
-from airflow_client.client.model.task_instance import TaskInstance
+from airflow_client.client.model.task_instance_collection import TaskInstanceCollection
 from airflow_client.client.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost/api/v1
@@ -414,7 +416,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TaskInstance**](TaskInstance.md)
+[**TaskInstanceCollection**](TaskInstanceCollection.md)
 
 ### Authorization
 

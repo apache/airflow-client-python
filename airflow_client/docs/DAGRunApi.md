@@ -23,13 +23,105 @@ All URIs are relative to *http://localhost/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**clear_dag_run**](DAGRunApi.md#clear_dag_run) | **POST** /dags/{dag_id}/dagRuns/{dag_run_id}/clear | Clear a DAG run
 [**delete_dag_run**](DAGRunApi.md#delete_dag_run) | **DELETE** /dags/{dag_id}/dagRuns/{dag_run_id} | Delete a DAG run
 [**get_dag_run**](DAGRunApi.md#get_dag_run) | **GET** /dags/{dag_id}/dagRuns/{dag_run_id} | Get a DAG run
 [**get_dag_runs**](DAGRunApi.md#get_dag_runs) | **GET** /dags/{dag_id}/dagRuns | List DAG runs
 [**get_dag_runs_batch**](DAGRunApi.md#get_dag_runs_batch) | **POST** /dags/~/dagRuns/list | List DAG runs (batch)
+[**get_upstream_dataset_events**](DAGRunApi.md#get_upstream_dataset_events) | **GET** /dags/{dag_id}/dagRuns/{dag_run_id}/upstreamDatasetEvents | Get dataset events for a DAG run
 [**post_dag_run**](DAGRunApi.md#post_dag_run) | **POST** /dags/{dag_id}/dagRuns | Trigger a new DAG run
 [**update_dag_run_state**](DAGRunApi.md#update_dag_run_state) | **PATCH** /dags/{dag_id}/dagRuns/{dag_run_id} | Modify a DAG run
 
+
+# **clear_dag_run**
+> DAGRun clear_dag_run(dag_id, dag_run_id, clear_dag_run)
+
+Clear a DAG run
+
+Clear a DAG run.  *New in version 2.4.0* 
+
+### Example
+
+* Basic Authentication (Basic):
+
+```python
+import time
+import airflow_client.client
+from airflow_client.client.api import dag_run_api
+from airflow_client.client.model.clear_dag_run import ClearDagRun
+from airflow_client.client.model.dag_run import DAGRun
+from airflow_client.client.model.error import Error
+from pprint import pprint
+# Defining the host is optional and defaults to http://localhost/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = client.Configuration(
+    host = "http://localhost/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: Basic
+configuration = client.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
+
+# Enter a context with an instance of the API client
+with client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = dag_run_api.DAGRunApi(api_client)
+    dag_id = "dag_id_example" # str | The DAG ID.
+    dag_run_id = "dag_run_id_example" # str | The DAG run ID.
+    clear_dag_run = ClearDagRun(
+        dry_run=True,
+    ) # ClearDagRun | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Clear a DAG run
+        api_response = api_instance.clear_dag_run(dag_id, dag_run_id, clear_dag_run)
+        pprint(api_response)
+    except client.ApiException as e:
+        print("Exception when calling DAGRunApi->clear_dag_run: %s\n" % e)
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **dag_id** | **str**| The DAG ID. |
+ **dag_run_id** | **str**| The DAG run ID. |
+ **clear_dag_run** | [**ClearDagRun**](ClearDagRun.md)|  |
+
+### Return type
+
+[**DAGRun**](DAGRun.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success. |  -  |
+**400** | Client specified an invalid argument. |  -  |
+**401** | Request not authenticated due to missing, invalid, authentication info. |  -  |
+**403** | Client does not have sufficient permission. |  -  |
+**404** | A specified resource is not found. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_dag_run**
 > delete_dag_run(dag_id, dag_run_id)
@@ -401,6 +493,90 @@ Name | Type | Description  | Notes
 **400** | Client specified an invalid argument. |  -  |
 **401** | Request not authenticated due to missing, invalid, authentication info. |  -  |
 **403** | Client does not have sufficient permission. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_upstream_dataset_events**
+> DatasetEventCollection get_upstream_dataset_events(dag_id, dag_run_id)
+
+Get dataset events for a DAG run
+
+Get datasets for a dag run.  *New in version 2.4.0* 
+
+### Example
+
+* Basic Authentication (Basic):
+
+```python
+import time
+import airflow_client.client
+from airflow_client.client.api import dag_run_api
+from airflow_client.client.model.dataset_event_collection import DatasetEventCollection
+from airflow_client.client.model.error import Error
+from pprint import pprint
+# Defining the host is optional and defaults to http://localhost/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = client.Configuration(
+    host = "http://localhost/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: Basic
+configuration = client.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
+
+# Enter a context with an instance of the API client
+with client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = dag_run_api.DAGRunApi(api_client)
+    dag_id = "dag_id_example" # str | The DAG ID.
+    dag_run_id = "dag_run_id_example" # str | The DAG run ID.
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Get dataset events for a DAG run
+        api_response = api_instance.get_upstream_dataset_events(dag_id, dag_run_id)
+        pprint(api_response)
+    except client.ApiException as e:
+        print("Exception when calling DAGRunApi->get_upstream_dataset_events: %s\n" % e)
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **dag_id** | **str**| The DAG ID. |
+ **dag_run_id** | **str**| The DAG run ID. |
+
+### Return type
+
+[**DatasetEventCollection**](DatasetEventCollection.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success. |  -  |
+**401** | Request not authenticated due to missing, invalid, authentication info. |  -  |
+**403** | Client does not have sufficient permission. |  -  |
+**404** | A specified resource is not found. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -30,8 +30,10 @@ from airflow_client.client.model.action import Action
 from airflow_client.client.model.action_collection import ActionCollection
 from airflow_client.client.model.action_collection_all_of import ActionCollectionAllOf
 from airflow_client.client.model.action_resource import ActionResource
+from airflow_client.client.model.basic_dag_run import BasicDAGRun
 from airflow_client.client.model.class_reference import ClassReference
-from airflow_client.client.model.clear_task_instance import ClearTaskInstance
+from airflow_client.client.model.clear_dag_run import ClearDagRun
+from airflow_client.client.model.clear_task_instances import ClearTaskInstances
 from airflow_client.client.model.collection_info import CollectionInfo
 from airflow_client.client.model.color import Color
 from airflow_client.client.model.config import Config
@@ -52,7 +54,17 @@ from airflow_client.client.model.dag_detail_all_of import DAGDetailAllOf
 from airflow_client.client.model.dag_run import DAGRun
 from airflow_client.client.model.dag_run_collection import DAGRunCollection
 from airflow_client.client.model.dag_run_collection_all_of import DAGRunCollectionAllOf
+from airflow_client.client.model.dag_schedule_dataset_reference import DagScheduleDatasetReference
 from airflow_client.client.model.dag_state import DagState
+from airflow_client.client.model.dag_warning import DagWarning
+from airflow_client.client.model.dag_warning_collection import DagWarningCollection
+from airflow_client.client.model.dag_warning_collection_all_of import DagWarningCollectionAllOf
+from airflow_client.client.model.dataset import Dataset
+from airflow_client.client.model.dataset_collection import DatasetCollection
+from airflow_client.client.model.dataset_collection_all_of import DatasetCollectionAllOf
+from airflow_client.client.model.dataset_event import DatasetEvent
+from airflow_client.client.model.dataset_event_collection import DatasetEventCollection
+from airflow_client.client.model.dataset_event_collection_all_of import DatasetEventCollectionAllOf
 from airflow_client.client.model.error import Error
 from airflow_client.client.model.event_log import EventLog
 from airflow_client.client.model.event_log_collection import EventLogCollection
@@ -94,6 +106,7 @@ from airflow_client.client.model.task_instance_collection import TaskInstanceCol
 from airflow_client.client.model.task_instance_collection_all_of import TaskInstanceCollectionAllOf
 from airflow_client.client.model.task_instance_reference import TaskInstanceReference
 from airflow_client.client.model.task_instance_reference_collection import TaskInstanceReferenceCollection
+from airflow_client.client.model.task_outlet_dataset_reference import TaskOutletDatasetReference
 from airflow_client.client.model.task_state import TaskState
 from airflow_client.client.model.time_delta import TimeDelta
 from airflow_client.client.model.trigger_rule import TriggerRule

@@ -19,8 +19,8 @@
 
 # Apache Airflow Python Client
 
-> **_NOTE:_**  The Apache Airflow Client is still under active development and some methods 
-> or APIs might be broken. Please raise an issue in github if you encounter any such issues. 
+> **_NOTE:_**  The Apache Airflow Client is still under active development and some methods
+> or APIs might be broken. Please raise an issue in github if you encounter any such issues.
 
 
 
@@ -93,7 +93,10 @@ See [README](./airflow_client/README.md#documentation-for-api-endpoints) for ful
 
 ## Release Process
 
-The Python client is generated using Airflow's [openapi spec](https://github.com/apache/airflow/blob/master/clients/gen/python.sh). 
+Typically releases are done coinciding with major and minor releases to Airflow. Therefore a release of (for example) 2.3.0 of this client
+would correspond with 2.3.X of Airflow.
+
+The Python client is generated using Airflow's [openapi spec](https://github.com/apache/airflow/blob/master/clients/gen/python.sh).
 To update the client for new APIs do the following steps:
 
 ```bash
@@ -106,7 +109,7 @@ git clone git@github.com:apache/airflow.git
 Edit the file `airflow/airflow/api_connexion/openapi/v1.yaml`
 Make sure it has the following `securitySchema`s listed under security `section`
 ```yaml
-security: 
+security:
   - Basic: []
   - GoogleOpenId: []
   - Kerberos: []
@@ -114,10 +117,12 @@ security:
 If your deployment of Airflow uses any different authentication mechanism than the three listed above, you might need to make further changes to the `v1.yaml` and generate your own client, see [OpenAPI Schema specification](https://swagger.io/docs/specification/authentication/) for details.
 (*These changes should not be commited to the upstream `v1.yaml` [as it will generate misleading openapi documentaion](https://github.com/apache/airflow/pull/17174)*)
 
-```bash 
+Update the VERSION string in setup.py with the corresponding new version string.
+
+```bash
 cd airflow
 
-# bump up the version in python.sh & run the following command 
+# bump up the version in python.sh & run the following command
 ./clients/gen/python.sh airflow/api_connexion/openapi/v1.yaml ../airflow-client-python/airflow_client
 
 # raise a PR in github for both the repos (airflow & airflow-client-python)

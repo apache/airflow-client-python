@@ -24,7 +24,6 @@ A plugin Item.  *New in version 2.1.0*
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**number** | **str** | The plugin number | [optional] 
 **name** | **str** | The name of the plugin | [optional] 
 **hooks** | **[str, none_type]** | The plugin hooks | [optional] 
 **executors** | **[str, none_type]** | The plugin executors | [optional] 

@@ -110,7 +110,7 @@ class DAGDetailAllOf(ModelNormal):
             'orientation': (str,),  # noqa: E501
             'concurrency': (float,),  # noqa: E501
             'start_date': (datetime, none_type,),  # noqa: E501
-            'dag_run_timeout': (TimeDelta,),  # noqa: E501
+            'dag_run_timeout': (TimeDelta, none_type,),  # noqa: E501
             'doc_md': (str, none_type,),  # noqa: E501
             'default_view': (str,),  # noqa: E501
             'params': ({str: (bool, date, datetime, dict, float, int, list, str, none_type)},),  # noqa: E501
@@ -200,7 +200,7 @@ class DAGDetailAllOf(ModelNormal):
             orientation (str): [optional]  # noqa: E501
             concurrency (float): [optional]  # noqa: E501
             start_date (datetime, none_type): The DAG's start date.  *Changed in version 2.0.1*&#58; Field becomes nullable. . [optional]  # noqa: E501
-            dag_run_timeout (TimeDelta): [optional]  # noqa: E501
+            dag_run_timeout (TimeDelta, none_type): [optional]  # noqa: E501
             doc_md (str, none_type): [optional]  # noqa: E501
             default_view (str): [optional]  # noqa: E501
             params ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}): User-specified DAG params.  *New in version 2.0.1* . [optional]  # noqa: E501
@@ -295,7 +295,7 @@ class DAGDetailAllOf(ModelNormal):
             orientation (str): [optional]  # noqa: E501
             concurrency (float): [optional]  # noqa: E501
             start_date (datetime, none_type): The DAG's start date.  *Changed in version 2.0.1*&#58; Field becomes nullable. . [optional]  # noqa: E501
-            dag_run_timeout (TimeDelta): [optional]  # noqa: E501
+            dag_run_timeout (TimeDelta, none_type): [optional]  # noqa: E501
             doc_md (str, none_type): [optional]  # noqa: E501
             default_view (str): [optional]  # noqa: E501
             params ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}): User-specified DAG params.  *New in version 2.0.1* . [optional]  # noqa: E501

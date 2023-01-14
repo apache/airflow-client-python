@@ -46,6 +46,9 @@ Name | Type | Description | Notes
 **executor_config** | **str** |  | [optional] 
 **sla_miss** | [**SLAMiss**](SLAMiss.md) |  | [optional] 
 **rendered_fields** | **{str: (bool, date, datetime, dict, float, int, list, str, none_type)}** | JSON object describing rendered fields.  *New in version 2.3.0*  | [optional] 
+**trigger** | [**Trigger**](Trigger.md) |  | [optional] 
+**triggerer_job** | [**Job**](Job.md) |  | [optional] 
+**note** | **str, none_type** | Contains manually entered notes by the user about the TaskInstance.  *New in version 2.5.0*  | [optional] 
 **any string name** | **bool, date, datetime, dict, float, int, list, str, none_type** | any string name can be used but the value must be the correct type | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

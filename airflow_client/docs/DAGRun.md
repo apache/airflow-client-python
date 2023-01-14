@@ -36,6 +36,7 @@ Name | Type | Description | Notes
 **state** | [**DagState**](DagState.md) |  | [optional] 
 **external_trigger** | **bool** |  | [optional] [readonly]  if omitted the server will use the default value of True
 **conf** | **{str: (bool, date, datetime, dict, float, int, list, str, none_type)}** | JSON object describing additional configuration parameters.  The value of this field can be set only when creating the object. If you try to modify the field of an existing object, the request fails with an BAD_REQUEST error.  | [optional] 
+**note** | **str, none_type** | Contains manually entered notes by the user about the DagRun.  *New in version 2.5.0*  | [optional] 
 **any string name** | **bool, date, datetime, dict, float, int, list, str, none_type** | any string name can be used but the value must be the correct type | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

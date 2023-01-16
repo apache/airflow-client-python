@@ -78,6 +78,7 @@ from airflow_client.client.model.import_error_collection import ImportErrorColle
 from airflow_client.client.model.import_error_collection_all_of import ImportErrorCollectionAllOf
 from airflow_client.client.model.inline_response200 import InlineResponse200
 from airflow_client.client.model.inline_response2001 import InlineResponse2001
+from airflow_client.client.model.job import Job
 from airflow_client.client.model.list_dag_runs_form import ListDagRunsForm
 from airflow_client.client.model.list_task_instance_form import ListTaskInstanceForm
 from airflow_client.client.model.metadatabase_status import MetadatabaseStatus
@@ -97,6 +98,8 @@ from airflow_client.client.model.role_collection_all_of import RoleCollectionAll
 from airflow_client.client.model.sla_miss import SLAMiss
 from airflow_client.client.model.schedule_interval import ScheduleInterval
 from airflow_client.client.model.scheduler_status import SchedulerStatus
+from airflow_client.client.model.set_dag_run_note import SetDagRunNote
+from airflow_client.client.model.set_task_instance_note import SetTaskInstanceNote
 from airflow_client.client.model.tag import Tag
 from airflow_client.client.model.task import Task
 from airflow_client.client.model.task_collection import TaskCollection
@@ -109,8 +112,10 @@ from airflow_client.client.model.task_instance_reference_collection import TaskI
 from airflow_client.client.model.task_outlet_dataset_reference import TaskOutletDatasetReference
 from airflow_client.client.model.task_state import TaskState
 from airflow_client.client.model.time_delta import TimeDelta
+from airflow_client.client.model.trigger import Trigger
 from airflow_client.client.model.trigger_rule import TriggerRule
 from airflow_client.client.model.update_dag_run_state import UpdateDagRunState
+from airflow_client.client.model.update_task_instance import UpdateTaskInstance
 from airflow_client.client.model.update_task_instances_state import UpdateTaskInstancesState
 from airflow_client.client.model.user import User
 from airflow_client.client.model.user_all_of import UserAllOf

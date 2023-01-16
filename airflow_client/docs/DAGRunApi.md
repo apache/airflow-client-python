@@ -30,6 +30,7 @@ Method | HTTP request | Description
 [**get_dag_runs_batch**](DAGRunApi.md#get_dag_runs_batch) | **POST** /dags/~/dagRuns/list | List DAG runs (batch)
 [**get_upstream_dataset_events**](DAGRunApi.md#get_upstream_dataset_events) | **GET** /dags/{dag_id}/dagRuns/{dag_run_id}/upstreamDatasetEvents | Get dataset events for a DAG run
 [**post_dag_run**](DAGRunApi.md#post_dag_run) | **POST** /dags/{dag_id}/dagRuns | Trigger a new DAG run
+[**set_dag_run_note**](DAGRunApi.md#set_dag_run_note) | **PATCH** /dags/{dag_id}/dagRuns/{dag_run_id}/setNote | Update the DagRun note.
 [**update_dag_run_state**](DAGRunApi.md#update_dag_run_state) | **PATCH** /dags/{dag_id}/dagRuns/{dag_run_id} | Modify a DAG run
 
 
@@ -42,7 +43,6 @@ Clear a DAG run.  *New in version 2.4.0*
 
 ### Example
 
-* Basic Authentication (Basic):
 
 ```python
 import time
@@ -58,19 +58,9 @@ configuration = client.Configuration(
     host = "http://localhost/api/v1"
 )
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = client.Configuration(
-    username = 'YOUR_USERNAME',
-    password = 'YOUR_PASSWORD'
-)
 
 # Enter a context with an instance of the API client
-with client.ApiClient(configuration) as api_client:
+with client.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = dag_run_api.DAGRunApi(api_client)
     dag_id = "dag_id_example" # str | The DAG ID.
@@ -103,7 +93,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 
@@ -130,7 +120,6 @@ Delete a DAG run
 
 ### Example
 
-* Basic Authentication (Basic):
 
 ```python
 import time
@@ -144,19 +133,9 @@ configuration = client.Configuration(
     host = "http://localhost/api/v1"
 )
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = client.Configuration(
-    username = 'YOUR_USERNAME',
-    password = 'YOUR_PASSWORD'
-)
 
 # Enter a context with an instance of the API client
-with client.ApiClient(configuration) as api_client:
+with client.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = dag_run_api.DAGRunApi(api_client)
     dag_id = "dag_id_example" # str | The DAG ID.
@@ -184,7 +163,7 @@ void (empty response body)
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 
@@ -211,7 +190,6 @@ Get a DAG run
 
 ### Example
 
-* Basic Authentication (Basic):
 
 ```python
 import time
@@ -226,19 +204,9 @@ configuration = client.Configuration(
     host = "http://localhost/api/v1"
 )
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = client.Configuration(
-    username = 'YOUR_USERNAME',
-    password = 'YOUR_PASSWORD'
-)
 
 # Enter a context with an instance of the API client
-with client.ApiClient(configuration) as api_client:
+with client.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = dag_run_api.DAGRunApi(api_client)
     dag_id = "dag_id_example" # str | The DAG ID.
@@ -267,7 +235,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 
@@ -295,7 +263,6 @@ This endpoint allows specifying `~` as the dag_id to retrieve DAG runs for all D
 
 ### Example
 
-* Basic Authentication (Basic):
 
 ```python
 import time
@@ -310,19 +277,9 @@ configuration = client.Configuration(
     host = "http://localhost/api/v1"
 )
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = client.Configuration(
-    username = 'YOUR_USERNAME',
-    password = 'YOUR_PASSWORD'
-)
 
 # Enter a context with an instance of the API client
-with client.ApiClient(configuration) as api_client:
+with client.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = dag_run_api.DAGRunApi(api_client)
     dag_id = "dag_id_example" # str | The DAG ID.
@@ -380,7 +337,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 
@@ -406,7 +363,6 @@ This endpoint is a POST to allow filtering across a large number of DAG IDs, whe
 
 ### Example
 
-* Basic Authentication (Basic):
 
 ```python
 import time
@@ -422,19 +378,9 @@ configuration = client.Configuration(
     host = "http://localhost/api/v1"
 )
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = client.Configuration(
-    username = 'YOUR_USERNAME',
-    password = 'YOUR_PASSWORD'
-)
 
 # Enter a context with an instance of the API client
-with client.ApiClient(configuration) as api_client:
+with client.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = dag_run_api.DAGRunApi(api_client)
     list_dag_runs_form = ListDagRunsForm(
@@ -477,7 +423,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 
@@ -505,7 +451,6 @@ Get datasets for a dag run.  *New in version 2.4.0*
 
 ### Example
 
-* Basic Authentication (Basic):
 
 ```python
 import time
@@ -520,19 +465,9 @@ configuration = client.Configuration(
     host = "http://localhost/api/v1"
 )
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = client.Configuration(
-    username = 'YOUR_USERNAME',
-    password = 'YOUR_PASSWORD'
-)
 
 # Enter a context with an instance of the API client
-with client.ApiClient(configuration) as api_client:
+with client.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = dag_run_api.DAGRunApi(api_client)
     dag_id = "dag_id_example" # str | The DAG ID.
@@ -561,7 +496,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 
@@ -587,7 +522,6 @@ Trigger a new DAG run
 
 ### Example
 
-* Basic Authentication (Basic):
 
 ```python
 import time
@@ -602,19 +536,9 @@ configuration = client.Configuration(
     host = "http://localhost/api/v1"
 )
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = client.Configuration(
-    username = 'YOUR_USERNAME',
-    password = 'YOUR_PASSWORD'
-)
 
 # Enter a context with an instance of the API client
-with client.ApiClient(configuration) as api_client:
+with client.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = dag_run_api.DAGRunApi(api_client)
     dag_id = "dag_id_example" # str | The DAG ID.
@@ -624,6 +548,7 @@ with client.ApiClient(configuration) as api_client:
         execution_date=dateutil_parser('1970-01-01T00:00:00.00Z'),
         state=DagState("queued"),
         conf={},
+        note="note_example",
     ) # DAGRun | 
 
     # example passing only required values which don't have defaults set
@@ -649,7 +574,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 
@@ -670,6 +595,85 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **set_dag_run_note**
+> DAGRun set_dag_run_note(dag_id, dag_run_id, set_dag_run_note)
+
+Update the DagRun note.
+
+Update the manual user note of a DagRun.  *New in version 2.5.0* 
+
+### Example
+
+
+```python
+import time
+import airflow_client.client
+from airflow_client.client.api import dag_run_api
+from airflow_client.client.model.set_dag_run_note import SetDagRunNote
+from airflow_client.client.model.dag_run import DAGRun
+from airflow_client.client.model.error import Error
+from pprint import pprint
+# Defining the host is optional and defaults to http://localhost/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = client.Configuration(
+    host = "http://localhost/api/v1"
+)
+
+
+# Enter a context with an instance of the API client
+with client.ApiClient() as api_client:
+    # Create an instance of the API class
+    api_instance = dag_run_api.DAGRunApi(api_client)
+    dag_id = "dag_id_example" # str | The DAG ID.
+    dag_run_id = "dag_run_id_example" # str | The DAG run ID.
+    set_dag_run_note = SetDagRunNote(
+        note="note_example",
+    ) # SetDagRunNote | Parameters of set DagRun note.
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Update the DagRun note.
+        api_response = api_instance.set_dag_run_note(dag_id, dag_run_id, set_dag_run_note)
+        pprint(api_response)
+    except client.ApiException as e:
+        print("Exception when calling DAGRunApi->set_dag_run_note: %s\n" % e)
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **dag_id** | **str**| The DAG ID. |
+ **dag_run_id** | **str**| The DAG run ID. |
+ **set_dag_run_note** | [**SetDagRunNote**](SetDagRunNote.md)| Parameters of set DagRun note. |
+
+### Return type
+
+[**DAGRun**](DAGRun.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success. |  -  |
+**400** | Client specified an invalid argument. |  -  |
+**401** | Request not authenticated due to missing, invalid, authentication info. |  -  |
+**403** | Client does not have sufficient permission. |  -  |
+**404** | A specified resource is not found. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **update_dag_run_state**
 > DAGRun update_dag_run_state(dag_id, dag_run_id, update_dag_run_state)
 
@@ -679,7 +683,6 @@ Modify a DAG run.  *New in version 2.2.0*
 
 ### Example
 
-* Basic Authentication (Basic):
 
 ```python
 import time
@@ -695,19 +698,9 @@ configuration = client.Configuration(
     host = "http://localhost/api/v1"
 )
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = client.Configuration(
-    username = 'YOUR_USERNAME',
-    password = 'YOUR_PASSWORD'
-)
 
 # Enter a context with an instance of the API client
-with client.ApiClient(configuration) as api_client:
+with client.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = dag_run_api.DAGRunApi(api_client)
     dag_id = "dag_id_example" # str | The DAG ID.
@@ -740,7 +733,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+No authorization required
 
 ### HTTP request headers
 

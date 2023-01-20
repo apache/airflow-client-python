@@ -1,3 +1,4 @@
 .rat-excludes
 .gitignore
 airflow_client/.gitignore
+airflow_client/.openapi-generator-ignore

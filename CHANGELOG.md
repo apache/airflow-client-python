@@ -17,6 +17,26 @@
  under the License.
  -->
 
+# v2.5.0
+
+Apache Airflow API version: 2.5.x
+
+### Major changes:
+
+- NA
+
+### Major fixes:
+
+- NA
+
+### New API supported:
+
+- GET /datasets/events | Get dataset events
+- GET /datasets | Get datasets
+- GET /datasets/{id} | Get a dataset
+- POST /dags/{dag_id}/dagRuns/{dag_run_id}/clear | Clear a dagrun endpoint
+- GET /dags/{dag_id}/dagRuns/{dag_run_id}/upstreamDatasetEvents | Get dataset events for a DAG run
+
 # v2.3.0
 
 Apache Airflow API version: 2.3.x

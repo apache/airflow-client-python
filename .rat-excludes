@@ -1,4 +1,6 @@
+# Note: these patterns are applied to single files or directories, not full paths
+# coverage/* will ignore any coverage dir, but airflow/www/static/coverage/* will match nothing
+
 .rat-excludes
 .gitignore
-airflow_client/.gitignore
-airflow_client/.openapi-generator-ignore
+.openapi-generator-ignore

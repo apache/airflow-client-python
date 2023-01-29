@@ -59,7 +59,10 @@ class DatasetApi(object):
         self.get_dataset_endpoint = _Endpoint(
             settings={
                 'response_type': (Dataset,),
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/datasets/{uri}',
                 'operation_id': 'get_dataset',
                 'http_method': 'GET',
@@ -108,7 +111,10 @@ class DatasetApi(object):
         self.get_dataset_events_endpoint = _Endpoint(
             settings={
                 'response_type': (DatasetEventCollection,),
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/datasets/events',
                 'operation_id': 'get_dataset_events',
                 'http_method': 'GET',
@@ -195,7 +201,10 @@ class DatasetApi(object):
         self.get_datasets_endpoint = _Endpoint(
             settings={
                 'response_type': (DatasetCollection,),
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/datasets',
                 'operation_id': 'get_datasets',
                 'http_method': 'GET',
@@ -262,7 +271,10 @@ class DatasetApi(object):
         self.get_upstream_dataset_events_endpoint = _Endpoint(
             settings={
                 'response_type': (DatasetEventCollection,),
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/dags/{dag_id}/dagRuns/{dag_run_id}/upstreamDatasetEvents',
                 'operation_id': 'get_upstream_dataset_events',
                 'http_method': 'GET',

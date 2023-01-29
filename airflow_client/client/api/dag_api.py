@@ -45,8 +45,10 @@ from airflow_client.client.model.dag_collection import DAGCollection
 from airflow_client.client.model.dag_detail import DAGDetail
 from airflow_client.client.model.error import Error
 from airflow_client.client.model.inline_response2001 import InlineResponse2001
+from airflow_client.client.model.set_task_instance_note import SetTaskInstanceNote
 from airflow_client.client.model.task import Task
 from airflow_client.client.model.task_collection import TaskCollection
+from airflow_client.client.model.task_instance import TaskInstance
 from airflow_client.client.model.task_instance_reference_collection import TaskInstanceReferenceCollection
 from airflow_client.client.model.update_task_instances_state import UpdateTaskInstancesState
 
@@ -65,7 +67,10 @@ class DAGApi(object):
         self.delete_dag_endpoint = _Endpoint(
             settings={
                 'response_type': None,
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/dags/{dag_id}',
                 'operation_id': 'delete_dag',
                 'http_method': 'DELETE',
@@ -114,7 +119,10 @@ class DAGApi(object):
         self.get_dag_endpoint = _Endpoint(
             settings={
                 'response_type': (DAG,),
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/dags/{dag_id}',
                 'operation_id': 'get_dag',
                 'http_method': 'GET',
@@ -163,7 +171,10 @@ class DAGApi(object):
         self.get_dag_details_endpoint = _Endpoint(
             settings={
                 'response_type': (DAGDetail,),
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/dags/{dag_id}/details',
                 'operation_id': 'get_dag_details',
                 'http_method': 'GET',
@@ -212,7 +223,10 @@ class DAGApi(object):
         self.get_dag_source_endpoint = _Endpoint(
             settings={
                 'response_type': (InlineResponse2001,),
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/dagSources/{file_token}',
                 'operation_id': 'get_dag_source',
                 'http_method': 'GET',
@@ -262,7 +276,10 @@ class DAGApi(object):
         self.get_dags_endpoint = _Endpoint(
             settings={
                 'response_type': (DAGCollection,),
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/dags',
                 'operation_id': 'get_dags',
                 'http_method': 'GET',
@@ -340,7 +357,10 @@ class DAGApi(object):
         self.get_task_endpoint = _Endpoint(
             settings={
                 'response_type': (Task,),
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/dags/{dag_id}/tasks/{task_id}',
                 'operation_id': 'get_task',
                 'http_method': 'GET',
@@ -395,7 +415,10 @@ class DAGApi(object):
         self.get_tasks_endpoint = _Endpoint(
             settings={
                 'response_type': (TaskCollection,),
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/dags/{dag_id}/tasks',
                 'operation_id': 'get_tasks',
                 'http_method': 'GET',
@@ -449,7 +472,10 @@ class DAGApi(object):
         self.patch_dag_endpoint = _Endpoint(
             settings={
                 'response_type': (DAG,),
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/dags/{dag_id}',
                 'operation_id': 'patch_dag',
                 'http_method': 'PATCH',
@@ -511,7 +537,10 @@ class DAGApi(object):
         self.patch_dags_endpoint = _Endpoint(
             settings={
                 'response_type': (DAGCollection,),
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/dags',
                 'operation_id': 'patch_dags',
                 'http_method': 'PATCH',
@@ -599,7 +628,10 @@ class DAGApi(object):
         self.post_clear_task_instances_endpoint = _Endpoint(
             settings={
                 'response_type': (TaskInstanceReferenceCollection,),
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/dags/{dag_id}/clearTaskInstances',
                 'operation_id': 'post_clear_task_instances',
                 'http_method': 'POST',
@@ -655,7 +687,10 @@ class DAGApi(object):
         self.post_set_task_instances_state_endpoint = _Endpoint(
             settings={
                 'response_type': (TaskInstanceReferenceCollection,),
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/dags/{dag_id}/updateTaskInstancesState',
                 'operation_id': 'post_set_task_instances_state',
                 'http_method': 'POST',
@@ -694,6 +729,154 @@ class DAGApi(object):
                 'location_map': {
                     'dag_id': 'path',
                     'update_task_instances_state': 'body',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json'
+                ],
+                'content_type': [
+                    'application/json'
+                ]
+            },
+            api_client=api_client
+        )
+        self.set_mapped_task_instance_note_endpoint = _Endpoint(
+            settings={
+                'response_type': (TaskInstance,),
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
+                'endpoint_path': '/dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/{map_index}/setNote',
+                'operation_id': 'set_mapped_task_instance_note',
+                'http_method': 'PATCH',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'dag_id',
+                    'dag_run_id',
+                    'task_id',
+                    'map_index',
+                    'set_task_instance_note',
+                ],
+                'required': [
+                    'dag_id',
+                    'dag_run_id',
+                    'task_id',
+                    'map_index',
+                    'set_task_instance_note',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'dag_id':
+                        (str,),
+                    'dag_run_id':
+                        (str,),
+                    'task_id':
+                        (str,),
+                    'map_index':
+                        (int,),
+                    'set_task_instance_note':
+                        (SetTaskInstanceNote,),
+                },
+                'attribute_map': {
+                    'dag_id': 'dag_id',
+                    'dag_run_id': 'dag_run_id',
+                    'task_id': 'task_id',
+                    'map_index': 'map_index',
+                },
+                'location_map': {
+                    'dag_id': 'path',
+                    'dag_run_id': 'path',
+                    'task_id': 'path',
+                    'map_index': 'path',
+                    'set_task_instance_note': 'body',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json'
+                ],
+                'content_type': [
+                    'application/json'
+                ]
+            },
+            api_client=api_client
+        )
+        self.set_task_instance_note_endpoint = _Endpoint(
+            settings={
+                'response_type': (TaskInstance,),
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
+                'endpoint_path': '/dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/setNote',
+                'operation_id': 'set_task_instance_note',
+                'http_method': 'PATCH',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'dag_id',
+                    'dag_run_id',
+                    'task_id',
+                    'set_task_instance_note',
+                ],
+                'required': [
+                    'dag_id',
+                    'dag_run_id',
+                    'task_id',
+                    'set_task_instance_note',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'dag_id':
+                        (str,),
+                    'dag_run_id':
+                        (str,),
+                    'task_id':
+                        (str,),
+                    'set_task_instance_note':
+                        (SetTaskInstanceNote,),
+                },
+                'attribute_map': {
+                    'dag_id': 'dag_id',
+                    'dag_run_id': 'dag_run_id',
+                    'task_id': 'task_id',
+                },
+                'location_map': {
+                    'dag_id': 'path',
+                    'dag_run_id': 'path',
+                    'task_id': 'path',
+                    'set_task_instance_note': 'body',
                 },
                 'collection_format_map': {
                 }
@@ -1459,4 +1642,164 @@ class DAGApi(object):
         kwargs['update_task_instances_state'] = \
             update_task_instances_state
         return self.post_set_task_instances_state_endpoint.call_with_http_info(**kwargs)
+
+    def set_mapped_task_instance_note(
+        self,
+        dag_id,
+        dag_run_id,
+        task_id,
+        map_index,
+        set_task_instance_note,
+        **kwargs
+    ):
+        """Update the TaskInstance note.  # noqa: E501
+
+        Update the manual user note of a mapped Task Instance.  *New in version 2.5.0*   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.set_mapped_task_instance_note(dag_id, dag_run_id, task_id, map_index, set_task_instance_note, async_req=True)
+        >>> result = thread.get()
+
+        Args:
+            dag_id (str): The DAG ID.
+            dag_run_id (str): The DAG run ID.
+            task_id (str): The task ID.
+            map_index (int): The map index.
+            set_task_instance_note (SetTaskInstanceNote): Parameters of set Task Instance note.
+
+        Keyword Args:
+            _return_http_data_only (bool): response data without head status
+                code and headers. Default is True.
+            _preload_content (bool): if False, the urllib3.HTTPResponse object
+                will be returned without reading/decoding response data.
+                Default is True.
+            _request_timeout (int/float/tuple): timeout setting for this request. If
+                one number provided, it will be total request timeout. It can also
+                be a pair (tuple) of (connection, read) timeouts.
+                Default is None.
+            _check_input_type (bool): specifies if type checking
+                should be done one the data sent to the server.
+                Default is True.
+            _check_return_type (bool): specifies if type checking
+                should be done one the data received from the server.
+                Default is True.
+            _host_index (int/None): specifies the index of the server
+                that we want to use.
+                Default is read from the configuration.
+            async_req (bool): execute request asynchronously
+
+        Returns:
+            TaskInstance
+                If the method is called asynchronously, returns the request
+                thread.
+        """
+        kwargs['async_req'] = kwargs.get(
+            'async_req', False
+        )
+        kwargs['_return_http_data_only'] = kwargs.get(
+            '_return_http_data_only', True
+        )
+        kwargs['_preload_content'] = kwargs.get(
+            '_preload_content', True
+        )
+        kwargs['_request_timeout'] = kwargs.get(
+            '_request_timeout', None
+        )
+        kwargs['_check_input_type'] = kwargs.get(
+            '_check_input_type', True
+        )
+        kwargs['_check_return_type'] = kwargs.get(
+            '_check_return_type', True
+        )
+        kwargs['_host_index'] = kwargs.get('_host_index')
+        kwargs['dag_id'] = \
+            dag_id
+        kwargs['dag_run_id'] = \
+            dag_run_id
+        kwargs['task_id'] = \
+            task_id
+        kwargs['map_index'] = \
+            map_index
+        kwargs['set_task_instance_note'] = \
+            set_task_instance_note
+        return self.set_mapped_task_instance_note_endpoint.call_with_http_info(**kwargs)
+
+    def set_task_instance_note(
+        self,
+        dag_id,
+        dag_run_id,
+        task_id,
+        set_task_instance_note,
+        **kwargs
+    ):
+        """Update the TaskInstance note.  # noqa: E501
+
+        Update the manual user note of a non-mapped Task Instance.  *New in version 2.5.0*   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.set_task_instance_note(dag_id, dag_run_id, task_id, set_task_instance_note, async_req=True)
+        >>> result = thread.get()
+
+        Args:
+            dag_id (str): The DAG ID.
+            dag_run_id (str): The DAG run ID.
+            task_id (str): The task ID.
+            set_task_instance_note (SetTaskInstanceNote): Parameters of set Task Instance note.
+
+        Keyword Args:
+            _return_http_data_only (bool): response data without head status
+                code and headers. Default is True.
+            _preload_content (bool): if False, the urllib3.HTTPResponse object
+                will be returned without reading/decoding response data.
+                Default is True.
+            _request_timeout (int/float/tuple): timeout setting for this request. If
+                one number provided, it will be total request timeout. It can also
+                be a pair (tuple) of (connection, read) timeouts.
+                Default is None.
+            _check_input_type (bool): specifies if type checking
+                should be done one the data sent to the server.
+                Default is True.
+            _check_return_type (bool): specifies if type checking
+                should be done one the data received from the server.
+                Default is True.
+            _host_index (int/None): specifies the index of the server
+                that we want to use.
+                Default is read from the configuration.
+            async_req (bool): execute request asynchronously
+
+        Returns:
+            TaskInstance
+                If the method is called asynchronously, returns the request
+                thread.
+        """
+        kwargs['async_req'] = kwargs.get(
+            'async_req', False
+        )
+        kwargs['_return_http_data_only'] = kwargs.get(
+            '_return_http_data_only', True
+        )
+        kwargs['_preload_content'] = kwargs.get(
+            '_preload_content', True
+        )
+        kwargs['_request_timeout'] = kwargs.get(
+            '_request_timeout', None
+        )
+        kwargs['_check_input_type'] = kwargs.get(
+            '_check_input_type', True
+        )
+        kwargs['_check_return_type'] = kwargs.get(
+            '_check_return_type', True
+        )
+        kwargs['_host_index'] = kwargs.get('_host_index')
+        kwargs['dag_id'] = \
+            dag_id
+        kwargs['dag_run_id'] = \
+            dag_run_id
+        kwargs['task_id'] = \
+            task_id
+        kwargs['set_task_instance_note'] = \
+            set_task_instance_note
+        return self.set_task_instance_note_endpoint.call_with_http_info(**kwargs)
 

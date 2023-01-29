@@ -58,7 +58,10 @@ class XComApi(object):
         self.get_xcom_entries_endpoint = _Endpoint(
             settings={
                 'response_type': (XComCollection,),
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/xcomEntries',
                 'operation_id': 'get_xcom_entries',
                 'http_method': 'GET',
@@ -134,7 +137,10 @@ class XComApi(object):
         self.get_xcom_entry_endpoint = _Endpoint(
             settings={
                 'response_type': (XCom,),
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/xcomEntries/{xcom_key}',
                 'operation_id': 'get_xcom_entry',
                 'http_method': 'GET',

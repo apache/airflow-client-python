@@ -58,7 +58,10 @@ class PoolApi(object):
         self.delete_pool_endpoint = _Endpoint(
             settings={
                 'response_type': None,
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/pools/{pool_name}',
                 'operation_id': 'delete_pool',
                 'http_method': 'DELETE',
@@ -107,7 +110,10 @@ class PoolApi(object):
         self.get_pool_endpoint = _Endpoint(
             settings={
                 'response_type': (Pool,),
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/pools/{pool_name}',
                 'operation_id': 'get_pool',
                 'http_method': 'GET',
@@ -156,7 +162,10 @@ class PoolApi(object):
         self.get_pools_endpoint = _Endpoint(
             settings={
                 'response_type': (PoolCollection,),
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/pools',
                 'operation_id': 'get_pools',
                 'http_method': 'GET',
@@ -218,7 +227,10 @@ class PoolApi(object):
         self.patch_pool_endpoint = _Endpoint(
             settings={
                 'response_type': (Pool,),
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/pools/{pool_name}',
                 'operation_id': 'patch_pool',
                 'http_method': 'PATCH',
@@ -280,7 +292,10 @@ class PoolApi(object):
         self.post_pool_endpoint = _Endpoint(
             settings={
                 'response_type': (Pool,),
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/pools',
                 'operation_id': 'post_pool',
                 'http_method': 'POST',

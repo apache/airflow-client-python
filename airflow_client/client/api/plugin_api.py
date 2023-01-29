@@ -57,7 +57,10 @@ class PluginApi(object):
         self.get_plugins_endpoint = _Endpoint(
             settings={
                 'response_type': (PluginCollection,),
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/plugins',
                 'operation_id': 'get_plugins',
                 'http_method': 'GET',

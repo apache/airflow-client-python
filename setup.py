@@ -25,7 +25,7 @@
 
 from setuptools import find_packages, setup  # noqa: H301
 
-VERSION = "2.5.0"
+VERSION = "2.5.1"
 # To install the library, run the following
 #
 # python setup.py install
@@ -41,7 +41,7 @@ REQUIRES = [
 setup(
     version=VERSION,
     keywords=["OpenAPI", "OpenAPI-Generator", "Apache Airflow API (Stable)"],
-    download_url=('https://archive.apache.org/dist/airflow/clients/python/' + VERSION),
+    download_url=("https://archive.apache.org/dist/airflow/clients/python/" + VERSION),
     install_requires=REQUIRES,
-    packages=find_packages(exclude=["test", "tests"])
+    packages=find_packages(exclude=["test", "tests"]),
 )

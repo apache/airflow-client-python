@@ -32,8 +32,6 @@ Method | HTTP request | Description
 [**get_task_instances_batch**](TaskInstanceApi.md#get_task_instances_batch) | **POST** /dags/~/dagRuns/~/taskInstances/list | List task instances (batch)
 [**patch_mapped_task_instance**](TaskInstanceApi.md#patch_mapped_task_instance) | **PATCH** /dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/{map_index} | Updates the state of a mapped task instance
 [**patch_task_instance**](TaskInstanceApi.md#patch_task_instance) | **PATCH** /dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id} | Updates the state of a task instance
-[**set_mapped_task_instance_note**](TaskInstanceApi.md#set_mapped_task_instance_note) | **PATCH** /dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/{map_index}/setNote | Update the TaskInstance note.
-[**set_task_instance_note**](TaskInstanceApi.md#set_task_instance_note) | **PATCH** /dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/setNote | Update the TaskInstance note.
 
 
 # **get_extra_links**
@@ -45,6 +43,7 @@ List extra links for task instance.
 
 ### Example
 
+* Basic Authentication (Basic):
 
 ```python
 import time
@@ -59,9 +58,19 @@ configuration = client.Configuration(
     host = "http://localhost/api/v1"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: Basic
+configuration = client.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
 
 # Enter a context with an instance of the API client
-with client.ApiClient() as api_client:
+with client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = task_instance_api.TaskInstanceApi(api_client)
     dag_id = "dag_id_example" # str | The DAG ID.
@@ -92,7 +101,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
 
 ### HTTP request headers
 
@@ -120,6 +129,7 @@ Get logs for a specific task instance and its try number.
 
 ### Example
 
+* Basic Authentication (Basic):
 
 ```python
 import time
@@ -134,9 +144,19 @@ configuration = client.Configuration(
     host = "http://localhost/api/v1"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: Basic
+configuration = client.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
 
 # Enter a context with an instance of the API client
-with client.ApiClient() as api_client:
+with client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = task_instance_api.TaskInstanceApi(api_client)
     dag_id = "dag_id_example" # str | The DAG ID.
@@ -184,7 +204,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
 
 ### HTTP request headers
 
@@ -213,6 +233,7 @@ Get details of a mapped task instance.  *New in version 2.3.0*
 
 ### Example
 
+* Basic Authentication (Basic):
 
 ```python
 import time
@@ -227,9 +248,19 @@ configuration = client.Configuration(
     host = "http://localhost/api/v1"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: Basic
+configuration = client.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
 
 # Enter a context with an instance of the API client
-with client.ApiClient() as api_client:
+with client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = task_instance_api.TaskInstanceApi(api_client)
     dag_id = "dag_id_example" # str | The DAG ID.
@@ -262,7 +293,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
 
 ### HTTP request headers
 
@@ -290,6 +321,7 @@ Get details of all mapped task instances.  *New in version 2.3.0*
 
 ### Example
 
+* Basic Authentication (Basic):
 
 ```python
 import time
@@ -304,9 +336,19 @@ configuration = client.Configuration(
     host = "http://localhost/api/v1"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: Basic
+configuration = client.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
 
 # Enter a context with an instance of the API client
-with client.ApiClient() as api_client:
+with client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = task_instance_api.TaskInstanceApi(api_client)
     dag_id = "dag_id_example" # str | The DAG ID.
@@ -380,7 +422,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
 
 ### HTTP request headers
 
@@ -406,6 +448,7 @@ Get a task instance
 
 ### Example
 
+* Basic Authentication (Basic):
 
 ```python
 import time
@@ -420,9 +463,19 @@ configuration = client.Configuration(
     host = "http://localhost/api/v1"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: Basic
+configuration = client.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
 
 # Enter a context with an instance of the API client
-with client.ApiClient() as api_client:
+with client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = task_instance_api.TaskInstanceApi(api_client)
     dag_id = "dag_id_example" # str | The DAG ID.
@@ -453,7 +506,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
 
 ### HTTP request headers
 
@@ -481,6 +534,7 @@ This endpoint allows specifying `~` as the dag_id, dag_run_id to retrieve DAG ru
 
 ### Example
 
+* Basic Authentication (Basic):
 
 ```python
 import time
@@ -495,9 +549,19 @@ configuration = client.Configuration(
     host = "http://localhost/api/v1"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: Basic
+configuration = client.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
 
 # Enter a context with an instance of the API client
-with client.ApiClient() as api_client:
+with client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = task_instance_api.TaskInstanceApi(api_client)
     dag_id = "dag_id_example" # str | The DAG ID.
@@ -567,7 +631,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
 
 ### HTTP request headers
 
@@ -594,6 +658,7 @@ List task instances from all DAGs and DAG runs. This endpoint is a POST to allow
 
 ### Example
 
+* Basic Authentication (Basic):
 
 ```python
 import time
@@ -609,9 +674,19 @@ configuration = client.Configuration(
     host = "http://localhost/api/v1"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: Basic
+configuration = client.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
 
 # Enter a context with an instance of the API client
-with client.ApiClient() as api_client:
+with client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = task_instance_api.TaskInstanceApi(api_client)
     list_task_instance_form = ListTaskInstanceForm(
@@ -659,7 +734,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
 
 ### HTTP request headers
 
@@ -687,6 +762,7 @@ Updates the state for single mapped task instance. *New in version 2.5.0*
 
 ### Example
 
+* Basic Authentication (Basic):
 
 ```python
 import time
@@ -702,9 +778,19 @@ configuration = client.Configuration(
     host = "http://localhost/api/v1"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: Basic
+configuration = client.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
 
 # Enter a context with an instance of the API client
-with client.ApiClient() as api_client:
+with client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = task_instance_api.TaskInstanceApi(api_client)
     dag_id = "dag_id_example" # str | The DAG ID.
@@ -751,7 +837,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
 
 ### HTTP request headers
 
@@ -779,6 +865,7 @@ Updates the state for single task instance. *New in version 2.5.0*
 
 ### Example
 
+* Basic Authentication (Basic):
 
 ```python
 import time
@@ -794,9 +881,19 @@ configuration = client.Configuration(
     host = "http://localhost/api/v1"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: Basic
+configuration = client.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
 
 # Enter a context with an instance of the API client
-with client.ApiClient() as api_client:
+with client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = task_instance_api.TaskInstanceApi(api_client)
     dag_id = "dag_id_example" # str | The DAG ID.
@@ -832,7 +929,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
 
 ### HTTP request headers
 
@@ -845,170 +942,6 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success. |  -  |
-**401** | Request not authenticated due to missing, invalid, authentication info. |  -  |
-**403** | Client does not have sufficient permission. |  -  |
-**404** | A specified resource is not found. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **set_mapped_task_instance_note**
-> TaskInstance set_mapped_task_instance_note(dag_id, dag_run_id, task_id, map_index, set_task_instance_note)
-
-Update the TaskInstance note.
-
-Update the manual user note of a mapped Task Instance.  *New in version 2.5.0* 
-
-### Example
-
-
-```python
-import time
-import airflow_client.client
-from airflow_client.client.api import task_instance_api
-from airflow_client.client.model.set_task_instance_note import SetTaskInstanceNote
-from airflow_client.client.model.task_instance import TaskInstance
-from airflow_client.client.model.error import Error
-from pprint import pprint
-# Defining the host is optional and defaults to http://localhost/api/v1
-# See configuration.py for a list of all supported configuration parameters.
-configuration = client.Configuration(
-    host = "http://localhost/api/v1"
-)
-
-
-# Enter a context with an instance of the API client
-with client.ApiClient() as api_client:
-    # Create an instance of the API class
-    api_instance = task_instance_api.TaskInstanceApi(api_client)
-    dag_id = "dag_id_example" # str | The DAG ID.
-    dag_run_id = "dag_run_id_example" # str | The DAG run ID.
-    task_id = "task_id_example" # str | The task ID.
-    map_index = 1 # int | The map index.
-    set_task_instance_note = SetTaskInstanceNote(
-        note="note_example",
-    ) # SetTaskInstanceNote | Parameters of set Task Instance note.
-
-    # example passing only required values which don't have defaults set
-    try:
-        # Update the TaskInstance note.
-        api_response = api_instance.set_mapped_task_instance_note(dag_id, dag_run_id, task_id, map_index, set_task_instance_note)
-        pprint(api_response)
-    except client.ApiException as e:
-        print("Exception when calling TaskInstanceApi->set_mapped_task_instance_note: %s\n" % e)
-```
-
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **dag_id** | **str**| The DAG ID. |
- **dag_run_id** | **str**| The DAG run ID. |
- **task_id** | **str**| The task ID. |
- **map_index** | **int**| The map index. |
- **set_task_instance_note** | [**SetTaskInstanceNote**](SetTaskInstanceNote.md)| Parameters of set Task Instance note. |
-
-### Return type
-
-[**TaskInstance**](TaskInstance.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Success. |  -  |
-**400** | Client specified an invalid argument. |  -  |
-**401** | Request not authenticated due to missing, invalid, authentication info. |  -  |
-**403** | Client does not have sufficient permission. |  -  |
-**404** | A specified resource is not found. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **set_task_instance_note**
-> TaskInstance set_task_instance_note(dag_id, dag_run_id, task_id, set_task_instance_note)
-
-Update the TaskInstance note.
-
-Update the manual user note of a non-mapped Task Instance.  *New in version 2.5.0* 
-
-### Example
-
-
-```python
-import time
-import airflow_client.client
-from airflow_client.client.api import task_instance_api
-from airflow_client.client.model.set_task_instance_note import SetTaskInstanceNote
-from airflow_client.client.model.task_instance import TaskInstance
-from airflow_client.client.model.error import Error
-from pprint import pprint
-# Defining the host is optional and defaults to http://localhost/api/v1
-# See configuration.py for a list of all supported configuration parameters.
-configuration = client.Configuration(
-    host = "http://localhost/api/v1"
-)
-
-
-# Enter a context with an instance of the API client
-with client.ApiClient() as api_client:
-    # Create an instance of the API class
-    api_instance = task_instance_api.TaskInstanceApi(api_client)
-    dag_id = "dag_id_example" # str | The DAG ID.
-    dag_run_id = "dag_run_id_example" # str | The DAG run ID.
-    task_id = "task_id_example" # str | The task ID.
-    set_task_instance_note = SetTaskInstanceNote(
-        note="note_example",
-    ) # SetTaskInstanceNote | Parameters of set Task Instance note.
-
-    # example passing only required values which don't have defaults set
-    try:
-        # Update the TaskInstance note.
-        api_response = api_instance.set_task_instance_note(dag_id, dag_run_id, task_id, set_task_instance_note)
-        pprint(api_response)
-    except client.ApiException as e:
-        print("Exception when calling TaskInstanceApi->set_task_instance_note: %s\n" % e)
-```
-
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **dag_id** | **str**| The DAG ID. |
- **dag_run_id** | **str**| The DAG run ID. |
- **task_id** | **str**| The task ID. |
- **set_task_instance_note** | [**SetTaskInstanceNote**](SetTaskInstanceNote.md)| Parameters of set Task Instance note. |
-
-### Return type
-
-[**TaskInstance**](TaskInstance.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Success. |  -  |
-**400** | Client specified an invalid argument. |  -  |
 **401** | Request not authenticated due to missing, invalid, authentication info. |  -  |
 **403** | Client does not have sufficient permission. |  -  |
 **404** | A specified resource is not found. |  -  |

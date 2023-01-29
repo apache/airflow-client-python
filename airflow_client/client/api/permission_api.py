@@ -57,7 +57,10 @@ class PermissionApi(object):
         self.get_permissions_endpoint = _Endpoint(
             settings={
                 'response_type': (ActionCollection,),
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/permissions',
                 'operation_id': 'get_permissions',
                 'http_method': 'GET',

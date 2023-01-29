@@ -63,7 +63,10 @@ class DAGRunApi(object):
         self.clear_dag_run_endpoint = _Endpoint(
             settings={
                 'response_type': (DAGRun,),
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/dags/{dag_id}/dagRuns/{dag_run_id}/clear',
                 'operation_id': 'clear_dag_run',
                 'http_method': 'POST',
@@ -125,7 +128,10 @@ class DAGRunApi(object):
         self.delete_dag_run_endpoint = _Endpoint(
             settings={
                 'response_type': None,
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/dags/{dag_id}/dagRuns/{dag_run_id}',
                 'operation_id': 'delete_dag_run',
                 'http_method': 'DELETE',
@@ -180,7 +186,10 @@ class DAGRunApi(object):
         self.get_dag_run_endpoint = _Endpoint(
             settings={
                 'response_type': (DAGRun,),
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/dags/{dag_id}/dagRuns/{dag_run_id}',
                 'operation_id': 'get_dag_run',
                 'http_method': 'GET',
@@ -235,7 +244,10 @@ class DAGRunApi(object):
         self.get_dag_runs_endpoint = _Endpoint(
             settings={
                 'response_type': (DAGRunCollection,),
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/dags/{dag_id}/dagRuns',
                 'operation_id': 'get_dag_runs',
                 'http_method': 'GET',
@@ -340,7 +352,10 @@ class DAGRunApi(object):
         self.get_dag_runs_batch_endpoint = _Endpoint(
             settings={
                 'response_type': (DAGRunCollection,),
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/dags/~/dagRuns/list',
                 'operation_id': 'get_dag_runs_batch',
                 'http_method': 'POST',
@@ -390,7 +405,10 @@ class DAGRunApi(object):
         self.get_upstream_dataset_events_endpoint = _Endpoint(
             settings={
                 'response_type': (DatasetEventCollection,),
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/dags/{dag_id}/dagRuns/{dag_run_id}/upstreamDatasetEvents',
                 'operation_id': 'get_upstream_dataset_events',
                 'http_method': 'GET',
@@ -445,7 +463,10 @@ class DAGRunApi(object):
         self.post_dag_run_endpoint = _Endpoint(
             settings={
                 'response_type': (DAGRun,),
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/dags/{dag_id}/dagRuns',
                 'operation_id': 'post_dag_run',
                 'http_method': 'POST',
@@ -501,7 +522,10 @@ class DAGRunApi(object):
         self.set_dag_run_note_endpoint = _Endpoint(
             settings={
                 'response_type': (DAGRun,),
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/dags/{dag_id}/dagRuns/{dag_run_id}/setNote',
                 'operation_id': 'set_dag_run_note',
                 'http_method': 'PATCH',
@@ -563,7 +587,10 @@ class DAGRunApi(object):
         self.update_dag_run_state_endpoint = _Endpoint(
             settings={
                 'response_type': (DAGRun,),
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/dags/{dag_id}/dagRuns/{dag_run_id}',
                 'operation_id': 'update_dag_run_state',
                 'http_method': 'PATCH',

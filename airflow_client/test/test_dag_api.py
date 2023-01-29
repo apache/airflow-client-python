@@ -118,6 +118,20 @@ class TestDAGApi(unittest.TestCase):
         """
         pass
 
+    def test_set_mapped_task_instance_note(self):
+        """Test case for set_mapped_task_instance_note
+
+        Update the TaskInstance note.  # noqa: E501
+        """
+        pass
+
+    def test_set_task_instance_note(self):
+        """Test case for set_task_instance_note
+
+        Update the TaskInstance note.  # noqa: E501
+        """
+        pass
+
 
 if __name__ == '__main__':
     unittest.main()

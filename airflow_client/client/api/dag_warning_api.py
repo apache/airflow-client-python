@@ -57,7 +57,10 @@ class DagWarningApi(object):
         self.get_dag_warnings_endpoint = _Endpoint(
             settings={
                 'response_type': (DagWarningCollection,),
-                'auth': [],
+                'auth': [
+                    'Basic',
+                    'Kerberos'
+                ],
                 'endpoint_path': '/dagWarnings',
                 'operation_id': 'get_dag_warnings',
                 'http_method': 'GET',

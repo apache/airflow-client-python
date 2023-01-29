@@ -17,6 +17,22 @@
  under the License.
  -->
 
+# v2.5.1
+
+Apache Airflow API version: 2.5.1
+
+### Major changes:
+
+- NA
+
+### Major fixes:
+
+- Fix authentication issues by regenerating the client with proper security schemas
+
+### New API supported:
+
+- NA
+
 # v2.5.0
 
 Apache Airflow API version: 2.5.x

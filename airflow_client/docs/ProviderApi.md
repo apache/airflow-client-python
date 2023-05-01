@@ -19,7 +19,7 @@
 
 # Apache Airflow Python Client.ProviderApi
 
-All URIs are relative to *http://localhost/api/v1*
+All URIs are relative to */api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -41,12 +41,14 @@ Get a list of providers.  *New in version 2.1.0*
 import time
 import airflow_client.client
 from airflow_client.client.api import provider_api
+from airflow_client.client.model.collection_info import CollectionInfo
+from airflow_client.client.model.provider_collection import ProviderCollection
 from airflow_client.client.model.error import Error
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost/api/v1
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = client.Configuration(
-    host = "http://localhost/api/v1"
+    host = "/api/v1"
 )
 
 # The client must configure the authentication and authorization parameters

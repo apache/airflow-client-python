@@ -17,6 +17,26 @@
  under the License.
  -->
 
+ # v2.6.0
+ Apache Airflow API version: 2.6.0
+
+ ### Major changes:
+
+ - NA
+
+ ### Major Fixes
+
+ - Move read only property in order to fix Dagrun API docs ([#30149](https://github.com/apache/airflow/pull/30149))
+ - Fix clear dag run openapi spec responses by adding additional return type ([#29600](https://github.com/apache/airflow/pull/29600))
+ - Fix Rest API update user output ([#29409](https://github.com/apache/airflow/pull/29409))
+ - Add a param for get_dags endpoint to list only unpaused dags
+([#28713](https://github.com/apache/airflow/pull/28713))
+ - Expose updated_at filter for dag run and task instance endpoints ([#28636](https://github.com/apache/airflow/pull/28636))
+
+ ### NEW API supported
+
+ - NA
+
 # v2.5.1
 
 Apache Airflow API version: 2.5.1

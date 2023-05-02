@@ -19,7 +19,7 @@
 
 # Apache Airflow Python Client.DAGApi
 
-All URIs are relative to *http://localhost/api/v1*
+All URIs are relative to */api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -34,8 +34,6 @@ Method | HTTP request | Description
 [**patch_dags**](DAGApi.md#patch_dags) | **PATCH** /dags | Update DAGs
 [**post_clear_task_instances**](DAGApi.md#post_clear_task_instances) | **POST** /dags/{dag_id}/clearTaskInstances | Clear a set of task instances
 [**post_set_task_instances_state**](DAGApi.md#post_set_task_instances_state) | **POST** /dags/{dag_id}/updateTaskInstancesState | Set a state of task instances
-[**set_mapped_task_instance_note**](DAGApi.md#set_mapped_task_instance_note) | **PATCH** /dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/{map_index}/setNote | Update the TaskInstance note.
-[**set_task_instance_note**](DAGApi.md#set_task_instance_note) | **PATCH** /dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/setNote | Update the TaskInstance note.
 
 
 # **delete_dag**
@@ -55,10 +53,10 @@ import airflow_client.client
 from airflow_client.client.api import dag_api
 from airflow_client.client.model.error import Error
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost/api/v1
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = client.Configuration(
-    host = "http://localhost/api/v1"
+    host = "/api/v1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -138,10 +136,10 @@ from airflow_client.client.api import dag_api
 from airflow_client.client.model.dag import DAG
 from airflow_client.client.model.error import Error
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost/api/v1
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = client.Configuration(
-    host = "http://localhost/api/v1"
+    host = "/api/v1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -220,10 +218,10 @@ from airflow_client.client.api import dag_api
 from airflow_client.client.model.dag_detail import DAGDetail
 from airflow_client.client.model.error import Error
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost/api/v1
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = client.Configuration(
-    host = "http://localhost/api/v1"
+    host = "/api/v1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -302,10 +300,10 @@ from airflow_client.client.api import dag_api
 from airflow_client.client.model.inline_response2001 import InlineResponse2001
 from airflow_client.client.model.error import Error
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost/api/v1
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = client.Configuration(
-    host = "http://localhost/api/v1"
+    host = "/api/v1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -385,10 +383,10 @@ from airflow_client.client.api import dag_api
 from airflow_client.client.model.dag_collection import DAGCollection
 from airflow_client.client.model.error import Error
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost/api/v1
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = client.Configuration(
-    host = "http://localhost/api/v1"
+    host = "/api/v1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -413,13 +411,14 @@ with client.ApiClient(configuration) as api_client:
         "tags_example",
     ] # [str] | List of tags to filter results.  *New in version 2.2.0*  (optional)
     only_active = True # bool | Only filter active DAGs.  *New in version 2.1.1*  (optional) if omitted the server will use the default value of True
+    paused = True # bool | Only filter paused/unpaused DAGs. If absent or null, it returns paused and unpaused DAGs.  *New in version 2.6.0*  (optional)
     dag_id_pattern = "dag_id_pattern_example" # str | If set, only return DAGs with dag_ids matching this pattern.  (optional)
 
     # example passing only required values which don't have defaults set
     # and optional values
     try:
         # List DAGs
-        api_response = api_instance.get_dags(limit=limit, offset=offset, order_by=order_by, tags=tags, only_active=only_active, dag_id_pattern=dag_id_pattern)
+        api_response = api_instance.get_dags(limit=limit, offset=offset, order_by=order_by, tags=tags, only_active=only_active, paused=paused, dag_id_pattern=dag_id_pattern)
         pprint(api_response)
     except client.ApiException as e:
         print("Exception when calling DAGApi->get_dags: %s\n" % e)
@@ -435,6 +434,7 @@ Name | Type | Description  | Notes
  **order_by** | **str**| The name of the field to order the results by. Prefix a field name with &#x60;-&#x60; to reverse the sort order.  *New in version 2.1.0*  | [optional]
  **tags** | **[str]**| List of tags to filter results.  *New in version 2.2.0*  | [optional]
  **only_active** | **bool**| Only filter active DAGs.  *New in version 2.1.1*  | [optional] if omitted the server will use the default value of True
+ **paused** | **bool**| Only filter paused/unpaused DAGs. If absent or null, it returns paused and unpaused DAGs.  *New in version 2.6.0*  | [optional]
  **dag_id_pattern** | **str**| If set, only return DAGs with dag_ids matching this pattern.  | [optional]
 
 ### Return type
@@ -476,10 +476,10 @@ from airflow_client.client.api import dag_api
 from airflow_client.client.model.task import Task
 from airflow_client.client.model.error import Error
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost/api/v1
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = client.Configuration(
-    host = "http://localhost/api/v1"
+    host = "/api/v1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -558,10 +558,10 @@ from airflow_client.client.api import dag_api
 from airflow_client.client.model.error import Error
 from airflow_client.client.model.task_collection import TaskCollection
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost/api/v1
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = client.Configuration(
-    host = "http://localhost/api/v1"
+    host = "/api/v1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -649,10 +649,10 @@ from airflow_client.client.api import dag_api
 from airflow_client.client.model.dag import DAG
 from airflow_client.client.model.error import Error
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost/api/v1
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = client.Configuration(
-    host = "http://localhost/api/v1"
+    host = "/api/v1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -749,10 +749,10 @@ from airflow_client.client.model.dag_collection import DAGCollection
 from airflow_client.client.model.dag import DAG
 from airflow_client.client.model.error import Error
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost/api/v1
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = client.Configuration(
-    host = "http://localhost/api/v1"
+    host = "/api/v1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -859,10 +859,10 @@ from airflow_client.client.model.error import Error
 from airflow_client.client.model.task_instance_reference_collection import TaskInstanceReferenceCollection
 from airflow_client.client.model.clear_task_instances import ClearTaskInstances
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost/api/v1
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = client.Configuration(
-    host = "http://localhost/api/v1"
+    host = "/api/v1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -961,10 +961,10 @@ from airflow_client.client.model.update_task_instances_state import UpdateTaskIn
 from airflow_client.client.model.error import Error
 from airflow_client.client.model.task_instance_reference_collection import TaskInstanceReferenceCollection
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost/api/v1
+# Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
 configuration = client.Configuration(
-    host = "http://localhost/api/v1"
+    host = "/api/v1"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1031,192 +1031,6 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success. |  -  |
-**401** | Request not authenticated due to missing, invalid, authentication info. |  -  |
-**403** | Client does not have sufficient permission. |  -  |
-**404** | A specified resource is not found. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **set_mapped_task_instance_note**
-> TaskInstance set_mapped_task_instance_note(dag_id, dag_run_id, task_id, map_index, set_task_instance_note)
-
-Update the TaskInstance note.
-
-Update the manual user note of a mapped Task Instance.  *New in version 2.5.0* 
-
-### Example
-
-* Basic Authentication (Basic):
-
-```python
-import time
-import airflow_client.client
-from airflow_client.client.api import dag_api
-from airflow_client.client.model.set_task_instance_note import SetTaskInstanceNote
-from airflow_client.client.model.task_instance import TaskInstance
-from airflow_client.client.model.error import Error
-from pprint import pprint
-# Defining the host is optional and defaults to http://localhost/api/v1
-# See configuration.py for a list of all supported configuration parameters.
-configuration = client.Configuration(
-    host = "http://localhost/api/v1"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = client.Configuration(
-    username = 'YOUR_USERNAME',
-    password = 'YOUR_PASSWORD'
-)
-
-# Enter a context with an instance of the API client
-with client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = dag_api.DAGApi(api_client)
-    dag_id = "dag_id_example" # str | The DAG ID.
-    dag_run_id = "dag_run_id_example" # str | The DAG run ID.
-    task_id = "task_id_example" # str | The task ID.
-    map_index = 1 # int | The map index.
-    set_task_instance_note = SetTaskInstanceNote(
-        note="note_example",
-    ) # SetTaskInstanceNote | Parameters of set Task Instance note.
-
-    # example passing only required values which don't have defaults set
-    try:
-        # Update the TaskInstance note.
-        api_response = api_instance.set_mapped_task_instance_note(dag_id, dag_run_id, task_id, map_index, set_task_instance_note)
-        pprint(api_response)
-    except client.ApiException as e:
-        print("Exception when calling DAGApi->set_mapped_task_instance_note: %s\n" % e)
-```
-
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **dag_id** | **str**| The DAG ID. |
- **dag_run_id** | **str**| The DAG run ID. |
- **task_id** | **str**| The task ID. |
- **map_index** | **int**| The map index. |
- **set_task_instance_note** | [**SetTaskInstanceNote**](SetTaskInstanceNote.md)| Parameters of set Task Instance note. |
-
-### Return type
-
-[**TaskInstance**](TaskInstance.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Success. |  -  |
-**400** | Client specified an invalid argument. |  -  |
-**401** | Request not authenticated due to missing, invalid, authentication info. |  -  |
-**403** | Client does not have sufficient permission. |  -  |
-**404** | A specified resource is not found. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **set_task_instance_note**
-> TaskInstance set_task_instance_note(dag_id, dag_run_id, task_id, set_task_instance_note)
-
-Update the TaskInstance note.
-
-Update the manual user note of a non-mapped Task Instance.  *New in version 2.5.0* 
-
-### Example
-
-* Basic Authentication (Basic):
-
-```python
-import time
-import airflow_client.client
-from airflow_client.client.api import dag_api
-from airflow_client.client.model.set_task_instance_note import SetTaskInstanceNote
-from airflow_client.client.model.task_instance import TaskInstance
-from airflow_client.client.model.error import Error
-from pprint import pprint
-# Defining the host is optional and defaults to http://localhost/api/v1
-# See configuration.py for a list of all supported configuration parameters.
-configuration = client.Configuration(
-    host = "http://localhost/api/v1"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: Basic
-configuration = client.Configuration(
-    username = 'YOUR_USERNAME',
-    password = 'YOUR_PASSWORD'
-)
-
-# Enter a context with an instance of the API client
-with client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = dag_api.DAGApi(api_client)
-    dag_id = "dag_id_example" # str | The DAG ID.
-    dag_run_id = "dag_run_id_example" # str | The DAG run ID.
-    task_id = "task_id_example" # str | The task ID.
-    set_task_instance_note = SetTaskInstanceNote(
-        note="note_example",
-    ) # SetTaskInstanceNote | Parameters of set Task Instance note.
-
-    # example passing only required values which don't have defaults set
-    try:
-        # Update the TaskInstance note.
-        api_response = api_instance.set_task_instance_note(dag_id, dag_run_id, task_id, set_task_instance_note)
-        pprint(api_response)
-    except client.ApiException as e:
-        print("Exception when calling DAGApi->set_task_instance_note: %s\n" % e)
-```
-
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **dag_id** | **str**| The DAG ID. |
- **dag_run_id** | **str**| The DAG run ID. |
- **task_id** | **str**| The task ID. |
- **set_task_instance_note** | [**SetTaskInstanceNote**](SetTaskInstanceNote.md)| Parameters of set Task Instance note. |
-
-### Return type
-
-[**TaskInstance**](TaskInstance.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Success. |  -  |
-**400** | Client specified an invalid argument. |  -  |
 **401** | Request not authenticated due to missing, invalid, authentication info. |  -  |
 **403** | Client does not have sufficient permission. |  -  |
 **404** | A specified resource is not found. |  -  |

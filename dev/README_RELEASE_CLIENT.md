@@ -52,7 +52,7 @@ If your deployment of Airflow uses any different authentication mechanism than t
 ```bash
 
 # bump up the version in python.sh & run the following command
-${AIRFLOW_REPO_ROOT}/clients/gen/python.sh airflow/api_connexion/openapi/v1.yaml ${CLIENT_REPO_ROOT}/airflow-client-python/airflow_client
+${AIRFLOW_REPO_ROOT}/clients/gen/python.sh airflow/api_connexion/openapi/v1.yaml ${CLIENT_REPO_ROOT}/airflow_client
 
 cd ${CLIENT_REPO_ROOT}
 ```
@@ -63,7 +63,8 @@ cd ${CLIENT_REPO_ROOT}
   which this release is based on:
 
       ```shell script
-      git log 2.3.0..2.5.0 --pretty=oneline
+      # Run this command in Airflow Repo
+      git log 2.3.0..2.5.0 --pretty=oneline -- airflow/api_connexion/openapi/v1.yaml
       ```
 
 - Update CHANGELOG.md with the details.
@@ -97,7 +98,7 @@ of this the version in the built artifacts that will become the official Apache 
 - Tag your release
 
     ```shell script
-    git tag -s ${VERSION}
+    git tag -s ${VERSION} -m "Airflow Python Client {VERSION}"
     ```
 
 - Clean the checkout: the sdist step below will
@@ -118,6 +119,7 @@ of this the version in the built artifacts that will become the official Apache 
   in the file produced.
 
     ```shell script
+    pip install wheel
     python setup.py sdist bdist_wheel
     ```
 

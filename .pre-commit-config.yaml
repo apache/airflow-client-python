@@ -21,8 +21,14 @@ default_language_version:
   python: python3
 minimum_pre_commit_version: "1.20.0"
 repos:
+  - repo: meta
+    hooks:
+      - id: identity
+        name: Print input to the static check hooks for troubleshooting
+      - id: check-hooks-apply
+        name: Check if all hooks apply to the repository
   - repo: https://github.com/Lucas-C/pre-commit-hooks
-    rev: v1.1.9
+    rev: v1.5.1
     hooks:
       - id: insert-license
         name: Add license for all md files
@@ -67,3 +73,12 @@ repos:
           - --fuzzy-match-generates-todo
         files: >
           \.properties$|\.cfg$|\.conf$|\.ini$|\.txt$$
+  - repo: local
+    hooks:
+      - id: update-example-in-readme
+        name: Update example python script in README.md
+        entry: ./dev/insert_readme_example.py
+        language: python
+        files: ^dev/test_python_client.py$|^README.md$
+        pass_filenames: false
+        require_serial: true

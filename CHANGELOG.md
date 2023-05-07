@@ -18,11 +18,14 @@
  -->
 
  # v2.6.0
- Apache Airflow API version: 2.6.0
+ 
+Apache Airflow API version: 2.6.0
 
  ### Major changes:
 
- - NA
+ - Minimum Python version is 3.7
+ - DAGRun dag_id parameter is properly validated as read-only and setting it might result in an error:
+   "`dag_id` is a read-only attribute" This might break some workflows that used examples from the documentation. 
 
  ### Major Fixes
 

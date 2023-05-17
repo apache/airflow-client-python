@@ -226,7 +226,7 @@ Body:
 cat <<EOF
 Hey fellow Airflowers,
 
-I have cut the first release candidate for the Airflow Python Client ${VERSION}.
+I have cut the release candidate for the Airflow Python Client ${VERSION}.
 The client consists of APIs corresponding to REST APIs available in
 *Apache Airflow ${AIRFLOW_VERSION}*. This email is calling for a vote on
 the release, which will last for 72 hours. Consider this my (binding) +1.

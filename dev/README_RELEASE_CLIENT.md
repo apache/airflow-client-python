@@ -110,7 +110,8 @@ of this the version in the built artifacts that will become the official Apache 
 - Tarball the repo
 
     ```shell script
-    git archive --format=tar.gz ${VERSION} --prefix=apache-airflow-client-${VERSION_WITHOUT_RC}/ -o apache-airflow-client-${VERSION_WITHOUT_RC}-source.tar.gz
+    mkdir dist
+    git archive --format=tar.gz ${VERSION} --prefix=apache-airflow-client-${VERSION_WITHOUT_RC}/ -o dist/apache-airflow-client-${VERSION_WITHOUT_RC}-source.tar.gz
     ```
 
 - Generate sdist
@@ -231,10 +232,10 @@ The client consists of APIs corresponding to REST APIs available in
 the release, which will last for 72 hours. Consider this my (binding) +1.
 
 Airflow Client ${VERSION} is available at:
-https://dist.apache.org/repos/dist/dev/airflow/clients/python/${VERSION}/
+https://dist.apache.org/repos/dist/dev/airflow/clients/python/$VERSION/
 
 Or also available at PyPI:
-https://pypi.org/project/apache-airflow-client/${VERSION}/
+https://pypi.org/project/apache-airflow-client/$VERSION/
 
 *apache-airflow-client-${VERSION}-source.tar.gz* is a source release that comes with
 INSTALL instructions.

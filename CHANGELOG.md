@@ -17,6 +17,21 @@
  under the License.
  -->
 
+ # v2.6.1
+ 
+Apache Airflow API version: 2.6.1
+
+ ### Major changes:
+- NA 
+
+ ### Major Fixes
+
+ - Fix Pool schema OpenAPI spec ([#30973](https://github.com/apache/airflow/pull/30973))
+
+ ### NEW API supported
+
+ - NA
+
  # v2.6.0
  
 Apache Airflow API version: 2.6.0

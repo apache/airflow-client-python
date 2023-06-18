@@ -113,6 +113,7 @@ client/model/task_state.py
 client/model/time_delta.py
 client/model/trigger.py
 client/model/trigger_rule.py
+client/model/triggerer_status.py
 client/model/update_dag_run_state.py
 client/model/update_task_instance.py
 client/model/update_task_instances_state.py
@@ -240,6 +241,7 @@ docs/TaskState.md
 docs/TimeDelta.md
 docs/Trigger.md
 docs/TriggerRule.md
+docs/TriggererStatus.md
 docs/UpdateDagRunState.md
 docs/UpdateTaskInstance.md
 docs/UpdateTaskInstancesState.md
@@ -368,6 +370,7 @@ test/test_task_state.py
 test/test_time_delta.py
 test/test_trigger.py
 test/test_trigger_rule.py
+test/test_triggerer_status.py
 test/test_update_dag_run_state.py
 test/test_update_task_instance.py
 test/test_update_task_instances_state.py

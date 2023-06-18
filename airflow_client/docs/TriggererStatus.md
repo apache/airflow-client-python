@@ -17,16 +17,15 @@
  under the License.
  -->
 
-# HealthInfo
+# TriggererStatus
 
-Instance status information.
+The status and the latest triggerer heartbeat.  *New in version 2.6.2* 
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**metadatabase** | [**MetadatabaseStatus**](MetadatabaseStatus.md) |  | [optional] 
-**scheduler** | [**SchedulerStatus**](SchedulerStatus.md) |  | [optional] 
-**triggerer** | [**TriggererStatus**](TriggererStatus.md) |  | [optional] 
+**status** | [**HealthStatus**](HealthStatus.md) |  | [optional] 
+**latest_triggerer_heartbeat** | **str, none_type** | The time the triggerer last did a heartbeat. | [optional] [readonly] 
 **any string name** | **bool, date, datetime, dict, float, int, list, str, none_type** | any string name can be used but the value must be the correct type | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

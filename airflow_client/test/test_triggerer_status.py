@@ -30,11 +30,13 @@ import sys
 import unittest
 
 import airflow_client.client
-from airflow_client.client.model.trigger import Trigger
+from airflow_client.client.model.health_status import HealthStatus
+globals()['HealthStatus'] = HealthStatus
+from airflow_client.client.model.triggerer_status import TriggererStatus
 
 
-class TestTrigger(unittest.TestCase):
-    """Trigger unit test stubs"""
+class TestTriggererStatus(unittest.TestCase):
+    """TriggererStatus unit test stubs"""
 
     def setUp(self):
         pass
@@ -42,10 +44,10 @@ class TestTrigger(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def testTrigger(self):
-        """Test Trigger"""
+    def testTriggererStatus(self):
+        """Test TriggererStatus"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = Trigger()  # noqa: E501
+        # model = TriggererStatus()  # noqa: E501
         pass
 
 

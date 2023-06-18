@@ -32,7 +32,7 @@ Method | HTTP request | Description
 
 Get instance status
 
-Get the status of Airflow's metadatabase and scheduler. It includes info about metadatabase and last heartbeat of scheduler. 
+Get the status of Airflow's metadatabase, triggerer and scheduler. It includes info about metadatabase and last heartbeat of scheduler and triggerer. 
 
 ### Example
 

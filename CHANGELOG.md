@@ -17,32 +17,48 @@
  under the License.
  -->
 
- # v2.6.1
- 
-Apache Airflow API version: 2.6.1
+# v2.6.2
 
- ### Major changes:
-- NA 
+Apache Airflow API version: 2.6.2
 
- ### Major Fixes
+### Major changes:
 
- - Fix Pool schema OpenAPI spec ([#30973](https://github.com/apache/airflow/pull/30973))
+ - Add TriggererStatus to OpenAPI spec ([#31579](https://github.com/apache/airflow/pull/31579))
 
- ### NEW API supported
+### Major Fixes
+
+ - Fixing broken links in openapi/v1.yaml ([#31619](https://github.com/apache/airflow/pull/31619))
+
+### NEW API supported
 
  - NA
 
- # v2.6.0
- 
+# v2.6.1
+
+Apache Airflow API version: 2.6.1
+
+### Major changes:
+ - NA
+
+### Major Fixes
+
+ - Fix Pool schema OpenAPI spec ([#30973](https://github.com/apache/airflow/pull/30973))
+
+### NEW API supported
+
+ - NA
+
+# v2.6.0
+
 Apache Airflow API version: 2.6.0
 
- ### Major changes:
+### Major changes:
 
  - Minimum Python version is 3.7
  - DAGRun dag_id parameter is properly validated as read-only and setting it might result in an error:
    "`dag_id` is a read-only attribute" This might break some workflows that used examples from the documentation. 
 
- ### Major Fixes
+### Major Fixes
 
  - Move read only property in order to fix Dagrun API docs ([#30149](https://github.com/apache/airflow/pull/30149))
  - Fix clear dag run openapi spec responses by adding additional return type ([#29600](https://github.com/apache/airflow/pull/29600))
@@ -51,7 +67,7 @@ Apache Airflow API version: 2.6.0
 ([#28713](https://github.com/apache/airflow/pull/28713))
  - Expose updated_at filter for dag run and task instance endpoints ([#28636](https://github.com/apache/airflow/pull/28636))
 
- ### NEW API supported
+### NEW API supported
 
  - NA
 
@@ -155,3 +171,4 @@ Apache Airflow API version: 2.1.x
 Apache Airflow API version: 2.0.x
 
 Initial version of the Python client.
+

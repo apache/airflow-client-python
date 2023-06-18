@@ -25,7 +25,7 @@
 
 from setuptools import find_packages, setup  # noqa: H301
 
-VERSION = "2.6.1"
+VERSION = "2.6.2"
 # To install the library, run the following
 #
 # python setup.py install

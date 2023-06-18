@@ -19,7 +19,7 @@
 
 # DAGDetail
 
-DAG details.  For details see: [airflow.models.DAG](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/index.html#airflow.models.DAG) 
+DAG details.  For details see: [airflow.models.dag.DAG](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/dag/index.html#airflow.models.dag.DAG) 
 
 ## Properties
 Name | Type | Description | Notes

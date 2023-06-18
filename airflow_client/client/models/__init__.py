@@ -114,6 +114,7 @@ from airflow_client.client.model.task_state import TaskState
 from airflow_client.client.model.time_delta import TimeDelta
 from airflow_client.client.model.trigger import Trigger
 from airflow_client.client.model.trigger_rule import TriggerRule
+from airflow_client.client.model.triggerer_status import TriggererStatus
 from airflow_client.client.model.update_dag_run_state import UpdateDagRunState
 from airflow_client.client.model.update_task_instance import UpdateTaskInstance
 from airflow_client.client.model.update_task_instances_state import UpdateTaskInstancesState

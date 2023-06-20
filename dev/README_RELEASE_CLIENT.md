@@ -26,6 +26,8 @@ The Python client is generated using Airflow's [openapi spec](https://github.com
 To update the client for new APIs do the following steps:
 
 ```bash
+# set the version of the client
+export VERSION=2.0.0rc1
 # clone this repo
 git clone git@github.com:apache/airflow-client-python.git
 cd airflow-client-python
@@ -68,7 +70,17 @@ cd ${CLIENT_REPO_ROOT}
       ```
 
 - Update CHANGELOG.md with the details.
-- Raise a PR in airflow-client-python
+- Commit the Changes with the message "Add Client Version ${VERSION}":
+  ```shell script
+  git add .
+  git commit -m "Add Client Version ${VERSION}"
+  ```
+- Cherry-pick this commit: https://github.com/apache/airflow-client-python/commit/ddd6fc0545a8066f474c765e1644a5202eebd256
+  ```shell script
+    git cherry-pick ddd6fc0545a8066f474c765e1644a5202eebd256 -x
+  ```
+  #TODO: Remove the cherry-pick instruction above when we upgrade to new client generator
+- Raise a PR in airflow-client-python with the above changes
 - Merge the above PR when approved before proceeding
 
 # Prepare the Apache Airflow Python Client Package RC

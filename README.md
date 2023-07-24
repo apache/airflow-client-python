@@ -160,5 +160,5 @@ with airflow_client.client.ApiClient(configuration) as api_client:
         print ('\n[green]Everything went well')
 ```
 
-See [README](https://github.com/apache/airflow-client-python/blob/main/README.md#documentation-for-api-endpoints) 
+See [README](https://github.com/apache/airflow-client-python/blob/main/airflow_client/README.md#documentation-for-api-endpoints) 
 for full client API documentation.

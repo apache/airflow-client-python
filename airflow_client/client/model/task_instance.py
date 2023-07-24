@@ -134,8 +134,8 @@ class TaskInstance(ModelNormal):
             'executor_config': (str,),  # noqa: E501
             'sla_miss': (SLAMiss,),  # noqa: E501
             'rendered_fields': ({str: (bool, date, datetime, dict, float, int, list, str, none_type)},),  # noqa: E501
-            'trigger': (Trigger,),  # noqa: E501
-            'triggerer_job': (Job,),  # noqa: E501
+            'trigger': (Trigger, none_type,),  # noqa: E501
+            'triggerer_job': (Job, none_type,),  # noqa: E501
             'note': (str, none_type,),  # noqa: E501
         }
 

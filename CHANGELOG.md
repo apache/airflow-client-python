@@ -17,6 +17,29 @@
  under the License.
  -->
 
+# v2.7.0
+
+Apache Airflow API version: 2.7.0
+
+### Major changes:
+
+ - Enable pools to consider deferred tasks ([#32709](https://github.com/apache/airflow/pull/32709))
+ - add dag_run_ids and task_ids filter for the batch task instance API endpoint ([#32705](https://github.com/apache/airflow/pull/32705))
+ - Add xcom map_index as a filter to xcom endpoint ([#32453](https://github.com/apache/airflow/pull/32453))
+ - Updates health check endpoint to include dag_processor status. ([#32382](https://github.com/apache/airflow/pull/32382))
+ - Add TriggererStatus to OpenAPI spec ([#31579](https://github.com/apache/airflow/pull/31579))
+
+### Major Fixes
+
+ - OpenAPI Spec fix nullable alongside $ref ([#32887](https://github.com/apache/airflow/pull/32887))
+ - Fix incorrect default on readonly property in our API ([#32510](https://github.com/apache/airflow/pull/32510))
+ - Fix broken links in openapi/v1.yaml ([#31619](https://github.com/apache/airflow/pull/31619))
+ - Update Dag trigger API and command docs ([#32696](https://github.com/apache/airflow/pull/32696))
+
+### NEW API supported
+
+ - NA
+
 # v2.6.2
 
 Apache Airflow API version: 2.6.2

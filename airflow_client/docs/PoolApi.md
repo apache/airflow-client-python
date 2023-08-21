@@ -315,6 +315,7 @@ with client.ApiClient(configuration) as api_client:
         name="name_example",
         slots=1,
         description="description_example",
+        include_deferred=True,
     ) # Pool | 
     update_mask = [
         "update_mask_example",
@@ -415,6 +416,7 @@ with client.ApiClient(configuration) as api_client:
         name="name_example",
         slots=1,
         description="description_example",
+        include_deferred=True,
     ) # Pool | 
 
     # example passing only required values which don't have defaults set

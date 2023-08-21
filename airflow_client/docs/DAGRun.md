@@ -34,7 +34,7 @@ Name | Type | Description | Notes
 **last_scheduling_decision** | **datetime, none_type** |  | [optional] [readonly] 
 **run_type** | **str** |  | [optional] [readonly] 
 **state** | [**DagState**](DagState.md) |  | [optional] 
-**external_trigger** | **bool** |  | [optional] [readonly]  if omitted the server will use the default value of True
+**external_trigger** | **bool** |  | [optional] [readonly] 
 **conf** | **{str: (bool, date, datetime, dict, float, int, list, str, none_type)}** | JSON object describing additional configuration parameters.  The value of this field can be set only when creating the object. If you try to modify the field of an existing object, the request fails with an BAD_REQUEST error.  | [optional] 
 **note** | **str, none_type** | Contains manually entered notes by the user about the DagRun.  *New in version 2.5.0*  | [optional] 
 **any string name** | **bool, date, datetime, dict, float, int, list, str, none_type** | any string name can be used but the value must be the correct type | [optional]

@@ -50,6 +50,7 @@ client/model/dag_collection.py
 client/model/dag_collection_all_of.py
 client/model/dag_detail.py
 client/model/dag_detail_all_of.py
+client/model/dag_processor_status.py
 client/model/dag_run.py
 client/model/dag_run_collection.py
 client/model/dag_run_collection_all_of.py
@@ -170,6 +171,7 @@ docs/DAGRun.md
 docs/DAGRunApi.md
 docs/DAGRunCollection.md
 docs/DAGRunCollectionAllOf.md
+docs/DagProcessorStatus.md
 docs/DagScheduleDatasetReference.md
 docs/DagState.md
 docs/DagWarning.md
@@ -295,6 +297,7 @@ test/test_dag_collection.py
 test/test_dag_collection_all_of.py
 test/test_dag_detail.py
 test/test_dag_detail_all_of.py
+test/test_dag_processor_status.py
 test/test_dag_run.py
 test/test_dag_run_api.py
 test/test_dag_run_collection.py

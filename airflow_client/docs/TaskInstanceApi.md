@@ -127,7 +127,7 @@ Name | Type | Description  | Notes
 
 Get logs
 
-Get logs for a specific task instance and its try number.
+Get logs for a specific task instance and its try number. To get log from specific character position, following way of using URLSafeSerializer can be used.  Example: ``` from itsdangerous.url_safe import URLSafeSerializer  request_url = f\"api/v1/dags/{DAG_ID}/dagRuns/{RUN_ID}/taskInstances/{TASK_ID}/logs/1\" key = app.config[\"SECRET_KEY\"] serializer = URLSafeSerializer(key) token = serializer.dumps({\"log_pos\": 10000})  response = self.client.get(     request_url,     query_string={\"token\": token},     headers={\"Accept\": \"text/plain\"},     environ_overrides={\"REMOTE_USER\": \"test\"}, ) continuation_token = response.json[\"continuation_token\"]     metadata = URLSafeSerializer(key).loads(continuation_token)     log_pos = metadata[\"log_pos\"]     end_of_log = metadata[\"end_of_log\"] ``` If log_pos is passed as 10000 like the above example, it renders the logs starting from char position 10000 to last (not the end as the logs may be tailing behind in running state). This way pagination can be done with metadata as part of the token. 
 
 ### Example
 
@@ -703,6 +703,12 @@ with client.ApiClient(configuration) as api_client:
         dag_ids=[
             "dag_ids_example",
         ],
+        dag_run_ids=[
+            "dag_run_ids_example",
+        ],
+        task_ids=[
+            "task_ids_example",
+        ],
         execution_date_gte=dateutil_parser('1970-01-01T00:00:00.00Z'),
         execution_date_lte=dateutil_parser('1970-01-01T00:00:00.00Z'),
         start_date_gte=dateutil_parser('1970-01-01T00:00:00.00Z'),
@@ -712,7 +718,7 @@ with client.ApiClient(configuration) as api_client:
         duration_gte=3.14,
         duration_lte=3.14,
         state=[
-            TaskState("success"),
+            TaskState("state_example"),
         ],
         pool=[
             "pool_example",

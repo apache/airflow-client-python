@@ -27,6 +27,7 @@ Name | Type | Description | Notes
 **key** | **str** |  | [optional] 
 **timestamp** | **str** |  | [optional] 
 **execution_date** | **str** |  | [optional] 
+**map_index** | **int** |  | [optional] 
 **task_id** | **str** |  | [optional] 
 **dag_id** | **str** |  | [optional] 
 **value** | **str** | The value | [optional] 

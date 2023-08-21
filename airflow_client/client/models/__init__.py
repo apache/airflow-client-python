@@ -54,6 +54,7 @@ from airflow_client.client.model.dag_detail_all_of import DAGDetailAllOf
 from airflow_client.client.model.dag_run import DAGRun
 from airflow_client.client.model.dag_run_collection import DAGRunCollection
 from airflow_client.client.model.dag_run_collection_all_of import DAGRunCollectionAllOf
+from airflow_client.client.model.dag_processor_status import DagProcessorStatus
 from airflow_client.client.model.dag_schedule_dataset_reference import DagScheduleDatasetReference
 from airflow_client.client.model.dag_state import DagState
 from airflow_client.client.model.dag_warning import DagWarning

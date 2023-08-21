@@ -29,7 +29,7 @@ Method | HTTP request | Description
 [**get_dag_runs**](DAGRunApi.md#get_dag_runs) | **GET** /dags/{dag_id}/dagRuns | List DAG runs
 [**get_dag_runs_batch**](DAGRunApi.md#get_dag_runs_batch) | **POST** /dags/~/dagRuns/list | List DAG runs (batch)
 [**get_upstream_dataset_events**](DAGRunApi.md#get_upstream_dataset_events) | **GET** /dags/{dag_id}/dagRuns/{dag_run_id}/upstreamDatasetEvents | Get dataset events for a DAG run
-[**post_dag_run**](DAGRunApi.md#post_dag_run) | **POST** /dags/{dag_id}/dagRuns | Trigger a new DAG run
+[**post_dag_run**](DAGRunApi.md#post_dag_run) | **POST** /dags/{dag_id}/dagRuns | Trigger a new DAG run.
 [**set_dag_run_note**](DAGRunApi.md#set_dag_run_note) | **PATCH** /dags/{dag_id}/dagRuns/{dag_run_id}/setNote | Update the DagRun note.
 [**update_dag_run_state**](DAGRunApi.md#update_dag_run_state) | **PATCH** /dags/{dag_id}/dagRuns/{dag_run_id} | Modify a DAG run
 
@@ -587,7 +587,9 @@ Name | Type | Description  | Notes
 # **post_dag_run**
 > DAGRun post_dag_run(dag_id, dag_run)
 
-Trigger a new DAG run
+Trigger a new DAG run.
+
+This will initiate a dagrun. If DAG is paused then dagrun state will remain queued, and the task won't run. 
 
 ### Example
 
@@ -632,7 +634,7 @@ with client.ApiClient(configuration) as api_client:
 
     # example passing only required values which don't have defaults set
     try:
-        # Trigger a new DAG run
+        # Trigger a new DAG run.
         api_response = api_instance.post_dag_run(dag_id, dag_run)
         pprint(api_response)
     except client.ApiException as e:

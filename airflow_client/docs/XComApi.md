@@ -69,6 +69,8 @@ with client.ApiClient(configuration) as api_client:
     dag_id = "dag_id_example" # str | The DAG ID.
     dag_run_id = "dag_run_id_example" # str | The DAG run ID.
     task_id = "task_id_example" # str | The task ID.
+    map_index = 1 # int | Filter on map index for mapped task. (optional)
+    xcom_key = "xcom_key_example" # str | Only filter the XCom records which have the provided key. (optional)
     limit = 100 # int | The numbers of items to return. (optional) if omitted the server will use the default value of 100
     offset = 0 # int | The number of items to skip before starting to collect the result set. (optional)
 
@@ -84,7 +86,7 @@ with client.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # List XCom entries
-        api_response = api_instance.get_xcom_entries(dag_id, dag_run_id, task_id, limit=limit, offset=offset)
+        api_response = api_instance.get_xcom_entries(dag_id, dag_run_id, task_id, map_index=map_index, xcom_key=xcom_key, limit=limit, offset=offset)
         pprint(api_response)
     except client.ApiException as e:
         print("Exception when calling XComApi->get_xcom_entries: %s\n" % e)
@@ -98,6 +100,8 @@ Name | Type | Description  | Notes
  **dag_id** | **str**| The DAG ID. |
  **dag_run_id** | **str**| The DAG run ID. |
  **task_id** | **str**| The task ID. |
+ **map_index** | **int**| Filter on map index for mapped task. | [optional]
+ **xcom_key** | **str**| Only filter the XCom records which have the provided key. | [optional]
  **limit** | **int**| The numbers of items to return. | [optional] if omitted the server will use the default value of 100
  **offset** | **int**| The number of items to skip before starting to collect the result set. | [optional]
 
@@ -166,6 +170,7 @@ with client.ApiClient(configuration) as api_client:
     dag_run_id = "dag_run_id_example" # str | The DAG run ID.
     task_id = "task_id_example" # str | The task ID.
     xcom_key = "xcom_key_example" # str | The XCom key.
+    map_index = 1 # int | Filter on map index for mapped task. (optional)
     deserialize = False # bool | Whether to deserialize an XCom value when using a custom XCom backend.  The XCom API endpoint calls `orm_deserialize_value` by default since an XCom may contain value that is potentially expensive to deserialize in the web server. Setting this to true overrides the consideration, and calls `deserialize_value` instead.  This parameter is not meaningful when using the default XCom backend.  *New in version 2.4.0*  (optional) if omitted the server will use the default value of False
 
     # example passing only required values which don't have defaults set
@@ -180,7 +185,7 @@ with client.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # Get an XCom entry
-        api_response = api_instance.get_xcom_entry(dag_id, dag_run_id, task_id, xcom_key, deserialize=deserialize)
+        api_response = api_instance.get_xcom_entry(dag_id, dag_run_id, task_id, xcom_key, map_index=map_index, deserialize=deserialize)
         pprint(api_response)
     except client.ApiException as e:
         print("Exception when calling XComApi->get_xcom_entry: %s\n" % e)
@@ -195,6 +200,7 @@ Name | Type | Description  | Notes
  **dag_run_id** | **str**| The DAG run ID. |
  **task_id** | **str**| The task ID. |
  **xcom_key** | **str**| The XCom key. |
+ **map_index** | **int**| Filter on map index for mapped task. | [optional]
  **deserialize** | **bool**| Whether to deserialize an XCom value when using a custom XCom backend.  The XCom API endpoint calls &#x60;orm_deserialize_value&#x60; by default since an XCom may contain value that is potentially expensive to deserialize in the web server. Setting this to true overrides the consideration, and calls &#x60;deserialize_value&#x60; instead.  This parameter is not meaningful when using the default XCom backend.  *New in version 2.4.0*  | [optional] if omitted the server will use the default value of False
 
 ### Return type

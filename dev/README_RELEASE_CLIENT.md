@@ -75,11 +75,6 @@ cd ${CLIENT_REPO_ROOT}
   git add .
   git commit -m "Add Client Version ${VERSION}"
   ```
-- Cherry-pick this commit: https://github.com/apache/airflow-client-python/commit/ddd6fc0545a8066f474c765e1644a5202eebd256
-  ```shell script
-    git cherry-pick ddd6fc0545a8066f474c765e1644a5202eebd256 -x
-  ```
-  #TODO: Remove the cherry-pick instruction above when we upgrade to new client generator
 - Raise a PR in airflow-client-python with the above changes
 - Merge the above PR when approved before proceeding
 

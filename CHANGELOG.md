@@ -17,6 +17,19 @@
  under the License.
  -->
 
+ # v2.7.2
+
+ Apache Airflow API version: 2.7.2
+
+  ### Major changes:
+  - NA
+
+  ### Major Fixes
+  - Fix: make dry run optional for patch task instance  ([#34568](https://github.com/apache/airflow/pull/34568))
+
+  ### NEW API supported
+  - NA
+
 # v2.7.0
 
 Apache Airflow API version: 2.7.0

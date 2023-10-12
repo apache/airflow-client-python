@@ -814,7 +814,7 @@ with client.ApiClient(configuration) as api_client:
     task_id = "task_id_example" # str | The task ID.
     map_index = 1 # int | The map index.
     update_task_instance = UpdateTaskInstance(
-        dry_run=False,
+        dry_run=True,
         new_state="success",
     ) # UpdateTaskInstance | Parameters of action (optional)
 
@@ -916,7 +916,7 @@ with client.ApiClient(configuration) as api_client:
     dag_run_id = "dag_run_id_example" # str | The DAG run ID.
     task_id = "task_id_example" # str | The task ID.
     update_task_instance = UpdateTaskInstance(
-        dry_run=False,
+        dry_run=True,
         new_state="success",
     ) # UpdateTaskInstance | Parameters of action
 

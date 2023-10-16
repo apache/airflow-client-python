@@ -383,22 +383,13 @@ At this point we release an official package:
     twine check dist/*
     ```
 
-- Upload the package to PyPi's test environment:
-
-    ```shell script
-    twine upload --repository-url=https://test.pypi.org/legacy/ dist/*
-    ```
-
-- Verify that the test package looks good by downloading it and installing it into a virtual environment.
-  The package download link is available at: https://test.pypi.org/project/apache-airflow-client/#files
-
 - Upload the package to PyPi's production environment:
 
     ```shell script
     twine upload -r pypi dist/*
     ```
 
-- Again, confirm that the package is available here: https://pypi.python.org/pypi/apache-airflow-client
+- Confirm that the package is available here: https://pypi.python.org/pypi/apache-airflow-client
 
 - Push Tag for the final version
 
@@ -413,7 +404,41 @@ Create a new release on GitHub with the release notes and assets from the releas
 
 ## Notify developers of release
 
-See Airflow process documented [here](https://github.com/apache/airflow/blob/master/dev/README_RELEASE_AIRFLOW.md#notify-developers-of-release) (just replace Airflow with Airflow Client)
+Notify users@airflow.apache.org (cc'ing dev@airflow.apache.org) that the artifacts have been published:
+
+Subject:
+
+```shell script
+    cat <<EOF
+    [ANNOUNCE] Apache Airflow Python Client ${VERSION} Released
+    EOF
+```
+Body: 
+
+```shell script
+    cat <<EOF
+    Dear Airflow community,
+
+I'm happy to announce that Airflow Python Client ${VERSION} was just released.
+
+We also made this version available on PyPI for convenience:
+`pip install apache-airflow-client`
+https://pypi.org/project/apache-airflow-client/${VERSION}/
+
+The documentation is available at:
+https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html
+
+Find the changelog here for more details:
+https://github.com/apache/airflow-client-python/blob/main/CHANGELOG.md
+
+
+Cheers,
+<your name>
+EOF
+```
+Send the same email to announce@apache.org, except change the opening line to Dear community,. It is more reliable to send it via the web ui at https://lists.apache.org/list.html?announce@apache.org (press "c" to compose a new thread)
+
+
 
 ## Add release data to Apache Committee Report Helper
 

@@ -296,7 +296,7 @@ class ApiClient(object):
         elif isinstance(obj, (str, int, float, none_type, bool)):
             return obj
         elif isinstance(obj, (datetime, date)):
-            return obj.isoformat()
+            return obj.strftime("%Y-%m-%dT%H:%M:%SZ")
         elif isinstance(obj, ModelSimple):
             return cls.sanitize_for_serialization(obj.value)
         elif isinstance(obj, (list, tuple)):

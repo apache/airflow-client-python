@@ -17,6 +17,15 @@
  under the License.
  -->
 
+ # v2.7.3
+
+ ### Major changes:
+ - NA
+
+ ### Major Fixes
+ - Add TriggerRule missing value in rest API ([#35194](https://github.com/apache/airflow/pull/35194))
+ - Fix wrong plugin schema ([#34858](https://github.com/apache/airflow/pull/34858))
+ 
  # v2.7.2
 
  Apache Airflow API version: 2.7.2

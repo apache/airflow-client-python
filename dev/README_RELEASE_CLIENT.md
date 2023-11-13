@@ -283,6 +283,20 @@ See Airflow process documented [here](https://github.com/apache/airflow/blob/mas
 ## Signature check
 See Airflow process documented [here](https://github.com/apache/airflow/blob/master/dev/README_RELEASE_AIRFLOW.md#signature-check).
 
+## Sources check
+
+The code of the Python Client is generated using OpenAPI generator and the generated code is committed to
+the repository, therefore the Source code check should consist of two steps:
+
+1. Checkout the release tag of the "airflow-client-python"
+2. Follow the [Release process](#release-process) above and generate client's code above
+3. Run ``git diff`` to see the differences - review them. Generally, the code generated should only contain
+   small differences regarding authentication.
+4. git reset --hard <RELEASE_TAG>
+
+Compare the sources with the packaged sources following the process described in Airflow:
+[here](https://github.com/apache/airflow/blob/master/dev/README_RELEASE_AIRFLOW.md#signature-check).
+
 # Verify release candidates by Contributors
 This can be done (and we encourage to) by any of the Contributors. In fact, it's best if the
 actual users of Airflow Client test it in their own staging/test installations. Each release candidate

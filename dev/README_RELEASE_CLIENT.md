@@ -294,7 +294,7 @@ the repository, therefore the Source code check should consist of two steps:
    small differences regarding authentication.
 4. git reset --hard <RELEASE_TAG>
 
-Compare the sources with the packaged sources following the process describd in Airflow:
+Compare the sources with the packaged sources following the process described in Airflow:
 [here](https://github.com/apache/airflow/blob/master/dev/README_RELEASE_AIRFLOW.md#signature-check).
 
 # Verify release candidates by Contributors

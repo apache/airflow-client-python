@@ -290,7 +290,7 @@ the repository, therefore the Source code check should consist of two steps:
 
 1. Checkout the release tag of the "airflow-client-python"
 2. Follow the [Release process](#release-process) above and generate client's code above
-3. Run ``git diff`` to see the differences - review them. Generally the code generated should only contain
+3. Run ``git diff`` to see the differences - review them. Generally, the code generated should only contain
    small differences regarding authentication.
 4. git reset --hard <RELEASE_TAG>
 

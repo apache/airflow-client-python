@@ -285,7 +285,7 @@ See Airflow process documented [here](https://github.com/apache/airflow/blob/mas
 
 ## Sources check
 
-The code of the Python Client is generated using Open API generator and the generated code is committed to
+The code of the Python Client is generated using OpenAPI generator and the generated code is committed to
 the repository, therefore the Source code check should consist of two steps:
 
 1. Checkout the release tag of the "airflow-client-python"

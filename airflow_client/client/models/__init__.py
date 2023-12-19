@@ -119,6 +119,7 @@ from airflow_client.client.model.triggerer_status import TriggererStatus
 from airflow_client.client.model.update_dag_run_state import UpdateDagRunState
 from airflow_client.client.model.update_task_instance import UpdateTaskInstance
 from airflow_client.client.model.update_task_instances_state import UpdateTaskInstancesState
+from airflow_client.client.model.update_task_state import UpdateTaskState
 from airflow_client.client.model.user import User
 from airflow_client.client.model.user_all_of import UserAllOf
 from airflow_client.client.model.user_collection import UserCollection

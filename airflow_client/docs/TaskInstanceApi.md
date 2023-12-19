@@ -815,7 +815,7 @@ with client.ApiClient(configuration) as api_client:
     map_index = 1 # int | The map index.
     update_task_instance = UpdateTaskInstance(
         dry_run=True,
-        new_state="success",
+        new_state=UpdateTaskState("success"),
     ) # UpdateTaskInstance | Parameters of action (optional)
 
     # example passing only required values which don't have defaults set
@@ -917,7 +917,7 @@ with client.ApiClient(configuration) as api_client:
     task_id = "task_id_example" # str | The task ID.
     update_task_instance = UpdateTaskInstance(
         dry_run=True,
-        new_state="success",
+        new_state=UpdateTaskState("success"),
     ) # UpdateTaskInstance | Parameters of action
 
     # example passing only required values which don't have defaults set

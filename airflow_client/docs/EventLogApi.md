@@ -149,12 +149,18 @@ with client.ApiClient(configuration) as api_client:
     limit = 100 # int | The numbers of items to return. (optional) if omitted the server will use the default value of 100
     offset = 0 # int | The number of items to skip before starting to collect the result set. (optional)
     order_by = "order_by_example" # str | The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order.  *New in version 2.1.0*  (optional)
+    dag_id = "dag_id_example" # str | Returns objects matched by the DAG ID. (optional)
+    task_id = "task_id_example" # str | Returns objects matched by the Task ID. (optional)
+    event = "event_example" # str | The name of event log. (optional)
+    owner = "owner_example" # str | The owner's name of event log. (optional)
+    before = dateutil_parser('1970-01-01T00:00:00.00Z') # datetime | Timestamp to select event logs occurring before. (optional)
+    after = dateutil_parser('1970-01-01T00:00:00.00Z') # datetime | Timestamp to select event logs occurring after. (optional)
 
     # example passing only required values which don't have defaults set
     # and optional values
     try:
         # List log entries
-        api_response = api_instance.get_event_logs(limit=limit, offset=offset, order_by=order_by)
+        api_response = api_instance.get_event_logs(limit=limit, offset=offset, order_by=order_by, dag_id=dag_id, task_id=task_id, event=event, owner=owner, before=before, after=after)
         pprint(api_response)
     except client.ApiException as e:
         print("Exception when calling EventLogApi->get_event_logs: %s\n" % e)
@@ -168,6 +174,12 @@ Name | Type | Description  | Notes
  **limit** | **int**| The numbers of items to return. | [optional] if omitted the server will use the default value of 100
  **offset** | **int**| The number of items to skip before starting to collect the result set. | [optional]
  **order_by** | **str**| The name of the field to order the results by. Prefix a field name with &#x60;-&#x60; to reverse the sort order.  *New in version 2.1.0*  | [optional]
+ **dag_id** | **str**| Returns objects matched by the DAG ID. | [optional]
+ **task_id** | **str**| Returns objects matched by the Task ID. | [optional]
+ **event** | **str**| The name of event log. | [optional]
+ **owner** | **str**| The owner&#39;s name of event log. | [optional]
+ **before** | **datetime**| Timestamp to select event logs occurring before. | [optional]
+ **after** | **datetime**| Timestamp to select event logs occurring after. | [optional]
 
 ### Return type
 

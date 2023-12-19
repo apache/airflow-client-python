@@ -34,6 +34,9 @@ Name | Type | Description | Notes
 **global_operator_extra_links** | **[str, none_type]** | The global operator extra links | [optional] 
 **operator_extra_links** | **[str, none_type]** | Operator extra links | [optional] 
 **source** | **str, none_type** | The plugin source | [optional] 
+**ti_deps** | **[str]** | The plugin task instance dependencies | [optional] 
+**listeners** | **[str]** | The plugin listeners | [optional] 
+**timetables** | **[str]** | The plugin timetables | [optional] 
 **any string name** | **bool, date, datetime, dict, float, int, list, str, none_type** | any string name can be used but the value must be the correct type | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -992,7 +992,7 @@ with client.ApiClient(configuration) as api_client:
         include_downstream=True,
         include_future=True,
         include_past=True,
-        new_state="success",
+        new_state=UpdateTaskState("success"),
     ) # UpdateTaskInstancesState | Parameters of action
 
     # example passing only required values which don't have defaults set

@@ -26,26 +26,26 @@
 """
 
 
+import sys
 import unittest
 
 import airflow_client.client
-from airflow_client.client.api.plugin_api import PluginApi  # noqa: E501
+from airflow_client.client.model.update_task_state import UpdateTaskState
 
 
-class TestPluginApi(unittest.TestCase):
-    """PluginApi unit test stubs"""
+class TestUpdateTaskState(unittest.TestCase):
+    """UpdateTaskState unit test stubs"""
 
     def setUp(self):
-        self.api = PluginApi()  # noqa: E501
+        pass
 
     def tearDown(self):
         pass
 
-    def test_get_plugins(self):
-        """Test case for get_plugins
-
-        Get a list of loaded plugins  # noqa: E501
-        """
+    def testUpdateTaskState(self):
+        """Test UpdateTaskState"""
+        # FIXME: construct object with mandatory attributes with example values
+        # model = UpdateTaskState()  # noqa: E501
         pass
 
 

@@ -34,7 +34,7 @@ Name | Type | Description | Notes
 **last_expired** | **datetime, none_type** | Time when the DAG last received a refresh signal (e.g. the DAG&#39;s \&quot;refresh\&quot; button was clicked in the web UI)  *New in version 2.3.0*  | [optional] [readonly] 
 **scheduler_lock** | **bool, none_type** | Whether (one of) the scheduler is scheduling this DAG at the moment  *New in version 2.3.0*  | [optional] [readonly] 
 **pickle_id** | **str, none_type** | Foreign key to the latest pickle_id  *New in version 2.3.0*  | [optional] [readonly] 
-**default_view** | **str** |  | [optional] [readonly] 
+**default_view** | **str, none_type** |  | [optional] [readonly] 
 **fileloc** | **str** | The absolute path to the file. | [optional] [readonly] 
 **file_token** | **str** | The key containing the encrypted path to the file. Encryption and decryption take place only on the server. This prevents the client from reading an non-DAG file. This also ensures API extensibility, because the format of encrypted data may change.  | [optional] [readonly] 
 **owners** | **[str]** |  | [optional] [readonly] 

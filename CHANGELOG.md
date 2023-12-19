@@ -17,6 +17,26 @@
  under the License.
  -->
 
+ # v2.8.0
+
+ ### Major changes:
+  - Allow filtering event logs by attributes ([#34417](https://github.com/apache/airflow/pull/34417))
+  - Add extra fields to plugins endpoint ([#34913](https://github.com/apache/airflow/pull/34913))
+  - Let auth managers provide their own API endpoints ([#34349](https://github.com/apache/airflow/pull/34349))
+  - Enable pools to consider deferred tasks ([#32709](https://github.com/apache/airflow/pull/32709))
+  - Add dag_run_ids and task_ids filter for the batch task instance API endpoint ([#32705](https://github.com/apache/airflow/pull/32705))
+
+ ### Major Fixes
+  - Add DagModel attributes before dumping DagDetailSchema for get_dag_details API endpoint ([#34947](https://github.com/apache/airflow/pull/34947))
+  - Add TriggerRule missing value in rest API ([#35194](https://github.com/apache/airflow/pull/35194))
+  - Fix wrong plugin schema ([#34858](https://github.com/apache/airflow/pull/34858))
+  - Make dry run optional for patch task instance ([#34568](https://github.com/apache/airflow/pull/34568))
+  - OpenAPI Spec fix nullable alongside $ref ([#32887](https://github.com/apache/airflow/pull/32887))
+  - Clarify new_state in OpenAPI spec ([#34056](https://github.com/apache/airflow/pull/34056))
+
+ ### NEW API supported
+  - NA
+
  # v2.7.3
 
  ### Major changes:

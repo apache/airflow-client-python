@@ -37,4 +37,6 @@ jobs:
       - name: Run pytest
         run: |
           pip install -r test-requirements.txt
-          pytest airflow_client/test
+          pytest test
+        env:
+          PYTEST_ADDOPTS: "--color=yes"

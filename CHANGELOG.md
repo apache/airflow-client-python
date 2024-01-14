@@ -17,16 +17,18 @@
  under the License.
  -->
 
- # v2.8.0
+# v2.8.0
 
- ### Major changes:
+## Major changes:
+
   - Allow filtering event logs by attributes ([#34417](https://github.com/apache/airflow/pull/34417))
   - Add extra fields to plugins endpoint ([#34913](https://github.com/apache/airflow/pull/34913))
   - Let auth managers provide their own API endpoints ([#34349](https://github.com/apache/airflow/pull/34349))
   - Enable pools to consider deferred tasks ([#32709](https://github.com/apache/airflow/pull/32709))
   - Add dag_run_ids and task_ids filter for the batch task instance API endpoint ([#32705](https://github.com/apache/airflow/pull/32705))
 
- ### Major Fixes
+## Major Fixes
+
   - Add DagModel attributes before dumping DagDetailSchema for get_dag_details API endpoint ([#34947](https://github.com/apache/airflow/pull/34947))
   - Add TriggerRule missing value in rest API ([#35194](https://github.com/apache/airflow/pull/35194))
   - Fix wrong plugin schema ([#34858](https://github.com/apache/airflow/pull/34858))
@@ -34,36 +36,42 @@
   - OpenAPI Spec fix nullable alongside $ref ([#32887](https://github.com/apache/airflow/pull/32887))
   - Clarify new_state in OpenAPI spec ([#34056](https://github.com/apache/airflow/pull/34056))
 
- ### NEW API supported
+## NEW API supported
+
   - NA
 
- # v2.7.3
+# v2.7.3
 
- ### Major changes:
+## Major changes:
+
  - NA
 
- ### Major Fixes
+## Major Fixes
+
  - Add TriggerRule missing value in rest API ([#35194](https://github.com/apache/airflow/pull/35194))
  - Fix wrong plugin schema ([#34858](https://github.com/apache/airflow/pull/34858))
- 
- # v2.7.2
+
+# v2.7.2
 
  Apache Airflow API version: 2.7.2
 
-  ### Major changes:
-  - NA
+## Major changes:
 
-  ### Major Fixes
-  - Fix: make dry run optional for patch task instance  ([#34568](https://github.com/apache/airflow/pull/34568))
+ - NA
 
-  ### NEW API supported
-  - NA
+## Major Fixes
+
+- Fix: make dry run optional for patch task instance  ([#34568](https://github.com/apache/airflow/pull/34568))
+
+## NEW API supported
+
+ - NA
 
 # v2.7.0
 
 Apache Airflow API version: 2.7.0
 
-### Major changes:
+## Major changes:
 
  - Enable pools to consider deferred tasks ([#32709](https://github.com/apache/airflow/pull/32709))
  - add dag_run_ids and task_ids filter for the batch task instance API endpoint ([#32705](https://github.com/apache/airflow/pull/32705))
@@ -71,14 +79,14 @@ Apache Airflow API version: 2.7.0
  - Updates health check endpoint to include dag_processor status. ([#32382](https://github.com/apache/airflow/pull/32382))
  - Add TriggererStatus to OpenAPI spec ([#31579](https://github.com/apache/airflow/pull/31579))
 
-### Major Fixes
+## Major Fixes
 
  - OpenAPI Spec fix nullable alongside $ref ([#32887](https://github.com/apache/airflow/pull/32887))
  - Fix incorrect default on readonly property in our API ([#32510](https://github.com/apache/airflow/pull/32510))
  - Fix broken links in openapi/v1.yaml ([#31619](https://github.com/apache/airflow/pull/31619))
  - Update Dag trigger API and command docs ([#32696](https://github.com/apache/airflow/pull/32696))
 
-### NEW API supported
+## NEW API supported
 
  - NA
 
@@ -86,15 +94,15 @@ Apache Airflow API version: 2.7.0
 
 Apache Airflow API version: 2.6.2
 
-### Major changes:
+## Major changes:
 
  - Add TriggererStatus to OpenAPI spec ([#31579](https://github.com/apache/airflow/pull/31579))
 
-### Major Fixes
+## Major Fixes
 
  - Fixing broken links in openapi/v1.yaml ([#31619](https://github.com/apache/airflow/pull/31619))
 
-### NEW API supported
+## NEW API supported
 
  - NA
 
@@ -102,14 +110,15 @@ Apache Airflow API version: 2.6.2
 
 Apache Airflow API version: 2.6.1
 
-### Major changes:
+## Major changes:
+
  - NA
 
-### Major Fixes
+## Major Fixes
 
  - Fix Pool schema OpenAPI spec ([#30973](https://github.com/apache/airflow/pull/30973))
 
-### NEW API supported
+## NEW API supported
 
  - NA
 
@@ -117,13 +126,13 @@ Apache Airflow API version: 2.6.1
 
 Apache Airflow API version: 2.6.0
 
-### Major changes:
+## Major changes:
 
  - Minimum Python version is 3.7
  - DAGRun dag_id parameter is properly validated as read-only and setting it might result in an error:
-   "`dag_id` is a read-only attribute" This might break some workflows that used examples from the documentation. 
+   "`dag_id` is a read-only attribute" This might break some workflows that used examples from the documentation.
 
-### Major Fixes
+## Major Fixes
 
  - Move read only property in order to fix Dagrun API docs ([#30149](https://github.com/apache/airflow/pull/30149))
  - Fix clear dag run openapi spec responses by adding additional return type ([#29600](https://github.com/apache/airflow/pull/29600))
@@ -132,7 +141,7 @@ Apache Airflow API version: 2.6.0
 ([#28713](https://github.com/apache/airflow/pull/28713))
  - Expose updated_at filter for dag run and task instance endpoints ([#28636](https://github.com/apache/airflow/pull/28636))
 
-### NEW API supported
+## NEW API supported
 
  - NA
 
@@ -140,15 +149,15 @@ Apache Airflow API version: 2.6.0
 
 Apache Airflow API version: 2.5.1
 
-### Major changes:
+## Major changes:
 
 - NA
 
-### Major fixes:
+## Major fixes:
 
 - Fix authentication issues by regenerating the client with proper security schemas
 
-### New API supported:
+## New API supported:
 
 - NA
 
@@ -156,15 +165,15 @@ Apache Airflow API version: 2.5.1
 
 Apache Airflow API version: 2.5.x
 
-### Major changes:
+## Major changes:
 
 - NA
 
-### Major fixes:
+## Major fixes:
 
 - NA
 
-### New API supported:
+## New API supported:
 
 - GET /datasets/events | Get dataset events
 - GET /datasets | Get datasets
@@ -176,15 +185,15 @@ Apache Airflow API version: 2.5.x
 
 Apache Airflow API version: 2.3.x
 
-### Major changes:
+## Major changes:
 
 - NA
 
-### Major fixes:
+## Major fixes:
 
 - NA
 
-### New API supported:
+## New API supported:
 
 - PATCH /dags | Update DAGs
 - GET /dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/{map_index} | Get a mapped task instance
@@ -194,15 +203,15 @@ Apache Airflow API version: 2.3.x
 
 Apache Airflow API version: 2.2.x
 
-### Major changes:
+## Major changes:
 
 - Client code is generated using OpenApi's 5.3.0 generator CLI
 
-### Major fixes:
+## Major fixes:
 
 - NA
 
-### New API supported:
+## New API supported:
 
 - POST /connections/test | Test a connection
 - DELETE /dags/{dag_id} | Delete a DAG
@@ -215,15 +224,16 @@ Apache Airflow API version: 2.2.x
 
 Apache Airflow API version: 2.1.x
 
-### Major changes:
+## Major changes:
 
  - Client code is generated using OpenApi's 5.1.1 generator CLI
 
-### Major fixes:
+## Major fixes:
 
- - Fixed the iteration issue on array items caused by unsupported class 'object' (issue #15)
+ - Fixed the iteration issue on array items caused by unsupported class 'object'.
+   Issue [#15](https://github.com/apache/airflow-client-python/issues/15)
 
-### New API supported:
+## New API supported:
 
  - Permissions
  - Plugins
@@ -236,4 +246,3 @@ Apache Airflow API version: 2.1.x
 Apache Airflow API version: 2.0.x
 
 Initial version of the Python client.
-

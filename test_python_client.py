@@ -26,6 +26,7 @@
 
 from __future__ import annotations
 
+import sys
 import uuid
 
 import airflow_client.client
@@ -124,5 +125,6 @@ with airflow_client.client.ApiClient(configuration) as api_client:
 
     if errors:
         print("\n[red]There were errors while running the script - see above for details")
+        sys.exit(1)
     else:
         print("\n[green]Everything went well")

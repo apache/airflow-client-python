@@ -65,12 +65,11 @@ Homepage = "https://airflow.apache.org/"
 [tool.hatch.envs.test]
 dependencies = [
     "pytest-cov>=2.8.1",
-    "python_dateutil >= 2.5.3",
     "urllib3 >= 1.25.3",
 ]
 
 [tool.hatch.envs.test.scripts]
-run-coverage = "pytest --cov-config=pyproject.toml --cov=airflow_client test --color=yes"
+run-coverage = "pytest test"
 run = "run-coverage --no-cov"
 
 [[tool.hatch.envs.test.matrix]]
@@ -102,4 +101,19 @@ artifacts = [
 ]
 include = [
     "/airflow_client",
+]
+
+[tool.pytest.ini_options]
+# make sure that pytest.ini is not read from pyproject.toml in paraent directories
+addopts = "--color=yes --cov-config=pyproject.toml --cov=airflow_client"
+norecursedirs = [
+]
+log_level = "INFO"
+filterwarnings = [
+]
+python_files = [
+    "test_*.py",
+]
+testpaths = [
+    "test",
 ]

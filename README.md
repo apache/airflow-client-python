@@ -571,6 +571,14 @@ configuration = airflow_client.client.Configuration(
 )
 ```
 
+* Run scheduler (or dag file processor you have setup with standalone dag file processor) for few parsing
+  loops (you can pass --num-runs parameter to it or keep it running in the background). The script relies
+  on example DAGs being serialized to the DB and this only
+  happens when scheduler runs with ``core/load_examples`` set to True.
+
+* Run webserver - reachable at the host/port for the test script you want to run. Make sure it had enough
+  time to initialize.
+
 Run `python test_python_client.py` and you should see colored output showing attempts to connect and status.
 
 

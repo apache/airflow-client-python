@@ -7,36 +7,30 @@ on:
     branches: ['main']
 
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@main
-      - uses: actions/setup-python@v2
-        with:
-          python-version: '3.x'
-      - name: Run precommit hooks
-        run: |
-          pip install pre-commit
-          pre-commit run --all-files
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python_version: ["3.7", "3.8", "3.9", "3.10"]
     steps:
       - name: Checkout
         uses: actions/checkout@main
-
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5
         with:
-          python-version: ${{ matrix.python_version }}
-        id: python
-
-      - name: Run pytest
+          python-version: 3.8
+          cache: 'pip'
+      - name: Install hatch
         run: |
-          pip install -r test-requirements.txt
-          pytest test
+          python -m pip install --upgrade pipx
+          pipx install hatch
+      - name: Run tests
+        run: hatch run run-coverage
         env:
-          PYTEST_ADDOPTS: "--color=yes"
+          HATCH_ENV: "test"
+      - name: Build packages
+        run: hatch build -c -t sdist -t wheel
+      - name: "Upload packages"
+        uses: actions/upload-artifact@v3
+        with:
+          name: packages
+          path: ./dist/apache_airflow_client-*
+          retention-days: 7
+          if-no-files-found: error

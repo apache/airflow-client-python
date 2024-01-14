@@ -16,9 +16,11 @@ java -jar apache-rat.jar -E ./.rat-excludes -d .
 python3 -m venv PATH_TO_YOUR_VENV
 source PATH_TO_YOUR_VENV/bin/activate
 
-# [required] building and installing by pip (preferred)
+# [required] building and installing by pip (the package can also be built with any other modern tools
+# that can build Python packages, e.g. setuptools, but pip is the recommended way)
+
 pip install .
 
-# or directly
-python setup.py install
+# We also recommend hatch to convert the client to packages
 
+hatch build -c -t wheel -t sdist

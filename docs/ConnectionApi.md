@@ -1,23 +1,4 @@
-<!--
- Licensed to the Apache Software Foundation (ASF) under one
- or more contributor license agreements.  See the NOTICE file
- distributed with this work for additional information
- regarding copyright ownership.  The ASF licenses this file
- to you under the Apache License, Version 2.0 (the
- "License"); you may not use this file except in compliance
- with the License.  You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing,
- software distributed under the License is distributed on an
- "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- KIND, either express or implied.  See the License for the
- specific language governing permissions and limitations
- under the License.
- -->
-
-# Apache Airflow Python Client.ConnectionApi
+# airflow_client.client.ConnectionApi
 
 All URIs are relative to */api/v1*
 
@@ -48,7 +29,7 @@ from airflow_client.client.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = client.Configuration(
+configuration = airflow_client.client.Configuration(
     host = "/api/v1"
 )
 
@@ -58,13 +39,13 @@ configuration = client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = client.Configuration(
+configuration = airflow_client.client.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with client.ApiClient(configuration) as api_client:
+with airflow_client.client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = connection_api.ConnectionApi(api_client)
     connection_id = "connection_id_example" # str | The connection ID.
@@ -73,7 +54,7 @@ with client.ApiClient(configuration) as api_client:
     try:
         # Delete a connection
         api_instance.delete_connection(connection_id)
-    except client.ApiException as e:
+    except airflow_client.client.ApiException as e:
         print("Exception when calling ConnectionApi->delete_connection: %s\n" % e)
 ```
 
@@ -123,12 +104,12 @@ Get a connection
 import time
 import airflow_client.client
 from airflow_client.client.api import connection_api
-from airflow_client.client.model.connection import Connection
 from airflow_client.client.model.error import Error
+from airflow_client.client.model.connection import Connection
 from pprint import pprint
 # Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = client.Configuration(
+configuration = airflow_client.client.Configuration(
     host = "/api/v1"
 )
 
@@ -138,13 +119,13 @@ configuration = client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = client.Configuration(
+configuration = airflow_client.client.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with client.ApiClient(configuration) as api_client:
+with airflow_client.client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = connection_api.ConnectionApi(api_client)
     connection_id = "connection_id_example" # str | The connection ID.
@@ -154,7 +135,7 @@ with client.ApiClient(configuration) as api_client:
         # Get a connection
         api_response = api_instance.get_connection(connection_id)
         pprint(api_response)
-    except client.ApiException as e:
+    except airflow_client.client.ApiException as e:
         print("Exception when calling ConnectionApi->get_connection: %s\n" % e)
 ```
 
@@ -208,7 +189,7 @@ from airflow_client.client.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = client.Configuration(
+configuration = airflow_client.client.Configuration(
     host = "/api/v1"
 )
 
@@ -218,13 +199,13 @@ configuration = client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = client.Configuration(
+configuration = airflow_client.client.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with client.ApiClient(configuration) as api_client:
+with airflow_client.client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = connection_api.ConnectionApi(api_client)
     limit = 100 # int | The numbers of items to return. (optional) if omitted the server will use the default value of 100
@@ -237,7 +218,7 @@ with client.ApiClient(configuration) as api_client:
         # List connections
         api_response = api_instance.get_connections(limit=limit, offset=offset, order_by=order_by)
         pprint(api_response)
-    except client.ApiException as e:
+    except airflow_client.client.ApiException as e:
         print("Exception when calling ConnectionApi->get_connections: %s\n" % e)
 ```
 
@@ -287,12 +268,12 @@ Update a connection
 import time
 import airflow_client.client
 from airflow_client.client.api import connection_api
-from airflow_client.client.model.connection import Connection
 from airflow_client.client.model.error import Error
+from airflow_client.client.model.connection import Connection
 from pprint import pprint
 # Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = client.Configuration(
+configuration = airflow_client.client.Configuration(
     host = "/api/v1"
 )
 
@@ -302,13 +283,13 @@ configuration = client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = client.Configuration(
+configuration = airflow_client.client.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with client.ApiClient(configuration) as api_client:
+with airflow_client.client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = connection_api.ConnectionApi(api_client)
     connection_id = "connection_id_example" # str | The connection ID.
@@ -322,7 +303,7 @@ with client.ApiClient(configuration) as api_client:
         # Update a connection
         api_response = api_instance.patch_connection(connection_id, connection)
         pprint(api_response)
-    except client.ApiException as e:
+    except airflow_client.client.ApiException as e:
         print("Exception when calling ConnectionApi->patch_connection: %s\n" % e)
 
     # example passing only required values which don't have defaults set
@@ -331,7 +312,7 @@ with client.ApiClient(configuration) as api_client:
         # Update a connection
         api_response = api_instance.patch_connection(connection_id, connection, update_mask=update_mask)
         pprint(api_response)
-    except client.ApiException as e:
+    except airflow_client.client.ApiException as e:
         print("Exception when calling ConnectionApi->patch_connection: %s\n" % e)
 ```
 
@@ -383,12 +364,12 @@ Create a connection
 import time
 import airflow_client.client
 from airflow_client.client.api import connection_api
-from airflow_client.client.model.connection import Connection
 from airflow_client.client.model.error import Error
+from airflow_client.client.model.connection import Connection
 from pprint import pprint
 # Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = client.Configuration(
+configuration = airflow_client.client.Configuration(
     host = "/api/v1"
 )
 
@@ -398,13 +379,13 @@ configuration = client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = client.Configuration(
+configuration = airflow_client.client.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with client.ApiClient(configuration) as api_client:
+with airflow_client.client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = connection_api.ConnectionApi(api_client)
     connection = Connection(None) # Connection | 
@@ -414,7 +395,7 @@ with client.ApiClient(configuration) as api_client:
         # Create a connection
         api_response = api_instance.post_connection(connection)
         pprint(api_response)
-    except client.ApiException as e:
+    except airflow_client.client.ApiException as e:
         print("Exception when calling ConnectionApi->post_connection: %s\n" % e)
 ```
 
@@ -465,13 +446,13 @@ Test a connection.  For security reasons, the test connection functionality is d
 import time
 import airflow_client.client
 from airflow_client.client.api import connection_api
-from airflow_client.client.model.connection import Connection
-from airflow_client.client.model.connection_test import ConnectionTest
 from airflow_client.client.model.error import Error
+from airflow_client.client.model.connection_test import ConnectionTest
+from airflow_client.client.model.connection import Connection
 from pprint import pprint
 # Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = client.Configuration(
+configuration = airflow_client.client.Configuration(
     host = "/api/v1"
 )
 
@@ -481,13 +462,13 @@ configuration = client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = client.Configuration(
+configuration = airflow_client.client.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with client.ApiClient(configuration) as api_client:
+with airflow_client.client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = connection_api.ConnectionApi(api_client)
     connection = Connection(None) # Connection | 
@@ -497,7 +478,7 @@ with client.ApiClient(configuration) as api_client:
         # Test a connection
         api_response = api_instance.test_connection(connection)
         pprint(api_response)
-    except client.ApiException as e:
+    except airflow_client.client.ApiException as e:
         print("Exception when calling ConnectionApi->test_connection: %s\n" % e)
 ```
 

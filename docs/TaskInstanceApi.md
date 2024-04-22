@@ -1,23 +1,4 @@
-<!--
- Licensed to the Apache Software Foundation (ASF) under one
- or more contributor license agreements.  See the NOTICE file
- distributed with this work for additional information
- regarding copyright ownership.  The ASF licenses this file
- to you under the Apache License, Version 2.0 (the
- "License"); you may not use this file except in compliance
- with the License.  You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing,
- software distributed under the License is distributed on an
- "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- KIND, either express or implied.  See the License for the
- specific language governing permissions and limitations
- under the License.
- -->
-
-# Apache Airflow Python Client.TaskInstanceApi
+# airflow_client.client.TaskInstanceApi
 
 All URIs are relative to */api/v1*
 
@@ -51,12 +32,12 @@ List extra links for task instance.
 import time
 import airflow_client.client
 from airflow_client.client.api import task_instance_api
-from airflow_client.client.model.extra_link_collection import ExtraLinkCollection
 from airflow_client.client.model.error import Error
+from airflow_client.client.model.extra_link_collection import ExtraLinkCollection
 from pprint import pprint
 # Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = client.Configuration(
+configuration = airflow_client.client.Configuration(
     host = "/api/v1"
 )
 
@@ -66,13 +47,13 @@ configuration = client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = client.Configuration(
+configuration = airflow_client.client.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with client.ApiClient(configuration) as api_client:
+with airflow_client.client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = task_instance_api.TaskInstanceApi(api_client)
     dag_id = "dag_id_example" # str | The DAG ID.
@@ -84,7 +65,7 @@ with client.ApiClient(configuration) as api_client:
         # List extra links
         api_response = api_instance.get_extra_links(dag_id, dag_run_id, task_id)
         pprint(api_response)
-    except client.ApiException as e:
+    except airflow_client.client.ApiException as e:
         print("Exception when calling TaskInstanceApi->get_extra_links: %s\n" % e)
 ```
 
@@ -123,7 +104,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_log**
-> InlineResponse200 get_log(dag_id, dag_run_id, task_id, task_try_number)
+> InlineResponse2001 get_log(dag_id, dag_run_id, task_id, task_try_number)
 
 Get logs
 
@@ -138,11 +119,11 @@ import time
 import airflow_client.client
 from airflow_client.client.api import task_instance_api
 from airflow_client.client.model.error import Error
-from airflow_client.client.model.inline_response200 import InlineResponse200
+from airflow_client.client.model.inline_response2001 import InlineResponse2001
 from pprint import pprint
 # Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = client.Configuration(
+configuration = airflow_client.client.Configuration(
     host = "/api/v1"
 )
 
@@ -152,13 +133,13 @@ configuration = client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = client.Configuration(
+configuration = airflow_client.client.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with client.ApiClient(configuration) as api_client:
+with airflow_client.client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = task_instance_api.TaskInstanceApi(api_client)
     dag_id = "dag_id_example" # str | The DAG ID.
@@ -174,7 +155,7 @@ with client.ApiClient(configuration) as api_client:
         # Get logs
         api_response = api_instance.get_log(dag_id, dag_run_id, task_id, task_try_number)
         pprint(api_response)
-    except client.ApiException as e:
+    except airflow_client.client.ApiException as e:
         print("Exception when calling TaskInstanceApi->get_log: %s\n" % e)
 
     # example passing only required values which don't have defaults set
@@ -183,7 +164,7 @@ with client.ApiClient(configuration) as api_client:
         # Get logs
         api_response = api_instance.get_log(dag_id, dag_run_id, task_id, task_try_number, full_content=full_content, map_index=map_index, token=token)
         pprint(api_response)
-    except client.ApiException as e:
+    except airflow_client.client.ApiException as e:
         print("Exception when calling TaskInstanceApi->get_log: %s\n" % e)
 ```
 
@@ -202,7 +183,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse200**](InlineResponse200.md)
+[**InlineResponse2001**](InlineResponse2001.md)
 
 ### Authorization
 
@@ -241,12 +222,12 @@ Get details of a mapped task instance.  *New in version 2.3.0*
 import time
 import airflow_client.client
 from airflow_client.client.api import task_instance_api
-from airflow_client.client.model.task_instance import TaskInstance
 from airflow_client.client.model.error import Error
+from airflow_client.client.model.task_instance import TaskInstance
 from pprint import pprint
 # Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = client.Configuration(
+configuration = airflow_client.client.Configuration(
     host = "/api/v1"
 )
 
@@ -256,13 +237,13 @@ configuration = client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = client.Configuration(
+configuration = airflow_client.client.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with client.ApiClient(configuration) as api_client:
+with airflow_client.client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = task_instance_api.TaskInstanceApi(api_client)
     dag_id = "dag_id_example" # str | The DAG ID.
@@ -275,7 +256,7 @@ with client.ApiClient(configuration) as api_client:
         # Get a mapped task instance
         api_response = api_instance.get_mapped_task_instance(dag_id, dag_run_id, task_id, map_index)
         pprint(api_response)
-    except client.ApiException as e:
+    except airflow_client.client.ApiException as e:
         print("Exception when calling TaskInstanceApi->get_mapped_task_instance: %s\n" % e)
 ```
 
@@ -329,12 +310,12 @@ Get details of all mapped task instances.  *New in version 2.3.0*
 import time
 import airflow_client.client
 from airflow_client.client.api import task_instance_api
-from airflow_client.client.model.task_instance_collection import TaskInstanceCollection
 from airflow_client.client.model.error import Error
+from airflow_client.client.model.task_instance_collection import TaskInstanceCollection
 from pprint import pprint
 # Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = client.Configuration(
+configuration = airflow_client.client.Configuration(
     host = "/api/v1"
 )
 
@@ -344,13 +325,13 @@ configuration = client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = client.Configuration(
+configuration = airflow_client.client.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with client.ApiClient(configuration) as api_client:
+with airflow_client.client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = task_instance_api.TaskInstanceApi(api_client)
     dag_id = "dag_id_example" # str | The DAG ID.
@@ -384,7 +365,7 @@ with client.ApiClient(configuration) as api_client:
         # List mapped task instances
         api_response = api_instance.get_mapped_task_instances(dag_id, dag_run_id, task_id)
         pprint(api_response)
-    except client.ApiException as e:
+    except airflow_client.client.ApiException as e:
         print("Exception when calling TaskInstanceApi->get_mapped_task_instances: %s\n" % e)
 
     # example passing only required values which don't have defaults set
@@ -393,7 +374,7 @@ with client.ApiClient(configuration) as api_client:
         # List mapped task instances
         api_response = api_instance.get_mapped_task_instances(dag_id, dag_run_id, task_id, limit=limit, offset=offset, execution_date_gte=execution_date_gte, execution_date_lte=execution_date_lte, start_date_gte=start_date_gte, start_date_lte=start_date_lte, end_date_gte=end_date_gte, end_date_lte=end_date_lte, updated_at_gte=updated_at_gte, updated_at_lte=updated_at_lte, duration_gte=duration_gte, duration_lte=duration_lte, state=state, pool=pool, queue=queue, order_by=order_by)
         pprint(api_response)
-    except client.ApiException as e:
+    except airflow_client.client.ApiException as e:
         print("Exception when calling TaskInstanceApi->get_mapped_task_instances: %s\n" % e)
 ```
 
@@ -460,12 +441,12 @@ Get a task instance
 import time
 import airflow_client.client
 from airflow_client.client.api import task_instance_api
-from airflow_client.client.model.task_instance import TaskInstance
 from airflow_client.client.model.error import Error
+from airflow_client.client.model.task_instance import TaskInstance
 from pprint import pprint
 # Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = client.Configuration(
+configuration = airflow_client.client.Configuration(
     host = "/api/v1"
 )
 
@@ -475,13 +456,13 @@ configuration = client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = client.Configuration(
+configuration = airflow_client.client.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with client.ApiClient(configuration) as api_client:
+with airflow_client.client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = task_instance_api.TaskInstanceApi(api_client)
     dag_id = "dag_id_example" # str | The DAG ID.
@@ -493,7 +474,7 @@ with client.ApiClient(configuration) as api_client:
         # Get a task instance
         api_response = api_instance.get_task_instance(dag_id, dag_run_id, task_id)
         pprint(api_response)
-    except client.ApiException as e:
+    except airflow_client.client.ApiException as e:
         print("Exception when calling TaskInstanceApi->get_task_instance: %s\n" % e)
 ```
 
@@ -546,12 +527,12 @@ This endpoint allows specifying `~` as the dag_id, dag_run_id to retrieve DAG ru
 import time
 import airflow_client.client
 from airflow_client.client.api import task_instance_api
-from airflow_client.client.model.task_instance_collection import TaskInstanceCollection
 from airflow_client.client.model.error import Error
+from airflow_client.client.model.task_instance_collection import TaskInstanceCollection
 from pprint import pprint
 # Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = client.Configuration(
+configuration = airflow_client.client.Configuration(
     host = "/api/v1"
 )
 
@@ -561,13 +542,13 @@ configuration = client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = client.Configuration(
+configuration = airflow_client.client.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with client.ApiClient(configuration) as api_client:
+with airflow_client.client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = task_instance_api.TaskInstanceApi(api_client)
     dag_id = "dag_id_example" # str | The DAG ID.
@@ -599,7 +580,7 @@ with client.ApiClient(configuration) as api_client:
         # List task instances
         api_response = api_instance.get_task_instances(dag_id, dag_run_id)
         pprint(api_response)
-    except client.ApiException as e:
+    except airflow_client.client.ApiException as e:
         print("Exception when calling TaskInstanceApi->get_task_instances: %s\n" % e)
 
     # example passing only required values which don't have defaults set
@@ -608,7 +589,7 @@ with client.ApiClient(configuration) as api_client:
         # List task instances
         api_response = api_instance.get_task_instances(dag_id, dag_run_id, execution_date_gte=execution_date_gte, execution_date_lte=execution_date_lte, start_date_gte=start_date_gte, start_date_lte=start_date_lte, end_date_gte=end_date_gte, end_date_lte=end_date_lte, updated_at_gte=updated_at_gte, updated_at_lte=updated_at_lte, duration_gte=duration_gte, duration_lte=duration_lte, state=state, pool=pool, queue=queue, limit=limit, offset=offset)
         pprint(api_response)
-    except client.ApiException as e:
+    except airflow_client.client.ApiException as e:
         print("Exception when calling TaskInstanceApi->get_task_instances: %s\n" % e)
 ```
 
@@ -674,13 +655,13 @@ List task instances from all DAGs and DAG runs. This endpoint is a POST to allow
 import time
 import airflow_client.client
 from airflow_client.client.api import task_instance_api
-from airflow_client.client.model.task_instance_collection import TaskInstanceCollection
 from airflow_client.client.model.error import Error
+from airflow_client.client.model.task_instance_collection import TaskInstanceCollection
 from airflow_client.client.model.list_task_instance_form import ListTaskInstanceForm
 from pprint import pprint
 # Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = client.Configuration(
+configuration = airflow_client.client.Configuration(
     host = "/api/v1"
 )
 
@@ -690,13 +671,13 @@ configuration = client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = client.Configuration(
+configuration = airflow_client.client.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with client.ApiClient(configuration) as api_client:
+with airflow_client.client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = task_instance_api.TaskInstanceApi(api_client)
     list_task_instance_form = ListTaskInstanceForm(
@@ -706,25 +687,25 @@ with client.ApiClient(configuration) as api_client:
         dag_run_ids=[
             "dag_run_ids_example",
         ],
-        task_ids=[
-            "task_ids_example",
-        ],
-        execution_date_gte=dateutil_parser('1970-01-01T00:00:00.00Z'),
-        execution_date_lte=dateutil_parser('1970-01-01T00:00:00.00Z'),
-        start_date_gte=dateutil_parser('1970-01-01T00:00:00.00Z'),
-        start_date_lte=dateutil_parser('1970-01-01T00:00:00.00Z'),
-        end_date_gte=dateutil_parser('1970-01-01T00:00:00.00Z'),
-        end_date_lte=dateutil_parser('1970-01-01T00:00:00.00Z'),
         duration_gte=3.14,
         duration_lte=3.14,
-        state=[
-            TaskState("state_example"),
-        ],
+        end_date_gte=dateutil_parser('1970-01-01T00:00:00.00Z'),
+        end_date_lte=dateutil_parser('1970-01-01T00:00:00.00Z'),
+        execution_date_gte=dateutil_parser('1970-01-01T00:00:00.00Z'),
+        execution_date_lte=dateutil_parser('1970-01-01T00:00:00.00Z'),
         pool=[
             "pool_example",
         ],
         queue=[
             "queue_example",
+        ],
+        start_date_gte=dateutil_parser('1970-01-01T00:00:00.00Z'),
+        start_date_lte=dateutil_parser('1970-01-01T00:00:00.00Z'),
+        state=[
+            TaskState("state_example"),
+        ],
+        task_ids=[
+            "task_ids_example",
         ],
     ) # ListTaskInstanceForm | 
 
@@ -733,7 +714,7 @@ with client.ApiClient(configuration) as api_client:
         # List task instances (batch)
         api_response = api_instance.get_task_instances_batch(list_task_instance_form)
         pprint(api_response)
-    except client.ApiException as e:
+    except airflow_client.client.ApiException as e:
         print("Exception when calling TaskInstanceApi->get_task_instances_batch: %s\n" % e)
 ```
 
@@ -784,13 +765,13 @@ Updates the state for single mapped task instance. *New in version 2.5.0*
 import time
 import airflow_client.client
 from airflow_client.client.api import task_instance_api
-from airflow_client.client.model.task_instance_reference import TaskInstanceReference
 from airflow_client.client.model.error import Error
+from airflow_client.client.model.task_instance_reference import TaskInstanceReference
 from airflow_client.client.model.update_task_instance import UpdateTaskInstance
 from pprint import pprint
 # Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = client.Configuration(
+configuration = airflow_client.client.Configuration(
     host = "/api/v1"
 )
 
@@ -800,13 +781,13 @@ configuration = client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = client.Configuration(
+configuration = airflow_client.client.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with client.ApiClient(configuration) as api_client:
+with airflow_client.client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = task_instance_api.TaskInstanceApi(api_client)
     dag_id = "dag_id_example" # str | The DAG ID.
@@ -823,7 +804,7 @@ with client.ApiClient(configuration) as api_client:
         # Updates the state of a mapped task instance
         api_response = api_instance.patch_mapped_task_instance(dag_id, dag_run_id, task_id, map_index)
         pprint(api_response)
-    except client.ApiException as e:
+    except airflow_client.client.ApiException as e:
         print("Exception when calling TaskInstanceApi->patch_mapped_task_instance: %s\n" % e)
 
     # example passing only required values which don't have defaults set
@@ -832,7 +813,7 @@ with client.ApiClient(configuration) as api_client:
         # Updates the state of a mapped task instance
         api_response = api_instance.patch_mapped_task_instance(dag_id, dag_run_id, task_id, map_index, update_task_instance=update_task_instance)
         pprint(api_response)
-    except client.ApiException as e:
+    except airflow_client.client.ApiException as e:
         print("Exception when calling TaskInstanceApi->patch_mapped_task_instance: %s\n" % e)
 ```
 
@@ -887,13 +868,13 @@ Updates the state for single task instance. *New in version 2.5.0*
 import time
 import airflow_client.client
 from airflow_client.client.api import task_instance_api
-from airflow_client.client.model.task_instance_reference import TaskInstanceReference
 from airflow_client.client.model.error import Error
+from airflow_client.client.model.task_instance_reference import TaskInstanceReference
 from airflow_client.client.model.update_task_instance import UpdateTaskInstance
 from pprint import pprint
 # Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = client.Configuration(
+configuration = airflow_client.client.Configuration(
     host = "/api/v1"
 )
 
@@ -903,13 +884,13 @@ configuration = client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = client.Configuration(
+configuration = airflow_client.client.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with client.ApiClient(configuration) as api_client:
+with airflow_client.client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = task_instance_api.TaskInstanceApi(api_client)
     dag_id = "dag_id_example" # str | The DAG ID.
@@ -925,7 +906,7 @@ with client.ApiClient(configuration) as api_client:
         # Updates the state of a task instance
         api_response = api_instance.patch_task_instance(dag_id, dag_run_id, task_id, update_task_instance)
         pprint(api_response)
-    except client.ApiException as e:
+    except airflow_client.client.ApiException as e:
         print("Exception when calling TaskInstanceApi->patch_task_instance: %s\n" % e)
 ```
 
@@ -979,13 +960,13 @@ Update the manual user note of a mapped Task Instance.  *New in version 2.5.0*
 import time
 import airflow_client.client
 from airflow_client.client.api import task_instance_api
-from airflow_client.client.model.set_task_instance_note import SetTaskInstanceNote
-from airflow_client.client.model.task_instance import TaskInstance
 from airflow_client.client.model.error import Error
+from airflow_client.client.model.task_instance import TaskInstance
+from airflow_client.client.model.set_task_instance_note import SetTaskInstanceNote
 from pprint import pprint
 # Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = client.Configuration(
+configuration = airflow_client.client.Configuration(
     host = "/api/v1"
 )
 
@@ -995,13 +976,13 @@ configuration = client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = client.Configuration(
+configuration = airflow_client.client.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with client.ApiClient(configuration) as api_client:
+with airflow_client.client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = task_instance_api.TaskInstanceApi(api_client)
     dag_id = "dag_id_example" # str | The DAG ID.
@@ -1017,7 +998,7 @@ with client.ApiClient(configuration) as api_client:
         # Update the TaskInstance note.
         api_response = api_instance.set_mapped_task_instance_note(dag_id, dag_run_id, task_id, map_index, set_task_instance_note)
         pprint(api_response)
-    except client.ApiException as e:
+    except airflow_client.client.ApiException as e:
         print("Exception when calling TaskInstanceApi->set_mapped_task_instance_note: %s\n" % e)
 ```
 
@@ -1073,13 +1054,13 @@ Update the manual user note of a non-mapped Task Instance.  *New in version 2.5.
 import time
 import airflow_client.client
 from airflow_client.client.api import task_instance_api
-from airflow_client.client.model.set_task_instance_note import SetTaskInstanceNote
-from airflow_client.client.model.task_instance import TaskInstance
 from airflow_client.client.model.error import Error
+from airflow_client.client.model.task_instance import TaskInstance
+from airflow_client.client.model.set_task_instance_note import SetTaskInstanceNote
 from pprint import pprint
 # Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = client.Configuration(
+configuration = airflow_client.client.Configuration(
     host = "/api/v1"
 )
 
@@ -1089,13 +1070,13 @@ configuration = client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = client.Configuration(
+configuration = airflow_client.client.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with client.ApiClient(configuration) as api_client:
+with airflow_client.client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = task_instance_api.TaskInstanceApi(api_client)
     dag_id = "dag_id_example" # str | The DAG ID.
@@ -1110,7 +1091,7 @@ with client.ApiClient(configuration) as api_client:
         # Update the TaskInstance note.
         api_response = api_instance.set_task_instance_note(dag_id, dag_run_id, task_id, set_task_instance_note)
         pprint(api_response)
-    except client.ApiException as e:
+    except airflow_client.client.ApiException as e:
         print("Exception when calling TaskInstanceApi->set_task_instance_note: %s\n" % e)
 ```
 

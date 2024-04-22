@@ -1,23 +1,4 @@
-<!--
- Licensed to the Apache Software Foundation (ASF) under one
- or more contributor license agreements.  See the NOTICE file
- distributed with this work for additional information
- regarding copyright ownership.  The ASF licenses this file
- to you under the Apache License, Version 2.0 (the
- "License"); you may not use this file except in compliance
- with the License.  You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing,
- software distributed under the License is distributed on an
- "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- KIND, either express or implied.  See the License for the
- specific language governing permissions and limitations
- under the License.
- -->
-
-# Apache Airflow Python Client.PluginApi
+# airflow_client.client.PluginApi
 
 All URIs are relative to */api/v1*
 
@@ -41,12 +22,12 @@ Get a list of loaded plugins.  *New in version 2.1.0*
 import time
 import airflow_client.client
 from airflow_client.client.api import plugin_api
-from airflow_client.client.model.plugin_collection import PluginCollection
 from airflow_client.client.model.error import Error
+from airflow_client.client.model.plugin_collection import PluginCollection
 from pprint import pprint
 # Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = client.Configuration(
+configuration = airflow_client.client.Configuration(
     host = "/api/v1"
 )
 
@@ -56,13 +37,13 @@ configuration = client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = client.Configuration(
+configuration = airflow_client.client.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with client.ApiClient(configuration) as api_client:
+with airflow_client.client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = plugin_api.PluginApi(api_client)
     limit = 100 # int | The numbers of items to return. (optional) if omitted the server will use the default value of 100
@@ -74,7 +55,7 @@ with client.ApiClient(configuration) as api_client:
         # Get a list of loaded plugins
         api_response = api_instance.get_plugins(limit=limit, offset=offset)
         pprint(api_response)
-    except client.ApiException as e:
+    except airflow_client.client.ApiException as e:
         print("Exception when calling PluginApi->get_plugins: %s\n" % e)
 ```
 

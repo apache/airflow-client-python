@@ -1,22 +1,3 @@
-<!--
- Licensed to the Apache Software Foundation (ASF) under one
- or more contributor license agreements.  See the NOTICE file
- distributed with this work for additional information
- regarding copyright ownership.  The ASF licenses this file
- to you under the Apache License, Version 2.0 (the
- "License"); you may not use this file except in compliance
- with the License.  You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing,
- software distributed under the License is distributed on an
- "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- KIND, either express or implied.  See the License for the
- specific language governing permissions and limitations
- under the License.
- -->
-
 # RelativeDelta
 
 Relative delta
@@ -25,21 +6,21 @@ Relative delta
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **type** | **str** |  | 
-**years** | **int** |  | 
-**months** | **int** |  | 
-**days** | **int** |  | 
-**leapdays** | **int** |  | 
-**hours** | **int** |  | 
-**minutes** | **int** |  | 
-**seconds** | **int** |  | 
-**microseconds** | **int** |  | 
-**year** | **int** |  | 
-**month** | **int** |  | 
 **day** | **int** |  | 
+**days** | **int** |  | 
 **hour** | **int** |  | 
-**minute** | **int** |  | 
-**second** | **int** |  | 
+**hours** | **int** |  | 
+**leapdays** | **int** |  | 
 **microsecond** | **int** |  | 
+**microseconds** | **int** |  | 
+**minute** | **int** |  | 
+**minutes** | **int** |  | 
+**month** | **int** |  | 
+**months** | **int** |  | 
+**second** | **int** |  | 
+**seconds** | **int** |  | 
+**year** | **int** |  | 
+**years** | **int** |  | 
 **any string name** | **bool, date, datetime, dict, float, int, list, str, none_type** | any string name can be used but the value must be the correct type | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

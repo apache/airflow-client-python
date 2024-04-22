@@ -1,20 +1,3 @@
-# Licensed to the Apache Software Foundation (ASF) under one
-# or more contributor license agreements.  See the NOTICE file
-# distributed with this work for additional information
-# regarding copyright ownership.  The ASF licenses this file
-# to you under the Apache License, Version 2.0 (the
-# "License"); you may not use this file except in compliance
-# with the License.  You may obtain a copy of the License at
-#
-#   http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing,
-# software distributed under the License is distributed on an
-# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-# KIND, either express or implied.  See the License for the
-# specific language governing permissions and limitations
-# under the License.
-
 # flake8: noqa
 
 # import all models into this package
@@ -45,6 +28,7 @@ from airflow_client.client.model.connection_collection import ConnectionCollecti
 from airflow_client.client.model.connection_collection_all_of import ConnectionCollectionAllOf
 from airflow_client.client.model.connection_collection_item import ConnectionCollectionItem
 from airflow_client.client.model.connection_test import ConnectionTest
+from airflow_client.client.model.create_dataset_event import CreateDatasetEvent
 from airflow_client.client.model.cron_expression import CronExpression
 from airflow_client.client.model.dag import DAG
 from airflow_client.client.model.dag_collection import DAGCollection
@@ -91,6 +75,9 @@ from airflow_client.client.model.pool_collection import PoolCollection
 from airflow_client.client.model.pool_collection_all_of import PoolCollectionAllOf
 from airflow_client.client.model.provider import Provider
 from airflow_client.client.model.provider_collection import ProviderCollection
+from airflow_client.client.model.queued_event import QueuedEvent
+from airflow_client.client.model.queued_event_collection import QueuedEventCollection
+from airflow_client.client.model.queued_event_collection_all_of import QueuedEventCollectionAllOf
 from airflow_client.client.model.relative_delta import RelativeDelta
 from airflow_client.client.model.resource import Resource
 from airflow_client.client.model.role import Role

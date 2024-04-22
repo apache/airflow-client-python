@@ -1,23 +1,4 @@
-<!--
- Licensed to the Apache Software Foundation (ASF) under one
- or more contributor license agreements.  See the NOTICE file
- distributed with this work for additional information
- regarding copyright ownership.  The ASF licenses this file
- to you under the Apache License, Version 2.0 (the
- "License"); you may not use this file except in compliance
- with the License.  You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing,
- software distributed under the License is distributed on an
- "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- KIND, either express or implied.  See the License for the
- specific language governing permissions and limitations
- under the License.
- -->
-
-# Apache Airflow Python Client.RoleApi
+# airflow_client.client.RoleApi
 
 All URIs are relative to */api/v1*
 
@@ -35,7 +16,7 @@ Method | HTTP request | Description
 
 Delete a role
 
-Delete a role.  *New in version 2.1.0* 
+Delete a role.  *This API endpoint is deprecated, please use the endpoint `/auth/fab/v1` for this operation instead.* 
 
 ### Example
 
@@ -49,7 +30,7 @@ from airflow_client.client.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = client.Configuration(
+configuration = airflow_client.client.Configuration(
     host = "/api/v1"
 )
 
@@ -59,13 +40,13 @@ configuration = client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = client.Configuration(
+configuration = airflow_client.client.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with client.ApiClient(configuration) as api_client:
+with airflow_client.client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = role_api.RoleApi(api_client)
     role_name = "role_name_example" # str | The role name
@@ -74,7 +55,7 @@ with client.ApiClient(configuration) as api_client:
     try:
         # Delete a role
         api_instance.delete_role(role_name)
-    except client.ApiException as e:
+    except airflow_client.client.ApiException as e:
         print("Exception when calling RoleApi->delete_role: %s\n" % e)
 ```
 
@@ -116,7 +97,7 @@ void (empty response body)
 
 Get a role
 
-Get a role.  *New in version 2.1.0* 
+Get a role.  *This API endpoint is deprecated, please use the endpoint `/auth/fab/v1` for this operation instead.* 
 
 ### Example
 
@@ -126,12 +107,12 @@ Get a role.  *New in version 2.1.0*
 import time
 import airflow_client.client
 from airflow_client.client.api import role_api
-from airflow_client.client.model.role import Role
 from airflow_client.client.model.error import Error
+from airflow_client.client.model.role import Role
 from pprint import pprint
 # Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = client.Configuration(
+configuration = airflow_client.client.Configuration(
     host = "/api/v1"
 )
 
@@ -141,13 +122,13 @@ configuration = client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = client.Configuration(
+configuration = airflow_client.client.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with client.ApiClient(configuration) as api_client:
+with airflow_client.client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = role_api.RoleApi(api_client)
     role_name = "role_name_example" # str | The role name
@@ -157,7 +138,7 @@ with client.ApiClient(configuration) as api_client:
         # Get a role
         api_response = api_instance.get_role(role_name)
         pprint(api_response)
-    except client.ApiException as e:
+    except airflow_client.client.ApiException as e:
         print("Exception when calling RoleApi->get_role: %s\n" % e)
 ```
 
@@ -198,7 +179,7 @@ Name | Type | Description  | Notes
 
 List roles
 
-Get a list of roles.  *New in version 2.1.0* 
+Get a list of roles.  *This API endpoint is deprecated, please use the endpoint `/auth/fab/v1` for this operation instead.* 
 
 ### Example
 
@@ -213,7 +194,7 @@ from airflow_client.client.model.role_collection import RoleCollection
 from pprint import pprint
 # Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = client.Configuration(
+configuration = airflow_client.client.Configuration(
     host = "/api/v1"
 )
 
@@ -223,13 +204,13 @@ configuration = client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = client.Configuration(
+configuration = airflow_client.client.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with client.ApiClient(configuration) as api_client:
+with airflow_client.client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = role_api.RoleApi(api_client)
     limit = 100 # int | The numbers of items to return. (optional) if omitted the server will use the default value of 100
@@ -242,7 +223,7 @@ with client.ApiClient(configuration) as api_client:
         # List roles
         api_response = api_instance.get_roles(limit=limit, offset=offset, order_by=order_by)
         pprint(api_response)
-    except client.ApiException as e:
+    except airflow_client.client.ApiException as e:
         print("Exception when calling RoleApi->get_roles: %s\n" % e)
 ```
 
@@ -284,7 +265,7 @@ Name | Type | Description  | Notes
 
 Update a role
 
-Update a role.  *New in version 2.1.0* 
+Update a role.  *This API endpoint is deprecated, please use the endpoint `/auth/fab/v1` for this operation instead.* 
 
 ### Example
 
@@ -294,12 +275,12 @@ Update a role.  *New in version 2.1.0*
 import time
 import airflow_client.client
 from airflow_client.client.api import role_api
-from airflow_client.client.model.role import Role
 from airflow_client.client.model.error import Error
+from airflow_client.client.model.role import Role
 from pprint import pprint
 # Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = client.Configuration(
+configuration = airflow_client.client.Configuration(
     host = "/api/v1"
 )
 
@@ -309,18 +290,17 @@ configuration = client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = client.Configuration(
+configuration = airflow_client.client.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with client.ApiClient(configuration) as api_client:
+with airflow_client.client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = role_api.RoleApi(api_client)
     role_name = "role_name_example" # str | The role name
     role = Role(
-        name="name_example",
         actions=[
             ActionResource(
                 action=Action(
@@ -331,6 +311,7 @@ with client.ApiClient(configuration) as api_client:
                 ),
             ),
         ],
+        name="name_example",
     ) # Role | 
     update_mask = [
         "update_mask_example",
@@ -341,7 +322,7 @@ with client.ApiClient(configuration) as api_client:
         # Update a role
         api_response = api_instance.patch_role(role_name, role)
         pprint(api_response)
-    except client.ApiException as e:
+    except airflow_client.client.ApiException as e:
         print("Exception when calling RoleApi->patch_role: %s\n" % e)
 
     # example passing only required values which don't have defaults set
@@ -350,7 +331,7 @@ with client.ApiClient(configuration) as api_client:
         # Update a role
         api_response = api_instance.patch_role(role_name, role, update_mask=update_mask)
         pprint(api_response)
-    except client.ApiException as e:
+    except airflow_client.client.ApiException as e:
         print("Exception when calling RoleApi->patch_role: %s\n" % e)
 ```
 
@@ -394,7 +375,7 @@ Name | Type | Description  | Notes
 
 Create a role
 
-Create a new role.  *New in version 2.1.0* 
+Create a new role.  *This API endpoint is deprecated, please use the endpoint `/auth/fab/v1` for this operation instead.* 
 
 ### Example
 
@@ -404,12 +385,12 @@ Create a new role.  *New in version 2.1.0*
 import time
 import airflow_client.client
 from airflow_client.client.api import role_api
-from airflow_client.client.model.role import Role
 from airflow_client.client.model.error import Error
+from airflow_client.client.model.role import Role
 from pprint import pprint
 # Defining the host is optional and defaults to /api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = client.Configuration(
+configuration = airflow_client.client.Configuration(
     host = "/api/v1"
 )
 
@@ -419,17 +400,16 @@ configuration = client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: Basic
-configuration = client.Configuration(
+configuration = airflow_client.client.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with client.ApiClient(configuration) as api_client:
+with airflow_client.client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = role_api.RoleApi(api_client)
     role = Role(
-        name="name_example",
         actions=[
             ActionResource(
                 action=Action(
@@ -440,6 +420,7 @@ with client.ApiClient(configuration) as api_client:
                 ),
             ),
         ],
+        name="name_example",
     ) # Role | 
 
     # example passing only required values which don't have defaults set
@@ -447,7 +428,7 @@ with client.ApiClient(configuration) as api_client:
         # Create a role
         api_response = api_instance.post_role(role)
         pprint(api_response)
-    except client.ApiException as e:
+    except airflow_client.client.ApiException as e:
         print("Exception when calling RoleApi->post_role: %s\n" % e)
 ```
 

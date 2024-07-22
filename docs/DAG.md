@@ -21,6 +21,7 @@ Name | Type | Description | Notes
 **last_pickled** | **datetime, none_type** | The last time the DAG was pickled.  *New in version 2.3.0*  | [optional] [readonly] 
 **max_active_runs** | **int, none_type** | Maximum number of active DAG runs for the DAG  *New in version 2.3.0*  | [optional] [readonly] 
 **max_active_tasks** | **int, none_type** | Maximum number of active tasks that can be run on the DAG  *New in version 2.3.0*  | [optional] [readonly] 
+**max_consecutive_failed_dag_runs** | **int, none_type** | (experimental) The maximum number of consecutive DAG failures before DAG is automatically paused.  *New in version 2.9.0*  | [optional] [readonly] 
 **next_dagrun** | **datetime, none_type** | The logical date of the next dag run.  *New in version 2.3.0*  | [optional] [readonly] 
 **next_dagrun_create_after** | **datetime, none_type** | Earliest time at which this &#x60;&#x60;next_dagrun&#x60;&#x60; can be created.  *New in version 2.3.0*  | [optional] [readonly] 
 **next_dagrun_data_interval_end** | **datetime, none_type** | The end of the interval of the next dag run.  *New in version 2.3.0*  | [optional] [readonly] 

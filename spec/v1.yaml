@@ -1054,6 +1054,17 @@ components:
           nullable: true
           readOnly: true
           type: integer
+        max_consecutive_failed_dag_runs:
+          description: '(experimental) The maximum number of consecutive DAG failures
+            before DAG is automatically paused.
+
+
+            *New in version 2.9.0*
+
+            '
+          nullable: true
+          readOnly: true
+          type: integer
         next_dagrun:
           description: 'The logical date of the next dag run.
 
@@ -3329,7 +3340,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Airflow API (Stable)
-  version: 2.9.0
+  version: 2.9.3
 openapi: 3.0.3
 paths:
   /config:

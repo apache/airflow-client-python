@@ -405,7 +405,7 @@ conf = airflow_client.client.Configuration(
                "OS: {env}\n"\
                "Python Version: {pyversion}\n"\
                "Version of the API: 2.9.3\n"\
-               "SDK Package Version: &quot;2.9.3&quot;".\
+               "SDK Package Version: &quot;2.9.1&quot;".\
                format(env=sys.platform, pyversion=sys.version)
 
     def get_host_settings(self):

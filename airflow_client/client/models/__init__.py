@@ -41,6 +41,10 @@ from airflow_client.client.model.dag_run_collection_all_of import DAGRunCollecti
 from airflow_client.client.model.dag_processor_status import DagProcessorStatus
 from airflow_client.client.model.dag_schedule_dataset_reference import DagScheduleDatasetReference
 from airflow_client.client.model.dag_state import DagState
+from airflow_client.client.model.dag_stats_collection_item import DagStatsCollectionItem
+from airflow_client.client.model.dag_stats_collection_schema import DagStatsCollectionSchema
+from airflow_client.client.model.dag_stats_collection_schema_all_of import DagStatsCollectionSchemaAllOf
+from airflow_client.client.model.dag_stats_state_collection_item import DagStatsStateCollectionItem
 from airflow_client.client.model.dag_warning import DagWarning
 from airflow_client.client.model.dag_warning_collection import DagWarningCollection
 from airflow_client.client.model.dag_warning_collection_all_of import DagWarningCollectionAllOf
@@ -92,9 +96,11 @@ from airflow_client.client.model.tag import Tag
 from airflow_client.client.model.task import Task
 from airflow_client.client.model.task_collection import TaskCollection
 from airflow_client.client.model.task_extra_links import TaskExtraLinks
+from airflow_client.client.model.task_failed_dependency import TaskFailedDependency
 from airflow_client.client.model.task_instance import TaskInstance
 from airflow_client.client.model.task_instance_collection import TaskInstanceCollection
 from airflow_client.client.model.task_instance_collection_all_of import TaskInstanceCollectionAllOf
+from airflow_client.client.model.task_instance_dependency_collection import TaskInstanceDependencyCollection
 from airflow_client.client.model.task_instance_reference import TaskInstanceReference
 from airflow_client.client.model.task_instance_reference_collection import TaskInstanceReferenceCollection
 from airflow_client.client.model.task_outlet_dataset_reference import TaskOutletDatasetReference

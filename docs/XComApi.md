@@ -153,6 +153,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     xcom_key = "xcom_key_example" # str | The XCom key.
     map_index = 1 # int | Filter on map index for mapped task. (optional)
     deserialize = False # bool | Whether to deserialize an XCom value when using a custom XCom backend.  The XCom API endpoint calls `orm_deserialize_value` by default since an XCom may contain value that is potentially expensive to deserialize in the web server. Setting this to true overrides the consideration, and calls `deserialize_value` instead.  This parameter is not meaningful when using the default XCom backend.  *New in version 2.4.0*  (optional) if omitted the server will use the default value of False
+    stringify = True # bool | Whether to convert the XCom value to be a string. XCom values can be of Any data type.  If set to true (default) the Any value will be returned as string, e.g. a Python representation of a dict. If set to false it will return the raw data as dict, list, string or whatever was stored.  *New in version 2.10.0*  (optional) if omitted the server will use the default value of True
 
     # example passing only required values which don't have defaults set
     try:
@@ -166,7 +167,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # Get an XCom entry
-        api_response = api_instance.get_xcom_entry(dag_id, dag_run_id, task_id, xcom_key, map_index=map_index, deserialize=deserialize)
+        api_response = api_instance.get_xcom_entry(dag_id, dag_run_id, task_id, xcom_key, map_index=map_index, deserialize=deserialize, stringify=stringify)
         pprint(api_response)
     except airflow_client.client.ApiException as e:
         print("Exception when calling XComApi->get_xcom_entry: %s\n" % e)
@@ -183,6 +184,7 @@ Name | Type | Description  | Notes
  **xcom_key** | **str**| The XCom key. |
  **map_index** | **int**| Filter on map index for mapped task. | [optional]
  **deserialize** | **bool**| Whether to deserialize an XCom value when using a custom XCom backend.  The XCom API endpoint calls &#x60;orm_deserialize_value&#x60; by default since an XCom may contain value that is potentially expensive to deserialize in the web server. Setting this to true overrides the consideration, and calls &#x60;deserialize_value&#x60; instead.  This parameter is not meaningful when using the default XCom backend.  *New in version 2.4.0*  | [optional] if omitted the server will use the default value of False
+ **stringify** | **bool**| Whether to convert the XCom value to be a string. XCom values can be of Any data type.  If set to true (default) the Any value will be returned as string, e.g. a Python representation of a dict. If set to false it will return the raw data as dict, list, string or whatever was stored.  *New in version 2.10.0*  | [optional] if omitted the server will use the default value of True
 
 ### Return type
 

@@ -1,6 +1,6 @@
 # EventLogCollection
 
-Collection of event logs.  *Changed in version 2.1.0*&#58; 'total_entries' field is added. 
+Collection of event logs.  *Changed in version 2.1.0*&#58; 'total_entries' field is added. *Changed in version 2.10.0*&#58; 'try_number' and 'map_index' fields are added. 
 
 ## Properties
 Name | Type | Description | Notes

@@ -133,6 +133,8 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     dag_id = "dag_id_example" # str | Returns objects matched by the DAG ID. (optional)
     task_id = "task_id_example" # str | Returns objects matched by the Task ID. (optional)
     run_id = "run_id_example" # str | Returns objects matched by the Run ID. (optional)
+    map_index = 1 # int | Filter on map index for mapped task. (optional)
+    try_number = 1 # int | Filter on try_number for task instance. (optional)
     event = "event_example" # str | The name of event log. (optional)
     owner = "owner_example" # str | The owner's name of event log. (optional)
     before = dateutil_parser('1970-01-01T00:00:00.00Z') # datetime | Timestamp to select event logs occurring before. (optional)
@@ -144,7 +146,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # List log entries
-        api_response = api_instance.get_event_logs(limit=limit, offset=offset, order_by=order_by, dag_id=dag_id, task_id=task_id, run_id=run_id, event=event, owner=owner, before=before, after=after, included_events=included_events, excluded_events=excluded_events)
+        api_response = api_instance.get_event_logs(limit=limit, offset=offset, order_by=order_by, dag_id=dag_id, task_id=task_id, run_id=run_id, map_index=map_index, try_number=try_number, event=event, owner=owner, before=before, after=after, included_events=included_events, excluded_events=excluded_events)
         pprint(api_response)
     except airflow_client.client.ApiException as e:
         print("Exception when calling EventLogApi->get_event_logs: %s\n" % e)
@@ -161,6 +163,8 @@ Name | Type | Description  | Notes
  **dag_id** | **str**| Returns objects matched by the DAG ID. | [optional]
  **task_id** | **str**| Returns objects matched by the Task ID. | [optional]
  **run_id** | **str**| Returns objects matched by the Run ID. | [optional]
+ **map_index** | **int**| Filter on map index for mapped task. | [optional]
+ **try_number** | **int**| Filter on try_number for task instance. | [optional]
  **event** | **str**| The name of event log. | [optional]
  **owner** | **str**| The owner&#39;s name of event log. | [optional]
  **before** | **datetime**| Timestamp to select event logs occurring before. | [optional]

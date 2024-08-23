@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **end_date_lte** | **datetime** | Returns objects less than or equal to the specified date.  This can be combined with start_date_gte parameter to receive only the selected period.  | [optional] 
 **execution_date_gte** | **datetime** | Returns objects greater or equal to the specified date.  This can be combined with execution_date_lte parameter to receive only the selected period.  | [optional] 
 **execution_date_lte** | **datetime** | Returns objects less than or equal to the specified date.  This can be combined with execution_date_gte parameter to receive only the selected period.  | [optional] 
+**executor** | **[str]** | The value can be repeated to retrieve multiple matching values (OR condition). | [optional] 
 **pool** | **[str]** | The value can be repeated to retrieve multiple matching values (OR condition). | [optional] 
 **queue** | **[str]** | The value can be repeated to retrieve multiple matching values (OR condition). | [optional] 
 **start_date_gte** | **datetime** | Returns objects greater or equal the specified date.  This can be combined with start_date_lte parameter to receive only the selected period.  | [optional] 

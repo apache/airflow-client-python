@@ -18,6 +18,7 @@ from airflow_client.client.api.config_api import ConfigApi
 from airflow_client.client.api.connection_api import ConnectionApi
 from airflow_client.client.api.dag_api import DAGApi
 from airflow_client.client.api.dag_run_api import DAGRunApi
+from airflow_client.client.api.dag_stats_api import DagStatsApi
 from airflow_client.client.api.dag_warning_api import DagWarningApi
 from airflow_client.client.api.dataset_api import DatasetApi
 from airflow_client.client.api.event_log_api import EventLogApi

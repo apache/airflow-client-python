@@ -15,6 +15,7 @@ Method | HTTP request | Description
 [**patch_dags**](DAGApi.md#patch_dags) | **PATCH** /dags | Update DAGs
 [**post_clear_task_instances**](DAGApi.md#post_clear_task_instances) | **POST** /dags/{dag_id}/clearTaskInstances | Clear a set of task instances
 [**post_set_task_instances_state**](DAGApi.md#post_set_task_instances_state) | **POST** /dags/{dag_id}/updateTaskInstancesState | Set a state of task instances
+[**reparse_dag_file**](DAGApi.md#reparse_dag_file) | **PUT** /parseDagFile/{file_token} | Request re-parsing of a DAG file
 
 
 # **delete_dag**
@@ -1042,6 +1043,86 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success. |  -  |
+**401** | Request not authenticated due to missing, invalid, authentication info. |  -  |
+**403** | Client does not have sufficient permission. |  -  |
+**404** | A specified resource is not found. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **reparse_dag_file**
+> reparse_dag_file(file_token)
+
+Request re-parsing of a DAG file
+
+Request re-parsing of existing DAG files using a file token. 
+
+### Example
+
+* Basic Authentication (Basic):
+
+```python
+import time
+import airflow_client.client
+from airflow_client.client.api import dag_api
+from airflow_client.client.model.error import Error
+from pprint import pprint
+# Defining the host is optional and defaults to /api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = airflow_client.client.Configuration(
+    host = "/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: Basic
+configuration = airflow_client.client.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
+
+# Enter a context with an instance of the API client
+with airflow_client.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = dag_api.DAGApi(api_client)
+    file_token = "file_token_example" # str | The key containing the encrypted path to the file. Encryption and decryption take place only on the server. This prevents the client from reading an non-DAG file. This also ensures API extensibility, because the format of encrypted data may change. 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Request re-parsing of a DAG file
+        api_instance.reparse_dag_file(file_token)
+    except airflow_client.client.ApiException as e:
+        print("Exception when calling DAGApi->reparse_dag_file: %s\n" % e)
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **file_token** | **str**| The key containing the encrypted path to the file. Encryption and decryption take place only on the server. This prevents the client from reading an non-DAG file. This also ensures API extensibility, because the format of encrypted data may change.  |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Success. |  -  |
 **401** | Request not authenticated due to missing, invalid, authentication info. |  -  |
 **403** | Client does not have sufficient permission. |  -  |
 **404** | A specified resource is not found. |  -  |

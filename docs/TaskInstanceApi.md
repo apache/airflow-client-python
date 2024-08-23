@@ -7,8 +7,14 @@ Method | HTTP request | Description
 [**get_extra_links**](TaskInstanceApi.md#get_extra_links) | **GET** /dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/links | List extra links
 [**get_log**](TaskInstanceApi.md#get_log) | **GET** /dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/logs/{task_try_number} | Get logs
 [**get_mapped_task_instance**](TaskInstanceApi.md#get_mapped_task_instance) | **GET** /dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/{map_index} | Get a mapped task instance
+[**get_mapped_task_instance_dependencies**](TaskInstanceApi.md#get_mapped_task_instance_dependencies) | **GET** /dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/{map_index}/dependencies | Get task dependencies blocking task from getting scheduled.
+[**get_mapped_task_instance_tries**](TaskInstanceApi.md#get_mapped_task_instance_tries) | **GET** /dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/{map_index}/tries | List mapped task instance tries
+[**get_mapped_task_instance_try_details**](TaskInstanceApi.md#get_mapped_task_instance_try_details) | **GET** /dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/{map_index}/tries/{task_try_number} | get mapped taskinstance try
 [**get_mapped_task_instances**](TaskInstanceApi.md#get_mapped_task_instances) | **GET** /dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/listMapped | List mapped task instances
 [**get_task_instance**](TaskInstanceApi.md#get_task_instance) | **GET** /dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id} | Get a task instance
+[**get_task_instance_dependencies**](TaskInstanceApi.md#get_task_instance_dependencies) | **GET** /dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/dependencies | Get task dependencies blocking task from getting scheduled.
+[**get_task_instance_tries**](TaskInstanceApi.md#get_task_instance_tries) | **GET** /dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/tries | List task instance tries
+[**get_task_instance_try_details**](TaskInstanceApi.md#get_task_instance_try_details) | **GET** /dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/tries/{task_try_number} | get taskinstance try
 [**get_task_instances**](TaskInstanceApi.md#get_task_instances) | **GET** /dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances | List task instances
 [**get_task_instances_batch**](TaskInstanceApi.md#get_task_instances_batch) | **POST** /dags/~/dagRuns/~/taskInstances/list | List task instances (batch)
 [**patch_mapped_task_instance**](TaskInstanceApi.md#patch_mapped_task_instance) | **PATCH** /dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/{map_index} | Updates the state of a mapped task instance
@@ -295,6 +301,288 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_mapped_task_instance_dependencies**
+> TaskInstanceDependencyCollection get_mapped_task_instance_dependencies(dag_id, dag_run_id, task_id, map_index)
+
+Get task dependencies blocking task from getting scheduled.
+
+Get task dependencies blocking task from getting scheduled.  *New in version 2.10.0* 
+
+### Example
+
+* Basic Authentication (Basic):
+
+```python
+import time
+import airflow_client.client
+from airflow_client.client.api import task_instance_api
+from airflow_client.client.model.error import Error
+from airflow_client.client.model.task_instance_dependency_collection import TaskInstanceDependencyCollection
+from pprint import pprint
+# Defining the host is optional and defaults to /api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = airflow_client.client.Configuration(
+    host = "/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: Basic
+configuration = airflow_client.client.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
+
+# Enter a context with an instance of the API client
+with airflow_client.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = task_instance_api.TaskInstanceApi(api_client)
+    dag_id = "dag_id_example" # str | The DAG ID.
+    dag_run_id = "dag_run_id_example" # str | The DAG run ID.
+    task_id = "task_id_example" # str | The task ID.
+    map_index = 1 # int | The map index.
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Get task dependencies blocking task from getting scheduled.
+        api_response = api_instance.get_mapped_task_instance_dependencies(dag_id, dag_run_id, task_id, map_index)
+        pprint(api_response)
+    except airflow_client.client.ApiException as e:
+        print("Exception when calling TaskInstanceApi->get_mapped_task_instance_dependencies: %s\n" % e)
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **dag_id** | **str**| The DAG ID. |
+ **dag_run_id** | **str**| The DAG run ID. |
+ **task_id** | **str**| The task ID. |
+ **map_index** | **int**| The map index. |
+
+### Return type
+
+[**TaskInstanceDependencyCollection**](TaskInstanceDependencyCollection.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success. |  -  |
+**400** | Client specified an invalid argument. |  -  |
+**401** | Request not authenticated due to missing, invalid, authentication info. |  -  |
+**403** | Client does not have sufficient permission. |  -  |
+**404** | A specified resource is not found. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_mapped_task_instance_tries**
+> TaskInstanceCollection get_mapped_task_instance_tries(dag_id, dag_run_id, task_id, map_index)
+
+List mapped task instance tries
+
+Get details of all task instance tries.  *New in version 2.10.0* 
+
+### Example
+
+* Basic Authentication (Basic):
+
+```python
+import time
+import airflow_client.client
+from airflow_client.client.api import task_instance_api
+from airflow_client.client.model.error import Error
+from airflow_client.client.model.task_instance_collection import TaskInstanceCollection
+from pprint import pprint
+# Defining the host is optional and defaults to /api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = airflow_client.client.Configuration(
+    host = "/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: Basic
+configuration = airflow_client.client.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
+
+# Enter a context with an instance of the API client
+with airflow_client.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = task_instance_api.TaskInstanceApi(api_client)
+    dag_id = "dag_id_example" # str | The DAG ID.
+    dag_run_id = "dag_run_id_example" # str | The DAG run ID.
+    task_id = "task_id_example" # str | The task ID.
+    map_index = 1 # int | The map index.
+    limit = 100 # int | The numbers of items to return. (optional) if omitted the server will use the default value of 100
+    offset = 0 # int | The number of items to skip before starting to collect the result set. (optional)
+    order_by = "order_by_example" # str | The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order.  *New in version 2.1.0*  (optional)
+
+    # example passing only required values which don't have defaults set
+    try:
+        # List mapped task instance tries
+        api_response = api_instance.get_mapped_task_instance_tries(dag_id, dag_run_id, task_id, map_index)
+        pprint(api_response)
+    except airflow_client.client.ApiException as e:
+        print("Exception when calling TaskInstanceApi->get_mapped_task_instance_tries: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # List mapped task instance tries
+        api_response = api_instance.get_mapped_task_instance_tries(dag_id, dag_run_id, task_id, map_index, limit=limit, offset=offset, order_by=order_by)
+        pprint(api_response)
+    except airflow_client.client.ApiException as e:
+        print("Exception when calling TaskInstanceApi->get_mapped_task_instance_tries: %s\n" % e)
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **dag_id** | **str**| The DAG ID. |
+ **dag_run_id** | **str**| The DAG run ID. |
+ **task_id** | **str**| The task ID. |
+ **map_index** | **int**| The map index. |
+ **limit** | **int**| The numbers of items to return. | [optional] if omitted the server will use the default value of 100
+ **offset** | **int**| The number of items to skip before starting to collect the result set. | [optional]
+ **order_by** | **str**| The name of the field to order the results by. Prefix a field name with &#x60;-&#x60; to reverse the sort order.  *New in version 2.1.0*  | [optional]
+
+### Return type
+
+[**TaskInstanceCollection**](TaskInstanceCollection.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success. |  -  |
+**401** | Request not authenticated due to missing, invalid, authentication info. |  -  |
+**403** | Client does not have sufficient permission. |  -  |
+**404** | A specified resource is not found. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_mapped_task_instance_try_details**
+> TaskInstance get_mapped_task_instance_try_details(dag_id, dag_run_id, task_id, map_index, task_try_number)
+
+get mapped taskinstance try
+
+Get details of a mapped task instance try.  *New in version 2.10.0* 
+
+### Example
+
+* Basic Authentication (Basic):
+
+```python
+import time
+import airflow_client.client
+from airflow_client.client.api import task_instance_api
+from airflow_client.client.model.error import Error
+from airflow_client.client.model.task_instance import TaskInstance
+from pprint import pprint
+# Defining the host is optional and defaults to /api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = airflow_client.client.Configuration(
+    host = "/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: Basic
+configuration = airflow_client.client.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
+
+# Enter a context with an instance of the API client
+with airflow_client.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = task_instance_api.TaskInstanceApi(api_client)
+    dag_id = "dag_id_example" # str | The DAG ID.
+    dag_run_id = "dag_run_id_example" # str | The DAG run ID.
+    task_id = "task_id_example" # str | The task ID.
+    map_index = 1 # int | The map index.
+    task_try_number = 1 # int | The task try number.
+
+    # example passing only required values which don't have defaults set
+    try:
+        # get mapped taskinstance try
+        api_response = api_instance.get_mapped_task_instance_try_details(dag_id, dag_run_id, task_id, map_index, task_try_number)
+        pprint(api_response)
+    except airflow_client.client.ApiException as e:
+        print("Exception when calling TaskInstanceApi->get_mapped_task_instance_try_details: %s\n" % e)
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **dag_id** | **str**| The DAG ID. |
+ **dag_run_id** | **str**| The DAG run ID. |
+ **task_id** | **str**| The task ID. |
+ **map_index** | **int**| The map index. |
+ **task_try_number** | **int**| The task try number. |
+
+### Return type
+
+[**TaskInstance**](TaskInstance.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success. |  -  |
+**401** | Request not authenticated due to missing, invalid, authentication info. |  -  |
+**403** | Client does not have sufficient permission. |  -  |
+**404** | A specified resource is not found. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_mapped_task_instances**
 > TaskInstanceCollection get_mapped_task_instances(dag_id, dag_run_id, task_id)
 
@@ -358,6 +646,9 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     queue = [
         "queue_example",
     ] # [str] | The value can be repeated to retrieve multiple matching values (OR condition). (optional)
+    executor = [
+        "executor_example",
+    ] # [str] | The value can be repeated to retrieve multiple matching values (OR condition). (optional)
     order_by = "order_by_example" # str | The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order.  *New in version 2.1.0*  (optional)
 
     # example passing only required values which don't have defaults set
@@ -372,7 +663,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # List mapped task instances
-        api_response = api_instance.get_mapped_task_instances(dag_id, dag_run_id, task_id, limit=limit, offset=offset, execution_date_gte=execution_date_gte, execution_date_lte=execution_date_lte, start_date_gte=start_date_gte, start_date_lte=start_date_lte, end_date_gte=end_date_gte, end_date_lte=end_date_lte, updated_at_gte=updated_at_gte, updated_at_lte=updated_at_lte, duration_gte=duration_gte, duration_lte=duration_lte, state=state, pool=pool, queue=queue, order_by=order_by)
+        api_response = api_instance.get_mapped_task_instances(dag_id, dag_run_id, task_id, limit=limit, offset=offset, execution_date_gte=execution_date_gte, execution_date_lte=execution_date_lte, start_date_gte=start_date_gte, start_date_lte=start_date_lte, end_date_gte=end_date_gte, end_date_lte=end_date_lte, updated_at_gte=updated_at_gte, updated_at_lte=updated_at_lte, duration_gte=duration_gte, duration_lte=duration_lte, state=state, pool=pool, queue=queue, executor=executor, order_by=order_by)
         pprint(api_response)
     except airflow_client.client.ApiException as e:
         print("Exception when calling TaskInstanceApi->get_mapped_task_instances: %s\n" % e)
@@ -401,6 +692,7 @@ Name | Type | Description  | Notes
  **state** | **[str]**| The value can be repeated to retrieve multiple matching values (OR condition). | [optional]
  **pool** | **[str]**| The value can be repeated to retrieve multiple matching values (OR condition). | [optional]
  **queue** | **[str]**| The value can be repeated to retrieve multiple matching values (OR condition). | [optional]
+ **executor** | **[str]**| The value can be repeated to retrieve multiple matching values (OR condition). | [optional]
  **order_by** | **str**| The name of the field to order the results by. Prefix a field name with &#x60;-&#x60; to reverse the sort order.  *New in version 2.1.0*  | [optional]
 
 ### Return type
@@ -512,6 +804,282 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_task_instance_dependencies**
+> TaskInstanceDependencyCollection get_task_instance_dependencies(dag_id, dag_run_id, task_id)
+
+Get task dependencies blocking task from getting scheduled.
+
+Get task dependencies blocking task from getting scheduled.  *New in version 2.10.0* 
+
+### Example
+
+* Basic Authentication (Basic):
+
+```python
+import time
+import airflow_client.client
+from airflow_client.client.api import task_instance_api
+from airflow_client.client.model.error import Error
+from airflow_client.client.model.task_instance_dependency_collection import TaskInstanceDependencyCollection
+from pprint import pprint
+# Defining the host is optional and defaults to /api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = airflow_client.client.Configuration(
+    host = "/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: Basic
+configuration = airflow_client.client.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
+
+# Enter a context with an instance of the API client
+with airflow_client.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = task_instance_api.TaskInstanceApi(api_client)
+    dag_id = "dag_id_example" # str | The DAG ID.
+    dag_run_id = "dag_run_id_example" # str | The DAG run ID.
+    task_id = "task_id_example" # str | The task ID.
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Get task dependencies blocking task from getting scheduled.
+        api_response = api_instance.get_task_instance_dependencies(dag_id, dag_run_id, task_id)
+        pprint(api_response)
+    except airflow_client.client.ApiException as e:
+        print("Exception when calling TaskInstanceApi->get_task_instance_dependencies: %s\n" % e)
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **dag_id** | **str**| The DAG ID. |
+ **dag_run_id** | **str**| The DAG run ID. |
+ **task_id** | **str**| The task ID. |
+
+### Return type
+
+[**TaskInstanceDependencyCollection**](TaskInstanceDependencyCollection.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success. |  -  |
+**400** | Client specified an invalid argument. |  -  |
+**401** | Request not authenticated due to missing, invalid, authentication info. |  -  |
+**403** | Client does not have sufficient permission. |  -  |
+**404** | A specified resource is not found. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_task_instance_tries**
+> TaskInstanceCollection get_task_instance_tries(dag_id, dag_run_id, task_id)
+
+List task instance tries
+
+Get details of all task instance tries.  *New in version 2.10.0* 
+
+### Example
+
+* Basic Authentication (Basic):
+
+```python
+import time
+import airflow_client.client
+from airflow_client.client.api import task_instance_api
+from airflow_client.client.model.error import Error
+from airflow_client.client.model.task_instance_collection import TaskInstanceCollection
+from pprint import pprint
+# Defining the host is optional and defaults to /api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = airflow_client.client.Configuration(
+    host = "/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: Basic
+configuration = airflow_client.client.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
+
+# Enter a context with an instance of the API client
+with airflow_client.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = task_instance_api.TaskInstanceApi(api_client)
+    dag_id = "dag_id_example" # str | The DAG ID.
+    dag_run_id = "dag_run_id_example" # str | The DAG run ID.
+    task_id = "task_id_example" # str | The task ID.
+    limit = 100 # int | The numbers of items to return. (optional) if omitted the server will use the default value of 100
+    offset = 0 # int | The number of items to skip before starting to collect the result set. (optional)
+    order_by = "order_by_example" # str | The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order.  *New in version 2.1.0*  (optional)
+
+    # example passing only required values which don't have defaults set
+    try:
+        # List task instance tries
+        api_response = api_instance.get_task_instance_tries(dag_id, dag_run_id, task_id)
+        pprint(api_response)
+    except airflow_client.client.ApiException as e:
+        print("Exception when calling TaskInstanceApi->get_task_instance_tries: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # List task instance tries
+        api_response = api_instance.get_task_instance_tries(dag_id, dag_run_id, task_id, limit=limit, offset=offset, order_by=order_by)
+        pprint(api_response)
+    except airflow_client.client.ApiException as e:
+        print("Exception when calling TaskInstanceApi->get_task_instance_tries: %s\n" % e)
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **dag_id** | **str**| The DAG ID. |
+ **dag_run_id** | **str**| The DAG run ID. |
+ **task_id** | **str**| The task ID. |
+ **limit** | **int**| The numbers of items to return. | [optional] if omitted the server will use the default value of 100
+ **offset** | **int**| The number of items to skip before starting to collect the result set. | [optional]
+ **order_by** | **str**| The name of the field to order the results by. Prefix a field name with &#x60;-&#x60; to reverse the sort order.  *New in version 2.1.0*  | [optional]
+
+### Return type
+
+[**TaskInstanceCollection**](TaskInstanceCollection.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success. |  -  |
+**401** | Request not authenticated due to missing, invalid, authentication info. |  -  |
+**403** | Client does not have sufficient permission. |  -  |
+**404** | A specified resource is not found. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_task_instance_try_details**
+> TaskInstance get_task_instance_try_details(dag_id, dag_run_id, task_id, task_try_number)
+
+get taskinstance try
+
+Get details of a task instance try.  *New in version 2.10.0* 
+
+### Example
+
+* Basic Authentication (Basic):
+
+```python
+import time
+import airflow_client.client
+from airflow_client.client.api import task_instance_api
+from airflow_client.client.model.error import Error
+from airflow_client.client.model.task_instance import TaskInstance
+from pprint import pprint
+# Defining the host is optional and defaults to /api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = airflow_client.client.Configuration(
+    host = "/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: Basic
+configuration = airflow_client.client.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
+
+# Enter a context with an instance of the API client
+with airflow_client.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = task_instance_api.TaskInstanceApi(api_client)
+    dag_id = "dag_id_example" # str | The DAG ID.
+    dag_run_id = "dag_run_id_example" # str | The DAG run ID.
+    task_id = "task_id_example" # str | The task ID.
+    task_try_number = 1 # int | The task try number.
+
+    # example passing only required values which don't have defaults set
+    try:
+        # get taskinstance try
+        api_response = api_instance.get_task_instance_try_details(dag_id, dag_run_id, task_id, task_try_number)
+        pprint(api_response)
+    except airflow_client.client.ApiException as e:
+        print("Exception when calling TaskInstanceApi->get_task_instance_try_details: %s\n" % e)
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **dag_id** | **str**| The DAG ID. |
+ **dag_run_id** | **str**| The DAG run ID. |
+ **task_id** | **str**| The task ID. |
+ **task_try_number** | **int**| The task try number. |
+
+### Return type
+
+[**TaskInstance**](TaskInstance.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success. |  -  |
+**401** | Request not authenticated due to missing, invalid, authentication info. |  -  |
+**403** | Client does not have sufficient permission. |  -  |
+**404** | A specified resource is not found. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_task_instances**
 > TaskInstanceCollection get_task_instances(dag_id, dag_run_id)
 
@@ -572,6 +1140,9 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     queue = [
         "queue_example",
     ] # [str] | The value can be repeated to retrieve multiple matching values (OR condition). (optional)
+    executor = [
+        "executor_example",
+    ] # [str] | The value can be repeated to retrieve multiple matching values (OR condition). (optional)
     limit = 100 # int | The numbers of items to return. (optional) if omitted the server will use the default value of 100
     offset = 0 # int | The number of items to skip before starting to collect the result set. (optional)
 
@@ -587,7 +1158,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # List task instances
-        api_response = api_instance.get_task_instances(dag_id, dag_run_id, execution_date_gte=execution_date_gte, execution_date_lte=execution_date_lte, start_date_gte=start_date_gte, start_date_lte=start_date_lte, end_date_gte=end_date_gte, end_date_lte=end_date_lte, updated_at_gte=updated_at_gte, updated_at_lte=updated_at_lte, duration_gte=duration_gte, duration_lte=duration_lte, state=state, pool=pool, queue=queue, limit=limit, offset=offset)
+        api_response = api_instance.get_task_instances(dag_id, dag_run_id, execution_date_gte=execution_date_gte, execution_date_lte=execution_date_lte, start_date_gte=start_date_gte, start_date_lte=start_date_lte, end_date_gte=end_date_gte, end_date_lte=end_date_lte, updated_at_gte=updated_at_gte, updated_at_lte=updated_at_lte, duration_gte=duration_gte, duration_lte=duration_lte, state=state, pool=pool, queue=queue, executor=executor, limit=limit, offset=offset)
         pprint(api_response)
     except airflow_client.client.ApiException as e:
         print("Exception when calling TaskInstanceApi->get_task_instances: %s\n" % e)
@@ -613,6 +1184,7 @@ Name | Type | Description  | Notes
  **state** | **[str]**| The value can be repeated to retrieve multiple matching values (OR condition). | [optional]
  **pool** | **[str]**| The value can be repeated to retrieve multiple matching values (OR condition). | [optional]
  **queue** | **[str]**| The value can be repeated to retrieve multiple matching values (OR condition). | [optional]
+ **executor** | **[str]**| The value can be repeated to retrieve multiple matching values (OR condition). | [optional]
  **limit** | **int**| The numbers of items to return. | [optional] if omitted the server will use the default value of 100
  **offset** | **int**| The number of items to skip before starting to collect the result set. | [optional]
 
@@ -693,6 +1265,9 @@ with airflow_client.client.ApiClient(configuration) as api_client:
         end_date_lte=dateutil_parser('1970-01-01T00:00:00.00Z'),
         execution_date_gte=dateutil_parser('1970-01-01T00:00:00.00Z'),
         execution_date_lte=dateutil_parser('1970-01-01T00:00:00.00Z'),
+        executor=[
+            "executor_example",
+        ],
         pool=[
             "pool_example",
         ],

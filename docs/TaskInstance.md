@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **duration** | **float, none_type** |  | [optional] 
 **end_date** | **str, none_type** |  | [optional] 
 **execution_date** | **str** |  | [optional] 
+**executor** | **str, none_type** | Executor the task is configured to run on or None (which indicates the default executor)  *New in version 2.10.0*  | [optional] 
 **executor_config** | **str** |  | [optional] 
 **hostname** | **str** |  | [optional] 
 **map_index** | **int** |  | [optional] 

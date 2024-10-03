@@ -282,7 +282,7 @@ Please follow the [installation procedure](#installation--usage) and then run th
 
 ```python
 import time
-import airflow_client.client
+from airflow_client import client
 from pprint import pprint
 from airflow_client.client.api import config_api
 from airflow_client.client.model.config import Config

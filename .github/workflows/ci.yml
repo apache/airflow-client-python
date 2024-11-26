@@ -28,7 +28,7 @@ jobs:
       - name: Build packages
         run: hatch build -c -t sdist -t wheel
       - name: "Upload packages"
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: packages
           path: ./dist/apache_airflow_client-*

@@ -1,33 +1,34 @@
 # airflow_client.client.ImportErrorApi
 
-All URIs are relative to */api/v1*
+All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_import_error**](ImportErrorApi.md#get_import_error) | **GET** /importErrors/{import_error_id} | Get an import error
-[**get_import_errors**](ImportErrorApi.md#get_import_errors) | **GET** /importErrors | List import errors
+[**get_import_error**](ImportErrorApi.md#get_import_error) | **GET** /api/v2/importErrors/{import_error_id} | Get Import Error
+[**get_import_errors**](ImportErrorApi.md#get_import_errors) | **GET** /api/v2/importErrors | Get Import Errors
 
 
 # **get_import_error**
-> ImportError get_import_error(import_error_id)
+> ImportErrorResponse get_import_error(import_error_id)
 
-Get an import error
+Get Import Error
+
+Get an import error.
 
 ### Example
 
-* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2PasswordBearer):
 
 ```python
-import time
 import airflow_client.client
-from airflow_client.client.api import import_error_api
-from airflow_client.client.model.error import Error
-from airflow_client.client.model.import_error import ImportError
+from airflow_client.client.models.import_error_response import ImportErrorResponse
+from airflow_client.client.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to /api/v1
+
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = airflow_client.client.Configuration(
-    host = "/api/v1"
+    host = "http://localhost"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -35,79 +36,78 @@ configuration = airflow_client.client.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: Basic
-configuration = airflow_client.client.Configuration(
-    username = 'YOUR_USERNAME',
-    password = 'YOUR_PASSWORD'
-)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
 with airflow_client.client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = import_error_api.ImportErrorApi(api_client)
-    import_error_id = 1 # int | The import error ID.
+    api_instance = airflow_client.client.ImportErrorApi(api_client)
+    import_error_id = 56 # int | 
 
-    # example passing only required values which don't have defaults set
     try:
-        # Get an import error
+        # Get Import Error
         api_response = api_instance.get_import_error(import_error_id)
+        print("The response of ImportErrorApi->get_import_error:\n")
         pprint(api_response)
-    except airflow_client.client.ApiException as e:
+    except Exception as e:
         print("Exception when calling ImportErrorApi->get_import_error: %s\n" % e)
 ```
 
 
+
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **import_error_id** | **int**| The import error ID. |
+ **import_error_id** | **int**|  | 
 
 ### Return type
 
-[**ImportError**](ImportError.md)
+[**ImportErrorResponse**](ImportErrorResponse.md)
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Success. |  -  |
-**401** | Request not authenticated due to missing, invalid, authentication info. |  -  |
-**403** | Client does not have sufficient permission. |  -  |
-**404** | A specified resource is not found. |  -  |
+**200** | Successful Response |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_import_errors**
-> ImportErrorCollection get_import_errors()
+> ImportErrorCollectionResponse get_import_errors(limit=limit, offset=offset, order_by=order_by)
 
-List import errors
+Get Import Errors
+
+Get all import errors.
 
 ### Example
 
-* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2PasswordBearer):
 
 ```python
-import time
 import airflow_client.client
-from airflow_client.client.api import import_error_api
-from airflow_client.client.model.error import Error
-from airflow_client.client.model.import_error_collection import ImportErrorCollection
+from airflow_client.client.models.import_error_collection_response import ImportErrorCollectionResponse
+from airflow_client.client.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to /api/v1
+
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = airflow_client.client.Configuration(
-    host = "/api/v1"
+    host = "http://localhost"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -115,60 +115,57 @@ configuration = airflow_client.client.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: Basic
-configuration = airflow_client.client.Configuration(
-    username = 'YOUR_USERNAME',
-    password = 'YOUR_PASSWORD'
-)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
 with airflow_client.client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = import_error_api.ImportErrorApi(api_client)
-    limit = 100 # int | The numbers of items to return. (optional) if omitted the server will use the default value of 100
-    offset = 0 # int | The number of items to skip before starting to collect the result set. (optional)
-    order_by = "order_by_example" # str | The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order.  *New in version 2.1.0*  (optional)
+    api_instance = airflow_client.client.ImportErrorApi(api_client)
+    limit = 50 # int |  (optional) (default to 50)
+    offset = 0 # int |  (optional) (default to 0)
+    order_by = 'id' # str |  (optional) (default to 'id')
 
-    # example passing only required values which don't have defaults set
-    # and optional values
     try:
-        # List import errors
+        # Get Import Errors
         api_response = api_instance.get_import_errors(limit=limit, offset=offset, order_by=order_by)
+        print("The response of ImportErrorApi->get_import_errors:\n")
         pprint(api_response)
-    except airflow_client.client.ApiException as e:
+    except Exception as e:
         print("Exception when calling ImportErrorApi->get_import_errors: %s\n" % e)
 ```
 
 
+
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **limit** | **int**| The numbers of items to return. | [optional] if omitted the server will use the default value of 100
- **offset** | **int**| The number of items to skip before starting to collect the result set. | [optional]
- **order_by** | **str**| The name of the field to order the results by. Prefix a field name with &#x60;-&#x60; to reverse the sort order.  *New in version 2.1.0*  | [optional]
+ **limit** | **int**|  | [optional] [default to 50]
+ **offset** | **int**|  | [optional] [default to 0]
+ **order_by** | **str**|  | [optional] [default to &#39;id&#39;]
 
 ### Return type
 
-[**ImportErrorCollection**](ImportErrorCollection.md)
+[**ImportErrorCollectionResponse**](ImportErrorCollectionResponse.md)
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Success. |  -  |
-**401** | Request not authenticated due to missing, invalid, authentication info. |  -  |
-**403** | Client does not have sufficient permission. |  -  |
+**200** | Successful Response |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

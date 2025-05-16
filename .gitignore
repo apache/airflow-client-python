@@ -1,4 +1,7 @@
+/airflow_client
+/docs
 /dist
+/test
 /tmp
 /v1.yaml
 /.coverage

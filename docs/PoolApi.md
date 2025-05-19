@@ -1,35 +1,39 @@
 # airflow_client.client.PoolApi
 
-All URIs are relative to */api/v1*
+All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**delete_pool**](PoolApi.md#delete_pool) | **DELETE** /pools/{pool_name} | Delete a pool
-[**get_pool**](PoolApi.md#get_pool) | **GET** /pools/{pool_name} | Get a pool
-[**get_pools**](PoolApi.md#get_pools) | **GET** /pools | List pools
-[**patch_pool**](PoolApi.md#patch_pool) | **PATCH** /pools/{pool_name} | Update a pool
-[**post_pool**](PoolApi.md#post_pool) | **POST** /pools | Create a pool
+[**bulk_pools**](PoolApi.md#bulk_pools) | **PATCH** /api/v2/pools | Bulk Pools
+[**delete_pool**](PoolApi.md#delete_pool) | **DELETE** /api/v2/pools/{pool_name} | Delete Pool
+[**get_pool**](PoolApi.md#get_pool) | **GET** /api/v2/pools/{pool_name} | Get Pool
+[**get_pools**](PoolApi.md#get_pools) | **GET** /api/v2/pools | Get Pools
+[**patch_pool**](PoolApi.md#patch_pool) | **PATCH** /api/v2/pools/{pool_name} | Patch Pool
+[**post_pool**](PoolApi.md#post_pool) | **POST** /api/v2/pools | Post Pool
 
 
-# **delete_pool**
-> delete_pool(pool_name)
+# **bulk_pools**
+> BulkResponse bulk_pools(bulk_body_pool_body)
 
-Delete a pool
+Bulk Pools
+
+Bulk create, update, and delete pools.
 
 ### Example
 
-* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2PasswordBearer):
 
 ```python
-import time
 import airflow_client.client
-from airflow_client.client.api import pool_api
-from airflow_client.client.model.error import Error
+from airflow_client.client.models.bulk_body_pool_body import BulkBodyPoolBody
+from airflow_client.client.models.bulk_response import BulkResponse
+from airflow_client.client.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to /api/v1
+
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = airflow_client.client.Configuration(
-    host = "/api/v1"
+    host = "http://localhost"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -37,32 +41,106 @@ configuration = airflow_client.client.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: Basic
-configuration = airflow_client.client.Configuration(
-    username = 'YOUR_USERNAME',
-    password = 'YOUR_PASSWORD'
-)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
 with airflow_client.client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = pool_api.PoolApi(api_client)
-    pool_name = "pool_name_example" # str | The pool name.
+    api_instance = airflow_client.client.PoolApi(api_client)
+    bulk_body_pool_body = airflow_client.client.BulkBodyPoolBody() # BulkBodyPoolBody | 
 
-    # example passing only required values which don't have defaults set
     try:
-        # Delete a pool
-        api_instance.delete_pool(pool_name)
-    except airflow_client.client.ApiException as e:
-        print("Exception when calling PoolApi->delete_pool: %s\n" % e)
+        # Bulk Pools
+        api_response = api_instance.bulk_pools(bulk_body_pool_body)
+        print("The response of PoolApi->bulk_pools:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PoolApi->bulk_pools: %s\n" % e)
 ```
+
 
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **pool_name** | **str**| The pool name. |
+ **bulk_body_pool_body** | [**BulkBodyPoolBody**](BulkBodyPoolBody.md)|  | 
+
+### Return type
+
+[**BulkResponse**](BulkResponse.md)
+
+### Authorization
+
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **delete_pool**
+> delete_pool(pool_name)
+
+Delete Pool
+
+Delete a pool entry.
+
+### Example
+
+* OAuth Authentication (OAuth2PasswordBearer):
+
+```python
+import airflow_client.client
+from airflow_client.client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = airflow_client.client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with airflow_client.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = airflow_client.client.PoolApi(api_client)
+    pool_name = 'pool_name_example' # str | 
+
+    try:
+        # Delete Pool
+        api_instance.delete_pool(pool_name)
+    except Exception as e:
+        print("Exception when calling PoolApi->delete_pool: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **pool_name** | **str**|  | 
 
 ### Return type
 
@@ -70,46 +148,47 @@ void (empty response body)
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**204** | Success. |  -  |
-**400** | Client specified an invalid argument. |  -  |
-**401** | Request not authenticated due to missing, invalid, authentication info. |  -  |
-**403** | Client does not have sufficient permission. |  -  |
-**404** | A specified resource is not found. |  -  |
+**204** | Successful Response |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_pool**
-> Pool get_pool(pool_name)
+> PoolResponse get_pool(pool_name)
 
-Get a pool
+Get Pool
+
+Get a pool.
 
 ### Example
 
-* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2PasswordBearer):
 
 ```python
-import time
 import airflow_client.client
-from airflow_client.client.api import pool_api
-from airflow_client.client.model.error import Error
-from airflow_client.client.model.pool import Pool
+from airflow_client.client.models.pool_response import PoolResponse
+from airflow_client.client.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to /api/v1
+
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = airflow_client.client.Configuration(
-    host = "/api/v1"
+    host = "http://localhost"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -117,79 +196,78 @@ configuration = airflow_client.client.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: Basic
-configuration = airflow_client.client.Configuration(
-    username = 'YOUR_USERNAME',
-    password = 'YOUR_PASSWORD'
-)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
 with airflow_client.client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = pool_api.PoolApi(api_client)
-    pool_name = "pool_name_example" # str | The pool name.
+    api_instance = airflow_client.client.PoolApi(api_client)
+    pool_name = 'pool_name_example' # str | 
 
-    # example passing only required values which don't have defaults set
     try:
-        # Get a pool
+        # Get Pool
         api_response = api_instance.get_pool(pool_name)
+        print("The response of PoolApi->get_pool:\n")
         pprint(api_response)
-    except airflow_client.client.ApiException as e:
+    except Exception as e:
         print("Exception when calling PoolApi->get_pool: %s\n" % e)
 ```
 
 
+
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **pool_name** | **str**| The pool name. |
+ **pool_name** | **str**|  | 
 
 ### Return type
 
-[**Pool**](Pool.md)
+[**PoolResponse**](PoolResponse.md)
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Success. |  -  |
-**401** | Request not authenticated due to missing, invalid, authentication info. |  -  |
-**403** | Client does not have sufficient permission. |  -  |
-**404** | A specified resource is not found. |  -  |
+**200** | Successful Response |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_pools**
-> PoolCollection get_pools()
+> PoolCollectionResponse get_pools(limit=limit, offset=offset, order_by=order_by, pool_name_pattern=pool_name_pattern)
 
-List pools
+Get Pools
+
+Get all pools entries.
 
 ### Example
 
-* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2PasswordBearer):
 
 ```python
-import time
 import airflow_client.client
-from airflow_client.client.api import pool_api
-from airflow_client.client.model.error import Error
-from airflow_client.client.model.pool_collection import PoolCollection
+from airflow_client.client.models.pool_collection_response import PoolCollectionResponse
+from airflow_client.client.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to /api/v1
+
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = airflow_client.client.Configuration(
-    host = "/api/v1"
+    host = "http://localhost"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -197,83 +275,85 @@ configuration = airflow_client.client.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: Basic
-configuration = airflow_client.client.Configuration(
-    username = 'YOUR_USERNAME',
-    password = 'YOUR_PASSWORD'
-)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
 with airflow_client.client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = pool_api.PoolApi(api_client)
-    limit = 100 # int | The numbers of items to return. (optional) if omitted the server will use the default value of 100
-    offset = 0 # int | The number of items to skip before starting to collect the result set. (optional)
-    order_by = "order_by_example" # str | The name of the field to order the results by. Prefix a field name with `-` to reverse the sort order.  *New in version 2.1.0*  (optional)
+    api_instance = airflow_client.client.PoolApi(api_client)
+    limit = 50 # int |  (optional) (default to 50)
+    offset = 0 # int |  (optional) (default to 0)
+    order_by = 'id' # str |  (optional) (default to 'id')
+    pool_name_pattern = 'pool_name_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported. (optional)
 
-    # example passing only required values which don't have defaults set
-    # and optional values
     try:
-        # List pools
-        api_response = api_instance.get_pools(limit=limit, offset=offset, order_by=order_by)
+        # Get Pools
+        api_response = api_instance.get_pools(limit=limit, offset=offset, order_by=order_by, pool_name_pattern=pool_name_pattern)
+        print("The response of PoolApi->get_pools:\n")
         pprint(api_response)
-    except airflow_client.client.ApiException as e:
+    except Exception as e:
         print("Exception when calling PoolApi->get_pools: %s\n" % e)
 ```
 
 
+
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **limit** | **int**| The numbers of items to return. | [optional] if omitted the server will use the default value of 100
- **offset** | **int**| The number of items to skip before starting to collect the result set. | [optional]
- **order_by** | **str**| The name of the field to order the results by. Prefix a field name with &#x60;-&#x60; to reverse the sort order.  *New in version 2.1.0*  | [optional]
+ **limit** | **int**|  | [optional] [default to 50]
+ **offset** | **int**|  | [optional] [default to 0]
+ **order_by** | **str**|  | [optional] [default to &#39;id&#39;]
+ **pool_name_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). Regular expressions are **not** supported. | [optional] 
 
 ### Return type
 
-[**PoolCollection**](PoolCollection.md)
+[**PoolCollectionResponse**](PoolCollectionResponse.md)
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | List of pools. |  -  |
-**401** | Request not authenticated due to missing, invalid, authentication info. |  -  |
-**403** | Client does not have sufficient permission. |  -  |
+**200** | Successful Response |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_pool**
-> Pool patch_pool(pool_name, pool)
+> PoolResponse patch_pool(pool_name, pool_patch_body, update_mask=update_mask)
 
-Update a pool
+Patch Pool
+
+Update a Pool.
 
 ### Example
 
-* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2PasswordBearer):
 
 ```python
-import time
 import airflow_client.client
-from airflow_client.client.api import pool_api
-from airflow_client.client.model.error import Error
-from airflow_client.client.model.pool import Pool
+from airflow_client.client.models.pool_patch_body import PoolPatchBody
+from airflow_client.client.models.pool_response import PoolResponse
+from airflow_client.client.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to /api/v1
+
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = airflow_client.client.Configuration(
-    host = "/api/v1"
+    host = "http://localhost"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -281,101 +361,84 @@ configuration = airflow_client.client.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: Basic
-configuration = airflow_client.client.Configuration(
-    username = 'YOUR_USERNAME',
-    password = 'YOUR_PASSWORD'
-)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
 with airflow_client.client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = pool_api.PoolApi(api_client)
-    pool_name = "pool_name_example" # str | The pool name.
-    pool = Pool(
-        description="description_example",
-        include_deferred=True,
-        name="name_example",
-        slots=1,
-    ) # Pool | 
-    update_mask = [
-        "update_mask_example",
-    ] # [str] | The fields to update on the resource. If absent or empty, all modifiable fields are updated. A comma-separated list of fully qualified names of fields.  (optional)
+    api_instance = airflow_client.client.PoolApi(api_client)
+    pool_name = 'pool_name_example' # str | 
+    pool_patch_body = airflow_client.client.PoolPatchBody() # PoolPatchBody | 
+    update_mask = ['update_mask_example'] # List[str] |  (optional)
 
-    # example passing only required values which don't have defaults set
     try:
-        # Update a pool
-        api_response = api_instance.patch_pool(pool_name, pool)
+        # Patch Pool
+        api_response = api_instance.patch_pool(pool_name, pool_patch_body, update_mask=update_mask)
+        print("The response of PoolApi->patch_pool:\n")
         pprint(api_response)
-    except airflow_client.client.ApiException as e:
-        print("Exception when calling PoolApi->patch_pool: %s\n" % e)
-
-    # example passing only required values which don't have defaults set
-    # and optional values
-    try:
-        # Update a pool
-        api_response = api_instance.patch_pool(pool_name, pool, update_mask=update_mask)
-        pprint(api_response)
-    except airflow_client.client.ApiException as e:
+    except Exception as e:
         print("Exception when calling PoolApi->patch_pool: %s\n" % e)
 ```
 
 
+
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **pool_name** | **str**| The pool name. |
- **pool** | [**Pool**](Pool.md)|  |
- **update_mask** | **[str]**| The fields to update on the resource. If absent or empty, all modifiable fields are updated. A comma-separated list of fully qualified names of fields.  | [optional]
+ **pool_name** | **str**|  | 
+ **pool_patch_body** | [**PoolPatchBody**](PoolPatchBody.md)|  | 
+ **update_mask** | [**List[str]**](str.md)|  | [optional] 
 
 ### Return type
 
-[**Pool**](Pool.md)
+[**PoolResponse**](PoolResponse.md)
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Success. |  -  |
-**400** | Client specified an invalid argument. |  -  |
-**401** | Request not authenticated due to missing, invalid, authentication info. |  -  |
-**403** | Client does not have sufficient permission. |  -  |
-**404** | A specified resource is not found. |  -  |
-**409** | An existing resource conflicts with the request. |  -  |
+**200** | Successful Response |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_pool**
-> Pool post_pool(pool)
+> PoolResponse post_pool(pool_body)
 
-Create a pool
+Post Pool
+
+Create a Pool.
 
 ### Example
 
-* Basic Authentication (Basic):
+* OAuth Authentication (OAuth2PasswordBearer):
 
 ```python
-import time
 import airflow_client.client
-from airflow_client.client.api import pool_api
-from airflow_client.client.model.error import Error
-from airflow_client.client.model.pool import Pool
+from airflow_client.client.models.pool_body import PoolBody
+from airflow_client.client.models.pool_response import PoolResponse
+from airflow_client.client.rest import ApiException
 from pprint import pprint
-# Defining the host is optional and defaults to /api/v1
+
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = airflow_client.client.Configuration(
-    host = "/api/v1"
+    host = "http://localhost"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -383,61 +446,54 @@ configuration = airflow_client.client.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: Basic
-configuration = airflow_client.client.Configuration(
-    username = 'YOUR_USERNAME',
-    password = 'YOUR_PASSWORD'
-)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
 with airflow_client.client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = pool_api.PoolApi(api_client)
-    pool = Pool(
-        description="description_example",
-        include_deferred=True,
-        name="name_example",
-        slots=1,
-    ) # Pool | 
+    api_instance = airflow_client.client.PoolApi(api_client)
+    pool_body = airflow_client.client.PoolBody() # PoolBody | 
 
-    # example passing only required values which don't have defaults set
     try:
-        # Create a pool
-        api_response = api_instance.post_pool(pool)
+        # Post Pool
+        api_response = api_instance.post_pool(pool_body)
+        print("The response of PoolApi->post_pool:\n")
         pprint(api_response)
-    except airflow_client.client.ApiException as e:
+    except Exception as e:
         print("Exception when calling PoolApi->post_pool: %s\n" % e)
 ```
 
 
+
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **pool** | [**Pool**](Pool.md)|  |
+ **pool_body** | [**PoolBody**](PoolBody.md)|  | 
 
 ### Return type
 
-[**Pool**](Pool.md)
+[**PoolResponse**](PoolResponse.md)
 
 ### Authorization
 
-[Basic](../README.md#Basic), [Kerberos](../README.md#Kerberos)
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Success. |  -  |
-**400** | Client specified an invalid argument. |  -  |
-**401** | Request not authenticated due to missing, invalid, authentication info. |  -  |
-**403** | Client does not have sufficient permission. |  -  |
+**201** | Successful Response |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**409** | Conflict |  -  |
+**422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

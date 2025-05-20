@@ -8,7 +8,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **asset_id** | **int** |  | 
 **created_at** | **datetime** |  | 
-**dag_display_name** | **str** |  | 
 **dag_id** | **str** |  | 
 
 ## Example

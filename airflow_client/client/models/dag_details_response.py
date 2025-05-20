@@ -37,7 +37,6 @@ class DAGDetailsResponse(BaseModel):
     dag_display_name: StrictStr
     dag_id: StrictStr
     dag_run_timeout: Optional[StrictStr] = None
-    default_args: Optional[Dict[str, Any]] = None
     description: Optional[StrictStr] = None
     doc_md: Optional[StrictStr] = None
     end_date: Optional[datetime] = None
@@ -70,7 +69,7 @@ class DAGDetailsResponse(BaseModel):
     timetable_description: Optional[StrictStr] = None
     timetable_summary: Optional[StrictStr] = None
     timezone: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["asset_expression", "bundle_name", "bundle_version", "catchup", "concurrency", "dag_display_name", "dag_id", "dag_run_timeout", "default_args", "description", "doc_md", "end_date", "file_token", "fileloc", "has_import_errors", "has_task_concurrency_limits", "is_paused", "is_paused_upon_creation", "is_stale", "last_expired", "last_parsed", "last_parsed_time", "latest_dag_version", "max_active_runs", "max_active_tasks", "max_consecutive_failed_dag_runs", "next_dagrun_data_interval_end", "next_dagrun_data_interval_start", "next_dagrun_logical_date", "next_dagrun_run_after", "owner_links", "owners", "params", "relative_fileloc", "render_template_as_native_obj", "start_date", "tags", "template_search_path", "timetable_description", "timetable_summary", "timezone"]
+    __properties: ClassVar[List[str]] = ["asset_expression", "bundle_name", "bundle_version", "catchup", "concurrency", "dag_display_name", "dag_id", "dag_run_timeout", "description", "doc_md", "end_date", "file_token", "fileloc", "has_import_errors", "has_task_concurrency_limits", "is_paused", "is_paused_upon_creation", "is_stale", "last_expired", "last_parsed", "last_parsed_time", "latest_dag_version", "max_active_runs", "max_active_tasks", "max_consecutive_failed_dag_runs", "next_dagrun_data_interval_end", "next_dagrun_data_interval_start", "next_dagrun_logical_date", "next_dagrun_run_after", "owner_links", "owners", "params", "relative_fileloc", "render_template_as_native_obj", "start_date", "tags", "template_search_path", "timetable_description", "timetable_summary", "timezone"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -145,7 +144,6 @@ class DAGDetailsResponse(BaseModel):
             "dag_display_name": obj.get("dag_display_name"),
             "dag_id": obj.get("dag_id"),
             "dag_run_timeout": obj.get("dag_run_timeout"),
-            "default_args": obj.get("default_args"),
             "description": obj.get("description"),
             "doc_md": obj.get("doc_md"),
             "end_date": obj.get("end_date"),

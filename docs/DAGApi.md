@@ -289,7 +289,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     limit = 50 # int |  (optional) (default to 50)
     offset = 0 # int |  (optional) (default to 0)
     order_by = 'name' # str |  (optional) (default to 'name')
-    tag_name_pattern = 'tag_name_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported. (optional)
+    tag_name_pattern = 'tag_name_pattern_example' # str |  (optional)
 
     try:
         # Get Dag Tags
@@ -310,7 +310,7 @@ Name | Type | Description  | Notes
  **limit** | **int**|  | [optional] [default to 50]
  **offset** | **int**|  | [optional] [default to 0]
  **order_by** | **str**|  | [optional] [default to &#39;name&#39;]
- **tag_name_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). Regular expressions are **not** supported. | [optional] 
+ **tag_name_pattern** | **str**|  | [optional] 
 
 ### Return type
 
@@ -376,8 +376,8 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     tags = ['tags_example'] # List[str] |  (optional)
     tags_match_mode = 'tags_match_mode_example' # str |  (optional)
     owners = ['owners_example'] # List[str] |  (optional)
-    dag_id_pattern = 'dag_id_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported. (optional)
-    dag_display_name_pattern = 'dag_display_name_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported. (optional)
+    dag_id_pattern = 'dag_id_pattern_example' # str |  (optional)
+    dag_display_name_pattern = 'dag_display_name_pattern_example' # str |  (optional)
     exclude_stale = True # bool |  (optional) (default to True)
     paused = True # bool |  (optional)
     last_dag_run_state = airflow_client.client.DagRunState() # DagRunState |  (optional)
@@ -409,8 +409,8 @@ Name | Type | Description  | Notes
  **tags** | [**List[str]**](str.md)|  | [optional] 
  **tags_match_mode** | **str**|  | [optional] 
  **owners** | [**List[str]**](str.md)|  | [optional] 
- **dag_id_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). Regular expressions are **not** supported. | [optional] 
- **dag_display_name_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). Regular expressions are **not** supported. | [optional] 
+ **dag_id_pattern** | **str**|  | [optional] 
+ **dag_display_name_pattern** | **str**|  | [optional] 
  **exclude_stale** | **bool**|  | [optional] [default to True]
  **paused** | **bool**|  | [optional] 
  **last_dag_run_state** | [**DagRunState**](.md)|  | [optional] 
@@ -573,7 +573,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     tags = ['tags_example'] # List[str] |  (optional)
     tags_match_mode = 'tags_match_mode_example' # str |  (optional)
     owners = ['owners_example'] # List[str] |  (optional)
-    dag_id_pattern = 'dag_id_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported. (optional)
+    dag_id_pattern = 'dag_id_pattern_example' # str |  (optional)
     exclude_stale = True # bool |  (optional) (default to True)
     paused = True # bool |  (optional)
     last_dag_run_state = airflow_client.client.DagRunState() # DagRunState |  (optional)
@@ -601,7 +601,7 @@ Name | Type | Description  | Notes
  **tags** | [**List[str]**](str.md)|  | [optional] 
  **tags_match_mode** | **str**|  | [optional] 
  **owners** | [**List[str]**](str.md)|  | [optional] 
- **dag_id_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). Regular expressions are **not** supported. | [optional] 
+ **dag_id_pattern** | **str**|  | [optional] 
  **exclude_stale** | **bool**|  | [optional] [default to True]
  **paused** | **bool**|  | [optional] 
  **last_dag_run_state** | [**DagRunState**](.md)|  | [optional] 

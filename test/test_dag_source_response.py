@@ -36,13 +36,11 @@ class TestDAGSourceResponse(unittest.TestCase):
         if include_optional:
             return DAGSourceResponse(
                 content = '',
-                dag_display_name = '',
                 dag_id = '',
                 version_number = 56
             )
         else:
             return DAGSourceResponse(
-                dag_display_name = '',
                 dag_id = '',
         )
         """

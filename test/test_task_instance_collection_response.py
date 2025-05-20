@@ -37,7 +37,6 @@ class TestTaskInstanceCollectionResponse(unittest.TestCase):
             return TaskInstanceCollectionResponse(
                 task_instances = [
                     airflow_client.client.models.task_instance_response.TaskInstanceResponse(
-                        dag_display_name = '', 
                         dag_id = '', 
                         dag_run_id = '', 
                         dag_version = airflow_client.client.models.dag_version_response.DagVersionResponse(
@@ -45,7 +44,6 @@ class TestTaskInstanceCollectionResponse(unittest.TestCase):
                             bundle_url = '', 
                             bundle_version = '', 
                             created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
-                            dag_display_name = '', 
                             dag_id = '', 
                             id = '', 
                             version_number = 56, ), 
@@ -81,7 +79,6 @@ class TestTaskInstanceCollectionResponse(unittest.TestCase):
                             kwargs = '', 
                             triggerer_id = 56, ), 
                         triggerer_job = airflow_client.client.models.job_response.JobResponse(
-                            dag_display_name = '', 
                             dag_id = '', 
                             end_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                             executor_class = '', 
@@ -100,7 +97,6 @@ class TestTaskInstanceCollectionResponse(unittest.TestCase):
             return TaskInstanceCollectionResponse(
                 task_instances = [
                     airflow_client.client.models.task_instance_response.TaskInstanceResponse(
-                        dag_display_name = '', 
                         dag_id = '', 
                         dag_run_id = '', 
                         dag_version = airflow_client.client.models.dag_version_response.DagVersionResponse(
@@ -108,7 +104,6 @@ class TestTaskInstanceCollectionResponse(unittest.TestCase):
                             bundle_url = '', 
                             bundle_version = '', 
                             created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
-                            dag_display_name = '', 
                             dag_id = '', 
                             id = '', 
                             version_number = 56, ), 
@@ -144,7 +139,6 @@ class TestTaskInstanceCollectionResponse(unittest.TestCase):
                             kwargs = '', 
                             triggerer_id = 56, ), 
                         triggerer_job = airflow_client.client.models.job_response.JobResponse(
-                            dag_display_name = '', 
                             dag_id = '', 
                             end_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                             executor_class = '', 

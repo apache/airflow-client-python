@@ -879,7 +879,7 @@ class DAGApi:
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         order_by: Optional[StrictStr] = None,
-        tag_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        tag_name_pattern: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -903,7 +903,7 @@ class DAGApi:
         :type offset: int
         :param order_by:
         :type order_by: str
-        :param tag_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :param tag_name_pattern:
         :type tag_name_pattern: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -961,7 +961,7 @@ class DAGApi:
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         order_by: Optional[StrictStr] = None,
-        tag_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        tag_name_pattern: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -985,7 +985,7 @@ class DAGApi:
         :type offset: int
         :param order_by:
         :type order_by: str
-        :param tag_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :param tag_name_pattern:
         :type tag_name_pattern: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1043,7 +1043,7 @@ class DAGApi:
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         order_by: Optional[StrictStr] = None,
-        tag_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        tag_name_pattern: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1067,7 +1067,7 @@ class DAGApi:
         :type offset: int
         :param order_by:
         :type order_by: str
-        :param tag_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :param tag_name_pattern:
         :type tag_name_pattern: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1204,8 +1204,8 @@ class DAGApi:
         tags: Optional[List[StrictStr]] = None,
         tags_match_mode: Optional[StrictStr] = None,
         owners: Optional[List[StrictStr]] = None,
-        dag_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
-        dag_display_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        dag_id_pattern: Optional[StrictStr] = None,
+        dag_display_name_pattern: Optional[StrictStr] = None,
         exclude_stale: Optional[StrictBool] = None,
         paused: Optional[StrictBool] = None,
         last_dag_run_state: Optional[DagRunState] = None,
@@ -1242,9 +1242,9 @@ class DAGApi:
         :type tags_match_mode: str
         :param owners:
         :type owners: List[str]
-        :param dag_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :param dag_id_pattern:
         :type dag_id_pattern: str
-        :param dag_display_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :param dag_display_name_pattern:
         :type dag_display_name_pattern: str
         :param exclude_stale:
         :type exclude_stale: bool
@@ -1334,8 +1334,8 @@ class DAGApi:
         tags: Optional[List[StrictStr]] = None,
         tags_match_mode: Optional[StrictStr] = None,
         owners: Optional[List[StrictStr]] = None,
-        dag_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
-        dag_display_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        dag_id_pattern: Optional[StrictStr] = None,
+        dag_display_name_pattern: Optional[StrictStr] = None,
         exclude_stale: Optional[StrictBool] = None,
         paused: Optional[StrictBool] = None,
         last_dag_run_state: Optional[DagRunState] = None,
@@ -1372,9 +1372,9 @@ class DAGApi:
         :type tags_match_mode: str
         :param owners:
         :type owners: List[str]
-        :param dag_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :param dag_id_pattern:
         :type dag_id_pattern: str
-        :param dag_display_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :param dag_display_name_pattern:
         :type dag_display_name_pattern: str
         :param exclude_stale:
         :type exclude_stale: bool
@@ -1464,8 +1464,8 @@ class DAGApi:
         tags: Optional[List[StrictStr]] = None,
         tags_match_mode: Optional[StrictStr] = None,
         owners: Optional[List[StrictStr]] = None,
-        dag_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
-        dag_display_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        dag_id_pattern: Optional[StrictStr] = None,
+        dag_display_name_pattern: Optional[StrictStr] = None,
         exclude_stale: Optional[StrictBool] = None,
         paused: Optional[StrictBool] = None,
         last_dag_run_state: Optional[DagRunState] = None,
@@ -1502,9 +1502,9 @@ class DAGApi:
         :type tags_match_mode: str
         :param owners:
         :type owners: List[str]
-        :param dag_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :param dag_id_pattern:
         :type dag_id_pattern: str
-        :param dag_display_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :param dag_display_name_pattern:
         :type dag_display_name_pattern: str
         :param exclude_stale:
         :type exclude_stale: bool
@@ -2094,7 +2094,7 @@ class DAGApi:
         tags: Optional[List[StrictStr]] = None,
         tags_match_mode: Optional[StrictStr] = None,
         owners: Optional[List[StrictStr]] = None,
-        dag_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        dag_id_pattern: Optional[StrictStr] = None,
         exclude_stale: Optional[StrictBool] = None,
         paused: Optional[StrictBool] = None,
         last_dag_run_state: Optional[DagRunState] = None,
@@ -2129,7 +2129,7 @@ class DAGApi:
         :type tags_match_mode: str
         :param owners:
         :type owners: List[str]
-        :param dag_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :param dag_id_pattern:
         :type dag_id_pattern: str
         :param exclude_stale:
         :type exclude_stale: bool
@@ -2206,7 +2206,7 @@ class DAGApi:
         tags: Optional[List[StrictStr]] = None,
         tags_match_mode: Optional[StrictStr] = None,
         owners: Optional[List[StrictStr]] = None,
-        dag_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        dag_id_pattern: Optional[StrictStr] = None,
         exclude_stale: Optional[StrictBool] = None,
         paused: Optional[StrictBool] = None,
         last_dag_run_state: Optional[DagRunState] = None,
@@ -2241,7 +2241,7 @@ class DAGApi:
         :type tags_match_mode: str
         :param owners:
         :type owners: List[str]
-        :param dag_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :param dag_id_pattern:
         :type dag_id_pattern: str
         :param exclude_stale:
         :type exclude_stale: bool
@@ -2318,7 +2318,7 @@ class DAGApi:
         tags: Optional[List[StrictStr]] = None,
         tags_match_mode: Optional[StrictStr] = None,
         owners: Optional[List[StrictStr]] = None,
-        dag_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        dag_id_pattern: Optional[StrictStr] = None,
         exclude_stale: Optional[StrictBool] = None,
         paused: Optional[StrictBool] = None,
         last_dag_run_state: Optional[DagRunState] = None,
@@ -2353,7 +2353,7 @@ class DAGApi:
         :type tags_match_mode: str
         :param owners:
         :type owners: List[str]
-        :param dag_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :param dag_id_pattern:
         :type dag_id_pattern: str
         :param exclude_stale:
         :type exclude_stale: bool

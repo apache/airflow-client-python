@@ -528,7 +528,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     api_instance = airflow_client.client.AssetApi(api_client)
     limit = 50 # int |  (optional) (default to 50)
     offset = 0 # int |  (optional) (default to 0)
-    name_pattern = 'name_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported. (optional)
+    name_pattern = 'name_pattern_example' # str |  (optional)
     order_by = 'id' # str |  (optional) (default to 'id')
 
     try:
@@ -549,7 +549,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **int**|  | [optional] [default to 50]
  **offset** | **int**|  | [optional] [default to 0]
- **name_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). Regular expressions are **not** supported. | [optional] 
+ **name_pattern** | **str**|  | [optional] 
  **order_by** | **str**|  | [optional] [default to &#39;id&#39;]
 
 ### Return type
@@ -791,8 +791,8 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     api_instance = airflow_client.client.AssetApi(api_client)
     limit = 50 # int |  (optional) (default to 50)
     offset = 0 # int |  (optional) (default to 0)
-    name_pattern = 'name_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported. (optional)
-    uri_pattern = 'uri_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported. (optional)
+    name_pattern = 'name_pattern_example' # str |  (optional)
+    uri_pattern = 'uri_pattern_example' # str |  (optional)
     dag_ids = ['dag_ids_example'] # List[str] |  (optional)
     only_active = True # bool |  (optional) (default to True)
     order_by = 'id' # str |  (optional) (default to 'id')
@@ -815,8 +815,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **int**|  | [optional] [default to 50]
  **offset** | **int**|  | [optional] [default to 0]
- **name_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). Regular expressions are **not** supported. | [optional] 
- **uri_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). Regular expressions are **not** supported. | [optional] 
+ **name_pattern** | **str**|  | [optional] 
+ **uri_pattern** | **str**|  | [optional] 
  **dag_ids** | [**List[str]**](str.md)|  | [optional] 
  **only_active** | **bool**|  | [optional] [default to True]
  **order_by** | **str**|  | [optional] [default to &#39;id&#39;]

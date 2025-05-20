@@ -7,7 +7,6 @@ DAG Source serializer for responses.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **content** | **str** |  | [optional] 
-**dag_display_name** | **str** |  | 
 **dag_id** | **str** |  | 
 **version_number** | **int** |  | [optional] 
 

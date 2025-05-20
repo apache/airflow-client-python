@@ -179,9 +179,6 @@ components:
         id:
           title: Id
           type: integer
-        last_asset_event:
-          $ref: '#/components/schemas/LastAssetEventResponse'
-          nullable: true
         name:
           title: Name
           type: string
@@ -273,9 +270,6 @@ components:
           format: date-time
           title: Created At
           type: string
-        dag_display_name:
-          title: Dag Display Name
-          type: string
         dag_id:
           title: Dag Id
           type: string
@@ -318,7 +312,6 @@ components:
       - max_active_runs
       - created_at
       - updated_at
-      - dag_display_name
       title: BackfillResponse
       type: object
     BaseInfoResponse:
@@ -910,10 +903,6 @@ components:
           format: duration
           nullable: true
           type: string
-        default_args:
-          additionalProperties: true
-          nullable: true
-          type: object
         description:
           nullable: true
           type: string
@@ -1225,9 +1214,6 @@ components:
           additionalProperties: true
           title: Conf
           type: object
-        dag_display_name:
-          title: Dag Display Name
-          type: string
         dag_id:
           title: Dag Id
           type: string
@@ -1289,7 +1275,6 @@ components:
       - state
       - conf
       - dag_versions
-      - dag_display_name
       title: DAGRunResponse
       type: object
     DAGRunsBatchBody:
@@ -1361,9 +1346,6 @@ components:
         content:
           nullable: true
           type: string
-        dag_display_name:
-          title: Dag Display Name
-          type: string
         dag_id:
           title: Dag Id
           type: string
@@ -1372,7 +1354,6 @@ components:
           type: integer
       required:
       - dag_id
-      - dag_display_name
       title: DAGSourceResponse
       type: object
     DAGTagCollectionResponse:
@@ -1631,9 +1612,6 @@ components:
           format: date-time
           title: Created At
           type: string
-        dag_display_name:
-          title: Dag Display Name
-          type: string
         dag_id:
           title: Dag Id
           type: string
@@ -1649,7 +1627,6 @@ components:
       - version_number
       - dag_id
       - created_at
-      - dag_display_name
       title: DagVersionResponse
       type: object
     DagWarningType:
@@ -1710,9 +1687,6 @@ components:
     EventLogResponse:
       description: Event Log Response.
       properties:
-        dag_display_name:
-          nullable: true
-          type: string
         dag_id:
           nullable: true
           type: string
@@ -1753,16 +1727,6 @@ components:
       - when
       - event
       title: EventLogResponse
-      type: object
-    ExternalLogUrlResponse:
-      description: Response for the external log URL endpoint.
-      properties:
-        url:
-          title: Url
-          type: string
-      required:
-      - url
-      title: ExternalLogUrlResponse
       type: object
     ExtraLinkCollectionResponse:
       description: Extra Links Response.
@@ -1916,9 +1880,6 @@ components:
     JobResponse:
       description: Job serializer for responses.
       properties:
-        dag_display_name:
-          nullable: true
-          type: string
         dag_id:
           nullable: true
           type: string
@@ -1957,19 +1918,6 @@ components:
       title: JobResponse
       type: object
     JsonValue: {}
-    LastAssetEventResponse:
-      description: Last asset event response serializer.
-      properties:
-        id:
-          minimum: 0.0
-          nullable: true
-          type: integer
-        timestamp:
-          format: date-time
-          nullable: true
-          type: string
-      title: LastAssetEventResponse
-      type: object
     PatchTaskInstanceBody:
       additionalProperties: false
       description: Request body for Clear Task Instances endpoint.
@@ -2014,36 +1962,6 @@ components:
       - plugins
       - total_entries
       title: PluginCollectionResponse
-      type: object
-    PluginImportErrorCollectionResponse:
-      description: Plugin Import Error Collection serializer.
-      properties:
-        import_errors:
-          items:
-            $ref: '#/components/schemas/PluginImportErrorResponse'
-          title: Import Errors
-          type: array
-        total_entries:
-          title: Total Entries
-          type: integer
-      required:
-      - import_errors
-      - total_entries
-      title: PluginImportErrorCollectionResponse
-      type: object
-    PluginImportErrorResponse:
-      description: Plugin Import Error serializer for responses.
-      properties:
-        error:
-          title: Error
-          type: string
-        source:
-          title: Source
-          type: string
-      required:
-      - source
-      - error
-      title: PluginImportErrorResponse
       type: object
     PluginResponse:
       description: Plugin serializer.
@@ -2281,9 +2199,6 @@ components:
           format: date-time
           title: Created At
           type: string
-        dag_display_name:
-          title: Dag Display Name
-          type: string
         dag_id:
           title: Dag Id
           type: string
@@ -2291,7 +2206,6 @@ components:
       - dag_id
       - asset_id
       - created_at
-      - dag_display_name
       title: QueuedEventResponse
       type: object
     ReprocessBehavior:
@@ -2409,9 +2323,6 @@ components:
     TaskInstanceHistoryResponse:
       description: TaskInstanceHistory serializer for responses.
       properties:
-        dag_display_name:
-          title: Dag Display Name
-          type: string
         dag_id:
           title: Dag Id
           type: string
@@ -2496,7 +2407,6 @@ components:
       - try_number
       - max_tries
       - task_display_name
-      - dag_display_name
       - pool
       - pool_slots
       - executor_config
@@ -2505,9 +2415,6 @@ components:
     TaskInstanceResponse:
       description: TaskInstance serializer for responses.
       properties:
-        dag_display_name:
-          title: Dag Display Name
-          type: string
         dag_id:
           title: Dag Id
           type: string
@@ -2621,7 +2528,6 @@ components:
       - try_number
       - max_tries
       - task_display_name
-      - dag_display_name
       - pool
       - pool_slots
       - executor_config
@@ -3107,9 +3013,6 @@ components:
     XComResponse:
       description: Serializer for a xcom item.
       properties:
-        dag_display_name:
-          title: Dag Display Name
-          type: string
         dag_id:
           title: Dag Id
           type: string
@@ -3140,15 +3043,11 @@ components:
       - task_id
       - dag_id
       - run_id
-      - dag_display_name
       title: XComResponse
       type: object
     XComResponseNative:
       description: XCom response serializer with native return type.
       properties:
-        dag_display_name:
-          title: Dag Display Name
-          type: string
         dag_id:
           title: Dag Id
           type: string
@@ -3181,16 +3080,12 @@ components:
       - task_id
       - dag_id
       - run_id
-      - dag_display_name
       - value
       title: XComResponseNative
       type: object
     XComResponseString:
       description: XCom response serializer with string return type.
       properties:
-        dag_display_name:
-          title: Dag Display Name
-          type: string
         dag_id:
           title: Dag Id
           type: string
@@ -3224,7 +3119,6 @@ components:
       - task_id
       - dag_id
       - run_id
-      - dag_display_name
       title: XComResponseString
       type: object
     XComUpdateBody:
@@ -3286,17 +3180,13 @@ paths:
           minimum: 0
           title: Offset
           type: integer
-      - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ Regular expressions are **not** supported."
-        in: query
+      - in: query
         name: name_pattern
         required: false
         schema:
           nullable: true
           type: string
-      - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ Regular expressions are **not** supported."
-        in: query
+      - in: query
         name: uri_pattern
         required: false
         schema:
@@ -3381,9 +3271,7 @@ paths:
           minimum: 0
           title: Offset
           type: integer
-      - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ Regular expressions are **not** supported."
-        in: query
+      - in: query
         name: name_pattern
         required: false
         schema:
@@ -4453,9 +4341,7 @@ paths:
           default: id
           title: Order By
           type: string
-      - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ Regular expressions are **not** supported."
-        in: query
+      - in: query
         name: connection_id_pattern
         required: false
         schema:
@@ -5018,9 +4904,7 @@ paths:
           default: name
           title: Order By
           type: string
-      - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ Regular expressions are **not** supported."
-        in: query
+      - in: query
         name: tag_name_pattern
         required: false
         schema:
@@ -5172,17 +5056,13 @@ paths:
             type: string
           title: Owners
           type: array
-      - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ Regular expressions are **not** supported."
-        in: query
+      - in: query
         name: dag_id_pattern
         required: false
         schema:
           nullable: true
           type: string
-      - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ Regular expressions are **not** supported."
-        in: query
+      - in: query
         name: dag_display_name_pattern
         required: false
         schema:
@@ -5333,9 +5213,7 @@ paths:
             type: string
           title: Owners
           type: array
-      - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ Regular expressions are **not** supported."
-        in: query
+      - in: query
         name: dag_id_pattern
         required: false
         schema:
@@ -6483,9 +6361,7 @@ paths:
         schema:
           nullable: true
           type: number
-      - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ Regular expressions are **not** supported."
-        in: query
+      - in: query
         name: task_display_name_pattern
         required: false
         schema:
@@ -6652,72 +6528,6 @@ paths:
       tags:
       - Task Instance
   /api/v2/dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}:
-    delete:
-      description: Delete a task instance.
-      operationId: delete_task_instance
-      parameters:
-      - in: path
-        name: dag_id
-        required: true
-        schema:
-          title: Dag Id
-          type: string
-      - in: path
-        name: dag_run_id
-        required: true
-        schema:
-          title: Dag Run Id
-          type: string
-      - in: path
-        name: task_id
-        required: true
-        schema:
-          title: Task Id
-          type: string
-      - in: query
-        name: map_index
-        required: false
-        schema:
-          default: -1
-          title: Map Index
-          type: integer
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                title: Response Delete Task Instance
-                type: 'null'
-          description: Successful Response
-        '401':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPExceptionResponse'
-          description: Unauthorized
-        '403':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPExceptionResponse'
-          description: Forbidden
-        '404':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPExceptionResponse'
-          description: Not Found
-        '422':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPValidationError'
-          description: Validation Error
-      security:
-      - OAuth2PasswordBearer: []
-      summary: Delete Task Instance
-      tags:
-      - Task Instance
     get:
       description: Get task instance.
       operationId: get_task_instance
@@ -7015,85 +6825,6 @@ paths:
       security:
       - OAuth2PasswordBearer: []
       summary: Patch Task Instance Dry Run
-      tags:
-      - Task Instance
-  /api/v2/dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/externalLogUrl/{try_number}:
-    get:
-      description: Get external log URL for a specific task instance.
-      operationId: get_external_log_url
-      parameters:
-      - in: path
-        name: dag_id
-        required: true
-        schema:
-          title: Dag Id
-          type: string
-      - in: path
-        name: dag_run_id
-        required: true
-        schema:
-          title: Dag Run Id
-          type: string
-      - in: path
-        name: task_id
-        required: true
-        schema:
-          title: Task Id
-          type: string
-      - in: path
-        name: try_number
-        required: true
-        schema:
-          exclusiveMinimum: 0
-          title: Try Number
-          type: integer
-      - in: query
-        name: map_index
-        required: false
-        schema:
-          default: -1
-          title: Map Index
-          type: integer
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ExternalLogUrlResponse'
-          description: Successful Response
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPExceptionResponse'
-          description: Bad Request
-        '401':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPExceptionResponse'
-          description: Unauthorized
-        '403':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPExceptionResponse'
-          description: Forbidden
-        '404':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPExceptionResponse'
-          description: Not Found
-        '422':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPValidationError'
-          description: Validation Error
-      security:
-      - OAuth2PasswordBearer: []
-      summary: Get External Log Url
       tags:
       - Task Instance
   /api/v2/dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/links:
@@ -7424,7 +7155,7 @@ paths:
           default: '*/*'
           enum:
           - application/json
-          - application/x-ndjson
+          - text/plain
           - '*/*'
           title: Accept
           type: string
@@ -7434,11 +7165,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TaskInstancesLogResponse'
-            application/x-ndjson:
+            text/plain:
               schema:
-                example: '{"content": "content"}
-
-                  {"content": "content"}
+                example: 'content
 
                   '
                 type: string
@@ -9273,33 +9002,6 @@ paths:
       summary: Get Plugins
       tags:
       - Plugin
-  /api/v2/plugins/importErrors:
-    get:
-      operationId: import_errors
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PluginImportErrorCollectionResponse'
-          description: Successful Response
-        '401':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPExceptionResponse'
-          description: Unauthorized
-        '403':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPExceptionResponse'
-          description: Forbidden
-      security:
-      - OAuth2PasswordBearer: []
-      summary: Import Errors
-      tags:
-      - Plugin
   /api/v2/pools:
     get:
       description: Get all pools entries.
@@ -9328,9 +9030,7 @@ paths:
           default: id
           title: Order By
           type: string
-      - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ Regular expressions are **not** supported."
-        in: query
+      - in: query
         name: pool_name_pattern
         required: false
         schema:
@@ -9696,9 +9396,7 @@ paths:
           default: id
           title: Order By
           type: string
-      - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ Regular expressions are **not** supported."
-        in: query
+      - in: query
         name: variable_key_pattern
         required: false
         schema:

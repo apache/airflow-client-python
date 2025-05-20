@@ -131,7 +131,6 @@ from airflow_client.client.models.dry_run_backfill_collection_response import Dr
 from airflow_client.client.models.dry_run_backfill_response import DryRunBackfillResponse
 from airflow_client.client.models.event_log_collection_response import EventLogCollectionResponse
 from airflow_client.client.models.event_log_response import EventLogResponse
-from airflow_client.client.models.external_log_url_response import ExternalLogUrlResponse
 from airflow_client.client.models.extra_link_collection_response import ExtraLinkCollectionResponse
 from airflow_client.client.models.fast_api_app_response import FastAPIAppResponse
 from airflow_client.client.models.fast_api_root_middleware_response import FastAPIRootMiddlewareResponse
@@ -142,11 +141,8 @@ from airflow_client.client.models.import_error_collection_response import Import
 from airflow_client.client.models.import_error_response import ImportErrorResponse
 from airflow_client.client.models.job_collection_response import JobCollectionResponse
 from airflow_client.client.models.job_response import JobResponse
-from airflow_client.client.models.last_asset_event_response import LastAssetEventResponse
 from airflow_client.client.models.patch_task_instance_body import PatchTaskInstanceBody
 from airflow_client.client.models.plugin_collection_response import PluginCollectionResponse
-from airflow_client.client.models.plugin_import_error_collection_response import PluginImportErrorCollectionResponse
-from airflow_client.client.models.plugin_import_error_response import PluginImportErrorResponse
 from airflow_client.client.models.plugin_response import PluginResponse
 from airflow_client.client.models.pool_body import PoolBody
 from airflow_client.client.models.pool_collection_response import PoolCollectionResponse

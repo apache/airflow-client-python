@@ -39,7 +39,6 @@ class TestDAGRunCollectionResponse(unittest.TestCase):
                     airflow_client.client.models.dag_run_response.DAGRunResponse(
                         bundle_version = '', 
                         conf = airflow_client.client.models.conf.Conf(), 
-                        dag_display_name = '', 
                         dag_id = '', 
                         dag_run_id = '', 
                         dag_versions = [
@@ -48,7 +47,6 @@ class TestDAGRunCollectionResponse(unittest.TestCase):
                                 bundle_url = '', 
                                 bundle_version = '', 
                                 created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
-                                dag_display_name = '', 
                                 dag_id = '', 
                                 id = '', 
                                 version_number = 56, )
@@ -74,7 +72,6 @@ class TestDAGRunCollectionResponse(unittest.TestCase):
                     airflow_client.client.models.dag_run_response.DAGRunResponse(
                         bundle_version = '', 
                         conf = airflow_client.client.models.conf.Conf(), 
-                        dag_display_name = '', 
                         dag_id = '', 
                         dag_run_id = '', 
                         dag_versions = [
@@ -83,7 +80,6 @@ class TestDAGRunCollectionResponse(unittest.TestCase):
                                 bundle_url = '', 
                                 bundle_version = '', 
                                 created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
-                                dag_display_name = '', 
                                 dag_id = '', 
                                 id = '', 
                                 version_number = 56, )

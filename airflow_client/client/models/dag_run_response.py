@@ -33,7 +33,6 @@ class DAGRunResponse(BaseModel):
     """ # noqa: E501
     bundle_version: Optional[StrictStr] = None
     conf: Dict[str, Any]
-    dag_display_name: StrictStr
     dag_id: StrictStr
     dag_run_id: StrictStr
     dag_versions: List[DagVersionResponse]
@@ -49,7 +48,7 @@ class DAGRunResponse(BaseModel):
     start_date: Optional[datetime] = None
     state: DagRunState
     triggered_by: Optional[DagRunTriggeredByType] = None
-    __properties: ClassVar[List[str]] = ["bundle_version", "conf", "dag_display_name", "dag_id", "dag_run_id", "dag_versions", "data_interval_end", "data_interval_start", "end_date", "last_scheduling_decision", "logical_date", "note", "queued_at", "run_after", "run_type", "start_date", "state", "triggered_by"]
+    __properties: ClassVar[List[str]] = ["bundle_version", "conf", "dag_id", "dag_run_id", "dag_versions", "data_interval_end", "data_interval_start", "end_date", "last_scheduling_decision", "logical_date", "note", "queued_at", "run_after", "run_type", "start_date", "state", "triggered_by"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -111,7 +110,6 @@ class DAGRunResponse(BaseModel):
         _obj = cls.model_validate({
             "bundle_version": obj.get("bundle_version"),
             "conf": obj.get("conf"),
-            "dag_display_name": obj.get("dag_display_name"),
             "dag_id": obj.get("dag_id"),
             "dag_run_id": obj.get("dag_run_id"),
             "dag_versions": [DagVersionResponse.from_dict(_item) for _item in obj["dag_versions"]] if obj.get("dag_versions") is not None else None,

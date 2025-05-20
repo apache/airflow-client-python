@@ -39,7 +39,6 @@ class TestQueuedEventCollectionResponse(unittest.TestCase):
                     airflow_client.client.models.queued_event_response.QueuedEventResponse(
                         asset_id = 56, 
                         created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
-                        dag_display_name = '', 
                         dag_id = '', )
                     ],
                 total_entries = 56
@@ -50,7 +49,6 @@ class TestQueuedEventCollectionResponse(unittest.TestCase):
                     airflow_client.client.models.queued_event_response.QueuedEventResponse(
                         asset_id = 56, 
                         created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
-                        dag_display_name = '', 
                         dag_id = '', )
                     ],
                 total_entries = 56,

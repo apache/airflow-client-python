@@ -27,7 +27,6 @@ class XComResponseNative(BaseModel):
     """
     XCom response serializer with native return type.
     """ # noqa: E501
-    dag_display_name: StrictStr
     dag_id: StrictStr
     key: StrictStr
     logical_date: Optional[datetime] = None
@@ -36,7 +35,7 @@ class XComResponseNative(BaseModel):
     task_id: StrictStr
     timestamp: datetime
     value: Optional[Any]
-    __properties: ClassVar[List[str]] = ["dag_display_name", "dag_id", "key", "logical_date", "map_index", "run_id", "task_id", "timestamp", "value"]
+    __properties: ClassVar[List[str]] = ["dag_id", "key", "logical_date", "map_index", "run_id", "task_id", "timestamp", "value"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -94,7 +93,6 @@ class XComResponseNative(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "dag_display_name": obj.get("dag_display_name"),
             "dag_id": obj.get("dag_id"),
             "key": obj.get("key"),
             "logical_date": obj.get("logical_date"),

@@ -26,20 +26,6 @@ class TestTaskInstanceApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_delete_task_instance(self) -> None:
-        """Test case for delete_task_instance
-
-        Delete Task Instance
-        """
-        pass
-
-    def test_get_external_log_url(self) -> None:
-        """Test case for get_external_log_url
-
-        Get External Log Url
-        """
-        pass
-
     def test_get_extra_links(self) -> None:
         """Test case for get_extra_links
 

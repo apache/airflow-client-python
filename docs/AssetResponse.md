@@ -12,7 +12,6 @@ Name | Type | Description | Notes
 **extra** | **object** |  | [optional] 
 **group** | **str** |  | 
 **id** | **int** |  | 
-**last_asset_event** | [**LastAssetEventResponse**](LastAssetEventResponse.md) |  | [optional] 
 **name** | **str** |  | 
 **producing_tasks** | [**List[TaskOutletAssetReference]**](TaskOutletAssetReference.md) |  | 
 **updated_at** | **datetime** |  | 

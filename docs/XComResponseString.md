@@ -6,7 +6,6 @@ XCom response serializer with string return type.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**dag_display_name** | **str** |  | 
 **dag_id** | **str** |  | 
 **key** | **str** |  | 
 **logical_date** | **datetime** |  | [optional] 

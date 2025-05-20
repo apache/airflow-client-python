@@ -29,9 +29,8 @@ class QueuedEventResponse(BaseModel):
     """ # noqa: E501
     asset_id: StrictInt
     created_at: datetime
-    dag_display_name: StrictStr
     dag_id: StrictStr
-    __properties: ClassVar[List[str]] = ["asset_id", "created_at", "dag_display_name", "dag_id"]
+    __properties: ClassVar[List[str]] = ["asset_id", "created_at", "dag_id"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -86,7 +85,6 @@ class QueuedEventResponse(BaseModel):
         _obj = cls.model_validate({
             "asset_id": obj.get("asset_id"),
             "created_at": obj.get("created_at"),
-            "dag_display_name": obj.get("dag_display_name"),
             "dag_id": obj.get("dag_id")
         })
         return _obj

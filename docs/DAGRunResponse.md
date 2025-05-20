@@ -8,7 +8,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **bundle_version** | **str** |  | [optional] 
 **conf** | **object** |  | 
-**dag_display_name** | **str** |  | 
 **dag_id** | **str** |  | 
 **dag_run_id** | **str** |  | 
 **dag_versions** | [**List[DagVersionResponse]**](DagVersionResponse.md) |  | 

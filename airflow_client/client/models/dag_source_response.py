@@ -27,10 +27,9 @@ class DAGSourceResponse(BaseModel):
     DAG Source serializer for responses.
     """ # noqa: E501
     content: Optional[StrictStr] = None
-    dag_display_name: StrictStr
     dag_id: StrictStr
     version_number: Optional[StrictInt] = None
-    __properties: ClassVar[List[str]] = ["content", "dag_display_name", "dag_id", "version_number"]
+    __properties: ClassVar[List[str]] = ["content", "dag_id", "version_number"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -84,7 +83,6 @@ class DAGSourceResponse(BaseModel):
 
         _obj = cls.model_validate({
             "content": obj.get("content"),
-            "dag_display_name": obj.get("dag_display_name"),
             "dag_id": obj.get("dag_id"),
             "version_number": obj.get("version_number")
         })

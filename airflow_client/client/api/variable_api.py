@@ -878,7 +878,7 @@ class VariableApi:
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         order_by: Optional[StrictStr] = None,
-        variable_key_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        variable_key_pattern: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -902,7 +902,7 @@ class VariableApi:
         :type offset: int
         :param order_by:
         :type order_by: str
-        :param variable_key_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :param variable_key_pattern:
         :type variable_key_pattern: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -960,7 +960,7 @@ class VariableApi:
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         order_by: Optional[StrictStr] = None,
-        variable_key_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        variable_key_pattern: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -984,7 +984,7 @@ class VariableApi:
         :type offset: int
         :param order_by:
         :type order_by: str
-        :param variable_key_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :param variable_key_pattern:
         :type variable_key_pattern: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1042,7 +1042,7 @@ class VariableApi:
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         order_by: Optional[StrictStr] = None,
-        variable_key_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        variable_key_pattern: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1066,7 +1066,7 @@ class VariableApi:
         :type offset: int
         :param order_by:
         :type order_by: str
-        :param variable_key_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :param variable_key_pattern:
         :type variable_key_pattern: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

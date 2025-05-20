@@ -1131,7 +1131,7 @@ class ConnectionApi:
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         order_by: Optional[StrictStr] = None,
-        connection_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        connection_id_pattern: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1155,7 +1155,7 @@ class ConnectionApi:
         :type offset: int
         :param order_by:
         :type order_by: str
-        :param connection_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :param connection_id_pattern:
         :type connection_id_pattern: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1214,7 +1214,7 @@ class ConnectionApi:
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         order_by: Optional[StrictStr] = None,
-        connection_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        connection_id_pattern: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1238,7 +1238,7 @@ class ConnectionApi:
         :type offset: int
         :param order_by:
         :type order_by: str
-        :param connection_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :param connection_id_pattern:
         :type connection_id_pattern: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1297,7 +1297,7 @@ class ConnectionApi:
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         order_by: Optional[StrictStr] = None,
-        connection_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        connection_id_pattern: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1321,7 +1321,7 @@ class ConnectionApi:
         :type offset: int
         :param order_by:
         :type order_by: str
-        :param connection_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :param connection_id_pattern:
         :type connection_id_pattern: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

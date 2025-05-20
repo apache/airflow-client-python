@@ -29,7 +29,6 @@ class TaskInstanceHistoryResponse(BaseModel):
     """
     TaskInstanceHistory serializer for responses.
     """ # noqa: E501
-    dag_display_name: StrictStr
     dag_id: StrictStr
     dag_run_id: StrictStr
     dag_version: Optional[DagVersionResponse] = None
@@ -54,7 +53,7 @@ class TaskInstanceHistoryResponse(BaseModel):
     task_id: StrictStr
     try_number: StrictInt
     unixname: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["dag_display_name", "dag_id", "dag_run_id", "dag_version", "duration", "end_date", "executor", "executor_config", "hostname", "map_index", "max_tries", "operator", "pid", "pool", "pool_slots", "priority_weight", "queue", "queued_when", "scheduled_when", "start_date", "state", "task_display_name", "task_id", "try_number", "unixname"]
+    __properties: ClassVar[List[str]] = ["dag_id", "dag_run_id", "dag_version", "duration", "end_date", "executor", "executor_config", "hostname", "map_index", "max_tries", "operator", "pid", "pool", "pool_slots", "priority_weight", "queue", "queued_when", "scheduled_when", "start_date", "state", "task_display_name", "task_id", "try_number", "unixname"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -110,7 +109,6 @@ class TaskInstanceHistoryResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "dag_display_name": obj.get("dag_display_name"),
             "dag_id": obj.get("dag_id"),
             "dag_run_id": obj.get("dag_run_id"),
             "dag_version": DagVersionResponse.from_dict(obj["dag_version"]) if obj.get("dag_version") is not None else None,

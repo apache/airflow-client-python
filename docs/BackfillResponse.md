@@ -8,7 +8,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **completed_at** | **datetime** |  | [optional] 
 **created_at** | **datetime** |  | 
-**dag_display_name** | **str** |  | 
 **dag_id** | **str** |  | 
 **dag_run_conf** | **object** |  | 
 **from_date** | **datetime** |  | 

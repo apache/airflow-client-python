@@ -6,7 +6,6 @@ Job serializer for responses.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**dag_display_name** | **str** |  | [optional] 
 **dag_id** | **str** |  | [optional] 
 **end_date** | **datetime** |  | [optional] 
 **executor_class** | **str** |  | [optional] 

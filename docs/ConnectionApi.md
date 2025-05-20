@@ -355,7 +355,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     limit = 50 # int |  (optional) (default to 50)
     offset = 0 # int |  (optional) (default to 0)
     order_by = 'id' # str |  (optional) (default to 'id')
-    connection_id_pattern = 'connection_id_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported. (optional)
+    connection_id_pattern = 'connection_id_pattern_example' # str |  (optional)
 
     try:
         # Get Connections
@@ -376,7 +376,7 @@ Name | Type | Description  | Notes
  **limit** | **int**|  | [optional] [default to 50]
  **offset** | **int**|  | [optional] [default to 0]
  **order_by** | **str**|  | [optional] [default to &#39;id&#39;]
- **connection_id_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). Regular expressions are **not** supported. | [optional] 
+ **connection_id_pattern** | **str**|  | [optional] 
 
 ### Return type
 

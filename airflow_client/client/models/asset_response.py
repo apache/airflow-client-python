@@ -22,7 +22,6 @@ from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from airflow_client.client.models.asset_alias_response import AssetAliasResponse
 from airflow_client.client.models.dag_schedule_asset_reference import DagScheduleAssetReference
-from airflow_client.client.models.last_asset_event_response import LastAssetEventResponse
 from airflow_client.client.models.task_outlet_asset_reference import TaskOutletAssetReference
 from typing import Optional, Set
 from typing_extensions import Self
@@ -37,12 +36,11 @@ class AssetResponse(BaseModel):
     extra: Optional[Dict[str, Any]] = None
     group: StrictStr
     id: StrictInt
-    last_asset_event: Optional[LastAssetEventResponse] = None
     name: StrictStr
     producing_tasks: List[TaskOutletAssetReference]
     updated_at: datetime
     uri: StrictStr
-    __properties: ClassVar[List[str]] = ["aliases", "consuming_dags", "created_at", "extra", "group", "id", "last_asset_event", "name", "producing_tasks", "updated_at", "uri"]
+    __properties: ClassVar[List[str]] = ["aliases", "consuming_dags", "created_at", "extra", "group", "id", "name", "producing_tasks", "updated_at", "uri"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -97,9 +95,6 @@ class AssetResponse(BaseModel):
                 if _item_consuming_dags:
                     _items.append(_item_consuming_dags.to_dict())
             _dict['consuming_dags'] = _items
-        # override the default output from pydantic by calling `to_dict()` of last_asset_event
-        if self.last_asset_event:
-            _dict['last_asset_event'] = self.last_asset_event.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in producing_tasks (list)
         _items = []
         if self.producing_tasks:
@@ -125,7 +120,6 @@ class AssetResponse(BaseModel):
             "extra": obj.get("extra"),
             "group": obj.get("group"),
             "id": obj.get("id"),
-            "last_asset_event": LastAssetEventResponse.from_dict(obj["last_asset_event"]) if obj.get("last_asset_event") is not None else None,
             "name": obj.get("name"),
             "producing_tasks": [TaskOutletAssetReference.from_dict(_item) for _item in obj["producing_tasks"]] if obj.get("producing_tasks") is not None else None,
             "updated_at": obj.get("updated_at"),

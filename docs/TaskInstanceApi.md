@@ -4,8 +4,6 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**delete_task_instance**](TaskInstanceApi.md#delete_task_instance) | **DELETE** /api/v2/dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id} | Delete Task Instance
-[**get_external_log_url**](TaskInstanceApi.md#get_external_log_url) | **GET** /api/v2/dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/externalLogUrl/{try_number} | Get External Log Url
 [**get_extra_links**](TaskInstanceApi.md#get_extra_links) | **GET** /api/v2/dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/links | Get Extra Links
 [**get_log**](TaskInstanceApi.md#get_log) | **GET** /api/v2/dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/logs/{try_number} | Get Log
 [**get_mapped_task_instance**](TaskInstanceApi.md#get_mapped_task_instance) | **GET** /api/v2/dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/{map_index} | Get Mapped Task Instance
@@ -25,178 +23,6 @@ Method | HTTP request | Description
 [**patch_task_instance_dry_run_by_map_index**](TaskInstanceApi.md#patch_task_instance_dry_run_by_map_index) | **PATCH** /api/v2/dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/{map_index}/dry_run | Patch Task Instance Dry Run
 [**post_clear_task_instances**](TaskInstanceApi.md#post_clear_task_instances) | **POST** /api/v2/dags/{dag_id}/clearTaskInstances | Post Clear Task Instances
 
-
-# **delete_task_instance**
-> object delete_task_instance(dag_id, dag_run_id, task_id, map_index=map_index)
-
-Delete Task Instance
-
-Delete a task instance.
-
-### Example
-
-* OAuth Authentication (OAuth2PasswordBearer):
-
-```python
-import airflow_client.client
-from airflow_client.client.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost
-# See configuration.py for a list of all supported configuration parameters.
-configuration = airflow_client.client.Configuration(
-    host = "http://localhost"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Enter a context with an instance of the API client
-with airflow_client.client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = airflow_client.client.TaskInstanceApi(api_client)
-    dag_id = 'dag_id_example' # str | 
-    dag_run_id = 'dag_run_id_example' # str | 
-    task_id = 'task_id_example' # str | 
-    map_index = -1 # int |  (optional) (default to -1)
-
-    try:
-        # Delete Task Instance
-        api_response = api_instance.delete_task_instance(dag_id, dag_run_id, task_id, map_index=map_index)
-        print("The response of TaskInstanceApi->delete_task_instance:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling TaskInstanceApi->delete_task_instance: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **dag_id** | **str**|  | 
- **dag_run_id** | **str**|  | 
- **task_id** | **str**|  | 
- **map_index** | **int**|  | [optional] [default to -1]
-
-### Return type
-
-**object**
-
-### Authorization
-
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Successful Response |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
-**422** | Validation Error |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_external_log_url**
-> ExternalLogUrlResponse get_external_log_url(dag_id, dag_run_id, task_id, try_number, map_index=map_index)
-
-Get External Log Url
-
-Get external log URL for a specific task instance.
-
-### Example
-
-* OAuth Authentication (OAuth2PasswordBearer):
-
-```python
-import airflow_client.client
-from airflow_client.client.models.external_log_url_response import ExternalLogUrlResponse
-from airflow_client.client.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost
-# See configuration.py for a list of all supported configuration parameters.
-configuration = airflow_client.client.Configuration(
-    host = "http://localhost"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-# Enter a context with an instance of the API client
-with airflow_client.client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = airflow_client.client.TaskInstanceApi(api_client)
-    dag_id = 'dag_id_example' # str | 
-    dag_run_id = 'dag_run_id_example' # str | 
-    task_id = 'task_id_example' # str | 
-    try_number = 56 # int | 
-    map_index = -1 # int |  (optional) (default to -1)
-
-    try:
-        # Get External Log Url
-        api_response = api_instance.get_external_log_url(dag_id, dag_run_id, task_id, try_number, map_index=map_index)
-        print("The response of TaskInstanceApi->get_external_log_url:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling TaskInstanceApi->get_external_log_url: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **dag_id** | **str**|  | 
- **dag_run_id** | **str**|  | 
- **task_id** | **str**|  | 
- **try_number** | **int**|  | 
- **map_index** | **int**|  | [optional] [default to -1]
-
-### Return type
-
-[**ExternalLogUrlResponse**](ExternalLogUrlResponse.md)
-
-### Authorization
-
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Successful Response |  -  |
-**400** | Bad Request |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
-**422** | Validation Error |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_extra_links**
 > ExtraLinkCollectionResponse get_extra_links(dag_id, dag_run_id, task_id, map_index=map_index)
@@ -362,7 +188,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json, application/x-ndjson
+ - **Accept**: application/json, text/plain
 
 ### HTTP response details
 
@@ -1229,7 +1055,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     updated_at_lte = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
     duration_gte = 3.4 # float |  (optional)
     duration_lte = 3.4 # float |  (optional)
-    task_display_name_pattern = 'task_display_name_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported. (optional)
+    task_display_name_pattern = 'task_display_name_pattern_example' # str |  (optional)
     state = ['state_example'] # List[str] |  (optional)
     pool = ['pool_example'] # List[str] |  (optional)
     queue = ['queue_example'] # List[str] |  (optional)
@@ -1270,7 +1096,7 @@ Name | Type | Description  | Notes
  **updated_at_lte** | **datetime**|  | [optional] 
  **duration_gte** | **float**|  | [optional] 
  **duration_lte** | **float**|  | [optional] 
- **task_display_name_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). Regular expressions are **not** supported. | [optional] 
+ **task_display_name_pattern** | **str**|  | [optional] 
  **state** | [**List[str]**](str.md)|  | [optional] 
  **pool** | [**List[str]**](str.md)|  | [optional] 
  **queue** | [**List[str]**](str.md)|  | [optional] 

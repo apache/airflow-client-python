@@ -35,7 +35,6 @@ class TestXComResponseNative(unittest.TestCase):
         model = XComResponseNative()
         if include_optional:
             return XComResponseNative(
-                dag_display_name = '',
                 dag_id = '',
                 key = '',
                 logical_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
@@ -47,7 +46,6 @@ class TestXComResponseNative(unittest.TestCase):
             )
         else:
             return XComResponseNative(
-                dag_display_name = '',
                 dag_id = '',
                 key = '',
                 map_index = 56,

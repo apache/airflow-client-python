@@ -14,7 +14,6 @@ Name | Type | Description | Notes
 **dag_display_name** | **str** |  | 
 **dag_id** | **str** |  | 
 **dag_run_timeout** | **str** |  | [optional] 
-**default_args** | **object** |  | [optional] 
 **description** | **str** |  | [optional] 
 **doc_md** | **str** |  | [optional] 
 **end_date** | **datetime** |  | [optional] 

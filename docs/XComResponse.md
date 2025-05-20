@@ -6,7 +6,6 @@ Serializer for a xcom item.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**dag_display_name** | **str** |  | 
 **dag_id** | **str** |  | 
 **key** | **str** |  | 
 **logical_date** | **datetime** |  | [optional] 

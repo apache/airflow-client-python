@@ -10,7 +10,6 @@ Name | Type | Description | Notes
 **bundle_url** | **str** |  | [optional] 
 **bundle_version** | **str** |  | [optional] 
 **created_at** | **datetime** |  | 
-**dag_display_name** | **str** |  | 
 **dag_id** | **str** |  | 
 **id** | **str** |  | 
 **version_number** | **int** |  | 

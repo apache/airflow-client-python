@@ -1773,7 +1773,7 @@ class AssetApi:
         self,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        name_pattern: Optional[StrictStr] = None,
         order_by: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -1796,7 +1796,7 @@ class AssetApi:
         :type limit: int
         :param offset:
         :type offset: int
-        :param name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :param name_pattern:
         :type name_pattern: str
         :param order_by:
         :type order_by: str
@@ -1856,7 +1856,7 @@ class AssetApi:
         self,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        name_pattern: Optional[StrictStr] = None,
         order_by: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -1879,7 +1879,7 @@ class AssetApi:
         :type limit: int
         :param offset:
         :type offset: int
-        :param name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :param name_pattern:
         :type name_pattern: str
         :param order_by:
         :type order_by: str
@@ -1939,7 +1939,7 @@ class AssetApi:
         self,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        name_pattern: Optional[StrictStr] = None,
         order_by: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -1962,7 +1962,7 @@ class AssetApi:
         :type limit: int
         :param offset:
         :type offset: int
-        :param name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :param name_pattern:
         :type name_pattern: str
         :param order_by:
         :type order_by: str
@@ -2835,8 +2835,8 @@ class AssetApi:
         self,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
-        uri_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        name_pattern: Optional[StrictStr] = None,
+        uri_pattern: Optional[StrictStr] = None,
         dag_ids: Optional[List[StrictStr]] = None,
         only_active: Optional[StrictBool] = None,
         order_by: Optional[StrictStr] = None,
@@ -2861,9 +2861,9 @@ class AssetApi:
         :type limit: int
         :param offset:
         :type offset: int
-        :param name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :param name_pattern:
         :type name_pattern: str
-        :param uri_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :param uri_pattern:
         :type uri_pattern: str
         :param dag_ids:
         :type dag_ids: List[str]
@@ -2930,8 +2930,8 @@ class AssetApi:
         self,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
-        uri_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        name_pattern: Optional[StrictStr] = None,
+        uri_pattern: Optional[StrictStr] = None,
         dag_ids: Optional[List[StrictStr]] = None,
         only_active: Optional[StrictBool] = None,
         order_by: Optional[StrictStr] = None,
@@ -2956,9 +2956,9 @@ class AssetApi:
         :type limit: int
         :param offset:
         :type offset: int
-        :param name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :param name_pattern:
         :type name_pattern: str
-        :param uri_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :param uri_pattern:
         :type uri_pattern: str
         :param dag_ids:
         :type dag_ids: List[str]
@@ -3025,8 +3025,8 @@ class AssetApi:
         self,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
-        uri_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        name_pattern: Optional[StrictStr] = None,
+        uri_pattern: Optional[StrictStr] = None,
         dag_ids: Optional[List[StrictStr]] = None,
         only_active: Optional[StrictBool] = None,
         order_by: Optional[StrictStr] = None,
@@ -3051,9 +3051,9 @@ class AssetApi:
         :type limit: int
         :param offset:
         :type offset: int
-        :param name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :param name_pattern:
         :type name_pattern: str
-        :param uri_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :param uri_pattern:
         :type uri_pattern: str
         :param dag_ids:
         :type dag_ids: List[str]

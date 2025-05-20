@@ -35,7 +35,6 @@ class TestEventLogResponse(unittest.TestCase):
         model = EventLogResponse()
         if include_optional:
             return EventLogResponse(
-                dag_display_name = '',
                 dag_id = '',
                 event = '',
                 event_log_id = 56,

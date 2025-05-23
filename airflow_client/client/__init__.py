@@ -14,7 +14,7 @@
 """  # noqa: E501
 
 
-__version__ = "&quot;3.0.0&quot;"
+__version__ = "3.0.0"
 
 # import apis into sdk package
 from airflow_client.client.api.asset_api import AssetApi

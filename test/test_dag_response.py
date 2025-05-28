@@ -13,8 +13,10 @@
 
 
 import unittest
+import datetime
 
 from airflow_client.client.models.dag_response import DAGResponse
+from airflow_client.client.models.dag_tag_response import DagTagResponse
 
 class TestDAGResponse(unittest.TestCase):
     """DAGResponse unit test stubs"""
@@ -30,9 +32,6 @@ class TestDAGResponse(unittest.TestCase):
             include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `DAGResponse`
-        """
-        model = DAGResponse()
         if include_optional:
             return DAGResponse(
                 bundle_name = '',
@@ -60,9 +59,9 @@ class TestDAGResponse(unittest.TestCase):
                     ],
                 relative_fileloc = '',
                 tags = [
-                    airflow_client.client.models.dag_tag_response.DagTagResponse(
+                    DagTagResponse(
                         dag_id = '', 
-                        name = '', )
+                        name = '')
                     ],
                 timetable_description = '',
                 timetable_summary = ''
@@ -83,17 +82,25 @@ class TestDAGResponse(unittest.TestCase):
                     ''
                     ],
                 tags = [
-                    airflow_client.client.models.dag_tag_response.DagTagResponse(
+                    DagTagResponse(
                         dag_id = '', 
-                        name = '', )
-                    ],
-        )
-        """
+                        name = '')
+                    ]
+            )
 
     def testDAGResponse(self):
         """Test DAGResponse"""
-        # inst_req_only = self.make_instance(include_optional=False)
-        # inst_req_and_optional = self.make_instance(include_optional=True)
+        inst_req_only = self.make_instance(include_optional=False)
+        inst_req_and_optional = self.make_instance(include_optional=True)
+
+    def test_to_json(self):
+        """Test to_json"""
+        inst_req_only = self.make_instance(include_optional=False)
+        inst_req_and_optional = self.make_instance(include_optional=True)
+
+        # Test that to_json works without errors
+        req_only_json = inst_req_only.to_json()
+        req_and_optional_json = inst_req_and_optional.to_json()
 
 if __name__ == '__main__':
     unittest.main()

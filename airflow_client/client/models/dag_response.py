@@ -103,6 +103,12 @@ class DAGResponse(BaseModel):
                 if _item_tags:
                     _items.append(_item_tags.to_dict())
             _dict['tags'] = _items
+
+        # Convert datetime objects to ISO format strings
+        for key, value in list(_dict.items()):
+            if isinstance(value, datetime):
+                _dict[key] = value.isoformat()
+
         return _dict
 
     @classmethod

@@ -75,6 +75,12 @@ class DagVersionResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+
+        # Convert datetime objects to ISO format strings
+        for key, value in list(_dict.items()):
+            if isinstance(value, datetime):
+                _dict[key] = value.isoformat()
+
         return _dict
 
     @classmethod

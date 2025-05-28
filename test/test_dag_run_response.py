@@ -13,8 +13,13 @@
 
 
 import unittest
+import datetime
 
 from airflow_client.client.models.dag_run_response import DAGRunResponse
+from airflow_client.client.models.dag_run_state import DagRunState
+from airflow_client.client.models.dag_run_type import DagRunType
+from airflow_client.client.models.dag_version_response import DagVersionResponse
+from airflow_client.client.models.dag_run_triggered_by_type import DagRunTriggeredByType
 
 class TestDAGRunResponse(unittest.TestCase):
     """DAGRunResponse unit test stubs"""
@@ -30,24 +35,22 @@ class TestDAGRunResponse(unittest.TestCase):
             include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `DAGRunResponse`
-        """
-        model = DAGRunResponse()
+        # instance of `DAGRunResponse`
         if include_optional:
             return DAGRunResponse(
                 bundle_version = '',
-                conf = airflow_client.client.models.conf.Conf(),
+                conf = {},
                 dag_id = '',
                 dag_run_id = '',
                 dag_versions = [
-                    airflow_client.client.models.dag_version_response.DagVersionResponse(
+                    DagVersionResponse(
                         bundle_name = '', 
                         bundle_url = '', 
                         bundle_version = '', 
                         created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                         dag_id = '', 
                         id = '', 
-                        version_number = 56, )
+                        version_number = 56)
                     ],
                 data_interval_end = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 data_interval_start = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
@@ -57,36 +60,42 @@ class TestDAGRunResponse(unittest.TestCase):
                 note = '',
                 queued_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 run_after = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
-                run_type = 'backfill',
+                run_type = DagRunType.BACKFILL,
                 start_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
-                state = 'queued',
-                triggered_by = 'cli'
+                state = DagRunState.QUEUED,
+                triggered_by = DagRunTriggeredByType.CLI
             )
         else:
             return DAGRunResponse(
-                conf = airflow_client.client.models.conf.Conf(),
+                conf = {},
                 dag_id = '',
                 dag_run_id = '',
                 dag_versions = [
-                    airflow_client.client.models.dag_version_response.DagVersionResponse(
+                    DagVersionResponse(
                         bundle_name = '', 
                         bundle_url = '', 
                         bundle_version = '', 
                         created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                         dag_id = '', 
                         id = '', 
-                        version_number = 56, )
+                        version_number = 56)
                     ],
                 run_after = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
-                run_type = 'backfill',
-                state = 'queued',
-        )
-        """
+                run_type = DagRunType.BACKFILL,
+                state = DagRunState.QUEUED
+            )
 
     def testDAGRunResponse(self):
         """Test DAGRunResponse"""
-        # inst_req_only = self.make_instance(include_optional=False)
-        # inst_req_and_optional = self.make_instance(include_optional=True)
+        inst_req_only = self.make_instance(include_optional=False)
+        inst_req_and_optional = self.make_instance(include_optional=True)
+
+    def test_to_json(self):
+        """Test to_json for datetime serialization"""
+        inst_req_and_optional = self.make_instance(include_optional=True)
+
+        # Test that to_json works without errors
+        json_output = inst_req_and_optional.to_json()
 
 if __name__ == '__main__':
     unittest.main()

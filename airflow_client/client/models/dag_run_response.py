@@ -96,6 +96,12 @@ class DAGRunResponse(BaseModel):
                 if _item_dag_versions:
                     _items.append(_item_dag_versions.to_dict())
             _dict['dag_versions'] = _items
+
+        # Convert datetime objects to ISO format strings
+        for key, value in list(_dict.items()):
+            if isinstance(value, datetime):
+                _dict[key] = value.isoformat()
+
         return _dict
 
     @classmethod

@@ -38,7 +38,7 @@ class TestDAGRunCollectionResponse(unittest.TestCase):
                 dag_runs = [
                     airflow_client.client.models.dag_run_response.DAGRunResponse(
                         bundle_version = '', 
-                        conf = airflow_client.client.models.conf.Conf(), 
+                        conf = airflow_client.client.models.extra.extra(), 
                         dag_id = '', 
                         dag_run_id = '', 
                         dag_versions = [
@@ -71,7 +71,7 @@ class TestDAGRunCollectionResponse(unittest.TestCase):
                 dag_runs = [
                     airflow_client.client.models.dag_run_response.DAGRunResponse(
                         bundle_version = '', 
-                        conf = airflow_client.client.models.conf.Conf(), 
+                        conf = airflow_client.client.models.extra.extra(), 
                         dag_id = '', 
                         dag_run_id = '', 
                         dag_versions = [

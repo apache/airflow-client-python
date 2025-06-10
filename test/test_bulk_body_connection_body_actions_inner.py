@@ -35,7 +35,7 @@ class TestBulkBodyConnectionBodyActionsInner(unittest.TestCase):
         model = BulkBodyConnectionBodyActionsInner()
         if include_optional:
             return BulkBodyConnectionBodyActionsInner(
-                action = 'create',
+                action = 'delete',
                 action_on_existence = 'fail',
                 entities = [
                     ''
@@ -44,7 +44,7 @@ class TestBulkBodyConnectionBodyActionsInner(unittest.TestCase):
             )
         else:
             return BulkBodyConnectionBodyActionsInner(
-                action = 'create',
+                action = 'delete',
                 entities = [
                     ''
                     ],

@@ -26,7 +26,6 @@ from airflow_client.client.models.backfill_collection_response import BackfillCo
 from airflow_client.client.models.backfill_post_body import BackfillPostBody
 from airflow_client.client.models.backfill_response import BackfillResponse
 from airflow_client.client.models.base_info_response import BaseInfoResponse
-from airflow_client.client.models.bulk_action import BulkAction
 from airflow_client.client.models.bulk_action_not_on_existence import BulkActionNotOnExistence
 from airflow_client.client.models.bulk_action_on_existence import BulkActionOnExistence
 from airflow_client.client.models.bulk_action_response import BulkActionResponse

@@ -36,7 +36,7 @@ class TestDAGRunResponse(unittest.TestCase):
         if include_optional:
             return DAGRunResponse(
                 bundle_version = '',
-                conf = airflow_client.client.models.conf.Conf(),
+                conf = airflow_client.client.models.extra.extra(),
                 dag_id = '',
                 dag_run_id = '',
                 dag_versions = [
@@ -64,7 +64,6 @@ class TestDAGRunResponse(unittest.TestCase):
             )
         else:
             return DAGRunResponse(
-                conf = airflow_client.client.models.conf.Conf(),
                 dag_id = '',
                 dag_run_id = '',
                 dag_versions = [

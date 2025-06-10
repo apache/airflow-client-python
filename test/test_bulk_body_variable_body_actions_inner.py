@@ -35,7 +35,7 @@ class TestBulkBodyVariableBodyActionsInner(unittest.TestCase):
         model = BulkBodyVariableBodyActionsInner()
         if include_optional:
             return BulkBodyVariableBodyActionsInner(
-                action = 'create',
+                action = 'delete',
                 action_on_existence = 'fail',
                 entities = [
                     ''
@@ -44,7 +44,7 @@ class TestBulkBodyVariableBodyActionsInner(unittest.TestCase):
             )
         else:
             return BulkBodyVariableBodyActionsInner(
-                action = 'create',
+                action = 'delete',
                 entities = [
                     ''
                     ],

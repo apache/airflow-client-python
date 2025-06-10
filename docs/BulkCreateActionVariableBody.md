@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**action** | [**BulkAction**](BulkAction.md) | The action to be performed on the entities. | 
+**action** | **str** | The action to be performed on the entities. | 
 **action_on_existence** | [**BulkActionOnExistence**](BulkActionOnExistence.md) |  | [optional] 
 **entities** | [**List[VariableBody]**](VariableBody.md) | A list of entities to be created. | 
 

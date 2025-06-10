@@ -17,9 +17,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
-from airflow_client.client.models.bulk_action import BulkAction
 from airflow_client.client.models.bulk_action_on_existence import BulkActionOnExistence
 from airflow_client.client.models.pool_body import PoolBody
 from typing import Optional, Set
@@ -29,10 +28,17 @@ class BulkCreateActionPoolBody(BaseModel):
     """
     BulkCreateActionPoolBody
     """ # noqa: E501
-    action: BulkAction = Field(description="The action to be performed on the entities.")
+    action: StrictStr = Field(description="The action to be performed on the entities.")
     action_on_existence: Optional[BulkActionOnExistence] = None
     entities: List[PoolBody] = Field(description="A list of entities to be created.")
     __properties: ClassVar[List[str]] = ["action", "action_on_existence", "entities"]
+
+    @field_validator('action')
+    def action_validate_enum(cls, value):
+        """Validates the enum"""
+        if value not in set(['create']):
+            raise ValueError("must be one of enum values ('create')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,

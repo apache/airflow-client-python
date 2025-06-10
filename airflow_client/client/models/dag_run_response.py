@@ -32,7 +32,7 @@ class DAGRunResponse(BaseModel):
     DAG Run serializer for responses.
     """ # noqa: E501
     bundle_version: Optional[StrictStr] = None
-    conf: Dict[str, Any]
+    conf: Optional[Dict[str, Any]] = None
     dag_id: StrictStr
     dag_run_id: StrictStr
     dag_versions: List[DagVersionResponse]

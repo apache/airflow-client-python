@@ -35,7 +35,7 @@ class TestBulkUpdateActionConnectionBody(unittest.TestCase):
         model = BulkUpdateActionConnectionBody()
         if include_optional:
             return BulkUpdateActionConnectionBody(
-                action = 'create',
+                action = 'update',
                 action_on_non_existence = 'fail',
                 entities = [
                     airflow_client.client.models.connection_body.ConnectionBody(
@@ -52,7 +52,7 @@ class TestBulkUpdateActionConnectionBody(unittest.TestCase):
             )
         else:
             return BulkUpdateActionConnectionBody(
-                action = 'create',
+                action = 'update',
                 entities = [
                     airflow_client.client.models.connection_body.ConnectionBody(
                         conn_type = '', 

@@ -35,7 +35,7 @@ class TestBulkUpdateActionPoolBody(unittest.TestCase):
         model = BulkUpdateActionPoolBody()
         if include_optional:
             return BulkUpdateActionPoolBody(
-                action = 'create',
+                action = 'update',
                 action_on_non_existence = 'fail',
                 entities = [
                     airflow_client.client.models.pool_body.PoolBody(
@@ -47,7 +47,7 @@ class TestBulkUpdateActionPoolBody(unittest.TestCase):
             )
         else:
             return BulkUpdateActionPoolBody(
-                action = 'create',
+                action = 'update',
                 entities = [
                     airflow_client.client.models.pool_body.PoolBody(
                         description = '', 

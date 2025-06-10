@@ -35,7 +35,7 @@ class TestBulkBodyPoolBodyActionsInner(unittest.TestCase):
         model = BulkBodyPoolBodyActionsInner()
         if include_optional:
             return BulkBodyPoolBodyActionsInner(
-                action = 'create',
+                action = 'delete',
                 action_on_existence = 'fail',
                 entities = [
                     ''
@@ -44,7 +44,7 @@ class TestBulkBodyPoolBodyActionsInner(unittest.TestCase):
             )
         else:
             return BulkBodyPoolBodyActionsInner(
-                action = 'create',
+                action = 'delete',
                 entities = [
                     ''
                     ],

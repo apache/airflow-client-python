@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**action** | [**BulkAction**](BulkAction.md) | The action to be performed on the entities. | 
+**action** | **str** | The action to be performed on the entities. | 
 **action_on_non_existence** | [**BulkActionNotOnExistence**](BulkActionNotOnExistence.md) |  | [optional] 
 **entities** | **List[str]** | A list of entity id/key to be deleted. | 
 

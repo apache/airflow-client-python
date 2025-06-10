@@ -35,7 +35,7 @@ class TestBulkDeleteActionPoolBody(unittest.TestCase):
         model = BulkDeleteActionPoolBody()
         if include_optional:
             return BulkDeleteActionPoolBody(
-                action = 'create',
+                action = 'delete',
                 action_on_non_existence = 'fail',
                 entities = [
                     ''
@@ -43,7 +43,7 @@ class TestBulkDeleteActionPoolBody(unittest.TestCase):
             )
         else:
             return BulkDeleteActionPoolBody(
-                action = 'create',
+                action = 'delete',
                 entities = [
                     ''
                     ],

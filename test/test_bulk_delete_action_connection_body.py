@@ -35,7 +35,7 @@ class TestBulkDeleteActionConnectionBody(unittest.TestCase):
         model = BulkDeleteActionConnectionBody()
         if include_optional:
             return BulkDeleteActionConnectionBody(
-                action = 'create',
+                action = 'delete',
                 action_on_non_existence = 'fail',
                 entities = [
                     ''
@@ -43,7 +43,7 @@ class TestBulkDeleteActionConnectionBody(unittest.TestCase):
             )
         else:
             return BulkDeleteActionConnectionBody(
-                action = 'create',
+                action = 'delete',
                 entities = [
                     ''
                     ],

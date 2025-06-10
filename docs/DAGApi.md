@@ -531,7 +531,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_dags**
-> DAGCollectionResponse patch_dags(dag_patch_body, update_mask=update_mask, limit=limit, offset=offset, tags=tags, tags_match_mode=tags_match_mode, owners=owners, dag_id_pattern=dag_id_pattern, exclude_stale=exclude_stale, paused=paused, last_dag_run_state=last_dag_run_state)
+> DAGCollectionResponse patch_dags(dag_patch_body, update_mask=update_mask, limit=limit, offset=offset, tags=tags, tags_match_mode=tags_match_mode, owners=owners, dag_id_pattern=dag_id_pattern, exclude_stale=exclude_stale, paused=paused)
 
 Patch Dags
 
@@ -545,7 +545,6 @@ Patch multiple DAGs.
 import airflow_client.client
 from airflow_client.client.models.dag_collection_response import DAGCollectionResponse
 from airflow_client.client.models.dag_patch_body import DAGPatchBody
-from airflow_client.client.models.dag_run_state import DagRunState
 from airflow_client.client.rest import ApiException
 from pprint import pprint
 
@@ -576,11 +575,10 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     dag_id_pattern = 'dag_id_pattern_example' # str |  (optional)
     exclude_stale = True # bool |  (optional) (default to True)
     paused = True # bool |  (optional)
-    last_dag_run_state = airflow_client.client.DagRunState() # DagRunState |  (optional)
 
     try:
         # Patch Dags
-        api_response = api_instance.patch_dags(dag_patch_body, update_mask=update_mask, limit=limit, offset=offset, tags=tags, tags_match_mode=tags_match_mode, owners=owners, dag_id_pattern=dag_id_pattern, exclude_stale=exclude_stale, paused=paused, last_dag_run_state=last_dag_run_state)
+        api_response = api_instance.patch_dags(dag_patch_body, update_mask=update_mask, limit=limit, offset=offset, tags=tags, tags_match_mode=tags_match_mode, owners=owners, dag_id_pattern=dag_id_pattern, exclude_stale=exclude_stale, paused=paused)
         print("The response of DAGApi->patch_dags:\n")
         pprint(api_response)
     except Exception as e:
@@ -604,7 +602,6 @@ Name | Type | Description  | Notes
  **dag_id_pattern** | **str**|  | [optional] 
  **exclude_stale** | **bool**|  | [optional] [default to True]
  **paused** | **bool**|  | [optional] 
- **last_dag_run_state** | [**DagRunState**](.md)|  | [optional] 
 
 ### Return type
 

@@ -93,7 +93,7 @@ class TestResponseClearDagRun(unittest.TestCase):
                     ],
                 total_entries = 56,
                 bundle_version = '',
-                conf = airflow_client.client.models.conf.Conf(),
+                conf = airflow_client.client.models.extra.extra(),
                 dag_id = '',
                 dag_run_id = '',
                 dag_versions = [
@@ -178,7 +178,6 @@ class TestResponseClearDagRun(unittest.TestCase):
                         unixname = '', )
                     ],
                 total_entries = 56,
-                conf = airflow_client.client.models.conf.Conf(),
                 dag_id = '',
                 dag_run_id = '',
                 dag_versions = [

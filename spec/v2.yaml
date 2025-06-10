@@ -323,14 +323,6 @@ components:
       required: []
       title: BaseInfoResponse
       type: object
-    BulkAction:
-      description: Bulk Action to be performed on the used model.
-      enum:
-      - create
-      - delete
-      - update
-      title: BulkAction
-      type: string
     BulkActionNotOnExistence:
       description: Bulk Action to be taken if the entity does not exist.
       enum:
@@ -425,8 +417,10 @@ components:
       additionalProperties: false
       properties:
         action:
-          $ref: '#/components/schemas/BulkAction'
+          const: create
           description: The action to be performed on the entities.
+          title: Action
+          type: string
         action_on_existence:
           $ref: '#/components/schemas/BulkActionOnExistence'
           default: fail
@@ -445,8 +439,10 @@ components:
       additionalProperties: false
       properties:
         action:
-          $ref: '#/components/schemas/BulkAction'
+          const: create
           description: The action to be performed on the entities.
+          title: Action
+          type: string
         action_on_existence:
           $ref: '#/components/schemas/BulkActionOnExistence'
           default: fail
@@ -465,8 +461,10 @@ components:
       additionalProperties: false
       properties:
         action:
-          $ref: '#/components/schemas/BulkAction'
+          const: create
           description: The action to be performed on the entities.
+          title: Action
+          type: string
         action_on_existence:
           $ref: '#/components/schemas/BulkActionOnExistence'
           default: fail
@@ -485,8 +483,10 @@ components:
       additionalProperties: false
       properties:
         action:
-          $ref: '#/components/schemas/BulkAction'
+          const: delete
           description: The action to be performed on the entities.
+          title: Action
+          type: string
         action_on_non_existence:
           $ref: '#/components/schemas/BulkActionNotOnExistence'
           default: fail
@@ -505,8 +505,10 @@ components:
       additionalProperties: false
       properties:
         action:
-          $ref: '#/components/schemas/BulkAction'
+          const: delete
           description: The action to be performed on the entities.
+          title: Action
+          type: string
         action_on_non_existence:
           $ref: '#/components/schemas/BulkActionNotOnExistence'
           default: fail
@@ -525,8 +527,10 @@ components:
       additionalProperties: false
       properties:
         action:
-          $ref: '#/components/schemas/BulkAction'
+          const: delete
           description: The action to be performed on the entities.
+          title: Action
+          type: string
         action_on_non_existence:
           $ref: '#/components/schemas/BulkActionNotOnExistence'
           default: fail
@@ -569,8 +573,10 @@ components:
       additionalProperties: false
       properties:
         action:
-          $ref: '#/components/schemas/BulkAction'
+          const: update
           description: The action to be performed on the entities.
+          title: Action
+          type: string
         action_on_non_existence:
           $ref: '#/components/schemas/BulkActionNotOnExistence'
           default: fail
@@ -589,8 +595,10 @@ components:
       additionalProperties: false
       properties:
         action:
-          $ref: '#/components/schemas/BulkAction'
+          const: update
           description: The action to be performed on the entities.
+          title: Action
+          type: string
         action_on_non_existence:
           $ref: '#/components/schemas/BulkActionNotOnExistence'
           default: fail
@@ -609,8 +617,10 @@ components:
       additionalProperties: false
       properties:
         action:
-          $ref: '#/components/schemas/BulkAction'
+          const: update
           description: The action to be performed on the entities.
+          title: Action
+          type: string
         action_on_non_existence:
           $ref: '#/components/schemas/BulkActionNotOnExistence'
           default: fail
@@ -1212,7 +1222,7 @@ components:
           type: string
         conf:
           additionalProperties: true
-          title: Conf
+          nullable: true
           type: object
         dag_id:
           title: Dag Id
@@ -1273,7 +1283,6 @@ components:
       - run_after
       - run_type
       - state
-      - conf
       - dag_versions
       title: DAGRunResponse
       type: object
@@ -5232,12 +5241,6 @@ paths:
         schema:
           nullable: true
           type: boolean
-      - in: query
-        name: last_dag_run_state
-        required: false
-        schema:
-          $ref: '#/components/schemas/DagRunState'
-          nullable: true
       requestBody:
         content:
           application/json:
@@ -7155,7 +7158,7 @@ paths:
           default: '*/*'
           enum:
           - application/json
-          - text/plain
+          - application/x-ndjson
           - '*/*'
           title: Accept
           type: string
@@ -7165,9 +7168,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TaskInstancesLogResponse'
-            text/plain:
+            application/x-ndjson:
               schema:
-                example: 'content
+                example: '{"content": "content"}
+
+                  {"content": "content"}
 
                   '
                 type: string

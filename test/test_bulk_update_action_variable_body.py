@@ -35,7 +35,7 @@ class TestBulkUpdateActionVariableBody(unittest.TestCase):
         model = BulkUpdateActionVariableBody()
         if include_optional:
             return BulkUpdateActionVariableBody(
-                action = 'create',
+                action = 'update',
                 action_on_non_existence = 'fail',
                 entities = [
                     airflow_client.client.models.variable_body.VariableBody(
@@ -46,7 +46,7 @@ class TestBulkUpdateActionVariableBody(unittest.TestCase):
             )
         else:
             return BulkUpdateActionVariableBody(
-                action = 'create',
+                action = 'update',
                 entities = [
                     airflow_client.client.models.variable_body.VariableBody(
                         description = '', 

@@ -2097,7 +2097,6 @@ class DAGApi:
         dag_id_pattern: Optional[StrictStr] = None,
         exclude_stale: Optional[StrictBool] = None,
         paused: Optional[StrictBool] = None,
-        last_dag_run_state: Optional[DagRunState] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2135,8 +2134,6 @@ class DAGApi:
         :type exclude_stale: bool
         :param paused:
         :type paused: bool
-        :param last_dag_run_state:
-        :type last_dag_run_state: DagRunState
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2170,7 +2167,6 @@ class DAGApi:
             dag_id_pattern=dag_id_pattern,
             exclude_stale=exclude_stale,
             paused=paused,
-            last_dag_run_state=last_dag_run_state,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2209,7 +2205,6 @@ class DAGApi:
         dag_id_pattern: Optional[StrictStr] = None,
         exclude_stale: Optional[StrictBool] = None,
         paused: Optional[StrictBool] = None,
-        last_dag_run_state: Optional[DagRunState] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2247,8 +2242,6 @@ class DAGApi:
         :type exclude_stale: bool
         :param paused:
         :type paused: bool
-        :param last_dag_run_state:
-        :type last_dag_run_state: DagRunState
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2282,7 +2275,6 @@ class DAGApi:
             dag_id_pattern=dag_id_pattern,
             exclude_stale=exclude_stale,
             paused=paused,
-            last_dag_run_state=last_dag_run_state,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2321,7 +2313,6 @@ class DAGApi:
         dag_id_pattern: Optional[StrictStr] = None,
         exclude_stale: Optional[StrictBool] = None,
         paused: Optional[StrictBool] = None,
-        last_dag_run_state: Optional[DagRunState] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2359,8 +2350,6 @@ class DAGApi:
         :type exclude_stale: bool
         :param paused:
         :type paused: bool
-        :param last_dag_run_state:
-        :type last_dag_run_state: DagRunState
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2394,7 +2383,6 @@ class DAGApi:
             dag_id_pattern=dag_id_pattern,
             exclude_stale=exclude_stale,
             paused=paused,
-            last_dag_run_state=last_dag_run_state,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2428,7 +2416,6 @@ class DAGApi:
         dag_id_pattern,
         exclude_stale,
         paused,
-        last_dag_run_state,
         _request_auth,
         _content_type,
         _headers,
@@ -2489,10 +2476,6 @@ class DAGApi:
         if paused is not None:
             
             _query_params.append(('paused', paused))
-            
-        if last_dag_run_state is not None:
-            
-            _query_params.append(('last_dag_run_state', last_dag_run_state.value))
             
         # process the header parameters
         # process the form parameters

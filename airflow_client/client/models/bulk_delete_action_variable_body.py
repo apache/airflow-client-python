@@ -17,9 +17,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
-from airflow_client.client.models.bulk_action import BulkAction
 from airflow_client.client.models.bulk_action_not_on_existence import BulkActionNotOnExistence
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,10 +27,17 @@ class BulkDeleteActionVariableBody(BaseModel):
     """
     BulkDeleteActionVariableBody
     """ # noqa: E501
-    action: BulkAction = Field(description="The action to be performed on the entities.")
+    action: StrictStr = Field(description="The action to be performed on the entities.")
     action_on_non_existence: Optional[BulkActionNotOnExistence] = None
     entities: List[StrictStr] = Field(description="A list of entity id/key to be deleted.")
     __properties: ClassVar[List[str]] = ["action", "action_on_non_existence", "entities"]
+
+    @field_validator('action')
+    def action_validate_enum(cls, value):
+        """Validates the enum"""
+        if value not in set(['delete']):
+            raise ValueError("must be one of enum values ('delete')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,

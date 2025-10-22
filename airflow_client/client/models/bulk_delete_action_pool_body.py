@@ -20,6 +20,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from airflow_client.client.models.bulk_action_not_on_existence import BulkActionNotOnExistence
+from airflow_client.client.models.bulk_delete_action_bulk_task_instance_body_entities_inner import BulkDeleteActionBulkTaskInstanceBodyEntitiesInner
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -29,7 +30,7 @@ class BulkDeleteActionPoolBody(BaseModel):
     """ # noqa: E501
     action: StrictStr = Field(description="The action to be performed on the entities.")
     action_on_non_existence: Optional[BulkActionNotOnExistence] = None
-    entities: List[StrictStr] = Field(description="A list of entity id/key to be deleted.")
+    entities: List[BulkDeleteActionBulkTaskInstanceBodyEntitiesInner] = Field(description="A list of entity id/key or entity objects to be deleted.")
     __properties: ClassVar[List[str]] = ["action", "action_on_non_existence", "entities"]
 
     @field_validator('action')
@@ -78,6 +79,13 @@ class BulkDeleteActionPoolBody(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in entities (list)
+        _items = []
+        if self.entities:
+            for _item_entities in self.entities:
+                if _item_entities:
+                    _items.append(_item_entities.to_dict())
+            _dict['entities'] = _items
         return _dict
 
     @classmethod
@@ -92,7 +100,7 @@ class BulkDeleteActionPoolBody(BaseModel):
         _obj = cls.model_validate({
             "action": obj.get("action"),
             "action_on_non_existence": obj.get("action_on_non_existence"),
-            "entities": obj.get("entities")
+            "entities": [BulkDeleteActionBulkTaskInstanceBodyEntitiesInner.from_dict(_item) for _item in obj["entities"]] if obj.get("entities") is not None else None
         })
         return _obj
 

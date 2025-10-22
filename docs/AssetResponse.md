@@ -7,13 +7,15 @@ Asset serializer for responses.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **aliases** | [**List[AssetAliasResponse]**](AssetAliasResponse.md) |  | 
-**consuming_dags** | [**List[DagScheduleAssetReference]**](DagScheduleAssetReference.md) |  | 
+**consuming_tasks** | [**List[TaskInletAssetReference]**](TaskInletAssetReference.md) |  | 
 **created_at** | **datetime** |  | 
 **extra** | **object** |  | [optional] 
 **group** | **str** |  | 
 **id** | **int** |  | 
+**last_asset_event** | [**LastAssetEventResponse**](LastAssetEventResponse.md) |  | [optional] 
 **name** | **str** |  | 
 **producing_tasks** | [**List[TaskOutletAssetReference]**](TaskOutletAssetReference.md) |  | 
+**scheduled_dags** | [**List[DagScheduleAssetReference]**](DagScheduleAssetReference.md) |  | 
 **updated_at** | **datetime** |  | 
 **uri** | **str** |  | 
 

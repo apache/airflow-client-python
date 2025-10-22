@@ -37,6 +37,7 @@ class TestEventLogCollectionResponse(unittest.TestCase):
             return EventLogCollectionResponse(
                 event_logs = [
                     airflow_client.client.models.event_log_response.EventLogResponse(
+                        dag_display_name = '', 
                         dag_id = '', 
                         event = '', 
                         event_log_id = 56, 
@@ -55,6 +56,7 @@ class TestEventLogCollectionResponse(unittest.TestCase):
             return EventLogCollectionResponse(
                 event_logs = [
                     airflow_client.client.models.event_log_response.EventLogResponse(
+                        dag_display_name = '', 
                         dag_id = '', 
                         event = '', 
                         event_log_id = 56, 

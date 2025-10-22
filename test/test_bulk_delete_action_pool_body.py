@@ -38,14 +38,14 @@ class TestBulkDeleteActionPoolBody(unittest.TestCase):
                 action = 'delete',
                 action_on_non_existence = 'fail',
                 entities = [
-                    ''
+                    null
                     ]
             )
         else:
             return BulkDeleteActionPoolBody(
                 action = 'delete',
                 entities = [
-                    ''
+                    null
                     ],
         )
         """

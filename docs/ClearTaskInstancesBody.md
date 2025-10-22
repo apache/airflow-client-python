@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **only_failed** | **bool** |  | [optional] [default to True]
 **only_running** | **bool** |  | [optional] [default to False]
 **reset_dag_runs** | **bool** |  | [optional] [default to True]
+**run_on_latest_version** | **bool** | (Experimental) Run on the latest bundle version of the dag after clearing the task instances. | [optional] [default to False]
 **start_date** | **datetime** |  | [optional] 
 **task_ids** | [**List[ClearTaskInstancesBodyTaskIdsInner]**](ClearTaskInstancesBodyTaskIdsInner.md) |  | [optional] 
 

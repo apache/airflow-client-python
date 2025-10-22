@@ -17,7 +17,7 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictInt, StrictStr
-from typing import Optional
+from typing import List, Optional
 from typing_extensions import Annotated
 from airflow_client.client.models.dag_version_collection_response import DAGVersionCollectionResponse
 from airflow_client.client.models.dag_version_response import DagVersionResponse
@@ -307,7 +307,8 @@ class DagVersionApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -337,7 +338,7 @@ class DagVersionApi:
         version_number: Optional[StrictInt] = None,
         bundle_name: Optional[StrictStr] = None,
         bundle_version: Optional[StrictStr] = None,
-        order_by: Optional[StrictStr] = None,
+        order_by: Optional[List[StrictStr]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -368,7 +369,7 @@ class DagVersionApi:
         :param bundle_version:
         :type bundle_version: str
         :param order_by:
-        :type order_by: str
+        :type order_by: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -432,7 +433,7 @@ class DagVersionApi:
         version_number: Optional[StrictInt] = None,
         bundle_name: Optional[StrictStr] = None,
         bundle_version: Optional[StrictStr] = None,
-        order_by: Optional[StrictStr] = None,
+        order_by: Optional[List[StrictStr]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -463,7 +464,7 @@ class DagVersionApi:
         :param bundle_version:
         :type bundle_version: str
         :param order_by:
-        :type order_by: str
+        :type order_by: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -527,7 +528,7 @@ class DagVersionApi:
         version_number: Optional[StrictInt] = None,
         bundle_name: Optional[StrictStr] = None,
         bundle_version: Optional[StrictStr] = None,
-        order_by: Optional[StrictStr] = None,
+        order_by: Optional[List[StrictStr]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -558,7 +559,7 @@ class DagVersionApi:
         :param bundle_version:
         :type bundle_version: str
         :param order_by:
-        :type order_by: str
+        :type order_by: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -627,6 +628,7 @@ class DagVersionApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
+            'order_by': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -682,7 +684,8 @@ class DagVersionApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(

@@ -35,6 +35,7 @@ class TestTaskInstanceResponse(unittest.TestCase):
         model = TaskInstanceResponse()
         if include_optional:
             return TaskInstanceResponse(
+                dag_display_name = '',
                 dag_id = '',
                 dag_run_id = '',
                 dag_version = airflow_client.client.models.dag_version_response.DagVersionResponse(
@@ -42,6 +43,7 @@ class TestTaskInstanceResponse(unittest.TestCase):
                     bundle_url = '', 
                     bundle_version = '', 
                     created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                    dag_display_name = '', 
                     dag_id = '', 
                     id = '', 
                     version_number = 56, ),
@@ -56,6 +58,7 @@ class TestTaskInstanceResponse(unittest.TestCase):
                 max_tries = 56,
                 note = '',
                 operator = '',
+                operator_name = '',
                 pid = 56,
                 pool = '',
                 pool_slots = 56,
@@ -77,6 +80,7 @@ class TestTaskInstanceResponse(unittest.TestCase):
                     kwargs = '', 
                     triggerer_id = 56, ),
                 triggerer_job = airflow_client.client.models.job_response.JobResponse(
+                    dag_display_name = '', 
                     dag_id = '', 
                     end_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                     executor_class = '', 
@@ -92,6 +96,7 @@ class TestTaskInstanceResponse(unittest.TestCase):
             )
         else:
             return TaskInstanceResponse(
+                dag_display_name = '',
                 dag_id = '',
                 dag_run_id = '',
                 executor_config = '',

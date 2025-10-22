@@ -43,22 +43,32 @@ class TestAssetCollectionResponse(unittest.TestCase):
                                 id = 56, 
                                 name = '', )
                             ], 
-                        consuming_dags = [
-                            airflow_client.client.models.dag_schedule_asset_reference.DagScheduleAssetReference(
+                        consuming_tasks = [
+                            airflow_client.client.models.task_inlet_asset_reference.TaskInletAssetReference(
                                 created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                                 dag_id = '', 
+                                task_id = '', 
                                 updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), )
                             ], 
                         created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                         extra = airflow_client.client.models.extra.extra(), 
                         group = '', 
                         id = 56, 
+                        last_asset_event = airflow_client.client.models.last_asset_event_response.LastAssetEventResponse(
+                            id = 0.0, 
+                            timestamp = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), ), 
                         name = '', 
                         producing_tasks = [
                             airflow_client.client.models.task_outlet_asset_reference.TaskOutletAssetReference(
                                 created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                                 dag_id = '', 
                                 task_id = '', 
+                                updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), )
+                            ], 
+                        scheduled_dags = [
+                            airflow_client.client.models.dag_schedule_asset_reference.DagScheduleAssetReference(
+                                created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                                dag_id = '', 
                                 updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), )
                             ], 
                         updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
@@ -76,22 +86,32 @@ class TestAssetCollectionResponse(unittest.TestCase):
                                 id = 56, 
                                 name = '', )
                             ], 
-                        consuming_dags = [
-                            airflow_client.client.models.dag_schedule_asset_reference.DagScheduleAssetReference(
+                        consuming_tasks = [
+                            airflow_client.client.models.task_inlet_asset_reference.TaskInletAssetReference(
                                 created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                                 dag_id = '', 
+                                task_id = '', 
                                 updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), )
                             ], 
                         created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                         extra = airflow_client.client.models.extra.extra(), 
                         group = '', 
                         id = 56, 
+                        last_asset_event = airflow_client.client.models.last_asset_event_response.LastAssetEventResponse(
+                            id = 0.0, 
+                            timestamp = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), ), 
                         name = '', 
                         producing_tasks = [
                             airflow_client.client.models.task_outlet_asset_reference.TaskOutletAssetReference(
                                 created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                                 dag_id = '', 
                                 task_id = '', 
+                                updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), )
+                            ], 
+                        scheduled_dags = [
+                            airflow_client.client.models.dag_schedule_asset_reference.DagScheduleAssetReference(
+                                created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                                dag_id = '', 
                                 updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), )
                             ], 
                         updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 

@@ -35,11 +35,13 @@ class TestDagTagResponse(unittest.TestCase):
         model = DagTagResponse()
         if include_optional:
             return DagTagResponse(
+                dag_display_name = '',
                 dag_id = '',
                 name = ''
             )
         else:
             return DagTagResponse(
+                dag_display_name = '',
                 dag_id = '',
                 name = '',
         )

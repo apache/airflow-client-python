@@ -31,25 +31,35 @@ class TaskInstancesBatchBody(BaseModel):
     """ # noqa: E501
     dag_ids: Optional[List[StrictStr]] = None
     dag_run_ids: Optional[List[StrictStr]] = None
+    duration_gt: Optional[Union[StrictFloat, StrictInt]] = None
     duration_gte: Optional[Union[StrictFloat, StrictInt]] = None
+    duration_lt: Optional[Union[StrictFloat, StrictInt]] = None
     duration_lte: Optional[Union[StrictFloat, StrictInt]] = None
+    end_date_gt: Optional[datetime] = None
     end_date_gte: Optional[datetime] = None
+    end_date_lt: Optional[datetime] = None
     end_date_lte: Optional[datetime] = None
     executor: Optional[List[StrictStr]] = None
+    logical_date_gt: Optional[datetime] = None
     logical_date_gte: Optional[datetime] = None
+    logical_date_lt: Optional[datetime] = None
     logical_date_lte: Optional[datetime] = None
     order_by: Optional[StrictStr] = None
     page_limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = 100
     page_offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = 0
     pool: Optional[List[StrictStr]] = None
     queue: Optional[List[StrictStr]] = None
+    run_after_gt: Optional[datetime] = None
     run_after_gte: Optional[datetime] = None
+    run_after_lt: Optional[datetime] = None
     run_after_lte: Optional[datetime] = None
+    start_date_gt: Optional[datetime] = None
     start_date_gte: Optional[datetime] = None
+    start_date_lt: Optional[datetime] = None
     start_date_lte: Optional[datetime] = None
     state: Optional[List[Optional[TaskInstanceState]]] = None
     task_ids: Optional[List[StrictStr]] = None
-    __properties: ClassVar[List[str]] = ["dag_ids", "dag_run_ids", "duration_gte", "duration_lte", "end_date_gte", "end_date_lte", "executor", "logical_date_gte", "logical_date_lte", "order_by", "page_limit", "page_offset", "pool", "queue", "run_after_gte", "run_after_lte", "start_date_gte", "start_date_lte", "state", "task_ids"]
+    __properties: ClassVar[List[str]] = ["dag_ids", "dag_run_ids", "duration_gt", "duration_gte", "duration_lt", "duration_lte", "end_date_gt", "end_date_gte", "end_date_lt", "end_date_lte", "executor", "logical_date_gt", "logical_date_gte", "logical_date_lt", "logical_date_lte", "order_by", "page_limit", "page_offset", "pool", "queue", "run_after_gt", "run_after_gte", "run_after_lt", "run_after_lte", "start_date_gt", "start_date_gte", "start_date_lt", "start_date_lte", "state", "task_ids"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -104,21 +114,31 @@ class TaskInstancesBatchBody(BaseModel):
         _obj = cls.model_validate({
             "dag_ids": obj.get("dag_ids"),
             "dag_run_ids": obj.get("dag_run_ids"),
+            "duration_gt": obj.get("duration_gt"),
             "duration_gte": obj.get("duration_gte"),
+            "duration_lt": obj.get("duration_lt"),
             "duration_lte": obj.get("duration_lte"),
+            "end_date_gt": obj.get("end_date_gt"),
             "end_date_gte": obj.get("end_date_gte"),
+            "end_date_lt": obj.get("end_date_lt"),
             "end_date_lte": obj.get("end_date_lte"),
             "executor": obj.get("executor"),
+            "logical_date_gt": obj.get("logical_date_gt"),
             "logical_date_gte": obj.get("logical_date_gte"),
+            "logical_date_lt": obj.get("logical_date_lt"),
             "logical_date_lte": obj.get("logical_date_lte"),
             "order_by": obj.get("order_by"),
             "page_limit": obj.get("page_limit") if obj.get("page_limit") is not None else 100,
             "page_offset": obj.get("page_offset") if obj.get("page_offset") is not None else 0,
             "pool": obj.get("pool"),
             "queue": obj.get("queue"),
+            "run_after_gt": obj.get("run_after_gt"),
             "run_after_gte": obj.get("run_after_gte"),
+            "run_after_lt": obj.get("run_after_lt"),
             "run_after_lte": obj.get("run_after_lte"),
+            "start_date_gt": obj.get("start_date_gt"),
             "start_date_gte": obj.get("start_date_gte"),
+            "start_date_lt": obj.get("start_date_lt"),
             "start_date_lte": obj.get("start_date_lte"),
             "state": obj.get("state"),
             "task_ids": obj.get("task_ids")

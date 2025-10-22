@@ -82,6 +82,13 @@ class TestDagRunApi(unittest.TestCase):
         """
         pass
 
+    def test_wait_dag_run_until_finished(self) -> None:
+        """Test case for wait_dag_run_until_finished
+
+        Experimental: Wait for a dag run to complete, and return task results if requested.
+        """
+        pass
+
 
 if __name__ == '__main__':
     unittest.main()

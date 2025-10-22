@@ -27,6 +27,7 @@ class JobResponse(BaseModel):
     """
     Job serializer for responses.
     """ # noqa: E501
+    dag_display_name: Optional[StrictStr] = None
     dag_id: Optional[StrictStr] = None
     end_date: Optional[datetime] = None
     executor_class: Optional[StrictStr] = None
@@ -37,7 +38,7 @@ class JobResponse(BaseModel):
     start_date: Optional[datetime] = None
     state: Optional[StrictStr] = None
     unixname: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["dag_id", "end_date", "executor_class", "hostname", "id", "job_type", "latest_heartbeat", "start_date", "state", "unixname"]
+    __properties: ClassVar[List[str]] = ["dag_display_name", "dag_id", "end_date", "executor_class", "hostname", "id", "job_type", "latest_heartbeat", "start_date", "state", "unixname"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -90,6 +91,7 @@ class JobResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "dag_display_name": obj.get("dag_display_name"),
             "dag_id": obj.get("dag_id"),
             "end_date": obj.get("end_date"),
             "executor_class": obj.get("executor_class"),

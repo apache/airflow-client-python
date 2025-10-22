@@ -17,7 +17,7 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictInt, StrictStr
-from typing import Optional
+from typing import List, Optional
 from typing_extensions import Annotated
 from airflow_client.client.models.import_error_collection_response import ImportErrorCollectionResponse
 from airflow_client.client.models.import_error_response import ImportErrorResponse
@@ -292,7 +292,8 @@ class ImportErrorApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -318,7 +319,8 @@ class ImportErrorApi:
         self,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        order_by: Optional[StrictStr] = None,
+        order_by: Optional[List[StrictStr]] = None,
+        filename_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -341,7 +343,9 @@ class ImportErrorApi:
         :param offset:
         :type offset: int
         :param order_by:
-        :type order_by: str
+        :type order_by: List[str]
+        :param filename_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :type filename_pattern: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -368,6 +372,7 @@ class ImportErrorApi:
             limit=limit,
             offset=offset,
             order_by=order_by,
+            filename_pattern=filename_pattern,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -396,7 +401,8 @@ class ImportErrorApi:
         self,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        order_by: Optional[StrictStr] = None,
+        order_by: Optional[List[StrictStr]] = None,
+        filename_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -419,7 +425,9 @@ class ImportErrorApi:
         :param offset:
         :type offset: int
         :param order_by:
-        :type order_by: str
+        :type order_by: List[str]
+        :param filename_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :type filename_pattern: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -446,6 +454,7 @@ class ImportErrorApi:
             limit=limit,
             offset=offset,
             order_by=order_by,
+            filename_pattern=filename_pattern,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -474,7 +483,8 @@ class ImportErrorApi:
         self,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        order_by: Optional[StrictStr] = None,
+        order_by: Optional[List[StrictStr]] = None,
+        filename_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -497,7 +507,9 @@ class ImportErrorApi:
         :param offset:
         :type offset: int
         :param order_by:
-        :type order_by: str
+        :type order_by: List[str]
+        :param filename_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :type filename_pattern: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -524,6 +536,7 @@ class ImportErrorApi:
             limit=limit,
             offset=offset,
             order_by=order_by,
+            filename_pattern=filename_pattern,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -548,6 +561,7 @@ class ImportErrorApi:
         limit,
         offset,
         order_by,
+        filename_pattern,
         _request_auth,
         _content_type,
         _headers,
@@ -557,6 +571,7 @@ class ImportErrorApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
+            'order_by': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -582,6 +597,10 @@ class ImportErrorApi:
             
             _query_params.append(('order_by', order_by))
             
+        if filename_pattern is not None:
+            
+            _query_params.append(('filename_pattern', filename_pattern))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -598,7 +617,8 @@ class ImportErrorApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(

@@ -18,8 +18,8 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from airflow_client.client.models.dag_tag_response import DagTagResponse
 from typing import Optional, Set
 from typing_extensions import Self
@@ -40,6 +40,7 @@ class DAGResponse(BaseModel):
     is_paused: StrictBool
     is_stale: StrictBool
     last_expired: Optional[datetime] = None
+    last_parse_duration: Optional[Union[StrictFloat, StrictInt]] = None
     last_parsed_time: Optional[datetime] = None
     max_active_runs: Optional[StrictInt] = None
     max_active_tasks: StrictInt
@@ -53,7 +54,7 @@ class DAGResponse(BaseModel):
     tags: List[DagTagResponse]
     timetable_description: Optional[StrictStr] = None
     timetable_summary: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["bundle_name", "bundle_version", "dag_display_name", "dag_id", "description", "file_token", "fileloc", "has_import_errors", "has_task_concurrency_limits", "is_paused", "is_stale", "last_expired", "last_parsed_time", "max_active_runs", "max_active_tasks", "max_consecutive_failed_dag_runs", "next_dagrun_data_interval_end", "next_dagrun_data_interval_start", "next_dagrun_logical_date", "next_dagrun_run_after", "owners", "relative_fileloc", "tags", "timetable_description", "timetable_summary"]
+    __properties: ClassVar[List[str]] = ["bundle_name", "bundle_version", "dag_display_name", "dag_id", "description", "file_token", "fileloc", "has_import_errors", "has_task_concurrency_limits", "is_paused", "is_stale", "last_expired", "last_parse_duration", "last_parsed_time", "max_active_runs", "max_active_tasks", "max_consecutive_failed_dag_runs", "next_dagrun_data_interval_end", "next_dagrun_data_interval_start", "next_dagrun_logical_date", "next_dagrun_run_after", "owners", "relative_fileloc", "tags", "timetable_description", "timetable_summary"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -127,6 +128,7 @@ class DAGResponse(BaseModel):
             "is_paused": obj.get("is_paused"),
             "is_stale": obj.get("is_stale"),
             "last_expired": obj.get("last_expired"),
+            "last_parse_duration": obj.get("last_parse_duration"),
             "last_parsed_time": obj.get("last_parsed_time"),
             "max_active_runs": obj.get("max_active_runs"),
             "max_active_tasks": obj.get("max_active_tasks"),

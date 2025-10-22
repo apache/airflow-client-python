@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **is_paused** | **bool** |  | 
 **is_stale** | **bool** |  | 
 **last_expired** | **datetime** |  | [optional] 
+**last_parse_duration** | **float** |  | [optional] 
 **last_parsed_time** | **datetime** |  | [optional] 
 **max_active_runs** | **int** |  | [optional] 
 **max_active_tasks** | **int** |  | 

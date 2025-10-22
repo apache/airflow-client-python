@@ -50,6 +50,16 @@ class TestPluginCollectionResponse(unittest.TestCase):
                                 name = '', 
                                 view = '', )
                             ], 
+                        external_views = [
+                            airflow_client.client.models.external_view_response.ExternalViewResponse(
+                                category = '', 
+                                destination = 'nav', 
+                                href = '', 
+                                icon = '', 
+                                icon_dark_mode = '', 
+                                name = '', 
+                                url_route = '', )
+                            ], 
                         fastapi_apps = [
                             airflow_client.client.models.fast_api_app_response.FastAPIAppResponse(
                                 app = '', 
@@ -76,6 +86,16 @@ class TestPluginCollectionResponse(unittest.TestCase):
                         name = '', 
                         operator_extra_links = [
                             ''
+                            ], 
+                        react_apps = [
+                            airflow_client.client.models.react_app_response.ReactAppResponse(
+                                bundle_url = '', 
+                                category = '', 
+                                destination = 'nav', 
+                                icon = '', 
+                                icon_dark_mode = '', 
+                                name = '', 
+                                url_route = '', )
                             ], 
                         source = '', 
                         timetables = [
@@ -101,6 +121,16 @@ class TestPluginCollectionResponse(unittest.TestCase):
                                 name = '', 
                                 view = '', )
                             ], 
+                        external_views = [
+                            airflow_client.client.models.external_view_response.ExternalViewResponse(
+                                category = '', 
+                                destination = 'nav', 
+                                href = '', 
+                                icon = '', 
+                                icon_dark_mode = '', 
+                                name = '', 
+                                url_route = '', )
+                            ], 
                         fastapi_apps = [
                             airflow_client.client.models.fast_api_app_response.FastAPIAppResponse(
                                 app = '', 
@@ -127,6 +157,16 @@ class TestPluginCollectionResponse(unittest.TestCase):
                         name = '', 
                         operator_extra_links = [
                             ''
+                            ], 
+                        react_apps = [
+                            airflow_client.client.models.react_app_response.ReactAppResponse(
+                                bundle_url = '', 
+                                category = '', 
+                                destination = 'nav', 
+                                icon = '', 
+                                icon_dark_mode = '', 
+                                name = '', 
+                                url_route = '', )
                             ], 
                         source = '', 
                         timetables = [

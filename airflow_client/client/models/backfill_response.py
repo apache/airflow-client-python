@@ -31,6 +31,7 @@ class BackfillResponse(BaseModel):
     """ # noqa: E501
     completed_at: Optional[datetime] = None
     created_at: datetime
+    dag_display_name: StrictStr
     dag_id: StrictStr
     dag_run_conf: Dict[str, Any]
     from_date: datetime
@@ -40,7 +41,7 @@ class BackfillResponse(BaseModel):
     reprocess_behavior: ReprocessBehavior
     to_date: datetime
     updated_at: datetime
-    __properties: ClassVar[List[str]] = ["completed_at", "created_at", "dag_id", "dag_run_conf", "from_date", "id", "is_paused", "max_active_runs", "reprocess_behavior", "to_date", "updated_at"]
+    __properties: ClassVar[List[str]] = ["completed_at", "created_at", "dag_display_name", "dag_id", "dag_run_conf", "from_date", "id", "is_paused", "max_active_runs", "reprocess_behavior", "to_date", "updated_at"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -95,6 +96,7 @@ class BackfillResponse(BaseModel):
         _obj = cls.model_validate({
             "completed_at": obj.get("completed_at"),
             "created_at": obj.get("created_at"),
+            "dag_display_name": obj.get("dag_display_name"),
             "dag_id": obj.get("dag_id"),
             "dag_run_conf": obj.get("dag_run_conf"),
             "from_date": obj.get("from_date"),

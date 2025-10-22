@@ -17,6 +17,7 @@ Get a list of DAG warnings.
 ### Example
 
 * OAuth Authentication (OAuth2PasswordBearer):
+* Bearer Authentication (HTTPBearer):
 
 ```python
 import airflow_client.client
@@ -38,6 +39,11 @@ configuration = airflow_client.client.Configuration(
 
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
+# Configure Bearer authorization: HTTPBearer
+configuration = airflow_client.client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with airflow_client.client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -46,7 +52,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     warning_type = airflow_client.client.DagWarningType() # DagWarningType |  (optional)
     limit = 50 # int |  (optional) (default to 50)
     offset = 0 # int |  (optional) (default to 0)
-    order_by = 'dag_id' # str |  (optional) (default to 'dag_id')
+    order_by = ["dag_id"] # List[str] |  (optional) (default to ["dag_id"])
 
     try:
         # List Dag Warnings
@@ -68,7 +74,7 @@ Name | Type | Description  | Notes
  **warning_type** | [**DagWarningType**](.md)|  | [optional] 
  **limit** | **int**|  | [optional] [default to 50]
  **offset** | **int**|  | [optional] [default to 0]
- **order_by** | **str**|  | [optional] [default to &#39;dag_id&#39;]
+ **order_by** | [**List[str]**](str.md)|  | [optional] [default to [&quot;dag_id&quot;]]
 
 ### Return type
 
@@ -76,7 +82,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 

@@ -10,10 +10,11 @@ Name | Type | Description | Notes
 **bundle_name** | **str** |  | [optional] 
 **bundle_version** | **str** |  | [optional] 
 **catchup** | **bool** |  | 
-**concurrency** | **int** | Return max_active_tasks as concurrency. | [readonly] 
+**concurrency** | **int** | Return max_active_tasks as concurrency.  Deprecated: Use max_active_tasks instead. | [readonly] 
 **dag_display_name** | **str** |  | 
 **dag_id** | **str** |  | 
 **dag_run_timeout** | **str** |  | [optional] 
+**default_args** | **object** |  | [optional] 
 **description** | **str** |  | [optional] 
 **doc_md** | **str** |  | [optional] 
 **end_date** | **datetime** |  | [optional] 
@@ -25,6 +26,7 @@ Name | Type | Description | Notes
 **is_paused_upon_creation** | **bool** |  | [optional] 
 **is_stale** | **bool** |  | 
 **last_expired** | **datetime** |  | [optional] 
+**last_parse_duration** | **float** |  | [optional] 
 **last_parsed** | **datetime** |  | [optional] 
 **last_parsed_time** | **datetime** |  | [optional] 
 **latest_dag_version** | [**DagVersionResponse**](DagVersionResponse.md) |  | [optional] 

@@ -47,6 +47,7 @@ class TestDAGResponse(unittest.TestCase):
                 is_paused = True,
                 is_stale = True,
                 last_expired = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+                last_parse_duration = 1.337,
                 last_parsed_time = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 max_active_runs = 56,
                 max_active_tasks = 56,
@@ -61,6 +62,7 @@ class TestDAGResponse(unittest.TestCase):
                 relative_fileloc = '',
                 tags = [
                     airflow_client.client.models.dag_tag_response.DagTagResponse(
+                        dag_display_name = '', 
                         dag_id = '', 
                         name = '', )
                     ],
@@ -84,6 +86,7 @@ class TestDAGResponse(unittest.TestCase):
                     ],
                 tags = [
                     airflow_client.client.models.dag_tag_response.DagTagResponse(
+                        dag_display_name = '', 
                         dag_id = '', 
                         name = '', )
                     ],

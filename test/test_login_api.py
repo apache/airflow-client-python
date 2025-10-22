@@ -40,6 +40,13 @@ class TestLoginApi(unittest.TestCase):
         """
         pass
 
+    def test_refresh(self) -> None:
+        """Test case for refresh
+
+        Refresh
+        """
+        pass
+
 
 if __name__ == '__main__':
     unittest.main()

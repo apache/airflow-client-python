@@ -29,6 +29,7 @@ Create asset events.
 ### Example
 
 * OAuth Authentication (OAuth2PasswordBearer):
+* Bearer Authentication (HTTPBearer):
 
 ```python
 import airflow_client.client
@@ -49,6 +50,11 @@ configuration = airflow_client.client.Configuration(
 # satisfies your auth use case.
 
 configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure Bearer authorization: HTTPBearer
+configuration = airflow_client.client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with airflow_client.client.ApiClient(configuration) as api_client:
@@ -80,7 +86,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 
@@ -109,6 +115,7 @@ Delete queued asset events for an asset.
 ### Example
 
 * OAuth Authentication (OAuth2PasswordBearer):
+* Bearer Authentication (HTTPBearer):
 
 ```python
 import airflow_client.client
@@ -127,6 +134,11 @@ configuration = airflow_client.client.Configuration(
 # satisfies your auth use case.
 
 configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure Bearer authorization: HTTPBearer
+configuration = airflow_client.client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with airflow_client.client.ApiClient(configuration) as api_client:
@@ -158,7 +170,7 @@ void (empty response body)
 
 ### Authorization
 
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 
@@ -187,6 +199,7 @@ Delete a queued asset event for a DAG.
 ### Example
 
 * OAuth Authentication (OAuth2PasswordBearer):
+* Bearer Authentication (HTTPBearer):
 
 ```python
 import airflow_client.client
@@ -205,6 +218,11 @@ configuration = airflow_client.client.Configuration(
 # satisfies your auth use case.
 
 configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure Bearer authorization: HTTPBearer
+configuration = airflow_client.client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with airflow_client.client.ApiClient(configuration) as api_client:
@@ -238,7 +256,7 @@ void (empty response body)
 
 ### Authorization
 
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 
@@ -266,6 +284,7 @@ Delete Dag Asset Queued Events
 ### Example
 
 * OAuth Authentication (OAuth2PasswordBearer):
+* Bearer Authentication (HTTPBearer):
 
 ```python
 import airflow_client.client
@@ -284,6 +303,11 @@ configuration = airflow_client.client.Configuration(
 # satisfies your auth use case.
 
 configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure Bearer authorization: HTTPBearer
+configuration = airflow_client.client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with airflow_client.client.ApiClient(configuration) as api_client:
@@ -315,7 +339,7 @@ void (empty response body)
 
 ### Authorization
 
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 
@@ -345,6 +369,7 @@ Get an asset.
 ### Example
 
 * OAuth Authentication (OAuth2PasswordBearer):
+* Bearer Authentication (HTTPBearer):
 
 ```python
 import airflow_client.client
@@ -364,6 +389,11 @@ configuration = airflow_client.client.Configuration(
 # satisfies your auth use case.
 
 configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure Bearer authorization: HTTPBearer
+configuration = airflow_client.client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with airflow_client.client.ApiClient(configuration) as api_client:
@@ -395,7 +425,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 
@@ -424,6 +454,7 @@ Get an asset alias.
 ### Example
 
 * OAuth Authentication (OAuth2PasswordBearer):
+* Bearer Authentication (HTTPBearer):
 
 ```python
 import airflow_client.client
@@ -442,6 +473,11 @@ configuration = airflow_client.client.Configuration(
 # satisfies your auth use case.
 
 configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure Bearer authorization: HTTPBearer
+configuration = airflow_client.client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with airflow_client.client.ApiClient(configuration) as api_client:
@@ -473,7 +509,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 
@@ -502,6 +538,7 @@ Get asset aliases.
 ### Example
 
 * OAuth Authentication (OAuth2PasswordBearer):
+* Bearer Authentication (HTTPBearer):
 
 ```python
 import airflow_client.client
@@ -522,14 +559,19 @@ configuration = airflow_client.client.Configuration(
 
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
+# Configure Bearer authorization: HTTPBearer
+configuration = airflow_client.client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with airflow_client.client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = airflow_client.client.AssetApi(api_client)
     limit = 50 # int |  (optional) (default to 50)
     offset = 0 # int |  (optional) (default to 0)
-    name_pattern = 'name_pattern_example' # str |  (optional)
-    order_by = 'id' # str |  (optional) (default to 'id')
+    name_pattern = 'name_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported. (optional)
+    order_by = [id] # List[str] |  (optional) (default to [id])
 
     try:
         # Get Asset Aliases
@@ -549,8 +591,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **int**|  | [optional] [default to 50]
  **offset** | **int**|  | [optional] [default to 0]
- **name_pattern** | **str**|  | [optional] 
- **order_by** | **str**|  | [optional] [default to &#39;id&#39;]
+ **name_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). Regular expressions are **not** supported. | [optional] 
+ **order_by** | [**List[str]**](str.md)|  | [optional] [default to [id]]
 
 ### Return type
 
@@ -558,7 +600,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 
@@ -578,7 +620,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_asset_events**
-> AssetEventCollectionResponse get_asset_events(limit=limit, offset=offset, order_by=order_by, asset_id=asset_id, source_dag_id=source_dag_id, source_task_id=source_task_id, source_run_id=source_run_id, source_map_index=source_map_index, timestamp_gte=timestamp_gte, timestamp_lte=timestamp_lte)
+> AssetEventCollectionResponse get_asset_events(limit=limit, offset=offset, order_by=order_by, asset_id=asset_id, source_dag_id=source_dag_id, source_task_id=source_task_id, source_run_id=source_run_id, source_map_index=source_map_index, timestamp_gte=timestamp_gte, timestamp_gt=timestamp_gt, timestamp_lte=timestamp_lte, timestamp_lt=timestamp_lt)
 
 Get Asset Events
 
@@ -587,6 +629,7 @@ Get asset events.
 ### Example
 
 * OAuth Authentication (OAuth2PasswordBearer):
+* Bearer Authentication (HTTPBearer):
 
 ```python
 import airflow_client.client
@@ -607,24 +650,31 @@ configuration = airflow_client.client.Configuration(
 
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
+# Configure Bearer authorization: HTTPBearer
+configuration = airflow_client.client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with airflow_client.client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = airflow_client.client.AssetApi(api_client)
     limit = 50 # int |  (optional) (default to 50)
     offset = 0 # int |  (optional) (default to 0)
-    order_by = 'timestamp' # str |  (optional) (default to 'timestamp')
+    order_by = ["timestamp"] # List[str] |  (optional) (default to ["timestamp"])
     asset_id = 56 # int |  (optional)
     source_dag_id = 'source_dag_id_example' # str |  (optional)
     source_task_id = 'source_task_id_example' # str |  (optional)
     source_run_id = 'source_run_id_example' # str |  (optional)
     source_map_index = 56 # int |  (optional)
     timestamp_gte = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
+    timestamp_gt = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
     timestamp_lte = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
+    timestamp_lt = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
 
     try:
         # Get Asset Events
-        api_response = api_instance.get_asset_events(limit=limit, offset=offset, order_by=order_by, asset_id=asset_id, source_dag_id=source_dag_id, source_task_id=source_task_id, source_run_id=source_run_id, source_map_index=source_map_index, timestamp_gte=timestamp_gte, timestamp_lte=timestamp_lte)
+        api_response = api_instance.get_asset_events(limit=limit, offset=offset, order_by=order_by, asset_id=asset_id, source_dag_id=source_dag_id, source_task_id=source_task_id, source_run_id=source_run_id, source_map_index=source_map_index, timestamp_gte=timestamp_gte, timestamp_gt=timestamp_gt, timestamp_lte=timestamp_lte, timestamp_lt=timestamp_lt)
         print("The response of AssetApi->get_asset_events:\n")
         pprint(api_response)
     except Exception as e:
@@ -640,14 +690,16 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **int**|  | [optional] [default to 50]
  **offset** | **int**|  | [optional] [default to 0]
- **order_by** | **str**|  | [optional] [default to &#39;timestamp&#39;]
+ **order_by** | [**List[str]**](str.md)|  | [optional] [default to [&quot;timestamp&quot;]]
  **asset_id** | **int**|  | [optional] 
  **source_dag_id** | **str**|  | [optional] 
  **source_task_id** | **str**|  | [optional] 
  **source_run_id** | **str**|  | [optional] 
  **source_map_index** | **int**|  | [optional] 
  **timestamp_gte** | **datetime**|  | [optional] 
+ **timestamp_gt** | **datetime**|  | [optional] 
  **timestamp_lte** | **datetime**|  | [optional] 
+ **timestamp_lt** | **datetime**|  | [optional] 
 
 ### Return type
 
@@ -655,7 +707,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 
@@ -684,6 +736,7 @@ Get queued asset events for an asset.
 ### Example
 
 * OAuth Authentication (OAuth2PasswordBearer):
+* Bearer Authentication (HTTPBearer):
 
 ```python
 import airflow_client.client
@@ -703,6 +756,11 @@ configuration = airflow_client.client.Configuration(
 # satisfies your auth use case.
 
 configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure Bearer authorization: HTTPBearer
+configuration = airflow_client.client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with airflow_client.client.ApiClient(configuration) as api_client:
@@ -736,7 +794,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 
@@ -765,6 +823,7 @@ Get assets.
 ### Example
 
 * OAuth Authentication (OAuth2PasswordBearer):
+* Bearer Authentication (HTTPBearer):
 
 ```python
 import airflow_client.client
@@ -785,17 +844,22 @@ configuration = airflow_client.client.Configuration(
 
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
+# Configure Bearer authorization: HTTPBearer
+configuration = airflow_client.client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with airflow_client.client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = airflow_client.client.AssetApi(api_client)
     limit = 50 # int |  (optional) (default to 50)
     offset = 0 # int |  (optional) (default to 0)
-    name_pattern = 'name_pattern_example' # str |  (optional)
-    uri_pattern = 'uri_pattern_example' # str |  (optional)
+    name_pattern = 'name_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported. (optional)
+    uri_pattern = 'uri_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported. (optional)
     dag_ids = ['dag_ids_example'] # List[str] |  (optional)
     only_active = True # bool |  (optional) (default to True)
-    order_by = 'id' # str |  (optional) (default to 'id')
+    order_by = ["id"] # List[str] |  (optional) (default to ["id"])
 
     try:
         # Get Assets
@@ -815,11 +879,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **int**|  | [optional] [default to 50]
  **offset** | **int**|  | [optional] [default to 0]
- **name_pattern** | **str**|  | [optional] 
- **uri_pattern** | **str**|  | [optional] 
+ **name_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). Regular expressions are **not** supported. | [optional] 
+ **uri_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). Regular expressions are **not** supported. | [optional] 
  **dag_ids** | [**List[str]**](str.md)|  | [optional] 
  **only_active** | **bool**|  | [optional] [default to True]
- **order_by** | **str**|  | [optional] [default to &#39;id&#39;]
+ **order_by** | [**List[str]**](str.md)|  | [optional] [default to [&quot;id&quot;]]
 
 ### Return type
 
@@ -827,7 +891,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 
@@ -856,6 +920,7 @@ Get a queued asset event for a DAG.
 ### Example
 
 * OAuth Authentication (OAuth2PasswordBearer):
+* Bearer Authentication (HTTPBearer):
 
 ```python
 import airflow_client.client
@@ -875,6 +940,11 @@ configuration = airflow_client.client.Configuration(
 # satisfies your auth use case.
 
 configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure Bearer authorization: HTTPBearer
+configuration = airflow_client.client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with airflow_client.client.ApiClient(configuration) as api_client:
@@ -910,7 +980,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 
@@ -939,6 +1009,7 @@ Get queued asset events for a DAG.
 ### Example
 
 * OAuth Authentication (OAuth2PasswordBearer):
+* Bearer Authentication (HTTPBearer):
 
 ```python
 import airflow_client.client
@@ -958,6 +1029,11 @@ configuration = airflow_client.client.Configuration(
 # satisfies your auth use case.
 
 configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure Bearer authorization: HTTPBearer
+configuration = airflow_client.client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with airflow_client.client.ApiClient(configuration) as api_client:
@@ -991,7 +1067,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 
@@ -1020,6 +1096,7 @@ Materialize an asset by triggering a DAG run that produces it.
 ### Example
 
 * OAuth Authentication (OAuth2PasswordBearer):
+* Bearer Authentication (HTTPBearer):
 
 ```python
 import airflow_client.client
@@ -1039,6 +1116,11 @@ configuration = airflow_client.client.Configuration(
 # satisfies your auth use case.
 
 configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure Bearer authorization: HTTPBearer
+configuration = airflow_client.client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with airflow_client.client.ApiClient(configuration) as api_client:
@@ -1070,7 +1152,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 

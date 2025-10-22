@@ -18,8 +18,8 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, StrictFloat, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from airflow_client.client.models.dag_run_state import DagRunState
 from airflow_client.client.models.dag_run_triggered_by_type import DagRunTriggeredByType
 from airflow_client.client.models.dag_run_type import DagRunType
@@ -33,11 +33,13 @@ class DAGRunResponse(BaseModel):
     """ # noqa: E501
     bundle_version: Optional[StrictStr] = None
     conf: Optional[Dict[str, Any]] = None
+    dag_display_name: StrictStr
     dag_id: StrictStr
     dag_run_id: StrictStr
     dag_versions: List[DagVersionResponse]
     data_interval_end: Optional[datetime] = None
     data_interval_start: Optional[datetime] = None
+    duration: Optional[Union[StrictFloat, StrictInt]] = None
     end_date: Optional[datetime] = None
     last_scheduling_decision: Optional[datetime] = None
     logical_date: Optional[datetime] = None
@@ -48,7 +50,8 @@ class DAGRunResponse(BaseModel):
     start_date: Optional[datetime] = None
     state: DagRunState
     triggered_by: Optional[DagRunTriggeredByType] = None
-    __properties: ClassVar[List[str]] = ["bundle_version", "conf", "dag_id", "dag_run_id", "dag_versions", "data_interval_end", "data_interval_start", "end_date", "last_scheduling_decision", "logical_date", "note", "queued_at", "run_after", "run_type", "start_date", "state", "triggered_by"]
+    triggering_user_name: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["bundle_version", "conf", "dag_display_name", "dag_id", "dag_run_id", "dag_versions", "data_interval_end", "data_interval_start", "duration", "end_date", "last_scheduling_decision", "logical_date", "note", "queued_at", "run_after", "run_type", "start_date", "state", "triggered_by", "triggering_user_name"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -110,11 +113,13 @@ class DAGRunResponse(BaseModel):
         _obj = cls.model_validate({
             "bundle_version": obj.get("bundle_version"),
             "conf": obj.get("conf"),
+            "dag_display_name": obj.get("dag_display_name"),
             "dag_id": obj.get("dag_id"),
             "dag_run_id": obj.get("dag_run_id"),
             "dag_versions": [DagVersionResponse.from_dict(_item) for _item in obj["dag_versions"]] if obj.get("dag_versions") is not None else None,
             "data_interval_end": obj.get("data_interval_end"),
             "data_interval_start": obj.get("data_interval_start"),
+            "duration": obj.get("duration"),
             "end_date": obj.get("end_date"),
             "last_scheduling_decision": obj.get("last_scheduling_decision"),
             "logical_date": obj.get("logical_date"),
@@ -124,7 +129,8 @@ class DAGRunResponse(BaseModel):
             "run_type": obj.get("run_type"),
             "start_date": obj.get("start_date"),
             "state": obj.get("state"),
-            "triggered_by": obj.get("triggered_by")
+            "triggered_by": obj.get("triggered_by"),
+            "triggering_user_name": obj.get("triggering_user_name")
         })
         return _obj
 

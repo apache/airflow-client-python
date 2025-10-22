@@ -18,7 +18,7 @@ from typing_extensions import Annotated
 
 from datetime import datetime
 from pydantic import Field, StrictBool, StrictStr
-from typing import Optional
+from typing import List, Optional
 from typing_extensions import Annotated
 from airflow_client.client.models.job_collection_response import JobCollectionResponse
 
@@ -45,12 +45,16 @@ class JobApi:
         self,
         is_alive: Optional[StrictBool] = None,
         start_date_gte: Optional[datetime] = None,
+        start_date_gt: Optional[datetime] = None,
         start_date_lte: Optional[datetime] = None,
+        start_date_lt: Optional[datetime] = None,
         end_date_gte: Optional[datetime] = None,
+        end_date_gt: Optional[datetime] = None,
         end_date_lte: Optional[datetime] = None,
+        end_date_lt: Optional[datetime] = None,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        order_by: Optional[StrictStr] = None,
+        order_by: Optional[List[StrictStr]] = None,
         job_state: Optional[StrictStr] = None,
         job_type: Optional[StrictStr] = None,
         hostname: Optional[StrictStr] = None,
@@ -76,18 +80,26 @@ class JobApi:
         :type is_alive: bool
         :param start_date_gte:
         :type start_date_gte: datetime
+        :param start_date_gt:
+        :type start_date_gt: datetime
         :param start_date_lte:
         :type start_date_lte: datetime
+        :param start_date_lt:
+        :type start_date_lt: datetime
         :param end_date_gte:
         :type end_date_gte: datetime
+        :param end_date_gt:
+        :type end_date_gt: datetime
         :param end_date_lte:
         :type end_date_lte: datetime
+        :param end_date_lt:
+        :type end_date_lt: datetime
         :param limit:
         :type limit: int
         :param offset:
         :type offset: int
         :param order_by:
-        :type order_by: str
+        :type order_by: List[str]
         :param job_state:
         :type job_state: str
         :param job_type:
@@ -121,9 +133,13 @@ class JobApi:
         _param = self._get_jobs_serialize(
             is_alive=is_alive,
             start_date_gte=start_date_gte,
+            start_date_gt=start_date_gt,
             start_date_lte=start_date_lte,
+            start_date_lt=start_date_lt,
             end_date_gte=end_date_gte,
+            end_date_gt=end_date_gt,
             end_date_lte=end_date_lte,
+            end_date_lt=end_date_lt,
             limit=limit,
             offset=offset,
             order_by=order_by,
@@ -160,12 +176,16 @@ class JobApi:
         self,
         is_alive: Optional[StrictBool] = None,
         start_date_gte: Optional[datetime] = None,
+        start_date_gt: Optional[datetime] = None,
         start_date_lte: Optional[datetime] = None,
+        start_date_lt: Optional[datetime] = None,
         end_date_gte: Optional[datetime] = None,
+        end_date_gt: Optional[datetime] = None,
         end_date_lte: Optional[datetime] = None,
+        end_date_lt: Optional[datetime] = None,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        order_by: Optional[StrictStr] = None,
+        order_by: Optional[List[StrictStr]] = None,
         job_state: Optional[StrictStr] = None,
         job_type: Optional[StrictStr] = None,
         hostname: Optional[StrictStr] = None,
@@ -191,18 +211,26 @@ class JobApi:
         :type is_alive: bool
         :param start_date_gte:
         :type start_date_gte: datetime
+        :param start_date_gt:
+        :type start_date_gt: datetime
         :param start_date_lte:
         :type start_date_lte: datetime
+        :param start_date_lt:
+        :type start_date_lt: datetime
         :param end_date_gte:
         :type end_date_gte: datetime
+        :param end_date_gt:
+        :type end_date_gt: datetime
         :param end_date_lte:
         :type end_date_lte: datetime
+        :param end_date_lt:
+        :type end_date_lt: datetime
         :param limit:
         :type limit: int
         :param offset:
         :type offset: int
         :param order_by:
-        :type order_by: str
+        :type order_by: List[str]
         :param job_state:
         :type job_state: str
         :param job_type:
@@ -236,9 +264,13 @@ class JobApi:
         _param = self._get_jobs_serialize(
             is_alive=is_alive,
             start_date_gte=start_date_gte,
+            start_date_gt=start_date_gt,
             start_date_lte=start_date_lte,
+            start_date_lt=start_date_lt,
             end_date_gte=end_date_gte,
+            end_date_gt=end_date_gt,
             end_date_lte=end_date_lte,
+            end_date_lt=end_date_lt,
             limit=limit,
             offset=offset,
             order_by=order_by,
@@ -275,12 +307,16 @@ class JobApi:
         self,
         is_alive: Optional[StrictBool] = None,
         start_date_gte: Optional[datetime] = None,
+        start_date_gt: Optional[datetime] = None,
         start_date_lte: Optional[datetime] = None,
+        start_date_lt: Optional[datetime] = None,
         end_date_gte: Optional[datetime] = None,
+        end_date_gt: Optional[datetime] = None,
         end_date_lte: Optional[datetime] = None,
+        end_date_lt: Optional[datetime] = None,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        order_by: Optional[StrictStr] = None,
+        order_by: Optional[List[StrictStr]] = None,
         job_state: Optional[StrictStr] = None,
         job_type: Optional[StrictStr] = None,
         hostname: Optional[StrictStr] = None,
@@ -306,18 +342,26 @@ class JobApi:
         :type is_alive: bool
         :param start_date_gte:
         :type start_date_gte: datetime
+        :param start_date_gt:
+        :type start_date_gt: datetime
         :param start_date_lte:
         :type start_date_lte: datetime
+        :param start_date_lt:
+        :type start_date_lt: datetime
         :param end_date_gte:
         :type end_date_gte: datetime
+        :param end_date_gt:
+        :type end_date_gt: datetime
         :param end_date_lte:
         :type end_date_lte: datetime
+        :param end_date_lt:
+        :type end_date_lt: datetime
         :param limit:
         :type limit: int
         :param offset:
         :type offset: int
         :param order_by:
-        :type order_by: str
+        :type order_by: List[str]
         :param job_state:
         :type job_state: str
         :param job_type:
@@ -351,9 +395,13 @@ class JobApi:
         _param = self._get_jobs_serialize(
             is_alive=is_alive,
             start_date_gte=start_date_gte,
+            start_date_gt=start_date_gt,
             start_date_lte=start_date_lte,
+            start_date_lt=start_date_lt,
             end_date_gte=end_date_gte,
+            end_date_gt=end_date_gt,
             end_date_lte=end_date_lte,
+            end_date_lt=end_date_lt,
             limit=limit,
             offset=offset,
             order_by=order_by,
@@ -385,9 +433,13 @@ class JobApi:
         self,
         is_alive,
         start_date_gte,
+        start_date_gt,
         start_date_lte,
+        start_date_lt,
         end_date_gte,
+        end_date_gt,
         end_date_lte,
+        end_date_lt,
         limit,
         offset,
         order_by,
@@ -404,6 +456,7 @@ class JobApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
+            'order_by': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -434,6 +487,19 @@ class JobApi:
             else:
                 _query_params.append(('start_date_gte', start_date_gte))
             
+        if start_date_gt is not None:
+            if isinstance(start_date_gt, datetime):
+                _query_params.append(
+                    (
+                        'start_date_gt',
+                        start_date_gt.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('start_date_gt', start_date_gt))
+            
         if start_date_lte is not None:
             if isinstance(start_date_lte, datetime):
                 _query_params.append(
@@ -446,6 +512,19 @@ class JobApi:
                 )
             else:
                 _query_params.append(('start_date_lte', start_date_lte))
+            
+        if start_date_lt is not None:
+            if isinstance(start_date_lt, datetime):
+                _query_params.append(
+                    (
+                        'start_date_lt',
+                        start_date_lt.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('start_date_lt', start_date_lt))
             
         if end_date_gte is not None:
             if isinstance(end_date_gte, datetime):
@@ -460,6 +539,19 @@ class JobApi:
             else:
                 _query_params.append(('end_date_gte', end_date_gte))
             
+        if end_date_gt is not None:
+            if isinstance(end_date_gt, datetime):
+                _query_params.append(
+                    (
+                        'end_date_gt',
+                        end_date_gt.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('end_date_gt', end_date_gt))
+            
         if end_date_lte is not None:
             if isinstance(end_date_lte, datetime):
                 _query_params.append(
@@ -472,6 +564,19 @@ class JobApi:
                 )
             else:
                 _query_params.append(('end_date_lte', end_date_lte))
+            
+        if end_date_lt is not None:
+            if isinstance(end_date_lt, datetime):
+                _query_params.append(
+                    (
+                        'end_date_lt',
+                        end_date_lt.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('end_date_lt', end_date_lt))
             
         if limit is not None:
             
@@ -517,7 +622,8 @@ class JobApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(

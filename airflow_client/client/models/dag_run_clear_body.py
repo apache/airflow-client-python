@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool
+from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,7 +28,8 @@ class DAGRunClearBody(BaseModel):
     """ # noqa: E501
     dry_run: Optional[StrictBool] = True
     only_failed: Optional[StrictBool] = False
-    __properties: ClassVar[List[str]] = ["dry_run", "only_failed"]
+    run_on_latest_version: Optional[StrictBool] = Field(default=False, description="(Experimental) Run on the latest bundle version of the Dag after clearing the Dag Run.")
+    __properties: ClassVar[List[str]] = ["dry_run", "only_failed", "run_on_latest_version"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -82,7 +83,8 @@ class DAGRunClearBody(BaseModel):
 
         _obj = cls.model_validate({
             "dry_run": obj.get("dry_run") if obj.get("dry_run") is not None else True,
-            "only_failed": obj.get("only_failed") if obj.get("only_failed") is not None else False
+            "only_failed": obj.get("only_failed") if obj.get("only_failed") is not None else False,
+            "run_on_latest_version": obj.get("run_on_latest_version") if obj.get("run_on_latest_version") is not None else False
         })
         return _obj
 

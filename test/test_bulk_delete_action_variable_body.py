@@ -38,14 +38,14 @@ class TestBulkDeleteActionVariableBody(unittest.TestCase):
                 action = 'delete',
                 action_on_non_existence = 'fail',
                 entities = [
-                    ''
+                    null
                     ]
             )
         else:
             return BulkDeleteActionVariableBody(
                 action = 'delete',
                 entities = [
-                    ''
+                    null
                     ],
         )
         """

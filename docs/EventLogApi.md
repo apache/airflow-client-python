@@ -16,6 +16,7 @@ Get Event Log
 ### Example
 
 * OAuth Authentication (OAuth2PasswordBearer):
+* Bearer Authentication (HTTPBearer):
 
 ```python
 import airflow_client.client
@@ -35,6 +36,11 @@ configuration = airflow_client.client.Configuration(
 # satisfies your auth use case.
 
 configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure Bearer authorization: HTTPBearer
+configuration = airflow_client.client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with airflow_client.client.ApiClient(configuration) as api_client:
@@ -66,7 +72,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 
@@ -86,7 +92,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_event_logs**
-> EventLogCollectionResponse get_event_logs(limit=limit, offset=offset, order_by=order_by, dag_id=dag_id, task_id=task_id, run_id=run_id, map_index=map_index, try_number=try_number, owner=owner, event=event, excluded_events=excluded_events, included_events=included_events, before=before, after=after)
+> EventLogCollectionResponse get_event_logs(limit=limit, offset=offset, order_by=order_by, dag_id=dag_id, task_id=task_id, run_id=run_id, map_index=map_index, try_number=try_number, owner=owner, event=event, excluded_events=excluded_events, included_events=included_events, before=before, after=after, dag_id_pattern=dag_id_pattern, task_id_pattern=task_id_pattern, run_id_pattern=run_id_pattern, owner_pattern=owner_pattern, event_pattern=event_pattern)
 
 Get Event Logs
 
@@ -95,6 +101,7 @@ Get all Event Logs.
 ### Example
 
 * OAuth Authentication (OAuth2PasswordBearer):
+* Bearer Authentication (HTTPBearer):
 
 ```python
 import airflow_client.client
@@ -115,13 +122,18 @@ configuration = airflow_client.client.Configuration(
 
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
+# Configure Bearer authorization: HTTPBearer
+configuration = airflow_client.client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with airflow_client.client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = airflow_client.client.EventLogApi(api_client)
     limit = 50 # int |  (optional) (default to 50)
     offset = 0 # int |  (optional) (default to 0)
-    order_by = 'id' # str |  (optional) (default to 'id')
+    order_by = [id] # List[str] |  (optional) (default to [id])
     dag_id = 'dag_id_example' # str |  (optional)
     task_id = 'task_id_example' # str |  (optional)
     run_id = 'run_id_example' # str |  (optional)
@@ -133,10 +145,15 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     included_events = ['included_events_example'] # List[str] |  (optional)
     before = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
     after = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
+    dag_id_pattern = 'dag_id_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported. (optional)
+    task_id_pattern = 'task_id_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported. (optional)
+    run_id_pattern = 'run_id_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported. (optional)
+    owner_pattern = 'owner_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported. (optional)
+    event_pattern = 'event_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported. (optional)
 
     try:
         # Get Event Logs
-        api_response = api_instance.get_event_logs(limit=limit, offset=offset, order_by=order_by, dag_id=dag_id, task_id=task_id, run_id=run_id, map_index=map_index, try_number=try_number, owner=owner, event=event, excluded_events=excluded_events, included_events=included_events, before=before, after=after)
+        api_response = api_instance.get_event_logs(limit=limit, offset=offset, order_by=order_by, dag_id=dag_id, task_id=task_id, run_id=run_id, map_index=map_index, try_number=try_number, owner=owner, event=event, excluded_events=excluded_events, included_events=included_events, before=before, after=after, dag_id_pattern=dag_id_pattern, task_id_pattern=task_id_pattern, run_id_pattern=run_id_pattern, owner_pattern=owner_pattern, event_pattern=event_pattern)
         print("The response of EventLogApi->get_event_logs:\n")
         pprint(api_response)
     except Exception as e:
@@ -152,7 +169,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **int**|  | [optional] [default to 50]
  **offset** | **int**|  | [optional] [default to 0]
- **order_by** | **str**|  | [optional] [default to &#39;id&#39;]
+ **order_by** | [**List[str]**](str.md)|  | [optional] [default to [id]]
  **dag_id** | **str**|  | [optional] 
  **task_id** | **str**|  | [optional] 
  **run_id** | **str**|  | [optional] 
@@ -164,6 +181,11 @@ Name | Type | Description  | Notes
  **included_events** | [**List[str]**](str.md)|  | [optional] 
  **before** | **datetime**|  | [optional] 
  **after** | **datetime**|  | [optional] 
+ **dag_id_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). Regular expressions are **not** supported. | [optional] 
+ **task_id_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). Regular expressions are **not** supported. | [optional] 
+ **run_id_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). Regular expressions are **not** supported. | [optional] 
+ **owner_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). Regular expressions are **not** supported. | [optional] 
+ **event_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). Regular expressions are **not** supported. | [optional] 
 
 ### Return type
 
@@ -171,7 +193,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 

@@ -37,6 +37,7 @@ class TestDAGWarningCollectionResponse(unittest.TestCase):
             return DAGWarningCollectionResponse(
                 dag_warnings = [
                     airflow_client.client.models.dag_warning_response.DAGWarningResponse(
+                        dag_display_name = '', 
                         dag_id = '', 
                         message = '', 
                         timestamp = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
@@ -48,6 +49,7 @@ class TestDAGWarningCollectionResponse(unittest.TestCase):
             return DAGWarningCollectionResponse(
                 dag_warnings = [
                     airflow_client.client.models.dag_warning_response.DAGWarningResponse(
+                        dag_display_name = '', 
                         dag_id = '', 
                         message = '', 
                         timestamp = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 

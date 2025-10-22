@@ -37,6 +37,7 @@ class TestTaskInstanceHistoryCollectionResponse(unittest.TestCase):
             return TaskInstanceHistoryCollectionResponse(
                 task_instances = [
                     airflow_client.client.models.task_instance_history_response.TaskInstanceHistoryResponse(
+                        dag_display_name = '', 
                         dag_id = '', 
                         dag_run_id = '', 
                         dag_version = airflow_client.client.models.dag_version_response.DagVersionResponse(
@@ -44,6 +45,7 @@ class TestTaskInstanceHistoryCollectionResponse(unittest.TestCase):
                             bundle_url = '', 
                             bundle_version = '', 
                             created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                            dag_display_name = '', 
                             dag_id = '', 
                             id = '', 
                             version_number = 56, ), 
@@ -55,6 +57,7 @@ class TestTaskInstanceHistoryCollectionResponse(unittest.TestCase):
                         map_index = 56, 
                         max_tries = 56, 
                         operator = '', 
+                        operator_name = '', 
                         pid = 56, 
                         pool = '', 
                         pool_slots = 56, 
@@ -75,6 +78,7 @@ class TestTaskInstanceHistoryCollectionResponse(unittest.TestCase):
             return TaskInstanceHistoryCollectionResponse(
                 task_instances = [
                     airflow_client.client.models.task_instance_history_response.TaskInstanceHistoryResponse(
+                        dag_display_name = '', 
                         dag_id = '', 
                         dag_run_id = '', 
                         dag_version = airflow_client.client.models.dag_version_response.DagVersionResponse(
@@ -82,6 +86,7 @@ class TestTaskInstanceHistoryCollectionResponse(unittest.TestCase):
                             bundle_url = '', 
                             bundle_version = '', 
                             created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                            dag_display_name = '', 
                             dag_id = '', 
                             id = '', 
                             version_number = 56, ), 
@@ -93,6 +98,7 @@ class TestTaskInstanceHistoryCollectionResponse(unittest.TestCase):
                         map_index = 56, 
                         max_tries = 56, 
                         operator = '', 
+                        operator_name = '', 
                         pid = 56, 
                         pool = '', 
                         pool_slots = 56, 

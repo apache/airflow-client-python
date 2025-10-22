@@ -33,6 +33,13 @@ class TestDAGApi(unittest.TestCase):
         """
         pass
 
+    def test_favorite_dag(self) -> None:
+        """Test case for favorite_dag
+
+        Favorite Dag
+        """
+        pass
+
     def test_get_dag(self) -> None:
         """Test case for get_dag
 
@@ -72,6 +79,13 @@ class TestDAGApi(unittest.TestCase):
         """Test case for patch_dags
 
         Patch Dags
+        """
+        pass
+
+    def test_unfavorite_dag(self) -> None:
+        """Test case for unfavorite_dag
+
+        Unfavorite Dag
         """
         pass
 

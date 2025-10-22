@@ -17,7 +17,7 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictStr
-from typing import Optional
+from typing import List, Optional
 from typing_extensions import Annotated
 from airflow_client.client.models.backfill_collection_response import BackfillCollectionResponse
 from airflow_client.client.models.backfill_post_body import BackfillPostBody
@@ -294,7 +294,8 @@ class BackfillApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -580,7 +581,8 @@ class BackfillApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -866,7 +868,8 @@ class BackfillApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -1136,7 +1139,8 @@ class BackfillApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -1163,7 +1167,7 @@ class BackfillApi:
         dag_id: StrictStr,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        order_by: Optional[StrictStr] = None,
+        order_by: Optional[List[StrictStr]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1187,7 +1191,7 @@ class BackfillApi:
         :param offset:
         :type offset: int
         :param order_by:
-        :type order_by: str
+        :type order_by: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1244,7 +1248,7 @@ class BackfillApi:
         dag_id: StrictStr,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        order_by: Optional[StrictStr] = None,
+        order_by: Optional[List[StrictStr]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1268,7 +1272,7 @@ class BackfillApi:
         :param offset:
         :type offset: int
         :param order_by:
-        :type order_by: str
+        :type order_by: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1325,7 +1329,7 @@ class BackfillApi:
         dag_id: StrictStr,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        order_by: Optional[StrictStr] = None,
+        order_by: Optional[List[StrictStr]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1349,7 +1353,7 @@ class BackfillApi:
         :param offset:
         :type offset: int
         :param order_by:
-        :type order_by: str
+        :type order_by: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1411,6 +1415,7 @@ class BackfillApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
+            'order_by': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1456,7 +1461,8 @@ class BackfillApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -1729,7 +1735,8 @@ class BackfillApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -2002,7 +2009,8 @@ class BackfillApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(

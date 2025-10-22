@@ -17,8 +17,8 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from datetime import datetime
-from pydantic import Field, StrictStr, field_validator
-from typing import Any, List, Optional
+from pydantic import Field, StrictFloat, StrictInt, StrictStr, field_validator
+from typing import Any, List, Optional, Union
 from typing_extensions import Annotated
 from airflow_client.client.models.asset_event_collection_response import AssetEventCollectionResponse
 from airflow_client.client.models.dag_run_clear_body import DAGRunClearBody
@@ -339,7 +339,8 @@ class DagRunApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -630,7 +631,8 @@ class DagRunApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -915,7 +917,8 @@ class DagRunApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -943,18 +946,31 @@ class DagRunApi:
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         run_after_gte: Optional[datetime] = None,
+        run_after_gt: Optional[datetime] = None,
         run_after_lte: Optional[datetime] = None,
+        run_after_lt: Optional[datetime] = None,
         logical_date_gte: Optional[datetime] = None,
+        logical_date_gt: Optional[datetime] = None,
         logical_date_lte: Optional[datetime] = None,
+        logical_date_lt: Optional[datetime] = None,
         start_date_gte: Optional[datetime] = None,
+        start_date_gt: Optional[datetime] = None,
         start_date_lte: Optional[datetime] = None,
+        start_date_lt: Optional[datetime] = None,
         end_date_gte: Optional[datetime] = None,
+        end_date_gt: Optional[datetime] = None,
         end_date_lte: Optional[datetime] = None,
+        end_date_lt: Optional[datetime] = None,
         updated_at_gte: Optional[datetime] = None,
+        updated_at_gt: Optional[datetime] = None,
         updated_at_lte: Optional[datetime] = None,
+        updated_at_lt: Optional[datetime] = None,
         run_type: Optional[List[StrictStr]] = None,
         state: Optional[List[StrictStr]] = None,
-        order_by: Optional[StrictStr] = None,
+        dag_version: Optional[List[StrictInt]] = None,
+        order_by: Optional[List[StrictStr]] = None,
+        run_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        triggering_user_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -980,30 +996,56 @@ class DagRunApi:
         :type offset: int
         :param run_after_gte:
         :type run_after_gte: datetime
+        :param run_after_gt:
+        :type run_after_gt: datetime
         :param run_after_lte:
         :type run_after_lte: datetime
+        :param run_after_lt:
+        :type run_after_lt: datetime
         :param logical_date_gte:
         :type logical_date_gte: datetime
+        :param logical_date_gt:
+        :type logical_date_gt: datetime
         :param logical_date_lte:
         :type logical_date_lte: datetime
+        :param logical_date_lt:
+        :type logical_date_lt: datetime
         :param start_date_gte:
         :type start_date_gte: datetime
+        :param start_date_gt:
+        :type start_date_gt: datetime
         :param start_date_lte:
         :type start_date_lte: datetime
+        :param start_date_lt:
+        :type start_date_lt: datetime
         :param end_date_gte:
         :type end_date_gte: datetime
+        :param end_date_gt:
+        :type end_date_gt: datetime
         :param end_date_lte:
         :type end_date_lte: datetime
+        :param end_date_lt:
+        :type end_date_lt: datetime
         :param updated_at_gte:
         :type updated_at_gte: datetime
+        :param updated_at_gt:
+        :type updated_at_gt: datetime
         :param updated_at_lte:
         :type updated_at_lte: datetime
+        :param updated_at_lt:
+        :type updated_at_lt: datetime
         :param run_type:
         :type run_type: List[str]
         :param state:
         :type state: List[str]
+        :param dag_version:
+        :type dag_version: List[int]
         :param order_by:
-        :type order_by: str
+        :type order_by: List[str]
+        :param run_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :type run_id_pattern: str
+        :param triggering_user_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :type triggering_user_name_pattern: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1031,18 +1073,31 @@ class DagRunApi:
             limit=limit,
             offset=offset,
             run_after_gte=run_after_gte,
+            run_after_gt=run_after_gt,
             run_after_lte=run_after_lte,
+            run_after_lt=run_after_lt,
             logical_date_gte=logical_date_gte,
+            logical_date_gt=logical_date_gt,
             logical_date_lte=logical_date_lte,
+            logical_date_lt=logical_date_lt,
             start_date_gte=start_date_gte,
+            start_date_gt=start_date_gt,
             start_date_lte=start_date_lte,
+            start_date_lt=start_date_lt,
             end_date_gte=end_date_gte,
+            end_date_gt=end_date_gt,
             end_date_lte=end_date_lte,
+            end_date_lt=end_date_lt,
             updated_at_gte=updated_at_gte,
+            updated_at_gt=updated_at_gt,
             updated_at_lte=updated_at_lte,
+            updated_at_lt=updated_at_lt,
             run_type=run_type,
             state=state,
+            dag_version=dag_version,
             order_by=order_by,
+            run_id_pattern=run_id_pattern,
+            triggering_user_name_pattern=triggering_user_name_pattern,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1074,18 +1129,31 @@ class DagRunApi:
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         run_after_gte: Optional[datetime] = None,
+        run_after_gt: Optional[datetime] = None,
         run_after_lte: Optional[datetime] = None,
+        run_after_lt: Optional[datetime] = None,
         logical_date_gte: Optional[datetime] = None,
+        logical_date_gt: Optional[datetime] = None,
         logical_date_lte: Optional[datetime] = None,
+        logical_date_lt: Optional[datetime] = None,
         start_date_gte: Optional[datetime] = None,
+        start_date_gt: Optional[datetime] = None,
         start_date_lte: Optional[datetime] = None,
+        start_date_lt: Optional[datetime] = None,
         end_date_gte: Optional[datetime] = None,
+        end_date_gt: Optional[datetime] = None,
         end_date_lte: Optional[datetime] = None,
+        end_date_lt: Optional[datetime] = None,
         updated_at_gte: Optional[datetime] = None,
+        updated_at_gt: Optional[datetime] = None,
         updated_at_lte: Optional[datetime] = None,
+        updated_at_lt: Optional[datetime] = None,
         run_type: Optional[List[StrictStr]] = None,
         state: Optional[List[StrictStr]] = None,
-        order_by: Optional[StrictStr] = None,
+        dag_version: Optional[List[StrictInt]] = None,
+        order_by: Optional[List[StrictStr]] = None,
+        run_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        triggering_user_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1111,30 +1179,56 @@ class DagRunApi:
         :type offset: int
         :param run_after_gte:
         :type run_after_gte: datetime
+        :param run_after_gt:
+        :type run_after_gt: datetime
         :param run_after_lte:
         :type run_after_lte: datetime
+        :param run_after_lt:
+        :type run_after_lt: datetime
         :param logical_date_gte:
         :type logical_date_gte: datetime
+        :param logical_date_gt:
+        :type logical_date_gt: datetime
         :param logical_date_lte:
         :type logical_date_lte: datetime
+        :param logical_date_lt:
+        :type logical_date_lt: datetime
         :param start_date_gte:
         :type start_date_gte: datetime
+        :param start_date_gt:
+        :type start_date_gt: datetime
         :param start_date_lte:
         :type start_date_lte: datetime
+        :param start_date_lt:
+        :type start_date_lt: datetime
         :param end_date_gte:
         :type end_date_gte: datetime
+        :param end_date_gt:
+        :type end_date_gt: datetime
         :param end_date_lte:
         :type end_date_lte: datetime
+        :param end_date_lt:
+        :type end_date_lt: datetime
         :param updated_at_gte:
         :type updated_at_gte: datetime
+        :param updated_at_gt:
+        :type updated_at_gt: datetime
         :param updated_at_lte:
         :type updated_at_lte: datetime
+        :param updated_at_lt:
+        :type updated_at_lt: datetime
         :param run_type:
         :type run_type: List[str]
         :param state:
         :type state: List[str]
+        :param dag_version:
+        :type dag_version: List[int]
         :param order_by:
-        :type order_by: str
+        :type order_by: List[str]
+        :param run_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :type run_id_pattern: str
+        :param triggering_user_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :type triggering_user_name_pattern: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1162,18 +1256,31 @@ class DagRunApi:
             limit=limit,
             offset=offset,
             run_after_gte=run_after_gte,
+            run_after_gt=run_after_gt,
             run_after_lte=run_after_lte,
+            run_after_lt=run_after_lt,
             logical_date_gte=logical_date_gte,
+            logical_date_gt=logical_date_gt,
             logical_date_lte=logical_date_lte,
+            logical_date_lt=logical_date_lt,
             start_date_gte=start_date_gte,
+            start_date_gt=start_date_gt,
             start_date_lte=start_date_lte,
+            start_date_lt=start_date_lt,
             end_date_gte=end_date_gte,
+            end_date_gt=end_date_gt,
             end_date_lte=end_date_lte,
+            end_date_lt=end_date_lt,
             updated_at_gte=updated_at_gte,
+            updated_at_gt=updated_at_gt,
             updated_at_lte=updated_at_lte,
+            updated_at_lt=updated_at_lt,
             run_type=run_type,
             state=state,
+            dag_version=dag_version,
             order_by=order_by,
+            run_id_pattern=run_id_pattern,
+            triggering_user_name_pattern=triggering_user_name_pattern,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1205,18 +1312,31 @@ class DagRunApi:
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         run_after_gte: Optional[datetime] = None,
+        run_after_gt: Optional[datetime] = None,
         run_after_lte: Optional[datetime] = None,
+        run_after_lt: Optional[datetime] = None,
         logical_date_gte: Optional[datetime] = None,
+        logical_date_gt: Optional[datetime] = None,
         logical_date_lte: Optional[datetime] = None,
+        logical_date_lt: Optional[datetime] = None,
         start_date_gte: Optional[datetime] = None,
+        start_date_gt: Optional[datetime] = None,
         start_date_lte: Optional[datetime] = None,
+        start_date_lt: Optional[datetime] = None,
         end_date_gte: Optional[datetime] = None,
+        end_date_gt: Optional[datetime] = None,
         end_date_lte: Optional[datetime] = None,
+        end_date_lt: Optional[datetime] = None,
         updated_at_gte: Optional[datetime] = None,
+        updated_at_gt: Optional[datetime] = None,
         updated_at_lte: Optional[datetime] = None,
+        updated_at_lt: Optional[datetime] = None,
         run_type: Optional[List[StrictStr]] = None,
         state: Optional[List[StrictStr]] = None,
-        order_by: Optional[StrictStr] = None,
+        dag_version: Optional[List[StrictInt]] = None,
+        order_by: Optional[List[StrictStr]] = None,
+        run_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        triggering_user_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1242,30 +1362,56 @@ class DagRunApi:
         :type offset: int
         :param run_after_gte:
         :type run_after_gte: datetime
+        :param run_after_gt:
+        :type run_after_gt: datetime
         :param run_after_lte:
         :type run_after_lte: datetime
+        :param run_after_lt:
+        :type run_after_lt: datetime
         :param logical_date_gte:
         :type logical_date_gte: datetime
+        :param logical_date_gt:
+        :type logical_date_gt: datetime
         :param logical_date_lte:
         :type logical_date_lte: datetime
+        :param logical_date_lt:
+        :type logical_date_lt: datetime
         :param start_date_gte:
         :type start_date_gte: datetime
+        :param start_date_gt:
+        :type start_date_gt: datetime
         :param start_date_lte:
         :type start_date_lte: datetime
+        :param start_date_lt:
+        :type start_date_lt: datetime
         :param end_date_gte:
         :type end_date_gte: datetime
+        :param end_date_gt:
+        :type end_date_gt: datetime
         :param end_date_lte:
         :type end_date_lte: datetime
+        :param end_date_lt:
+        :type end_date_lt: datetime
         :param updated_at_gte:
         :type updated_at_gte: datetime
+        :param updated_at_gt:
+        :type updated_at_gt: datetime
         :param updated_at_lte:
         :type updated_at_lte: datetime
+        :param updated_at_lt:
+        :type updated_at_lt: datetime
         :param run_type:
         :type run_type: List[str]
         :param state:
         :type state: List[str]
+        :param dag_version:
+        :type dag_version: List[int]
         :param order_by:
-        :type order_by: str
+        :type order_by: List[str]
+        :param run_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :type run_id_pattern: str
+        :param triggering_user_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :type triggering_user_name_pattern: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1293,18 +1439,31 @@ class DagRunApi:
             limit=limit,
             offset=offset,
             run_after_gte=run_after_gte,
+            run_after_gt=run_after_gt,
             run_after_lte=run_after_lte,
+            run_after_lt=run_after_lt,
             logical_date_gte=logical_date_gte,
+            logical_date_gt=logical_date_gt,
             logical_date_lte=logical_date_lte,
+            logical_date_lt=logical_date_lt,
             start_date_gte=start_date_gte,
+            start_date_gt=start_date_gt,
             start_date_lte=start_date_lte,
+            start_date_lt=start_date_lt,
             end_date_gte=end_date_gte,
+            end_date_gt=end_date_gt,
             end_date_lte=end_date_lte,
+            end_date_lt=end_date_lt,
             updated_at_gte=updated_at_gte,
+            updated_at_gt=updated_at_gt,
             updated_at_lte=updated_at_lte,
+            updated_at_lt=updated_at_lt,
             run_type=run_type,
             state=state,
+            dag_version=dag_version,
             order_by=order_by,
+            run_id_pattern=run_id_pattern,
+            triggering_user_name_pattern=triggering_user_name_pattern,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1331,18 +1490,31 @@ class DagRunApi:
         limit,
         offset,
         run_after_gte,
+        run_after_gt,
         run_after_lte,
+        run_after_lt,
         logical_date_gte,
+        logical_date_gt,
         logical_date_lte,
+        logical_date_lt,
         start_date_gte,
+        start_date_gt,
         start_date_lte,
+        start_date_lt,
         end_date_gte,
+        end_date_gt,
         end_date_lte,
+        end_date_lt,
         updated_at_gte,
+        updated_at_gt,
         updated_at_lte,
+        updated_at_lt,
         run_type,
         state,
+        dag_version,
         order_by,
+        run_id_pattern,
+        triggering_user_name_pattern,
         _request_auth,
         _content_type,
         _headers,
@@ -1354,6 +1526,8 @@ class DagRunApi:
         _collection_formats: Dict[str, str] = {
             'run_type': 'multi',
             'state': 'multi',
+            'dag_version': 'multi',
+            'order_by': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1390,6 +1564,19 @@ class DagRunApi:
             else:
                 _query_params.append(('run_after_gte', run_after_gte))
             
+        if run_after_gt is not None:
+            if isinstance(run_after_gt, datetime):
+                _query_params.append(
+                    (
+                        'run_after_gt',
+                        run_after_gt.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('run_after_gt', run_after_gt))
+            
         if run_after_lte is not None:
             if isinstance(run_after_lte, datetime):
                 _query_params.append(
@@ -1402,6 +1589,19 @@ class DagRunApi:
                 )
             else:
                 _query_params.append(('run_after_lte', run_after_lte))
+            
+        if run_after_lt is not None:
+            if isinstance(run_after_lt, datetime):
+                _query_params.append(
+                    (
+                        'run_after_lt',
+                        run_after_lt.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('run_after_lt', run_after_lt))
             
         if logical_date_gte is not None:
             if isinstance(logical_date_gte, datetime):
@@ -1416,6 +1616,19 @@ class DagRunApi:
             else:
                 _query_params.append(('logical_date_gte', logical_date_gte))
             
+        if logical_date_gt is not None:
+            if isinstance(logical_date_gt, datetime):
+                _query_params.append(
+                    (
+                        'logical_date_gt',
+                        logical_date_gt.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('logical_date_gt', logical_date_gt))
+            
         if logical_date_lte is not None:
             if isinstance(logical_date_lte, datetime):
                 _query_params.append(
@@ -1428,6 +1641,19 @@ class DagRunApi:
                 )
             else:
                 _query_params.append(('logical_date_lte', logical_date_lte))
+            
+        if logical_date_lt is not None:
+            if isinstance(logical_date_lt, datetime):
+                _query_params.append(
+                    (
+                        'logical_date_lt',
+                        logical_date_lt.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('logical_date_lt', logical_date_lt))
             
         if start_date_gte is not None:
             if isinstance(start_date_gte, datetime):
@@ -1442,6 +1668,19 @@ class DagRunApi:
             else:
                 _query_params.append(('start_date_gte', start_date_gte))
             
+        if start_date_gt is not None:
+            if isinstance(start_date_gt, datetime):
+                _query_params.append(
+                    (
+                        'start_date_gt',
+                        start_date_gt.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('start_date_gt', start_date_gt))
+            
         if start_date_lte is not None:
             if isinstance(start_date_lte, datetime):
                 _query_params.append(
@@ -1454,6 +1693,19 @@ class DagRunApi:
                 )
             else:
                 _query_params.append(('start_date_lte', start_date_lte))
+            
+        if start_date_lt is not None:
+            if isinstance(start_date_lt, datetime):
+                _query_params.append(
+                    (
+                        'start_date_lt',
+                        start_date_lt.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('start_date_lt', start_date_lt))
             
         if end_date_gte is not None:
             if isinstance(end_date_gte, datetime):
@@ -1468,6 +1720,19 @@ class DagRunApi:
             else:
                 _query_params.append(('end_date_gte', end_date_gte))
             
+        if end_date_gt is not None:
+            if isinstance(end_date_gt, datetime):
+                _query_params.append(
+                    (
+                        'end_date_gt',
+                        end_date_gt.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('end_date_gt', end_date_gt))
+            
         if end_date_lte is not None:
             if isinstance(end_date_lte, datetime):
                 _query_params.append(
@@ -1480,6 +1745,19 @@ class DagRunApi:
                 )
             else:
                 _query_params.append(('end_date_lte', end_date_lte))
+            
+        if end_date_lt is not None:
+            if isinstance(end_date_lt, datetime):
+                _query_params.append(
+                    (
+                        'end_date_lt',
+                        end_date_lt.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('end_date_lt', end_date_lt))
             
         if updated_at_gte is not None:
             if isinstance(updated_at_gte, datetime):
@@ -1494,6 +1772,19 @@ class DagRunApi:
             else:
                 _query_params.append(('updated_at_gte', updated_at_gte))
             
+        if updated_at_gt is not None:
+            if isinstance(updated_at_gt, datetime):
+                _query_params.append(
+                    (
+                        'updated_at_gt',
+                        updated_at_gt.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('updated_at_gt', updated_at_gt))
+            
         if updated_at_lte is not None:
             if isinstance(updated_at_lte, datetime):
                 _query_params.append(
@@ -1507,6 +1798,19 @@ class DagRunApi:
             else:
                 _query_params.append(('updated_at_lte', updated_at_lte))
             
+        if updated_at_lt is not None:
+            if isinstance(updated_at_lt, datetime):
+                _query_params.append(
+                    (
+                        'updated_at_lt',
+                        updated_at_lt.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('updated_at_lt', updated_at_lt))
+            
         if run_type is not None:
             
             _query_params.append(('run_type', run_type))
@@ -1515,9 +1819,21 @@ class DagRunApi:
             
             _query_params.append(('state', state))
             
+        if dag_version is not None:
+            
+            _query_params.append(('dag_version', dag_version))
+            
         if order_by is not None:
             
             _query_params.append(('order_by', order_by))
+            
+        if run_id_pattern is not None:
+            
+            _query_params.append(('run_id_pattern', run_id_pattern))
+            
+        if triggering_user_name_pattern is not None:
+            
+            _query_params.append(('triggering_user_name_pattern', triggering_user_name_pattern))
             
         # process the header parameters
         # process the form parameters
@@ -1535,7 +1851,8 @@ class DagRunApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -1836,7 +2153,8 @@ class DagRunApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -2124,7 +2442,8 @@ class DagRunApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -2461,7 +2780,8 @@ class DagRunApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -2768,12 +3088,338 @@ class DagRunApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/api/v2/dags/{dag_id}/dagRuns',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def wait_dag_run_until_finished(
+        self,
+        dag_id: StrictStr,
+        dag_run_id: StrictStr,
+        interval: Annotated[Union[StrictFloat, StrictInt], Field(description="Seconds to wait between dag run state checks")],
+        result: Annotated[Optional[List[StrictStr]], Field(description="Collect result XCom from task. Can be set multiple times.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> object:
+        """Experimental: Wait for a dag run to complete, and return task results if requested.
+
+        🚧 This is an experimental endpoint and may change or be removed without notice.Successful response are streamed as newline-delimited JSON (NDJSON). Each line is a JSON object representing the DAG run state.
+
+        :param dag_id: (required)
+        :type dag_id: str
+        :param dag_run_id: (required)
+        :type dag_run_id: str
+        :param interval: Seconds to wait between dag run state checks (required)
+        :type interval: float
+        :param result: Collect result XCom from task. Can be set multiple times.
+        :type result: List[str]
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._wait_dag_run_until_finished_serialize(
+            dag_id=dag_id,
+            dag_run_id=dag_run_id,
+            interval=interval,
+            result=result,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "object",
+            '401': "HTTPExceptionResponse",
+            '403': "HTTPExceptionResponse",
+            '404': "HTTPExceptionResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def wait_dag_run_until_finished_with_http_info(
+        self,
+        dag_id: StrictStr,
+        dag_run_id: StrictStr,
+        interval: Annotated[Union[StrictFloat, StrictInt], Field(description="Seconds to wait between dag run state checks")],
+        result: Annotated[Optional[List[StrictStr]], Field(description="Collect result XCom from task. Can be set multiple times.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[object]:
+        """Experimental: Wait for a dag run to complete, and return task results if requested.
+
+        🚧 This is an experimental endpoint and may change or be removed without notice.Successful response are streamed as newline-delimited JSON (NDJSON). Each line is a JSON object representing the DAG run state.
+
+        :param dag_id: (required)
+        :type dag_id: str
+        :param dag_run_id: (required)
+        :type dag_run_id: str
+        :param interval: Seconds to wait between dag run state checks (required)
+        :type interval: float
+        :param result: Collect result XCom from task. Can be set multiple times.
+        :type result: List[str]
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._wait_dag_run_until_finished_serialize(
+            dag_id=dag_id,
+            dag_run_id=dag_run_id,
+            interval=interval,
+            result=result,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "object",
+            '401': "HTTPExceptionResponse",
+            '403': "HTTPExceptionResponse",
+            '404': "HTTPExceptionResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def wait_dag_run_until_finished_without_preload_content(
+        self,
+        dag_id: StrictStr,
+        dag_run_id: StrictStr,
+        interval: Annotated[Union[StrictFloat, StrictInt], Field(description="Seconds to wait between dag run state checks")],
+        result: Annotated[Optional[List[StrictStr]], Field(description="Collect result XCom from task. Can be set multiple times.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Experimental: Wait for a dag run to complete, and return task results if requested.
+
+        🚧 This is an experimental endpoint and may change or be removed without notice.Successful response are streamed as newline-delimited JSON (NDJSON). Each line is a JSON object representing the DAG run state.
+
+        :param dag_id: (required)
+        :type dag_id: str
+        :param dag_run_id: (required)
+        :type dag_run_id: str
+        :param interval: Seconds to wait between dag run state checks (required)
+        :type interval: float
+        :param result: Collect result XCom from task. Can be set multiple times.
+        :type result: List[str]
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._wait_dag_run_until_finished_serialize(
+            dag_id=dag_id,
+            dag_run_id=dag_run_id,
+            interval=interval,
+            result=result,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "object",
+            '401': "HTTPExceptionResponse",
+            '403': "HTTPExceptionResponse",
+            '404': "HTTPExceptionResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _wait_dag_run_until_finished_serialize(
+        self,
+        dag_id,
+        dag_run_id,
+        interval,
+        result,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+            'result': 'multi',
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if dag_id is not None:
+            _path_params['dag_id'] = dag_id
+        if dag_run_id is not None:
+            _path_params['dag_run_id'] = dag_run_id
+        # process the query parameters
+        if interval is not None:
+            
+            _query_params.append(('interval', interval))
+            
+        if result is not None:
+            
+            _query_params.append(('result', result))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json', 
+                    'application/x-ndjson'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/api/v2/dags/{dag_id}/dagRuns/{dag_run_id}/wait',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

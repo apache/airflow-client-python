@@ -31,6 +31,7 @@ class TaskInstanceResponse(BaseModel):
     """
     TaskInstance serializer for responses.
     """ # noqa: E501
+    dag_display_name: StrictStr
     dag_id: StrictStr
     dag_run_id: StrictStr
     dag_version: Optional[DagVersionResponse] = None
@@ -45,6 +46,7 @@ class TaskInstanceResponse(BaseModel):
     max_tries: StrictInt
     note: Optional[StrictStr] = None
     operator: Optional[StrictStr] = None
+    operator_name: Optional[StrictStr] = None
     pid: Optional[StrictInt] = None
     pool: StrictStr
     pool_slots: StrictInt
@@ -63,7 +65,7 @@ class TaskInstanceResponse(BaseModel):
     triggerer_job: Optional[JobResponse] = None
     try_number: StrictInt
     unixname: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["dag_id", "dag_run_id", "dag_version", "duration", "end_date", "executor", "executor_config", "hostname", "id", "logical_date", "map_index", "max_tries", "note", "operator", "pid", "pool", "pool_slots", "priority_weight", "queue", "queued_when", "rendered_fields", "rendered_map_index", "run_after", "scheduled_when", "start_date", "state", "task_display_name", "task_id", "trigger", "triggerer_job", "try_number", "unixname"]
+    __properties: ClassVar[List[str]] = ["dag_display_name", "dag_id", "dag_run_id", "dag_version", "duration", "end_date", "executor", "executor_config", "hostname", "id", "logical_date", "map_index", "max_tries", "note", "operator", "operator_name", "pid", "pool", "pool_slots", "priority_weight", "queue", "queued_when", "rendered_fields", "rendered_map_index", "run_after", "scheduled_when", "start_date", "state", "task_display_name", "task_id", "trigger", "triggerer_job", "try_number", "unixname"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -125,6 +127,7 @@ class TaskInstanceResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "dag_display_name": obj.get("dag_display_name"),
             "dag_id": obj.get("dag_id"),
             "dag_run_id": obj.get("dag_run_id"),
             "dag_version": DagVersionResponse.from_dict(obj["dag_version"]) if obj.get("dag_version") is not None else None,
@@ -139,6 +142,7 @@ class TaskInstanceResponse(BaseModel):
             "max_tries": obj.get("max_tries"),
             "note": obj.get("note"),
             "operator": obj.get("operator"),
+            "operator_name": obj.get("operator_name"),
             "pid": obj.get("pid"),
             "pool": obj.get("pool"),
             "pool_slots": obj.get("pool_slots"),

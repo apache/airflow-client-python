@@ -313,7 +313,8 @@ class AssetApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -603,7 +604,8 @@ class AssetApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -911,7 +913,8 @@ class AssetApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -1201,7 +1204,8 @@ class AssetApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -1474,7 +1478,8 @@ class AssetApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -1747,7 +1752,8 @@ class AssetApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -1773,8 +1779,8 @@ class AssetApi:
         self,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        name_pattern: Optional[StrictStr] = None,
-        order_by: Optional[StrictStr] = None,
+        name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        order_by: Optional[List[StrictStr]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1796,10 +1802,10 @@ class AssetApi:
         :type limit: int
         :param offset:
         :type offset: int
-        :param name_pattern:
+        :param name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
         :type name_pattern: str
         :param order_by:
-        :type order_by: str
+        :type order_by: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1856,8 +1862,8 @@ class AssetApi:
         self,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        name_pattern: Optional[StrictStr] = None,
-        order_by: Optional[StrictStr] = None,
+        name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        order_by: Optional[List[StrictStr]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1879,10 +1885,10 @@ class AssetApi:
         :type limit: int
         :param offset:
         :type offset: int
-        :param name_pattern:
+        :param name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
         :type name_pattern: str
         :param order_by:
-        :type order_by: str
+        :type order_by: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1939,8 +1945,8 @@ class AssetApi:
         self,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        name_pattern: Optional[StrictStr] = None,
-        order_by: Optional[StrictStr] = None,
+        name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        order_by: Optional[List[StrictStr]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1962,10 +1968,10 @@ class AssetApi:
         :type limit: int
         :param offset:
         :type offset: int
-        :param name_pattern:
+        :param name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
         :type name_pattern: str
         :param order_by:
-        :type order_by: str
+        :type order_by: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2028,6 +2034,7 @@ class AssetApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
+            'order_by': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -2073,7 +2080,8 @@ class AssetApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -2099,14 +2107,16 @@ class AssetApi:
         self,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        order_by: Optional[StrictStr] = None,
+        order_by: Optional[List[StrictStr]] = None,
         asset_id: Optional[StrictInt] = None,
         source_dag_id: Optional[StrictStr] = None,
         source_task_id: Optional[StrictStr] = None,
         source_run_id: Optional[StrictStr] = None,
         source_map_index: Optional[StrictInt] = None,
         timestamp_gte: Optional[datetime] = None,
+        timestamp_gt: Optional[datetime] = None,
         timestamp_lte: Optional[datetime] = None,
+        timestamp_lt: Optional[datetime] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2129,7 +2139,7 @@ class AssetApi:
         :param offset:
         :type offset: int
         :param order_by:
-        :type order_by: str
+        :type order_by: List[str]
         :param asset_id:
         :type asset_id: int
         :param source_dag_id:
@@ -2142,8 +2152,12 @@ class AssetApi:
         :type source_map_index: int
         :param timestamp_gte:
         :type timestamp_gte: datetime
+        :param timestamp_gt:
+        :type timestamp_gt: datetime
         :param timestamp_lte:
         :type timestamp_lte: datetime
+        :param timestamp_lt:
+        :type timestamp_lt: datetime
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2176,7 +2190,9 @@ class AssetApi:
             source_run_id=source_run_id,
             source_map_index=source_map_index,
             timestamp_gte=timestamp_gte,
+            timestamp_gt=timestamp_gt,
             timestamp_lte=timestamp_lte,
+            timestamp_lt=timestamp_lt,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2206,14 +2222,16 @@ class AssetApi:
         self,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        order_by: Optional[StrictStr] = None,
+        order_by: Optional[List[StrictStr]] = None,
         asset_id: Optional[StrictInt] = None,
         source_dag_id: Optional[StrictStr] = None,
         source_task_id: Optional[StrictStr] = None,
         source_run_id: Optional[StrictStr] = None,
         source_map_index: Optional[StrictInt] = None,
         timestamp_gte: Optional[datetime] = None,
+        timestamp_gt: Optional[datetime] = None,
         timestamp_lte: Optional[datetime] = None,
+        timestamp_lt: Optional[datetime] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2236,7 +2254,7 @@ class AssetApi:
         :param offset:
         :type offset: int
         :param order_by:
-        :type order_by: str
+        :type order_by: List[str]
         :param asset_id:
         :type asset_id: int
         :param source_dag_id:
@@ -2249,8 +2267,12 @@ class AssetApi:
         :type source_map_index: int
         :param timestamp_gte:
         :type timestamp_gte: datetime
+        :param timestamp_gt:
+        :type timestamp_gt: datetime
         :param timestamp_lte:
         :type timestamp_lte: datetime
+        :param timestamp_lt:
+        :type timestamp_lt: datetime
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2283,7 +2305,9 @@ class AssetApi:
             source_run_id=source_run_id,
             source_map_index=source_map_index,
             timestamp_gte=timestamp_gte,
+            timestamp_gt=timestamp_gt,
             timestamp_lte=timestamp_lte,
+            timestamp_lt=timestamp_lt,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2313,14 +2337,16 @@ class AssetApi:
         self,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        order_by: Optional[StrictStr] = None,
+        order_by: Optional[List[StrictStr]] = None,
         asset_id: Optional[StrictInt] = None,
         source_dag_id: Optional[StrictStr] = None,
         source_task_id: Optional[StrictStr] = None,
         source_run_id: Optional[StrictStr] = None,
         source_map_index: Optional[StrictInt] = None,
         timestamp_gte: Optional[datetime] = None,
+        timestamp_gt: Optional[datetime] = None,
         timestamp_lte: Optional[datetime] = None,
+        timestamp_lt: Optional[datetime] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2343,7 +2369,7 @@ class AssetApi:
         :param offset:
         :type offset: int
         :param order_by:
-        :type order_by: str
+        :type order_by: List[str]
         :param asset_id:
         :type asset_id: int
         :param source_dag_id:
@@ -2356,8 +2382,12 @@ class AssetApi:
         :type source_map_index: int
         :param timestamp_gte:
         :type timestamp_gte: datetime
+        :param timestamp_gt:
+        :type timestamp_gt: datetime
         :param timestamp_lte:
         :type timestamp_lte: datetime
+        :param timestamp_lt:
+        :type timestamp_lt: datetime
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2390,7 +2420,9 @@ class AssetApi:
             source_run_id=source_run_id,
             source_map_index=source_map_index,
             timestamp_gte=timestamp_gte,
+            timestamp_gt=timestamp_gt,
             timestamp_lte=timestamp_lte,
+            timestamp_lt=timestamp_lt,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2422,7 +2454,9 @@ class AssetApi:
         source_run_id,
         source_map_index,
         timestamp_gte,
+        timestamp_gt,
         timestamp_lte,
+        timestamp_lt,
         _request_auth,
         _content_type,
         _headers,
@@ -2432,6 +2466,7 @@ class AssetApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
+            'order_by': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -2490,6 +2525,19 @@ class AssetApi:
             else:
                 _query_params.append(('timestamp_gte', timestamp_gte))
             
+        if timestamp_gt is not None:
+            if isinstance(timestamp_gt, datetime):
+                _query_params.append(
+                    (
+                        'timestamp_gt',
+                        timestamp_gt.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('timestamp_gt', timestamp_gt))
+            
         if timestamp_lte is not None:
             if isinstance(timestamp_lte, datetime):
                 _query_params.append(
@@ -2502,6 +2550,19 @@ class AssetApi:
                 )
             else:
                 _query_params.append(('timestamp_lte', timestamp_lte))
+            
+        if timestamp_lt is not None:
+            if isinstance(timestamp_lt, datetime):
+                _query_params.append(
+                    (
+                        'timestamp_lt',
+                        timestamp_lt.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('timestamp_lt', timestamp_lt))
             
         # process the header parameters
         # process the form parameters
@@ -2519,7 +2580,8 @@ class AssetApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -2809,7 +2871,8 @@ class AssetApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -2835,11 +2898,11 @@ class AssetApi:
         self,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        name_pattern: Optional[StrictStr] = None,
-        uri_pattern: Optional[StrictStr] = None,
+        name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        uri_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
         dag_ids: Optional[List[StrictStr]] = None,
         only_active: Optional[StrictBool] = None,
-        order_by: Optional[StrictStr] = None,
+        order_by: Optional[List[StrictStr]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2861,16 +2924,16 @@ class AssetApi:
         :type limit: int
         :param offset:
         :type offset: int
-        :param name_pattern:
+        :param name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
         :type name_pattern: str
-        :param uri_pattern:
+        :param uri_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
         :type uri_pattern: str
         :param dag_ids:
         :type dag_ids: List[str]
         :param only_active:
         :type only_active: bool
         :param order_by:
-        :type order_by: str
+        :type order_by: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2930,11 +2993,11 @@ class AssetApi:
         self,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        name_pattern: Optional[StrictStr] = None,
-        uri_pattern: Optional[StrictStr] = None,
+        name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        uri_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
         dag_ids: Optional[List[StrictStr]] = None,
         only_active: Optional[StrictBool] = None,
-        order_by: Optional[StrictStr] = None,
+        order_by: Optional[List[StrictStr]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2956,16 +3019,16 @@ class AssetApi:
         :type limit: int
         :param offset:
         :type offset: int
-        :param name_pattern:
+        :param name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
         :type name_pattern: str
-        :param uri_pattern:
+        :param uri_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
         :type uri_pattern: str
         :param dag_ids:
         :type dag_ids: List[str]
         :param only_active:
         :type only_active: bool
         :param order_by:
-        :type order_by: str
+        :type order_by: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3025,11 +3088,11 @@ class AssetApi:
         self,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        name_pattern: Optional[StrictStr] = None,
-        uri_pattern: Optional[StrictStr] = None,
+        name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        uri_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
         dag_ids: Optional[List[StrictStr]] = None,
         only_active: Optional[StrictBool] = None,
-        order_by: Optional[StrictStr] = None,
+        order_by: Optional[List[StrictStr]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3051,16 +3114,16 @@ class AssetApi:
         :type limit: int
         :param offset:
         :type offset: int
-        :param name_pattern:
+        :param name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
         :type name_pattern: str
-        :param uri_pattern:
+        :param uri_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
         :type uri_pattern: str
         :param dag_ids:
         :type dag_ids: List[str]
         :param only_active:
         :type only_active: bool
         :param order_by:
-        :type order_by: str
+        :type order_by: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3130,6 +3193,7 @@ class AssetApi:
 
         _collection_formats: Dict[str, str] = {
             'dag_ids': 'multi',
+            'order_by': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -3187,7 +3251,8 @@ class AssetApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -3492,7 +3557,8 @@ class AssetApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -3782,7 +3848,8 @@ class AssetApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -4058,7 +4125,8 @@ class AssetApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(

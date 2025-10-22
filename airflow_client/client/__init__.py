@@ -14,7 +14,7 @@
 """  # noqa: E501
 
 
-__version__ = "3.0.2"
+__version__ = "3.1.0"
 
 # import apis into sdk package
 from airflow_client.client.api.asset_api import AssetApi
@@ -43,6 +43,7 @@ from airflow_client.client.api.task_instance_api import TaskInstanceApi
 from airflow_client.client.api.variable_api import VariableApi
 from airflow_client.client.api.version_api import VersionApi
 from airflow_client.client.api.x_com_api import XComApi
+from airflow_client.client.api.experimental_api import ExperimentalApi
 
 # import ApiClient
 from airflow_client.client.api_response import ApiResponse
@@ -71,19 +72,26 @@ from airflow_client.client.models.base_info_response import BaseInfoResponse
 from airflow_client.client.models.bulk_action_not_on_existence import BulkActionNotOnExistence
 from airflow_client.client.models.bulk_action_on_existence import BulkActionOnExistence
 from airflow_client.client.models.bulk_action_response import BulkActionResponse
+from airflow_client.client.models.bulk_body_bulk_task_instance_body import BulkBodyBulkTaskInstanceBody
+from airflow_client.client.models.bulk_body_bulk_task_instance_body_actions_inner import BulkBodyBulkTaskInstanceBodyActionsInner
 from airflow_client.client.models.bulk_body_connection_body import BulkBodyConnectionBody
 from airflow_client.client.models.bulk_body_connection_body_actions_inner import BulkBodyConnectionBodyActionsInner
 from airflow_client.client.models.bulk_body_pool_body import BulkBodyPoolBody
 from airflow_client.client.models.bulk_body_pool_body_actions_inner import BulkBodyPoolBodyActionsInner
 from airflow_client.client.models.bulk_body_variable_body import BulkBodyVariableBody
 from airflow_client.client.models.bulk_body_variable_body_actions_inner import BulkBodyVariableBodyActionsInner
+from airflow_client.client.models.bulk_create_action_bulk_task_instance_body import BulkCreateActionBulkTaskInstanceBody
 from airflow_client.client.models.bulk_create_action_connection_body import BulkCreateActionConnectionBody
 from airflow_client.client.models.bulk_create_action_pool_body import BulkCreateActionPoolBody
 from airflow_client.client.models.bulk_create_action_variable_body import BulkCreateActionVariableBody
+from airflow_client.client.models.bulk_delete_action_bulk_task_instance_body import BulkDeleteActionBulkTaskInstanceBody
+from airflow_client.client.models.bulk_delete_action_bulk_task_instance_body_entities_inner import BulkDeleteActionBulkTaskInstanceBodyEntitiesInner
 from airflow_client.client.models.bulk_delete_action_connection_body import BulkDeleteActionConnectionBody
 from airflow_client.client.models.bulk_delete_action_pool_body import BulkDeleteActionPoolBody
 from airflow_client.client.models.bulk_delete_action_variable_body import BulkDeleteActionVariableBody
 from airflow_client.client.models.bulk_response import BulkResponse
+from airflow_client.client.models.bulk_task_instance_body import BulkTaskInstanceBody
+from airflow_client.client.models.bulk_update_action_bulk_task_instance_body import BulkUpdateActionBulkTaskInstanceBody
 from airflow_client.client.models.bulk_update_action_connection_body import BulkUpdateActionConnectionBody
 from airflow_client.client.models.bulk_update_action_pool_body import BulkUpdateActionPoolBody
 from airflow_client.client.models.bulk_update_action_variable_body import BulkUpdateActionVariableBody
@@ -130,9 +138,15 @@ from airflow_client.client.models.dry_run_backfill_collection_response import Dr
 from airflow_client.client.models.dry_run_backfill_response import DryRunBackfillResponse
 from airflow_client.client.models.event_log_collection_response import EventLogCollectionResponse
 from airflow_client.client.models.event_log_response import EventLogResponse
+from airflow_client.client.models.external_log_url_response import ExternalLogUrlResponse
+from airflow_client.client.models.external_view_response import ExternalViewResponse
 from airflow_client.client.models.extra_link_collection_response import ExtraLinkCollectionResponse
 from airflow_client.client.models.fast_api_app_response import FastAPIAppResponse
 from airflow_client.client.models.fast_api_root_middleware_response import FastAPIRootMiddlewareResponse
+from airflow_client.client.models.hitl_detail import HITLDetail
+from airflow_client.client.models.hitl_detail_collection import HITLDetailCollection
+from airflow_client.client.models.hitl_detail_response import HITLDetailResponse
+from airflow_client.client.models.hitl_user import HITLUser
 from airflow_client.client.models.http_exception_response import HTTPExceptionResponse
 from airflow_client.client.models.http_validation_error import HTTPValidationError
 from airflow_client.client.models.health_info_response import HealthInfoResponse
@@ -140,8 +154,11 @@ from airflow_client.client.models.import_error_collection_response import Import
 from airflow_client.client.models.import_error_response import ImportErrorResponse
 from airflow_client.client.models.job_collection_response import JobCollectionResponse
 from airflow_client.client.models.job_response import JobResponse
+from airflow_client.client.models.last_asset_event_response import LastAssetEventResponse
 from airflow_client.client.models.patch_task_instance_body import PatchTaskInstanceBody
 from airflow_client.client.models.plugin_collection_response import PluginCollectionResponse
+from airflow_client.client.models.plugin_import_error_collection_response import PluginImportErrorCollectionResponse
+from airflow_client.client.models.plugin_import_error_response import PluginImportErrorResponse
 from airflow_client.client.models.plugin_response import PluginResponse
 from airflow_client.client.models.pool_body import PoolBody
 from airflow_client.client.models.pool_collection_response import PoolCollectionResponse
@@ -151,6 +168,7 @@ from airflow_client.client.models.provider_collection_response import ProviderCo
 from airflow_client.client.models.provider_response import ProviderResponse
 from airflow_client.client.models.queued_event_collection_response import QueuedEventCollectionResponse
 from airflow_client.client.models.queued_event_response import QueuedEventResponse
+from airflow_client.client.models.react_app_response import ReactAppResponse
 from airflow_client.client.models.reprocess_behavior import ReprocessBehavior
 from airflow_client.client.models.response_clear_dag_run import ResponseClearDagRun
 from airflow_client.client.models.response_get_xcom_entry import ResponseGetXcomEntry
@@ -159,6 +177,7 @@ from airflow_client.client.models.structured_log_message import StructuredLogMes
 from airflow_client.client.models.task_collection_response import TaskCollectionResponse
 from airflow_client.client.models.task_dependency_collection_response import TaskDependencyCollectionResponse
 from airflow_client.client.models.task_dependency_response import TaskDependencyResponse
+from airflow_client.client.models.task_inlet_asset_reference import TaskInletAssetReference
 from airflow_client.client.models.task_instance_collection_response import TaskInstanceCollectionResponse
 from airflow_client.client.models.task_instance_history_collection_response import TaskInstanceHistoryCollectionResponse
 from airflow_client.client.models.task_instance_history_response import TaskInstanceHistoryResponse
@@ -172,6 +191,7 @@ from airflow_client.client.models.time_delta import TimeDelta
 from airflow_client.client.models.trigger_dag_run_post_body import TriggerDAGRunPostBody
 from airflow_client.client.models.trigger_response import TriggerResponse
 from airflow_client.client.models.triggerer_info_response import TriggererInfoResponse
+from airflow_client.client.models.update_hitl_detail_payload import UpdateHITLDetailPayload
 from airflow_client.client.models.validation_error import ValidationError
 from airflow_client.client.models.validation_error_loc_inner import ValidationErrorLocInner
 from airflow_client.client.models.value import Value

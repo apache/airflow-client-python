@@ -35,21 +35,25 @@ class TestXComResponseString(unittest.TestCase):
         model = XComResponseString()
         if include_optional:
             return XComResponseString(
+                dag_display_name = '',
                 dag_id = '',
                 key = '',
                 logical_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 map_index = 56,
                 run_id = '',
+                task_display_name = '',
                 task_id = '',
                 timestamp = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 value = ''
             )
         else:
             return XComResponseString(
+                dag_display_name = '',
                 dag_id = '',
                 key = '',
                 map_index = 56,
                 run_id = '',
+                task_display_name = '',
                 task_id = '',
                 timestamp = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
         )

@@ -27,9 +27,10 @@ class DagStatsResponse(BaseModel):
     """
     DAG Stats serializer for responses.
     """ # noqa: E501
+    dag_display_name: StrictStr
     dag_id: StrictStr
     stats: List[DagStatsStateResponse]
-    __properties: ClassVar[List[str]] = ["dag_id", "stats"]
+    __properties: ClassVar[List[str]] = ["dag_display_name", "dag_id", "stats"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -89,6 +90,7 @@ class DagStatsResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "dag_display_name": obj.get("dag_display_name"),
             "dag_id": obj.get("dag_id"),
             "stats": [DagStatsStateResponse.from_dict(_item) for _item in obj["stats"]] if obj.get("stats") is not None else None
         })

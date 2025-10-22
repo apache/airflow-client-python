@@ -26,9 +26,10 @@ class DagTagResponse(BaseModel):
     """
     DAG Tag serializer for responses.
     """ # noqa: E501
+    dag_display_name: StrictStr
     dag_id: StrictStr
     name: StrictStr
-    __properties: ClassVar[List[str]] = ["dag_id", "name"]
+    __properties: ClassVar[List[str]] = ["dag_display_name", "dag_id", "name"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -81,6 +82,7 @@ class DagTagResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "dag_display_name": obj.get("dag_display_name"),
             "dag_id": obj.get("dag_id"),
             "name": obj.get("name")
         })

@@ -27,4 +27,5 @@ from airflow_client.client.api.task_instance_api import TaskInstanceApi
 from airflow_client.client.api.variable_api import VariableApi
 from airflow_client.client.api.version_api import VersionApi
 from airflow_client.client.api.x_com_api import XComApi
+from airflow_client.client.api.experimental_api import ExperimentalApi
 

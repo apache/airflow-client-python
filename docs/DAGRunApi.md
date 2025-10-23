@@ -12,6 +12,7 @@ Method | HTTP request | Description
 [**get_upstream_asset_events**](DagRunApi.md#get_upstream_asset_events) | **GET** /api/v2/dags/{dag_id}/dagRuns/{dag_run_id}/upstreamAssetEvents | Get Upstream Asset Events
 [**patch_dag_run**](DagRunApi.md#patch_dag_run) | **PATCH** /api/v2/dags/{dag_id}/dagRuns/{dag_run_id} | Patch Dag Run
 [**trigger_dag_run**](DagRunApi.md#trigger_dag_run) | **POST** /api/v2/dags/{dag_id}/dagRuns | Trigger Dag Run
+[**wait_dag_run_until_finished**](DagRunApi.md#wait_dag_run_until_finished) | **GET** /api/v2/dags/{dag_id}/dagRuns/{dag_run_id}/wait | Experimental: Wait for a dag run to complete, and return task results if requested.
 
 
 # **clear_dag_run**
@@ -22,6 +23,7 @@ Clear Dag Run
 ### Example
 
 * OAuth Authentication (OAuth2PasswordBearer):
+* Bearer Authentication (HTTPBearer):
 
 ```python
 import airflow_client.client
@@ -42,6 +44,11 @@ configuration = airflow_client.client.Configuration(
 # satisfies your auth use case.
 
 configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure Bearer authorization: HTTPBearer
+configuration = airflow_client.client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with airflow_client.client.ApiClient(configuration) as api_client:
@@ -77,7 +84,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 
@@ -106,6 +113,7 @@ Delete a DAG Run entry.
 ### Example
 
 * OAuth Authentication (OAuth2PasswordBearer):
+* Bearer Authentication (HTTPBearer):
 
 ```python
 import airflow_client.client
@@ -124,6 +132,11 @@ configuration = airflow_client.client.Configuration(
 # satisfies your auth use case.
 
 configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure Bearer authorization: HTTPBearer
+configuration = airflow_client.client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with airflow_client.client.ApiClient(configuration) as api_client:
@@ -155,7 +168,7 @@ void (empty response body)
 
 ### Authorization
 
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 
@@ -183,6 +196,7 @@ Get Dag Run
 ### Example
 
 * OAuth Authentication (OAuth2PasswordBearer):
+* Bearer Authentication (HTTPBearer):
 
 ```python
 import airflow_client.client
@@ -202,6 +216,11 @@ configuration = airflow_client.client.Configuration(
 # satisfies your auth use case.
 
 configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure Bearer authorization: HTTPBearer
+configuration = airflow_client.client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with airflow_client.client.ApiClient(configuration) as api_client:
@@ -235,7 +254,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 
@@ -255,7 +274,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_dag_runs**
-> DAGRunCollectionResponse get_dag_runs(dag_id, limit=limit, offset=offset, run_after_gte=run_after_gte, run_after_lte=run_after_lte, logical_date_gte=logical_date_gte, logical_date_lte=logical_date_lte, start_date_gte=start_date_gte, start_date_lte=start_date_lte, end_date_gte=end_date_gte, end_date_lte=end_date_lte, updated_at_gte=updated_at_gte, updated_at_lte=updated_at_lte, run_type=run_type, state=state, order_by=order_by)
+> DAGRunCollectionResponse get_dag_runs(dag_id, limit=limit, offset=offset, run_after_gte=run_after_gte, run_after_gt=run_after_gt, run_after_lte=run_after_lte, run_after_lt=run_after_lt, logical_date_gte=logical_date_gte, logical_date_gt=logical_date_gt, logical_date_lte=logical_date_lte, logical_date_lt=logical_date_lt, start_date_gte=start_date_gte, start_date_gt=start_date_gt, start_date_lte=start_date_lte, start_date_lt=start_date_lt, end_date_gte=end_date_gte, end_date_gt=end_date_gt, end_date_lte=end_date_lte, end_date_lt=end_date_lt, updated_at_gte=updated_at_gte, updated_at_gt=updated_at_gt, updated_at_lte=updated_at_lte, updated_at_lt=updated_at_lt, run_type=run_type, state=state, dag_version=dag_version, order_by=order_by, run_id_pattern=run_id_pattern, triggering_user_name_pattern=triggering_user_name_pattern)
 
 Get Dag Runs
 
@@ -266,6 +285,7 @@ This endpoint allows specifying `~` as the dag_id to retrieve Dag Runs for all D
 ### Example
 
 * OAuth Authentication (OAuth2PasswordBearer):
+* Bearer Authentication (HTTPBearer):
 
 ```python
 import airflow_client.client
@@ -286,6 +306,11 @@ configuration = airflow_client.client.Configuration(
 
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
+# Configure Bearer authorization: HTTPBearer
+configuration = airflow_client.client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with airflow_client.client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -294,22 +319,35 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     limit = 50 # int |  (optional) (default to 50)
     offset = 0 # int |  (optional) (default to 0)
     run_after_gte = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
+    run_after_gt = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
     run_after_lte = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
+    run_after_lt = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
     logical_date_gte = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
+    logical_date_gt = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
     logical_date_lte = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
+    logical_date_lt = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
     start_date_gte = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
+    start_date_gt = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
     start_date_lte = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
+    start_date_lt = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
     end_date_gte = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
+    end_date_gt = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
     end_date_lte = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
+    end_date_lt = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
     updated_at_gte = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
+    updated_at_gt = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
     updated_at_lte = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
+    updated_at_lt = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
     run_type = ['run_type_example'] # List[str] |  (optional)
     state = ['state_example'] # List[str] |  (optional)
-    order_by = 'id' # str |  (optional) (default to 'id')
+    dag_version = [56] # List[int] |  (optional)
+    order_by = [id] # List[str] |  (optional) (default to [id])
+    run_id_pattern = 'run_id_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported. (optional)
+    triggering_user_name_pattern = 'triggering_user_name_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported. (optional)
 
     try:
         # Get Dag Runs
-        api_response = api_instance.get_dag_runs(dag_id, limit=limit, offset=offset, run_after_gte=run_after_gte, run_after_lte=run_after_lte, logical_date_gte=logical_date_gte, logical_date_lte=logical_date_lte, start_date_gte=start_date_gte, start_date_lte=start_date_lte, end_date_gte=end_date_gte, end_date_lte=end_date_lte, updated_at_gte=updated_at_gte, updated_at_lte=updated_at_lte, run_type=run_type, state=state, order_by=order_by)
+        api_response = api_instance.get_dag_runs(dag_id, limit=limit, offset=offset, run_after_gte=run_after_gte, run_after_gt=run_after_gt, run_after_lte=run_after_lte, run_after_lt=run_after_lt, logical_date_gte=logical_date_gte, logical_date_gt=logical_date_gt, logical_date_lte=logical_date_lte, logical_date_lt=logical_date_lt, start_date_gte=start_date_gte, start_date_gt=start_date_gt, start_date_lte=start_date_lte, start_date_lt=start_date_lt, end_date_gte=end_date_gte, end_date_gt=end_date_gt, end_date_lte=end_date_lte, end_date_lt=end_date_lt, updated_at_gte=updated_at_gte, updated_at_gt=updated_at_gt, updated_at_lte=updated_at_lte, updated_at_lt=updated_at_lt, run_type=run_type, state=state, dag_version=dag_version, order_by=order_by, run_id_pattern=run_id_pattern, triggering_user_name_pattern=triggering_user_name_pattern)
         print("The response of DagRunApi->get_dag_runs:\n")
         pprint(api_response)
     except Exception as e:
@@ -327,18 +365,31 @@ Name | Type | Description  | Notes
  **limit** | **int**|  | [optional] [default to 50]
  **offset** | **int**|  | [optional] [default to 0]
  **run_after_gte** | **datetime**|  | [optional] 
+ **run_after_gt** | **datetime**|  | [optional] 
  **run_after_lte** | **datetime**|  | [optional] 
+ **run_after_lt** | **datetime**|  | [optional] 
  **logical_date_gte** | **datetime**|  | [optional] 
+ **logical_date_gt** | **datetime**|  | [optional] 
  **logical_date_lte** | **datetime**|  | [optional] 
+ **logical_date_lt** | **datetime**|  | [optional] 
  **start_date_gte** | **datetime**|  | [optional] 
+ **start_date_gt** | **datetime**|  | [optional] 
  **start_date_lte** | **datetime**|  | [optional] 
+ **start_date_lt** | **datetime**|  | [optional] 
  **end_date_gte** | **datetime**|  | [optional] 
+ **end_date_gt** | **datetime**|  | [optional] 
  **end_date_lte** | **datetime**|  | [optional] 
+ **end_date_lt** | **datetime**|  | [optional] 
  **updated_at_gte** | **datetime**|  | [optional] 
+ **updated_at_gt** | **datetime**|  | [optional] 
  **updated_at_lte** | **datetime**|  | [optional] 
+ **updated_at_lt** | **datetime**|  | [optional] 
  **run_type** | [**List[str]**](str.md)|  | [optional] 
  **state** | [**List[str]**](str.md)|  | [optional] 
- **order_by** | **str**|  | [optional] [default to &#39;id&#39;]
+ **dag_version** | [**List[int]**](int.md)|  | [optional] 
+ **order_by** | [**List[str]**](str.md)|  | [optional] [default to [id]]
+ **run_id_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). Regular expressions are **not** supported. | [optional] 
+ **triggering_user_name_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). Regular expressions are **not** supported. | [optional] 
 
 ### Return type
 
@@ -346,7 +397,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 
@@ -375,6 +426,7 @@ Get a list of DAG Runs.
 ### Example
 
 * OAuth Authentication (OAuth2PasswordBearer):
+* Bearer Authentication (HTTPBearer):
 
 ```python
 import airflow_client.client
@@ -395,6 +447,11 @@ configuration = airflow_client.client.Configuration(
 # satisfies your auth use case.
 
 configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure Bearer authorization: HTTPBearer
+configuration = airflow_client.client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with airflow_client.client.ApiClient(configuration) as api_client:
@@ -428,7 +485,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 
@@ -457,6 +514,7 @@ If dag run is asset-triggered, return the asset events that triggered it.
 ### Example
 
 * OAuth Authentication (OAuth2PasswordBearer):
+* Bearer Authentication (HTTPBearer):
 
 ```python
 import airflow_client.client
@@ -476,6 +534,11 @@ configuration = airflow_client.client.Configuration(
 # satisfies your auth use case.
 
 configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure Bearer authorization: HTTPBearer
+configuration = airflow_client.client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with airflow_client.client.ApiClient(configuration) as api_client:
@@ -509,7 +572,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 
@@ -538,6 +601,7 @@ Modify a DAG Run.
 ### Example
 
 * OAuth Authentication (OAuth2PasswordBearer):
+* Bearer Authentication (HTTPBearer):
 
 ```python
 import airflow_client.client
@@ -558,6 +622,11 @@ configuration = airflow_client.client.Configuration(
 # satisfies your auth use case.
 
 configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure Bearer authorization: HTTPBearer
+configuration = airflow_client.client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with airflow_client.client.ApiClient(configuration) as api_client:
@@ -595,7 +664,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 
@@ -625,6 +694,7 @@ Trigger a DAG.
 ### Example
 
 * OAuth Authentication (OAuth2PasswordBearer):
+* Bearer Authentication (HTTPBearer):
 
 ```python
 import airflow_client.client
@@ -645,6 +715,11 @@ configuration = airflow_client.client.Configuration(
 # satisfies your auth use case.
 
 configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure Bearer authorization: HTTPBearer
+configuration = airflow_client.client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with airflow_client.client.ApiClient(configuration) as api_client:
@@ -678,7 +753,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 
@@ -695,6 +770,96 @@ Name | Type | Description  | Notes
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
 **409** | Conflict |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **wait_dag_run_until_finished**
+> object wait_dag_run_until_finished(dag_id, dag_run_id, interval, result=result)
+
+Experimental: Wait for a dag run to complete, and return task results if requested.
+
+🚧 This is an experimental endpoint and may change or be removed without notice.Successful response are streamed as newline-delimited JSON (NDJSON). Each line is a JSON object representing the DAG run state.
+
+### Example
+
+* OAuth Authentication (OAuth2PasswordBearer):
+* Bearer Authentication (HTTPBearer):
+
+```python
+import airflow_client.client
+from airflow_client.client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = airflow_client.client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure Bearer authorization: HTTPBearer
+configuration = airflow_client.client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with airflow_client.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = airflow_client.client.DagRunApi(api_client)
+    dag_id = 'dag_id_example' # str | 
+    dag_run_id = 'dag_run_id_example' # str | 
+    interval = 3.4 # float | Seconds to wait between dag run state checks
+    result = ['result_example'] # List[str] | Collect result XCom from task. Can be set multiple times. (optional)
+
+    try:
+        # Experimental: Wait for a dag run to complete, and return task results if requested.
+        api_response = api_instance.wait_dag_run_until_finished(dag_id, dag_run_id, interval, result=result)
+        print("The response of DagRunApi->wait_dag_run_until_finished:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DagRunApi->wait_dag_run_until_finished: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **dag_id** | **str**|  | 
+ **dag_run_id** | **str**|  | 
+ **interval** | **float**| Seconds to wait between dag run state checks | 
+ **result** | [**List[str]**](str.md)| Collect result XCom from task. Can be set multiple times. | [optional] 
+
+### Return type
+
+**object**
+
+### Authorization
+
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/x-ndjson
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
 **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

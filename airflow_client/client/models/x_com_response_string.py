@@ -27,15 +27,17 @@ class XComResponseString(BaseModel):
     """
     XCom response serializer with string return type.
     """ # noqa: E501
+    dag_display_name: StrictStr
     dag_id: StrictStr
     key: StrictStr
     logical_date: Optional[datetime] = None
     map_index: StrictInt
     run_id: StrictStr
+    task_display_name: StrictStr
     task_id: StrictStr
     timestamp: datetime
     value: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["dag_id", "key", "logical_date", "map_index", "run_id", "task_id", "timestamp", "value"]
+    __properties: ClassVar[List[str]] = ["dag_display_name", "dag_id", "key", "logical_date", "map_index", "run_id", "task_display_name", "task_id", "timestamp", "value"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -88,11 +90,13 @@ class XComResponseString(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "dag_display_name": obj.get("dag_display_name"),
             "dag_id": obj.get("dag_id"),
             "key": obj.get("key"),
             "logical_date": obj.get("logical_date"),
             "map_index": obj.get("map_index"),
             "run_id": obj.get("run_id"),
+            "task_display_name": obj.get("task_display_name"),
             "task_id": obj.get("task_id"),
             "timestamp": obj.get("timestamp"),
             "value": obj.get("value")

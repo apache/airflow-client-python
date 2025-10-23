@@ -35,6 +35,7 @@ class TestDagStatsResponse(unittest.TestCase):
         model = DagStatsResponse()
         if include_optional:
             return DagStatsResponse(
+                dag_display_name = '',
                 dag_id = '',
                 stats = [
                     airflow_client.client.models.dag_stats_state_response.DagStatsStateResponse(
@@ -44,6 +45,7 @@ class TestDagStatsResponse(unittest.TestCase):
             )
         else:
             return DagStatsResponse(
+                dag_display_name = '',
                 dag_id = '',
                 stats = [
                     airflow_client.client.models.dag_stats_state_response.DagStatsStateResponse(

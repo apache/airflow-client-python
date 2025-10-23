@@ -31,10 +31,11 @@ class DagVersionResponse(BaseModel):
     bundle_url: Optional[StrictStr] = None
     bundle_version: Optional[StrictStr] = None
     created_at: datetime
+    dag_display_name: StrictStr
     dag_id: StrictStr
     id: StrictStr
     version_number: StrictInt
-    __properties: ClassVar[List[str]] = ["bundle_name", "bundle_url", "bundle_version", "created_at", "dag_id", "id", "version_number"]
+    __properties: ClassVar[List[str]] = ["bundle_name", "bundle_url", "bundle_version", "created_at", "dag_display_name", "dag_id", "id", "version_number"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -91,6 +92,7 @@ class DagVersionResponse(BaseModel):
             "bundle_url": obj.get("bundle_url"),
             "bundle_version": obj.get("bundle_version"),
             "created_at": obj.get("created_at"),
+            "dag_display_name": obj.get("dag_display_name"),
             "dag_id": obj.get("dag_id"),
             "id": obj.get("id"),
             "version_number": obj.get("version_number")

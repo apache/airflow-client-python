@@ -18,6 +18,7 @@ Get one Dag Version.
 ### Example
 
 * OAuth Authentication (OAuth2PasswordBearer):
+* Bearer Authentication (HTTPBearer):
 
 ```python
 import airflow_client.client
@@ -37,6 +38,11 @@ configuration = airflow_client.client.Configuration(
 # satisfies your auth use case.
 
 configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure Bearer authorization: HTTPBearer
+configuration = airflow_client.client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with airflow_client.client.ApiClient(configuration) as api_client:
@@ -70,7 +76,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 
@@ -101,6 +107,7 @@ This endpoint allows specifying `~` as the dag_id to retrieve DAG Versions for a
 ### Example
 
 * OAuth Authentication (OAuth2PasswordBearer):
+* Bearer Authentication (HTTPBearer):
 
 ```python
 import airflow_client.client
@@ -121,6 +128,11 @@ configuration = airflow_client.client.Configuration(
 
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
+# Configure Bearer authorization: HTTPBearer
+configuration = airflow_client.client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with airflow_client.client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -131,7 +143,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     version_number = 56 # int |  (optional)
     bundle_name = 'bundle_name_example' # str |  (optional)
     bundle_version = 'bundle_version_example' # str |  (optional)
-    order_by = 'id' # str |  (optional) (default to 'id')
+    order_by = [id] # List[str] |  (optional) (default to [id])
 
     try:
         # Get Dag Versions
@@ -155,7 +167,7 @@ Name | Type | Description  | Notes
  **version_number** | **int**|  | [optional] 
  **bundle_name** | **str**|  | [optional] 
  **bundle_version** | **str**|  | [optional] 
- **order_by** | **str**|  | [optional] [default to &#39;id&#39;]
+ **order_by** | [**List[str]**](str.md)|  | [optional] [default to [id]]
 
 ### Return type
 
@@ -163,7 +175,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 

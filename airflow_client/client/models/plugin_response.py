@@ -17,12 +17,14 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List
 from airflow_client.client.models.app_builder_menu_item_response import AppBuilderMenuItemResponse
 from airflow_client.client.models.app_builder_view_response import AppBuilderViewResponse
+from airflow_client.client.models.external_view_response import ExternalViewResponse
 from airflow_client.client.models.fast_api_app_response import FastAPIAppResponse
 from airflow_client.client.models.fast_api_root_middleware_response import FastAPIRootMiddlewareResponse
+from airflow_client.client.models.react_app_response import ReactAppResponse
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -32,6 +34,7 @@ class PluginResponse(BaseModel):
     """ # noqa: E501
     appbuilder_menu_items: List[AppBuilderMenuItemResponse]
     appbuilder_views: List[AppBuilderViewResponse]
+    external_views: List[ExternalViewResponse] = Field(description="Aggregate all external views. Both 'external_views' and 'appbuilder_menu_items' are included here.")
     fastapi_apps: List[FastAPIAppResponse]
     fastapi_root_middlewares: List[FastAPIRootMiddlewareResponse]
     flask_blueprints: List[StrictStr]
@@ -40,9 +43,10 @@ class PluginResponse(BaseModel):
     macros: List[StrictStr]
     name: StrictStr
     operator_extra_links: List[StrictStr]
+    react_apps: List[ReactAppResponse]
     source: StrictStr
     timetables: List[StrictStr]
-    __properties: ClassVar[List[str]] = ["appbuilder_menu_items", "appbuilder_views", "fastapi_apps", "fastapi_root_middlewares", "flask_blueprints", "global_operator_extra_links", "listeners", "macros", "name", "operator_extra_links", "source", "timetables"]
+    __properties: ClassVar[List[str]] = ["appbuilder_menu_items", "appbuilder_views", "external_views", "fastapi_apps", "fastapi_root_middlewares", "flask_blueprints", "global_operator_extra_links", "listeners", "macros", "name", "operator_extra_links", "react_apps", "source", "timetables"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -97,6 +101,13 @@ class PluginResponse(BaseModel):
                 if _item_appbuilder_views:
                     _items.append(_item_appbuilder_views.to_dict())
             _dict['appbuilder_views'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in external_views (list)
+        _items = []
+        if self.external_views:
+            for _item_external_views in self.external_views:
+                if _item_external_views:
+                    _items.append(_item_external_views.to_dict())
+            _dict['external_views'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in fastapi_apps (list)
         _items = []
         if self.fastapi_apps:
@@ -111,6 +122,13 @@ class PluginResponse(BaseModel):
                 if _item_fastapi_root_middlewares:
                     _items.append(_item_fastapi_root_middlewares.to_dict())
             _dict['fastapi_root_middlewares'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in react_apps (list)
+        _items = []
+        if self.react_apps:
+            for _item_react_apps in self.react_apps:
+                if _item_react_apps:
+                    _items.append(_item_react_apps.to_dict())
+            _dict['react_apps'] = _items
         return _dict
 
     @classmethod
@@ -125,6 +143,7 @@ class PluginResponse(BaseModel):
         _obj = cls.model_validate({
             "appbuilder_menu_items": [AppBuilderMenuItemResponse.from_dict(_item) for _item in obj["appbuilder_menu_items"]] if obj.get("appbuilder_menu_items") is not None else None,
             "appbuilder_views": [AppBuilderViewResponse.from_dict(_item) for _item in obj["appbuilder_views"]] if obj.get("appbuilder_views") is not None else None,
+            "external_views": [ExternalViewResponse.from_dict(_item) for _item in obj["external_views"]] if obj.get("external_views") is not None else None,
             "fastapi_apps": [FastAPIAppResponse.from_dict(_item) for _item in obj["fastapi_apps"]] if obj.get("fastapi_apps") is not None else None,
             "fastapi_root_middlewares": [FastAPIRootMiddlewareResponse.from_dict(_item) for _item in obj["fastapi_root_middlewares"]] if obj.get("fastapi_root_middlewares") is not None else None,
             "flask_blueprints": obj.get("flask_blueprints"),
@@ -133,6 +152,7 @@ class PluginResponse(BaseModel):
             "macros": obj.get("macros"),
             "name": obj.get("name"),
             "operator_extra_links": obj.get("operator_extra_links"),
+            "react_apps": [ReactAppResponse.from_dict(_item) for _item in obj["react_apps"]] if obj.get("react_apps") is not None else None,
             "source": obj.get("source"),
             "timetables": obj.get("timetables")
         })

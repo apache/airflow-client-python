@@ -62,7 +62,7 @@ class TriggerDAGRunPostBody(BaseModel):
         if 'logical_date' not in _dict:
             _dict['logical_date'] = None
         if self.additional_properties is not None:
-            for _key, _value in self.additional_properties.items():
+            for (_key, _value) in self.additional_properties.items():
                 _dict[_key] = _value
         return _dict
 

@@ -45,6 +45,7 @@ class TestClearTaskInstancesBody(unittest.TestCase):
                 only_failed = True,
                 only_running = True,
                 reset_dag_runs = True,
+                run_on_latest_version = True,
                 start_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 task_ids = [
                     null

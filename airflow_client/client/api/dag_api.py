@@ -300,12 +300,287 @@ class DAGApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
             method='DELETE',
             resource_path='/api/v2/dags/{dag_id}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def favorite_dag(
+        self,
+        dag_id: StrictStr,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> None:
+        """Favorite Dag
+
+        Mark the DAG as favorite.
+
+        :param dag_id: (required)
+        :type dag_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._favorite_dag_serialize(
+            dag_id=dag_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '204': None,
+            '401': "HTTPExceptionResponse",
+            '403': "HTTPExceptionResponse",
+            '404': "HTTPExceptionResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def favorite_dag_with_http_info(
+        self,
+        dag_id: StrictStr,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[None]:
+        """Favorite Dag
+
+        Mark the DAG as favorite.
+
+        :param dag_id: (required)
+        :type dag_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._favorite_dag_serialize(
+            dag_id=dag_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '204': None,
+            '401': "HTTPExceptionResponse",
+            '403': "HTTPExceptionResponse",
+            '404': "HTTPExceptionResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def favorite_dag_without_preload_content(
+        self,
+        dag_id: StrictStr,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Favorite Dag
+
+        Mark the DAG as favorite.
+
+        :param dag_id: (required)
+        :type dag_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._favorite_dag_serialize(
+            dag_id=dag_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '204': None,
+            '401': "HTTPExceptionResponse",
+            '403': "HTTPExceptionResponse",
+            '404': "HTTPExceptionResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _favorite_dag_serialize(
+        self,
+        dag_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if dag_id is not None:
+            _path_params['dag_id'] = dag_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api/v2/dags/{dag_id}/favorite',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -576,7 +851,8 @@ class DAGApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -852,7 +1128,8 @@ class DAGApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -878,8 +1155,8 @@ class DAGApi:
         self,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        order_by: Optional[StrictStr] = None,
-        tag_name_pattern: Optional[StrictStr] = None,
+        order_by: Optional[List[StrictStr]] = None,
+        tag_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -902,8 +1179,8 @@ class DAGApi:
         :param offset:
         :type offset: int
         :param order_by:
-        :type order_by: str
-        :param tag_name_pattern:
+        :type order_by: List[str]
+        :param tag_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
         :type tag_name_pattern: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -960,8 +1237,8 @@ class DAGApi:
         self,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        order_by: Optional[StrictStr] = None,
-        tag_name_pattern: Optional[StrictStr] = None,
+        order_by: Optional[List[StrictStr]] = None,
+        tag_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -984,8 +1261,8 @@ class DAGApi:
         :param offset:
         :type offset: int
         :param order_by:
-        :type order_by: str
-        :param tag_name_pattern:
+        :type order_by: List[str]
+        :param tag_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
         :type tag_name_pattern: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1042,8 +1319,8 @@ class DAGApi:
         self,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        order_by: Optional[StrictStr] = None,
-        tag_name_pattern: Optional[StrictStr] = None,
+        order_by: Optional[List[StrictStr]] = None,
+        tag_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1066,8 +1343,8 @@ class DAGApi:
         :param offset:
         :type offset: int
         :param order_by:
-        :type order_by: str
-        :param tag_name_pattern:
+        :type order_by: List[str]
+        :param tag_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
         :type tag_name_pattern: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1130,6 +1407,7 @@ class DAGApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
+            'order_by': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1175,7 +1453,8 @@ class DAGApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -1204,17 +1483,27 @@ class DAGApi:
         tags: Optional[List[StrictStr]] = None,
         tags_match_mode: Optional[StrictStr] = None,
         owners: Optional[List[StrictStr]] = None,
-        dag_id_pattern: Optional[StrictStr] = None,
-        dag_display_name_pattern: Optional[StrictStr] = None,
+        dag_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        dag_display_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
         exclude_stale: Optional[StrictBool] = None,
         paused: Optional[StrictBool] = None,
+        has_import_errors: Annotated[Optional[StrictBool], Field(description="Filter Dags by having import errors. Only Dags that have been successfully loaded before will be returned.")] = None,
         last_dag_run_state: Optional[DagRunState] = None,
+        bundle_name: Optional[StrictStr] = None,
+        bundle_version: Optional[StrictStr] = None,
+        has_asset_schedule: Annotated[Optional[StrictBool], Field(description="Filter Dags with asset-based scheduling")] = None,
+        asset_dependency: Annotated[Optional[StrictStr], Field(description="Filter Dags by asset dependency (name or URI)")] = None,
         dag_run_start_date_gte: Optional[datetime] = None,
+        dag_run_start_date_gt: Optional[datetime] = None,
         dag_run_start_date_lte: Optional[datetime] = None,
+        dag_run_start_date_lt: Optional[datetime] = None,
         dag_run_end_date_gte: Optional[datetime] = None,
+        dag_run_end_date_gt: Optional[datetime] = None,
         dag_run_end_date_lte: Optional[datetime] = None,
+        dag_run_end_date_lt: Optional[datetime] = None,
         dag_run_state: Optional[List[StrictStr]] = None,
-        order_by: Optional[StrictStr] = None,
+        order_by: Optional[List[StrictStr]] = None,
+        is_favorite: Optional[StrictBool] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1242,28 +1531,48 @@ class DAGApi:
         :type tags_match_mode: str
         :param owners:
         :type owners: List[str]
-        :param dag_id_pattern:
+        :param dag_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
         :type dag_id_pattern: str
-        :param dag_display_name_pattern:
+        :param dag_display_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
         :type dag_display_name_pattern: str
         :param exclude_stale:
         :type exclude_stale: bool
         :param paused:
         :type paused: bool
+        :param has_import_errors: Filter Dags by having import errors. Only Dags that have been successfully loaded before will be returned.
+        :type has_import_errors: bool
         :param last_dag_run_state:
         :type last_dag_run_state: DagRunState
+        :param bundle_name:
+        :type bundle_name: str
+        :param bundle_version:
+        :type bundle_version: str
+        :param has_asset_schedule: Filter Dags with asset-based scheduling
+        :type has_asset_schedule: bool
+        :param asset_dependency: Filter Dags by asset dependency (name or URI)
+        :type asset_dependency: str
         :param dag_run_start_date_gte:
         :type dag_run_start_date_gte: datetime
+        :param dag_run_start_date_gt:
+        :type dag_run_start_date_gt: datetime
         :param dag_run_start_date_lte:
         :type dag_run_start_date_lte: datetime
+        :param dag_run_start_date_lt:
+        :type dag_run_start_date_lt: datetime
         :param dag_run_end_date_gte:
         :type dag_run_end_date_gte: datetime
+        :param dag_run_end_date_gt:
+        :type dag_run_end_date_gt: datetime
         :param dag_run_end_date_lte:
         :type dag_run_end_date_lte: datetime
+        :param dag_run_end_date_lt:
+        :type dag_run_end_date_lt: datetime
         :param dag_run_state:
         :type dag_run_state: List[str]
         :param order_by:
-        :type order_by: str
+        :type order_by: List[str]
+        :param is_favorite:
+        :type is_favorite: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1296,13 +1605,23 @@ class DAGApi:
             dag_display_name_pattern=dag_display_name_pattern,
             exclude_stale=exclude_stale,
             paused=paused,
+            has_import_errors=has_import_errors,
             last_dag_run_state=last_dag_run_state,
+            bundle_name=bundle_name,
+            bundle_version=bundle_version,
+            has_asset_schedule=has_asset_schedule,
+            asset_dependency=asset_dependency,
             dag_run_start_date_gte=dag_run_start_date_gte,
+            dag_run_start_date_gt=dag_run_start_date_gt,
             dag_run_start_date_lte=dag_run_start_date_lte,
+            dag_run_start_date_lt=dag_run_start_date_lt,
             dag_run_end_date_gte=dag_run_end_date_gte,
+            dag_run_end_date_gt=dag_run_end_date_gt,
             dag_run_end_date_lte=dag_run_end_date_lte,
+            dag_run_end_date_lt=dag_run_end_date_lt,
             dag_run_state=dag_run_state,
             order_by=order_by,
+            is_favorite=is_favorite,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1334,17 +1653,27 @@ class DAGApi:
         tags: Optional[List[StrictStr]] = None,
         tags_match_mode: Optional[StrictStr] = None,
         owners: Optional[List[StrictStr]] = None,
-        dag_id_pattern: Optional[StrictStr] = None,
-        dag_display_name_pattern: Optional[StrictStr] = None,
+        dag_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        dag_display_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
         exclude_stale: Optional[StrictBool] = None,
         paused: Optional[StrictBool] = None,
+        has_import_errors: Annotated[Optional[StrictBool], Field(description="Filter Dags by having import errors. Only Dags that have been successfully loaded before will be returned.")] = None,
         last_dag_run_state: Optional[DagRunState] = None,
+        bundle_name: Optional[StrictStr] = None,
+        bundle_version: Optional[StrictStr] = None,
+        has_asset_schedule: Annotated[Optional[StrictBool], Field(description="Filter Dags with asset-based scheduling")] = None,
+        asset_dependency: Annotated[Optional[StrictStr], Field(description="Filter Dags by asset dependency (name or URI)")] = None,
         dag_run_start_date_gte: Optional[datetime] = None,
+        dag_run_start_date_gt: Optional[datetime] = None,
         dag_run_start_date_lte: Optional[datetime] = None,
+        dag_run_start_date_lt: Optional[datetime] = None,
         dag_run_end_date_gte: Optional[datetime] = None,
+        dag_run_end_date_gt: Optional[datetime] = None,
         dag_run_end_date_lte: Optional[datetime] = None,
+        dag_run_end_date_lt: Optional[datetime] = None,
         dag_run_state: Optional[List[StrictStr]] = None,
-        order_by: Optional[StrictStr] = None,
+        order_by: Optional[List[StrictStr]] = None,
+        is_favorite: Optional[StrictBool] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1372,28 +1701,48 @@ class DAGApi:
         :type tags_match_mode: str
         :param owners:
         :type owners: List[str]
-        :param dag_id_pattern:
+        :param dag_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
         :type dag_id_pattern: str
-        :param dag_display_name_pattern:
+        :param dag_display_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
         :type dag_display_name_pattern: str
         :param exclude_stale:
         :type exclude_stale: bool
         :param paused:
         :type paused: bool
+        :param has_import_errors: Filter Dags by having import errors. Only Dags that have been successfully loaded before will be returned.
+        :type has_import_errors: bool
         :param last_dag_run_state:
         :type last_dag_run_state: DagRunState
+        :param bundle_name:
+        :type bundle_name: str
+        :param bundle_version:
+        :type bundle_version: str
+        :param has_asset_schedule: Filter Dags with asset-based scheduling
+        :type has_asset_schedule: bool
+        :param asset_dependency: Filter Dags by asset dependency (name or URI)
+        :type asset_dependency: str
         :param dag_run_start_date_gte:
         :type dag_run_start_date_gte: datetime
+        :param dag_run_start_date_gt:
+        :type dag_run_start_date_gt: datetime
         :param dag_run_start_date_lte:
         :type dag_run_start_date_lte: datetime
+        :param dag_run_start_date_lt:
+        :type dag_run_start_date_lt: datetime
         :param dag_run_end_date_gte:
         :type dag_run_end_date_gte: datetime
+        :param dag_run_end_date_gt:
+        :type dag_run_end_date_gt: datetime
         :param dag_run_end_date_lte:
         :type dag_run_end_date_lte: datetime
+        :param dag_run_end_date_lt:
+        :type dag_run_end_date_lt: datetime
         :param dag_run_state:
         :type dag_run_state: List[str]
         :param order_by:
-        :type order_by: str
+        :type order_by: List[str]
+        :param is_favorite:
+        :type is_favorite: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1426,13 +1775,23 @@ class DAGApi:
             dag_display_name_pattern=dag_display_name_pattern,
             exclude_stale=exclude_stale,
             paused=paused,
+            has_import_errors=has_import_errors,
             last_dag_run_state=last_dag_run_state,
+            bundle_name=bundle_name,
+            bundle_version=bundle_version,
+            has_asset_schedule=has_asset_schedule,
+            asset_dependency=asset_dependency,
             dag_run_start_date_gte=dag_run_start_date_gte,
+            dag_run_start_date_gt=dag_run_start_date_gt,
             dag_run_start_date_lte=dag_run_start_date_lte,
+            dag_run_start_date_lt=dag_run_start_date_lt,
             dag_run_end_date_gte=dag_run_end_date_gte,
+            dag_run_end_date_gt=dag_run_end_date_gt,
             dag_run_end_date_lte=dag_run_end_date_lte,
+            dag_run_end_date_lt=dag_run_end_date_lt,
             dag_run_state=dag_run_state,
             order_by=order_by,
+            is_favorite=is_favorite,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1464,17 +1823,27 @@ class DAGApi:
         tags: Optional[List[StrictStr]] = None,
         tags_match_mode: Optional[StrictStr] = None,
         owners: Optional[List[StrictStr]] = None,
-        dag_id_pattern: Optional[StrictStr] = None,
-        dag_display_name_pattern: Optional[StrictStr] = None,
+        dag_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        dag_display_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
         exclude_stale: Optional[StrictBool] = None,
         paused: Optional[StrictBool] = None,
+        has_import_errors: Annotated[Optional[StrictBool], Field(description="Filter Dags by having import errors. Only Dags that have been successfully loaded before will be returned.")] = None,
         last_dag_run_state: Optional[DagRunState] = None,
+        bundle_name: Optional[StrictStr] = None,
+        bundle_version: Optional[StrictStr] = None,
+        has_asset_schedule: Annotated[Optional[StrictBool], Field(description="Filter Dags with asset-based scheduling")] = None,
+        asset_dependency: Annotated[Optional[StrictStr], Field(description="Filter Dags by asset dependency (name or URI)")] = None,
         dag_run_start_date_gte: Optional[datetime] = None,
+        dag_run_start_date_gt: Optional[datetime] = None,
         dag_run_start_date_lte: Optional[datetime] = None,
+        dag_run_start_date_lt: Optional[datetime] = None,
         dag_run_end_date_gte: Optional[datetime] = None,
+        dag_run_end_date_gt: Optional[datetime] = None,
         dag_run_end_date_lte: Optional[datetime] = None,
+        dag_run_end_date_lt: Optional[datetime] = None,
         dag_run_state: Optional[List[StrictStr]] = None,
-        order_by: Optional[StrictStr] = None,
+        order_by: Optional[List[StrictStr]] = None,
+        is_favorite: Optional[StrictBool] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1502,28 +1871,48 @@ class DAGApi:
         :type tags_match_mode: str
         :param owners:
         :type owners: List[str]
-        :param dag_id_pattern:
+        :param dag_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
         :type dag_id_pattern: str
-        :param dag_display_name_pattern:
+        :param dag_display_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
         :type dag_display_name_pattern: str
         :param exclude_stale:
         :type exclude_stale: bool
         :param paused:
         :type paused: bool
+        :param has_import_errors: Filter Dags by having import errors. Only Dags that have been successfully loaded before will be returned.
+        :type has_import_errors: bool
         :param last_dag_run_state:
         :type last_dag_run_state: DagRunState
+        :param bundle_name:
+        :type bundle_name: str
+        :param bundle_version:
+        :type bundle_version: str
+        :param has_asset_schedule: Filter Dags with asset-based scheduling
+        :type has_asset_schedule: bool
+        :param asset_dependency: Filter Dags by asset dependency (name or URI)
+        :type asset_dependency: str
         :param dag_run_start_date_gte:
         :type dag_run_start_date_gte: datetime
+        :param dag_run_start_date_gt:
+        :type dag_run_start_date_gt: datetime
         :param dag_run_start_date_lte:
         :type dag_run_start_date_lte: datetime
+        :param dag_run_start_date_lt:
+        :type dag_run_start_date_lt: datetime
         :param dag_run_end_date_gte:
         :type dag_run_end_date_gte: datetime
+        :param dag_run_end_date_gt:
+        :type dag_run_end_date_gt: datetime
         :param dag_run_end_date_lte:
         :type dag_run_end_date_lte: datetime
+        :param dag_run_end_date_lt:
+        :type dag_run_end_date_lt: datetime
         :param dag_run_state:
         :type dag_run_state: List[str]
         :param order_by:
-        :type order_by: str
+        :type order_by: List[str]
+        :param is_favorite:
+        :type is_favorite: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1556,13 +1945,23 @@ class DAGApi:
             dag_display_name_pattern=dag_display_name_pattern,
             exclude_stale=exclude_stale,
             paused=paused,
+            has_import_errors=has_import_errors,
             last_dag_run_state=last_dag_run_state,
+            bundle_name=bundle_name,
+            bundle_version=bundle_version,
+            has_asset_schedule=has_asset_schedule,
+            asset_dependency=asset_dependency,
             dag_run_start_date_gte=dag_run_start_date_gte,
+            dag_run_start_date_gt=dag_run_start_date_gt,
             dag_run_start_date_lte=dag_run_start_date_lte,
+            dag_run_start_date_lt=dag_run_start_date_lt,
             dag_run_end_date_gte=dag_run_end_date_gte,
+            dag_run_end_date_gt=dag_run_end_date_gt,
             dag_run_end_date_lte=dag_run_end_date_lte,
+            dag_run_end_date_lt=dag_run_end_date_lt,
             dag_run_state=dag_run_state,
             order_by=order_by,
+            is_favorite=is_favorite,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1593,13 +1992,23 @@ class DAGApi:
         dag_display_name_pattern,
         exclude_stale,
         paused,
+        has_import_errors,
         last_dag_run_state,
+        bundle_name,
+        bundle_version,
+        has_asset_schedule,
+        asset_dependency,
         dag_run_start_date_gte,
+        dag_run_start_date_gt,
         dag_run_start_date_lte,
+        dag_run_start_date_lt,
         dag_run_end_date_gte,
+        dag_run_end_date_gt,
         dag_run_end_date_lte,
+        dag_run_end_date_lt,
         dag_run_state,
         order_by,
+        is_favorite,
         _request_auth,
         _content_type,
         _headers,
@@ -1612,6 +2021,7 @@ class DAGApi:
             'tags': 'multi',
             'owners': 'multi',
             'dag_run_state': 'multi',
+            'order_by': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1661,9 +2071,29 @@ class DAGApi:
             
             _query_params.append(('paused', paused))
             
+        if has_import_errors is not None:
+            
+            _query_params.append(('has_import_errors', has_import_errors))
+            
         if last_dag_run_state is not None:
             
             _query_params.append(('last_dag_run_state', last_dag_run_state.value))
+            
+        if bundle_name is not None:
+            
+            _query_params.append(('bundle_name', bundle_name))
+            
+        if bundle_version is not None:
+            
+            _query_params.append(('bundle_version', bundle_version))
+            
+        if has_asset_schedule is not None:
+            
+            _query_params.append(('has_asset_schedule', has_asset_schedule))
+            
+        if asset_dependency is not None:
+            
+            _query_params.append(('asset_dependency', asset_dependency))
             
         if dag_run_start_date_gte is not None:
             if isinstance(dag_run_start_date_gte, datetime):
@@ -1678,6 +2108,19 @@ class DAGApi:
             else:
                 _query_params.append(('dag_run_start_date_gte', dag_run_start_date_gte))
             
+        if dag_run_start_date_gt is not None:
+            if isinstance(dag_run_start_date_gt, datetime):
+                _query_params.append(
+                    (
+                        'dag_run_start_date_gt',
+                        dag_run_start_date_gt.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('dag_run_start_date_gt', dag_run_start_date_gt))
+            
         if dag_run_start_date_lte is not None:
             if isinstance(dag_run_start_date_lte, datetime):
                 _query_params.append(
@@ -1690,6 +2133,19 @@ class DAGApi:
                 )
             else:
                 _query_params.append(('dag_run_start_date_lte', dag_run_start_date_lte))
+            
+        if dag_run_start_date_lt is not None:
+            if isinstance(dag_run_start_date_lt, datetime):
+                _query_params.append(
+                    (
+                        'dag_run_start_date_lt',
+                        dag_run_start_date_lt.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('dag_run_start_date_lt', dag_run_start_date_lt))
             
         if dag_run_end_date_gte is not None:
             if isinstance(dag_run_end_date_gte, datetime):
@@ -1704,6 +2160,19 @@ class DAGApi:
             else:
                 _query_params.append(('dag_run_end_date_gte', dag_run_end_date_gte))
             
+        if dag_run_end_date_gt is not None:
+            if isinstance(dag_run_end_date_gt, datetime):
+                _query_params.append(
+                    (
+                        'dag_run_end_date_gt',
+                        dag_run_end_date_gt.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('dag_run_end_date_gt', dag_run_end_date_gt))
+            
         if dag_run_end_date_lte is not None:
             if isinstance(dag_run_end_date_lte, datetime):
                 _query_params.append(
@@ -1717,6 +2186,19 @@ class DAGApi:
             else:
                 _query_params.append(('dag_run_end_date_lte', dag_run_end_date_lte))
             
+        if dag_run_end_date_lt is not None:
+            if isinstance(dag_run_end_date_lt, datetime):
+                _query_params.append(
+                    (
+                        'dag_run_end_date_lt',
+                        dag_run_end_date_lt.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('dag_run_end_date_lt', dag_run_end_date_lt))
+            
         if dag_run_state is not None:
             
             _query_params.append(('dag_run_state', dag_run_state))
@@ -1724,6 +2206,10 @@ class DAGApi:
         if order_by is not None:
             
             _query_params.append(('order_by', order_by))
+            
+        if is_favorite is not None:
+            
+            _query_params.append(('is_favorite', is_favorite))
             
         # process the header parameters
         # process the form parameters
@@ -1741,7 +2227,8 @@ class DAGApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -2063,7 +2550,8 @@ class DAGApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -2094,7 +2582,7 @@ class DAGApi:
         tags: Optional[List[StrictStr]] = None,
         tags_match_mode: Optional[StrictStr] = None,
         owners: Optional[List[StrictStr]] = None,
-        dag_id_pattern: Optional[StrictStr] = None,
+        dag_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
         exclude_stale: Optional[StrictBool] = None,
         paused: Optional[StrictBool] = None,
         _request_timeout: Union[
@@ -2128,7 +2616,7 @@ class DAGApi:
         :type tags_match_mode: str
         :param owners:
         :type owners: List[str]
-        :param dag_id_pattern:
+        :param dag_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
         :type dag_id_pattern: str
         :param exclude_stale:
         :type exclude_stale: bool
@@ -2202,7 +2690,7 @@ class DAGApi:
         tags: Optional[List[StrictStr]] = None,
         tags_match_mode: Optional[StrictStr] = None,
         owners: Optional[List[StrictStr]] = None,
-        dag_id_pattern: Optional[StrictStr] = None,
+        dag_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
         exclude_stale: Optional[StrictBool] = None,
         paused: Optional[StrictBool] = None,
         _request_timeout: Union[
@@ -2236,7 +2724,7 @@ class DAGApi:
         :type tags_match_mode: str
         :param owners:
         :type owners: List[str]
-        :param dag_id_pattern:
+        :param dag_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
         :type dag_id_pattern: str
         :param exclude_stale:
         :type exclude_stale: bool
@@ -2310,7 +2798,7 @@ class DAGApi:
         tags: Optional[List[StrictStr]] = None,
         tags_match_mode: Optional[StrictStr] = None,
         owners: Optional[List[StrictStr]] = None,
-        dag_id_pattern: Optional[StrictStr] = None,
+        dag_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
         exclude_stale: Optional[StrictBool] = None,
         paused: Optional[StrictBool] = None,
         _request_timeout: Union[
@@ -2344,7 +2832,7 @@ class DAGApi:
         :type tags_match_mode: str
         :param owners:
         :type owners: List[str]
-        :param dag_id_pattern:
+        :param dag_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
         :type dag_id_pattern: str
         :param exclude_stale:
         :type exclude_stale: bool
@@ -2508,12 +2996,290 @@ class DAGApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
             method='PATCH',
             resource_path='/api/v2/dags',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def unfavorite_dag(
+        self,
+        dag_id: StrictStr,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> None:
+        """Unfavorite Dag
+
+        Unmark the DAG as favorite.
+
+        :param dag_id: (required)
+        :type dag_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._unfavorite_dag_serialize(
+            dag_id=dag_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '204': None,
+            '401': "HTTPExceptionResponse",
+            '403': "HTTPExceptionResponse",
+            '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def unfavorite_dag_with_http_info(
+        self,
+        dag_id: StrictStr,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[None]:
+        """Unfavorite Dag
+
+        Unmark the DAG as favorite.
+
+        :param dag_id: (required)
+        :type dag_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._unfavorite_dag_serialize(
+            dag_id=dag_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '204': None,
+            '401': "HTTPExceptionResponse",
+            '403': "HTTPExceptionResponse",
+            '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def unfavorite_dag_without_preload_content(
+        self,
+        dag_id: StrictStr,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Unfavorite Dag
+
+        Unmark the DAG as favorite.
+
+        :param dag_id: (required)
+        :type dag_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._unfavorite_dag_serialize(
+            dag_id=dag_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '204': None,
+            '401': "HTTPExceptionResponse",
+            '403': "HTTPExceptionResponse",
+            '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _unfavorite_dag_serialize(
+        self,
+        dag_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if dag_id is not None:
+            _path_params['dag_id'] = dag_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api/v2/dags/{dag_id}/unfavorite',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

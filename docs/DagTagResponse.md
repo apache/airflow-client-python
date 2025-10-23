@@ -6,6 +6,7 @@ DAG Tag serializer for responses.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**dag_display_name** | **str** |  | 
 **dag_id** | **str** |  | 
 **name** | **str** |  | 
 

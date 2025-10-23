@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from airflow_client.client.models.clear_task_instances_body_task_ids_inner import ClearTaskInstancesBodyTaskIdsInner
 from typing import Optional, Set
@@ -38,9 +38,10 @@ class ClearTaskInstancesBody(BaseModel):
     only_failed: Optional[StrictBool] = True
     only_running: Optional[StrictBool] = False
     reset_dag_runs: Optional[StrictBool] = True
+    run_on_latest_version: Optional[StrictBool] = Field(default=False, description="(Experimental) Run on the latest bundle version of the dag after clearing the task instances.")
     start_date: Optional[datetime] = None
     task_ids: Optional[List[ClearTaskInstancesBodyTaskIdsInner]] = None
-    __properties: ClassVar[List[str]] = ["dag_run_id", "dry_run", "end_date", "include_downstream", "include_future", "include_past", "include_upstream", "only_failed", "only_running", "reset_dag_runs", "start_date", "task_ids"]
+    __properties: ClassVar[List[str]] = ["dag_run_id", "dry_run", "end_date", "include_downstream", "include_future", "include_past", "include_upstream", "only_failed", "only_running", "reset_dag_runs", "run_on_latest_version", "start_date", "task_ids"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -110,6 +111,7 @@ class ClearTaskInstancesBody(BaseModel):
             "only_failed": obj.get("only_failed") if obj.get("only_failed") is not None else True,
             "only_running": obj.get("only_running") if obj.get("only_running") is not None else False,
             "reset_dag_runs": obj.get("reset_dag_runs") if obj.get("reset_dag_runs") is not None else True,
+            "run_on_latest_version": obj.get("run_on_latest_version") if obj.get("run_on_latest_version") is not None else False,
             "start_date": obj.get("start_date"),
             "task_ids": [ClearTaskInstancesBodyTaskIdsInner.from_dict(_item) for _item in obj["task_ids"]] if obj.get("task_ids") is not None else None
         })

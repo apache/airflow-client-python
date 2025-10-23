@@ -18,10 +18,16 @@ from typing_extensions import Annotated
 
 from datetime import datetime
 from pydantic import Field, StrictBool, StrictFloat, StrictInt, StrictStr, field_validator
-from typing import List, Optional, Union
+from typing import Any, List, Optional, Union
 from typing_extensions import Annotated
+from airflow_client.client.models.bulk_body_bulk_task_instance_body import BulkBodyBulkTaskInstanceBody
+from airflow_client.client.models.bulk_response import BulkResponse
 from airflow_client.client.models.clear_task_instances_body import ClearTaskInstancesBody
+from airflow_client.client.models.external_log_url_response import ExternalLogUrlResponse
 from airflow_client.client.models.extra_link_collection_response import ExtraLinkCollectionResponse
+from airflow_client.client.models.hitl_detail import HITLDetail
+from airflow_client.client.models.hitl_detail_collection import HITLDetailCollection
+from airflow_client.client.models.hitl_detail_response import HITLDetailResponse
 from airflow_client.client.models.patch_task_instance_body import PatchTaskInstanceBody
 from airflow_client.client.models.task_dependency_collection_response import TaskDependencyCollectionResponse
 from airflow_client.client.models.task_instance_collection_response import TaskInstanceCollectionResponse
@@ -30,6 +36,7 @@ from airflow_client.client.models.task_instance_history_response import TaskInst
 from airflow_client.client.models.task_instance_response import TaskInstanceResponse
 from airflow_client.client.models.task_instances_batch_body import TaskInstancesBatchBody
 from airflow_client.client.models.task_instances_log_response import TaskInstancesLogResponse
+from airflow_client.client.models.update_hitl_detail_payload import UpdateHITLDetailPayload
 
 from airflow_client.client.api_client import ApiClient, RequestSerialized
 from airflow_client.client.api_response import ApiResponse
@@ -47,6 +54,980 @@ class TaskInstanceApi:
         if api_client is None:
             api_client = ApiClient.get_default()
         self.api_client = api_client
+
+
+    @validate_call
+    def bulk_task_instances(
+        self,
+        dag_id: StrictStr,
+        dag_run_id: StrictStr,
+        bulk_body_bulk_task_instance_body: BulkBodyBulkTaskInstanceBody,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> BulkResponse:
+        """Bulk Task Instances
+
+        Bulk update, and delete task instances.
+
+        :param dag_id: (required)
+        :type dag_id: str
+        :param dag_run_id: (required)
+        :type dag_run_id: str
+        :param bulk_body_bulk_task_instance_body: (required)
+        :type bulk_body_bulk_task_instance_body: BulkBodyBulkTaskInstanceBody
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._bulk_task_instances_serialize(
+            dag_id=dag_id,
+            dag_run_id=dag_run_id,
+            bulk_body_bulk_task_instance_body=bulk_body_bulk_task_instance_body,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "BulkResponse",
+            '401': "HTTPExceptionResponse",
+            '403': "HTTPExceptionResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def bulk_task_instances_with_http_info(
+        self,
+        dag_id: StrictStr,
+        dag_run_id: StrictStr,
+        bulk_body_bulk_task_instance_body: BulkBodyBulkTaskInstanceBody,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[BulkResponse]:
+        """Bulk Task Instances
+
+        Bulk update, and delete task instances.
+
+        :param dag_id: (required)
+        :type dag_id: str
+        :param dag_run_id: (required)
+        :type dag_run_id: str
+        :param bulk_body_bulk_task_instance_body: (required)
+        :type bulk_body_bulk_task_instance_body: BulkBodyBulkTaskInstanceBody
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._bulk_task_instances_serialize(
+            dag_id=dag_id,
+            dag_run_id=dag_run_id,
+            bulk_body_bulk_task_instance_body=bulk_body_bulk_task_instance_body,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "BulkResponse",
+            '401': "HTTPExceptionResponse",
+            '403': "HTTPExceptionResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def bulk_task_instances_without_preload_content(
+        self,
+        dag_id: StrictStr,
+        dag_run_id: StrictStr,
+        bulk_body_bulk_task_instance_body: BulkBodyBulkTaskInstanceBody,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Bulk Task Instances
+
+        Bulk update, and delete task instances.
+
+        :param dag_id: (required)
+        :type dag_id: str
+        :param dag_run_id: (required)
+        :type dag_run_id: str
+        :param bulk_body_bulk_task_instance_body: (required)
+        :type bulk_body_bulk_task_instance_body: BulkBodyBulkTaskInstanceBody
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._bulk_task_instances_serialize(
+            dag_id=dag_id,
+            dag_run_id=dag_run_id,
+            bulk_body_bulk_task_instance_body=bulk_body_bulk_task_instance_body,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "BulkResponse",
+            '401': "HTTPExceptionResponse",
+            '403': "HTTPExceptionResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _bulk_task_instances_serialize(
+        self,
+        dag_id,
+        dag_run_id,
+        bulk_body_bulk_task_instance_body,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if dag_id is not None:
+            _path_params['dag_id'] = dag_id
+        if dag_run_id is not None:
+            _path_params['dag_run_id'] = dag_run_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if bulk_body_bulk_task_instance_body is not None:
+            _body_params = bulk_body_bulk_task_instance_body
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
+        ]
+
+        return self.api_client.param_serialize(
+            method='PATCH',
+            resource_path='/api/v2/dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def delete_task_instance(
+        self,
+        dag_id: StrictStr,
+        dag_run_id: StrictStr,
+        task_id: StrictStr,
+        map_index: Optional[StrictInt] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> object:
+        """Delete Task Instance
+
+        Delete a task instance.
+
+        :param dag_id: (required)
+        :type dag_id: str
+        :param dag_run_id: (required)
+        :type dag_run_id: str
+        :param task_id: (required)
+        :type task_id: str
+        :param map_index:
+        :type map_index: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._delete_task_instance_serialize(
+            dag_id=dag_id,
+            dag_run_id=dag_run_id,
+            task_id=task_id,
+            map_index=map_index,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "object",
+            '401': "HTTPExceptionResponse",
+            '403': "HTTPExceptionResponse",
+            '404': "HTTPExceptionResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def delete_task_instance_with_http_info(
+        self,
+        dag_id: StrictStr,
+        dag_run_id: StrictStr,
+        task_id: StrictStr,
+        map_index: Optional[StrictInt] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[object]:
+        """Delete Task Instance
+
+        Delete a task instance.
+
+        :param dag_id: (required)
+        :type dag_id: str
+        :param dag_run_id: (required)
+        :type dag_run_id: str
+        :param task_id: (required)
+        :type task_id: str
+        :param map_index:
+        :type map_index: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._delete_task_instance_serialize(
+            dag_id=dag_id,
+            dag_run_id=dag_run_id,
+            task_id=task_id,
+            map_index=map_index,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "object",
+            '401': "HTTPExceptionResponse",
+            '403': "HTTPExceptionResponse",
+            '404': "HTTPExceptionResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def delete_task_instance_without_preload_content(
+        self,
+        dag_id: StrictStr,
+        dag_run_id: StrictStr,
+        task_id: StrictStr,
+        map_index: Optional[StrictInt] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Delete Task Instance
+
+        Delete a task instance.
+
+        :param dag_id: (required)
+        :type dag_id: str
+        :param dag_run_id: (required)
+        :type dag_run_id: str
+        :param task_id: (required)
+        :type task_id: str
+        :param map_index:
+        :type map_index: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._delete_task_instance_serialize(
+            dag_id=dag_id,
+            dag_run_id=dag_run_id,
+            task_id=task_id,
+            map_index=map_index,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "object",
+            '401': "HTTPExceptionResponse",
+            '403': "HTTPExceptionResponse",
+            '404': "HTTPExceptionResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _delete_task_instance_serialize(
+        self,
+        dag_id,
+        dag_run_id,
+        task_id,
+        map_index,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if dag_id is not None:
+            _path_params['dag_id'] = dag_id
+        if dag_run_id is not None:
+            _path_params['dag_run_id'] = dag_run_id
+        if task_id is not None:
+            _path_params['task_id'] = task_id
+        # process the query parameters
+        if map_index is not None:
+            
+            _query_params.append(('map_index', map_index))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
+        ]
+
+        return self.api_client.param_serialize(
+            method='DELETE',
+            resource_path='/api/v2/dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def get_external_log_url(
+        self,
+        dag_id: StrictStr,
+        dag_run_id: StrictStr,
+        task_id: StrictStr,
+        try_number: StrictInt,
+        map_index: Optional[StrictInt] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ExternalLogUrlResponse:
+        """Get External Log Url
+
+        Get external log URL for a specific task instance.
+
+        :param dag_id: (required)
+        :type dag_id: str
+        :param dag_run_id: (required)
+        :type dag_run_id: str
+        :param task_id: (required)
+        :type task_id: str
+        :param try_number: (required)
+        :type try_number: int
+        :param map_index:
+        :type map_index: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_external_log_url_serialize(
+            dag_id=dag_id,
+            dag_run_id=dag_run_id,
+            task_id=task_id,
+            try_number=try_number,
+            map_index=map_index,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ExternalLogUrlResponse",
+            '400': "HTTPExceptionResponse",
+            '401': "HTTPExceptionResponse",
+            '403': "HTTPExceptionResponse",
+            '404': "HTTPExceptionResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_external_log_url_with_http_info(
+        self,
+        dag_id: StrictStr,
+        dag_run_id: StrictStr,
+        task_id: StrictStr,
+        try_number: StrictInt,
+        map_index: Optional[StrictInt] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[ExternalLogUrlResponse]:
+        """Get External Log Url
+
+        Get external log URL for a specific task instance.
+
+        :param dag_id: (required)
+        :type dag_id: str
+        :param dag_run_id: (required)
+        :type dag_run_id: str
+        :param task_id: (required)
+        :type task_id: str
+        :param try_number: (required)
+        :type try_number: int
+        :param map_index:
+        :type map_index: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_external_log_url_serialize(
+            dag_id=dag_id,
+            dag_run_id=dag_run_id,
+            task_id=task_id,
+            try_number=try_number,
+            map_index=map_index,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ExternalLogUrlResponse",
+            '400': "HTTPExceptionResponse",
+            '401': "HTTPExceptionResponse",
+            '403': "HTTPExceptionResponse",
+            '404': "HTTPExceptionResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_external_log_url_without_preload_content(
+        self,
+        dag_id: StrictStr,
+        dag_run_id: StrictStr,
+        task_id: StrictStr,
+        try_number: StrictInt,
+        map_index: Optional[StrictInt] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get External Log Url
+
+        Get external log URL for a specific task instance.
+
+        :param dag_id: (required)
+        :type dag_id: str
+        :param dag_run_id: (required)
+        :type dag_run_id: str
+        :param task_id: (required)
+        :type task_id: str
+        :param try_number: (required)
+        :type try_number: int
+        :param map_index:
+        :type map_index: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_external_log_url_serialize(
+            dag_id=dag_id,
+            dag_run_id=dag_run_id,
+            task_id=task_id,
+            try_number=try_number,
+            map_index=map_index,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ExternalLogUrlResponse",
+            '400': "HTTPExceptionResponse",
+            '401': "HTTPExceptionResponse",
+            '403': "HTTPExceptionResponse",
+            '404': "HTTPExceptionResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_external_log_url_serialize(
+        self,
+        dag_id,
+        dag_run_id,
+        task_id,
+        try_number,
+        map_index,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if dag_id is not None:
+            _path_params['dag_id'] = dag_id
+        if dag_run_id is not None:
+            _path_params['dag_run_id'] = dag_run_id
+        if task_id is not None:
+            _path_params['task_id'] = task_id
+        if try_number is not None:
+            _path_params['try_number'] = try_number
+        # process the query parameters
+        if map_index is not None:
+            
+            _query_params.append(('map_index', map_index))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/api/v2/dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/externalLogUrl/{try_number}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
 
 
     @validate_call
@@ -348,7 +1329,8 @@ class TaskInstanceApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -370,12 +1352,946 @@ class TaskInstanceApi:
 
 
     @validate_call
+    def get_hitl_detail(
+        self,
+        dag_id: StrictStr,
+        dag_run_id: StrictStr,
+        task_id: StrictStr,
+        map_index: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> HITLDetail:
+        """Get Hitl Detail
+
+        Get a Human-in-the-loop detail of a specific task instance.
+
+        :param dag_id: (required)
+        :type dag_id: str
+        :param dag_run_id: (required)
+        :type dag_run_id: str
+        :param task_id: (required)
+        :type task_id: str
+        :param map_index: (required)
+        :type map_index: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_hitl_detail_serialize(
+            dag_id=dag_id,
+            dag_run_id=dag_run_id,
+            task_id=task_id,
+            map_index=map_index,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "HITLDetail",
+            '401': "HTTPExceptionResponse",
+            '403': "HTTPExceptionResponse",
+            '404': "HTTPExceptionResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_hitl_detail_with_http_info(
+        self,
+        dag_id: StrictStr,
+        dag_run_id: StrictStr,
+        task_id: StrictStr,
+        map_index: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[HITLDetail]:
+        """Get Hitl Detail
+
+        Get a Human-in-the-loop detail of a specific task instance.
+
+        :param dag_id: (required)
+        :type dag_id: str
+        :param dag_run_id: (required)
+        :type dag_run_id: str
+        :param task_id: (required)
+        :type task_id: str
+        :param map_index: (required)
+        :type map_index: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_hitl_detail_serialize(
+            dag_id=dag_id,
+            dag_run_id=dag_run_id,
+            task_id=task_id,
+            map_index=map_index,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "HITLDetail",
+            '401': "HTTPExceptionResponse",
+            '403': "HTTPExceptionResponse",
+            '404': "HTTPExceptionResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_hitl_detail_without_preload_content(
+        self,
+        dag_id: StrictStr,
+        dag_run_id: StrictStr,
+        task_id: StrictStr,
+        map_index: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get Hitl Detail
+
+        Get a Human-in-the-loop detail of a specific task instance.
+
+        :param dag_id: (required)
+        :type dag_id: str
+        :param dag_run_id: (required)
+        :type dag_run_id: str
+        :param task_id: (required)
+        :type task_id: str
+        :param map_index: (required)
+        :type map_index: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_hitl_detail_serialize(
+            dag_id=dag_id,
+            dag_run_id=dag_run_id,
+            task_id=task_id,
+            map_index=map_index,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "HITLDetail",
+            '401': "HTTPExceptionResponse",
+            '403': "HTTPExceptionResponse",
+            '404': "HTTPExceptionResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_hitl_detail_serialize(
+        self,
+        dag_id,
+        dag_run_id,
+        task_id,
+        map_index,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if dag_id is not None:
+            _path_params['dag_id'] = dag_id
+        if dag_run_id is not None:
+            _path_params['dag_run_id'] = dag_run_id
+        if task_id is not None:
+            _path_params['task_id'] = task_id
+        if map_index is not None:
+            _path_params['map_index'] = map_index
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/api/v2/dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/{map_index}/hitlDetails',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def get_hitl_details(
+        self,
+        dag_id: StrictStr,
+        dag_run_id: StrictStr,
+        limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
+        offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
+        order_by: Optional[List[StrictStr]] = None,
+        dag_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        task_id: Optional[StrictStr] = None,
+        task_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        map_index: Optional[StrictInt] = None,
+        state: Optional[List[StrictStr]] = None,
+        response_received: Optional[StrictBool] = None,
+        responded_by_user_id: Optional[List[StrictStr]] = None,
+        responded_by_user_name: Optional[List[StrictStr]] = None,
+        subject_search: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        body_search: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        created_at_gte: Optional[datetime] = None,
+        created_at_gt: Optional[datetime] = None,
+        created_at_lte: Optional[datetime] = None,
+        created_at_lt: Optional[datetime] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> HITLDetailCollection:
+        """Get Hitl Details
+
+        Get Human-in-the-loop details.
+
+        :param dag_id: (required)
+        :type dag_id: str
+        :param dag_run_id: (required)
+        :type dag_run_id: str
+        :param limit:
+        :type limit: int
+        :param offset:
+        :type offset: int
+        :param order_by:
+        :type order_by: List[str]
+        :param dag_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :type dag_id_pattern: str
+        :param task_id:
+        :type task_id: str
+        :param task_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :type task_id_pattern: str
+        :param map_index:
+        :type map_index: int
+        :param state:
+        :type state: List[str]
+        :param response_received:
+        :type response_received: bool
+        :param responded_by_user_id:
+        :type responded_by_user_id: List[str]
+        :param responded_by_user_name:
+        :type responded_by_user_name: List[str]
+        :param subject_search: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :type subject_search: str
+        :param body_search: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :type body_search: str
+        :param created_at_gte:
+        :type created_at_gte: datetime
+        :param created_at_gt:
+        :type created_at_gt: datetime
+        :param created_at_lte:
+        :type created_at_lte: datetime
+        :param created_at_lt:
+        :type created_at_lt: datetime
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_hitl_details_serialize(
+            dag_id=dag_id,
+            dag_run_id=dag_run_id,
+            limit=limit,
+            offset=offset,
+            order_by=order_by,
+            dag_id_pattern=dag_id_pattern,
+            task_id=task_id,
+            task_id_pattern=task_id_pattern,
+            map_index=map_index,
+            state=state,
+            response_received=response_received,
+            responded_by_user_id=responded_by_user_id,
+            responded_by_user_name=responded_by_user_name,
+            subject_search=subject_search,
+            body_search=body_search,
+            created_at_gte=created_at_gte,
+            created_at_gt=created_at_gt,
+            created_at_lte=created_at_lte,
+            created_at_lt=created_at_lt,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "HITLDetailCollection",
+            '401': "HTTPExceptionResponse",
+            '403': "HTTPExceptionResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_hitl_details_with_http_info(
+        self,
+        dag_id: StrictStr,
+        dag_run_id: StrictStr,
+        limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
+        offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
+        order_by: Optional[List[StrictStr]] = None,
+        dag_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        task_id: Optional[StrictStr] = None,
+        task_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        map_index: Optional[StrictInt] = None,
+        state: Optional[List[StrictStr]] = None,
+        response_received: Optional[StrictBool] = None,
+        responded_by_user_id: Optional[List[StrictStr]] = None,
+        responded_by_user_name: Optional[List[StrictStr]] = None,
+        subject_search: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        body_search: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        created_at_gte: Optional[datetime] = None,
+        created_at_gt: Optional[datetime] = None,
+        created_at_lte: Optional[datetime] = None,
+        created_at_lt: Optional[datetime] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[HITLDetailCollection]:
+        """Get Hitl Details
+
+        Get Human-in-the-loop details.
+
+        :param dag_id: (required)
+        :type dag_id: str
+        :param dag_run_id: (required)
+        :type dag_run_id: str
+        :param limit:
+        :type limit: int
+        :param offset:
+        :type offset: int
+        :param order_by:
+        :type order_by: List[str]
+        :param dag_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :type dag_id_pattern: str
+        :param task_id:
+        :type task_id: str
+        :param task_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :type task_id_pattern: str
+        :param map_index:
+        :type map_index: int
+        :param state:
+        :type state: List[str]
+        :param response_received:
+        :type response_received: bool
+        :param responded_by_user_id:
+        :type responded_by_user_id: List[str]
+        :param responded_by_user_name:
+        :type responded_by_user_name: List[str]
+        :param subject_search: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :type subject_search: str
+        :param body_search: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :type body_search: str
+        :param created_at_gte:
+        :type created_at_gte: datetime
+        :param created_at_gt:
+        :type created_at_gt: datetime
+        :param created_at_lte:
+        :type created_at_lte: datetime
+        :param created_at_lt:
+        :type created_at_lt: datetime
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_hitl_details_serialize(
+            dag_id=dag_id,
+            dag_run_id=dag_run_id,
+            limit=limit,
+            offset=offset,
+            order_by=order_by,
+            dag_id_pattern=dag_id_pattern,
+            task_id=task_id,
+            task_id_pattern=task_id_pattern,
+            map_index=map_index,
+            state=state,
+            response_received=response_received,
+            responded_by_user_id=responded_by_user_id,
+            responded_by_user_name=responded_by_user_name,
+            subject_search=subject_search,
+            body_search=body_search,
+            created_at_gte=created_at_gte,
+            created_at_gt=created_at_gt,
+            created_at_lte=created_at_lte,
+            created_at_lt=created_at_lt,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "HITLDetailCollection",
+            '401': "HTTPExceptionResponse",
+            '403': "HTTPExceptionResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_hitl_details_without_preload_content(
+        self,
+        dag_id: StrictStr,
+        dag_run_id: StrictStr,
+        limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
+        offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
+        order_by: Optional[List[StrictStr]] = None,
+        dag_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        task_id: Optional[StrictStr] = None,
+        task_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        map_index: Optional[StrictInt] = None,
+        state: Optional[List[StrictStr]] = None,
+        response_received: Optional[StrictBool] = None,
+        responded_by_user_id: Optional[List[StrictStr]] = None,
+        responded_by_user_name: Optional[List[StrictStr]] = None,
+        subject_search: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        body_search: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        created_at_gte: Optional[datetime] = None,
+        created_at_gt: Optional[datetime] = None,
+        created_at_lte: Optional[datetime] = None,
+        created_at_lt: Optional[datetime] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get Hitl Details
+
+        Get Human-in-the-loop details.
+
+        :param dag_id: (required)
+        :type dag_id: str
+        :param dag_run_id: (required)
+        :type dag_run_id: str
+        :param limit:
+        :type limit: int
+        :param offset:
+        :type offset: int
+        :param order_by:
+        :type order_by: List[str]
+        :param dag_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :type dag_id_pattern: str
+        :param task_id:
+        :type task_id: str
+        :param task_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :type task_id_pattern: str
+        :param map_index:
+        :type map_index: int
+        :param state:
+        :type state: List[str]
+        :param response_received:
+        :type response_received: bool
+        :param responded_by_user_id:
+        :type responded_by_user_id: List[str]
+        :param responded_by_user_name:
+        :type responded_by_user_name: List[str]
+        :param subject_search: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :type subject_search: str
+        :param body_search: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :type body_search: str
+        :param created_at_gte:
+        :type created_at_gte: datetime
+        :param created_at_gt:
+        :type created_at_gt: datetime
+        :param created_at_lte:
+        :type created_at_lte: datetime
+        :param created_at_lt:
+        :type created_at_lt: datetime
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_hitl_details_serialize(
+            dag_id=dag_id,
+            dag_run_id=dag_run_id,
+            limit=limit,
+            offset=offset,
+            order_by=order_by,
+            dag_id_pattern=dag_id_pattern,
+            task_id=task_id,
+            task_id_pattern=task_id_pattern,
+            map_index=map_index,
+            state=state,
+            response_received=response_received,
+            responded_by_user_id=responded_by_user_id,
+            responded_by_user_name=responded_by_user_name,
+            subject_search=subject_search,
+            body_search=body_search,
+            created_at_gte=created_at_gte,
+            created_at_gt=created_at_gt,
+            created_at_lte=created_at_lte,
+            created_at_lt=created_at_lt,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "HITLDetailCollection",
+            '401': "HTTPExceptionResponse",
+            '403': "HTTPExceptionResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_hitl_details_serialize(
+        self,
+        dag_id,
+        dag_run_id,
+        limit,
+        offset,
+        order_by,
+        dag_id_pattern,
+        task_id,
+        task_id_pattern,
+        map_index,
+        state,
+        response_received,
+        responded_by_user_id,
+        responded_by_user_name,
+        subject_search,
+        body_search,
+        created_at_gte,
+        created_at_gt,
+        created_at_lte,
+        created_at_lt,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+            'order_by': 'multi',
+            'state': 'multi',
+            'responded_by_user_id': 'multi',
+            'responded_by_user_name': 'multi',
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if dag_id is not None:
+            _path_params['dag_id'] = dag_id
+        if dag_run_id is not None:
+            _path_params['dag_run_id'] = dag_run_id
+        # process the query parameters
+        if limit is not None:
+            
+            _query_params.append(('limit', limit))
+            
+        if offset is not None:
+            
+            _query_params.append(('offset', offset))
+            
+        if order_by is not None:
+            
+            _query_params.append(('order_by', order_by))
+            
+        if dag_id_pattern is not None:
+            
+            _query_params.append(('dag_id_pattern', dag_id_pattern))
+            
+        if task_id is not None:
+            
+            _query_params.append(('task_id', task_id))
+            
+        if task_id_pattern is not None:
+            
+            _query_params.append(('task_id_pattern', task_id_pattern))
+            
+        if map_index is not None:
+            
+            _query_params.append(('map_index', map_index))
+            
+        if state is not None:
+            
+            _query_params.append(('state', state))
+            
+        if response_received is not None:
+            
+            _query_params.append(('response_received', response_received))
+            
+        if responded_by_user_id is not None:
+            
+            _query_params.append(('responded_by_user_id', responded_by_user_id))
+            
+        if responded_by_user_name is not None:
+            
+            _query_params.append(('responded_by_user_name', responded_by_user_name))
+            
+        if subject_search is not None:
+            
+            _query_params.append(('subject_search', subject_search))
+            
+        if body_search is not None:
+            
+            _query_params.append(('body_search', body_search))
+            
+        if created_at_gte is not None:
+            if isinstance(created_at_gte, datetime):
+                _query_params.append(
+                    (
+                        'created_at_gte',
+                        created_at_gte.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('created_at_gte', created_at_gte))
+            
+        if created_at_gt is not None:
+            if isinstance(created_at_gt, datetime):
+                _query_params.append(
+                    (
+                        'created_at_gt',
+                        created_at_gt.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('created_at_gt', created_at_gt))
+            
+        if created_at_lte is not None:
+            if isinstance(created_at_lte, datetime):
+                _query_params.append(
+                    (
+                        'created_at_lte',
+                        created_at_lte.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('created_at_lte', created_at_lte))
+            
+        if created_at_lt is not None:
+            if isinstance(created_at_lt, datetime):
+                _query_params.append(
+                    (
+                        'created_at_lt',
+                        created_at_lt.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('created_at_lt', created_at_lt))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/api/v2/dags/{dag_id}/dagRuns/{dag_run_id}/hitlDetails',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     def get_log(
         self,
         dag_id: StrictStr,
         dag_run_id: StrictStr,
         task_id: StrictStr,
-        try_number: StrictInt,
+        try_number: Annotated[int, Field(strict=True, ge=0)],
         full_content: Optional[StrictBool] = None,
         map_index: Optional[StrictInt] = None,
         token: Optional[StrictStr] = None,
@@ -474,7 +2390,7 @@ class TaskInstanceApi:
         dag_id: StrictStr,
         dag_run_id: StrictStr,
         task_id: StrictStr,
-        try_number: StrictInt,
+        try_number: Annotated[int, Field(strict=True, ge=0)],
         full_content: Optional[StrictBool] = None,
         map_index: Optional[StrictInt] = None,
         token: Optional[StrictStr] = None,
@@ -573,7 +2489,7 @@ class TaskInstanceApi:
         dag_id: StrictStr,
         dag_run_id: StrictStr,
         task_id: StrictStr,
-        try_number: StrictInt,
+        try_number: Annotated[int, Field(strict=True, ge=0)],
         full_content: Optional[StrictBool] = None,
         map_index: Optional[StrictInt] = None,
         token: Optional[StrictStr] = None,
@@ -733,7 +2649,8 @@ class TaskInstanceApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -1051,7 +2968,8 @@ class TaskInstanceApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -1366,7 +3284,8 @@ class TaskInstanceApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -1696,7 +3615,8 @@ class TaskInstanceApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -1724,25 +3644,40 @@ class TaskInstanceApi:
         dag_run_id: StrictStr,
         task_id: StrictStr,
         run_after_gte: Optional[datetime] = None,
+        run_after_gt: Optional[datetime] = None,
         run_after_lte: Optional[datetime] = None,
+        run_after_lt: Optional[datetime] = None,
         logical_date_gte: Optional[datetime] = None,
+        logical_date_gt: Optional[datetime] = None,
         logical_date_lte: Optional[datetime] = None,
+        logical_date_lt: Optional[datetime] = None,
         start_date_gte: Optional[datetime] = None,
+        start_date_gt: Optional[datetime] = None,
         start_date_lte: Optional[datetime] = None,
+        start_date_lt: Optional[datetime] = None,
         end_date_gte: Optional[datetime] = None,
+        end_date_gt: Optional[datetime] = None,
         end_date_lte: Optional[datetime] = None,
+        end_date_lt: Optional[datetime] = None,
         updated_at_gte: Optional[datetime] = None,
+        updated_at_gt: Optional[datetime] = None,
         updated_at_lte: Optional[datetime] = None,
+        updated_at_lt: Optional[datetime] = None,
         duration_gte: Optional[Union[StrictFloat, StrictInt]] = None,
+        duration_gt: Optional[Union[StrictFloat, StrictInt]] = None,
         duration_lte: Optional[Union[StrictFloat, StrictInt]] = None,
+        duration_lt: Optional[Union[StrictFloat, StrictInt]] = None,
         state: Optional[List[StrictStr]] = None,
         pool: Optional[List[StrictStr]] = None,
         queue: Optional[List[StrictStr]] = None,
         executor: Optional[List[StrictStr]] = None,
         version_number: Optional[List[StrictInt]] = None,
+        try_number: Optional[List[StrictInt]] = None,
+        operator: Optional[List[StrictStr]] = None,
+        map_index: Optional[List[StrictInt]] = None,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        order_by: Optional[StrictStr] = None,
+        order_by: Optional[List[StrictStr]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1768,28 +3703,52 @@ class TaskInstanceApi:
         :type task_id: str
         :param run_after_gte:
         :type run_after_gte: datetime
+        :param run_after_gt:
+        :type run_after_gt: datetime
         :param run_after_lte:
         :type run_after_lte: datetime
+        :param run_after_lt:
+        :type run_after_lt: datetime
         :param logical_date_gte:
         :type logical_date_gte: datetime
+        :param logical_date_gt:
+        :type logical_date_gt: datetime
         :param logical_date_lte:
         :type logical_date_lte: datetime
+        :param logical_date_lt:
+        :type logical_date_lt: datetime
         :param start_date_gte:
         :type start_date_gte: datetime
+        :param start_date_gt:
+        :type start_date_gt: datetime
         :param start_date_lte:
         :type start_date_lte: datetime
+        :param start_date_lt:
+        :type start_date_lt: datetime
         :param end_date_gte:
         :type end_date_gte: datetime
+        :param end_date_gt:
+        :type end_date_gt: datetime
         :param end_date_lte:
         :type end_date_lte: datetime
+        :param end_date_lt:
+        :type end_date_lt: datetime
         :param updated_at_gte:
         :type updated_at_gte: datetime
+        :param updated_at_gt:
+        :type updated_at_gt: datetime
         :param updated_at_lte:
         :type updated_at_lte: datetime
+        :param updated_at_lt:
+        :type updated_at_lt: datetime
         :param duration_gte:
         :type duration_gte: float
+        :param duration_gt:
+        :type duration_gt: float
         :param duration_lte:
         :type duration_lte: float
+        :param duration_lt:
+        :type duration_lt: float
         :param state:
         :type state: List[str]
         :param pool:
@@ -1800,12 +3759,18 @@ class TaskInstanceApi:
         :type executor: List[str]
         :param version_number:
         :type version_number: List[int]
+        :param try_number:
+        :type try_number: List[int]
+        :param operator:
+        :type operator: List[str]
+        :param map_index:
+        :type map_index: List[int]
         :param limit:
         :type limit: int
         :param offset:
         :type offset: int
         :param order_by:
-        :type order_by: str
+        :type order_by: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1833,22 +3798,37 @@ class TaskInstanceApi:
             dag_run_id=dag_run_id,
             task_id=task_id,
             run_after_gte=run_after_gte,
+            run_after_gt=run_after_gt,
             run_after_lte=run_after_lte,
+            run_after_lt=run_after_lt,
             logical_date_gte=logical_date_gte,
+            logical_date_gt=logical_date_gt,
             logical_date_lte=logical_date_lte,
+            logical_date_lt=logical_date_lt,
             start_date_gte=start_date_gte,
+            start_date_gt=start_date_gt,
             start_date_lte=start_date_lte,
+            start_date_lt=start_date_lt,
             end_date_gte=end_date_gte,
+            end_date_gt=end_date_gt,
             end_date_lte=end_date_lte,
+            end_date_lt=end_date_lt,
             updated_at_gte=updated_at_gte,
+            updated_at_gt=updated_at_gt,
             updated_at_lte=updated_at_lte,
+            updated_at_lt=updated_at_lt,
             duration_gte=duration_gte,
+            duration_gt=duration_gt,
             duration_lte=duration_lte,
+            duration_lt=duration_lt,
             state=state,
             pool=pool,
             queue=queue,
             executor=executor,
             version_number=version_number,
+            try_number=try_number,
+            operator=operator,
+            map_index=map_index,
             limit=limit,
             offset=offset,
             order_by=order_by,
@@ -1883,25 +3863,40 @@ class TaskInstanceApi:
         dag_run_id: StrictStr,
         task_id: StrictStr,
         run_after_gte: Optional[datetime] = None,
+        run_after_gt: Optional[datetime] = None,
         run_after_lte: Optional[datetime] = None,
+        run_after_lt: Optional[datetime] = None,
         logical_date_gte: Optional[datetime] = None,
+        logical_date_gt: Optional[datetime] = None,
         logical_date_lte: Optional[datetime] = None,
+        logical_date_lt: Optional[datetime] = None,
         start_date_gte: Optional[datetime] = None,
+        start_date_gt: Optional[datetime] = None,
         start_date_lte: Optional[datetime] = None,
+        start_date_lt: Optional[datetime] = None,
         end_date_gte: Optional[datetime] = None,
+        end_date_gt: Optional[datetime] = None,
         end_date_lte: Optional[datetime] = None,
+        end_date_lt: Optional[datetime] = None,
         updated_at_gte: Optional[datetime] = None,
+        updated_at_gt: Optional[datetime] = None,
         updated_at_lte: Optional[datetime] = None,
+        updated_at_lt: Optional[datetime] = None,
         duration_gte: Optional[Union[StrictFloat, StrictInt]] = None,
+        duration_gt: Optional[Union[StrictFloat, StrictInt]] = None,
         duration_lte: Optional[Union[StrictFloat, StrictInt]] = None,
+        duration_lt: Optional[Union[StrictFloat, StrictInt]] = None,
         state: Optional[List[StrictStr]] = None,
         pool: Optional[List[StrictStr]] = None,
         queue: Optional[List[StrictStr]] = None,
         executor: Optional[List[StrictStr]] = None,
         version_number: Optional[List[StrictInt]] = None,
+        try_number: Optional[List[StrictInt]] = None,
+        operator: Optional[List[StrictStr]] = None,
+        map_index: Optional[List[StrictInt]] = None,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        order_by: Optional[StrictStr] = None,
+        order_by: Optional[List[StrictStr]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1927,28 +3922,52 @@ class TaskInstanceApi:
         :type task_id: str
         :param run_after_gte:
         :type run_after_gte: datetime
+        :param run_after_gt:
+        :type run_after_gt: datetime
         :param run_after_lte:
         :type run_after_lte: datetime
+        :param run_after_lt:
+        :type run_after_lt: datetime
         :param logical_date_gte:
         :type logical_date_gte: datetime
+        :param logical_date_gt:
+        :type logical_date_gt: datetime
         :param logical_date_lte:
         :type logical_date_lte: datetime
+        :param logical_date_lt:
+        :type logical_date_lt: datetime
         :param start_date_gte:
         :type start_date_gte: datetime
+        :param start_date_gt:
+        :type start_date_gt: datetime
         :param start_date_lte:
         :type start_date_lte: datetime
+        :param start_date_lt:
+        :type start_date_lt: datetime
         :param end_date_gte:
         :type end_date_gte: datetime
+        :param end_date_gt:
+        :type end_date_gt: datetime
         :param end_date_lte:
         :type end_date_lte: datetime
+        :param end_date_lt:
+        :type end_date_lt: datetime
         :param updated_at_gte:
         :type updated_at_gte: datetime
+        :param updated_at_gt:
+        :type updated_at_gt: datetime
         :param updated_at_lte:
         :type updated_at_lte: datetime
+        :param updated_at_lt:
+        :type updated_at_lt: datetime
         :param duration_gte:
         :type duration_gte: float
+        :param duration_gt:
+        :type duration_gt: float
         :param duration_lte:
         :type duration_lte: float
+        :param duration_lt:
+        :type duration_lt: float
         :param state:
         :type state: List[str]
         :param pool:
@@ -1959,12 +3978,18 @@ class TaskInstanceApi:
         :type executor: List[str]
         :param version_number:
         :type version_number: List[int]
+        :param try_number:
+        :type try_number: List[int]
+        :param operator:
+        :type operator: List[str]
+        :param map_index:
+        :type map_index: List[int]
         :param limit:
         :type limit: int
         :param offset:
         :type offset: int
         :param order_by:
-        :type order_by: str
+        :type order_by: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1992,22 +4017,37 @@ class TaskInstanceApi:
             dag_run_id=dag_run_id,
             task_id=task_id,
             run_after_gte=run_after_gte,
+            run_after_gt=run_after_gt,
             run_after_lte=run_after_lte,
+            run_after_lt=run_after_lt,
             logical_date_gte=logical_date_gte,
+            logical_date_gt=logical_date_gt,
             logical_date_lte=logical_date_lte,
+            logical_date_lt=logical_date_lt,
             start_date_gte=start_date_gte,
+            start_date_gt=start_date_gt,
             start_date_lte=start_date_lte,
+            start_date_lt=start_date_lt,
             end_date_gte=end_date_gte,
+            end_date_gt=end_date_gt,
             end_date_lte=end_date_lte,
+            end_date_lt=end_date_lt,
             updated_at_gte=updated_at_gte,
+            updated_at_gt=updated_at_gt,
             updated_at_lte=updated_at_lte,
+            updated_at_lt=updated_at_lt,
             duration_gte=duration_gte,
+            duration_gt=duration_gt,
             duration_lte=duration_lte,
+            duration_lt=duration_lt,
             state=state,
             pool=pool,
             queue=queue,
             executor=executor,
             version_number=version_number,
+            try_number=try_number,
+            operator=operator,
+            map_index=map_index,
             limit=limit,
             offset=offset,
             order_by=order_by,
@@ -2042,25 +4082,40 @@ class TaskInstanceApi:
         dag_run_id: StrictStr,
         task_id: StrictStr,
         run_after_gte: Optional[datetime] = None,
+        run_after_gt: Optional[datetime] = None,
         run_after_lte: Optional[datetime] = None,
+        run_after_lt: Optional[datetime] = None,
         logical_date_gte: Optional[datetime] = None,
+        logical_date_gt: Optional[datetime] = None,
         logical_date_lte: Optional[datetime] = None,
+        logical_date_lt: Optional[datetime] = None,
         start_date_gte: Optional[datetime] = None,
+        start_date_gt: Optional[datetime] = None,
         start_date_lte: Optional[datetime] = None,
+        start_date_lt: Optional[datetime] = None,
         end_date_gte: Optional[datetime] = None,
+        end_date_gt: Optional[datetime] = None,
         end_date_lte: Optional[datetime] = None,
+        end_date_lt: Optional[datetime] = None,
         updated_at_gte: Optional[datetime] = None,
+        updated_at_gt: Optional[datetime] = None,
         updated_at_lte: Optional[datetime] = None,
+        updated_at_lt: Optional[datetime] = None,
         duration_gte: Optional[Union[StrictFloat, StrictInt]] = None,
+        duration_gt: Optional[Union[StrictFloat, StrictInt]] = None,
         duration_lte: Optional[Union[StrictFloat, StrictInt]] = None,
+        duration_lt: Optional[Union[StrictFloat, StrictInt]] = None,
         state: Optional[List[StrictStr]] = None,
         pool: Optional[List[StrictStr]] = None,
         queue: Optional[List[StrictStr]] = None,
         executor: Optional[List[StrictStr]] = None,
         version_number: Optional[List[StrictInt]] = None,
+        try_number: Optional[List[StrictInt]] = None,
+        operator: Optional[List[StrictStr]] = None,
+        map_index: Optional[List[StrictInt]] = None,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        order_by: Optional[StrictStr] = None,
+        order_by: Optional[List[StrictStr]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2086,28 +4141,52 @@ class TaskInstanceApi:
         :type task_id: str
         :param run_after_gte:
         :type run_after_gte: datetime
+        :param run_after_gt:
+        :type run_after_gt: datetime
         :param run_after_lte:
         :type run_after_lte: datetime
+        :param run_after_lt:
+        :type run_after_lt: datetime
         :param logical_date_gte:
         :type logical_date_gte: datetime
+        :param logical_date_gt:
+        :type logical_date_gt: datetime
         :param logical_date_lte:
         :type logical_date_lte: datetime
+        :param logical_date_lt:
+        :type logical_date_lt: datetime
         :param start_date_gte:
         :type start_date_gte: datetime
+        :param start_date_gt:
+        :type start_date_gt: datetime
         :param start_date_lte:
         :type start_date_lte: datetime
+        :param start_date_lt:
+        :type start_date_lt: datetime
         :param end_date_gte:
         :type end_date_gte: datetime
+        :param end_date_gt:
+        :type end_date_gt: datetime
         :param end_date_lte:
         :type end_date_lte: datetime
+        :param end_date_lt:
+        :type end_date_lt: datetime
         :param updated_at_gte:
         :type updated_at_gte: datetime
+        :param updated_at_gt:
+        :type updated_at_gt: datetime
         :param updated_at_lte:
         :type updated_at_lte: datetime
+        :param updated_at_lt:
+        :type updated_at_lt: datetime
         :param duration_gte:
         :type duration_gte: float
+        :param duration_gt:
+        :type duration_gt: float
         :param duration_lte:
         :type duration_lte: float
+        :param duration_lt:
+        :type duration_lt: float
         :param state:
         :type state: List[str]
         :param pool:
@@ -2118,12 +4197,18 @@ class TaskInstanceApi:
         :type executor: List[str]
         :param version_number:
         :type version_number: List[int]
+        :param try_number:
+        :type try_number: List[int]
+        :param operator:
+        :type operator: List[str]
+        :param map_index:
+        :type map_index: List[int]
         :param limit:
         :type limit: int
         :param offset:
         :type offset: int
         :param order_by:
-        :type order_by: str
+        :type order_by: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2151,22 +4236,37 @@ class TaskInstanceApi:
             dag_run_id=dag_run_id,
             task_id=task_id,
             run_after_gte=run_after_gte,
+            run_after_gt=run_after_gt,
             run_after_lte=run_after_lte,
+            run_after_lt=run_after_lt,
             logical_date_gte=logical_date_gte,
+            logical_date_gt=logical_date_gt,
             logical_date_lte=logical_date_lte,
+            logical_date_lt=logical_date_lt,
             start_date_gte=start_date_gte,
+            start_date_gt=start_date_gt,
             start_date_lte=start_date_lte,
+            start_date_lt=start_date_lt,
             end_date_gte=end_date_gte,
+            end_date_gt=end_date_gt,
             end_date_lte=end_date_lte,
+            end_date_lt=end_date_lt,
             updated_at_gte=updated_at_gte,
+            updated_at_gt=updated_at_gt,
             updated_at_lte=updated_at_lte,
+            updated_at_lt=updated_at_lt,
             duration_gte=duration_gte,
+            duration_gt=duration_gt,
             duration_lte=duration_lte,
+            duration_lt=duration_lt,
             state=state,
             pool=pool,
             queue=queue,
             executor=executor,
             version_number=version_number,
+            try_number=try_number,
+            operator=operator,
+            map_index=map_index,
             limit=limit,
             offset=offset,
             order_by=order_by,
@@ -2196,22 +4296,37 @@ class TaskInstanceApi:
         dag_run_id,
         task_id,
         run_after_gte,
+        run_after_gt,
         run_after_lte,
+        run_after_lt,
         logical_date_gte,
+        logical_date_gt,
         logical_date_lte,
+        logical_date_lt,
         start_date_gte,
+        start_date_gt,
         start_date_lte,
+        start_date_lt,
         end_date_gte,
+        end_date_gt,
         end_date_lte,
+        end_date_lt,
         updated_at_gte,
+        updated_at_gt,
         updated_at_lte,
+        updated_at_lt,
         duration_gte,
+        duration_gt,
         duration_lte,
+        duration_lt,
         state,
         pool,
         queue,
         executor,
         version_number,
+        try_number,
+        operator,
+        map_index,
         limit,
         offset,
         order_by,
@@ -2229,6 +4344,10 @@ class TaskInstanceApi:
             'queue': 'multi',
             'executor': 'multi',
             'version_number': 'multi',
+            'try_number': 'multi',
+            'operator': 'multi',
+            'map_index': 'multi',
+            'order_by': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -2261,6 +4380,19 @@ class TaskInstanceApi:
             else:
                 _query_params.append(('run_after_gte', run_after_gte))
             
+        if run_after_gt is not None:
+            if isinstance(run_after_gt, datetime):
+                _query_params.append(
+                    (
+                        'run_after_gt',
+                        run_after_gt.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('run_after_gt', run_after_gt))
+            
         if run_after_lte is not None:
             if isinstance(run_after_lte, datetime):
                 _query_params.append(
@@ -2273,6 +4405,19 @@ class TaskInstanceApi:
                 )
             else:
                 _query_params.append(('run_after_lte', run_after_lte))
+            
+        if run_after_lt is not None:
+            if isinstance(run_after_lt, datetime):
+                _query_params.append(
+                    (
+                        'run_after_lt',
+                        run_after_lt.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('run_after_lt', run_after_lt))
             
         if logical_date_gte is not None:
             if isinstance(logical_date_gte, datetime):
@@ -2287,6 +4432,19 @@ class TaskInstanceApi:
             else:
                 _query_params.append(('logical_date_gte', logical_date_gte))
             
+        if logical_date_gt is not None:
+            if isinstance(logical_date_gt, datetime):
+                _query_params.append(
+                    (
+                        'logical_date_gt',
+                        logical_date_gt.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('logical_date_gt', logical_date_gt))
+            
         if logical_date_lte is not None:
             if isinstance(logical_date_lte, datetime):
                 _query_params.append(
@@ -2299,6 +4457,19 @@ class TaskInstanceApi:
                 )
             else:
                 _query_params.append(('logical_date_lte', logical_date_lte))
+            
+        if logical_date_lt is not None:
+            if isinstance(logical_date_lt, datetime):
+                _query_params.append(
+                    (
+                        'logical_date_lt',
+                        logical_date_lt.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('logical_date_lt', logical_date_lt))
             
         if start_date_gte is not None:
             if isinstance(start_date_gte, datetime):
@@ -2313,6 +4484,19 @@ class TaskInstanceApi:
             else:
                 _query_params.append(('start_date_gte', start_date_gte))
             
+        if start_date_gt is not None:
+            if isinstance(start_date_gt, datetime):
+                _query_params.append(
+                    (
+                        'start_date_gt',
+                        start_date_gt.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('start_date_gt', start_date_gt))
+            
         if start_date_lte is not None:
             if isinstance(start_date_lte, datetime):
                 _query_params.append(
@@ -2325,6 +4509,19 @@ class TaskInstanceApi:
                 )
             else:
                 _query_params.append(('start_date_lte', start_date_lte))
+            
+        if start_date_lt is not None:
+            if isinstance(start_date_lt, datetime):
+                _query_params.append(
+                    (
+                        'start_date_lt',
+                        start_date_lt.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('start_date_lt', start_date_lt))
             
         if end_date_gte is not None:
             if isinstance(end_date_gte, datetime):
@@ -2339,6 +4536,19 @@ class TaskInstanceApi:
             else:
                 _query_params.append(('end_date_gte', end_date_gte))
             
+        if end_date_gt is not None:
+            if isinstance(end_date_gt, datetime):
+                _query_params.append(
+                    (
+                        'end_date_gt',
+                        end_date_gt.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('end_date_gt', end_date_gt))
+            
         if end_date_lte is not None:
             if isinstance(end_date_lte, datetime):
                 _query_params.append(
@@ -2351,6 +4561,19 @@ class TaskInstanceApi:
                 )
             else:
                 _query_params.append(('end_date_lte', end_date_lte))
+            
+        if end_date_lt is not None:
+            if isinstance(end_date_lt, datetime):
+                _query_params.append(
+                    (
+                        'end_date_lt',
+                        end_date_lt.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('end_date_lt', end_date_lt))
             
         if updated_at_gte is not None:
             if isinstance(updated_at_gte, datetime):
@@ -2365,6 +4588,19 @@ class TaskInstanceApi:
             else:
                 _query_params.append(('updated_at_gte', updated_at_gte))
             
+        if updated_at_gt is not None:
+            if isinstance(updated_at_gt, datetime):
+                _query_params.append(
+                    (
+                        'updated_at_gt',
+                        updated_at_gt.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('updated_at_gt', updated_at_gt))
+            
         if updated_at_lte is not None:
             if isinstance(updated_at_lte, datetime):
                 _query_params.append(
@@ -2378,13 +4614,34 @@ class TaskInstanceApi:
             else:
                 _query_params.append(('updated_at_lte', updated_at_lte))
             
+        if updated_at_lt is not None:
+            if isinstance(updated_at_lt, datetime):
+                _query_params.append(
+                    (
+                        'updated_at_lt',
+                        updated_at_lt.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('updated_at_lt', updated_at_lt))
+            
         if duration_gte is not None:
             
             _query_params.append(('duration_gte', duration_gte))
             
+        if duration_gt is not None:
+            
+            _query_params.append(('duration_gt', duration_gt))
+            
         if duration_lte is not None:
             
             _query_params.append(('duration_lte', duration_lte))
+            
+        if duration_lt is not None:
+            
+            _query_params.append(('duration_lt', duration_lt))
             
         if state is not None:
             
@@ -2405,6 +4662,18 @@ class TaskInstanceApi:
         if version_number is not None:
             
             _query_params.append(('version_number', version_number))
+            
+        if try_number is not None:
+            
+            _query_params.append(('try_number', try_number))
+            
+        if operator is not None:
+            
+            _query_params.append(('operator', operator))
+            
+        if map_index is not None:
+            
+            _query_params.append(('map_index', map_index))
             
         if limit is not None:
             
@@ -2434,7 +4703,8 @@ class TaskInstanceApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -2737,7 +5007,8 @@ class TaskInstanceApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -3057,7 +5328,8 @@ class TaskInstanceApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -3375,7 +5647,8 @@ class TaskInstanceApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -3695,7 +5968,8 @@ class TaskInstanceApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -4030,7 +6304,8 @@ class TaskInstanceApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -4058,26 +6333,41 @@ class TaskInstanceApi:
         dag_run_id: StrictStr,
         task_id: Optional[StrictStr] = None,
         run_after_gte: Optional[datetime] = None,
+        run_after_gt: Optional[datetime] = None,
         run_after_lte: Optional[datetime] = None,
+        run_after_lt: Optional[datetime] = None,
         logical_date_gte: Optional[datetime] = None,
+        logical_date_gt: Optional[datetime] = None,
         logical_date_lte: Optional[datetime] = None,
+        logical_date_lt: Optional[datetime] = None,
         start_date_gte: Optional[datetime] = None,
+        start_date_gt: Optional[datetime] = None,
         start_date_lte: Optional[datetime] = None,
+        start_date_lt: Optional[datetime] = None,
         end_date_gte: Optional[datetime] = None,
+        end_date_gt: Optional[datetime] = None,
         end_date_lte: Optional[datetime] = None,
+        end_date_lt: Optional[datetime] = None,
         updated_at_gte: Optional[datetime] = None,
+        updated_at_gt: Optional[datetime] = None,
         updated_at_lte: Optional[datetime] = None,
+        updated_at_lt: Optional[datetime] = None,
         duration_gte: Optional[Union[StrictFloat, StrictInt]] = None,
+        duration_gt: Optional[Union[StrictFloat, StrictInt]] = None,
         duration_lte: Optional[Union[StrictFloat, StrictInt]] = None,
-        task_display_name_pattern: Optional[StrictStr] = None,
+        duration_lt: Optional[Union[StrictFloat, StrictInt]] = None,
+        task_display_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
         state: Optional[List[StrictStr]] = None,
         pool: Optional[List[StrictStr]] = None,
         queue: Optional[List[StrictStr]] = None,
         executor: Optional[List[StrictStr]] = None,
         version_number: Optional[List[StrictInt]] = None,
+        try_number: Optional[List[StrictInt]] = None,
+        operator: Optional[List[StrictStr]] = None,
+        map_index: Optional[List[StrictInt]] = None,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        order_by: Optional[StrictStr] = None,
+        order_by: Optional[List[StrictStr]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4103,29 +6393,53 @@ class TaskInstanceApi:
         :type task_id: str
         :param run_after_gte:
         :type run_after_gte: datetime
+        :param run_after_gt:
+        :type run_after_gt: datetime
         :param run_after_lte:
         :type run_after_lte: datetime
+        :param run_after_lt:
+        :type run_after_lt: datetime
         :param logical_date_gte:
         :type logical_date_gte: datetime
+        :param logical_date_gt:
+        :type logical_date_gt: datetime
         :param logical_date_lte:
         :type logical_date_lte: datetime
+        :param logical_date_lt:
+        :type logical_date_lt: datetime
         :param start_date_gte:
         :type start_date_gte: datetime
+        :param start_date_gt:
+        :type start_date_gt: datetime
         :param start_date_lte:
         :type start_date_lte: datetime
+        :param start_date_lt:
+        :type start_date_lt: datetime
         :param end_date_gte:
         :type end_date_gte: datetime
+        :param end_date_gt:
+        :type end_date_gt: datetime
         :param end_date_lte:
         :type end_date_lte: datetime
+        :param end_date_lt:
+        :type end_date_lt: datetime
         :param updated_at_gte:
         :type updated_at_gte: datetime
+        :param updated_at_gt:
+        :type updated_at_gt: datetime
         :param updated_at_lte:
         :type updated_at_lte: datetime
+        :param updated_at_lt:
+        :type updated_at_lt: datetime
         :param duration_gte:
         :type duration_gte: float
+        :param duration_gt:
+        :type duration_gt: float
         :param duration_lte:
         :type duration_lte: float
-        :param task_display_name_pattern:
+        :param duration_lt:
+        :type duration_lt: float
+        :param task_display_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
         :type task_display_name_pattern: str
         :param state:
         :type state: List[str]
@@ -4137,12 +6451,18 @@ class TaskInstanceApi:
         :type executor: List[str]
         :param version_number:
         :type version_number: List[int]
+        :param try_number:
+        :type try_number: List[int]
+        :param operator:
+        :type operator: List[str]
+        :param map_index:
+        :type map_index: List[int]
         :param limit:
         :type limit: int
         :param offset:
         :type offset: int
         :param order_by:
-        :type order_by: str
+        :type order_by: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4170,23 +6490,38 @@ class TaskInstanceApi:
             dag_run_id=dag_run_id,
             task_id=task_id,
             run_after_gte=run_after_gte,
+            run_after_gt=run_after_gt,
             run_after_lte=run_after_lte,
+            run_after_lt=run_after_lt,
             logical_date_gte=logical_date_gte,
+            logical_date_gt=logical_date_gt,
             logical_date_lte=logical_date_lte,
+            logical_date_lt=logical_date_lt,
             start_date_gte=start_date_gte,
+            start_date_gt=start_date_gt,
             start_date_lte=start_date_lte,
+            start_date_lt=start_date_lt,
             end_date_gte=end_date_gte,
+            end_date_gt=end_date_gt,
             end_date_lte=end_date_lte,
+            end_date_lt=end_date_lt,
             updated_at_gte=updated_at_gte,
+            updated_at_gt=updated_at_gt,
             updated_at_lte=updated_at_lte,
+            updated_at_lt=updated_at_lt,
             duration_gte=duration_gte,
+            duration_gt=duration_gt,
             duration_lte=duration_lte,
+            duration_lt=duration_lt,
             task_display_name_pattern=task_display_name_pattern,
             state=state,
             pool=pool,
             queue=queue,
             executor=executor,
             version_number=version_number,
+            try_number=try_number,
+            operator=operator,
+            map_index=map_index,
             limit=limit,
             offset=offset,
             order_by=order_by,
@@ -4221,26 +6556,41 @@ class TaskInstanceApi:
         dag_run_id: StrictStr,
         task_id: Optional[StrictStr] = None,
         run_after_gte: Optional[datetime] = None,
+        run_after_gt: Optional[datetime] = None,
         run_after_lte: Optional[datetime] = None,
+        run_after_lt: Optional[datetime] = None,
         logical_date_gte: Optional[datetime] = None,
+        logical_date_gt: Optional[datetime] = None,
         logical_date_lte: Optional[datetime] = None,
+        logical_date_lt: Optional[datetime] = None,
         start_date_gte: Optional[datetime] = None,
+        start_date_gt: Optional[datetime] = None,
         start_date_lte: Optional[datetime] = None,
+        start_date_lt: Optional[datetime] = None,
         end_date_gte: Optional[datetime] = None,
+        end_date_gt: Optional[datetime] = None,
         end_date_lte: Optional[datetime] = None,
+        end_date_lt: Optional[datetime] = None,
         updated_at_gte: Optional[datetime] = None,
+        updated_at_gt: Optional[datetime] = None,
         updated_at_lte: Optional[datetime] = None,
+        updated_at_lt: Optional[datetime] = None,
         duration_gte: Optional[Union[StrictFloat, StrictInt]] = None,
+        duration_gt: Optional[Union[StrictFloat, StrictInt]] = None,
         duration_lte: Optional[Union[StrictFloat, StrictInt]] = None,
-        task_display_name_pattern: Optional[StrictStr] = None,
+        duration_lt: Optional[Union[StrictFloat, StrictInt]] = None,
+        task_display_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
         state: Optional[List[StrictStr]] = None,
         pool: Optional[List[StrictStr]] = None,
         queue: Optional[List[StrictStr]] = None,
         executor: Optional[List[StrictStr]] = None,
         version_number: Optional[List[StrictInt]] = None,
+        try_number: Optional[List[StrictInt]] = None,
+        operator: Optional[List[StrictStr]] = None,
+        map_index: Optional[List[StrictInt]] = None,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        order_by: Optional[StrictStr] = None,
+        order_by: Optional[List[StrictStr]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4266,29 +6616,53 @@ class TaskInstanceApi:
         :type task_id: str
         :param run_after_gte:
         :type run_after_gte: datetime
+        :param run_after_gt:
+        :type run_after_gt: datetime
         :param run_after_lte:
         :type run_after_lte: datetime
+        :param run_after_lt:
+        :type run_after_lt: datetime
         :param logical_date_gte:
         :type logical_date_gte: datetime
+        :param logical_date_gt:
+        :type logical_date_gt: datetime
         :param logical_date_lte:
         :type logical_date_lte: datetime
+        :param logical_date_lt:
+        :type logical_date_lt: datetime
         :param start_date_gte:
         :type start_date_gte: datetime
+        :param start_date_gt:
+        :type start_date_gt: datetime
         :param start_date_lte:
         :type start_date_lte: datetime
+        :param start_date_lt:
+        :type start_date_lt: datetime
         :param end_date_gte:
         :type end_date_gte: datetime
+        :param end_date_gt:
+        :type end_date_gt: datetime
         :param end_date_lte:
         :type end_date_lte: datetime
+        :param end_date_lt:
+        :type end_date_lt: datetime
         :param updated_at_gte:
         :type updated_at_gte: datetime
+        :param updated_at_gt:
+        :type updated_at_gt: datetime
         :param updated_at_lte:
         :type updated_at_lte: datetime
+        :param updated_at_lt:
+        :type updated_at_lt: datetime
         :param duration_gte:
         :type duration_gte: float
+        :param duration_gt:
+        :type duration_gt: float
         :param duration_lte:
         :type duration_lte: float
-        :param task_display_name_pattern:
+        :param duration_lt:
+        :type duration_lt: float
+        :param task_display_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
         :type task_display_name_pattern: str
         :param state:
         :type state: List[str]
@@ -4300,12 +6674,18 @@ class TaskInstanceApi:
         :type executor: List[str]
         :param version_number:
         :type version_number: List[int]
+        :param try_number:
+        :type try_number: List[int]
+        :param operator:
+        :type operator: List[str]
+        :param map_index:
+        :type map_index: List[int]
         :param limit:
         :type limit: int
         :param offset:
         :type offset: int
         :param order_by:
-        :type order_by: str
+        :type order_by: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4333,23 +6713,38 @@ class TaskInstanceApi:
             dag_run_id=dag_run_id,
             task_id=task_id,
             run_after_gte=run_after_gte,
+            run_after_gt=run_after_gt,
             run_after_lte=run_after_lte,
+            run_after_lt=run_after_lt,
             logical_date_gte=logical_date_gte,
+            logical_date_gt=logical_date_gt,
             logical_date_lte=logical_date_lte,
+            logical_date_lt=logical_date_lt,
             start_date_gte=start_date_gte,
+            start_date_gt=start_date_gt,
             start_date_lte=start_date_lte,
+            start_date_lt=start_date_lt,
             end_date_gte=end_date_gte,
+            end_date_gt=end_date_gt,
             end_date_lte=end_date_lte,
+            end_date_lt=end_date_lt,
             updated_at_gte=updated_at_gte,
+            updated_at_gt=updated_at_gt,
             updated_at_lte=updated_at_lte,
+            updated_at_lt=updated_at_lt,
             duration_gte=duration_gte,
+            duration_gt=duration_gt,
             duration_lte=duration_lte,
+            duration_lt=duration_lt,
             task_display_name_pattern=task_display_name_pattern,
             state=state,
             pool=pool,
             queue=queue,
             executor=executor,
             version_number=version_number,
+            try_number=try_number,
+            operator=operator,
+            map_index=map_index,
             limit=limit,
             offset=offset,
             order_by=order_by,
@@ -4384,26 +6779,41 @@ class TaskInstanceApi:
         dag_run_id: StrictStr,
         task_id: Optional[StrictStr] = None,
         run_after_gte: Optional[datetime] = None,
+        run_after_gt: Optional[datetime] = None,
         run_after_lte: Optional[datetime] = None,
+        run_after_lt: Optional[datetime] = None,
         logical_date_gte: Optional[datetime] = None,
+        logical_date_gt: Optional[datetime] = None,
         logical_date_lte: Optional[datetime] = None,
+        logical_date_lt: Optional[datetime] = None,
         start_date_gte: Optional[datetime] = None,
+        start_date_gt: Optional[datetime] = None,
         start_date_lte: Optional[datetime] = None,
+        start_date_lt: Optional[datetime] = None,
         end_date_gte: Optional[datetime] = None,
+        end_date_gt: Optional[datetime] = None,
         end_date_lte: Optional[datetime] = None,
+        end_date_lt: Optional[datetime] = None,
         updated_at_gte: Optional[datetime] = None,
+        updated_at_gt: Optional[datetime] = None,
         updated_at_lte: Optional[datetime] = None,
+        updated_at_lt: Optional[datetime] = None,
         duration_gte: Optional[Union[StrictFloat, StrictInt]] = None,
+        duration_gt: Optional[Union[StrictFloat, StrictInt]] = None,
         duration_lte: Optional[Union[StrictFloat, StrictInt]] = None,
-        task_display_name_pattern: Optional[StrictStr] = None,
+        duration_lt: Optional[Union[StrictFloat, StrictInt]] = None,
+        task_display_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
         state: Optional[List[StrictStr]] = None,
         pool: Optional[List[StrictStr]] = None,
         queue: Optional[List[StrictStr]] = None,
         executor: Optional[List[StrictStr]] = None,
         version_number: Optional[List[StrictInt]] = None,
+        try_number: Optional[List[StrictInt]] = None,
+        operator: Optional[List[StrictStr]] = None,
+        map_index: Optional[List[StrictInt]] = None,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        order_by: Optional[StrictStr] = None,
+        order_by: Optional[List[StrictStr]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4429,29 +6839,53 @@ class TaskInstanceApi:
         :type task_id: str
         :param run_after_gte:
         :type run_after_gte: datetime
+        :param run_after_gt:
+        :type run_after_gt: datetime
         :param run_after_lte:
         :type run_after_lte: datetime
+        :param run_after_lt:
+        :type run_after_lt: datetime
         :param logical_date_gte:
         :type logical_date_gte: datetime
+        :param logical_date_gt:
+        :type logical_date_gt: datetime
         :param logical_date_lte:
         :type logical_date_lte: datetime
+        :param logical_date_lt:
+        :type logical_date_lt: datetime
         :param start_date_gte:
         :type start_date_gte: datetime
+        :param start_date_gt:
+        :type start_date_gt: datetime
         :param start_date_lte:
         :type start_date_lte: datetime
+        :param start_date_lt:
+        :type start_date_lt: datetime
         :param end_date_gte:
         :type end_date_gte: datetime
+        :param end_date_gt:
+        :type end_date_gt: datetime
         :param end_date_lte:
         :type end_date_lte: datetime
+        :param end_date_lt:
+        :type end_date_lt: datetime
         :param updated_at_gte:
         :type updated_at_gte: datetime
+        :param updated_at_gt:
+        :type updated_at_gt: datetime
         :param updated_at_lte:
         :type updated_at_lte: datetime
+        :param updated_at_lt:
+        :type updated_at_lt: datetime
         :param duration_gte:
         :type duration_gte: float
+        :param duration_gt:
+        :type duration_gt: float
         :param duration_lte:
         :type duration_lte: float
-        :param task_display_name_pattern:
+        :param duration_lt:
+        :type duration_lt: float
+        :param task_display_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
         :type task_display_name_pattern: str
         :param state:
         :type state: List[str]
@@ -4463,12 +6897,18 @@ class TaskInstanceApi:
         :type executor: List[str]
         :param version_number:
         :type version_number: List[int]
+        :param try_number:
+        :type try_number: List[int]
+        :param operator:
+        :type operator: List[str]
+        :param map_index:
+        :type map_index: List[int]
         :param limit:
         :type limit: int
         :param offset:
         :type offset: int
         :param order_by:
-        :type order_by: str
+        :type order_by: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4496,23 +6936,38 @@ class TaskInstanceApi:
             dag_run_id=dag_run_id,
             task_id=task_id,
             run_after_gte=run_after_gte,
+            run_after_gt=run_after_gt,
             run_after_lte=run_after_lte,
+            run_after_lt=run_after_lt,
             logical_date_gte=logical_date_gte,
+            logical_date_gt=logical_date_gt,
             logical_date_lte=logical_date_lte,
+            logical_date_lt=logical_date_lt,
             start_date_gte=start_date_gte,
+            start_date_gt=start_date_gt,
             start_date_lte=start_date_lte,
+            start_date_lt=start_date_lt,
             end_date_gte=end_date_gte,
+            end_date_gt=end_date_gt,
             end_date_lte=end_date_lte,
+            end_date_lt=end_date_lt,
             updated_at_gte=updated_at_gte,
+            updated_at_gt=updated_at_gt,
             updated_at_lte=updated_at_lte,
+            updated_at_lt=updated_at_lt,
             duration_gte=duration_gte,
+            duration_gt=duration_gt,
             duration_lte=duration_lte,
+            duration_lt=duration_lt,
             task_display_name_pattern=task_display_name_pattern,
             state=state,
             pool=pool,
             queue=queue,
             executor=executor,
             version_number=version_number,
+            try_number=try_number,
+            operator=operator,
+            map_index=map_index,
             limit=limit,
             offset=offset,
             order_by=order_by,
@@ -4542,23 +6997,38 @@ class TaskInstanceApi:
         dag_run_id,
         task_id,
         run_after_gte,
+        run_after_gt,
         run_after_lte,
+        run_after_lt,
         logical_date_gte,
+        logical_date_gt,
         logical_date_lte,
+        logical_date_lt,
         start_date_gte,
+        start_date_gt,
         start_date_lte,
+        start_date_lt,
         end_date_gte,
+        end_date_gt,
         end_date_lte,
+        end_date_lt,
         updated_at_gte,
+        updated_at_gt,
         updated_at_lte,
+        updated_at_lt,
         duration_gte,
+        duration_gt,
         duration_lte,
+        duration_lt,
         task_display_name_pattern,
         state,
         pool,
         queue,
         executor,
         version_number,
+        try_number,
+        operator,
+        map_index,
         limit,
         offset,
         order_by,
@@ -4576,6 +7046,10 @@ class TaskInstanceApi:
             'queue': 'multi',
             'executor': 'multi',
             'version_number': 'multi',
+            'try_number': 'multi',
+            'operator': 'multi',
+            'map_index': 'multi',
+            'order_by': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -4610,6 +7084,19 @@ class TaskInstanceApi:
             else:
                 _query_params.append(('run_after_gte', run_after_gte))
             
+        if run_after_gt is not None:
+            if isinstance(run_after_gt, datetime):
+                _query_params.append(
+                    (
+                        'run_after_gt',
+                        run_after_gt.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('run_after_gt', run_after_gt))
+            
         if run_after_lte is not None:
             if isinstance(run_after_lte, datetime):
                 _query_params.append(
@@ -4622,6 +7109,19 @@ class TaskInstanceApi:
                 )
             else:
                 _query_params.append(('run_after_lte', run_after_lte))
+            
+        if run_after_lt is not None:
+            if isinstance(run_after_lt, datetime):
+                _query_params.append(
+                    (
+                        'run_after_lt',
+                        run_after_lt.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('run_after_lt', run_after_lt))
             
         if logical_date_gte is not None:
             if isinstance(logical_date_gte, datetime):
@@ -4636,6 +7136,19 @@ class TaskInstanceApi:
             else:
                 _query_params.append(('logical_date_gte', logical_date_gte))
             
+        if logical_date_gt is not None:
+            if isinstance(logical_date_gt, datetime):
+                _query_params.append(
+                    (
+                        'logical_date_gt',
+                        logical_date_gt.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('logical_date_gt', logical_date_gt))
+            
         if logical_date_lte is not None:
             if isinstance(logical_date_lte, datetime):
                 _query_params.append(
@@ -4648,6 +7161,19 @@ class TaskInstanceApi:
                 )
             else:
                 _query_params.append(('logical_date_lte', logical_date_lte))
+            
+        if logical_date_lt is not None:
+            if isinstance(logical_date_lt, datetime):
+                _query_params.append(
+                    (
+                        'logical_date_lt',
+                        logical_date_lt.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('logical_date_lt', logical_date_lt))
             
         if start_date_gte is not None:
             if isinstance(start_date_gte, datetime):
@@ -4662,6 +7188,19 @@ class TaskInstanceApi:
             else:
                 _query_params.append(('start_date_gte', start_date_gte))
             
+        if start_date_gt is not None:
+            if isinstance(start_date_gt, datetime):
+                _query_params.append(
+                    (
+                        'start_date_gt',
+                        start_date_gt.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('start_date_gt', start_date_gt))
+            
         if start_date_lte is not None:
             if isinstance(start_date_lte, datetime):
                 _query_params.append(
@@ -4674,6 +7213,19 @@ class TaskInstanceApi:
                 )
             else:
                 _query_params.append(('start_date_lte', start_date_lte))
+            
+        if start_date_lt is not None:
+            if isinstance(start_date_lt, datetime):
+                _query_params.append(
+                    (
+                        'start_date_lt',
+                        start_date_lt.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('start_date_lt', start_date_lt))
             
         if end_date_gte is not None:
             if isinstance(end_date_gte, datetime):
@@ -4688,6 +7240,19 @@ class TaskInstanceApi:
             else:
                 _query_params.append(('end_date_gte', end_date_gte))
             
+        if end_date_gt is not None:
+            if isinstance(end_date_gt, datetime):
+                _query_params.append(
+                    (
+                        'end_date_gt',
+                        end_date_gt.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('end_date_gt', end_date_gt))
+            
         if end_date_lte is not None:
             if isinstance(end_date_lte, datetime):
                 _query_params.append(
@@ -4700,6 +7265,19 @@ class TaskInstanceApi:
                 )
             else:
                 _query_params.append(('end_date_lte', end_date_lte))
+            
+        if end_date_lt is not None:
+            if isinstance(end_date_lt, datetime):
+                _query_params.append(
+                    (
+                        'end_date_lt',
+                        end_date_lt.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('end_date_lt', end_date_lt))
             
         if updated_at_gte is not None:
             if isinstance(updated_at_gte, datetime):
@@ -4714,6 +7292,19 @@ class TaskInstanceApi:
             else:
                 _query_params.append(('updated_at_gte', updated_at_gte))
             
+        if updated_at_gt is not None:
+            if isinstance(updated_at_gt, datetime):
+                _query_params.append(
+                    (
+                        'updated_at_gt',
+                        updated_at_gt.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('updated_at_gt', updated_at_gt))
+            
         if updated_at_lte is not None:
             if isinstance(updated_at_lte, datetime):
                 _query_params.append(
@@ -4727,13 +7318,34 @@ class TaskInstanceApi:
             else:
                 _query_params.append(('updated_at_lte', updated_at_lte))
             
+        if updated_at_lt is not None:
+            if isinstance(updated_at_lt, datetime):
+                _query_params.append(
+                    (
+                        'updated_at_lt',
+                        updated_at_lt.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('updated_at_lt', updated_at_lt))
+            
         if duration_gte is not None:
             
             _query_params.append(('duration_gte', duration_gte))
             
+        if duration_gt is not None:
+            
+            _query_params.append(('duration_gt', duration_gt))
+            
         if duration_lte is not None:
             
             _query_params.append(('duration_lte', duration_lte))
+            
+        if duration_lt is not None:
+            
+            _query_params.append(('duration_lt', duration_lt))
             
         if task_display_name_pattern is not None:
             
@@ -4758,6 +7370,18 @@ class TaskInstanceApi:
         if version_number is not None:
             
             _query_params.append(('version_number', version_number))
+            
+        if try_number is not None:
+            
+            _query_params.append(('try_number', try_number))
+            
+        if operator is not None:
+            
+            _query_params.append(('operator', operator))
+            
+        if map_index is not None:
+            
+            _query_params.append(('map_index', map_index))
             
         if limit is not None:
             
@@ -4787,7 +7411,8 @@ class TaskInstanceApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -5103,7 +7728,8 @@ class TaskInstanceApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -5475,7 +8101,8 @@ class TaskInstanceApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -5845,7 +8472,8 @@ class TaskInstanceApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -6214,7 +8842,8 @@ class TaskInstanceApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -6581,7 +9210,8 @@ class TaskInstanceApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -6882,12 +9512,363 @@ class TaskInstanceApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/api/v2/dags/{dag_id}/clearTaskInstances',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def update_hitl_detail(
+        self,
+        dag_id: StrictStr,
+        dag_run_id: StrictStr,
+        task_id: StrictStr,
+        map_index: StrictInt,
+        update_hitl_detail_payload: UpdateHITLDetailPayload,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> HITLDetailResponse:
+        """Update Hitl Detail
+
+        Update a Human-in-the-loop detail.
+
+        :param dag_id: (required)
+        :type dag_id: str
+        :param dag_run_id: (required)
+        :type dag_run_id: str
+        :param task_id: (required)
+        :type task_id: str
+        :param map_index: (required)
+        :type map_index: int
+        :param update_hitl_detail_payload: (required)
+        :type update_hitl_detail_payload: UpdateHITLDetailPayload
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_hitl_detail_serialize(
+            dag_id=dag_id,
+            dag_run_id=dag_run_id,
+            task_id=task_id,
+            map_index=map_index,
+            update_hitl_detail_payload=update_hitl_detail_payload,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "HITLDetailResponse",
+            '401': "HTTPExceptionResponse",
+            '403': "HTTPExceptionResponse",
+            '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def update_hitl_detail_with_http_info(
+        self,
+        dag_id: StrictStr,
+        dag_run_id: StrictStr,
+        task_id: StrictStr,
+        map_index: StrictInt,
+        update_hitl_detail_payload: UpdateHITLDetailPayload,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[HITLDetailResponse]:
+        """Update Hitl Detail
+
+        Update a Human-in-the-loop detail.
+
+        :param dag_id: (required)
+        :type dag_id: str
+        :param dag_run_id: (required)
+        :type dag_run_id: str
+        :param task_id: (required)
+        :type task_id: str
+        :param map_index: (required)
+        :type map_index: int
+        :param update_hitl_detail_payload: (required)
+        :type update_hitl_detail_payload: UpdateHITLDetailPayload
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_hitl_detail_serialize(
+            dag_id=dag_id,
+            dag_run_id=dag_run_id,
+            task_id=task_id,
+            map_index=map_index,
+            update_hitl_detail_payload=update_hitl_detail_payload,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "HITLDetailResponse",
+            '401': "HTTPExceptionResponse",
+            '403': "HTTPExceptionResponse",
+            '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def update_hitl_detail_without_preload_content(
+        self,
+        dag_id: StrictStr,
+        dag_run_id: StrictStr,
+        task_id: StrictStr,
+        map_index: StrictInt,
+        update_hitl_detail_payload: UpdateHITLDetailPayload,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Update Hitl Detail
+
+        Update a Human-in-the-loop detail.
+
+        :param dag_id: (required)
+        :type dag_id: str
+        :param dag_run_id: (required)
+        :type dag_run_id: str
+        :param task_id: (required)
+        :type task_id: str
+        :param map_index: (required)
+        :type map_index: int
+        :param update_hitl_detail_payload: (required)
+        :type update_hitl_detail_payload: UpdateHITLDetailPayload
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_hitl_detail_serialize(
+            dag_id=dag_id,
+            dag_run_id=dag_run_id,
+            task_id=task_id,
+            map_index=map_index,
+            update_hitl_detail_payload=update_hitl_detail_payload,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "HITLDetailResponse",
+            '401': "HTTPExceptionResponse",
+            '403': "HTTPExceptionResponse",
+            '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _update_hitl_detail_serialize(
+        self,
+        dag_id,
+        dag_run_id,
+        task_id,
+        map_index,
+        update_hitl_detail_payload,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if dag_id is not None:
+            _path_params['dag_id'] = dag_id
+        if dag_run_id is not None:
+            _path_params['dag_run_id'] = dag_run_id
+        if task_id is not None:
+            _path_params['task_id'] = task_id
+        if map_index is not None:
+            _path_params['map_index'] = map_index
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if update_hitl_detail_payload is not None:
+            _body_params = update_hitl_detail_payload
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
+        ]
+
+        return self.api_client.param_serialize(
+            method='PATCH',
+            resource_path='/api/v2/dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/{map_index}/hitlDetails',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

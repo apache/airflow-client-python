@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **action** | **str** | The action to be performed on the entities. | 
 **action_on_existence** | [**BulkActionOnExistence**](BulkActionOnExistence.md) |  | [optional] 
-**entities** | **List[str]** | A list of entity id/key to be deleted. | 
+**entities** | [**List[BulkDeleteActionBulkTaskInstanceBodyEntitiesInner]**](BulkDeleteActionBulkTaskInstanceBodyEntitiesInner.md) | A list of entity id/key or entity objects to be deleted. | 
 **action_on_non_existence** | [**BulkActionNotOnExistence**](BulkActionNotOnExistence.md) |  | [optional] 
 
 ## Example

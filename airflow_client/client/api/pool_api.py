@@ -306,7 +306,8 @@ class PoolApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -582,7 +583,8 @@ class PoolApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -855,7 +857,8 @@ class PoolApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -881,8 +884,8 @@ class PoolApi:
         self,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        order_by: Optional[StrictStr] = None,
-        pool_name_pattern: Optional[StrictStr] = None,
+        order_by: Optional[List[StrictStr]] = None,
+        pool_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -905,8 +908,8 @@ class PoolApi:
         :param offset:
         :type offset: int
         :param order_by:
-        :type order_by: str
-        :param pool_name_pattern:
+        :type order_by: List[str]
+        :param pool_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
         :type pool_name_pattern: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -964,8 +967,8 @@ class PoolApi:
         self,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        order_by: Optional[StrictStr] = None,
-        pool_name_pattern: Optional[StrictStr] = None,
+        order_by: Optional[List[StrictStr]] = None,
+        pool_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -988,8 +991,8 @@ class PoolApi:
         :param offset:
         :type offset: int
         :param order_by:
-        :type order_by: str
-        :param pool_name_pattern:
+        :type order_by: List[str]
+        :param pool_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
         :type pool_name_pattern: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1047,8 +1050,8 @@ class PoolApi:
         self,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        order_by: Optional[StrictStr] = None,
-        pool_name_pattern: Optional[StrictStr] = None,
+        order_by: Optional[List[StrictStr]] = None,
+        pool_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1071,8 +1074,8 @@ class PoolApi:
         :param offset:
         :type offset: int
         :param order_by:
-        :type order_by: str
-        :param pool_name_pattern:
+        :type order_by: List[str]
+        :param pool_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
         :type pool_name_pattern: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1136,6 +1139,7 @@ class PoolApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
+            'order_by': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1181,7 +1185,8 @@ class PoolApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -1503,7 +1508,8 @@ class PoolApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -1789,7 +1795,8 @@ class PoolApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(

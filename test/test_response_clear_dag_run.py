@@ -37,6 +37,7 @@ class TestResponseClearDagRun(unittest.TestCase):
             return ResponseClearDagRun(
                 task_instances = [
                     airflow_client.client.models.task_instance_response.TaskInstanceResponse(
+                        dag_display_name = '', 
                         dag_id = '', 
                         dag_run_id = '', 
                         dag_version = airflow_client.client.models.dag_version_response.DagVersionResponse(
@@ -44,6 +45,7 @@ class TestResponseClearDagRun(unittest.TestCase):
                             bundle_url = '', 
                             bundle_version = '', 
                             created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                            dag_display_name = '', 
                             dag_id = '', 
                             id = '', 
                             version_number = 56, ), 
@@ -58,6 +60,7 @@ class TestResponseClearDagRun(unittest.TestCase):
                         max_tries = 56, 
                         note = '', 
                         operator = '', 
+                        operator_name = '', 
                         pid = 56, 
                         pool = '', 
                         pool_slots = 56, 
@@ -79,6 +82,7 @@ class TestResponseClearDagRun(unittest.TestCase):
                             kwargs = '', 
                             triggerer_id = 56, ), 
                         triggerer_job = airflow_client.client.models.job_response.JobResponse(
+                            dag_display_name = '', 
                             dag_id = '', 
                             end_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                             executor_class = '', 
@@ -94,6 +98,7 @@ class TestResponseClearDagRun(unittest.TestCase):
                 total_entries = 56,
                 bundle_version = '',
                 conf = airflow_client.client.models.extra.extra(),
+                dag_display_name = '',
                 dag_id = '',
                 dag_run_id = '',
                 dag_versions = [
@@ -102,12 +107,14 @@ class TestResponseClearDagRun(unittest.TestCase):
                         bundle_url = '', 
                         bundle_version = '', 
                         created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        dag_display_name = '', 
                         dag_id = '', 
                         id = '', 
                         version_number = 56, )
                     ],
                 data_interval_end = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 data_interval_start = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+                duration = 1.337,
                 end_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 last_scheduling_decision = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 logical_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
@@ -117,12 +124,14 @@ class TestResponseClearDagRun(unittest.TestCase):
                 run_type = 'backfill',
                 start_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 state = 'queued',
-                triggered_by = 'cli'
+                triggered_by = 'cli',
+                triggering_user_name = ''
             )
         else:
             return ResponseClearDagRun(
                 task_instances = [
                     airflow_client.client.models.task_instance_response.TaskInstanceResponse(
+                        dag_display_name = '', 
                         dag_id = '', 
                         dag_run_id = '', 
                         dag_version = airflow_client.client.models.dag_version_response.DagVersionResponse(
@@ -130,6 +139,7 @@ class TestResponseClearDagRun(unittest.TestCase):
                             bundle_url = '', 
                             bundle_version = '', 
                             created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                            dag_display_name = '', 
                             dag_id = '', 
                             id = '', 
                             version_number = 56, ), 
@@ -144,6 +154,7 @@ class TestResponseClearDagRun(unittest.TestCase):
                         max_tries = 56, 
                         note = '', 
                         operator = '', 
+                        operator_name = '', 
                         pid = 56, 
                         pool = '', 
                         pool_slots = 56, 
@@ -165,6 +176,7 @@ class TestResponseClearDagRun(unittest.TestCase):
                             kwargs = '', 
                             triggerer_id = 56, ), 
                         triggerer_job = airflow_client.client.models.job_response.JobResponse(
+                            dag_display_name = '', 
                             dag_id = '', 
                             end_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                             executor_class = '', 
@@ -178,6 +190,7 @@ class TestResponseClearDagRun(unittest.TestCase):
                         unixname = '', )
                     ],
                 total_entries = 56,
+                dag_display_name = '',
                 dag_id = '',
                 dag_run_id = '',
                 dag_versions = [
@@ -186,6 +199,7 @@ class TestResponseClearDagRun(unittest.TestCase):
                         bundle_url = '', 
                         bundle_version = '', 
                         created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        dag_display_name = '', 
                         dag_id = '', 
                         id = '', 
                         version_number = 56, )

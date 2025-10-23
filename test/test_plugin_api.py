@@ -33,6 +33,13 @@ class TestPluginApi(unittest.TestCase):
         """
         pass
 
+    def test_import_errors(self) -> None:
+        """Test case for import_errors
+
+        Import Errors
+        """
+        pass
+
 
 if __name__ == '__main__':
     unittest.main()

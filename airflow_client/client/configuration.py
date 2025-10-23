@@ -113,6 +113,7 @@ HTTPSignatureAuthSetting = TypedDict(
 AuthSettings = TypedDict(
     "AuthSettings",
     {
+        "HTTPBearer": BearerAuthSetting,
         "OAuth2PasswordBearer": OAuth2AuthSetting,
     },
     total=False,
@@ -493,6 +494,13 @@ class Configuration:
         """
         auth: AuthSettings = {}
         if self.access_token is not None:
+            auth['HTTPBearer'] = {
+                'type': 'bearer',
+                'in': 'header',
+                'key': 'Authorization',
+                'value': 'Bearer ' + self.access_token
+            }
+        if self.access_token is not None:
             auth['OAuth2PasswordBearer'] = {
                 'type': 'oauth2',
                 'in': 'header',
@@ -510,7 +518,7 @@ class Configuration:
                "OS: {env}\n"\
                "Python Version: {pyversion}\n"\
                "Version of the API: 2\n"\
-               "SDK Package Version: 3.0.2".\
+               "SDK Package Version: 3.1.0".\
                format(env=sys.platform, pyversion=sys.version)
 
     def get_host_settings(self) -> List[HostSetting]:

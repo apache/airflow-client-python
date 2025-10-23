@@ -5,11 +5,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**dag_display_name** | **str** |  | 
 **dag_id** | **str** |  | 
 **key** | **str** |  | 
 **logical_date** | **datetime** |  | [optional] 
 **map_index** | **int** |  | 
 **run_id** | **str** |  | 
+**task_display_name** | **str** |  | 
 **task_id** | **str** |  | 
 **timestamp** | **datetime** |  | 
 **value** | **str** |  | 

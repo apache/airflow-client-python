@@ -38,7 +38,7 @@ class TestBulkBodyVariableBodyActionsInner(unittest.TestCase):
                 action = 'delete',
                 action_on_existence = 'fail',
                 entities = [
-                    ''
+                    null
                     ],
                 action_on_non_existence = 'fail'
             )
@@ -46,7 +46,7 @@ class TestBulkBodyVariableBodyActionsInner(unittest.TestCase):
             return BulkBodyVariableBodyActionsInner(
                 action = 'delete',
                 entities = [
-                    ''
+                    null
                     ],
         )
         """

@@ -35,6 +35,7 @@ class TestDAGWarningResponse(unittest.TestCase):
         model = DAGWarningResponse()
         if include_optional:
             return DAGWarningResponse(
+                dag_display_name = '',
                 dag_id = '',
                 message = '',
                 timestamp = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
@@ -42,6 +43,7 @@ class TestDAGWarningResponse(unittest.TestCase):
             )
         else:
             return DAGWarningResponse(
+                dag_display_name = '',
                 dag_id = '',
                 message = '',
                 timestamp = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),

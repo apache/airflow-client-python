@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **appbuilder_menu_items** | [**List[AppBuilderMenuItemResponse]**](AppBuilderMenuItemResponse.md) |  | 
 **appbuilder_views** | [**List[AppBuilderViewResponse]**](AppBuilderViewResponse.md) |  | 
+**external_views** | [**List[ExternalViewResponse]**](ExternalViewResponse.md) | Aggregate all external views. Both &#39;external_views&#39; and &#39;appbuilder_menu_items&#39; are included here. | 
 **fastapi_apps** | [**List[FastAPIAppResponse]**](FastAPIAppResponse.md) |  | 
 **fastapi_root_middlewares** | [**List[FastAPIRootMiddlewareResponse]**](FastAPIRootMiddlewareResponse.md) |  | 
 **flask_blueprints** | **List[str]** |  | 
@@ -16,6 +17,7 @@ Name | Type | Description | Notes
 **macros** | **List[str]** |  | 
 **name** | **str** |  | 
 **operator_extra_links** | **List[str]** |  | 
+**react_apps** | [**List[ReactAppResponse]**](ReactAppResponse.md) |  | 
 **source** | **str** |  | 
 **timetables** | **List[str]** |  | 
 

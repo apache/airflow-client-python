@@ -28,11 +28,12 @@ class DAGWarningResponse(BaseModel):
     """
     DAG Warning serializer for responses.
     """ # noqa: E501
+    dag_display_name: StrictStr
     dag_id: StrictStr
     message: StrictStr
     timestamp: datetime
     warning_type: DagWarningType
-    __properties: ClassVar[List[str]] = ["dag_id", "message", "timestamp", "warning_type"]
+    __properties: ClassVar[List[str]] = ["dag_display_name", "dag_id", "message", "timestamp", "warning_type"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -85,6 +86,7 @@ class DAGWarningResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "dag_display_name": obj.get("dag_display_name"),
             "dag_id": obj.get("dag_id"),
             "message": obj.get("message"),
             "timestamp": obj.get("timestamp"),

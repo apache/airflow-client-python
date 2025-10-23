@@ -16,7 +16,8 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictBool, StrictStr
+from datetime import datetime
+from pydantic import Field, StrictBool, StrictInt, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
 from airflow_client.client.models.response_get_xcom_entry import ResponseGetXcomEntry
@@ -356,7 +357,8 @@ class XComApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -387,6 +389,19 @@ class XComApi:
         map_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
+        xcom_key_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        dag_display_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        run_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        task_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        map_index_filter: Optional[StrictInt] = None,
+        logical_date_gte: Optional[datetime] = None,
+        logical_date_gt: Optional[datetime] = None,
+        logical_date_lte: Optional[datetime] = None,
+        logical_date_lt: Optional[datetime] = None,
+        run_after_gte: Optional[datetime] = None,
+        run_after_gt: Optional[datetime] = None,
+        run_after_lte: Optional[datetime] = None,
+        run_after_lt: Optional[datetime] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -418,6 +433,32 @@ class XComApi:
         :type limit: int
         :param offset:
         :type offset: int
+        :param xcom_key_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :type xcom_key_pattern: str
+        :param dag_display_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :type dag_display_name_pattern: str
+        :param run_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :type run_id_pattern: str
+        :param task_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :type task_id_pattern: str
+        :param map_index_filter:
+        :type map_index_filter: int
+        :param logical_date_gte:
+        :type logical_date_gte: datetime
+        :param logical_date_gt:
+        :type logical_date_gt: datetime
+        :param logical_date_lte:
+        :type logical_date_lte: datetime
+        :param logical_date_lt:
+        :type logical_date_lt: datetime
+        :param run_after_gte:
+        :type run_after_gte: datetime
+        :param run_after_gt:
+        :type run_after_gt: datetime
+        :param run_after_lte:
+        :type run_after_lte: datetime
+        :param run_after_lt:
+        :type run_after_lt: datetime
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -448,6 +489,19 @@ class XComApi:
             map_index=map_index,
             limit=limit,
             offset=offset,
+            xcom_key_pattern=xcom_key_pattern,
+            dag_display_name_pattern=dag_display_name_pattern,
+            run_id_pattern=run_id_pattern,
+            task_id_pattern=task_id_pattern,
+            map_index_filter=map_index_filter,
+            logical_date_gte=logical_date_gte,
+            logical_date_gt=logical_date_gt,
+            logical_date_lte=logical_date_lte,
+            logical_date_lt=logical_date_lt,
+            run_after_gte=run_after_gte,
+            run_after_gt=run_after_gt,
+            run_after_lte=run_after_lte,
+            run_after_lt=run_after_lt,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -483,6 +537,19 @@ class XComApi:
         map_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
+        xcom_key_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        dag_display_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        run_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        task_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        map_index_filter: Optional[StrictInt] = None,
+        logical_date_gte: Optional[datetime] = None,
+        logical_date_gt: Optional[datetime] = None,
+        logical_date_lte: Optional[datetime] = None,
+        logical_date_lt: Optional[datetime] = None,
+        run_after_gte: Optional[datetime] = None,
+        run_after_gt: Optional[datetime] = None,
+        run_after_lte: Optional[datetime] = None,
+        run_after_lt: Optional[datetime] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -514,6 +581,32 @@ class XComApi:
         :type limit: int
         :param offset:
         :type offset: int
+        :param xcom_key_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :type xcom_key_pattern: str
+        :param dag_display_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :type dag_display_name_pattern: str
+        :param run_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :type run_id_pattern: str
+        :param task_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :type task_id_pattern: str
+        :param map_index_filter:
+        :type map_index_filter: int
+        :param logical_date_gte:
+        :type logical_date_gte: datetime
+        :param logical_date_gt:
+        :type logical_date_gt: datetime
+        :param logical_date_lte:
+        :type logical_date_lte: datetime
+        :param logical_date_lt:
+        :type logical_date_lt: datetime
+        :param run_after_gte:
+        :type run_after_gte: datetime
+        :param run_after_gt:
+        :type run_after_gt: datetime
+        :param run_after_lte:
+        :type run_after_lte: datetime
+        :param run_after_lt:
+        :type run_after_lt: datetime
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -544,6 +637,19 @@ class XComApi:
             map_index=map_index,
             limit=limit,
             offset=offset,
+            xcom_key_pattern=xcom_key_pattern,
+            dag_display_name_pattern=dag_display_name_pattern,
+            run_id_pattern=run_id_pattern,
+            task_id_pattern=task_id_pattern,
+            map_index_filter=map_index_filter,
+            logical_date_gte=logical_date_gte,
+            logical_date_gt=logical_date_gt,
+            logical_date_lte=logical_date_lte,
+            logical_date_lt=logical_date_lt,
+            run_after_gte=run_after_gte,
+            run_after_gt=run_after_gt,
+            run_after_lte=run_after_lte,
+            run_after_lt=run_after_lt,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -579,6 +685,19 @@ class XComApi:
         map_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
+        xcom_key_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        dag_display_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        run_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        task_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        map_index_filter: Optional[StrictInt] = None,
+        logical_date_gte: Optional[datetime] = None,
+        logical_date_gt: Optional[datetime] = None,
+        logical_date_lte: Optional[datetime] = None,
+        logical_date_lt: Optional[datetime] = None,
+        run_after_gte: Optional[datetime] = None,
+        run_after_gt: Optional[datetime] = None,
+        run_after_lte: Optional[datetime] = None,
+        run_after_lt: Optional[datetime] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -610,6 +729,32 @@ class XComApi:
         :type limit: int
         :param offset:
         :type offset: int
+        :param xcom_key_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :type xcom_key_pattern: str
+        :param dag_display_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :type dag_display_name_pattern: str
+        :param run_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :type run_id_pattern: str
+        :param task_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :type task_id_pattern: str
+        :param map_index_filter:
+        :type map_index_filter: int
+        :param logical_date_gte:
+        :type logical_date_gte: datetime
+        :param logical_date_gt:
+        :type logical_date_gt: datetime
+        :param logical_date_lte:
+        :type logical_date_lte: datetime
+        :param logical_date_lt:
+        :type logical_date_lt: datetime
+        :param run_after_gte:
+        :type run_after_gte: datetime
+        :param run_after_gt:
+        :type run_after_gt: datetime
+        :param run_after_lte:
+        :type run_after_lte: datetime
+        :param run_after_lt:
+        :type run_after_lt: datetime
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -640,6 +785,19 @@ class XComApi:
             map_index=map_index,
             limit=limit,
             offset=offset,
+            xcom_key_pattern=xcom_key_pattern,
+            dag_display_name_pattern=dag_display_name_pattern,
+            run_id_pattern=run_id_pattern,
+            task_id_pattern=task_id_pattern,
+            map_index_filter=map_index_filter,
+            logical_date_gte=logical_date_gte,
+            logical_date_gt=logical_date_gt,
+            logical_date_lte=logical_date_lte,
+            logical_date_lt=logical_date_lt,
+            run_after_gte=run_after_gte,
+            run_after_gt=run_after_gt,
+            run_after_lte=run_after_lte,
+            run_after_lt=run_after_lt,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -670,6 +828,19 @@ class XComApi:
         map_index,
         limit,
         offset,
+        xcom_key_pattern,
+        dag_display_name_pattern,
+        run_id_pattern,
+        task_id_pattern,
+        map_index_filter,
+        logical_date_gte,
+        logical_date_gt,
+        logical_date_lte,
+        logical_date_lt,
+        run_after_gte,
+        run_after_gt,
+        run_after_lte,
+        run_after_lt,
         _request_auth,
         _content_type,
         _headers,
@@ -714,6 +885,130 @@ class XComApi:
             
             _query_params.append(('offset', offset))
             
+        if xcom_key_pattern is not None:
+            
+            _query_params.append(('xcom_key_pattern', xcom_key_pattern))
+            
+        if dag_display_name_pattern is not None:
+            
+            _query_params.append(('dag_display_name_pattern', dag_display_name_pattern))
+            
+        if run_id_pattern is not None:
+            
+            _query_params.append(('run_id_pattern', run_id_pattern))
+            
+        if task_id_pattern is not None:
+            
+            _query_params.append(('task_id_pattern', task_id_pattern))
+            
+        if map_index_filter is not None:
+            
+            _query_params.append(('map_index_filter', map_index_filter))
+            
+        if logical_date_gte is not None:
+            if isinstance(logical_date_gte, datetime):
+                _query_params.append(
+                    (
+                        'logical_date_gte',
+                        logical_date_gte.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('logical_date_gte', logical_date_gte))
+            
+        if logical_date_gt is not None:
+            if isinstance(logical_date_gt, datetime):
+                _query_params.append(
+                    (
+                        'logical_date_gt',
+                        logical_date_gt.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('logical_date_gt', logical_date_gt))
+            
+        if logical_date_lte is not None:
+            if isinstance(logical_date_lte, datetime):
+                _query_params.append(
+                    (
+                        'logical_date_lte',
+                        logical_date_lte.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('logical_date_lte', logical_date_lte))
+            
+        if logical_date_lt is not None:
+            if isinstance(logical_date_lt, datetime):
+                _query_params.append(
+                    (
+                        'logical_date_lt',
+                        logical_date_lt.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('logical_date_lt', logical_date_lt))
+            
+        if run_after_gte is not None:
+            if isinstance(run_after_gte, datetime):
+                _query_params.append(
+                    (
+                        'run_after_gte',
+                        run_after_gte.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('run_after_gte', run_after_gte))
+            
+        if run_after_gt is not None:
+            if isinstance(run_after_gt, datetime):
+                _query_params.append(
+                    (
+                        'run_after_gt',
+                        run_after_gt.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('run_after_gt', run_after_gt))
+            
+        if run_after_lte is not None:
+            if isinstance(run_after_lte, datetime):
+                _query_params.append(
+                    (
+                        'run_after_lte',
+                        run_after_lte.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('run_after_lte', run_after_lte))
+            
+        if run_after_lt is not None:
+            if isinstance(run_after_lt, datetime):
+                _query_params.append(
+                    (
+                        'run_after_lt',
+                        run_after_lt.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('run_after_lt', run_after_lt))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -730,7 +1025,8 @@ class XComApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -1102,7 +1398,8 @@ class XComApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -1451,7 +1748,8 @@ class XComApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'OAuth2PasswordBearer', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(

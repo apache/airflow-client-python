@@ -6,6 +6,7 @@ TaskInstanceHistory serializer for responses.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**dag_display_name** | **str** |  | 
 **dag_id** | **str** |  | 
 **dag_run_id** | **str** |  | 
 **dag_version** | [**DagVersionResponse**](DagVersionResponse.md) |  | [optional] 
@@ -17,6 +18,7 @@ Name | Type | Description | Notes
 **map_index** | **int** |  | 
 **max_tries** | **int** |  | 
 **operator** | **str** |  | [optional] 
+**operator_name** | **str** |  | [optional] 
 **pid** | **int** |  | [optional] 
 **pool** | **str** |  | 
 **pool_slots** | **int** |  | 

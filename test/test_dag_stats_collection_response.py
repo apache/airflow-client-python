@@ -37,6 +37,7 @@ class TestDagStatsCollectionResponse(unittest.TestCase):
             return DagStatsCollectionResponse(
                 dags = [
                     airflow_client.client.models.dag_stats_response.DagStatsResponse(
+                        dag_display_name = '', 
                         dag_id = '', 
                         stats = [
                             airflow_client.client.models.dag_stats_state_response.DagStatsStateResponse(
@@ -50,6 +51,7 @@ class TestDagStatsCollectionResponse(unittest.TestCase):
             return DagStatsCollectionResponse(
                 dags = [
                     airflow_client.client.models.dag_stats_response.DagStatsResponse(
+                        dag_display_name = '', 
                         dag_id = '', 
                         stats = [
                             airflow_client.client.models.dag_stats_state_response.DagStatsStateResponse(

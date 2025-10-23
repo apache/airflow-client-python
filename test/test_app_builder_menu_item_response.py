@@ -41,6 +41,7 @@ class TestAppBuilderMenuItemResponse(unittest.TestCase):
             )
         else:
             return AppBuilderMenuItemResponse(
+                href = '',
                 name = '',
         )
         """

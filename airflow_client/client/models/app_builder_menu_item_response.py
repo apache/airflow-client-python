@@ -27,7 +27,7 @@ class AppBuilderMenuItemResponse(BaseModel):
     Serializer for AppBuilder Menu Item responses.
     """ # noqa: E501
     category: Optional[StrictStr] = None
-    href: Optional[StrictStr] = None
+    href: StrictStr
     name: StrictStr
     __properties: ClassVar[List[str]] = ["category", "href", "name"]
 

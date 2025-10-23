@@ -38,14 +38,14 @@ class TestBulkDeleteActionConnectionBody(unittest.TestCase):
                 action = 'delete',
                 action_on_non_existence = 'fail',
                 entities = [
-                    ''
+                    null
                     ]
             )
         else:
             return BulkDeleteActionConnectionBody(
                 action = 'delete',
                 entities = [
-                    ''
+                    null
                     ],
         )
         """

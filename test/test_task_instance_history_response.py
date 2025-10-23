@@ -35,6 +35,7 @@ class TestTaskInstanceHistoryResponse(unittest.TestCase):
         model = TaskInstanceHistoryResponse()
         if include_optional:
             return TaskInstanceHistoryResponse(
+                dag_display_name = '',
                 dag_id = '',
                 dag_run_id = '',
                 dag_version = airflow_client.client.models.dag_version_response.DagVersionResponse(
@@ -42,6 +43,7 @@ class TestTaskInstanceHistoryResponse(unittest.TestCase):
                     bundle_url = '', 
                     bundle_version = '', 
                     created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                    dag_display_name = '', 
                     dag_id = '', 
                     id = '', 
                     version_number = 56, ),
@@ -53,6 +55,7 @@ class TestTaskInstanceHistoryResponse(unittest.TestCase):
                 map_index = 56,
                 max_tries = 56,
                 operator = '',
+                operator_name = '',
                 pid = 56,
                 pool = '',
                 pool_slots = 56,
@@ -69,6 +72,7 @@ class TestTaskInstanceHistoryResponse(unittest.TestCase):
             )
         else:
             return TaskInstanceHistoryResponse(
+                dag_display_name = '',
                 dag_id = '',
                 dag_run_id = '',
                 executor_config = '',

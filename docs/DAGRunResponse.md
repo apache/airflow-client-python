@@ -8,11 +8,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **bundle_version** | **str** |  | [optional] 
 **conf** | **object** |  | [optional] 
+**dag_display_name** | **str** |  | 
 **dag_id** | **str** |  | 
 **dag_run_id** | **str** |  | 
 **dag_versions** | [**List[DagVersionResponse]**](DagVersionResponse.md) |  | 
 **data_interval_end** | **datetime** |  | [optional] 
 **data_interval_start** | **datetime** |  | [optional] 
+**duration** | **float** |  | [optional] 
 **end_date** | **datetime** |  | [optional] 
 **last_scheduling_decision** | **datetime** |  | [optional] 
 **logical_date** | **datetime** |  | [optional] 
@@ -23,6 +25,7 @@ Name | Type | Description | Notes
 **start_date** | **datetime** |  | [optional] 
 **state** | [**DagRunState**](DagRunState.md) |  | 
 **triggered_by** | [**DagRunTriggeredByType**](DagRunTriggeredByType.md) |  | [optional] 
+**triggering_user_name** | **str** |  | [optional] 
 
 ## Example
 

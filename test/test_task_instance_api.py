@@ -26,10 +26,45 @@ class TestTaskInstanceApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
+    def test_bulk_task_instances(self) -> None:
+        """Test case for bulk_task_instances
+
+        Bulk Task Instances
+        """
+        pass
+
+    def test_delete_task_instance(self) -> None:
+        """Test case for delete_task_instance
+
+        Delete Task Instance
+        """
+        pass
+
+    def test_get_external_log_url(self) -> None:
+        """Test case for get_external_log_url
+
+        Get External Log Url
+        """
+        pass
+
     def test_get_extra_links(self) -> None:
         """Test case for get_extra_links
 
         Get Extra Links
+        """
+        pass
+
+    def test_get_hitl_detail(self) -> None:
+        """Test case for get_hitl_detail
+
+        Get Hitl Detail
+        """
+        pass
+
+    def test_get_hitl_details(self) -> None:
+        """Test case for get_hitl_details
+
+        Get Hitl Details
         """
         pass
 
@@ -149,6 +184,13 @@ class TestTaskInstanceApi(unittest.TestCase):
         """Test case for post_clear_task_instances
 
         Post Clear Task Instances
+        """
+        pass
+
+    def test_update_hitl_detail(self) -> None:
+        """Test case for update_hitl_detail
+
+        Update Hitl Detail
         """
         pass
 

@@ -6,6 +6,7 @@ TaskInstance serializer for responses.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**dag_display_name** | **str** |  | 
 **dag_id** | **str** |  | 
 **dag_run_id** | **str** |  | 
 **dag_version** | [**DagVersionResponse**](DagVersionResponse.md) |  | [optional] 
@@ -20,6 +21,7 @@ Name | Type | Description | Notes
 **max_tries** | **int** |  | 
 **note** | **str** |  | [optional] 
 **operator** | **str** |  | [optional] 
+**operator_name** | **str** |  | [optional] 
 **pid** | **int** |  | [optional] 
 **pool** | **str** |  | 
 **pool_slots** | **int** |  | 

@@ -20,6 +20,7 @@ Create an XCom entry.
 ### Example
 
 * OAuth Authentication (OAuth2PasswordBearer):
+* Bearer Authentication (HTTPBearer):
 
 ```python
 import airflow_client.client
@@ -40,6 +41,11 @@ configuration = airflow_client.client.Configuration(
 # satisfies your auth use case.
 
 configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure Bearer authorization: HTTPBearer
+configuration = airflow_client.client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with airflow_client.client.ApiClient(configuration) as api_client:
@@ -77,7 +83,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 
@@ -98,7 +104,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_xcom_entries**
-> XComCollectionResponse get_xcom_entries(dag_id, dag_run_id, task_id, xcom_key=xcom_key, map_index=map_index, limit=limit, offset=offset)
+> XComCollectionResponse get_xcom_entries(dag_id, dag_run_id, task_id, xcom_key=xcom_key, map_index=map_index, limit=limit, offset=offset, xcom_key_pattern=xcom_key_pattern, dag_display_name_pattern=dag_display_name_pattern, run_id_pattern=run_id_pattern, task_id_pattern=task_id_pattern, map_index_filter=map_index_filter, logical_date_gte=logical_date_gte, logical_date_gt=logical_date_gt, logical_date_lte=logical_date_lte, logical_date_lt=logical_date_lt, run_after_gte=run_after_gte, run_after_gt=run_after_gt, run_after_lte=run_after_lte, run_after_lt=run_after_lt)
 
 Get Xcom Entries
 
@@ -109,6 +115,7 @@ This endpoint allows specifying `~` as the dag_id, dag_run_id, task_id to retrie
 ### Example
 
 * OAuth Authentication (OAuth2PasswordBearer):
+* Bearer Authentication (HTTPBearer):
 
 ```python
 import airflow_client.client
@@ -129,6 +136,11 @@ configuration = airflow_client.client.Configuration(
 
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
+# Configure Bearer authorization: HTTPBearer
+configuration = airflow_client.client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
 # Enter a context with an instance of the API client
 with airflow_client.client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -140,10 +152,23 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     map_index = 56 # int |  (optional)
     limit = 50 # int |  (optional) (default to 50)
     offset = 0 # int |  (optional) (default to 0)
+    xcom_key_pattern = 'xcom_key_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported. (optional)
+    dag_display_name_pattern = 'dag_display_name_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported. (optional)
+    run_id_pattern = 'run_id_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported. (optional)
+    task_id_pattern = 'task_id_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported. (optional)
+    map_index_filter = 56 # int |  (optional)
+    logical_date_gte = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
+    logical_date_gt = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
+    logical_date_lte = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
+    logical_date_lt = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
+    run_after_gte = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
+    run_after_gt = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
+    run_after_lte = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
+    run_after_lt = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
 
     try:
         # Get Xcom Entries
-        api_response = api_instance.get_xcom_entries(dag_id, dag_run_id, task_id, xcom_key=xcom_key, map_index=map_index, limit=limit, offset=offset)
+        api_response = api_instance.get_xcom_entries(dag_id, dag_run_id, task_id, xcom_key=xcom_key, map_index=map_index, limit=limit, offset=offset, xcom_key_pattern=xcom_key_pattern, dag_display_name_pattern=dag_display_name_pattern, run_id_pattern=run_id_pattern, task_id_pattern=task_id_pattern, map_index_filter=map_index_filter, logical_date_gte=logical_date_gte, logical_date_gt=logical_date_gt, logical_date_lte=logical_date_lte, logical_date_lt=logical_date_lt, run_after_gte=run_after_gte, run_after_gt=run_after_gt, run_after_lte=run_after_lte, run_after_lt=run_after_lt)
         print("The response of XComApi->get_xcom_entries:\n")
         pprint(api_response)
     except Exception as e:
@@ -164,6 +189,19 @@ Name | Type | Description  | Notes
  **map_index** | **int**|  | [optional] 
  **limit** | **int**|  | [optional] [default to 50]
  **offset** | **int**|  | [optional] [default to 0]
+ **xcom_key_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). Regular expressions are **not** supported. | [optional] 
+ **dag_display_name_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). Regular expressions are **not** supported. | [optional] 
+ **run_id_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). Regular expressions are **not** supported. | [optional] 
+ **task_id_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). Regular expressions are **not** supported. | [optional] 
+ **map_index_filter** | **int**|  | [optional] 
+ **logical_date_gte** | **datetime**|  | [optional] 
+ **logical_date_gt** | **datetime**|  | [optional] 
+ **logical_date_lte** | **datetime**|  | [optional] 
+ **logical_date_lt** | **datetime**|  | [optional] 
+ **run_after_gte** | **datetime**|  | [optional] 
+ **run_after_gt** | **datetime**|  | [optional] 
+ **run_after_lte** | **datetime**|  | [optional] 
+ **run_after_lt** | **datetime**|  | [optional] 
 
 ### Return type
 
@@ -171,7 +209,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 
@@ -201,6 +239,7 @@ Get an XCom entry.
 ### Example
 
 * OAuth Authentication (OAuth2PasswordBearer):
+* Bearer Authentication (HTTPBearer):
 
 ```python
 import airflow_client.client
@@ -220,6 +259,11 @@ configuration = airflow_client.client.Configuration(
 # satisfies your auth use case.
 
 configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure Bearer authorization: HTTPBearer
+configuration = airflow_client.client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with airflow_client.client.ApiClient(configuration) as api_client:
@@ -263,7 +307,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 
@@ -293,6 +337,7 @@ Update an existing XCom entry.
 ### Example
 
 * OAuth Authentication (OAuth2PasswordBearer):
+* Bearer Authentication (HTTPBearer):
 
 ```python
 import airflow_client.client
@@ -313,6 +358,11 @@ configuration = airflow_client.client.Configuration(
 # satisfies your auth use case.
 
 configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure Bearer authorization: HTTPBearer
+configuration = airflow_client.client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with airflow_client.client.ApiClient(configuration) as api_client:
@@ -352,7 +402,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 

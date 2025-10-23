@@ -35,6 +35,7 @@ class TestJobResponse(unittest.TestCase):
         model = JobResponse()
         if include_optional:
             return JobResponse(
+                dag_display_name = '',
                 dag_id = '',
                 end_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 executor_class = '',

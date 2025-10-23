@@ -38,7 +38,7 @@ class TestBulkBodyPoolBodyActionsInner(unittest.TestCase):
                 action = 'delete',
                 action_on_existence = 'fail',
                 entities = [
-                    ''
+                    null
                     ],
                 action_on_non_existence = 'fail'
             )
@@ -46,7 +46,7 @@ class TestBulkBodyPoolBodyActionsInner(unittest.TestCase):
             return BulkBodyPoolBodyActionsInner(
                 action = 'delete',
                 entities = [
-                    ''
+                    null
                     ],
         )
         """

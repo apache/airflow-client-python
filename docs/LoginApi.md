@@ -79,7 +79,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **logout**
-> object logout(next=next)
+> object logout()
 
 Logout
 
@@ -104,11 +104,10 @@ configuration = airflow_client.client.Configuration(
 with airflow_client.client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = airflow_client.client.LoginApi(api_client)
-    next = 'next_example' # str |  (optional)
 
     try:
         # Logout
-        api_response = api_instance.logout(next=next)
+        api_response = api_instance.logout()
         print("The response of LoginApi->logout:\n")
         pprint(api_response)
     except Exception as e:
@@ -119,10 +118,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **next** | **str**|  | [optional] 
+This endpoint does not need any parameter.
 
 ### Return type
 
@@ -143,7 +139,6 @@ No authorization required
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **307** | Temporary Redirect |  -  |
-**422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

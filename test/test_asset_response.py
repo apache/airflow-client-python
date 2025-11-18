@@ -49,7 +49,9 @@ class TestAssetResponse(unittest.TestCase):
                         updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), )
                     ],
                 created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
-                extra = airflow_client.client.models.extra.extra(),
+                extra = {
+                    'key' : null
+                    },
                 group = '',
                 id = 56,
                 last_asset_event = airflow_client.client.models.last_asset_event_response.LastAssetEventResponse(

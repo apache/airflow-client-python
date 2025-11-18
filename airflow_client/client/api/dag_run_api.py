@@ -968,7 +968,7 @@ class DagRunApi:
         run_type: Optional[List[StrictStr]] = None,
         state: Optional[List[StrictStr]] = None,
         dag_version: Optional[List[StrictInt]] = None,
-        order_by: Optional[List[StrictStr]] = None,
+        order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, state, dag_id, run_id, logical_date, run_after, start_date, end_date, updated_at, conf, duration, dag_run_id`")] = None,
         run_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
         triggering_user_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
         _request_timeout: Union[
@@ -1040,7 +1040,7 @@ class DagRunApi:
         :type state: List[str]
         :param dag_version:
         :type dag_version: List[int]
-        :param order_by:
+        :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, state, dag_id, run_id, logical_date, run_after, start_date, end_date, updated_at, conf, duration, dag_run_id`
         :type order_by: List[str]
         :param run_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
         :type run_id_pattern: str
@@ -1151,7 +1151,7 @@ class DagRunApi:
         run_type: Optional[List[StrictStr]] = None,
         state: Optional[List[StrictStr]] = None,
         dag_version: Optional[List[StrictInt]] = None,
-        order_by: Optional[List[StrictStr]] = None,
+        order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, state, dag_id, run_id, logical_date, run_after, start_date, end_date, updated_at, conf, duration, dag_run_id`")] = None,
         run_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
         triggering_user_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
         _request_timeout: Union[
@@ -1223,7 +1223,7 @@ class DagRunApi:
         :type state: List[str]
         :param dag_version:
         :type dag_version: List[int]
-        :param order_by:
+        :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, state, dag_id, run_id, logical_date, run_after, start_date, end_date, updated_at, conf, duration, dag_run_id`
         :type order_by: List[str]
         :param run_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
         :type run_id_pattern: str
@@ -1334,7 +1334,7 @@ class DagRunApi:
         run_type: Optional[List[StrictStr]] = None,
         state: Optional[List[StrictStr]] = None,
         dag_version: Optional[List[StrictInt]] = None,
-        order_by: Optional[List[StrictStr]] = None,
+        order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, state, dag_id, run_id, logical_date, run_after, start_date, end_date, updated_at, conf, duration, dag_run_id`")] = None,
         run_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
         triggering_user_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
         _request_timeout: Union[
@@ -1406,7 +1406,7 @@ class DagRunApi:
         :type state: List[str]
         :param dag_version:
         :type dag_version: List[int]
-        :param order_by:
+        :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, state, dag_id, run_id, logical_date, run_after, start_date, end_date, updated_at, conf, duration, dag_run_id`
         :type order_by: List[str]
         :param run_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
         :type run_id_pattern: str

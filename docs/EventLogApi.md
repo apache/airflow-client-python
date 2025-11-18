@@ -133,7 +133,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     api_instance = airflow_client.client.EventLogApi(api_client)
     limit = 50 # int |  (optional) (default to 50)
     offset = 0 # int |  (optional) (default to 0)
-    order_by = [id] # List[str] |  (optional) (default to [id])
+    order_by = ["id"] # List[str] | Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, dttm, dag_id, task_id, run_id, event, logical_date, owner, extra, when, event_log_id` (optional) (default to ["id"])
     dag_id = 'dag_id_example' # str |  (optional)
     task_id = 'task_id_example' # str |  (optional)
     run_id = 'run_id_example' # str |  (optional)
@@ -169,7 +169,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **int**|  | [optional] [default to 50]
  **offset** | **int**|  | [optional] [default to 0]
- **order_by** | [**List[str]**](str.md)|  | [optional] [default to [id]]
+ **order_by** | [**List[str]**](str.md)| Attributes to order by, multi criteria sort is supported. Prefix with &#x60;-&#x60; for descending order. Supported attributes: &#x60;id, dttm, dag_id, task_id, run_id, event, logical_date, owner, extra, when, event_log_id&#x60; | [optional] [default to [&quot;id&quot;]]
  **dag_id** | **str**|  | [optional] 
  **task_id** | **str**|  | [optional] 
  **run_id** | **str**|  | [optional] 

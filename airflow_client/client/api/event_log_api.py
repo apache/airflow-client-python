@@ -317,7 +317,7 @@ class EventLogApi:
         self,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        order_by: Optional[List[StrictStr]] = None,
+        order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, dttm, dag_id, task_id, run_id, event, logical_date, owner, extra, when, event_log_id`")] = None,
         dag_id: Optional[StrictStr] = None,
         task_id: Optional[StrictStr] = None,
         run_id: Optional[StrictStr] = None,
@@ -355,7 +355,7 @@ class EventLogApi:
         :type limit: int
         :param offset:
         :type offset: int
-        :param order_by:
+        :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, dttm, dag_id, task_id, run_id, event, logical_date, owner, extra, when, event_log_id`
         :type order_by: List[str]
         :param dag_id:
         :type dag_id: str
@@ -459,7 +459,7 @@ class EventLogApi:
         self,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        order_by: Optional[List[StrictStr]] = None,
+        order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, dttm, dag_id, task_id, run_id, event, logical_date, owner, extra, when, event_log_id`")] = None,
         dag_id: Optional[StrictStr] = None,
         task_id: Optional[StrictStr] = None,
         run_id: Optional[StrictStr] = None,
@@ -497,7 +497,7 @@ class EventLogApi:
         :type limit: int
         :param offset:
         :type offset: int
-        :param order_by:
+        :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, dttm, dag_id, task_id, run_id, event, logical_date, owner, extra, when, event_log_id`
         :type order_by: List[str]
         :param dag_id:
         :type dag_id: str
@@ -601,7 +601,7 @@ class EventLogApi:
         self,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        order_by: Optional[List[StrictStr]] = None,
+        order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, dttm, dag_id, task_id, run_id, event, logical_date, owner, extra, when, event_log_id`")] = None,
         dag_id: Optional[StrictStr] = None,
         task_id: Optional[StrictStr] = None,
         run_id: Optional[StrictStr] = None,
@@ -639,7 +639,7 @@ class EventLogApi:
         :type limit: int
         :param offset:
         :type offset: int
-        :param order_by:
+        :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, dttm, dag_id, task_id, run_id, event, logical_date, owner, extra, when, event_log_id`
         :type order_by: List[str]
         :param dag_id:
         :type dag_id: str

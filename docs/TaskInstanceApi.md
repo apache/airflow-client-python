@@ -529,7 +529,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     dag_run_id = 'dag_run_id_example' # str | 
     limit = 50 # int |  (optional) (default to 50)
     offset = 0 # int |  (optional) (default to 0)
-    order_by = ["ti_id"] # List[str] |  (optional) (default to ["ti_id"])
+    order_by = ["ti_id"] # List[str] | Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `ti_id, subject, responded_at, created_at, responded_by_user_id, responded_by_user_name, dag_id, run_id, run_after, rendered_map_index, task_instance_operator, task_instance_state` (optional) (default to ["ti_id"])
     dag_id_pattern = 'dag_id_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported. (optional)
     task_id = 'task_id_example' # str |  (optional)
     task_id_pattern = 'task_id_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported. (optional)
@@ -565,7 +565,7 @@ Name | Type | Description  | Notes
  **dag_run_id** | **str**|  | 
  **limit** | **int**|  | [optional] [default to 50]
  **offset** | **int**|  | [optional] [default to 0]
- **order_by** | [**List[str]**](str.md)|  | [optional] [default to [&quot;ti_id&quot;]]
+ **order_by** | [**List[str]**](str.md)| Attributes to order by, multi criteria sort is supported. Prefix with &#x60;-&#x60; for descending order. Supported attributes: &#x60;ti_id, subject, responded_at, created_at, responded_by_user_id, responded_by_user_name, dag_id, run_id, run_after, rendered_map_index, task_instance_operator, task_instance_state&#x60; | [optional] [default to [&quot;ti_id&quot;]]
  **dag_id_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). Regular expressions are **not** supported. | [optional] 
  **task_id** | **str**|  | [optional] 
  **task_id_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). Regular expressions are **not** supported. | [optional] 
@@ -1052,7 +1052,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     map_index = [56] # List[int] |  (optional)
     limit = 50 # int |  (optional) (default to 50)
     offset = 0 # int |  (optional) (default to 0)
-    order_by = [map_index] # List[str] |  (optional) (default to [map_index])
+    order_by = ["map_index"] # List[str] | Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, state, duration, start_date, end_date, map_index, try_number, logical_date, run_after, data_interval_start, data_interval_end, rendered_map_index, operator, run_after, logical_date, data_interval_start, data_interval_end` (optional) (default to ["map_index"])
 
     try:
         # Get Mapped Task Instances
@@ -1107,7 +1107,7 @@ Name | Type | Description  | Notes
  **map_index** | [**List[int]**](int.md)|  | [optional] 
  **limit** | **int**|  | [optional] [default to 50]
  **offset** | **int**|  | [optional] [default to 0]
- **order_by** | [**List[str]**](str.md)|  | [optional] [default to [map_index]]
+ **order_by** | [**List[str]**](str.md)| Attributes to order by, multi criteria sort is supported. Prefix with &#x60;-&#x60; for descending order. Supported attributes: &#x60;id, state, duration, start_date, end_date, map_index, try_number, logical_date, run_after, data_interval_start, data_interval_end, rendered_map_index, operator, run_after, logical_date, data_interval_start, data_interval_end&#x60; | [optional] [default to [&quot;map_index&quot;]]
 
 ### Return type
 
@@ -1670,7 +1670,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     map_index = [56] # List[int] |  (optional)
     limit = 50 # int |  (optional) (default to 50)
     offset = 0 # int |  (optional) (default to 0)
-    order_by = ["map_index"] # List[str] |  (optional) (default to ["map_index"])
+    order_by = ["map_index"] # List[str] | Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, state, duration, start_date, end_date, map_index, try_number, logical_date, run_after, data_interval_start, data_interval_end, rendered_map_index, operator, logical_date, run_after, data_interval_start, data_interval_end` (optional) (default to ["map_index"])
 
     try:
         # Get Task Instances
@@ -1726,7 +1726,7 @@ Name | Type | Description  | Notes
  **map_index** | [**List[int]**](int.md)|  | [optional] 
  **limit** | **int**|  | [optional] [default to 50]
  **offset** | **int**|  | [optional] [default to 0]
- **order_by** | [**List[str]**](str.md)|  | [optional] [default to [&quot;map_index&quot;]]
+ **order_by** | [**List[str]**](str.md)| Attributes to order by, multi criteria sort is supported. Prefix with &#x60;-&#x60; for descending order. Supported attributes: &#x60;id, state, duration, start_date, end_date, map_index, try_number, logical_date, run_after, data_interval_start, data_interval_end, rendered_map_index, operator, logical_date, run_after, data_interval_start, data_interval_end&#x60; | [optional] [default to [&quot;map_index&quot;]]
 
 ### Return type
 

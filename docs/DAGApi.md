@@ -396,7 +396,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     api_instance = airflow_client.client.DAGApi(api_client)
     limit = 50 # int |  (optional) (default to 50)
     offset = 0 # int |  (optional) (default to 0)
-    order_by = ["name"] # List[str] |  (optional) (default to ["name"])
+    order_by = ["name"] # List[str] | Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `name` (optional) (default to ["name"])
     tag_name_pattern = 'tag_name_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported. (optional)
 
     try:
@@ -417,7 +417,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **int**|  | [optional] [default to 50]
  **offset** | **int**|  | [optional] [default to 0]
- **order_by** | [**List[str]**](str.md)|  | [optional] [default to [&quot;name&quot;]]
+ **order_by** | [**List[str]**](str.md)| Attributes to order by, multi criteria sort is supported. Prefix with &#x60;-&#x60; for descending order. Supported attributes: &#x60;name&#x60; | [optional] [default to [&quot;name&quot;]]
  **tag_name_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). Regular expressions are **not** supported. | [optional] 
 
 ### Return type
@@ -509,7 +509,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     dag_run_end_date_lte = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
     dag_run_end_date_lt = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
     dag_run_state = ['dag_run_state_example'] # List[str] |  (optional)
-    order_by = [dag_id] # List[str] |  (optional) (default to [dag_id])
+    order_by = ["dag_id"] # List[str] | Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `dag_id, dag_display_name, next_dagrun, state, start_date, last_run_state, last_run_start_date` (optional) (default to ["dag_id"])
     is_favorite = True # bool |  (optional)
 
     try:
@@ -552,7 +552,7 @@ Name | Type | Description  | Notes
  **dag_run_end_date_lte** | **datetime**|  | [optional] 
  **dag_run_end_date_lt** | **datetime**|  | [optional] 
  **dag_run_state** | [**List[str]**](str.md)|  | [optional] 
- **order_by** | [**List[str]**](str.md)|  | [optional] [default to [dag_id]]
+ **order_by** | [**List[str]**](str.md)| Attributes to order by, multi criteria sort is supported. Prefix with &#x60;-&#x60; for descending order. Supported attributes: &#x60;dag_id, dag_display_name, next_dagrun, state, start_date, last_run_state, last_run_start_date&#x60; | [optional] [default to [&quot;dag_id&quot;]]
  **is_favorite** | **bool**|  | [optional] 
 
 ### Return type

@@ -45,6 +45,7 @@ class DAGDetailsResponse(BaseModel):
     fileloc: StrictStr
     has_import_errors: StrictBool
     has_task_concurrency_limits: StrictBool
+    is_favorite: Optional[StrictBool] = False
     is_paused: StrictBool
     is_paused_upon_creation: Optional[StrictBool] = None
     is_stale: StrictBool
@@ -71,7 +72,7 @@ class DAGDetailsResponse(BaseModel):
     timetable_description: Optional[StrictStr] = None
     timetable_summary: Optional[StrictStr] = None
     timezone: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["asset_expression", "bundle_name", "bundle_version", "catchup", "concurrency", "dag_display_name", "dag_id", "dag_run_timeout", "default_args", "description", "doc_md", "end_date", "file_token", "fileloc", "has_import_errors", "has_task_concurrency_limits", "is_paused", "is_paused_upon_creation", "is_stale", "last_expired", "last_parse_duration", "last_parsed", "last_parsed_time", "latest_dag_version", "max_active_runs", "max_active_tasks", "max_consecutive_failed_dag_runs", "next_dagrun_data_interval_end", "next_dagrun_data_interval_start", "next_dagrun_logical_date", "next_dagrun_run_after", "owner_links", "owners", "params", "relative_fileloc", "render_template_as_native_obj", "start_date", "tags", "template_search_path", "timetable_description", "timetable_summary", "timezone"]
+    __properties: ClassVar[List[str]] = ["asset_expression", "bundle_name", "bundle_version", "catchup", "concurrency", "dag_display_name", "dag_id", "dag_run_timeout", "default_args", "description", "doc_md", "end_date", "file_token", "fileloc", "has_import_errors", "has_task_concurrency_limits", "is_favorite", "is_paused", "is_paused_upon_creation", "is_stale", "last_expired", "last_parse_duration", "last_parsed", "last_parsed_time", "latest_dag_version", "max_active_runs", "max_active_tasks", "max_consecutive_failed_dag_runs", "next_dagrun_data_interval_end", "next_dagrun_data_interval_start", "next_dagrun_logical_date", "next_dagrun_run_after", "owner_links", "owners", "params", "relative_fileloc", "render_template_as_native_obj", "start_date", "tags", "template_search_path", "timetable_description", "timetable_summary", "timezone"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -154,6 +155,7 @@ class DAGDetailsResponse(BaseModel):
             "fileloc": obj.get("fileloc"),
             "has_import_errors": obj.get("has_import_errors"),
             "has_task_concurrency_limits": obj.get("has_task_concurrency_limits"),
+            "is_favorite": obj.get("is_favorite") if obj.get("is_favorite") is not None else False,
             "is_paused": obj.get("is_paused"),
             "is_paused_upon_creation": obj.get("is_paused_upon_creation"),
             "is_stale": obj.get("is_stale"),

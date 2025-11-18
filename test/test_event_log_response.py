@@ -44,6 +44,7 @@ class TestEventLogResponse(unittest.TestCase):
                 map_index = 56,
                 owner = '',
                 run_id = '',
+                task_display_name = '',
                 task_id = '',
                 try_number = 56,
                 when = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f')

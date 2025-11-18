@@ -341,7 +341,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     run_type = ['run_type_example'] # List[str] |  (optional)
     state = ['state_example'] # List[str] |  (optional)
     dag_version = [56] # List[int] |  (optional)
-    order_by = [id] # List[str] |  (optional) (default to [id])
+    order_by = ["id"] # List[str] | Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, state, dag_id, run_id, logical_date, run_after, start_date, end_date, updated_at, conf, duration, dag_run_id` (optional) (default to ["id"])
     run_id_pattern = 'run_id_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported. (optional)
     triggering_user_name_pattern = 'triggering_user_name_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported. (optional)
 
@@ -387,7 +387,7 @@ Name | Type | Description  | Notes
  **run_type** | [**List[str]**](str.md)|  | [optional] 
  **state** | [**List[str]**](str.md)|  | [optional] 
  **dag_version** | [**List[int]**](int.md)|  | [optional] 
- **order_by** | [**List[str]**](str.md)|  | [optional] [default to [id]]
+ **order_by** | [**List[str]**](str.md)| Attributes to order by, multi criteria sort is supported. Prefix with &#x60;-&#x60; for descending order. Supported attributes: &#x60;id, state, dag_id, run_id, logical_date, run_after, start_date, end_date, updated_at, conf, duration, dag_run_id&#x60; | [optional] [default to [&quot;id&quot;]]
  **run_id_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). Regular expressions are **not** supported. | [optional] 
  **triggering_user_name_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). Regular expressions are **not** supported. | [optional] 
 

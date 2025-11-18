@@ -571,7 +571,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     limit = 50 # int |  (optional) (default to 50)
     offset = 0 # int |  (optional) (default to 0)
     name_pattern = 'name_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported. (optional)
-    order_by = [id] # List[str] |  (optional) (default to [id])
+    order_by = ["id"] # List[str] | Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, name` (optional) (default to ["id"])
 
     try:
         # Get Asset Aliases
@@ -592,7 +592,7 @@ Name | Type | Description  | Notes
  **limit** | **int**|  | [optional] [default to 50]
  **offset** | **int**|  | [optional] [default to 0]
  **name_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). Regular expressions are **not** supported. | [optional] 
- **order_by** | [**List[str]**](str.md)|  | [optional] [default to [id]]
+ **order_by** | [**List[str]**](str.md)| Attributes to order by, multi criteria sort is supported. Prefix with &#x60;-&#x60; for descending order. Supported attributes: &#x60;id, name&#x60; | [optional] [default to [&quot;id&quot;]]
 
 ### Return type
 
@@ -661,7 +661,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     api_instance = airflow_client.client.AssetApi(api_client)
     limit = 50 # int |  (optional) (default to 50)
     offset = 0 # int |  (optional) (default to 0)
-    order_by = ["timestamp"] # List[str] |  (optional) (default to ["timestamp"])
+    order_by = ["timestamp"] # List[str] | Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `source_task_id, source_dag_id, source_run_id, source_map_index, timestamp` (optional) (default to ["timestamp"])
     asset_id = 56 # int |  (optional)
     source_dag_id = 'source_dag_id_example' # str |  (optional)
     source_task_id = 'source_task_id_example' # str |  (optional)
@@ -690,7 +690,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **int**|  | [optional] [default to 50]
  **offset** | **int**|  | [optional] [default to 0]
- **order_by** | [**List[str]**](str.md)|  | [optional] [default to [&quot;timestamp&quot;]]
+ **order_by** | [**List[str]**](str.md)| Attributes to order by, multi criteria sort is supported. Prefix with &#x60;-&#x60; for descending order. Supported attributes: &#x60;source_task_id, source_dag_id, source_run_id, source_map_index, timestamp&#x60; | [optional] [default to [&quot;timestamp&quot;]]
  **asset_id** | **int**|  | [optional] 
  **source_dag_id** | **str**|  | [optional] 
  **source_task_id** | **str**|  | [optional] 
@@ -859,7 +859,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     uri_pattern = 'uri_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported. (optional)
     dag_ids = ['dag_ids_example'] # List[str] |  (optional)
     only_active = True # bool |  (optional) (default to True)
-    order_by = ["id"] # List[str] |  (optional) (default to ["id"])
+    order_by = ["id"] # List[str] | Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, name, uri, created_at, updated_at` (optional) (default to ["id"])
 
     try:
         # Get Assets
@@ -883,7 +883,7 @@ Name | Type | Description  | Notes
  **uri_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). Regular expressions are **not** supported. | [optional] 
  **dag_ids** | [**List[str]**](str.md)|  | [optional] 
  **only_active** | **bool**|  | [optional] [default to True]
- **order_by** | [**List[str]**](str.md)|  | [optional] [default to [&quot;id&quot;]]
+ **order_by** | [**List[str]**](str.md)| Attributes to order by, multi criteria sort is supported. Prefix with &#x60;-&#x60; for descending order. Supported attributes: &#x60;id, name, uri, created_at, updated_at&#x60; | [optional] [default to [&quot;id&quot;]]
 
 ### Return type
 

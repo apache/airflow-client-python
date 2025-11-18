@@ -1155,7 +1155,7 @@ class DAGApi:
         self,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        order_by: Optional[List[StrictStr]] = None,
+        order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `name`")] = None,
         tag_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
         _request_timeout: Union[
             None,
@@ -1178,7 +1178,7 @@ class DAGApi:
         :type limit: int
         :param offset:
         :type offset: int
-        :param order_by:
+        :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `name`
         :type order_by: List[str]
         :param tag_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
         :type tag_name_pattern: str
@@ -1237,7 +1237,7 @@ class DAGApi:
         self,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        order_by: Optional[List[StrictStr]] = None,
+        order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `name`")] = None,
         tag_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
         _request_timeout: Union[
             None,
@@ -1260,7 +1260,7 @@ class DAGApi:
         :type limit: int
         :param offset:
         :type offset: int
-        :param order_by:
+        :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `name`
         :type order_by: List[str]
         :param tag_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
         :type tag_name_pattern: str
@@ -1319,7 +1319,7 @@ class DAGApi:
         self,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        order_by: Optional[List[StrictStr]] = None,
+        order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `name`")] = None,
         tag_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
         _request_timeout: Union[
             None,
@@ -1342,7 +1342,7 @@ class DAGApi:
         :type limit: int
         :param offset:
         :type offset: int
-        :param order_by:
+        :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `name`
         :type order_by: List[str]
         :param tag_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
         :type tag_name_pattern: str
@@ -1502,7 +1502,7 @@ class DAGApi:
         dag_run_end_date_lte: Optional[datetime] = None,
         dag_run_end_date_lt: Optional[datetime] = None,
         dag_run_state: Optional[List[StrictStr]] = None,
-        order_by: Optional[List[StrictStr]] = None,
+        order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `dag_id, dag_display_name, next_dagrun, state, start_date, last_run_state, last_run_start_date`")] = None,
         is_favorite: Optional[StrictBool] = None,
         _request_timeout: Union[
             None,
@@ -1569,7 +1569,7 @@ class DAGApi:
         :type dag_run_end_date_lt: datetime
         :param dag_run_state:
         :type dag_run_state: List[str]
-        :param order_by:
+        :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `dag_id, dag_display_name, next_dagrun, state, start_date, last_run_state, last_run_start_date`
         :type order_by: List[str]
         :param is_favorite:
         :type is_favorite: bool
@@ -1672,7 +1672,7 @@ class DAGApi:
         dag_run_end_date_lte: Optional[datetime] = None,
         dag_run_end_date_lt: Optional[datetime] = None,
         dag_run_state: Optional[List[StrictStr]] = None,
-        order_by: Optional[List[StrictStr]] = None,
+        order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `dag_id, dag_display_name, next_dagrun, state, start_date, last_run_state, last_run_start_date`")] = None,
         is_favorite: Optional[StrictBool] = None,
         _request_timeout: Union[
             None,
@@ -1739,7 +1739,7 @@ class DAGApi:
         :type dag_run_end_date_lt: datetime
         :param dag_run_state:
         :type dag_run_state: List[str]
-        :param order_by:
+        :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `dag_id, dag_display_name, next_dagrun, state, start_date, last_run_state, last_run_start_date`
         :type order_by: List[str]
         :param is_favorite:
         :type is_favorite: bool
@@ -1842,7 +1842,7 @@ class DAGApi:
         dag_run_end_date_lte: Optional[datetime] = None,
         dag_run_end_date_lt: Optional[datetime] = None,
         dag_run_state: Optional[List[StrictStr]] = None,
-        order_by: Optional[List[StrictStr]] = None,
+        order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `dag_id, dag_display_name, next_dagrun, state, start_date, last_run_state, last_run_start_date`")] = None,
         is_favorite: Optional[StrictBool] = None,
         _request_timeout: Union[
             None,
@@ -1909,7 +1909,7 @@ class DAGApi:
         :type dag_run_end_date_lt: datetime
         :param dag_run_state:
         :type dag_run_state: List[str]
-        :param order_by:
+        :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `dag_id, dag_display_name, next_dagrun, state, start_date, last_run_state, last_run_start_date`
         :type order_by: List[str]
         :param is_favorite:
         :type is_favorite: bool

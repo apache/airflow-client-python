@@ -114,7 +114,8 @@ components:
           title: Created Dagruns
           type: array
         extra:
-          additionalProperties: true
+          additionalProperties:
+            $ref: '#/components/schemas/JsonValue'
           nullable: true
           type: object
         group:
@@ -171,7 +172,8 @@ components:
           title: Created At
           type: string
         extra:
-          additionalProperties: true
+          additionalProperties:
+            $ref: '#/components/schemas/JsonValue'
           nullable: true
           type: object
         group:
@@ -1091,6 +1093,10 @@ components:
         has_task_concurrency_limits:
           title: Has Task Concurrency Limits
           type: boolean
+        is_favorite:
+          default: false
+          title: Is Favorite
+          type: boolean
         is_paused:
           title: Is Paused
           type: boolean
@@ -1950,6 +1956,9 @@ components:
           nullable: true
           type: string
         run_id:
+          nullable: true
+          type: string
+        task_display_name:
           nullable: true
           type: string
         task_id:
@@ -3843,12 +3852,18 @@ paths:
           default: true
           title: Only Active
           type: boolean
-      - in: query
+      - description: 'Attributes to order by, multi criteria sort is supported. Prefix
+          with `-` for descending order. Supported attributes: `id, name, uri, created_at,
+          updated_at`'
+        in: query
         name: order_by
         required: false
         schema:
           default:
           - id
+          description: 'Attributes to order by, multi criteria sort is supported.
+            Prefix with `-` for descending order. Supported attributes: `id, name,
+            uri, created_at, updated_at`'
           items:
             type: string
           title: Order By
@@ -3919,12 +3934,16 @@ paths:
         schema:
           nullable: true
           type: string
-      - in: query
+      - description: 'Attributes to order by, multi criteria sort is supported. Prefix
+          with `-` for descending order. Supported attributes: `id, name`'
+        in: query
         name: order_by
         required: false
         schema:
           default:
           - id
+          description: 'Attributes to order by, multi criteria sort is supported.
+            Prefix with `-` for descending order. Supported attributes: `id, name`'
           items:
             type: string
           title: Order By
@@ -4034,12 +4053,18 @@ paths:
           minimum: 0
           title: Offset
           type: integer
-      - in: query
+      - description: 'Attributes to order by, multi criteria sort is supported. Prefix
+          with `-` for descending order. Supported attributes: `source_task_id, source_dag_id,
+          source_run_id, source_map_index, timestamp`'
+        in: query
         name: order_by
         required: false
         schema:
           default:
           - timestamp
+          description: 'Attributes to order by, multi criteria sort is supported.
+            Prefix with `-` for descending order. Supported attributes: `source_task_id,
+            source_dag_id, source_run_id, source_map_index, timestamp`'
           items:
             type: string
           title: Order By
@@ -4426,13 +4451,6 @@ paths:
     get:
       description: Logout the user.
       operationId: logout
-      parameters:
-      - in: query
-        name: next
-        required: false
-        schema:
-          nullable: true
-          type: string
       responses:
         '200':
           content:
@@ -4445,12 +4463,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPExceptionResponse'
           description: Temporary Redirect
-        '422':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPValidationError'
-          description: Validation Error
       summary: Logout
       tags:
       - Login
@@ -4512,12 +4524,16 @@ paths:
           minimum: 0
           title: Offset
           type: integer
-      - in: query
+      - description: 'Attributes to order by, multi criteria sort is supported. Prefix
+          with `-` for descending order. Supported attributes: `id`'
+        in: query
         name: order_by
         required: false
         schema:
           default:
           - id
+          description: 'Attributes to order by, multi criteria sort is supported.
+            Prefix with `-` for descending order. Supported attributes: `id`'
           items:
             type: string
           title: Order By
@@ -5048,12 +5064,18 @@ paths:
           minimum: 0
           title: Offset
           type: integer
-      - in: query
+      - description: 'Attributes to order by, multi criteria sort is supported. Prefix
+          with `-` for descending order. Supported attributes: `conn_id, conn_type,
+          description, host, port, id, connection_id`'
+        in: query
         name: order_by
         required: false
         schema:
           default:
           - id
+          description: 'Attributes to order by, multi criteria sort is supported.
+            Prefix with `-` for descending order. Supported attributes: `conn_id,
+            conn_type, description, host, port, id, connection_id`'
           items:
             type: string
           title: Order By
@@ -5422,53 +5444,6 @@ paths:
       summary: Patch Connection
       tags:
       - Connection
-  /api/v2/dagReports:
-    get:
-      description: Get DAG report.
-      operationId: get_dag_reports
-      parameters:
-      - in: query
-        name: subdir
-        required: true
-        schema:
-          title: Subdir
-          type: string
-      responses:
-        '200':
-          content:
-            application/json:
-              schema: {}
-          description: Successful Response
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPExceptionResponse'
-          description: Bad Request
-        '401':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPExceptionResponse'
-          description: Unauthorized
-        '403':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPExceptionResponse'
-          description: Forbidden
-        '422':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPValidationError'
-          description: Validation Error
-      security:
-      - OAuth2PasswordBearer: []
-      - HTTPBearer: []
-      summary: Get Dag Reports
-      tags:
-      - DagReport
   /api/v2/dagSources/{dag_id}:
     get:
       description: Get source code using file token.
@@ -5627,12 +5602,16 @@ paths:
           minimum: 0
           title: Offset
           type: integer
-      - in: query
+      - description: 'Attributes to order by, multi criteria sort is supported. Prefix
+          with `-` for descending order. Supported attributes: `name`'
+        in: query
         name: order_by
         required: false
         schema:
           default:
           - name
+          description: 'Attributes to order by, multi criteria sort is supported.
+            Prefix with `-` for descending order. Supported attributes: `name`'
           items:
             type: string
           title: Order By
@@ -5709,12 +5688,18 @@ paths:
           minimum: 0
           title: Offset
           type: integer
-      - in: query
+      - description: 'Attributes to order by, multi criteria sort is supported. Prefix
+          with `-` for descending order. Supported attributes: `dag_id, warning_type,
+          message, timestamp`'
+        in: query
         name: order_by
         required: false
         schema:
           default:
           - dag_id
+          description: 'Attributes to order by, multi criteria sort is supported.
+            Prefix with `-` for descending order. Supported attributes: `dag_id, warning_type,
+            message, timestamp`'
           items:
             type: string
           title: Order By
@@ -5929,12 +5914,18 @@ paths:
             type: string
           title: Dag Run State
           type: array
-      - in: query
+      - description: 'Attributes to order by, multi criteria sort is supported. Prefix
+          with `-` for descending order. Supported attributes: `dag_id, dag_display_name,
+          next_dagrun, state, start_date, last_run_state, last_run_start_date`'
+        in: query
         name: order_by
         required: false
         schema:
           default:
           - dag_id
+          description: 'Attributes to order by, multi criteria sort is supported.
+            Prefix with `-` for descending order. Supported attributes: `dag_id, dag_display_name,
+            next_dagrun, state, start_date, last_run_state, last_run_start_date`'
           items:
             type: string
           title: Order By
@@ -6750,12 +6741,20 @@ paths:
             type: integer
           title: Dag Version
           type: array
-      - in: query
+      - description: 'Attributes to order by, multi criteria sort is supported. Prefix
+          with `-` for descending order. Supported attributes: `id, state, dag_id,
+          run_id, logical_date, run_after, start_date, end_date, updated_at, conf,
+          duration, dag_run_id`'
+        in: query
         name: order_by
         required: false
         schema:
           default:
           - id
+          description: 'Attributes to order by, multi criteria sort is supported.
+            Prefix with `-` for descending order. Supported attributes: `id, state,
+            dag_id, run_id, logical_date, run_after, start_date, end_date, updated_at,
+            conf, duration, dag_run_id`'
           items:
             type: string
           title: Order By
@@ -7208,12 +7207,21 @@ paths:
           minimum: 0
           title: Offset
           type: integer
-      - in: query
+      - description: 'Attributes to order by, multi criteria sort is supported. Prefix
+          with `-` for descending order. Supported attributes: `ti_id, subject, responded_at,
+          created_at, responded_by_user_id, responded_by_user_name, dag_id, run_id,
+          run_after, rendered_map_index, task_instance_operator, task_instance_state`'
+        in: query
         name: order_by
         required: false
         schema:
           default:
           - ti_id
+          description: 'Attributes to order by, multi criteria sort is supported.
+            Prefix with `-` for descending order. Supported attributes: `ti_id, subject,
+            responded_at, created_at, responded_by_user_id, responded_by_user_name,
+            dag_id, run_id, run_after, rendered_map_index, task_instance_operator,
+            task_instance_state`'
           items:
             type: string
           title: Order By
@@ -7632,12 +7640,22 @@ paths:
           minimum: 0
           title: Offset
           type: integer
-      - in: query
+      - description: 'Attributes to order by, multi criteria sort is supported. Prefix
+          with `-` for descending order. Supported attributes: `id, state, duration,
+          start_date, end_date, map_index, try_number, logical_date, run_after, data_interval_start,
+          data_interval_end, rendered_map_index, operator, logical_date, run_after,
+          data_interval_start, data_interval_end`'
+        in: query
         name: order_by
         required: false
         schema:
           default:
           - map_index
+          description: 'Attributes to order by, multi criteria sort is supported.
+            Prefix with `-` for descending order. Supported attributes: `id, state,
+            duration, start_date, end_date, map_index, try_number, logical_date, run_after,
+            data_interval_start, data_interval_end, rendered_map_index, operator,
+            logical_date, run_after, data_interval_start, data_interval_end`'
           items:
             type: string
           title: Order By
@@ -8578,12 +8596,22 @@ paths:
           minimum: 0
           title: Offset
           type: integer
-      - in: query
+      - description: 'Attributes to order by, multi criteria sort is supported. Prefix
+          with `-` for descending order. Supported attributes: `id, state, duration,
+          start_date, end_date, map_index, try_number, logical_date, run_after, data_interval_start,
+          data_interval_end, rendered_map_index, operator, run_after, logical_date,
+          data_interval_start, data_interval_end`'
+        in: query
         name: order_by
         required: false
         schema:
           default:
           - map_index
+          description: 'Attributes to order by, multi criteria sort is supported.
+            Prefix with `-` for descending order. Supported attributes: `id, state,
+            duration, start_date, end_date, map_index, try_number, logical_date, run_after,
+            data_interval_start, data_interval_end, rendered_map_index, operator,
+            run_after, logical_date, data_interval_start, data_interval_end`'
           items:
             type: string
           title: Order By
@@ -10084,12 +10112,18 @@ paths:
         schema:
           nullable: true
           type: string
-      - in: query
+      - description: 'Attributes to order by, multi criteria sort is supported. Prefix
+          with `-` for descending order. Supported attributes: `id, version_number,
+          bundle_name, bundle_version`'
+        in: query
         name: order_by
         required: false
         schema:
           default:
           - id
+          description: 'Attributes to order by, multi criteria sort is supported.
+            Prefix with `-` for descending order. Supported attributes: `id, version_number,
+            bundle_name, bundle_version`'
           items:
             type: string
           title: Order By
@@ -10474,12 +10508,18 @@ paths:
           minimum: 0
           title: Offset
           type: integer
-      - in: query
+      - description: 'Attributes to order by, multi criteria sort is supported. Prefix
+          with `-` for descending order. Supported attributes: `id, dttm, dag_id,
+          task_id, run_id, event, logical_date, owner, extra, when, event_log_id`'
+        in: query
         name: order_by
         required: false
         schema:
           default:
           - id
+          description: 'Attributes to order by, multi criteria sort is supported.
+            Prefix with `-` for descending order. Supported attributes: `id, dttm,
+            dag_id, task_id, run_id, event, logical_date, owner, extra, when, event_log_id`'
           items:
             type: string
           title: Order By
@@ -10695,12 +10735,18 @@ paths:
           minimum: 0
           title: Offset
           type: integer
-      - in: query
+      - description: 'Attributes to order by, multi criteria sort is supported. Prefix
+          with `-` for descending order. Supported attributes: `id, timestamp, filename,
+          bundle_name, stacktrace, import_error_id`'
+        in: query
         name: order_by
         required: false
         schema:
           default:
           - id
+          description: 'Attributes to order by, multi criteria sort is supported.
+            Prefix with `-` for descending order. Supported attributes: `id, timestamp,
+            filename, bundle_name, stacktrace, import_error_id`'
           items:
             type: string
           title: Order By
@@ -10875,12 +10921,20 @@ paths:
           minimum: 0
           title: Offset
           type: integer
-      - in: query
+      - description: 'Attributes to order by, multi criteria sort is supported. Prefix
+          with `-` for descending order. Supported attributes: `id, dag_id, state,
+          job_type, start_date, end_date, latest_heartbeat, executor_class, hostname,
+          unixname`'
+        in: query
         name: order_by
         required: false
         schema:
           default:
           - id
+          description: 'Attributes to order by, multi criteria sort is supported.
+            Prefix with `-` for descending order. Supported attributes: `id, dag_id,
+            state, job_type, start_date, end_date, latest_heartbeat, executor_class,
+            hostname, unixname`'
           items:
             type: string
           title: Order By
@@ -11106,12 +11160,17 @@ paths:
           minimum: 0
           title: Offset
           type: integer
-      - in: query
+      - description: 'Attributes to order by, multi criteria sort is supported. Prefix
+          with `-` for descending order. Supported attributes: `id, pool, name`'
+        in: query
         name: order_by
         required: false
         schema:
           default:
           - id
+          description: 'Attributes to order by, multi criteria sort is supported.
+            Prefix with `-` for descending order. Supported attributes: `id, pool,
+            name`'
           items:
             type: string
           title: Order By
@@ -11484,12 +11543,18 @@ paths:
           minimum: 0
           title: Offset
           type: integer
-      - in: query
+      - description: 'Attributes to order by, multi criteria sort is supported. Prefix
+          with `-` for descending order. Supported attributes: `key, id, _val, description,
+          is_encrypted`'
+        in: query
         name: order_by
         required: false
         schema:
           default:
           - id
+          description: 'Attributes to order by, multi criteria sort is supported.
+            Prefix with `-` for descending order. Supported attributes: `key, id,
+            _val, description, is_encrypted`'
           items:
             type: string
           title: Order By

@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **map_index** | **int** |  | [optional] 
 **owner** | **str** |  | [optional] 
 **run_id** | **str** |  | [optional] 
+**task_display_name** | **str** |  | [optional] 
 **task_id** | **str** |  | [optional] 
 **try_number** | **int** |  | [optional] 
 **when** | **datetime** |  | 

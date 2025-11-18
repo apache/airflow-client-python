@@ -37,7 +37,7 @@ class TestTaskCollectionResponse(unittest.TestCase):
             return TaskCollectionResponse(
                 tasks = [
                     airflow_client.client.models.task_response.TaskResponse(
-                        class_ref = airflow_client.client.models.extra.extra(), 
+                        class_ref = airflow_client.client.models.conf.conf(), 
                         depends_on_past = True, 
                         doc_md = '', 
                         downstream_task_ids = [
@@ -55,7 +55,7 @@ class TestTaskCollectionResponse(unittest.TestCase):
                         is_mapped = True, 
                         operator_name = '', 
                         owner = '', 
-                        params = airflow_client.client.models.extra.extra(), 
+                        params = airflow_client.client.models.conf.conf(), 
                         pool = '', 
                         pool_slots = 1.337, 
                         priority_weight = 1.337, 
@@ -85,7 +85,7 @@ class TestTaskCollectionResponse(unittest.TestCase):
             return TaskCollectionResponse(
                 tasks = [
                     airflow_client.client.models.task_response.TaskResponse(
-                        class_ref = airflow_client.client.models.extra.extra(), 
+                        class_ref = airflow_client.client.models.conf.conf(), 
                         depends_on_past = True, 
                         doc_md = '', 
                         downstream_task_ids = [
@@ -103,7 +103,7 @@ class TestTaskCollectionResponse(unittest.TestCase):
                         is_mapped = True, 
                         operator_name = '', 
                         owner = '', 
-                        params = airflow_client.client.models.extra.extra(), 
+                        params = airflow_client.client.models.conf.conf(), 
                         pool = '', 
                         pool_slots = 1.337, 
                         priority_weight = 1.337, 

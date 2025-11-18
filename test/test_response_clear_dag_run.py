@@ -97,7 +97,7 @@ class TestResponseClearDagRun(unittest.TestCase):
                     ],
                 total_entries = 56,
                 bundle_version = '',
-                conf = airflow_client.client.models.extra.extra(),
+                conf = airflow_client.client.models.conf.conf(),
                 dag_display_name = '',
                 dag_id = '',
                 dag_run_id = '',

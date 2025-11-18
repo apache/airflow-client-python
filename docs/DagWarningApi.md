@@ -52,7 +52,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     warning_type = airflow_client.client.DagWarningType() # DagWarningType |  (optional)
     limit = 50 # int |  (optional) (default to 50)
     offset = 0 # int |  (optional) (default to 0)
-    order_by = ["dag_id"] # List[str] |  (optional) (default to ["dag_id"])
+    order_by = ["dag_id"] # List[str] | Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `dag_id, warning_type, message, timestamp` (optional) (default to ["dag_id"])
 
     try:
         # List Dag Warnings
@@ -74,7 +74,7 @@ Name | Type | Description  | Notes
  **warning_type** | [**DagWarningType**](.md)|  | [optional] 
  **limit** | **int**|  | [optional] [default to 50]
  **offset** | **int**|  | [optional] [default to 0]
- **order_by** | [**List[str]**](str.md)|  | [optional] [default to [&quot;dag_id&quot;]]
+ **order_by** | [**List[str]**](str.md)| Attributes to order by, multi criteria sort is supported. Prefix with &#x60;-&#x60; for descending order. Supported attributes: &#x60;dag_id, warning_type, message, timestamp&#x60; | [optional] [default to [&quot;dag_id&quot;]]
 
 ### Return type
 

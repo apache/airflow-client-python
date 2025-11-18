@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **asset_id** | **int** |  | 
 **created_dagruns** | [**List[DagRunAssetReference]**](DagRunAssetReference.md) |  | 
-**extra** | **object** |  | [optional] 
+**extra** | **Dict[str, object]** |  | [optional] 
 **group** | **str** |  | [optional] 
 **id** | **int** |  | 
 **name** | **str** |  | [optional] 

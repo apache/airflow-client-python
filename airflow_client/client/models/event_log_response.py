@@ -36,10 +36,11 @@ class EventLogResponse(BaseModel):
     map_index: Optional[StrictInt] = None
     owner: Optional[StrictStr] = None
     run_id: Optional[StrictStr] = None
+    task_display_name: Optional[StrictStr] = None
     task_id: Optional[StrictStr] = None
     try_number: Optional[StrictInt] = None
     when: datetime
-    __properties: ClassVar[List[str]] = ["dag_display_name", "dag_id", "event", "event_log_id", "extra", "logical_date", "map_index", "owner", "run_id", "task_id", "try_number", "when"]
+    __properties: ClassVar[List[str]] = ["dag_display_name", "dag_id", "event", "event_log_id", "extra", "logical_date", "map_index", "owner", "run_id", "task_display_name", "task_id", "try_number", "when"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -101,6 +102,7 @@ class EventLogResponse(BaseModel):
             "map_index": obj.get("map_index"),
             "owner": obj.get("owner"),
             "run_id": obj.get("run_id"),
+            "task_display_name": obj.get("task_display_name"),
             "task_id": obj.get("task_id"),
             "try_number": obj.get("try_number"),
             "when": obj.get("when")

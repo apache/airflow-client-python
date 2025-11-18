@@ -14,7 +14,7 @@
 """  # noqa: E501
 
 
-__version__ = "3.1.0"
+__version__ = "3.1.3"
 
 # import apis into sdk package
 from airflow_client.client.api.asset_api import AssetApi
@@ -23,7 +23,6 @@ from airflow_client.client.api.config_api import ConfigApi
 from airflow_client.client.api.connection_api import ConnectionApi
 from airflow_client.client.api.dag_api import DAGApi
 from airflow_client.client.api.dag_parsing_api import DAGParsingApi
-from airflow_client.client.api.dag_report_api import DagReportApi
 from airflow_client.client.api.dag_run_api import DagRunApi
 from airflow_client.client.api.dag_source_api import DagSourceApi
 from airflow_client.client.api.dag_stats_api import DagStatsApi

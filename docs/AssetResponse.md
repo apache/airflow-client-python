@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **aliases** | [**List[AssetAliasResponse]**](AssetAliasResponse.md) |  | 
 **consuming_tasks** | [**List[TaskInletAssetReference]**](TaskInletAssetReference.md) |  | 
 **created_at** | **datetime** |  | 
-**extra** | **object** |  | [optional] 
+**extra** | **Dict[str, object]** |  | [optional] 
 **group** | **str** |  | 
 **id** | **int** |  | 
 **last_asset_event** | [**LastAssetEventResponse**](LastAssetEventResponse.md) |  | [optional] 

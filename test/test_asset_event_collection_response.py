@@ -49,7 +49,9 @@ class TestAssetEventCollectionResponse(unittest.TestCase):
                                 start_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                                 state = '', )
                             ], 
-                        extra = airflow_client.client.models.extra.extra(), 
+                        extra = {
+                            'key' : null
+                            }, 
                         group = '', 
                         id = 56, 
                         name = '', 
@@ -78,7 +80,9 @@ class TestAssetEventCollectionResponse(unittest.TestCase):
                                 start_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                                 state = '', )
                             ], 
-                        extra = airflow_client.client.models.extra.extra(), 
+                        extra = {
+                            'key' : null
+                            }, 
                         group = '', 
                         id = 56, 
                         name = '', 

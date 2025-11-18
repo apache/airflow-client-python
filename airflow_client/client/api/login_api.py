@@ -308,7 +308,6 @@ class LoginApi:
     @validate_call
     def logout(
         self,
-        next: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -326,8 +325,6 @@ class LoginApi:
 
         Logout the user.
 
-        :param next:
-        :type next: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -351,7 +348,6 @@ class LoginApi:
         """ # noqa: E501
 
         _param = self._logout_serialize(
-            next=next,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -361,7 +357,6 @@ class LoginApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "object",
             '307': "HTTPExceptionResponse",
-            '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -377,7 +372,6 @@ class LoginApi:
     @validate_call
     def logout_with_http_info(
         self,
-        next: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -395,8 +389,6 @@ class LoginApi:
 
         Logout the user.
 
-        :param next:
-        :type next: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -420,7 +412,6 @@ class LoginApi:
         """ # noqa: E501
 
         _param = self._logout_serialize(
-            next=next,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -430,7 +421,6 @@ class LoginApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "object",
             '307': "HTTPExceptionResponse",
-            '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -446,7 +436,6 @@ class LoginApi:
     @validate_call
     def logout_without_preload_content(
         self,
-        next: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -464,8 +453,6 @@ class LoginApi:
 
         Logout the user.
 
-        :param next:
-        :type next: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -489,7 +476,6 @@ class LoginApi:
         """ # noqa: E501
 
         _param = self._logout_serialize(
-            next=next,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -499,7 +485,6 @@ class LoginApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "object",
             '307': "HTTPExceptionResponse",
-            '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -510,7 +495,6 @@ class LoginApi:
 
     def _logout_serialize(
         self,
-        next,
         _request_auth,
         _content_type,
         _headers,
@@ -533,10 +517,6 @@ class LoginApi:
 
         # process the path parameters
         # process the query parameters
-        if next is not None:
-            
-            _query_params.append(('next', next))
-            
         # process the header parameters
         # process the form parameters
         # process the body parameter

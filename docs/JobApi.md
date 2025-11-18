@@ -58,7 +58,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     end_date_lt = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
     limit = 50 # int |  (optional) (default to 50)
     offset = 0 # int |  (optional) (default to 0)
-    order_by = [id] # List[str] |  (optional) (default to [id])
+    order_by = ["id"] # List[str] | Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, dag_id, state, job_type, start_date, end_date, latest_heartbeat, executor_class, hostname, unixname` (optional) (default to ["id"])
     job_state = 'job_state_example' # str |  (optional)
     job_type = 'job_type_example' # str |  (optional)
     hostname = 'hostname_example' # str |  (optional)
@@ -91,7 +91,7 @@ Name | Type | Description  | Notes
  **end_date_lt** | **datetime**|  | [optional] 
  **limit** | **int**|  | [optional] [default to 50]
  **offset** | **int**|  | [optional] [default to 0]
- **order_by** | [**List[str]**](str.md)|  | [optional] [default to [id]]
+ **order_by** | [**List[str]**](str.md)| Attributes to order by, multi criteria sort is supported. Prefix with &#x60;-&#x60; for descending order. Supported attributes: &#x60;id, dag_id, state, job_type, start_date, end_date, latest_heartbeat, executor_class, hostname, unixname&#x60; | [optional] [default to [&quot;id&quot;]]
  **job_state** | **str**|  | [optional] 
  **job_type** | **str**|  | [optional] 
  **hostname** | **str**|  | [optional] 

@@ -22,6 +22,7 @@ Name | Type | Description | Notes
 **fileloc** | **str** |  | 
 **has_import_errors** | **bool** |  | 
 **has_task_concurrency_limits** | **bool** |  | 
+**is_favorite** | **bool** |  | [optional] [default to False]
 **is_paused** | **bool** |  | 
 **is_paused_upon_creation** | **bool** |  | [optional] 
 **is_stale** | **bool** |  | 

@@ -4466,38 +4466,6 @@ paths:
       summary: Logout
       tags:
       - Login
-  /api/v2/auth/refresh:
-    get:
-      description: Refresh the authentication token.
-      operationId: refresh
-      parameters:
-      - in: query
-        name: next
-        required: false
-        schema:
-          nullable: true
-          type: string
-      responses:
-        '200':
-          content:
-            application/json:
-              schema: {}
-          description: Successful Response
-        '307':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPExceptionResponse'
-          description: Temporary Redirect
-        '422':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPValidationError'
-          description: Validation Error
-      summary: Refresh
-      tags:
-      - Login
   /api/v2/backfills:
     get:
       operationId: list_backfills

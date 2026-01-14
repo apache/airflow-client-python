@@ -7,11 +7,12 @@ Object used for create backfill request.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **dag_id** | **str** |  | 
-**dag_run_conf** | **object** |  | [optional] 
+**dag_run_conf** | **Dict[str, object]** |  | [optional] 
 **from_date** | **datetime** |  | 
 **max_active_runs** | **int** |  | [optional] [default to 10]
 **reprocess_behavior** | [**ReprocessBehavior**](ReprocessBehavior.md) |  | [optional] 
 **run_backwards** | **bool** |  | [optional] [default to False]
+**run_on_latest_version** | **bool** |  | [optional] [default to True]
 **to_date** | **datetime** |  | 
 
 ## Example

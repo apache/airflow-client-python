@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,9 +27,10 @@ class ProviderResponse(BaseModel):
     Provider serializer for responses.
     """ # noqa: E501
     description: StrictStr
+    documentation_url: Optional[StrictStr] = None
     package_name: StrictStr
     version: StrictStr
-    __properties: ClassVar[List[str]] = ["description", "package_name", "version"]
+    __properties: ClassVar[List[str]] = ["description", "documentation_url", "package_name", "version"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -83,6 +84,7 @@ class ProviderResponse(BaseModel):
 
         _obj = cls.model_validate({
             "description": obj.get("description"),
+            "documentation_url": obj.get("documentation_url"),
             "package_name": obj.get("package_name"),
             "version": obj.get("version")
         })

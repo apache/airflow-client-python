@@ -7,7 +7,7 @@ Create asset events request.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **asset_id** | **int** |  | 
-**extra** | **object** |  | [optional] 
+**extra** | **Dict[str, object]** |  | [optional] 
 
 ## Example
 

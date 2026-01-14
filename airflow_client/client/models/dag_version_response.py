@@ -20,6 +20,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -33,7 +34,7 @@ class DagVersionResponse(BaseModel):
     created_at: datetime
     dag_display_name: StrictStr
     dag_id: StrictStr
-    id: StrictStr
+    id: UUID
     version_number: StrictInt
     __properties: ClassVar[List[str]] = ["bundle_name", "bundle_url", "bundle_version", "created_at", "dag_display_name", "dag_id", "id", "version_number"]
 

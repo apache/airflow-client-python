@@ -6357,6 +6357,7 @@ class TaskInstanceApi:
         duration_lte: Optional[Union[StrictFloat, StrictInt]] = None,
         duration_lt: Optional[Union[StrictFloat, StrictInt]] = None,
         task_display_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        task_group_id: Annotated[Optional[StrictStr], Field(description="Filter by exact task group ID. Returns all tasks within the specified task group.")] = None,
         state: Optional[List[StrictStr]] = None,
         pool: Optional[List[StrictStr]] = None,
         queue: Optional[List[StrictStr]] = None,
@@ -6441,6 +6442,8 @@ class TaskInstanceApi:
         :type duration_lt: float
         :param task_display_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
         :type task_display_name_pattern: str
+        :param task_group_id: Filter by exact task group ID. Returns all tasks within the specified task group.
+        :type task_group_id: str
         :param state:
         :type state: List[str]
         :param pool:
@@ -6514,6 +6517,7 @@ class TaskInstanceApi:
             duration_lte=duration_lte,
             duration_lt=duration_lt,
             task_display_name_pattern=task_display_name_pattern,
+            task_group_id=task_group_id,
             state=state,
             pool=pool,
             queue=queue,
@@ -6580,6 +6584,7 @@ class TaskInstanceApi:
         duration_lte: Optional[Union[StrictFloat, StrictInt]] = None,
         duration_lt: Optional[Union[StrictFloat, StrictInt]] = None,
         task_display_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        task_group_id: Annotated[Optional[StrictStr], Field(description="Filter by exact task group ID. Returns all tasks within the specified task group.")] = None,
         state: Optional[List[StrictStr]] = None,
         pool: Optional[List[StrictStr]] = None,
         queue: Optional[List[StrictStr]] = None,
@@ -6664,6 +6669,8 @@ class TaskInstanceApi:
         :type duration_lt: float
         :param task_display_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
         :type task_display_name_pattern: str
+        :param task_group_id: Filter by exact task group ID. Returns all tasks within the specified task group.
+        :type task_group_id: str
         :param state:
         :type state: List[str]
         :param pool:
@@ -6737,6 +6744,7 @@ class TaskInstanceApi:
             duration_lte=duration_lte,
             duration_lt=duration_lt,
             task_display_name_pattern=task_display_name_pattern,
+            task_group_id=task_group_id,
             state=state,
             pool=pool,
             queue=queue,
@@ -6803,6 +6811,7 @@ class TaskInstanceApi:
         duration_lte: Optional[Union[StrictFloat, StrictInt]] = None,
         duration_lt: Optional[Union[StrictFloat, StrictInt]] = None,
         task_display_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        task_group_id: Annotated[Optional[StrictStr], Field(description="Filter by exact task group ID. Returns all tasks within the specified task group.")] = None,
         state: Optional[List[StrictStr]] = None,
         pool: Optional[List[StrictStr]] = None,
         queue: Optional[List[StrictStr]] = None,
@@ -6887,6 +6896,8 @@ class TaskInstanceApi:
         :type duration_lt: float
         :param task_display_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
         :type task_display_name_pattern: str
+        :param task_group_id: Filter by exact task group ID. Returns all tasks within the specified task group.
+        :type task_group_id: str
         :param state:
         :type state: List[str]
         :param pool:
@@ -6960,6 +6971,7 @@ class TaskInstanceApi:
             duration_lte=duration_lte,
             duration_lt=duration_lt,
             task_display_name_pattern=task_display_name_pattern,
+            task_group_id=task_group_id,
             state=state,
             pool=pool,
             queue=queue,
@@ -7021,6 +7033,7 @@ class TaskInstanceApi:
         duration_lte,
         duration_lt,
         task_display_name_pattern,
+        task_group_id,
         state,
         pool,
         queue,
@@ -7350,6 +7363,10 @@ class TaskInstanceApi:
         if task_display_name_pattern is not None:
             
             _query_params.append(('task_display_name_pattern', task_display_name_pattern))
+            
+        if task_group_id is not None:
+            
+            _query_params.append(('task_group_id', task_group_id))
             
         if state is not None:
             

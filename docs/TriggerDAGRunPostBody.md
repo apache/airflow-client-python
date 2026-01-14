@@ -6,7 +6,7 @@ Trigger DAG Run Serializer for POST body.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**conf** | **object** |  | [optional] 
+**conf** | **Dict[str, object]** |  | [optional] 
 **dag_run_id** | **str** |  | [optional] 
 **data_interval_end** | **datetime** |  | [optional] 
 **data_interval_start** | **datetime** |  | [optional] 

@@ -37,35 +37,27 @@ class TestTaskCollectionResponse(unittest.TestCase):
             return TaskCollectionResponse(
                 tasks = [
                     airflow_client.client.models.task_response.TaskResponse(
-                        class_ref = airflow_client.client.models.conf.conf(), 
+                        class_ref = { }, 
                         depends_on_past = True, 
                         doc_md = '', 
                         downstream_task_ids = [
                             ''
                             ], 
                         end_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
-                        execution_timeout = airflow_client.client.models.time_delta.TimeDelta(
-                            __type = 'TimeDelta', 
-                            days = 56, 
-                            microseconds = 56, 
-                            seconds = 56, ), 
+                        execution_timeout = null, 
                         extra_links = [
                             ''
                             ], 
                         is_mapped = True, 
                         operator_name = '', 
                         owner = '', 
-                        params = airflow_client.client.models.conf.conf(), 
+                        params = { }, 
                         pool = '', 
                         pool_slots = 1.337, 
                         priority_weight = 1.337, 
                         queue = '', 
                         retries = 1.337, 
-                        retry_delay = airflow_client.client.models.time_delta.TimeDelta(
-                            __type = 'TimeDelta', 
-                            days = 56, 
-                            microseconds = 56, 
-                            seconds = 56, ), 
+                        retry_delay = null, 
                         retry_exponential_backoff = True, 
                         start_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                         task_display_name = '', 
@@ -85,35 +77,27 @@ class TestTaskCollectionResponse(unittest.TestCase):
             return TaskCollectionResponse(
                 tasks = [
                     airflow_client.client.models.task_response.TaskResponse(
-                        class_ref = airflow_client.client.models.conf.conf(), 
+                        class_ref = { }, 
                         depends_on_past = True, 
                         doc_md = '', 
                         downstream_task_ids = [
                             ''
                             ], 
                         end_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
-                        execution_timeout = airflow_client.client.models.time_delta.TimeDelta(
-                            __type = 'TimeDelta', 
-                            days = 56, 
-                            microseconds = 56, 
-                            seconds = 56, ), 
+                        execution_timeout = null, 
                         extra_links = [
                             ''
                             ], 
                         is_mapped = True, 
                         operator_name = '', 
                         owner = '', 
-                        params = airflow_client.client.models.conf.conf(), 
+                        params = { }, 
                         pool = '', 
                         pool_slots = 1.337, 
                         priority_weight = 1.337, 
                         queue = '', 
                         retries = 1.337, 
-                        retry_delay = airflow_client.client.models.time_delta.TimeDelta(
-                            __type = 'TimeDelta', 
-                            days = 56, 
-                            microseconds = 56, 
-                            seconds = 56, ), 
+                        retry_delay = null, 
                         retry_exponential_backoff = True, 
                         start_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                         task_display_name = '', 

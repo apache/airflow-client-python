@@ -28,7 +28,7 @@ Name | Type | Description | Notes
 **priority_weight** | **int** |  | [optional] 
 **queue** | **str** |  | [optional] 
 **queued_when** | **datetime** |  | [optional] 
-**rendered_fields** | **object** |  | [optional] 
+**rendered_fields** | **Dict[str, object]** |  | [optional] 
 **rendered_map_index** | **str** |  | [optional] 
 **run_after** | **datetime** |  | 
 **scheduled_when** | **datetime** |  | [optional] 

@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **task_instances** | [**List[TaskInstanceResponse]**](TaskInstanceResponse.md) |  | 
 **total_entries** | **int** |  | 
 **bundle_version** | **str** |  | [optional] 
-**conf** | **object** |  | [optional] 
+**conf** | **Dict[str, object]** |  | [optional] 
 **dag_display_name** | **str** |  | 
 **dag_id** | **str** |  | 
 **dag_run_id** | **str** |  | 

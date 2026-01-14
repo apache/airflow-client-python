@@ -35,7 +35,7 @@ class TestTaskResponse(unittest.TestCase):
         model = TaskResponse()
         if include_optional:
             return TaskResponse(
-                class_ref = airflow_client.client.models.conf.conf(),
+                class_ref = { },
                 depends_on_past = True,
                 doc_md = '',
                 downstream_task_ids = [
@@ -53,7 +53,7 @@ class TestTaskResponse(unittest.TestCase):
                 is_mapped = True,
                 operator_name = '',
                 owner = '',
-                params = airflow_client.client.models.conf.conf(),
+                params = { },
                 pool = '',
                 pool_slots = 1.337,
                 priority_weight = 1.337,

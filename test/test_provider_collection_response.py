@@ -38,6 +38,7 @@ class TestProviderCollectionResponse(unittest.TestCase):
                 providers = [
                     airflow_client.client.models.provider_response.ProviderResponse(
                         description = '', 
+                        documentation_url = '', 
                         package_name = '', 
                         version = '', )
                     ],
@@ -48,6 +49,7 @@ class TestProviderCollectionResponse(unittest.TestCase):
                 providers = [
                     airflow_client.client.models.provider_response.ProviderResponse(
                         description = '', 
+                        documentation_url = '', 
                         package_name = '', 
                         version = '', )
                     ],

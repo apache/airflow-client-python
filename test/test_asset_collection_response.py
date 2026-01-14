@@ -56,9 +56,7 @@ class TestAssetCollectionResponse(unittest.TestCase):
                             }, 
                         group = '', 
                         id = 56, 
-                        last_asset_event = airflow_client.client.models.last_asset_event_response.LastAssetEventResponse(
-                            id = 0.0, 
-                            timestamp = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), ), 
+                        last_asset_event = null, 
                         name = '', 
                         producing_tasks = [
                             airflow_client.client.models.task_outlet_asset_reference.TaskOutletAssetReference(
@@ -101,9 +99,7 @@ class TestAssetCollectionResponse(unittest.TestCase):
                             }, 
                         group = '', 
                         id = 56, 
-                        last_asset_event = airflow_client.client.models.last_asset_event_response.LastAssetEventResponse(
-                            id = 0.0, 
-                            timestamp = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), ), 
+                        last_asset_event = null, 
                         name = '', 
                         producing_tasks = [
                             airflow_client.client.models.task_outlet_asset_reference.TaskOutletAssetReference(

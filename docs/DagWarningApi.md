@@ -22,7 +22,6 @@ Get a list of DAG warnings.
 ```python
 import airflow_client.client
 from airflow_client.client.models.dag_warning_collection_response import DAGWarningCollectionResponse
-from airflow_client.client.models.dag_warning_type import DagWarningType
 from airflow_client.client.rest import ApiException
 from pprint import pprint
 

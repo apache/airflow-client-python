@@ -38,7 +38,7 @@ class TestHITLDetailResponse(unittest.TestCase):
                 chosen_options = [
                     ''
                     ],
-                params_input = airflow_client.client.models.params_input.Params Input(),
+                params_input = { },
                 responded_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 responded_by = airflow_client.client.models.hitl_user.HITLUser(
                     id = '', 

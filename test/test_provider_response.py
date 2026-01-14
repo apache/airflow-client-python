@@ -36,6 +36,7 @@ class TestProviderResponse(unittest.TestCase):
         if include_optional:
             return ProviderResponse(
                 description = '',
+                documentation_url = '',
                 package_name = '',
                 version = ''
             )

@@ -38,38 +38,19 @@ class TestPluginCollectionResponse(unittest.TestCase):
                 plugins = [
                     airflow_client.client.models.plugin_response.PluginResponse(
                         appbuilder_menu_items = [
-                            airflow_client.client.models.app_builder_menu_item_response.AppBuilderMenuItemResponse(
-                                category = '', 
-                                href = '', 
-                                name = '', )
+                            { }
                             ], 
                         appbuilder_views = [
-                            airflow_client.client.models.app_builder_view_response.AppBuilderViewResponse(
-                                category = '', 
-                                label = '', 
-                                name = '', 
-                                view = '', )
+                            { }
                             ], 
                         external_views = [
-                            airflow_client.client.models.external_view_response.ExternalViewResponse(
-                                category = '', 
-                                destination = 'nav', 
-                                href = '', 
-                                icon = '', 
-                                icon_dark_mode = '', 
-                                name = '', 
-                                url_route = '', )
+                            { }
                             ], 
                         fastapi_apps = [
-                            airflow_client.client.models.fast_api_app_response.FastAPIAppResponse(
-                                app = '', 
-                                name = '', 
-                                url_prefix = '', )
+                            { }
                             ], 
                         fastapi_root_middlewares = [
-                            airflow_client.client.models.fast_api_root_middleware_response.FastAPIRootMiddlewareResponse(
-                                middleware = '', 
-                                name = '', )
+                            { }
                             ], 
                         flask_blueprints = [
                             ''
@@ -88,14 +69,7 @@ class TestPluginCollectionResponse(unittest.TestCase):
                             ''
                             ], 
                         react_apps = [
-                            airflow_client.client.models.react_app_response.ReactAppResponse(
-                                bundle_url = '', 
-                                category = '', 
-                                destination = 'nav', 
-                                icon = '', 
-                                icon_dark_mode = '', 
-                                name = '', 
-                                url_route = '', )
+                            { }
                             ], 
                         source = '', 
                         timetables = [
@@ -109,38 +83,19 @@ class TestPluginCollectionResponse(unittest.TestCase):
                 plugins = [
                     airflow_client.client.models.plugin_response.PluginResponse(
                         appbuilder_menu_items = [
-                            airflow_client.client.models.app_builder_menu_item_response.AppBuilderMenuItemResponse(
-                                category = '', 
-                                href = '', 
-                                name = '', )
+                            { }
                             ], 
                         appbuilder_views = [
-                            airflow_client.client.models.app_builder_view_response.AppBuilderViewResponse(
-                                category = '', 
-                                label = '', 
-                                name = '', 
-                                view = '', )
+                            { }
                             ], 
                         external_views = [
-                            airflow_client.client.models.external_view_response.ExternalViewResponse(
-                                category = '', 
-                                destination = 'nav', 
-                                href = '', 
-                                icon = '', 
-                                icon_dark_mode = '', 
-                                name = '', 
-                                url_route = '', )
+                            { }
                             ], 
                         fastapi_apps = [
-                            airflow_client.client.models.fast_api_app_response.FastAPIAppResponse(
-                                app = '', 
-                                name = '', 
-                                url_prefix = '', )
+                            { }
                             ], 
                         fastapi_root_middlewares = [
-                            airflow_client.client.models.fast_api_root_middleware_response.FastAPIRootMiddlewareResponse(
-                                middleware = '', 
-                                name = '', )
+                            { }
                             ], 
                         flask_blueprints = [
                             ''
@@ -159,14 +114,7 @@ class TestPluginCollectionResponse(unittest.TestCase):
                             ''
                             ], 
                         react_apps = [
-                            airflow_client.client.models.react_app_response.ReactAppResponse(
-                                bundle_url = '', 
-                                category = '', 
-                                destination = 'nav', 
-                                icon = '', 
-                                icon_dark_mode = '', 
-                                name = '', 
-                                url_route = '', )
+                            { }
                             ], 
                         source = '', 
                         timetables = [

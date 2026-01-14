@@ -37,21 +37,21 @@ class TestBulkResponse(unittest.TestCase):
             return BulkResponse(
                 create = airflow_client.client.models.bulk_action_response.BulkActionResponse(
                     errors = [
-                        None
+                        { }
                         ], 
                     success = [
                         ''
                         ], ),
                 delete = airflow_client.client.models.bulk_action_response.BulkActionResponse(
                     errors = [
-                        None
+                        { }
                         ], 
                     success = [
                         ''
                         ], ),
                 update = airflow_client.client.models.bulk_action_response.BulkActionResponse(
                     errors = [
-                        None
+                        { }
                         ], 
                     success = [
                         ''

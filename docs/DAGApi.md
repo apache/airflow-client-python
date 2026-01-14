@@ -459,7 +459,6 @@ Get all DAGs.
 ```python
 import airflow_client.client
 from airflow_client.client.models.dag_collection_response import DAGCollectionResponse
-from airflow_client.client.models.dag_run_state import DagRunState
 from airflow_client.client.rest import ApiException
 from pprint import pprint
 

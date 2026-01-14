@@ -65,7 +65,7 @@ class TestTaskInstanceResponse(unittest.TestCase):
                 priority_weight = 56,
                 queue = '',
                 queued_when = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
-                rendered_fields = airflow_client.client.models.rendered_fields.Rendered Fields(),
+                rendered_fields = { },
                 rendered_map_index = '',
                 run_after = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 scheduled_when = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),

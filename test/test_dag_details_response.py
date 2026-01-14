@@ -35,7 +35,7 @@ class TestDAGDetailsResponse(unittest.TestCase):
         model = DAGDetailsResponse()
         if include_optional:
             return DAGDetailsResponse(
-                asset_expression = None,
+                asset_expression = { },
                 bundle_name = '',
                 bundle_version = '',
                 catchup = True,
@@ -43,7 +43,7 @@ class TestDAGDetailsResponse(unittest.TestCase):
                 dag_display_name = '',
                 dag_id = '',
                 dag_run_timeout = '',
-                default_args = None,
+                default_args = { },
                 description = '',
                 doc_md = '',
                 end_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
@@ -81,7 +81,7 @@ class TestDAGDetailsResponse(unittest.TestCase):
                 owners = [
                     ''
                     ],
-                params = None,
+                params = { },
                 relative_fileloc = '',
                 render_template_as_native_obj = True,
                 start_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),

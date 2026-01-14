@@ -34,9 +34,10 @@ class BackfillPostBody(BaseModel):
     max_active_runs: Optional[StrictInt] = 10
     reprocess_behavior: Optional[ReprocessBehavior] = None
     run_backwards: Optional[StrictBool] = False
+    run_on_latest_version: Optional[StrictBool] = True
     to_date: datetime
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["dag_id", "dag_run_conf", "from_date", "max_active_runs", "reprocess_behavior", "run_backwards", "to_date"]
+    __properties: ClassVar[List[str]] = ["dag_id", "dag_run_conf", "from_date", "max_active_runs", "reprocess_behavior", "run_backwards", "run_on_latest_version", "to_date"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -102,6 +103,7 @@ class BackfillPostBody(BaseModel):
             "max_active_runs": obj.get("max_active_runs") if obj.get("max_active_runs") is not None else 10,
             "reprocess_behavior": obj.get("reprocess_behavior"),
             "run_backwards": obj.get("run_backwards") if obj.get("run_backwards") is not None else False,
+            "run_on_latest_version": obj.get("run_on_latest_version") if obj.get("run_on_latest_version") is not None else True,
             "to_date": obj.get("to_date")
         })
         # store additional fields in additional_properties

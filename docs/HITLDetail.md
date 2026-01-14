@@ -13,8 +13,8 @@ Name | Type | Description | Notes
 **defaults** | **List[str]** |  | [optional] 
 **multiple** | **bool** |  | [optional] [default to False]
 **options** | **List[str]** |  | 
-**params** | **object** |  | [optional] 
-**params_input** | **object** |  | [optional] 
+**params** | **Dict[str, object]** |  | [optional] 
+**params_input** | **Dict[str, object]** |  | [optional] 
 **responded_at** | **datetime** |  | [optional] 
 **responded_by_user** | [**HITLUser**](HITLUser.md) |  | [optional] 
 **response_received** | **bool** |  | [optional] [default to False]

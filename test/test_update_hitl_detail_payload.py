@@ -38,7 +38,7 @@ class TestUpdateHITLDetailPayload(unittest.TestCase):
                 chosen_options = [
                     ''
                     ],
-                params_input = airflow_client.client.models.params_input.Params Input()
+                params_input = { }
             )
         else:
             return UpdateHITLDetailPayload(

@@ -7,7 +7,7 @@ Response of updating a Human-in-the-loop detail.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **chosen_options** | **List[str]** |  | 
-**params_input** | **object** |  | [optional] 
+**params_input** | **Dict[str, object]** |  | [optional] 
 **responded_at** | **datetime** |  | 
 **responded_by** | [**HITLUser**](HITLUser.md) |  | 
 

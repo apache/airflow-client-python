@@ -6,7 +6,7 @@ Specific serializer for DAG Details responses.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**asset_expression** | **object** |  | [optional] 
+**asset_expression** | **Dict[str, object]** |  | [optional] 
 **bundle_name** | **str** |  | [optional] 
 **bundle_version** | **str** |  | [optional] 
 **catchup** | **bool** |  | 
@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **dag_display_name** | **str** |  | 
 **dag_id** | **str** |  | 
 **dag_run_timeout** | **str** |  | [optional] 
-**default_args** | **object** |  | [optional] 
+**default_args** | **Dict[str, object]** |  | [optional] 
 **description** | **str** |  | [optional] 
 **doc_md** | **str** |  | [optional] 
 **end_date** | **datetime** |  | [optional] 
@@ -40,7 +40,7 @@ Name | Type | Description | Notes
 **next_dagrun_run_after** | **datetime** |  | [optional] 
 **owner_links** | **Dict[str, str]** |  | [optional] 
 **owners** | **List[str]** |  | 
-**params** | **object** |  | [optional] 
+**params** | **Dict[str, object]** |  | [optional] 
 **relative_fileloc** | **str** |  | [optional] 
 **render_template_as_native_obj** | **bool** |  | 
 **start_date** | **datetime** |  | [optional] 

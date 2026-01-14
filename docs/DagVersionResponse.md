@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **created_at** | **datetime** |  | 
 **dag_display_name** | **str** |  | 
 **dag_id** | **str** |  | 
-**id** | **str** |  | 
+**id** | **UUID** |  | 
 **version_number** | **int** |  | 
 
 ## Example

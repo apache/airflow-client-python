@@ -36,11 +36,12 @@ class TestBackfillPostBody(unittest.TestCase):
         if include_optional:
             return BackfillPostBody(
                 dag_id = '',
-                dag_run_conf = airflow_client.client.models.dag_run_conf.Dag Run Conf(),
+                dag_run_conf = { },
                 from_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 max_active_runs = 56,
                 reprocess_behavior = 'failed',
                 run_backwards = True,
+                run_on_latest_version = True,
                 to_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f')
             )
         else:

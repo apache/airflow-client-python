@@ -7,7 +7,7 @@ DAG Run serializer for responses.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **bundle_version** | **str** |  | [optional] 
-**conf** | **object** |  | [optional] 
+**conf** | **Dict[str, object]** |  | [optional] 
 **dag_display_name** | **str** |  | 
 **dag_id** | **str** |  | 
 **dag_run_id** | **str** |  | 

@@ -25,7 +25,6 @@ from airflow_client.client.models.dag_details_response import DAGDetailsResponse
 from airflow_client.client.models.dag_patch_body import DAGPatchBody
 from airflow_client.client.models.dag_response import DAGResponse
 from airflow_client.client.models.dag_tag_collection_response import DAGTagCollectionResponse
-from airflow_client.client.models.dag_run_state import DagRunState
 
 from airflow_client.client.api_client import ApiClient, RequestSerialized
 from airflow_client.client.api_response import ApiResponse
@@ -1488,7 +1487,7 @@ class DAGApi:
         exclude_stale: Optional[StrictBool] = None,
         paused: Optional[StrictBool] = None,
         has_import_errors: Annotated[Optional[StrictBool], Field(description="Filter Dags by having import errors. Only Dags that have been successfully loaded before will be returned.")] = None,
-        last_dag_run_state: Optional[DagRunState] = None,
+        last_dag_run_state: Optional[Any] = None,
         bundle_name: Optional[StrictStr] = None,
         bundle_version: Optional[StrictStr] = None,
         has_asset_schedule: Annotated[Optional[StrictBool], Field(description="Filter Dags with asset-based scheduling")] = None,
@@ -1658,7 +1657,7 @@ class DAGApi:
         exclude_stale: Optional[StrictBool] = None,
         paused: Optional[StrictBool] = None,
         has_import_errors: Annotated[Optional[StrictBool], Field(description="Filter Dags by having import errors. Only Dags that have been successfully loaded before will be returned.")] = None,
-        last_dag_run_state: Optional[DagRunState] = None,
+        last_dag_run_state: Optional[Any] = None,
         bundle_name: Optional[StrictStr] = None,
         bundle_version: Optional[StrictStr] = None,
         has_asset_schedule: Annotated[Optional[StrictBool], Field(description="Filter Dags with asset-based scheduling")] = None,
@@ -1828,7 +1827,7 @@ class DAGApi:
         exclude_stale: Optional[StrictBool] = None,
         paused: Optional[StrictBool] = None,
         has_import_errors: Annotated[Optional[StrictBool], Field(description="Filter Dags by having import errors. Only Dags that have been successfully loaded before will be returned.")] = None,
-        last_dag_run_state: Optional[DagRunState] = None,
+        last_dag_run_state: Optional[Any] = None,
         bundle_name: Optional[StrictStr] = None,
         bundle_version: Optional[StrictStr] = None,
         has_asset_schedule: Annotated[Optional[StrictBool], Field(description="Filter Dags with asset-based scheduling")] = None,

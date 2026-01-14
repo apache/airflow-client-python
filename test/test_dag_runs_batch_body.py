@@ -58,7 +58,7 @@ class TestDAGRunsBatchBody(unittest.TestCase):
                 start_date_lt = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 start_date_lte = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 states = [
-                    'queued'
+                    null
                     ]
             )
         else:

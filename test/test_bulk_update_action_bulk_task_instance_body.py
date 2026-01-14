@@ -44,7 +44,7 @@ class TestBulkUpdateActionBulkTaskInstanceBody(unittest.TestCase):
                         include_past = True, 
                         include_upstream = True, 
                         map_index = 56, 
-                        new_state = 'removed', 
+                        new_state = null, 
                         note = '', 
                         task_id = '', )
                     ]
@@ -59,7 +59,7 @@ class TestBulkUpdateActionBulkTaskInstanceBody(unittest.TestCase):
                         include_past = True, 
                         include_upstream = True, 
                         map_index = 56, 
-                        new_state = 'removed', 
+                        new_state = null, 
                         note = '', 
                         task_id = '', )
                     ],

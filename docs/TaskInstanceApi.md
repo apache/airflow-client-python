@@ -1590,7 +1590,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_task_instances**
-> TaskInstanceCollectionResponse get_task_instances(dag_id, dag_run_id, task_id=task_id, run_after_gte=run_after_gte, run_after_gt=run_after_gt, run_after_lte=run_after_lte, run_after_lt=run_after_lt, logical_date_gte=logical_date_gte, logical_date_gt=logical_date_gt, logical_date_lte=logical_date_lte, logical_date_lt=logical_date_lt, start_date_gte=start_date_gte, start_date_gt=start_date_gt, start_date_lte=start_date_lte, start_date_lt=start_date_lt, end_date_gte=end_date_gte, end_date_gt=end_date_gt, end_date_lte=end_date_lte, end_date_lt=end_date_lt, updated_at_gte=updated_at_gte, updated_at_gt=updated_at_gt, updated_at_lte=updated_at_lte, updated_at_lt=updated_at_lt, duration_gte=duration_gte, duration_gt=duration_gt, duration_lte=duration_lte, duration_lt=duration_lt, task_display_name_pattern=task_display_name_pattern, state=state, pool=pool, queue=queue, executor=executor, version_number=version_number, try_number=try_number, operator=operator, map_index=map_index, limit=limit, offset=offset, order_by=order_by)
+> TaskInstanceCollectionResponse get_task_instances(dag_id, dag_run_id, task_id=task_id, run_after_gte=run_after_gte, run_after_gt=run_after_gt, run_after_lte=run_after_lte, run_after_lt=run_after_lt, logical_date_gte=logical_date_gte, logical_date_gt=logical_date_gt, logical_date_lte=logical_date_lte, logical_date_lt=logical_date_lt, start_date_gte=start_date_gte, start_date_gt=start_date_gt, start_date_lte=start_date_lte, start_date_lt=start_date_lt, end_date_gte=end_date_gte, end_date_gt=end_date_gt, end_date_lte=end_date_lte, end_date_lt=end_date_lt, updated_at_gte=updated_at_gte, updated_at_gt=updated_at_gt, updated_at_lte=updated_at_lte, updated_at_lt=updated_at_lt, duration_gte=duration_gte, duration_gt=duration_gt, duration_lte=duration_lte, duration_lt=duration_lt, task_display_name_pattern=task_display_name_pattern, task_group_id=task_group_id, state=state, pool=pool, queue=queue, executor=executor, version_number=version_number, try_number=try_number, operator=operator, map_index=map_index, limit=limit, offset=offset, order_by=order_by)
 
 Get Task Instances
 
@@ -1660,6 +1660,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     duration_lte = 3.4 # float |  (optional)
     duration_lt = 3.4 # float |  (optional)
     task_display_name_pattern = 'task_display_name_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported. (optional)
+    task_group_id = 'task_group_id_example' # str | Filter by exact task group ID. Returns all tasks within the specified task group. (optional)
     state = ['state_example'] # List[str] |  (optional)
     pool = ['pool_example'] # List[str] |  (optional)
     queue = ['queue_example'] # List[str] |  (optional)
@@ -1674,7 +1675,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
 
     try:
         # Get Task Instances
-        api_response = api_instance.get_task_instances(dag_id, dag_run_id, task_id=task_id, run_after_gte=run_after_gte, run_after_gt=run_after_gt, run_after_lte=run_after_lte, run_after_lt=run_after_lt, logical_date_gte=logical_date_gte, logical_date_gt=logical_date_gt, logical_date_lte=logical_date_lte, logical_date_lt=logical_date_lt, start_date_gte=start_date_gte, start_date_gt=start_date_gt, start_date_lte=start_date_lte, start_date_lt=start_date_lt, end_date_gte=end_date_gte, end_date_gt=end_date_gt, end_date_lte=end_date_lte, end_date_lt=end_date_lt, updated_at_gte=updated_at_gte, updated_at_gt=updated_at_gt, updated_at_lte=updated_at_lte, updated_at_lt=updated_at_lt, duration_gte=duration_gte, duration_gt=duration_gt, duration_lte=duration_lte, duration_lt=duration_lt, task_display_name_pattern=task_display_name_pattern, state=state, pool=pool, queue=queue, executor=executor, version_number=version_number, try_number=try_number, operator=operator, map_index=map_index, limit=limit, offset=offset, order_by=order_by)
+        api_response = api_instance.get_task_instances(dag_id, dag_run_id, task_id=task_id, run_after_gte=run_after_gte, run_after_gt=run_after_gt, run_after_lte=run_after_lte, run_after_lt=run_after_lt, logical_date_gte=logical_date_gte, logical_date_gt=logical_date_gt, logical_date_lte=logical_date_lte, logical_date_lt=logical_date_lt, start_date_gte=start_date_gte, start_date_gt=start_date_gt, start_date_lte=start_date_lte, start_date_lt=start_date_lt, end_date_gte=end_date_gte, end_date_gt=end_date_gt, end_date_lte=end_date_lte, end_date_lt=end_date_lt, updated_at_gte=updated_at_gte, updated_at_gt=updated_at_gt, updated_at_lte=updated_at_lte, updated_at_lt=updated_at_lt, duration_gte=duration_gte, duration_gt=duration_gt, duration_lte=duration_lte, duration_lt=duration_lt, task_display_name_pattern=task_display_name_pattern, task_group_id=task_group_id, state=state, pool=pool, queue=queue, executor=executor, version_number=version_number, try_number=try_number, operator=operator, map_index=map_index, limit=limit, offset=offset, order_by=order_by)
         print("The response of TaskInstanceApi->get_task_instances:\n")
         pprint(api_response)
     except Exception as e:
@@ -1716,6 +1717,7 @@ Name | Type | Description  | Notes
  **duration_lte** | **float**|  | [optional] 
  **duration_lt** | **float**|  | [optional] 
  **task_display_name_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). Regular expressions are **not** supported. | [optional] 
+ **task_group_id** | **str**| Filter by exact task group ID. Returns all tasks within the specified task group. | [optional] 
  **state** | [**List[str]**](str.md)|  | [optional] 
  **pool** | [**List[str]**](str.md)|  | [optional] 
  **queue** | [**List[str]**](str.md)|  | [optional] 

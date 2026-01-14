@@ -261,6 +261,10 @@ components:
           default: false
           title: Run Backwards
           type: boolean
+        run_on_latest_version:
+          default: true
+          title: Run On Latest Version
+          type: boolean
         to_date:
           format: date-time
           title: To Date
@@ -2638,6 +2642,9 @@ components:
       properties:
         description:
           title: Description
+          type: string
+        documentation_url:
+          nullable: true
           type: string
         package_name:
           title: Package Name
@@ -7524,6 +7531,14 @@ paths:
           \ Regular expressions are **not** supported."
         in: query
         name: task_display_name_pattern
+        required: false
+        schema:
+          nullable: true
+          type: string
+      - description: Filter by exact task group ID. Returns all tasks within the specified
+          task group.
+        in: query
+        name: task_group_id
         required: false
         schema:
           nullable: true

@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **created_at** | **datetime** |  | 
 **dag_display_name** | **str** |  | 
 **dag_id** | **str** |  | 
-**dag_run_conf** | **object** |  | 
+**dag_run_conf** | **Dict[str, object]** |  | 
 **from_date** | **datetime** |  | 
 **id** | **int** |  | 
 **is_paused** | **bool** |  | 

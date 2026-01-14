@@ -6,7 +6,7 @@ Task serializer for responses.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**class_ref** | **object** |  | [optional] 
+**class_ref** | **Dict[str, object]** |  | [optional] 
 **depends_on_past** | **bool** |  | 
 **doc_md** | **str** |  | [optional] 
 **downstream_task_ids** | **List[str]** |  | [optional] 
@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 **is_mapped** | **bool** |  | [optional] 
 **operator_name** | **str** |  | [optional] 
 **owner** | **str** |  | [optional] 
-**params** | **object** |  | [optional] 
+**params** | **Dict[str, object]** |  | [optional] 
 **pool** | **str** |  | [optional] 
 **pool_slots** | **float** |  | [optional] 
 **priority_weight** | **float** |  | [optional] 

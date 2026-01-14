@@ -12,7 +12,6 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 # import models into model package
 from airflow_client.client.models.app_builder_menu_item_response import AppBuilderMenuItemResponse
 from airflow_client.client.models.app_builder_view_response import AppBuilderViewResponse
@@ -162,3 +161,4 @@ from airflow_client.client.models.x_com_response import XComResponse
 from airflow_client.client.models.x_com_response_native import XComResponseNative
 from airflow_client.client.models.x_com_response_string import XComResponseString
 from airflow_client.client.models.x_com_update_body import XComUpdateBody
+

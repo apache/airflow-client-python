@@ -36,7 +36,7 @@ class TestBulkActionResponse(unittest.TestCase):
         if include_optional:
             return BulkActionResponse(
                 errors = [
-                    None
+                    { }
                     ],
                 success = [
                     ''

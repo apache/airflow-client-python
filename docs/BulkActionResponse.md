@@ -6,7 +6,7 @@ Serializer for individual bulk action responses.  Represents the outcome of a si
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**errors** | **List[object]** | A list of errors encountered during the operation, each containing details about the issue. | [optional] [default to []]
+**errors** | **List[Dict[str, object]]** | A list of errors encountered during the operation, each containing details about the issue. | [optional] [default to []]
 **success** | **List[str]** | A list of unique id/key representing successful operations. | [optional] [default to []]
 
 ## Example

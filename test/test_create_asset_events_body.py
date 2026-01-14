@@ -36,7 +36,7 @@ class TestCreateAssetEventsBody(unittest.TestCase):
         if include_optional:
             return CreateAssetEventsBody(
                 asset_id = 56,
-                extra = airflow_client.client.models.extra.Extra()
+                extra = { }
             )
         else:
             return CreateAssetEventsBody(

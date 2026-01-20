@@ -26,9 +26,11 @@ github:
     - python
   features:
     # Enable issues management
-    issues: true
+    issues: false
     # Enable projects for project management boards
     projects: false
+    # Enable discussions
+    discussions: true
   enabled_merge_buttons:
     squash: true
     merge: false

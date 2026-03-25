@@ -46,7 +46,7 @@ class TestPoolCollectionResponse(unittest.TestCase):
                         queued_slots = 56, 
                         running_slots = 56, 
                         scheduled_slots = 56, 
-                        slots = 56, )
+                        slots = -1.0, )
                     ],
                 total_entries = 56
             )
@@ -63,7 +63,7 @@ class TestPoolCollectionResponse(unittest.TestCase):
                         queued_slots = 56, 
                         running_slots = 56, 
                         scheduled_slots = 56, 
-                        slots = 56, )
+                        slots = -1.0, )
                     ],
                 total_entries = 56,
         )

@@ -14,10 +14,10 @@
 
 import unittest
 
-from airflow_client.client.models.bulk_body_connection_body_actions_inner import BulkBodyConnectionBodyActionsInner
+from airflow_client.client.models.actions_inner2 import ActionsInner2
 
-class TestBulkBodyConnectionBodyActionsInner(unittest.TestCase):
-    """BulkBodyConnectionBodyActionsInner unit test stubs"""
+class TestActionsInner2(unittest.TestCase):
+    """ActionsInner2 unit test stubs"""
 
     def setUp(self):
         pass
@@ -25,16 +25,16 @@ class TestBulkBodyConnectionBodyActionsInner(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> BulkBodyConnectionBodyActionsInner:
-        """Test BulkBodyConnectionBodyActionsInner
+    def make_instance(self, include_optional) -> ActionsInner2:
+        """Test ActionsInner2
             include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `BulkBodyConnectionBodyActionsInner`
+        # uncomment below to create an instance of `ActionsInner2`
         """
-        model = BulkBodyConnectionBodyActionsInner()
+        model = ActionsInner2()
         if include_optional:
-            return BulkBodyConnectionBodyActionsInner(
+            return ActionsInner2(
                 action = 'delete',
                 action_on_existence = 'fail',
                 entities = [
@@ -43,7 +43,7 @@ class TestBulkBodyConnectionBodyActionsInner(unittest.TestCase):
                 action_on_non_existence = 'fail'
             )
         else:
-            return BulkBodyConnectionBodyActionsInner(
+            return ActionsInner2(
                 action = 'delete',
                 entities = [
                     null
@@ -51,8 +51,8 @@ class TestBulkBodyConnectionBodyActionsInner(unittest.TestCase):
         )
         """
 
-    def testBulkBodyConnectionBodyActionsInner(self):
-        """Test BulkBodyConnectionBodyActionsInner"""
+    def testActionsInner2(self):
+        """Test ActionsInner2"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

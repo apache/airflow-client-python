@@ -17,28 +17,29 @@ from inspect import getfullargspec
 import json
 import pprint
 import re  # noqa: F401
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, ValidationError, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, field_validator
 from typing import Optional
+from airflow_client.client.models.bulk_task_instance_body import BulkTaskInstanceBody
 from typing import Union, Any, List, Set, TYPE_CHECKING, Optional, Dict
 from typing_extensions import Literal, Self
 from pydantic import Field
 
-VALIDATIONERRORLOCINNER_ANY_OF_SCHEMAS = ["int", "str"]
+ENTITIESINNER_ANY_OF_SCHEMAS = ["BulkTaskInstanceBody", "str"]
 
-class ValidationErrorLocInner(BaseModel):
+class EntitiesInner(BaseModel):
     """
-    ValidationErrorLocInner
+    EntitiesInner
     """
 
     # data type: str
     anyof_schema_1_validator: Optional[StrictStr] = None
-    # data type: int
-    anyof_schema_2_validator: Optional[StrictInt] = None
+    # data type: BulkTaskInstanceBody
+    anyof_schema_2_validator: Optional[BulkTaskInstanceBody] = None
     if TYPE_CHECKING:
-        actual_instance: Optional[Union[int, str]] = None
+        actual_instance: Optional[Union[BulkTaskInstanceBody, str]] = None
     else:
         actual_instance: Any = None
-    any_of_schemas: Set[str] = { "int", "str" }
+    any_of_schemas: Set[str] = { "BulkTaskInstanceBody", "str" }
 
     model_config = {
         "validate_assignment": True,
@@ -57,7 +58,7 @@ class ValidationErrorLocInner(BaseModel):
 
     @field_validator('actual_instance')
     def actual_instance_must_validate_anyof(cls, v):
-        instance = ValidationErrorLocInner.model_construct()
+        instance = EntitiesInner.model_construct()
         error_messages = []
         # validate data type: str
         try:
@@ -65,15 +66,15 @@ class ValidationErrorLocInner(BaseModel):
             return v
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # validate data type: int
-        try:
-            instance.anyof_schema_2_validator = v
+        # validate data type: BulkTaskInstanceBody
+        if not isinstance(v, BulkTaskInstanceBody):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `BulkTaskInstanceBody`")
+        else:
             return v
-        except (ValidationError, ValueError) as e:
-            error_messages.append(str(e))
+
         if error_messages:
             # no match
-            raise ValueError("No match found when setting the actual_instance in ValidationErrorLocInner with anyOf schemas: int, str. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting the actual_instance in EntitiesInner with anyOf schemas: BulkTaskInstanceBody, str. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -95,19 +96,16 @@ class ValidationErrorLocInner(BaseModel):
             return instance
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into int
+        # anyof_schema_2_validator: Optional[BulkTaskInstanceBody] = None
         try:
-            # validation
-            instance.anyof_schema_2_validator = json.loads(json_str)
-            # assign value to actual_instance
-            instance.actual_instance = instance.anyof_schema_2_validator
+            instance.actual_instance = BulkTaskInstanceBody.from_json(json_str)
             return instance
         except (ValidationError, ValueError) as e:
-            error_messages.append(str(e))
+             error_messages.append(str(e))
 
         if error_messages:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into ValidationErrorLocInner with anyOf schemas: int, str. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into EntitiesInner with anyOf schemas: BulkTaskInstanceBody, str. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -121,7 +119,7 @@ class ValidationErrorLocInner(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], int, str]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], BulkTaskInstanceBody, str]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None

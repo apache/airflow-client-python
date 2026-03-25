@@ -24,11 +24,11 @@ from pydantic import StrictStr, Field
 from typing import Union, List, Set, Optional, Dict
 from typing_extensions import Literal, Self
 
-BULKBODYVARIABLEBODYACTIONSINNER_ONE_OF_SCHEMAS = ["BulkCreateActionVariableBody", "BulkDeleteActionVariableBody", "BulkUpdateActionVariableBody"]
+ACTIONSINNER3_ONE_OF_SCHEMAS = ["BulkCreateActionVariableBody", "BulkDeleteActionVariableBody", "BulkUpdateActionVariableBody"]
 
-class BulkBodyVariableBodyActionsInner(BaseModel):
+class ActionsInner3(BaseModel):
     """
-    BulkBodyVariableBodyActionsInner
+    ActionsInner3
     """
     # data type: BulkCreateActionVariableBody
     oneof_schema_1_validator: Optional[BulkCreateActionVariableBody] = None
@@ -57,7 +57,7 @@ class BulkBodyVariableBodyActionsInner(BaseModel):
 
     @field_validator('actual_instance')
     def actual_instance_must_validate_oneof(cls, v):
-        instance = BulkBodyVariableBodyActionsInner.model_construct()
+        instance = ActionsInner3.model_construct()
         error_messages = []
         match = 0
         # validate data type: BulkCreateActionVariableBody
@@ -77,10 +77,10 @@ class BulkBodyVariableBodyActionsInner(BaseModel):
             match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in BulkBodyVariableBodyActionsInner with oneOf schemas: BulkCreateActionVariableBody, BulkDeleteActionVariableBody, BulkUpdateActionVariableBody. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in ActionsInner3 with oneOf schemas: BulkCreateActionVariableBody, BulkDeleteActionVariableBody, BulkUpdateActionVariableBody. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in BulkBodyVariableBodyActionsInner with oneOf schemas: BulkCreateActionVariableBody, BulkDeleteActionVariableBody, BulkUpdateActionVariableBody. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in ActionsInner3 with oneOf schemas: BulkCreateActionVariableBody, BulkDeleteActionVariableBody, BulkUpdateActionVariableBody. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -116,10 +116,10 @@ class BulkBodyVariableBodyActionsInner(BaseModel):
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into BulkBodyVariableBodyActionsInner with oneOf schemas: BulkCreateActionVariableBody, BulkDeleteActionVariableBody, BulkUpdateActionVariableBody. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into ActionsInner3 with oneOf schemas: BulkCreateActionVariableBody, BulkDeleteActionVariableBody, BulkUpdateActionVariableBody. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into BulkBodyVariableBodyActionsInner with oneOf schemas: BulkCreateActionVariableBody, BulkDeleteActionVariableBody, BulkUpdateActionVariableBody. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into ActionsInner3 with oneOf schemas: BulkCreateActionVariableBody, BulkDeleteActionVariableBody, BulkUpdateActionVariableBody. Details: " + ", ".join(error_messages))
         else:
             return instance
 

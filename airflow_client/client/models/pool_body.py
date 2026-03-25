@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from typing import Optional, Set
@@ -30,7 +30,7 @@ class PoolBody(BaseModel):
     description: Optional[StrictStr] = None
     include_deferred: Optional[StrictBool] = False
     name: Annotated[str, Field(strict=True, max_length=256)]
-    slots: StrictInt
+    slots: Annotated[int, Field(strict=True, ge=-1)] = Field(description="Number of slots. Use -1 for unlimited.")
     __properties: ClassVar[List[str]] = ["description", "include_deferred", "name", "slots"]
 
     model_config = ConfigDict(

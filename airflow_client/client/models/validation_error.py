@@ -19,7 +19,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, StrictStr
 from typing import Any, ClassVar, Dict, List
-from airflow_client.client.models.validation_error_loc_inner import ValidationErrorLocInner
+from airflow_client.client.models.location_inner import LocationInner
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,7 +27,7 @@ class ValidationError(BaseModel):
     """
     ValidationError
     """ # noqa: E501
-    loc: List[ValidationErrorLocInner]
+    loc: List[LocationInner]
     msg: StrictStr
     type: StrictStr
     __properties: ClassVar[List[str]] = ["loc", "msg", "type"]
@@ -90,7 +90,7 @@ class ValidationError(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "loc": [ValidationErrorLocInner.from_dict(_item) for _item in obj["loc"]] if obj.get("loc") is not None else None,
+            "loc": [LocationInner.from_dict(_item) for _item in obj["loc"]] if obj.get("loc") is not None else None,
             "msg": obj.get("msg"),
             "type": obj.get("type")
         })

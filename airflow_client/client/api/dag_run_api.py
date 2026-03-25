@@ -1,5 +1,3 @@
-# coding: utf-8
-
 """
     Airflow API
 
@@ -11,13 +9,14 @@
     Do not edit the class manually.
 """  # noqa: E501
 
+
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from datetime import datetime
-from pydantic import Field, StrictFloat, StrictInt, StrictStr, field_validator
+from pydantic import Field, StrictInt, StrictStr, field_validator
 from typing import Any, List, Optional, Union
 from typing_extensions import Annotated
 from airflow_client.client.models.asset_event_collection_response import AssetEventCollectionResponse
@@ -3115,7 +3114,7 @@ class DagRunApi:
         self,
         dag_id: StrictStr,
         dag_run_id: StrictStr,
-        interval: Annotated[Union[StrictFloat, StrictInt], Field(description="Seconds to wait between dag run state checks")],
+        interval: Annotated[Union[Annotated[float, Field(strict=True, gt=0.0)], Annotated[int, Field(strict=True, gt=0)]], Field(description="Seconds to wait between dag run state checks")],
         result: Annotated[Optional[List[StrictStr]], Field(description="Collect result XCom from task. Can be set multiple times.")] = None,
         _request_timeout: Union[
             None,
@@ -3198,7 +3197,7 @@ class DagRunApi:
         self,
         dag_id: StrictStr,
         dag_run_id: StrictStr,
-        interval: Annotated[Union[StrictFloat, StrictInt], Field(description="Seconds to wait between dag run state checks")],
+        interval: Annotated[Union[Annotated[float, Field(strict=True, gt=0.0)], Annotated[int, Field(strict=True, gt=0)]], Field(description="Seconds to wait between dag run state checks")],
         result: Annotated[Optional[List[StrictStr]], Field(description="Collect result XCom from task. Can be set multiple times.")] = None,
         _request_timeout: Union[
             None,
@@ -3281,7 +3280,7 @@ class DagRunApi:
         self,
         dag_id: StrictStr,
         dag_run_id: StrictStr,
-        interval: Annotated[Union[StrictFloat, StrictInt], Field(description="Seconds to wait between dag run state checks")],
+        interval: Annotated[Union[Annotated[float, Field(strict=True, gt=0.0)], Annotated[int, Field(strict=True, gt=0)]], Field(description="Seconds to wait between dag run state checks")],
         result: Annotated[Optional[List[StrictStr]], Field(description="Collect result XCom from task. Can be set multiple times.")] = None,
         _request_timeout: Union[
             None,

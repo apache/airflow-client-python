@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **queued_slots** | **int** |  | 
 **running_slots** | **int** |  | 
 **scheduled_slots** | **int** |  | 
-**slots** | **int** |  | 
+**slots** | **int** | Number of slots. Use -1 for unlimited. | 
 
 ## Example
 

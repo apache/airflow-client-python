@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**actions** | [**List[BulkBodyBulkTaskInstanceBodyActionsInner]**](BulkBodyBulkTaskInstanceBodyActionsInner.md) |  | 
+**actions** | [**List[ActionsInner]**](ActionsInner.md) |  | 
 
 ## Example
 

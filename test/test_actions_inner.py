@@ -14,10 +14,10 @@
 
 import unittest
 
-from airflow_client.client.models.validation_error_loc_inner import ValidationErrorLocInner
+from airflow_client.client.models.actions_inner import ActionsInner
 
-class TestValidationErrorLocInner(unittest.TestCase):
-    """ValidationErrorLocInner unit test stubs"""
+class TestActionsInner(unittest.TestCase):
+    """ActionsInner unit test stubs"""
 
     def setUp(self):
         pass
@@ -25,24 +25,34 @@ class TestValidationErrorLocInner(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> ValidationErrorLocInner:
-        """Test ValidationErrorLocInner
+    def make_instance(self, include_optional) -> ActionsInner:
+        """Test ActionsInner
             include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `ValidationErrorLocInner`
+        # uncomment below to create an instance of `ActionsInner`
         """
-        model = ValidationErrorLocInner()
+        model = ActionsInner()
         if include_optional:
-            return ValidationErrorLocInner(
+            return ActionsInner(
+                action = 'delete',
+                action_on_existence = 'fail',
+                entities = [
+                    null
+                    ],
+                action_on_non_existence = 'fail'
             )
         else:
-            return ValidationErrorLocInner(
+            return ActionsInner(
+                action = 'delete',
+                entities = [
+                    null
+                    ],
         )
         """
 
-    def testValidationErrorLocInner(self):
-        """Test ValidationErrorLocInner"""
+    def testActionsInner(self):
+        """Test ActionsInner"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

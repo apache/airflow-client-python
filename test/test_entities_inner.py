@@ -14,10 +14,10 @@
 
 import unittest
 
-from airflow_client.client.models.bulk_delete_action_bulk_task_instance_body_entities_inner import BulkDeleteActionBulkTaskInstanceBodyEntitiesInner
+from airflow_client.client.models.entities_inner import EntitiesInner
 
-class TestBulkDeleteActionBulkTaskInstanceBodyEntitiesInner(unittest.TestCase):
-    """BulkDeleteActionBulkTaskInstanceBodyEntitiesInner unit test stubs"""
+class TestEntitiesInner(unittest.TestCase):
+    """EntitiesInner unit test stubs"""
 
     def setUp(self):
         pass
@@ -25,16 +25,16 @@ class TestBulkDeleteActionBulkTaskInstanceBodyEntitiesInner(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> BulkDeleteActionBulkTaskInstanceBodyEntitiesInner:
-        """Test BulkDeleteActionBulkTaskInstanceBodyEntitiesInner
+    def make_instance(self, include_optional) -> EntitiesInner:
+        """Test EntitiesInner
             include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `BulkDeleteActionBulkTaskInstanceBodyEntitiesInner`
+        # uncomment below to create an instance of `EntitiesInner`
         """
-        model = BulkDeleteActionBulkTaskInstanceBodyEntitiesInner()
+        model = EntitiesInner()
         if include_optional:
-            return BulkDeleteActionBulkTaskInstanceBodyEntitiesInner(
+            return EntitiesInner(
                 include_downstream = True,
                 include_future = True,
                 include_past = True,
@@ -45,13 +45,13 @@ class TestBulkDeleteActionBulkTaskInstanceBodyEntitiesInner(unittest.TestCase):
                 task_id = ''
             )
         else:
-            return BulkDeleteActionBulkTaskInstanceBodyEntitiesInner(
+            return EntitiesInner(
                 task_id = '',
         )
         """
 
-    def testBulkDeleteActionBulkTaskInstanceBodyEntitiesInner(self):
-        """Test BulkDeleteActionBulkTaskInstanceBodyEntitiesInner"""
+    def testEntitiesInner(self):
+        """Test EntitiesInner"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

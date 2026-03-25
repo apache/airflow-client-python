@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**actions** | [**List[BulkBodyPoolBodyActionsInner]**](BulkBodyPoolBodyActionsInner.md) |  | 
+**actions** | [**List[ActionsInner2]**](ActionsInner2.md) |  | 
 
 ## Example
 

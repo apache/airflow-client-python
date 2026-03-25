@@ -14,10 +14,10 @@
 
 import unittest
 
-from airflow_client.client.models.bulk_body_bulk_task_instance_body_actions_inner import BulkBodyBulkTaskInstanceBodyActionsInner
+from airflow_client.client.models.actions_inner1 import ActionsInner1
 
-class TestBulkBodyBulkTaskInstanceBodyActionsInner(unittest.TestCase):
-    """BulkBodyBulkTaskInstanceBodyActionsInner unit test stubs"""
+class TestActionsInner1(unittest.TestCase):
+    """ActionsInner1 unit test stubs"""
 
     def setUp(self):
         pass
@@ -25,16 +25,16 @@ class TestBulkBodyBulkTaskInstanceBodyActionsInner(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> BulkBodyBulkTaskInstanceBodyActionsInner:
-        """Test BulkBodyBulkTaskInstanceBodyActionsInner
+    def make_instance(self, include_optional) -> ActionsInner1:
+        """Test ActionsInner1
             include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `BulkBodyBulkTaskInstanceBodyActionsInner`
+        # uncomment below to create an instance of `ActionsInner1`
         """
-        model = BulkBodyBulkTaskInstanceBodyActionsInner()
+        model = ActionsInner1()
         if include_optional:
-            return BulkBodyBulkTaskInstanceBodyActionsInner(
+            return ActionsInner1(
                 action = 'delete',
                 action_on_existence = 'fail',
                 entities = [
@@ -43,7 +43,7 @@ class TestBulkBodyBulkTaskInstanceBodyActionsInner(unittest.TestCase):
                 action_on_non_existence = 'fail'
             )
         else:
-            return BulkBodyBulkTaskInstanceBodyActionsInner(
+            return ActionsInner1(
                 action = 'delete',
                 entities = [
                     null
@@ -51,8 +51,8 @@ class TestBulkBodyBulkTaskInstanceBodyActionsInner(unittest.TestCase):
         )
         """
 
-    def testBulkBodyBulkTaskInstanceBodyActionsInner(self):
-        """Test BulkBodyBulkTaskInstanceBodyActionsInner"""
+    def testActionsInner1(self):
+        """Test ActionsInner1"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

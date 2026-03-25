@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **description** | **str** |  | [optional] 
 **include_deferred** | **bool** |  | [optional] [default to False]
 **name** | **str** |  | 
-**slots** | **int** |  | 
+**slots** | **int** | Number of slots. Use -1 for unlimited. | 
 
 ## Example
 

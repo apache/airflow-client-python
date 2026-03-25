@@ -38,12 +38,12 @@ class TestPoolBody(unittest.TestCase):
                 description = '',
                 include_deferred = True,
                 name = '',
-                slots = 56
+                slots = -1.0
             )
         else:
             return PoolBody(
                 name = '',
-                slots = 56,
+                slots = -1.0,
         )
         """
 

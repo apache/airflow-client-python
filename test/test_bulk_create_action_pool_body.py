@@ -42,7 +42,7 @@ class TestBulkCreateActionPoolBody(unittest.TestCase):
                         description = '', 
                         include_deferred = True, 
                         name = '', 
-                        slots = 56, )
+                        slots = -1.0, )
                     ]
             )
         else:
@@ -53,7 +53,7 @@ class TestBulkCreateActionPoolBody(unittest.TestCase):
                         description = '', 
                         include_deferred = True, 
                         name = '', 
-                        slots = 56, )
+                        slots = -1.0, )
                     ],
         )
         """

@@ -1,5 +1,3 @@
-# coding: utf-8
-
 """
     Airflow API
 
@@ -10,6 +8,7 @@
 
     Do not edit the class manually.
 """  # noqa: E501
+
 
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
@@ -697,7 +696,7 @@ class TaskInstanceApi:
         dag_id: StrictStr,
         dag_run_id: StrictStr,
         task_id: StrictStr,
-        try_number: StrictInt,
+        try_number: Annotated[int, Field(strict=True, gt=0)],
         map_index: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
@@ -785,7 +784,7 @@ class TaskInstanceApi:
         dag_id: StrictStr,
         dag_run_id: StrictStr,
         task_id: StrictStr,
-        try_number: StrictInt,
+        try_number: Annotated[int, Field(strict=True, gt=0)],
         map_index: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
@@ -873,7 +872,7 @@ class TaskInstanceApi:
         dag_id: StrictStr,
         dag_run_id: StrictStr,
         task_id: StrictStr,
-        try_number: StrictInt,
+        try_number: Annotated[int, Field(strict=True, gt=0)],
         map_index: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,

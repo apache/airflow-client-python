@@ -32,11 +32,12 @@ class XComResponse(BaseModel):
     key: StrictStr
     logical_date: Optional[datetime] = None
     map_index: StrictInt
+    run_after: datetime
     run_id: StrictStr
     task_display_name: StrictStr
     task_id: StrictStr
     timestamp: datetime
-    __properties: ClassVar[List[str]] = ["dag_display_name", "dag_id", "key", "logical_date", "map_index", "run_id", "task_display_name", "task_id", "timestamp"]
+    __properties: ClassVar[List[str]] = ["dag_display_name", "dag_id", "key", "logical_date", "map_index", "run_after", "run_id", "task_display_name", "task_id", "timestamp"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -94,6 +95,7 @@ class XComResponse(BaseModel):
             "key": obj.get("key"),
             "logical_date": obj.get("logical_date"),
             "map_index": obj.get("map_index"),
+            "run_after": obj.get("run_after"),
             "run_id": obj.get("run_id"),
             "task_display_name": obj.get("task_display_name"),
             "task_id": obj.get("task_id"),

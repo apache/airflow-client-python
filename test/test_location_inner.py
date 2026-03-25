@@ -14,10 +14,10 @@
 
 import unittest
 
-from airflow_client.client.models.bulk_body_pool_body_actions_inner import BulkBodyPoolBodyActionsInner
+from airflow_client.client.models.location_inner import LocationInner
 
-class TestBulkBodyPoolBodyActionsInner(unittest.TestCase):
-    """BulkBodyPoolBodyActionsInner unit test stubs"""
+class TestLocationInner(unittest.TestCase):
+    """LocationInner unit test stubs"""
 
     def setUp(self):
         pass
@@ -25,34 +25,24 @@ class TestBulkBodyPoolBodyActionsInner(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> BulkBodyPoolBodyActionsInner:
-        """Test BulkBodyPoolBodyActionsInner
+    def make_instance(self, include_optional) -> LocationInner:
+        """Test LocationInner
             include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `BulkBodyPoolBodyActionsInner`
+        # uncomment below to create an instance of `LocationInner`
         """
-        model = BulkBodyPoolBodyActionsInner()
+        model = LocationInner()
         if include_optional:
-            return BulkBodyPoolBodyActionsInner(
-                action = 'delete',
-                action_on_existence = 'fail',
-                entities = [
-                    null
-                    ],
-                action_on_non_existence = 'fail'
+            return LocationInner(
             )
         else:
-            return BulkBodyPoolBodyActionsInner(
-                action = 'delete',
-                entities = [
-                    null
-                    ],
+            return LocationInner(
         )
         """
 
-    def testBulkBodyPoolBodyActionsInner(self):
-        """Test BulkBodyPoolBodyActionsInner"""
+    def testLocationInner(self):
+        """Test LocationInner"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

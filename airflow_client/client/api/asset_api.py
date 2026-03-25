@@ -1,5 +1,3 @@
-# coding: utf-8
-
 """
     Airflow API
 
@@ -10,6 +8,7 @@
 
     Do not edit the class manually.
 """  # noqa: E501
+
 
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
@@ -2663,7 +2662,6 @@ class AssetApi:
             '200': "QueuedEventCollectionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
-            '404': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -2738,7 +2736,6 @@ class AssetApi:
             '200': "QueuedEventCollectionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
-            '404': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -2813,7 +2810,6 @@ class AssetApi:
             '200': "QueuedEventCollectionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
-            '404': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -3640,7 +3636,6 @@ class AssetApi:
             '200': "QueuedEventCollectionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
-            '404': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -3715,7 +3710,6 @@ class AssetApi:
             '200': "QueuedEventCollectionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
-            '404': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -3790,7 +3784,6 @@ class AssetApi:
             '200': "QueuedEventCollectionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
-            '404': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(

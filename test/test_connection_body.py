@@ -43,7 +43,8 @@ class TestConnectionBody(unittest.TestCase):
                 login = '',
                 password = '',
                 port = 56,
-                var_schema = ''
+                var_schema = '',
+                team_name = ''
             )
         else:
             return ConnectionBody(

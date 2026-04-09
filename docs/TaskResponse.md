@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **downstream_task_ids** | **List[str]** |  | [optional] 
 **end_date** | **datetime** |  | [optional] 
 **execution_timeout** | [**TimeDelta**](TimeDelta.md) |  | [optional] 
-**extra_links** | **List[str]** | Extract and return extra_links. | 
+**extra_links** | **List[str]** | Extract and return extra_links. | [readonly] 
 **is_mapped** | **bool** |  | [optional] 
 **operator_name** | **str** |  | [optional] 
 **owner** | **str** |  | [optional] 
@@ -23,7 +23,7 @@ Name | Type | Description | Notes
 **queue** | **str** |  | [optional] 
 **retries** | **float** |  | [optional] 
 **retry_delay** | [**TimeDelta**](TimeDelta.md) |  | [optional] 
-**retry_exponential_backoff** | **bool** |  | 
+**retry_exponential_backoff** | **float** |  | 
 **start_date** | **datetime** |  | [optional] 
 **task_display_name** | **str** |  | [optional] 
 **task_id** | **str** |  | [optional] 

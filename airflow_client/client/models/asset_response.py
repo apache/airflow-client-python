@@ -21,12 +21,14 @@ from datetime import datetime
 from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from airflow_client.client.models.asset_alias_response import AssetAliasResponse
+from airflow_client.client.models.asset_watcher_response import AssetWatcherResponse
 from airflow_client.client.models.dag_schedule_asset_reference import DagScheduleAssetReference
 from airflow_client.client.models.last_asset_event_response import LastAssetEventResponse
 from airflow_client.client.models.task_inlet_asset_reference import TaskInletAssetReference
 from airflow_client.client.models.task_outlet_asset_reference import TaskOutletAssetReference
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class AssetResponse(BaseModel):
     """
@@ -44,10 +46,12 @@ class AssetResponse(BaseModel):
     scheduled_dags: List[DagScheduleAssetReference]
     updated_at: datetime
     uri: StrictStr
-    __properties: ClassVar[List[str]] = ["aliases", "consuming_tasks", "created_at", "extra", "group", "id", "last_asset_event", "name", "producing_tasks", "scheduled_dags", "updated_at", "uri"]
+    watchers: List[AssetWatcherResponse]
+    __properties: ClassVar[List[str]] = ["aliases", "consuming_tasks", "created_at", "extra", "group", "id", "last_asset_event", "name", "producing_tasks", "scheduled_dags", "updated_at", "uri", "watchers"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -59,8 +63,7 @@ class AssetResponse(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -116,6 +119,13 @@ class AssetResponse(BaseModel):
                 if _item_scheduled_dags:
                     _items.append(_item_scheduled_dags.to_dict())
             _dict['scheduled_dags'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in watchers (list)
+        _items = []
+        if self.watchers:
+            for _item_watchers in self.watchers:
+                if _item_watchers:
+                    _items.append(_item_watchers.to_dict())
+            _dict['watchers'] = _items
         return _dict
 
     @classmethod
@@ -139,7 +149,8 @@ class AssetResponse(BaseModel):
             "producing_tasks": [TaskOutletAssetReference.from_dict(_item) for _item in obj["producing_tasks"]] if obj.get("producing_tasks") is not None else None,
             "scheduled_dags": [DagScheduleAssetReference.from_dict(_item) for _item in obj["scheduled_dags"]] if obj.get("scheduled_dags") is not None else None,
             "updated_at": obj.get("updated_at"),
-            "uri": obj.get("uri")
+            "uri": obj.get("uri"),
+            "watchers": [AssetWatcherResponse.from_dict(_item) for _item in obj["watchers"]] if obj.get("watchers") is not None else None
         })
         return _obj
 

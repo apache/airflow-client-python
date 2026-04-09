@@ -64,7 +64,7 @@ class TestTaskResponse(unittest.TestCase):
                     days = 56, 
                     microseconds = 56, 
                     seconds = 56, ),
-                retry_exponential_backoff = True,
+                retry_exponential_backoff = 1.337,
                 start_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 task_display_name = '',
                 task_id = '',
@@ -83,7 +83,7 @@ class TestTaskResponse(unittest.TestCase):
                 extra_links = [
                     ''
                     ],
-                retry_exponential_backoff = True,
+                retry_exponential_backoff = 1.337,
                 wait_for_downstream = True,
         )
         """

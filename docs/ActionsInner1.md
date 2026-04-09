@@ -7,8 +7,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **action** | **str** | The action to be performed on the entities. | 
 **action_on_existence** | [**BulkActionOnExistence**](BulkActionOnExistence.md) |  | [optional] 
-**entities** | [**List[EntitiesInner]**](EntitiesInner.md) | A list of entity id/key or entity objects to be deleted. | 
+**entities** | [**List[EntitiesInner1]**](EntitiesInner1.md) | A list of entity id/key or entity objects to be deleted. | 
 **action_on_non_existence** | [**BulkActionNotOnExistence**](BulkActionNotOnExistence.md) |  | [optional] 
+**update_mask** | **List[str]** |  | [optional] 
 
 ## Example
 

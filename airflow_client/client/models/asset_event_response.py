@@ -23,6 +23,7 @@ from typing import Any, ClassVar, Dict, List, Optional
 from airflow_client.client.models.dag_run_asset_reference import DagRunAssetReference
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class AssetEventResponse(BaseModel):
     """
@@ -34,16 +35,18 @@ class AssetEventResponse(BaseModel):
     group: Optional[StrictStr] = None
     id: StrictInt
     name: Optional[StrictStr] = None
+    partition_key: Optional[StrictStr] = None
     source_dag_id: Optional[StrictStr] = None
     source_map_index: StrictInt
     source_run_id: Optional[StrictStr] = None
     source_task_id: Optional[StrictStr] = None
     timestamp: datetime
     uri: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["asset_id", "created_dagruns", "extra", "group", "id", "name", "source_dag_id", "source_map_index", "source_run_id", "source_task_id", "timestamp", "uri"]
+    __properties: ClassVar[List[str]] = ["asset_id", "created_dagruns", "extra", "group", "id", "name", "partition_key", "source_dag_id", "source_map_index", "source_run_id", "source_task_id", "timestamp", "uri"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -55,8 +58,7 @@ class AssetEventResponse(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -106,6 +108,7 @@ class AssetEventResponse(BaseModel):
             "group": obj.get("group"),
             "id": obj.get("id"),
             "name": obj.get("name"),
+            "partition_key": obj.get("partition_key"),
             "source_dag_id": obj.get("source_dag_id"),
             "source_map_index": obj.get("source_map_index"),
             "source_run_id": obj.get("source_run_id"),

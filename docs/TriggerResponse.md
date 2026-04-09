@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **created_date** | **datetime** |  | 
 **id** | **int** |  | 
 **kwargs** | **str** |  | 
+**queue** | **str** |  | [optional] 
 **triggerer_id** | **int** |  | [optional] 
 
 ## Example

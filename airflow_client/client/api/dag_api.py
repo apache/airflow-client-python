@@ -1154,7 +1154,7 @@ class DAGApi:
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `name`")] = None,
-        tag_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        tag_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1178,7 +1178,7 @@ class DAGApi:
         :type offset: int
         :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `name`
         :type order_by: List[str]
-        :param tag_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :param tag_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
         :type tag_name_pattern: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1236,7 +1236,7 @@ class DAGApi:
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `name`")] = None,
-        tag_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        tag_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1260,7 +1260,7 @@ class DAGApi:
         :type offset: int
         :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `name`
         :type order_by: List[str]
-        :param tag_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :param tag_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
         :type tag_name_pattern: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1318,7 +1318,7 @@ class DAGApi:
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `name`")] = None,
-        tag_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        tag_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1342,7 +1342,7 @@ class DAGApi:
         :type offset: int
         :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `name`
         :type order_by: List[str]
-        :param tag_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :param tag_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
         :type tag_name_pattern: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1481,8 +1481,8 @@ class DAGApi:
         tags: Optional[List[StrictStr]] = None,
         tags_match_mode: Optional[StrictStr] = None,
         owners: Optional[List[StrictStr]] = None,
-        dag_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
-        dag_display_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        dag_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
+        dag_display_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
         exclude_stale: Optional[StrictBool] = None,
         paused: Optional[StrictBool] = None,
         has_import_errors: Annotated[Optional[StrictBool], Field(description="Filter Dags by having import errors. Only Dags that have been successfully loaded before will be returned.")] = None,
@@ -1502,6 +1502,7 @@ class DAGApi:
         dag_run_state: Optional[List[StrictStr]] = None,
         order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `dag_id, dag_display_name, next_dagrun, state, start_date, last_run_state, last_run_start_date`")] = None,
         is_favorite: Optional[StrictBool] = None,
+        timetable_type: Optional[List[StrictStr]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1529,9 +1530,9 @@ class DAGApi:
         :type tags_match_mode: str
         :param owners:
         :type owners: List[str]
-        :param dag_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :param dag_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
         :type dag_id_pattern: str
-        :param dag_display_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :param dag_display_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
         :type dag_display_name_pattern: str
         :param exclude_stale:
         :type exclude_stale: bool
@@ -1571,6 +1572,8 @@ class DAGApi:
         :type order_by: List[str]
         :param is_favorite:
         :type is_favorite: bool
+        :param timetable_type:
+        :type timetable_type: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1620,6 +1623,7 @@ class DAGApi:
             dag_run_state=dag_run_state,
             order_by=order_by,
             is_favorite=is_favorite,
+            timetable_type=timetable_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1651,8 +1655,8 @@ class DAGApi:
         tags: Optional[List[StrictStr]] = None,
         tags_match_mode: Optional[StrictStr] = None,
         owners: Optional[List[StrictStr]] = None,
-        dag_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
-        dag_display_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        dag_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
+        dag_display_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
         exclude_stale: Optional[StrictBool] = None,
         paused: Optional[StrictBool] = None,
         has_import_errors: Annotated[Optional[StrictBool], Field(description="Filter Dags by having import errors. Only Dags that have been successfully loaded before will be returned.")] = None,
@@ -1672,6 +1676,7 @@ class DAGApi:
         dag_run_state: Optional[List[StrictStr]] = None,
         order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `dag_id, dag_display_name, next_dagrun, state, start_date, last_run_state, last_run_start_date`")] = None,
         is_favorite: Optional[StrictBool] = None,
+        timetable_type: Optional[List[StrictStr]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1699,9 +1704,9 @@ class DAGApi:
         :type tags_match_mode: str
         :param owners:
         :type owners: List[str]
-        :param dag_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :param dag_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
         :type dag_id_pattern: str
-        :param dag_display_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :param dag_display_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
         :type dag_display_name_pattern: str
         :param exclude_stale:
         :type exclude_stale: bool
@@ -1741,6 +1746,8 @@ class DAGApi:
         :type order_by: List[str]
         :param is_favorite:
         :type is_favorite: bool
+        :param timetable_type:
+        :type timetable_type: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1790,6 +1797,7 @@ class DAGApi:
             dag_run_state=dag_run_state,
             order_by=order_by,
             is_favorite=is_favorite,
+            timetable_type=timetable_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1821,8 +1829,8 @@ class DAGApi:
         tags: Optional[List[StrictStr]] = None,
         tags_match_mode: Optional[StrictStr] = None,
         owners: Optional[List[StrictStr]] = None,
-        dag_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
-        dag_display_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        dag_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
+        dag_display_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
         exclude_stale: Optional[StrictBool] = None,
         paused: Optional[StrictBool] = None,
         has_import_errors: Annotated[Optional[StrictBool], Field(description="Filter Dags by having import errors. Only Dags that have been successfully loaded before will be returned.")] = None,
@@ -1842,6 +1850,7 @@ class DAGApi:
         dag_run_state: Optional[List[StrictStr]] = None,
         order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `dag_id, dag_display_name, next_dagrun, state, start_date, last_run_state, last_run_start_date`")] = None,
         is_favorite: Optional[StrictBool] = None,
+        timetable_type: Optional[List[StrictStr]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1869,9 +1878,9 @@ class DAGApi:
         :type tags_match_mode: str
         :param owners:
         :type owners: List[str]
-        :param dag_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :param dag_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
         :type dag_id_pattern: str
-        :param dag_display_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :param dag_display_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
         :type dag_display_name_pattern: str
         :param exclude_stale:
         :type exclude_stale: bool
@@ -1911,6 +1920,8 @@ class DAGApi:
         :type order_by: List[str]
         :param is_favorite:
         :type is_favorite: bool
+        :param timetable_type:
+        :type timetable_type: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1960,6 +1971,7 @@ class DAGApi:
             dag_run_state=dag_run_state,
             order_by=order_by,
             is_favorite=is_favorite,
+            timetable_type=timetable_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2007,6 +2019,7 @@ class DAGApi:
         dag_run_state,
         order_by,
         is_favorite,
+        timetable_type,
         _request_auth,
         _content_type,
         _headers,
@@ -2020,6 +2033,7 @@ class DAGApi:
             'owners': 'multi',
             'dag_run_state': 'multi',
             'order_by': 'multi',
+            'timetable_type': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -2208,6 +2222,10 @@ class DAGApi:
         if is_favorite is not None:
             
             _query_params.append(('is_favorite', is_favorite))
+            
+        if timetable_type is not None:
+            
+            _query_params.append(('timetable_type', timetable_type))
             
         # process the header parameters
         # process the form parameters
@@ -2580,7 +2598,7 @@ class DAGApi:
         tags: Optional[List[StrictStr]] = None,
         tags_match_mode: Optional[StrictStr] = None,
         owners: Optional[List[StrictStr]] = None,
-        dag_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        dag_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
         exclude_stale: Optional[StrictBool] = None,
         paused: Optional[StrictBool] = None,
         _request_timeout: Union[
@@ -2614,7 +2632,7 @@ class DAGApi:
         :type tags_match_mode: str
         :param owners:
         :type owners: List[str]
-        :param dag_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :param dag_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
         :type dag_id_pattern: str
         :param exclude_stale:
         :type exclude_stale: bool
@@ -2688,7 +2706,7 @@ class DAGApi:
         tags: Optional[List[StrictStr]] = None,
         tags_match_mode: Optional[StrictStr] = None,
         owners: Optional[List[StrictStr]] = None,
-        dag_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        dag_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
         exclude_stale: Optional[StrictBool] = None,
         paused: Optional[StrictBool] = None,
         _request_timeout: Union[
@@ -2722,7 +2740,7 @@ class DAGApi:
         :type tags_match_mode: str
         :param owners:
         :type owners: List[str]
-        :param dag_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :param dag_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
         :type dag_id_pattern: str
         :param exclude_stale:
         :type exclude_stale: bool
@@ -2796,7 +2814,7 @@ class DAGApi:
         tags: Optional[List[StrictStr]] = None,
         tags_match_mode: Optional[StrictStr] = None,
         owners: Optional[List[StrictStr]] = None,
-        dag_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        dag_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
         exclude_stale: Optional[StrictBool] = None,
         paused: Optional[StrictBool] = None,
         _request_timeout: Union[
@@ -2830,7 +2848,7 @@ class DAGApi:
         :type tags_match_mode: str
         :param owners:
         :type owners: List[str]
-        :param dag_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :param dag_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
         :type dag_id_pattern: str
         :param exclude_stale:
         :type exclude_stale: bool

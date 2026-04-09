@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **description** | **str** |  | [optional] 
 **key** | **str** |  | 
+**team_name** | **str** |  | [optional] 
 **value** | **object** |  | 
 
 ## Example

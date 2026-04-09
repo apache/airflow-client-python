@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **password** | **str** |  | [optional] 
 **port** | **int** |  | [optional] 
 **var_schema** | **str** |  | [optional] 
+**team_name** | **str** |  | [optional] 
 
 ## Example
 

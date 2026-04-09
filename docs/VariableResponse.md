@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **description** | **str** |  | [optional] 
 **is_encrypted** | **bool** |  | 
 **key** | **str** |  | 
+**team_name** | **str** |  | [optional] 
 **value** | **str** |  | 
 
 ## Example

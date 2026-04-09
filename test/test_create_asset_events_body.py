@@ -36,7 +36,8 @@ class TestCreateAssetEventsBody(unittest.TestCase):
         if include_optional:
             return CreateAssetEventsBody(
                 asset_id = 56,
-                extra = { }
+                extra = { },
+                partition_key = ''
             )
         else:
             return CreateAssetEventsBody(

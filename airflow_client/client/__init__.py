@@ -14,7 +14,7 @@
 """  # noqa: E501
 
 
-__version__ = "3.1.8"
+__version__ = "3.2.0"
 
 # Define package exports
 __all__ = [
@@ -65,6 +65,7 @@ __all__ = [
     "AssetEventCollectionResponse",
     "AssetEventResponse",
     "AssetResponse",
+    "AssetWatcherResponse",
     "BackfillCollectionResponse",
     "BackfillPostBody",
     "BackfillResponse",
@@ -132,6 +133,9 @@ __all__ = [
     "DryRunBackfillCollectionResponse",
     "DryRunBackfillResponse",
     "EntitiesInner",
+    "EntitiesInner1",
+    "EntitiesInner2",
+    "EntitiesInner3",
     "EventLogCollectionResponse",
     "EventLogResponse",
     "ExternalLogUrlResponse",
@@ -141,6 +145,7 @@ __all__ = [
     "FastAPIRootMiddlewareResponse",
     "HITLDetail",
     "HITLDetailCollection",
+    "HITLDetailHistory",
     "HITLDetailResponse",
     "HITLUser",
     "HTTPExceptionResponse",
@@ -255,6 +260,7 @@ from airflow_client.client.models.asset_collection_response import AssetCollecti
 from airflow_client.client.models.asset_event_collection_response import AssetEventCollectionResponse as AssetEventCollectionResponse
 from airflow_client.client.models.asset_event_response import AssetEventResponse as AssetEventResponse
 from airflow_client.client.models.asset_response import AssetResponse as AssetResponse
+from airflow_client.client.models.asset_watcher_response import AssetWatcherResponse as AssetWatcherResponse
 from airflow_client.client.models.backfill_collection_response import BackfillCollectionResponse as BackfillCollectionResponse
 from airflow_client.client.models.backfill_post_body import BackfillPostBody as BackfillPostBody
 from airflow_client.client.models.backfill_response import BackfillResponse as BackfillResponse
@@ -322,6 +328,9 @@ from airflow_client.client.models.detail import Detail as Detail
 from airflow_client.client.models.dry_run_backfill_collection_response import DryRunBackfillCollectionResponse as DryRunBackfillCollectionResponse
 from airflow_client.client.models.dry_run_backfill_response import DryRunBackfillResponse as DryRunBackfillResponse
 from airflow_client.client.models.entities_inner import EntitiesInner as EntitiesInner
+from airflow_client.client.models.entities_inner1 import EntitiesInner1 as EntitiesInner1
+from airflow_client.client.models.entities_inner2 import EntitiesInner2 as EntitiesInner2
+from airflow_client.client.models.entities_inner3 import EntitiesInner3 as EntitiesInner3
 from airflow_client.client.models.event_log_collection_response import EventLogCollectionResponse as EventLogCollectionResponse
 from airflow_client.client.models.event_log_response import EventLogResponse as EventLogResponse
 from airflow_client.client.models.external_log_url_response import ExternalLogUrlResponse as ExternalLogUrlResponse
@@ -331,6 +340,7 @@ from airflow_client.client.models.fast_api_app_response import FastAPIAppRespons
 from airflow_client.client.models.fast_api_root_middleware_response import FastAPIRootMiddlewareResponse as FastAPIRootMiddlewareResponse
 from airflow_client.client.models.hitl_detail import HITLDetail as HITLDetail
 from airflow_client.client.models.hitl_detail_collection import HITLDetailCollection as HITLDetailCollection
+from airflow_client.client.models.hitl_detail_history import HITLDetailHistory as HITLDetailHistory
 from airflow_client.client.models.hitl_detail_response import HITLDetailResponse as HITLDetailResponse
 from airflow_client.client.models.hitl_user import HITLUser as HITLUser
 from airflow_client.client.models.http_exception_response import HTTPExceptionResponse as HTTPExceptionResponse

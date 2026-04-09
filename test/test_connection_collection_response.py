@@ -45,7 +45,8 @@ class TestConnectionCollectionResponse(unittest.TestCase):
                         login = '', 
                         password = '', 
                         port = 56, 
-                        schema = '', )
+                        schema = '', 
+                        team_name = '', )
                     ],
                 total_entries = 56
             )
@@ -61,7 +62,8 @@ class TestConnectionCollectionResponse(unittest.TestCase):
                         login = '', 
                         password = '', 
                         port = 56, 
-                        schema = '', )
+                        schema = '', 
+                        team_name = '', )
                     ],
                 total_entries = 56,
         )

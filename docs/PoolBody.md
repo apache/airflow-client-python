@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **include_deferred** | **bool** |  | [optional] [default to False]
 **name** | **str** |  | 
 **slots** | **int** | Number of slots. Use -1 for unlimited. | 
+**team_name** | **str** |  | [optional] 
 
 ## Example
 

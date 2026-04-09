@@ -41,6 +41,7 @@ class TestBulkCreateActionVariableBody(unittest.TestCase):
                     airflow_client.client.models.variable_body.VariableBody(
                         description = '', 
                         key = '', 
+                        team_name = '', 
                         value = null, )
                     ]
             )
@@ -51,6 +52,7 @@ class TestBulkCreateActionVariableBody(unittest.TestCase):
                     airflow_client.client.models.variable_body.VariableBody(
                         description = '', 
                         key = '', 
+                        team_name = '', 
                         value = null, )
                     ],
         )

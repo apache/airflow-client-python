@@ -18,22 +18,26 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from airflow_client.client.models.location_inner import LocationInner
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class ValidationError(BaseModel):
     """
     ValidationError
     """ # noqa: E501
+    ctx: Optional[Dict[str, Any]] = None
+    input: Optional[Any] = None
     loc: List[LocationInner]
     msg: StrictStr
     type: StrictStr
-    __properties: ClassVar[List[str]] = ["loc", "msg", "type"]
+    __properties: ClassVar[List[str]] = ["ctx", "input", "loc", "msg", "type"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -45,8 +49,7 @@ class ValidationError(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -78,6 +81,11 @@ class ValidationError(BaseModel):
                 if _item_loc:
                     _items.append(_item_loc.to_dict())
             _dict['loc'] = _items
+        # set to None if input (nullable) is None
+        # and model_fields_set contains the field
+        if self.input is None and "input" in self.model_fields_set:
+            _dict['input'] = None
+
         return _dict
 
     @classmethod
@@ -90,6 +98,8 @@ class ValidationError(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "ctx": obj.get("ctx"),
+            "input": obj.get("input"),
             "loc": [LocationInner.from_dict(_item) for _item in obj["loc"]] if obj.get("loc") is not None else None,
             "msg": obj.get("msg"),
             "type": obj.get("type")

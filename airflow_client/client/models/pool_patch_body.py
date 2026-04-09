@@ -22,6 +22,7 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class PoolPatchBody(BaseModel):
     """
@@ -31,10 +32,12 @@ class PoolPatchBody(BaseModel):
     include_deferred: Optional[StrictBool] = None
     pool: Optional[StrictStr] = None
     slots: Optional[Annotated[int, Field(strict=True, ge=-1)]] = Field(default=None, description="Number of slots. Use -1 for unlimited.")
-    __properties: ClassVar[List[str]] = ["description", "include_deferred", "pool", "slots"]
+    team_name: Optional[Annotated[str, Field(strict=True, max_length=50)]] = None
+    __properties: ClassVar[List[str]] = ["description", "include_deferred", "pool", "slots", "team_name"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -46,8 +49,7 @@ class PoolPatchBody(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -87,7 +89,8 @@ class PoolPatchBody(BaseModel):
             "description": obj.get("description"),
             "include_deferred": obj.get("include_deferred"),
             "pool": obj.get("pool"),
-            "slots": obj.get("slots")
+            "slots": obj.get("slots"),
+            "team_name": obj.get("team_name")
         })
         return _obj
 

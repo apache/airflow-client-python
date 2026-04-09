@@ -35,9 +35,14 @@ class TestDAGRunsBatchBody(unittest.TestCase):
         model = DAGRunsBatchBody()
         if include_optional:
             return DAGRunsBatchBody(
+                conf_contains = '',
                 dag_ids = [
                     ''
                     ],
+                duration_gt = 1.337,
+                duration_gte = 1.337,
+                duration_lt = 1.337,
+                duration_lte = 1.337,
                 end_date_gt = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 end_date_gte = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 end_date_lt = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),

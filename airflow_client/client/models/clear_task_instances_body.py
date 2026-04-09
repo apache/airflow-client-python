@@ -23,6 +23,7 @@ from typing import Any, ClassVar, Dict, List, Optional
 from airflow_client.client.models.clear_task_instances_body_task_ids_inner import ClearTaskInstancesBodyTaskIdsInner
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class ClearTaskInstancesBody(BaseModel):
     """
@@ -37,14 +38,16 @@ class ClearTaskInstancesBody(BaseModel):
     include_upstream: Optional[StrictBool] = False
     only_failed: Optional[StrictBool] = True
     only_running: Optional[StrictBool] = False
+    prevent_running_task: Optional[StrictBool] = False
     reset_dag_runs: Optional[StrictBool] = True
     run_on_latest_version: Optional[StrictBool] = Field(default=False, description="(Experimental) Run on the latest bundle version of the dag after clearing the task instances.")
     start_date: Optional[datetime] = None
     task_ids: Optional[List[ClearTaskInstancesBodyTaskIdsInner]] = None
-    __properties: ClassVar[List[str]] = ["dag_run_id", "dry_run", "end_date", "include_downstream", "include_future", "include_past", "include_upstream", "only_failed", "only_running", "reset_dag_runs", "run_on_latest_version", "start_date", "task_ids"]
+    __properties: ClassVar[List[str]] = ["dag_run_id", "dry_run", "end_date", "include_downstream", "include_future", "include_past", "include_upstream", "only_failed", "only_running", "prevent_running_task", "reset_dag_runs", "run_on_latest_version", "start_date", "task_ids"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -56,8 +59,7 @@ class ClearTaskInstancesBody(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -110,6 +112,7 @@ class ClearTaskInstancesBody(BaseModel):
             "include_upstream": obj.get("include_upstream") if obj.get("include_upstream") is not None else False,
             "only_failed": obj.get("only_failed") if obj.get("only_failed") is not None else True,
             "only_running": obj.get("only_running") if obj.get("only_running") is not None else False,
+            "prevent_running_task": obj.get("prevent_running_task") if obj.get("prevent_running_task") is not None else False,
             "reset_dag_runs": obj.get("reset_dag_runs") if obj.get("reset_dag_runs") is not None else True,
             "run_on_latest_version": obj.get("run_on_latest_version") if obj.get("run_on_latest_version") is not None else False,
             "start_date": obj.get("start_date"),

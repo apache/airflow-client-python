@@ -40,7 +40,10 @@ class TestActionsInner(unittest.TestCase):
                 entities = [
                     null
                     ],
-                action_on_non_existence = 'fail'
+                action_on_non_existence = 'fail',
+                update_mask = [
+                    ''
+                    ]
             )
         else:
             return ActionsInner(

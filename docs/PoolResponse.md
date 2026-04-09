@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **running_slots** | **int** |  | 
 **scheduled_slots** | **int** |  | 
 **slots** | **int** | Number of slots. Use -1 for unlimited. | 
+**team_name** | **str** |  | [optional] 
 
 ## Example
 

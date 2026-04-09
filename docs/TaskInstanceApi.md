@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**get_external_log_url**](TaskInstanceApi.md#get_external_log_url) | **GET** /api/v2/dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/externalLogUrl/{try_number} | Get External Log Url
 [**get_extra_links**](TaskInstanceApi.md#get_extra_links) | **GET** /api/v2/dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/links | Get Extra Links
 [**get_hitl_detail**](TaskInstanceApi.md#get_hitl_detail) | **GET** /api/v2/dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/{map_index}/hitlDetails | Get Hitl Detail
+[**get_hitl_detail_try_detail**](TaskInstanceApi.md#get_hitl_detail_try_detail) | **GET** /api/v2/dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/{map_index}/hitlDetails/tries/{try_number} | Get Hitl Detail Try Detail
 [**get_hitl_details**](TaskInstanceApi.md#get_hitl_details) | **GET** /api/v2/dags/{dag_id}/dagRuns/{dag_run_id}/hitlDetails | Get Hitl Details
 [**get_log**](TaskInstanceApi.md#get_log) | **GET** /api/v2/dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/logs/{try_number} | Get Log
 [**get_mapped_task_instance**](TaskInstanceApi.md#get_mapped_task_instance) | **GET** /api/v2/dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/{map_index} | Get Mapped Task Instance
@@ -485,6 +486,99 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_hitl_detail_try_detail**
+> HITLDetailHistory get_hitl_detail_try_detail(dag_id, dag_run_id, task_id, map_index, try_number)
+
+Get Hitl Detail Try Detail
+
+Get a Human-in-the-loop detail of a specific task instance.
+
+### Example
+
+* OAuth Authentication (OAuth2PasswordBearer):
+* Bearer Authentication (HTTPBearer):
+
+```python
+import airflow_client.client
+from airflow_client.client.models.hitl_detail_history import HITLDetailHistory
+from airflow_client.client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = airflow_client.client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure Bearer authorization: HTTPBearer
+configuration = airflow_client.client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with airflow_client.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = airflow_client.client.TaskInstanceApi(api_client)
+    dag_id = 'dag_id_example' # str | 
+    dag_run_id = 'dag_run_id_example' # str | 
+    task_id = 'task_id_example' # str | 
+    map_index = 56 # int | 
+    try_number = 56 # int | 
+
+    try:
+        # Get Hitl Detail Try Detail
+        api_response = api_instance.get_hitl_detail_try_detail(dag_id, dag_run_id, task_id, map_index, try_number)
+        print("The response of TaskInstanceApi->get_hitl_detail_try_detail:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling TaskInstanceApi->get_hitl_detail_try_detail: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **dag_id** | **str**|  | 
+ **dag_run_id** | **str**|  | 
+ **task_id** | **str**|  | 
+ **map_index** | **int**|  | 
+ **try_number** | **int**|  | 
+
+### Return type
+
+[**HITLDetailHistory**](HITLDetailHistory.md)
+
+### Authorization
+
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_hitl_details**
 > HITLDetailCollection get_hitl_details(dag_id, dag_run_id, limit=limit, offset=offset, order_by=order_by, dag_id_pattern=dag_id_pattern, task_id=task_id, task_id_pattern=task_id_pattern, map_index=map_index, state=state, response_received=response_received, responded_by_user_id=responded_by_user_id, responded_by_user_name=responded_by_user_name, subject_search=subject_search, body_search=body_search, created_at_gte=created_at_gte, created_at_gt=created_at_gt, created_at_lte=created_at_lte, created_at_lt=created_at_lt)
 
@@ -529,17 +623,17 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     dag_run_id = 'dag_run_id_example' # str | 
     limit = 50 # int |  (optional) (default to 50)
     offset = 0 # int |  (optional) (default to 0)
-    order_by = ["ti_id"] # List[str] | Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `ti_id, subject, responded_at, created_at, responded_by_user_id, responded_by_user_name, dag_id, run_id, run_after, rendered_map_index, task_instance_operator, task_instance_state` (optional) (default to ["ti_id"])
-    dag_id_pattern = 'dag_id_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported. (optional)
+    order_by = ["ti_id"] # List[str] | Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `ti_id, subject, responded_at, created_at, responded_by_user_id, responded_by_user_name, dag_id, run_id, task_display_name, run_after, rendered_map_index, task_instance_operator, task_instance_state` (optional) (default to ["ti_id"])
+    dag_id_pattern = 'dag_id_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported. (optional)
     task_id = 'task_id_example' # str |  (optional)
-    task_id_pattern = 'task_id_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported. (optional)
+    task_id_pattern = 'task_id_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported. (optional)
     map_index = 56 # int |  (optional)
     state = ['state_example'] # List[str] |  (optional)
     response_received = True # bool |  (optional)
     responded_by_user_id = ['responded_by_user_id_example'] # List[str] |  (optional)
     responded_by_user_name = ['responded_by_user_name_example'] # List[str] |  (optional)
-    subject_search = 'subject_search_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported. (optional)
-    body_search = 'body_search_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported. (optional)
+    subject_search = 'subject_search_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported. (optional)
+    body_search = 'body_search_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported. (optional)
     created_at_gte = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
     created_at_gt = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
     created_at_lte = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
@@ -565,17 +659,17 @@ Name | Type | Description  | Notes
  **dag_run_id** | **str**|  | 
  **limit** | **int**|  | [optional] [default to 50]
  **offset** | **int**|  | [optional] [default to 0]
- **order_by** | [**List[str]**](str.md)| Attributes to order by, multi criteria sort is supported. Prefix with &#x60;-&#x60; for descending order. Supported attributes: &#x60;ti_id, subject, responded_at, created_at, responded_by_user_id, responded_by_user_name, dag_id, run_id, run_after, rendered_map_index, task_instance_operator, task_instance_state&#x60; | [optional] [default to [&quot;ti_id&quot;]]
- **dag_id_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). Regular expressions are **not** supported. | [optional] 
+ **order_by** | [**List[str]**](str.md)| Attributes to order by, multi criteria sort is supported. Prefix with &#x60;-&#x60; for descending order. Supported attributes: &#x60;ti_id, subject, responded_at, created_at, responded_by_user_id, responded_by_user_name, dag_id, run_id, task_display_name, run_after, rendered_map_index, task_instance_operator, task_instance_state&#x60; | [optional] [default to [&quot;ti_id&quot;]]
+ **dag_id_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). or the pipe &#x60;|&#x60; operator for OR logic (e.g. &#x60;dag1 | dag2&#x60;). Regular expressions are **not** supported. | [optional] 
  **task_id** | **str**|  | [optional] 
- **task_id_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). Regular expressions are **not** supported. | [optional] 
+ **task_id_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). or the pipe &#x60;|&#x60; operator for OR logic (e.g. &#x60;dag1 | dag2&#x60;). Regular expressions are **not** supported. | [optional] 
  **map_index** | **int**|  | [optional] 
  **state** | [**List[str]**](str.md)|  | [optional] 
  **response_received** | **bool**|  | [optional] 
  **responded_by_user_id** | [**List[str]**](str.md)|  | [optional] 
  **responded_by_user_name** | [**List[str]**](str.md)|  | [optional] 
- **subject_search** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). Regular expressions are **not** supported. | [optional] 
- **body_search** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). Regular expressions are **not** supported. | [optional] 
+ **subject_search** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). or the pipe &#x60;|&#x60; operator for OR logic (e.g. &#x60;dag1 | dag2&#x60;). Regular expressions are **not** supported. | [optional] 
+ **body_search** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). or the pipe &#x60;|&#x60; operator for OR logic (e.g. &#x60;dag1 | dag2&#x60;). Regular expressions are **not** supported. | [optional] 
  **created_at_gte** | **datetime**|  | [optional] 
  **created_at_gt** | **datetime**|  | [optional] 
  **created_at_lte** | **datetime**|  | [optional] 
@@ -976,7 +1070,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_mapped_task_instances**
-> TaskInstanceCollectionResponse get_mapped_task_instances(dag_id, dag_run_id, task_id, run_after_gte=run_after_gte, run_after_gt=run_after_gt, run_after_lte=run_after_lte, run_after_lt=run_after_lt, logical_date_gte=logical_date_gte, logical_date_gt=logical_date_gt, logical_date_lte=logical_date_lte, logical_date_lt=logical_date_lt, start_date_gte=start_date_gte, start_date_gt=start_date_gt, start_date_lte=start_date_lte, start_date_lt=start_date_lt, end_date_gte=end_date_gte, end_date_gt=end_date_gt, end_date_lte=end_date_lte, end_date_lt=end_date_lt, updated_at_gte=updated_at_gte, updated_at_gt=updated_at_gt, updated_at_lte=updated_at_lte, updated_at_lt=updated_at_lt, duration_gte=duration_gte, duration_gt=duration_gt, duration_lte=duration_lte, duration_lt=duration_lt, state=state, pool=pool, queue=queue, executor=executor, version_number=version_number, try_number=try_number, operator=operator, map_index=map_index, limit=limit, offset=offset, order_by=order_by)
+> TaskInstanceCollectionResponse get_mapped_task_instances(dag_id, dag_run_id, task_id, run_after_gte=run_after_gte, run_after_gt=run_after_gt, run_after_lte=run_after_lte, run_after_lt=run_after_lt, logical_date_gte=logical_date_gte, logical_date_gt=logical_date_gt, logical_date_lte=logical_date_lte, logical_date_lt=logical_date_lt, start_date_gte=start_date_gte, start_date_gt=start_date_gt, start_date_lte=start_date_lte, start_date_lt=start_date_lt, end_date_gte=end_date_gte, end_date_gt=end_date_gt, end_date_lte=end_date_lte, end_date_lt=end_date_lt, updated_at_gte=updated_at_gte, updated_at_gt=updated_at_gt, updated_at_lte=updated_at_lte, updated_at_lt=updated_at_lt, duration_gte=duration_gte, duration_gt=duration_gt, duration_lte=duration_lte, duration_lt=duration_lt, state=state, pool=pool, pool_name_pattern=pool_name_pattern, queue=queue, queue_name_pattern=queue_name_pattern, executor=executor, version_number=version_number, try_number=try_number, operator=operator, operator_name_pattern=operator_name_pattern, map_index=map_index, limit=limit, offset=offset, order_by=order_by)
 
 Get Mapped Task Instances
 
@@ -1044,11 +1138,14 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     duration_lt = 3.4 # float |  (optional)
     state = ['state_example'] # List[str] |  (optional)
     pool = ['pool_example'] # List[str] |  (optional)
+    pool_name_pattern = 'pool_name_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported. (optional)
     queue = ['queue_example'] # List[str] |  (optional)
+    queue_name_pattern = 'queue_name_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported. (optional)
     executor = ['executor_example'] # List[str] |  (optional)
     version_number = [56] # List[int] |  (optional)
     try_number = [56] # List[int] |  (optional)
     operator = ['operator_example'] # List[str] |  (optional)
+    operator_name_pattern = 'operator_name_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported. (optional)
     map_index = [56] # List[int] |  (optional)
     limit = 50 # int |  (optional) (default to 50)
     offset = 0 # int |  (optional) (default to 0)
@@ -1056,7 +1153,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
 
     try:
         # Get Mapped Task Instances
-        api_response = api_instance.get_mapped_task_instances(dag_id, dag_run_id, task_id, run_after_gte=run_after_gte, run_after_gt=run_after_gt, run_after_lte=run_after_lte, run_after_lt=run_after_lt, logical_date_gte=logical_date_gte, logical_date_gt=logical_date_gt, logical_date_lte=logical_date_lte, logical_date_lt=logical_date_lt, start_date_gte=start_date_gte, start_date_gt=start_date_gt, start_date_lte=start_date_lte, start_date_lt=start_date_lt, end_date_gte=end_date_gte, end_date_gt=end_date_gt, end_date_lte=end_date_lte, end_date_lt=end_date_lt, updated_at_gte=updated_at_gte, updated_at_gt=updated_at_gt, updated_at_lte=updated_at_lte, updated_at_lt=updated_at_lt, duration_gte=duration_gte, duration_gt=duration_gt, duration_lte=duration_lte, duration_lt=duration_lt, state=state, pool=pool, queue=queue, executor=executor, version_number=version_number, try_number=try_number, operator=operator, map_index=map_index, limit=limit, offset=offset, order_by=order_by)
+        api_response = api_instance.get_mapped_task_instances(dag_id, dag_run_id, task_id, run_after_gte=run_after_gte, run_after_gt=run_after_gt, run_after_lte=run_after_lte, run_after_lt=run_after_lt, logical_date_gte=logical_date_gte, logical_date_gt=logical_date_gt, logical_date_lte=logical_date_lte, logical_date_lt=logical_date_lt, start_date_gte=start_date_gte, start_date_gt=start_date_gt, start_date_lte=start_date_lte, start_date_lt=start_date_lt, end_date_gte=end_date_gte, end_date_gt=end_date_gt, end_date_lte=end_date_lte, end_date_lt=end_date_lt, updated_at_gte=updated_at_gte, updated_at_gt=updated_at_gt, updated_at_lte=updated_at_lte, updated_at_lt=updated_at_lt, duration_gte=duration_gte, duration_gt=duration_gt, duration_lte=duration_lte, duration_lt=duration_lt, state=state, pool=pool, pool_name_pattern=pool_name_pattern, queue=queue, queue_name_pattern=queue_name_pattern, executor=executor, version_number=version_number, try_number=try_number, operator=operator, operator_name_pattern=operator_name_pattern, map_index=map_index, limit=limit, offset=offset, order_by=order_by)
         print("The response of TaskInstanceApi->get_mapped_task_instances:\n")
         pprint(api_response)
     except Exception as e:
@@ -1099,11 +1196,14 @@ Name | Type | Description  | Notes
  **duration_lt** | **float**|  | [optional] 
  **state** | [**List[str]**](str.md)|  | [optional] 
  **pool** | [**List[str]**](str.md)|  | [optional] 
+ **pool_name_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). or the pipe &#x60;|&#x60; operator for OR logic (e.g. &#x60;dag1 | dag2&#x60;). Regular expressions are **not** supported. | [optional] 
  **queue** | [**List[str]**](str.md)|  | [optional] 
+ **queue_name_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). or the pipe &#x60;|&#x60; operator for OR logic (e.g. &#x60;dag1 | dag2&#x60;). Regular expressions are **not** supported. | [optional] 
  **executor** | [**List[str]**](str.md)|  | [optional] 
  **version_number** | [**List[int]**](int.md)|  | [optional] 
  **try_number** | [**List[int]**](int.md)|  | [optional] 
  **operator** | [**List[str]**](str.md)|  | [optional] 
+ **operator_name_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). or the pipe &#x60;|&#x60; operator for OR logic (e.g. &#x60;dag1 | dag2&#x60;). Regular expressions are **not** supported. | [optional] 
  **map_index** | [**List[int]**](int.md)|  | [optional] 
  **limit** | **int**|  | [optional] [default to 50]
  **offset** | **int**|  | [optional] [default to 0]
@@ -1590,7 +1690,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_task_instances**
-> TaskInstanceCollectionResponse get_task_instances(dag_id, dag_run_id, task_id=task_id, run_after_gte=run_after_gte, run_after_gt=run_after_gt, run_after_lte=run_after_lte, run_after_lt=run_after_lt, logical_date_gte=logical_date_gte, logical_date_gt=logical_date_gt, logical_date_lte=logical_date_lte, logical_date_lt=logical_date_lt, start_date_gte=start_date_gte, start_date_gt=start_date_gt, start_date_lte=start_date_lte, start_date_lt=start_date_lt, end_date_gte=end_date_gte, end_date_gt=end_date_gt, end_date_lte=end_date_lte, end_date_lt=end_date_lt, updated_at_gte=updated_at_gte, updated_at_gt=updated_at_gt, updated_at_lte=updated_at_lte, updated_at_lt=updated_at_lt, duration_gte=duration_gte, duration_gt=duration_gt, duration_lte=duration_lte, duration_lt=duration_lt, task_display_name_pattern=task_display_name_pattern, task_group_id=task_group_id, state=state, pool=pool, queue=queue, executor=executor, version_number=version_number, try_number=try_number, operator=operator, map_index=map_index, limit=limit, offset=offset, order_by=order_by)
+> TaskInstanceCollectionResponse get_task_instances(dag_id, dag_run_id, task_id=task_id, run_after_gte=run_after_gte, run_after_gt=run_after_gt, run_after_lte=run_after_lte, run_after_lt=run_after_lt, logical_date_gte=logical_date_gte, logical_date_gt=logical_date_gt, logical_date_lte=logical_date_lte, logical_date_lt=logical_date_lt, start_date_gte=start_date_gte, start_date_gt=start_date_gt, start_date_lte=start_date_lte, start_date_lt=start_date_lt, end_date_gte=end_date_gte, end_date_gt=end_date_gt, end_date_lte=end_date_lte, end_date_lt=end_date_lt, updated_at_gte=updated_at_gte, updated_at_gt=updated_at_gt, updated_at_lte=updated_at_lte, updated_at_lt=updated_at_lt, duration_gte=duration_gte, duration_gt=duration_gt, duration_lte=duration_lte, duration_lt=duration_lt, task_display_name_pattern=task_display_name_pattern, task_group_id=task_group_id, dag_id_pattern=dag_id_pattern, run_id_pattern=run_id_pattern, state=state, pool=pool, pool_name_pattern=pool_name_pattern, queue=queue, queue_name_pattern=queue_name_pattern, executor=executor, version_number=version_number, try_number=try_number, operator=operator, operator_name_pattern=operator_name_pattern, map_index=map_index, limit=limit, offset=offset, order_by=order_by)
 
 Get Task Instances
 
@@ -1659,15 +1759,20 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     duration_gt = 3.4 # float |  (optional)
     duration_lte = 3.4 # float |  (optional)
     duration_lt = 3.4 # float |  (optional)
-    task_display_name_pattern = 'task_display_name_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported. (optional)
+    task_display_name_pattern = 'task_display_name_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported. (optional)
     task_group_id = 'task_group_id_example' # str | Filter by exact task group ID. Returns all tasks within the specified task group. (optional)
+    dag_id_pattern = 'dag_id_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported. (optional)
+    run_id_pattern = 'run_id_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported. (optional)
     state = ['state_example'] # List[str] |  (optional)
     pool = ['pool_example'] # List[str] |  (optional)
+    pool_name_pattern = 'pool_name_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported. (optional)
     queue = ['queue_example'] # List[str] |  (optional)
+    queue_name_pattern = 'queue_name_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported. (optional)
     executor = ['executor_example'] # List[str] |  (optional)
     version_number = [56] # List[int] |  (optional)
     try_number = [56] # List[int] |  (optional)
     operator = ['operator_example'] # List[str] |  (optional)
+    operator_name_pattern = 'operator_name_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported. (optional)
     map_index = [56] # List[int] |  (optional)
     limit = 50 # int |  (optional) (default to 50)
     offset = 0 # int |  (optional) (default to 0)
@@ -1675,7 +1780,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
 
     try:
         # Get Task Instances
-        api_response = api_instance.get_task_instances(dag_id, dag_run_id, task_id=task_id, run_after_gte=run_after_gte, run_after_gt=run_after_gt, run_after_lte=run_after_lte, run_after_lt=run_after_lt, logical_date_gte=logical_date_gte, logical_date_gt=logical_date_gt, logical_date_lte=logical_date_lte, logical_date_lt=logical_date_lt, start_date_gte=start_date_gte, start_date_gt=start_date_gt, start_date_lte=start_date_lte, start_date_lt=start_date_lt, end_date_gte=end_date_gte, end_date_gt=end_date_gt, end_date_lte=end_date_lte, end_date_lt=end_date_lt, updated_at_gte=updated_at_gte, updated_at_gt=updated_at_gt, updated_at_lte=updated_at_lte, updated_at_lt=updated_at_lt, duration_gte=duration_gte, duration_gt=duration_gt, duration_lte=duration_lte, duration_lt=duration_lt, task_display_name_pattern=task_display_name_pattern, task_group_id=task_group_id, state=state, pool=pool, queue=queue, executor=executor, version_number=version_number, try_number=try_number, operator=operator, map_index=map_index, limit=limit, offset=offset, order_by=order_by)
+        api_response = api_instance.get_task_instances(dag_id, dag_run_id, task_id=task_id, run_after_gte=run_after_gte, run_after_gt=run_after_gt, run_after_lte=run_after_lte, run_after_lt=run_after_lt, logical_date_gte=logical_date_gte, logical_date_gt=logical_date_gt, logical_date_lte=logical_date_lte, logical_date_lt=logical_date_lt, start_date_gte=start_date_gte, start_date_gt=start_date_gt, start_date_lte=start_date_lte, start_date_lt=start_date_lt, end_date_gte=end_date_gte, end_date_gt=end_date_gt, end_date_lte=end_date_lte, end_date_lt=end_date_lt, updated_at_gte=updated_at_gte, updated_at_gt=updated_at_gt, updated_at_lte=updated_at_lte, updated_at_lt=updated_at_lt, duration_gte=duration_gte, duration_gt=duration_gt, duration_lte=duration_lte, duration_lt=duration_lt, task_display_name_pattern=task_display_name_pattern, task_group_id=task_group_id, dag_id_pattern=dag_id_pattern, run_id_pattern=run_id_pattern, state=state, pool=pool, pool_name_pattern=pool_name_pattern, queue=queue, queue_name_pattern=queue_name_pattern, executor=executor, version_number=version_number, try_number=try_number, operator=operator, operator_name_pattern=operator_name_pattern, map_index=map_index, limit=limit, offset=offset, order_by=order_by)
         print("The response of TaskInstanceApi->get_task_instances:\n")
         pprint(api_response)
     except Exception as e:
@@ -1716,15 +1821,20 @@ Name | Type | Description  | Notes
  **duration_gt** | **float**|  | [optional] 
  **duration_lte** | **float**|  | [optional] 
  **duration_lt** | **float**|  | [optional] 
- **task_display_name_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). Regular expressions are **not** supported. | [optional] 
+ **task_display_name_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). or the pipe &#x60;|&#x60; operator for OR logic (e.g. &#x60;dag1 | dag2&#x60;). Regular expressions are **not** supported. | [optional] 
  **task_group_id** | **str**| Filter by exact task group ID. Returns all tasks within the specified task group. | [optional] 
+ **dag_id_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). or the pipe &#x60;|&#x60; operator for OR logic (e.g. &#x60;dag1 | dag2&#x60;). Regular expressions are **not** supported. | [optional] 
+ **run_id_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). or the pipe &#x60;|&#x60; operator for OR logic (e.g. &#x60;dag1 | dag2&#x60;). Regular expressions are **not** supported. | [optional] 
  **state** | [**List[str]**](str.md)|  | [optional] 
  **pool** | [**List[str]**](str.md)|  | [optional] 
+ **pool_name_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). or the pipe &#x60;|&#x60; operator for OR logic (e.g. &#x60;dag1 | dag2&#x60;). Regular expressions are **not** supported. | [optional] 
  **queue** | [**List[str]**](str.md)|  | [optional] 
+ **queue_name_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). or the pipe &#x60;|&#x60; operator for OR logic (e.g. &#x60;dag1 | dag2&#x60;). Regular expressions are **not** supported. | [optional] 
  **executor** | [**List[str]**](str.md)|  | [optional] 
  **version_number** | [**List[int]**](int.md)|  | [optional] 
  **try_number** | [**List[int]**](int.md)|  | [optional] 
  **operator** | [**List[str]**](str.md)|  | [optional] 
+ **operator_name_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). or the pipe &#x60;|&#x60; operator for OR logic (e.g. &#x60;dag1 | dag2&#x60;). Regular expressions are **not** supported. | [optional] 
  **map_index** | [**List[int]**](int.md)|  | [optional] 
  **limit** | **int**|  | [optional] [default to 50]
  **offset** | **int**|  | [optional] [default to 0]
@@ -1748,6 +1858,7 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
+**400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
@@ -2319,6 +2430,7 @@ Name | Type | Description  | Notes
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
+**409** | Conflict |  -  |
 **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

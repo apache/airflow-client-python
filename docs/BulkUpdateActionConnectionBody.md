@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **action** | **str** | The action to be performed on the entities. | 
 **action_on_non_existence** | [**BulkActionNotOnExistence**](BulkActionNotOnExistence.md) |  | [optional] 
 **entities** | [**List[ConnectionBody]**](ConnectionBody.md) | A list of entities to be updated. | 
+**update_mask** | **List[str]** |  | [optional] 
 
 ## Example
 

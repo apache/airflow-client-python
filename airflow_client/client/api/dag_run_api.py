@@ -16,7 +16,7 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from datetime import datetime
-from pydantic import Field, StrictInt, StrictStr, field_validator
+from pydantic import Field, StrictFloat, StrictInt, StrictStr, field_validator
 from typing import Any, List, Optional, Union
 from typing_extensions import Annotated
 from airflow_client.client.models.asset_event_collection_response import AssetEventCollectionResponse
@@ -960,16 +960,24 @@ class DagRunApi:
         end_date_gt: Optional[datetime] = None,
         end_date_lte: Optional[datetime] = None,
         end_date_lt: Optional[datetime] = None,
+        duration_gte: Optional[Union[StrictFloat, StrictInt]] = None,
+        duration_gt: Optional[Union[StrictFloat, StrictInt]] = None,
+        duration_lte: Optional[Union[StrictFloat, StrictInt]] = None,
+        duration_lt: Optional[Union[StrictFloat, StrictInt]] = None,
         updated_at_gte: Optional[datetime] = None,
         updated_at_gt: Optional[datetime] = None,
         updated_at_lte: Optional[datetime] = None,
         updated_at_lt: Optional[datetime] = None,
+        conf_contains: Optional[StrictStr] = None,
         run_type: Optional[List[StrictStr]] = None,
         state: Optional[List[StrictStr]] = None,
         dag_version: Optional[List[StrictInt]] = None,
+        bundle_version: Optional[StrictStr] = None,
         order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, state, dag_id, run_id, logical_date, run_after, start_date, end_date, updated_at, conf, duration, dag_run_id`")] = None,
-        run_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
-        triggering_user_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        run_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
+        triggering_user_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
+        dag_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
+        partition_key_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1025,6 +1033,14 @@ class DagRunApi:
         :type end_date_lte: datetime
         :param end_date_lt:
         :type end_date_lt: datetime
+        :param duration_gte:
+        :type duration_gte: float
+        :param duration_gt:
+        :type duration_gt: float
+        :param duration_lte:
+        :type duration_lte: float
+        :param duration_lt:
+        :type duration_lt: float
         :param updated_at_gte:
         :type updated_at_gte: datetime
         :param updated_at_gt:
@@ -1033,18 +1049,26 @@ class DagRunApi:
         :type updated_at_lte: datetime
         :param updated_at_lt:
         :type updated_at_lt: datetime
+        :param conf_contains:
+        :type conf_contains: str
         :param run_type:
         :type run_type: List[str]
         :param state:
         :type state: List[str]
         :param dag_version:
         :type dag_version: List[int]
+        :param bundle_version:
+        :type bundle_version: str
         :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, state, dag_id, run_id, logical_date, run_after, start_date, end_date, updated_at, conf, duration, dag_run_id`
         :type order_by: List[str]
-        :param run_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :param run_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
         :type run_id_pattern: str
-        :param triggering_user_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :param triggering_user_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
         :type triggering_user_name_pattern: str
+        :param dag_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :type dag_id_pattern: str
+        :param partition_key_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :type partition_key_pattern: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1087,16 +1111,24 @@ class DagRunApi:
             end_date_gt=end_date_gt,
             end_date_lte=end_date_lte,
             end_date_lt=end_date_lt,
+            duration_gte=duration_gte,
+            duration_gt=duration_gt,
+            duration_lte=duration_lte,
+            duration_lt=duration_lt,
             updated_at_gte=updated_at_gte,
             updated_at_gt=updated_at_gt,
             updated_at_lte=updated_at_lte,
             updated_at_lt=updated_at_lt,
+            conf_contains=conf_contains,
             run_type=run_type,
             state=state,
             dag_version=dag_version,
+            bundle_version=bundle_version,
             order_by=order_by,
             run_id_pattern=run_id_pattern,
             triggering_user_name_pattern=triggering_user_name_pattern,
+            dag_id_pattern=dag_id_pattern,
+            partition_key_pattern=partition_key_pattern,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1143,16 +1175,24 @@ class DagRunApi:
         end_date_gt: Optional[datetime] = None,
         end_date_lte: Optional[datetime] = None,
         end_date_lt: Optional[datetime] = None,
+        duration_gte: Optional[Union[StrictFloat, StrictInt]] = None,
+        duration_gt: Optional[Union[StrictFloat, StrictInt]] = None,
+        duration_lte: Optional[Union[StrictFloat, StrictInt]] = None,
+        duration_lt: Optional[Union[StrictFloat, StrictInt]] = None,
         updated_at_gte: Optional[datetime] = None,
         updated_at_gt: Optional[datetime] = None,
         updated_at_lte: Optional[datetime] = None,
         updated_at_lt: Optional[datetime] = None,
+        conf_contains: Optional[StrictStr] = None,
         run_type: Optional[List[StrictStr]] = None,
         state: Optional[List[StrictStr]] = None,
         dag_version: Optional[List[StrictInt]] = None,
+        bundle_version: Optional[StrictStr] = None,
         order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, state, dag_id, run_id, logical_date, run_after, start_date, end_date, updated_at, conf, duration, dag_run_id`")] = None,
-        run_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
-        triggering_user_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        run_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
+        triggering_user_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
+        dag_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
+        partition_key_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1208,6 +1248,14 @@ class DagRunApi:
         :type end_date_lte: datetime
         :param end_date_lt:
         :type end_date_lt: datetime
+        :param duration_gte:
+        :type duration_gte: float
+        :param duration_gt:
+        :type duration_gt: float
+        :param duration_lte:
+        :type duration_lte: float
+        :param duration_lt:
+        :type duration_lt: float
         :param updated_at_gte:
         :type updated_at_gte: datetime
         :param updated_at_gt:
@@ -1216,18 +1264,26 @@ class DagRunApi:
         :type updated_at_lte: datetime
         :param updated_at_lt:
         :type updated_at_lt: datetime
+        :param conf_contains:
+        :type conf_contains: str
         :param run_type:
         :type run_type: List[str]
         :param state:
         :type state: List[str]
         :param dag_version:
         :type dag_version: List[int]
+        :param bundle_version:
+        :type bundle_version: str
         :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, state, dag_id, run_id, logical_date, run_after, start_date, end_date, updated_at, conf, duration, dag_run_id`
         :type order_by: List[str]
-        :param run_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :param run_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
         :type run_id_pattern: str
-        :param triggering_user_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :param triggering_user_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
         :type triggering_user_name_pattern: str
+        :param dag_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :type dag_id_pattern: str
+        :param partition_key_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :type partition_key_pattern: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1270,16 +1326,24 @@ class DagRunApi:
             end_date_gt=end_date_gt,
             end_date_lte=end_date_lte,
             end_date_lt=end_date_lt,
+            duration_gte=duration_gte,
+            duration_gt=duration_gt,
+            duration_lte=duration_lte,
+            duration_lt=duration_lt,
             updated_at_gte=updated_at_gte,
             updated_at_gt=updated_at_gt,
             updated_at_lte=updated_at_lte,
             updated_at_lt=updated_at_lt,
+            conf_contains=conf_contains,
             run_type=run_type,
             state=state,
             dag_version=dag_version,
+            bundle_version=bundle_version,
             order_by=order_by,
             run_id_pattern=run_id_pattern,
             triggering_user_name_pattern=triggering_user_name_pattern,
+            dag_id_pattern=dag_id_pattern,
+            partition_key_pattern=partition_key_pattern,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1326,16 +1390,24 @@ class DagRunApi:
         end_date_gt: Optional[datetime] = None,
         end_date_lte: Optional[datetime] = None,
         end_date_lt: Optional[datetime] = None,
+        duration_gte: Optional[Union[StrictFloat, StrictInt]] = None,
+        duration_gt: Optional[Union[StrictFloat, StrictInt]] = None,
+        duration_lte: Optional[Union[StrictFloat, StrictInt]] = None,
+        duration_lt: Optional[Union[StrictFloat, StrictInt]] = None,
         updated_at_gte: Optional[datetime] = None,
         updated_at_gt: Optional[datetime] = None,
         updated_at_lte: Optional[datetime] = None,
         updated_at_lt: Optional[datetime] = None,
+        conf_contains: Optional[StrictStr] = None,
         run_type: Optional[List[StrictStr]] = None,
         state: Optional[List[StrictStr]] = None,
         dag_version: Optional[List[StrictInt]] = None,
+        bundle_version: Optional[StrictStr] = None,
         order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, state, dag_id, run_id, logical_date, run_after, start_date, end_date, updated_at, conf, duration, dag_run_id`")] = None,
-        run_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
-        triggering_user_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        run_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
+        triggering_user_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
+        dag_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
+        partition_key_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1391,6 +1463,14 @@ class DagRunApi:
         :type end_date_lte: datetime
         :param end_date_lt:
         :type end_date_lt: datetime
+        :param duration_gte:
+        :type duration_gte: float
+        :param duration_gt:
+        :type duration_gt: float
+        :param duration_lte:
+        :type duration_lte: float
+        :param duration_lt:
+        :type duration_lt: float
         :param updated_at_gte:
         :type updated_at_gte: datetime
         :param updated_at_gt:
@@ -1399,18 +1479,26 @@ class DagRunApi:
         :type updated_at_lte: datetime
         :param updated_at_lt:
         :type updated_at_lt: datetime
+        :param conf_contains:
+        :type conf_contains: str
         :param run_type:
         :type run_type: List[str]
         :param state:
         :type state: List[str]
         :param dag_version:
         :type dag_version: List[int]
+        :param bundle_version:
+        :type bundle_version: str
         :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, state, dag_id, run_id, logical_date, run_after, start_date, end_date, updated_at, conf, duration, dag_run_id`
         :type order_by: List[str]
-        :param run_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :param run_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
         :type run_id_pattern: str
-        :param triggering_user_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :param triggering_user_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
         :type triggering_user_name_pattern: str
+        :param dag_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :type dag_id_pattern: str
+        :param partition_key_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :type partition_key_pattern: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1453,16 +1541,24 @@ class DagRunApi:
             end_date_gt=end_date_gt,
             end_date_lte=end_date_lte,
             end_date_lt=end_date_lt,
+            duration_gte=duration_gte,
+            duration_gt=duration_gt,
+            duration_lte=duration_lte,
+            duration_lt=duration_lt,
             updated_at_gte=updated_at_gte,
             updated_at_gt=updated_at_gt,
             updated_at_lte=updated_at_lte,
             updated_at_lt=updated_at_lt,
+            conf_contains=conf_contains,
             run_type=run_type,
             state=state,
             dag_version=dag_version,
+            bundle_version=bundle_version,
             order_by=order_by,
             run_id_pattern=run_id_pattern,
             triggering_user_name_pattern=triggering_user_name_pattern,
+            dag_id_pattern=dag_id_pattern,
+            partition_key_pattern=partition_key_pattern,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1504,16 +1600,24 @@ class DagRunApi:
         end_date_gt,
         end_date_lte,
         end_date_lt,
+        duration_gte,
+        duration_gt,
+        duration_lte,
+        duration_lt,
         updated_at_gte,
         updated_at_gt,
         updated_at_lte,
         updated_at_lt,
+        conf_contains,
         run_type,
         state,
         dag_version,
+        bundle_version,
         order_by,
         run_id_pattern,
         triggering_user_name_pattern,
+        dag_id_pattern,
+        partition_key_pattern,
         _request_auth,
         _content_type,
         _headers,
@@ -1758,6 +1862,22 @@ class DagRunApi:
             else:
                 _query_params.append(('end_date_lt', end_date_lt))
             
+        if duration_gte is not None:
+            
+            _query_params.append(('duration_gte', duration_gte))
+            
+        if duration_gt is not None:
+            
+            _query_params.append(('duration_gt', duration_gt))
+            
+        if duration_lte is not None:
+            
+            _query_params.append(('duration_lte', duration_lte))
+            
+        if duration_lt is not None:
+            
+            _query_params.append(('duration_lt', duration_lt))
+            
         if updated_at_gte is not None:
             if isinstance(updated_at_gte, datetime):
                 _query_params.append(
@@ -1810,6 +1930,10 @@ class DagRunApi:
             else:
                 _query_params.append(('updated_at_lt', updated_at_lt))
             
+        if conf_contains is not None:
+            
+            _query_params.append(('conf_contains', conf_contains))
+            
         if run_type is not None:
             
             _query_params.append(('run_type', run_type))
@@ -1822,6 +1946,10 @@ class DagRunApi:
             
             _query_params.append(('dag_version', dag_version))
             
+        if bundle_version is not None:
+            
+            _query_params.append(('bundle_version', bundle_version))
+            
         if order_by is not None:
             
             _query_params.append(('order_by', order_by))
@@ -1833,6 +1961,14 @@ class DagRunApi:
         if triggering_user_name_pattern is not None:
             
             _query_params.append(('triggering_user_name_pattern', triggering_user_name_pattern))
+            
+        if dag_id_pattern is not None:
+            
+            _query_params.append(('dag_id_pattern', dag_id_pattern))
+            
+        if partition_key_pattern is not None:
+            
+            _query_params.append(('partition_key_pattern', partition_key_pattern))
             
         # process the header parameters
         # process the form parameters

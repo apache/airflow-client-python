@@ -28,6 +28,7 @@ class DagWarningType(str, Enum):
     """
     ASSET_CONFLICT = 'asset conflict'
     NON_MINUS_EXISTENT_POOL = 'non-existent pool'
+    RUNTIME_VARYING_VALUE = 'runtime varying value'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

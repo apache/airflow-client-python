@@ -1778,7 +1778,7 @@ class AssetApi:
         self,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
         order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, name`")] = None,
         _request_timeout: Union[
             None,
@@ -1801,7 +1801,7 @@ class AssetApi:
         :type limit: int
         :param offset:
         :type offset: int
-        :param name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :param name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
         :type name_pattern: str
         :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, name`
         :type order_by: List[str]
@@ -1861,7 +1861,7 @@ class AssetApi:
         self,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
         order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, name`")] = None,
         _request_timeout: Union[
             None,
@@ -1884,7 +1884,7 @@ class AssetApi:
         :type limit: int
         :param offset:
         :type offset: int
-        :param name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :param name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
         :type name_pattern: str
         :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, name`
         :type order_by: List[str]
@@ -1944,7 +1944,7 @@ class AssetApi:
         self,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
         order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, name`")] = None,
         _request_timeout: Union[
             None,
@@ -1967,7 +1967,7 @@ class AssetApi:
         :type limit: int
         :param offset:
         :type offset: int
-        :param name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :param name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
         :type name_pattern: str
         :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, name`
         :type order_by: List[str]
@@ -2112,6 +2112,7 @@ class AssetApi:
         source_task_id: Optional[StrictStr] = None,
         source_run_id: Optional[StrictStr] = None,
         source_map_index: Optional[StrictInt] = None,
+        name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
         timestamp_gte: Optional[datetime] = None,
         timestamp_gt: Optional[datetime] = None,
         timestamp_lte: Optional[datetime] = None,
@@ -2149,6 +2150,8 @@ class AssetApi:
         :type source_run_id: str
         :param source_map_index:
         :type source_map_index: int
+        :param name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :type name_pattern: str
         :param timestamp_gte:
         :type timestamp_gte: datetime
         :param timestamp_gt:
@@ -2188,6 +2191,7 @@ class AssetApi:
             source_task_id=source_task_id,
             source_run_id=source_run_id,
             source_map_index=source_map_index,
+            name_pattern=name_pattern,
             timestamp_gte=timestamp_gte,
             timestamp_gt=timestamp_gt,
             timestamp_lte=timestamp_lte,
@@ -2227,6 +2231,7 @@ class AssetApi:
         source_task_id: Optional[StrictStr] = None,
         source_run_id: Optional[StrictStr] = None,
         source_map_index: Optional[StrictInt] = None,
+        name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
         timestamp_gte: Optional[datetime] = None,
         timestamp_gt: Optional[datetime] = None,
         timestamp_lte: Optional[datetime] = None,
@@ -2264,6 +2269,8 @@ class AssetApi:
         :type source_run_id: str
         :param source_map_index:
         :type source_map_index: int
+        :param name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :type name_pattern: str
         :param timestamp_gte:
         :type timestamp_gte: datetime
         :param timestamp_gt:
@@ -2303,6 +2310,7 @@ class AssetApi:
             source_task_id=source_task_id,
             source_run_id=source_run_id,
             source_map_index=source_map_index,
+            name_pattern=name_pattern,
             timestamp_gte=timestamp_gte,
             timestamp_gt=timestamp_gt,
             timestamp_lte=timestamp_lte,
@@ -2342,6 +2350,7 @@ class AssetApi:
         source_task_id: Optional[StrictStr] = None,
         source_run_id: Optional[StrictStr] = None,
         source_map_index: Optional[StrictInt] = None,
+        name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
         timestamp_gte: Optional[datetime] = None,
         timestamp_gt: Optional[datetime] = None,
         timestamp_lte: Optional[datetime] = None,
@@ -2379,6 +2388,8 @@ class AssetApi:
         :type source_run_id: str
         :param source_map_index:
         :type source_map_index: int
+        :param name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :type name_pattern: str
         :param timestamp_gte:
         :type timestamp_gte: datetime
         :param timestamp_gt:
@@ -2418,6 +2429,7 @@ class AssetApi:
             source_task_id=source_task_id,
             source_run_id=source_run_id,
             source_map_index=source_map_index,
+            name_pattern=name_pattern,
             timestamp_gte=timestamp_gte,
             timestamp_gt=timestamp_gt,
             timestamp_lte=timestamp_lte,
@@ -2452,6 +2464,7 @@ class AssetApi:
         source_task_id,
         source_run_id,
         source_map_index,
+        name_pattern,
         timestamp_gte,
         timestamp_gt,
         timestamp_lte,
@@ -2510,6 +2523,10 @@ class AssetApi:
         if source_map_index is not None:
             
             _query_params.append(('source_map_index', source_map_index))
+            
+        if name_pattern is not None:
+            
+            _query_params.append(('name_pattern', name_pattern))
             
         if timestamp_gte is not None:
             if isinstance(timestamp_gte, datetime):
@@ -2894,8 +2911,8 @@ class AssetApi:
         self,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
-        uri_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
+        uri_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
         dag_ids: Optional[List[StrictStr]] = None,
         only_active: Optional[StrictBool] = None,
         order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, name, uri, created_at, updated_at`")] = None,
@@ -2920,9 +2937,9 @@ class AssetApi:
         :type limit: int
         :param offset:
         :type offset: int
-        :param name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :param name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
         :type name_pattern: str
-        :param uri_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :param uri_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
         :type uri_pattern: str
         :param dag_ids:
         :type dag_ids: List[str]
@@ -2989,8 +3006,8 @@ class AssetApi:
         self,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
-        uri_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
+        uri_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
         dag_ids: Optional[List[StrictStr]] = None,
         only_active: Optional[StrictBool] = None,
         order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, name, uri, created_at, updated_at`")] = None,
@@ -3015,9 +3032,9 @@ class AssetApi:
         :type limit: int
         :param offset:
         :type offset: int
-        :param name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :param name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
         :type name_pattern: str
-        :param uri_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :param uri_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
         :type uri_pattern: str
         :param dag_ids:
         :type dag_ids: List[str]
@@ -3084,8 +3101,8 @@ class AssetApi:
         self,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
-        uri_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.")] = None,
+        name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
+        uri_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
         dag_ids: Optional[List[StrictStr]] = None,
         only_active: Optional[StrictBool] = None,
         order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, name, uri, created_at, updated_at`")] = None,
@@ -3110,9 +3127,9 @@ class AssetApi:
         :type limit: int
         :param offset:
         :type offset: int
-        :param name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :param name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
         :type name_pattern: str
-        :param uri_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported.
+        :param uri_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
         :type uri_pattern: str
         :param dag_ids:
         :type dag_ids: List[str]
@@ -3918,6 +3935,7 @@ class AssetApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DAGRunResponse",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
@@ -3990,6 +4008,7 @@ class AssetApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DAGRunResponse",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
@@ -4062,6 +4081,7 @@ class AssetApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DAGRunResponse",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",

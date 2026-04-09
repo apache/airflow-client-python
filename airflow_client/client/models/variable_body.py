@@ -22,6 +22,7 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class VariableBody(BaseModel):
     """
@@ -29,11 +30,13 @@ class VariableBody(BaseModel):
     """ # noqa: E501
     description: Optional[StrictStr] = None
     key: Annotated[str, Field(strict=True, max_length=250)]
+    team_name: Optional[Annotated[str, Field(strict=True, max_length=50)]] = None
     value: Optional[Any]
-    __properties: ClassVar[List[str]] = ["description", "key", "value"]
+    __properties: ClassVar[List[str]] = ["description", "key", "team_name", "value"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -45,8 +48,7 @@ class VariableBody(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -90,6 +92,7 @@ class VariableBody(BaseModel):
         _obj = cls.model_validate({
             "description": obj.get("description"),
             "key": obj.get("key"),
+            "team_name": obj.get("team_name"),
             "value": obj.get("value")
         })
         return _obj

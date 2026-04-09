@@ -35,11 +35,12 @@ class TestDryRunBackfillResponse(unittest.TestCase):
         model = DryRunBackfillResponse()
         if include_optional:
             return DryRunBackfillResponse(
-                logical_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f')
+                logical_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+                partition_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+                partition_key = ''
             )
         else:
             return DryRunBackfillResponse(
-                logical_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
         )
         """
 

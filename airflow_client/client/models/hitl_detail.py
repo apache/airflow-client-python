@@ -25,6 +25,7 @@ from airflow_client.client.models.hitl_user import HITLUser
 from airflow_client.client.models.task_instance_response import TaskInstanceResponse
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class HITLDetail(BaseModel):
     """
@@ -47,7 +48,8 @@ class HITLDetail(BaseModel):
     __properties: ClassVar[List[str]] = ["assigned_users", "body", "chosen_options", "created_at", "defaults", "multiple", "options", "params", "params_input", "responded_at", "responded_by_user", "response_received", "subject", "task_instance"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -59,8 +61,7 @@ class HITLDetail(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

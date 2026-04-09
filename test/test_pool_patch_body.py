@@ -38,7 +38,8 @@ class TestPoolPatchBody(unittest.TestCase):
                 description = '',
                 include_deferred = True,
                 pool = '',
-                slots = -1.0
+                slots = -1.0,
+                team_name = ''
             )
         else:
             return PoolPatchBody(

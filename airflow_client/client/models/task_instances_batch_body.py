@@ -24,6 +24,7 @@ from typing_extensions import Annotated
 from airflow_client.client.models.task_instance_state import TaskInstanceState
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class TaskInstancesBatchBody(BaseModel):
     """
@@ -62,7 +63,8 @@ class TaskInstancesBatchBody(BaseModel):
     __properties: ClassVar[List[str]] = ["dag_ids", "dag_run_ids", "duration_gt", "duration_gte", "duration_lt", "duration_lte", "end_date_gt", "end_date_gte", "end_date_lt", "end_date_lte", "executor", "logical_date_gt", "logical_date_gte", "logical_date_lt", "logical_date_lte", "order_by", "page_limit", "page_offset", "pool", "queue", "run_after_gt", "run_after_gte", "run_after_lt", "run_after_lte", "start_date_gt", "start_date_gte", "start_date_lt", "start_date_lte", "state", "task_ids"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -74,8 +76,7 @@ class TaskInstancesBatchBody(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

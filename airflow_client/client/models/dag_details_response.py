@@ -20,15 +20,19 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
+from airflow_client.client.models.dag_run_type import DagRunType
 from airflow_client.client.models.dag_tag_response import DagTagResponse
 from airflow_client.client.models.dag_version_response import DagVersionResponse
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class DAGDetailsResponse(BaseModel):
     """
     Specific serializer for DAG Details responses.
     """ # noqa: E501
+    active_runs_count: Optional[StrictInt] = 0
+    allowed_run_types: Optional[List[DagRunType]] = None
     asset_expression: Optional[Dict[str, Any]] = None
     bundle_name: Optional[StrictStr] = None
     bundle_version: Optional[StrictStr] = None
@@ -70,12 +74,14 @@ class DAGDetailsResponse(BaseModel):
     tags: List[DagTagResponse]
     template_search_path: Optional[List[StrictStr]] = None
     timetable_description: Optional[StrictStr] = None
+    timetable_partitioned: StrictBool
     timetable_summary: Optional[StrictStr] = None
     timezone: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["asset_expression", "bundle_name", "bundle_version", "catchup", "concurrency", "dag_display_name", "dag_id", "dag_run_timeout", "default_args", "description", "doc_md", "end_date", "file_token", "fileloc", "has_import_errors", "has_task_concurrency_limits", "is_favorite", "is_paused", "is_paused_upon_creation", "is_stale", "last_expired", "last_parse_duration", "last_parsed", "last_parsed_time", "latest_dag_version", "max_active_runs", "max_active_tasks", "max_consecutive_failed_dag_runs", "next_dagrun_data_interval_end", "next_dagrun_data_interval_start", "next_dagrun_logical_date", "next_dagrun_run_after", "owner_links", "owners", "params", "relative_fileloc", "render_template_as_native_obj", "start_date", "tags", "template_search_path", "timetable_description", "timetable_summary", "timezone"]
+    __properties: ClassVar[List[str]] = ["active_runs_count", "allowed_run_types", "asset_expression", "bundle_name", "bundle_version", "catchup", "concurrency", "dag_display_name", "dag_id", "dag_run_timeout", "default_args", "description", "doc_md", "end_date", "file_token", "fileloc", "has_import_errors", "has_task_concurrency_limits", "is_favorite", "is_paused", "is_paused_upon_creation", "is_stale", "last_expired", "last_parse_duration", "last_parsed", "last_parsed_time", "latest_dag_version", "max_active_runs", "max_active_tasks", "max_consecutive_failed_dag_runs", "next_dagrun_data_interval_end", "next_dagrun_data_interval_start", "next_dagrun_logical_date", "next_dagrun_run_after", "owner_links", "owners", "params", "relative_fileloc", "render_template_as_native_obj", "start_date", "tags", "template_search_path", "timetable_description", "timetable_partitioned", "timetable_summary", "timezone"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -87,8 +93,7 @@ class DAGDetailsResponse(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -139,6 +144,8 @@ class DAGDetailsResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "active_runs_count": obj.get("active_runs_count") if obj.get("active_runs_count") is not None else 0,
+            "allowed_run_types": obj.get("allowed_run_types"),
             "asset_expression": obj.get("asset_expression"),
             "bundle_name": obj.get("bundle_name"),
             "bundle_version": obj.get("bundle_version"),
@@ -180,6 +187,7 @@ class DAGDetailsResponse(BaseModel):
             "tags": [DagTagResponse.from_dict(_item) for _item in obj["tags"]] if obj.get("tags") is not None else None,
             "template_search_path": obj.get("template_search_path"),
             "timetable_description": obj.get("timetable_description"),
+            "timetable_partitioned": obj.get("timetable_partitioned"),
             "timetable_summary": obj.get("timetable_summary"),
             "timezone": obj.get("timezone")
         })

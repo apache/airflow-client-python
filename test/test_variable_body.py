@@ -37,6 +37,7 @@ class TestVariableBody(unittest.TestCase):
             return VariableBody(
                 description = '',
                 key = '',
+                team_name = '',
                 value = None
             )
         else:

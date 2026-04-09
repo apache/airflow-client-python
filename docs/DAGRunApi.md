@@ -274,7 +274,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_dag_runs**
-> DAGRunCollectionResponse get_dag_runs(dag_id, limit=limit, offset=offset, run_after_gte=run_after_gte, run_after_gt=run_after_gt, run_after_lte=run_after_lte, run_after_lt=run_after_lt, logical_date_gte=logical_date_gte, logical_date_gt=logical_date_gt, logical_date_lte=logical_date_lte, logical_date_lt=logical_date_lt, start_date_gte=start_date_gte, start_date_gt=start_date_gt, start_date_lte=start_date_lte, start_date_lt=start_date_lt, end_date_gte=end_date_gte, end_date_gt=end_date_gt, end_date_lte=end_date_lte, end_date_lt=end_date_lt, updated_at_gte=updated_at_gte, updated_at_gt=updated_at_gt, updated_at_lte=updated_at_lte, updated_at_lt=updated_at_lt, run_type=run_type, state=state, dag_version=dag_version, order_by=order_by, run_id_pattern=run_id_pattern, triggering_user_name_pattern=triggering_user_name_pattern)
+> DAGRunCollectionResponse get_dag_runs(dag_id, limit=limit, offset=offset, run_after_gte=run_after_gte, run_after_gt=run_after_gt, run_after_lte=run_after_lte, run_after_lt=run_after_lt, logical_date_gte=logical_date_gte, logical_date_gt=logical_date_gt, logical_date_lte=logical_date_lte, logical_date_lt=logical_date_lt, start_date_gte=start_date_gte, start_date_gt=start_date_gt, start_date_lte=start_date_lte, start_date_lt=start_date_lt, end_date_gte=end_date_gte, end_date_gt=end_date_gt, end_date_lte=end_date_lte, end_date_lt=end_date_lt, duration_gte=duration_gte, duration_gt=duration_gt, duration_lte=duration_lte, duration_lt=duration_lt, updated_at_gte=updated_at_gte, updated_at_gt=updated_at_gt, updated_at_lte=updated_at_lte, updated_at_lt=updated_at_lt, conf_contains=conf_contains, run_type=run_type, state=state, dag_version=dag_version, bundle_version=bundle_version, order_by=order_by, run_id_pattern=run_id_pattern, triggering_user_name_pattern=triggering_user_name_pattern, dag_id_pattern=dag_id_pattern, partition_key_pattern=partition_key_pattern)
 
 Get Dag Runs
 
@@ -334,20 +334,28 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     end_date_gt = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
     end_date_lte = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
     end_date_lt = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
+    duration_gte = 3.4 # float |  (optional)
+    duration_gt = 3.4 # float |  (optional)
+    duration_lte = 3.4 # float |  (optional)
+    duration_lt = 3.4 # float |  (optional)
     updated_at_gte = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
     updated_at_gt = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
     updated_at_lte = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
     updated_at_lt = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
+    conf_contains = 'conf_contains_example' # str |  (optional)
     run_type = ['run_type_example'] # List[str] |  (optional)
     state = ['state_example'] # List[str] |  (optional)
     dag_version = [56] # List[int] |  (optional)
+    bundle_version = 'bundle_version_example' # str |  (optional)
     order_by = ["id"] # List[str] | Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, state, dag_id, run_id, logical_date, run_after, start_date, end_date, updated_at, conf, duration, dag_run_id` (optional) (default to ["id"])
-    run_id_pattern = 'run_id_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported. (optional)
-    triggering_user_name_pattern = 'triggering_user_name_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported. (optional)
+    run_id_pattern = 'run_id_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported. (optional)
+    triggering_user_name_pattern = 'triggering_user_name_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported. (optional)
+    dag_id_pattern = 'dag_id_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported. (optional)
+    partition_key_pattern = 'partition_key_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported. (optional)
 
     try:
         # Get Dag Runs
-        api_response = api_instance.get_dag_runs(dag_id, limit=limit, offset=offset, run_after_gte=run_after_gte, run_after_gt=run_after_gt, run_after_lte=run_after_lte, run_after_lt=run_after_lt, logical_date_gte=logical_date_gte, logical_date_gt=logical_date_gt, logical_date_lte=logical_date_lte, logical_date_lt=logical_date_lt, start_date_gte=start_date_gte, start_date_gt=start_date_gt, start_date_lte=start_date_lte, start_date_lt=start_date_lt, end_date_gte=end_date_gte, end_date_gt=end_date_gt, end_date_lte=end_date_lte, end_date_lt=end_date_lt, updated_at_gte=updated_at_gte, updated_at_gt=updated_at_gt, updated_at_lte=updated_at_lte, updated_at_lt=updated_at_lt, run_type=run_type, state=state, dag_version=dag_version, order_by=order_by, run_id_pattern=run_id_pattern, triggering_user_name_pattern=triggering_user_name_pattern)
+        api_response = api_instance.get_dag_runs(dag_id, limit=limit, offset=offset, run_after_gte=run_after_gte, run_after_gt=run_after_gt, run_after_lte=run_after_lte, run_after_lt=run_after_lt, logical_date_gte=logical_date_gte, logical_date_gt=logical_date_gt, logical_date_lte=logical_date_lte, logical_date_lt=logical_date_lt, start_date_gte=start_date_gte, start_date_gt=start_date_gt, start_date_lte=start_date_lte, start_date_lt=start_date_lt, end_date_gte=end_date_gte, end_date_gt=end_date_gt, end_date_lte=end_date_lte, end_date_lt=end_date_lt, duration_gte=duration_gte, duration_gt=duration_gt, duration_lte=duration_lte, duration_lt=duration_lt, updated_at_gte=updated_at_gte, updated_at_gt=updated_at_gt, updated_at_lte=updated_at_lte, updated_at_lt=updated_at_lt, conf_contains=conf_contains, run_type=run_type, state=state, dag_version=dag_version, bundle_version=bundle_version, order_by=order_by, run_id_pattern=run_id_pattern, triggering_user_name_pattern=triggering_user_name_pattern, dag_id_pattern=dag_id_pattern, partition_key_pattern=partition_key_pattern)
         print("The response of DagRunApi->get_dag_runs:\n")
         pprint(api_response)
     except Exception as e:
@@ -380,16 +388,24 @@ Name | Type | Description  | Notes
  **end_date_gt** | **datetime**|  | [optional] 
  **end_date_lte** | **datetime**|  | [optional] 
  **end_date_lt** | **datetime**|  | [optional] 
+ **duration_gte** | **float**|  | [optional] 
+ **duration_gt** | **float**|  | [optional] 
+ **duration_lte** | **float**|  | [optional] 
+ **duration_lt** | **float**|  | [optional] 
  **updated_at_gte** | **datetime**|  | [optional] 
  **updated_at_gt** | **datetime**|  | [optional] 
  **updated_at_lte** | **datetime**|  | [optional] 
  **updated_at_lt** | **datetime**|  | [optional] 
+ **conf_contains** | **str**|  | [optional] 
  **run_type** | [**List[str]**](str.md)|  | [optional] 
  **state** | [**List[str]**](str.md)|  | [optional] 
  **dag_version** | [**List[int]**](int.md)|  | [optional] 
+ **bundle_version** | **str**|  | [optional] 
  **order_by** | [**List[str]**](str.md)| Attributes to order by, multi criteria sort is supported. Prefix with &#x60;-&#x60; for descending order. Supported attributes: &#x60;id, state, dag_id, run_id, logical_date, run_after, start_date, end_date, updated_at, conf, duration, dag_run_id&#x60; | [optional] [default to [&quot;id&quot;]]
- **run_id_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). Regular expressions are **not** supported. | [optional] 
- **triggering_user_name_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). Regular expressions are **not** supported. | [optional] 
+ **run_id_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). or the pipe &#x60;|&#x60; operator for OR logic (e.g. &#x60;dag1 | dag2&#x60;). Regular expressions are **not** supported. | [optional] 
+ **triggering_user_name_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). or the pipe &#x60;|&#x60; operator for OR logic (e.g. &#x60;dag1 | dag2&#x60;). Regular expressions are **not** supported. | [optional] 
+ **dag_id_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). or the pipe &#x60;|&#x60; operator for OR logic (e.g. &#x60;dag1 | dag2&#x60;). Regular expressions are **not** supported. | [optional] 
+ **partition_key_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). or the pipe &#x60;|&#x60; operator for OR logic (e.g. &#x60;dag1 | dag2&#x60;). Regular expressions are **not** supported. | [optional] 
 
 ### Return type
 

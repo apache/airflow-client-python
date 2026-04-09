@@ -33,6 +33,13 @@ class TestXComApi(unittest.TestCase):
         """
         pass
 
+    def test_delete_xcom_entry(self) -> None:
+        """Test case for delete_xcom_entry
+
+        Delete Xcom Entry
+        """
+        pass
+
     def test_get_xcom_entries(self) -> None:
         """Test case for get_xcom_entries
 

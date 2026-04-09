@@ -5,6 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ctx** | **object** |  | [optional] 
+**input** | **object** |  | [optional] 
 **loc** | [**List[LocationInner]**](LocationInner.md) |  | 
 **msg** | **str** |  | 
 **type** | **str** |  | 

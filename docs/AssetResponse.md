@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **scheduled_dags** | [**List[DagScheduleAssetReference]**](DagScheduleAssetReference.md) |  | 
 **updated_at** | **datetime** |  | 
 **uri** | **str** |  | 
+**watchers** | [**List[AssetWatcherResponse]**](AssetWatcherResponse.md) |  | 
 
 ## Example
 

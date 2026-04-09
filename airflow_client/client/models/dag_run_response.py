@@ -26,6 +26,7 @@ from airflow_client.client.models.dag_run_type import DagRunType
 from airflow_client.client.models.dag_version_response import DagVersionResponse
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class DAGRunResponse(BaseModel):
     """
@@ -44,6 +45,7 @@ class DAGRunResponse(BaseModel):
     last_scheduling_decision: Optional[datetime] = None
     logical_date: Optional[datetime] = None
     note: Optional[StrictStr] = None
+    partition_key: Optional[StrictStr] = None
     queued_at: Optional[datetime] = None
     run_after: datetime
     run_type: DagRunType
@@ -51,10 +53,11 @@ class DAGRunResponse(BaseModel):
     state: DagRunState
     triggered_by: Optional[DagRunTriggeredByType] = None
     triggering_user_name: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["bundle_version", "conf", "dag_display_name", "dag_id", "dag_run_id", "dag_versions", "data_interval_end", "data_interval_start", "duration", "end_date", "last_scheduling_decision", "logical_date", "note", "queued_at", "run_after", "run_type", "start_date", "state", "triggered_by", "triggering_user_name"]
+    __properties: ClassVar[List[str]] = ["bundle_version", "conf", "dag_display_name", "dag_id", "dag_run_id", "dag_versions", "data_interval_end", "data_interval_start", "duration", "end_date", "last_scheduling_decision", "logical_date", "note", "partition_key", "queued_at", "run_after", "run_type", "start_date", "state", "triggered_by", "triggering_user_name"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -66,8 +69,7 @@ class DAGRunResponse(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -124,6 +126,7 @@ class DAGRunResponse(BaseModel):
             "last_scheduling_decision": obj.get("last_scheduling_decision"),
             "logical_date": obj.get("logical_date"),
             "note": obj.get("note"),
+            "partition_key": obj.get("partition_key"),
             "queued_at": obj.get("queued_at"),
             "run_after": obj.get("run_after"),
             "run_type": obj.get("run_type"),

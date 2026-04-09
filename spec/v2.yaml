@@ -127,6 +127,9 @@ components:
         name:
           nullable: true
           type: string
+        partition_key:
+          nullable: true
+          type: string
         source_dag_id:
           nullable: true
           type: string
@@ -205,6 +208,11 @@ components:
         uri:
           title: Uri
           type: string
+        watchers:
+          items:
+            $ref: '#/components/schemas/AssetWatcherResponse'
+          title: Watchers
+          type: array
       required:
       - id
       - name
@@ -216,7 +224,27 @@ components:
       - producing_tasks
       - consuming_tasks
       - aliases
+      - watchers
       title: AssetResponse
+      type: object
+    AssetWatcherResponse:
+      description: Asset watcher serializer for responses.
+      properties:
+        created_date:
+          format: date-time
+          title: Created Date
+          type: string
+        name:
+          title: Name
+          type: string
+        trigger_id:
+          title: Trigger Id
+          type: integer
+      required:
+      - name
+      - trigger_id
+      - created_date
+      title: AssetWatcherResponse
       type: object
     BackfillCollectionResponse:
       description: Backfill Collection serializer for responses.
@@ -294,7 +322,7 @@ components:
           type: string
         dag_run_conf:
           additionalProperties: true
-          title: Dag Run Conf
+          nullable: true
           type: object
         from_date:
           format: date-time
@@ -325,7 +353,6 @@ components:
       - dag_id
       - from_date
       - to_date
-      - dag_run_conf
       - is_paused
       - reprocess_behavior
       - max_active_runs
@@ -576,7 +603,7 @@ components:
           items:
             anyOf:
             - type: string
-            - $ref: '#/components/schemas/BulkTaskInstanceBody'
+            - $ref: '#/components/schemas/ConnectionBody'
           title: Entities
           type: array
       required:
@@ -600,7 +627,7 @@ components:
           items:
             anyOf:
             - type: string
-            - $ref: '#/components/schemas/BulkTaskInstanceBody'
+            - $ref: '#/components/schemas/PoolBody'
           title: Entities
           type: array
       required:
@@ -624,7 +651,7 @@ components:
           items:
             anyOf:
             - type: string
-            - $ref: '#/components/schemas/BulkTaskInstanceBody'
+            - $ref: '#/components/schemas/VariableBody'
           title: Entities
           type: array
       required:
@@ -660,6 +687,12 @@ components:
       additionalProperties: false
       description: Request body for bulk update, and delete task instances.
       properties:
+        dag_id:
+          nullable: true
+          type: string
+        dag_run_id:
+          nullable: true
+          type: string
         include_downstream:
           default: false
           title: Include Downstream
@@ -710,6 +743,11 @@ components:
             $ref: '#/components/schemas/BulkTaskInstanceBody'
           title: Entities
           type: array
+        update_mask:
+          items:
+            type: string
+          nullable: true
+          type: array
       required:
       - action
       - entities
@@ -731,6 +769,11 @@ components:
           items:
             $ref: '#/components/schemas/ConnectionBody'
           title: Entities
+          type: array
+        update_mask:
+          items:
+            type: string
+          nullable: true
           type: array
       required:
       - action
@@ -754,6 +797,11 @@ components:
             $ref: '#/components/schemas/PoolBody'
           title: Entities
           type: array
+        update_mask:
+          items:
+            type: string
+          nullable: true
+          type: array
       required:
       - action
       - entities
@@ -775,6 +823,11 @@ components:
           items:
             $ref: '#/components/schemas/VariableBody'
           title: Entities
+          type: array
+        update_mask:
+          items:
+            type: string
+          nullable: true
           type: array
       required:
       - action
@@ -819,6 +872,10 @@ components:
         only_running:
           default: false
           title: Only Running
+          type: boolean
+        prevent_running_task:
+          default: false
+          title: Prevent Running Task
           type: boolean
         reset_dag_runs:
           default: true
@@ -933,6 +990,10 @@ components:
         schema:
           nullable: true
           type: string
+        team_name:
+          maxLength: 50
+          nullable: true
+          type: string
       required:
       - connection_id
       - conn_type
@@ -984,6 +1045,9 @@ components:
         schema:
           nullable: true
           type: string
+        team_name:
+          nullable: true
+          type: string
       required:
       - connection_id
       - conn_type
@@ -1014,6 +1078,9 @@ components:
           additionalProperties: true
           title: Extra
           type: object
+        partition_key:
+          nullable: true
+          type: string
       required:
       - asset_id
       title: CreateAssetEventsBody
@@ -1037,6 +1104,15 @@ components:
     DAGDetailsResponse:
       description: Specific serializer for DAG Details responses.
       properties:
+        active_runs_count:
+          default: 0
+          title: Active Runs Count
+          type: integer
+        allowed_run_types:
+          items:
+            $ref: '#/components/schemas/DagRunType'
+          nullable: true
+          type: array
         asset_expression:
           additionalProperties: true
           nullable: true
@@ -1190,6 +1266,9 @@ components:
         timetable_description:
           nullable: true
           type: string
+        timetable_partitioned:
+          title: Timetable Partitioned
+          type: boolean
         timetable_summary:
           nullable: true
           type: string
@@ -1202,6 +1281,7 @@ components:
       - is_paused
       - is_stale
       - fileloc
+      - timetable_partitioned
       - tags
       - max_active_tasks
       - max_consecutive_failed_dag_runs
@@ -1228,6 +1308,11 @@ components:
     DAGResponse:
       description: DAG serializer for responses.
       properties:
+        allowed_run_types:
+          items:
+            $ref: '#/components/schemas/DagRunType'
+          nullable: true
+          type: array
         bundle_name:
           nullable: true
           type: string
@@ -1315,6 +1400,9 @@ components:
         timetable_description:
           nullable: true
           type: string
+        timetable_partitioned:
+          title: Timetable Partitioned
+          type: boolean
         timetable_summary:
           nullable: true
           type: string
@@ -1324,6 +1412,7 @@ components:
       - is_paused
       - is_stale
       - fileloc
+      - timetable_partitioned
       - tags
       - max_active_tasks
       - max_consecutive_failed_dag_runs
@@ -1440,6 +1529,9 @@ components:
         note:
           nullable: true
           type: string
+        partition_key:
+          nullable: true
+          type: string
         queued_at:
           format: date-time
           nullable: true
@@ -1476,11 +1568,26 @@ components:
       additionalProperties: false
       description: List DAG Runs body for batch endpoint.
       properties:
+        conf_contains:
+          nullable: true
+          type: string
         dag_ids:
           items:
             type: string
           nullable: true
           type: array
+        duration_gt:
+          nullable: true
+          type: number
+        duration_gte:
+          nullable: true
+          type: number
+        duration_lt:
+          nullable: true
+          type: number
+        duration_lte:
+          nullable: true
+          type: number
         end_date_gt:
           format: date-time
           nullable: true
@@ -1675,7 +1782,7 @@ components:
       type: object
     DagRunAssetReference:
       additionalProperties: false
-      description: DAGRun serializer for asset responses.
+      description: DagRun serializer for asset responses.
       properties:
         dag_id:
           title: Dag Id
@@ -1694,6 +1801,9 @@ components:
           type: string
         logical_date:
           format: date-time
+          nullable: true
+          type: string
+        partition_key:
           nullable: true
           type: string
         run_id:
@@ -1749,6 +1859,7 @@ components:
       - scheduled
       - manual
       - asset_triggered
+      - asset_materialization
       title: DagRunType
       type: string
     DagScheduleAssetReference:
@@ -1886,6 +1997,7 @@ components:
       enum:
       - asset conflict
       - non-existent pool
+      - runtime varying value
       title: DagWarningType
       type: string
     DryRunBackfillCollectionResponse:
@@ -1909,10 +2021,16 @@ components:
       properties:
         logical_date:
           format: date-time
-          title: Logical Date
+          nullable: true
           type: string
-      required:
-      - logical_date
+        partition_date:
+          format: date-time
+          nullable: true
+          type: string
+        partition_key:
+          nullable: true
+          type: string
+      required: []
       title: DryRunBackfillResponse
       type: object
     EventLogCollectionResponse:
@@ -2006,6 +2124,7 @@ components:
           - dag_run
           - task
           - task_instance
+          - base
           title: Destination
           type: string
         href:
@@ -2139,10 +2258,10 @@ components:
         task_instance:
           $ref: '#/components/schemas/TaskInstanceResponse'
       required:
-      - task_instance
       - options
       - subject
       - created_at
+      - task_instance
       title: HITLDetail
       type: object
     HITLDetailCollection:
@@ -2160,6 +2279,72 @@ components:
       - hitl_details
       - total_entries
       title: HITLDetailCollection
+      type: object
+    HITLDetailHistory:
+      description: Schema for Human-in-the-loop detail history.
+      properties:
+        assigned_users:
+          items:
+            $ref: '#/components/schemas/HITLUser'
+          title: Assigned Users
+          type: array
+        body:
+          nullable: true
+          type: string
+        chosen_options:
+          items:
+            type: string
+          nullable: true
+          type: array
+        created_at:
+          format: date-time
+          title: Created At
+          type: string
+        defaults:
+          items:
+            type: string
+          nullable: true
+          type: array
+        multiple:
+          default: false
+          title: Multiple
+          type: boolean
+        options:
+          items:
+            type: string
+          minItems: 1
+          title: Options
+          type: array
+        params:
+          additionalProperties: true
+          title: Params
+          type: object
+        params_input:
+          additionalProperties: true
+          title: Params Input
+          type: object
+        responded_at:
+          format: date-time
+          nullable: true
+          type: string
+        responded_by_user:
+          $ref: '#/components/schemas/HITLUser'
+          nullable: true
+        response_received:
+          default: false
+          title: Response Received
+          type: boolean
+        subject:
+          title: Subject
+          type: string
+        task_instance:
+          $ref: '#/components/schemas/TaskInstanceHistoryResponse'
+      required:
+      - options
+      - subject
+      - created_at
+      - task_instance
+      title: HITLDetailHistory
       type: object
     HITLDetailResponse:
       description: Response of updating a Human-in-the-loop detail.
@@ -2539,6 +2724,10 @@ components:
           minimum: -1.0
           title: Slots
           type: integer
+        team_name:
+          maxLength: 50
+          nullable: true
+          type: string
       required:
       - name
       - slots
@@ -2578,6 +2767,10 @@ components:
           minimum: -1.0
           nullable: true
           type: integer
+        team_name:
+          maxLength: 50
+          nullable: true
+          type: string
       title: PoolPatchBody
       type: object
     PoolResponse:
@@ -2615,6 +2808,9 @@ components:
           minimum: -1.0
           title: Slots
           type: integer
+        team_name:
+          nullable: true
+          type: string
       required:
       - name
       - slots
@@ -2721,6 +2917,7 @@ components:
           - dag_run
           - task
           - task_instance
+          - base
           - dashboard
           title: Destination
           type: string
@@ -3009,6 +3206,7 @@ components:
           nullable: true
           type: string
         id:
+          format: uuid
           title: Id
           type: string
         logical_date:
@@ -3366,7 +3564,7 @@ components:
           nullable: true
         retry_exponential_backoff:
           title: Retry Exponential Backoff
-          type: boolean
+          type: number
         start_date:
           format: date-time
           nullable: true
@@ -3452,6 +3650,9 @@ components:
         note:
           nullable: true
           type: string
+        partition_key:
+          nullable: true
+          type: string
         run_after:
           format: date-time
           nullable: true
@@ -3474,6 +3675,9 @@ components:
           type: integer
         kwargs:
           title: Kwargs
+          type: string
+        queue:
+          nullable: true
           type: string
         triggerer_id:
           nullable: true
@@ -3516,6 +3720,11 @@ components:
       type: object
     ValidationError:
       properties:
+        ctx:
+          title: Context
+          type: object
+        input:
+          title: Input
         loc:
           items:
             anyOf:
@@ -3545,6 +3754,10 @@ components:
         key:
           maxLength: 250
           title: Key
+          type: string
+        team_name:
+          maxLength: 50
+          nullable: true
           type: string
         value:
           $ref: '#/components/schemas/JsonValue'
@@ -3580,6 +3793,9 @@ components:
           type: boolean
         key:
           title: Key
+          type: string
+        team_name:
+          nullable: true
           type: string
         value:
           title: Value
@@ -3850,7 +4066,8 @@ paths:
           title: Offset
           type: integer
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ Regular expressions are **not** supported."
+          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ are **not** supported."
         in: query
         name: name_pattern
         required: false
@@ -3858,7 +4075,8 @@ paths:
           nullable: true
           type: string
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ Regular expressions are **not** supported."
+          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ are **not** supported."
         in: query
         name: uri_pattern
         required: false
@@ -3955,7 +4173,8 @@ paths:
           title: Offset
           type: integer
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ Regular expressions are **not** supported."
+          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ are **not** supported."
         in: query
         name: name_pattern
         required: false
@@ -4127,6 +4346,15 @@ paths:
         schema:
           nullable: true
           type: integer
+      - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
+          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ are **not** supported."
+        in: query
+        name: name_pattern
+        required: false
+        schema:
+          nullable: true
+          type: string
       - in: query
         name: timestamp_gte
         required: false
@@ -4304,6 +4532,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/DAGRunResponse'
           description: Successful Response
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Bad Request
         '401':
           content:
             application/json:
@@ -4574,6 +4808,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/BackfillResponse'
           description: Successful Response
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Bad Request
         '401':
           content:
             application/json:
@@ -5056,7 +5296,7 @@ paths:
           type: integer
       - description: 'Attributes to order by, multi criteria sort is supported. Prefix
           with `-` for descending order. Supported attributes: `conn_id, conn_type,
-          description, host, port, id, connection_id`'
+          description, host, port, id, team_name, connection_id`'
         in: query
         name: order_by
         required: false
@@ -5065,13 +5305,14 @@ paths:
           - id
           description: 'Attributes to order by, multi criteria sort is supported.
             Prefix with `-` for descending order. Supported attributes: `conn_id,
-            conn_type, description, host, port, id, connection_id`'
+            conn_type, description, host, port, id, team_name, connection_id`'
           items:
             type: string
           title: Order By
           type: array
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ Regular expressions are **not** supported."
+          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ are **not** supported."
         in: query
         name: connection_id_pattern
         required: false
@@ -5607,7 +5848,8 @@ paths:
           title: Order By
           type: array
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ Regular expressions are **not** supported."
+          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ are **not** supported."
         in: query
         name: tag_name_pattern
         required: false
@@ -5772,7 +6014,8 @@ paths:
           title: Owners
           type: array
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ Regular expressions are **not** supported."
+          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ are **not** supported."
         in: query
         name: dag_id_pattern
         required: false
@@ -5780,7 +6023,8 @@ paths:
           nullable: true
           type: string
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ Regular expressions are **not** supported."
+          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ are **not** supported."
         in: query
         name: dag_display_name_pattern
         required: false
@@ -5926,6 +6170,14 @@ paths:
         schema:
           nullable: true
           type: boolean
+      - in: query
+        name: timetable_type
+        required: false
+        schema:
+          items:
+            type: string
+          title: Timetable Type
+          type: array
       responses:
         '200':
           content:
@@ -6011,7 +6263,8 @@ paths:
           title: Owners
           type: array
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ Regular expressions are **not** supported."
+          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ are **not** supported."
         in: query
         name: dag_id_pattern
         required: false
@@ -6518,6 +6771,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPExceptionResponse'
           description: Not Found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Conflict
         '422':
           content:
             application/json:
@@ -6674,6 +6933,30 @@ paths:
           nullable: true
           type: string
       - in: query
+        name: duration_gte
+        required: false
+        schema:
+          nullable: true
+          type: number
+      - in: query
+        name: duration_gt
+        required: false
+        schema:
+          nullable: true
+          type: number
+      - in: query
+        name: duration_lte
+        required: false
+        schema:
+          nullable: true
+          type: number
+      - in: query
+        name: duration_lt
+        required: false
+        schema:
+          nullable: true
+          type: number
+      - in: query
         name: updated_at_gte
         required: false
         schema:
@@ -6702,6 +6985,12 @@ paths:
           nullable: true
           type: string
       - in: query
+        name: conf_contains
+        required: false
+        schema:
+          title: Conf Contains
+          type: string
+      - in: query
         name: run_type
         required: false
         schema:
@@ -6725,6 +7014,12 @@ paths:
             type: integer
           title: Dag Version
           type: array
+      - in: query
+        name: bundle_version
+        required: false
+        schema:
+          nullable: true
+          type: string
       - description: 'Attributes to order by, multi criteria sort is supported. Prefix
           with `-` for descending order. Supported attributes: `id, state, dag_id,
           run_id, logical_date, run_after, start_date, end_date, updated_at, conf,
@@ -6744,7 +7039,8 @@ paths:
           title: Order By
           type: array
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ Regular expressions are **not** supported."
+          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ are **not** supported."
         in: query
         name: run_id_pattern
         required: false
@@ -6752,9 +7048,28 @@ paths:
           nullable: true
           type: string
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ Regular expressions are **not** supported."
+          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ are **not** supported."
         in: query
         name: triggering_user_name_pattern
+        required: false
+        schema:
+          nullable: true
+          type: string
+      - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
+          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ are **not** supported."
+        in: query
+        name: dag_id_pattern
+        required: false
+        schema:
+          nullable: true
+          type: string
+      - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
+          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ are **not** supported."
+        in: query
+        name: partition_key_pattern
         required: false
         schema:
           nullable: true
@@ -7194,7 +7509,8 @@ paths:
       - description: 'Attributes to order by, multi criteria sort is supported. Prefix
           with `-` for descending order. Supported attributes: `ti_id, subject, responded_at,
           created_at, responded_by_user_id, responded_by_user_name, dag_id, run_id,
-          run_after, rendered_map_index, task_instance_operator, task_instance_state`'
+          task_display_name, run_after, rendered_map_index, task_instance_operator,
+          task_instance_state`'
         in: query
         name: order_by
         required: false
@@ -7204,14 +7520,15 @@ paths:
           description: 'Attributes to order by, multi criteria sort is supported.
             Prefix with `-` for descending order. Supported attributes: `ti_id, subject,
             responded_at, created_at, responded_by_user_id, responded_by_user_name,
-            dag_id, run_id, run_after, rendered_map_index, task_instance_operator,
+            dag_id, run_id, task_display_name, run_after, rendered_map_index, task_instance_operator,
             task_instance_state`'
           items:
             type: string
           title: Order By
           type: array
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ Regular expressions are **not** supported."
+          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ are **not** supported."
         in: query
         name: dag_id_pattern
         required: false
@@ -7225,7 +7542,8 @@ paths:
           nullable: true
           type: string
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ Regular expressions are **not** supported."
+          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ are **not** supported."
         in: query
         name: task_id_pattern
         required: false
@@ -7269,7 +7587,8 @@ paths:
           title: Responded By User Name
           type: array
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ Regular expressions are **not** supported."
+          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ are **not** supported."
         in: query
         name: subject_search
         required: false
@@ -7277,7 +7596,8 @@ paths:
           nullable: true
           type: string
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ Regular expressions are **not** supported."
+          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ are **not** supported."
         in: query
         name: body_search
         required: false
@@ -7537,7 +7857,8 @@ paths:
           nullable: true
           type: number
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ Regular expressions are **not** supported."
+          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ are **not** supported."
         in: query
         name: task_display_name_pattern
         required: false
@@ -7548,6 +7869,24 @@ paths:
           task group.
         in: query
         name: task_group_id
+        required: false
+        schema:
+          nullable: true
+          type: string
+      - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
+          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ are **not** supported."
+        in: query
+        name: dag_id_pattern
+        required: false
+        schema:
+          nullable: true
+          type: string
+      - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
+          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ are **not** supported."
+        in: query
+        name: run_id_pattern
         required: false
         schema:
           nullable: true
@@ -7568,6 +7907,15 @@ paths:
             type: string
           title: Pool
           type: array
+      - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
+          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ are **not** supported."
+        in: query
+        name: pool_name_pattern
+        required: false
+        schema:
+          nullable: true
+          type: string
       - in: query
         name: queue
         required: false
@@ -7576,6 +7924,15 @@ paths:
             type: string
           title: Queue
           type: array
+      - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
+          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ are **not** supported."
+        in: query
+        name: queue_name_pattern
+        required: false
+        schema:
+          nullable: true
+          type: string
       - in: query
         name: executor
         required: false
@@ -7608,6 +7965,15 @@ paths:
             type: string
           title: Operator
           type: array
+      - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
+          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ are **not** supported."
+        in: query
+        name: operator_name_pattern
+        required: false
+        schema:
+          nullable: true
+          type: string
       - in: query
         name: map_index
         required: false
@@ -7659,6 +8025,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/TaskInstanceCollectionResponse'
           description: Successful Response
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Bad Request
         '401':
           content:
             application/json:
@@ -8524,6 +8896,15 @@ paths:
             type: string
           title: Pool
           type: array
+      - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
+          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ are **not** supported."
+        in: query
+        name: pool_name_pattern
+        required: false
+        schema:
+          nullable: true
+          type: string
       - in: query
         name: queue
         required: false
@@ -8532,6 +8913,15 @@ paths:
             type: string
           title: Queue
           type: array
+      - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
+          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ are **not** supported."
+        in: query
+        name: queue_name_pattern
+        required: false
+        schema:
+          nullable: true
+          type: string
       - in: query
         name: executor
         required: false
@@ -8564,6 +8954,15 @@ paths:
             type: string
           title: Operator
           type: array
+      - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
+          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ are **not** supported."
+        in: query
+        name: operator_name_pattern
+        required: false
+        schema:
+          nullable: true
+          type: string
       - in: query
         name: map_index
         required: false
@@ -8948,7 +9347,8 @@ paths:
           title: Offset
           type: integer
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ Regular expressions are **not** supported."
+          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ are **not** supported."
         in: query
         name: xcom_key_pattern
         required: false
@@ -8956,7 +9356,8 @@ paths:
           nullable: true
           type: string
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ Regular expressions are **not** supported."
+          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ are **not** supported."
         in: query
         name: dag_display_name_pattern
         required: false
@@ -8964,7 +9365,8 @@ paths:
           nullable: true
           type: string
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ Regular expressions are **not** supported."
+          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ are **not** supported."
         in: query
         name: run_id_pattern
         required: false
@@ -8972,7 +9374,8 @@ paths:
           nullable: true
           type: string
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ Regular expressions are **not** supported."
+          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ are **not** supported."
         in: query
         name: task_id_pattern
         required: false
@@ -9156,6 +9559,81 @@ paths:
       tags:
       - XCom
   /api/v2/dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/xcomEntries/{xcom_key}:
+    delete:
+      description: Delete an XCom entry.
+      operationId: delete_xcom_entry
+      parameters:
+      - in: path
+        name: dag_id
+        required: true
+        schema:
+          title: Dag Id
+          type: string
+      - in: path
+        name: task_id
+        required: true
+        schema:
+          title: Task Id
+          type: string
+      - in: path
+        name: dag_run_id
+        required: true
+        schema:
+          title: Dag Run Id
+          type: string
+      - in: path
+        name: xcom_key
+        required: true
+        schema:
+          title: Xcom Key
+          type: string
+      - in: query
+        name: map_index
+        required: false
+        schema:
+          default: -1
+          minimum: -1
+          title: Map Index
+          type: integer
+      responses:
+        '204':
+          description: Successful Response
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      - HTTPBearer: []
+      summary: Delete Xcom Entry
+      tags:
+      - XCom
     get:
       description: Get an XCom entry.
       operationId: get_xcom_entry
@@ -9779,6 +10257,78 @@ paths:
       - OAuth2PasswordBearer: []
       - HTTPBearer: []
       summary: Update Hitl Detail
+      tags:
+      - Task Instance
+  /api/v2/dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/{map_index}/hitlDetails/tries/{try_number}:
+    get:
+      description: Get a Human-in-the-loop detail of a specific task instance.
+      operationId: get_hitl_detail_try_detail
+      parameters:
+      - in: path
+        name: dag_id
+        required: true
+        schema:
+          title: Dag Id
+          type: string
+      - in: path
+        name: dag_run_id
+        required: true
+        schema:
+          title: Dag Run Id
+          type: string
+      - in: path
+        name: task_id
+        required: true
+        schema:
+          title: Task Id
+          type: string
+      - in: path
+        name: map_index
+        required: true
+        schema:
+          title: Map Index
+          type: integer
+      - in: path
+        name: try_number
+        required: true
+        schema:
+          nullable: true
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HITLDetailHistory'
+          description: Successful Response
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      - HTTPBearer: []
+      summary: Get Hitl Detail Try Detail
       tags:
       - Task Instance
   /api/v2/dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/{map_index}/tries:
@@ -10589,7 +11139,8 @@ paths:
           nullable: true
           type: string
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ Regular expressions are **not** supported."
+          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ are **not** supported."
         in: query
         name: dag_id_pattern
         required: false
@@ -10597,7 +11148,8 @@ paths:
           nullable: true
           type: string
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ Regular expressions are **not** supported."
+          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ are **not** supported."
         in: query
         name: task_id_pattern
         required: false
@@ -10605,7 +11157,8 @@ paths:
           nullable: true
           type: string
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ Regular expressions are **not** supported."
+          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ are **not** supported."
         in: query
         name: run_id_pattern
         required: false
@@ -10613,7 +11166,8 @@ paths:
           nullable: true
           type: string
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ Regular expressions are **not** supported."
+          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ are **not** supported."
         in: query
         name: owner_pattern
         required: false
@@ -10621,7 +11175,8 @@ paths:
           nullable: true
           type: string
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ Regular expressions are **not** supported."
+          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ are **not** supported."
         in: query
         name: event_pattern
         required: false
@@ -10744,7 +11299,8 @@ paths:
           title: Order By
           type: array
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ Regular expressions are **not** supported."
+          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ are **not** supported."
         in: query
         name: filename_pattern
         required: false
@@ -11168,7 +11724,8 @@ paths:
           title: Order By
           type: array
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ Regular expressions are **not** supported."
+          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ are **not** supported."
         in: query
         name: pool_name_pattern
         required: false
@@ -11537,7 +12094,7 @@ paths:
           type: integer
       - description: 'Attributes to order by, multi criteria sort is supported. Prefix
           with `-` for descending order. Supported attributes: `key, id, _val, description,
-          is_encrypted`'
+          is_encrypted, team_name`'
         in: query
         name: order_by
         required: false
@@ -11546,13 +12103,14 @@ paths:
           - id
           description: 'Attributes to order by, multi criteria sort is supported.
             Prefix with `-` for descending order. Supported attributes: `key, id,
-            _val, description, is_encrypted`'
+            _val, description, is_encrypted, team_name`'
           items:
             type: string
           title: Order By
           type: array
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ Regular expressions are **not** supported."
+          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ are **not** supported."
         in: query
         name: variable_key_pattern
         required: false

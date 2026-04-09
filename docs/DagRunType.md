@@ -12,6 +12,8 @@ Class with DagRun types.
 
 * `ASSET_TRIGGERED` (value: `'asset_triggered'`)
 
+* `ASSET_MATERIALIZATION` (value: `'asset_materialization'`)
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

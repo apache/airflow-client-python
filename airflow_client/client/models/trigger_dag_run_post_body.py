@@ -17,6 +17,7 @@ from pydantic import BaseModel, ConfigDict, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class TriggerDAGRunPostBody(BaseModel):
     """
@@ -28,10 +29,11 @@ class TriggerDAGRunPostBody(BaseModel):
     data_interval_start: Optional[datetime] = None
     logical_date: Optional[datetime] = None
     note: Optional[StrictStr] = None
+    partition_key: Optional[StrictStr] = None
     run_after: Optional[datetime] = None
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ['conf', 'dag_run_id', 'data_interval_end', 'data_interval_start', 'logical_date', 'note', 'run_after']
-    model_config = ConfigDict(populate_by_name=True, validate_assignment=True, protected_namespaces=())
+    __properties: ClassVar[List[str]] = ['conf', 'dag_run_id', 'data_interval_end', 'data_interval_start', 'logical_date', 'note', 'partition_key', 'run_after']
+    model_config = ConfigDict(validate_by_name=True, validate_by_alias=True, validate_assignment=True, protected_namespaces=())
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -39,7 +41,7 @@ class TriggerDAGRunPostBody(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -73,7 +75,7 @@ class TriggerDAGRunPostBody(BaseModel):
             return None
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
-        _obj = cls.model_validate({'conf': obj.get('conf'), 'dag_run_id': obj.get('dag_run_id'), 'data_interval_end': obj.get('data_interval_end'), 'data_interval_start': obj.get('data_interval_start'), 'logical_date': obj.get('logical_date'), 'note': obj.get('note'), 'run_after': obj.get('run_after')})
+        _obj = cls.model_validate({'conf': obj.get('conf'), 'dag_run_id': obj.get('dag_run_id'), 'data_interval_end': obj.get('data_interval_end'), 'data_interval_start': obj.get('data_interval_start'), 'logical_date': obj.get('logical_date'), 'note': obj.get('note'), 'partition_key': obj.get('partition_key'), 'run_after': obj.get('run_after')})
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)

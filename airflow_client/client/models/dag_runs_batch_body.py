@@ -18,18 +18,24 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing_extensions import Annotated
 from airflow_client.client.models.dag_run_state import DagRunState
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class DAGRunsBatchBody(BaseModel):
     """
     List DAG Runs body for batch endpoint.
     """ # noqa: E501
+    conf_contains: Optional[StrictStr] = None
     dag_ids: Optional[List[StrictStr]] = None
+    duration_gt: Optional[Union[StrictFloat, StrictInt]] = None
+    duration_gte: Optional[Union[StrictFloat, StrictInt]] = None
+    duration_lt: Optional[Union[StrictFloat, StrictInt]] = None
+    duration_lte: Optional[Union[StrictFloat, StrictInt]] = None
     end_date_gt: Optional[datetime] = None
     end_date_gte: Optional[datetime] = None
     end_date_lt: Optional[datetime] = None
@@ -50,10 +56,11 @@ class DAGRunsBatchBody(BaseModel):
     start_date_lt: Optional[datetime] = None
     start_date_lte: Optional[datetime] = None
     states: Optional[List[Optional[DagRunState]]] = None
-    __properties: ClassVar[List[str]] = ["dag_ids", "end_date_gt", "end_date_gte", "end_date_lt", "end_date_lte", "logical_date_gt", "logical_date_gte", "logical_date_lt", "logical_date_lte", "order_by", "page_limit", "page_offset", "run_after_gt", "run_after_gte", "run_after_lt", "run_after_lte", "start_date_gt", "start_date_gte", "start_date_lt", "start_date_lte", "states"]
+    __properties: ClassVar[List[str]] = ["conf_contains", "dag_ids", "duration_gt", "duration_gte", "duration_lt", "duration_lte", "end_date_gt", "end_date_gte", "end_date_lt", "end_date_lte", "logical_date_gt", "logical_date_gte", "logical_date_lt", "logical_date_lte", "order_by", "page_limit", "page_offset", "run_after_gt", "run_after_gte", "run_after_lt", "run_after_lte", "start_date_gt", "start_date_gte", "start_date_lt", "start_date_lte", "states"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -65,8 +72,7 @@ class DAGRunsBatchBody(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -103,7 +109,12 @@ class DAGRunsBatchBody(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "conf_contains": obj.get("conf_contains"),
             "dag_ids": obj.get("dag_ids"),
+            "duration_gt": obj.get("duration_gt"),
+            "duration_gte": obj.get("duration_gte"),
+            "duration_lt": obj.get("duration_lt"),
+            "duration_lte": obj.get("duration_lte"),
             "end_date_gt": obj.get("end_date_gt"),
             "end_date_gte": obj.get("end_date_gte"),
             "end_date_lt": obj.get("end_date_lt"),

@@ -35,6 +35,9 @@ class TestDAGResponse(unittest.TestCase):
         model = DAGResponse()
         if include_optional:
             return DAGResponse(
+                allowed_run_types = [
+                    'backfill'
+                    ],
                 bundle_name = '',
                 bundle_version = '',
                 dag_display_name = '',
@@ -67,6 +70,7 @@ class TestDAGResponse(unittest.TestCase):
                         name = '', )
                     ],
                 timetable_description = '',
+                timetable_partitioned = True,
                 timetable_summary = ''
             )
         else:
@@ -90,6 +94,7 @@ class TestDAGResponse(unittest.TestCase):
                         dag_id = '', 
                         name = '', )
                     ],
+                timetable_partitioned = True,
         )
         """
 

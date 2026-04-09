@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **last_scheduling_decision** | **datetime** |  | [optional] 
 **logical_date** | **datetime** |  | [optional] 
 **note** | **str** |  | [optional] 
+**partition_key** | **str** |  | [optional] 
 **queued_at** | **datetime** |  | [optional] 
 **run_after** | **datetime** |  | 
 **run_type** | [**DagRunType**](DagRunType.md) |  | 

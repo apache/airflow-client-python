@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **data_interval_start** | **datetime** |  | [optional] 
 **logical_date** | **datetime** |  | [optional] 
 **note** | **str** |  | [optional] 
+**partition_key** | **str** |  | [optional] 
 **run_after** | **datetime** |  | [optional] 
 
 ## Example

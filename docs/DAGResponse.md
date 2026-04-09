@@ -6,6 +6,7 @@ DAG serializer for responses.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**allowed_run_types** | [**List[DagRunType]**](DagRunType.md) |  | [optional] 
 **bundle_name** | **str** |  | [optional] 
 **bundle_version** | **str** |  | [optional] 
 **dag_display_name** | **str** |  | 
@@ -31,6 +32,7 @@ Name | Type | Description | Notes
 **relative_fileloc** | **str** |  | [optional] 
 **tags** | [**List[DagTagResponse]**](DagTagResponse.md) |  | 
 **timetable_description** | **str** |  | [optional] 
+**timetable_partitioned** | **bool** |  | 
 **timetable_summary** | **str** |  | [optional] 
 
 ## Example

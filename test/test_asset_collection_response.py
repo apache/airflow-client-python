@@ -72,7 +72,13 @@ class TestAssetCollectionResponse(unittest.TestCase):
                                 updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), )
                             ], 
                         updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
-                        uri = '', )
+                        uri = '', 
+                        watchers = [
+                            airflow_client.client.models.asset_watcher_response.AssetWatcherResponse(
+                                created_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                                name = '', 
+                                trigger_id = 56, )
+                            ], )
                     ],
                 total_entries = 56
             )
@@ -115,7 +121,13 @@ class TestAssetCollectionResponse(unittest.TestCase):
                                 updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), )
                             ], 
                         updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
-                        uri = '', )
+                        uri = '', 
+                        watchers = [
+                            airflow_client.client.models.asset_watcher_response.AssetWatcherResponse(
+                                created_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                                name = '', 
+                                trigger_id = 56, )
+                            ], )
                     ],
                 total_entries = 56,
         )

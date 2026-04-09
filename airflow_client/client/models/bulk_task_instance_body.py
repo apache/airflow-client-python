@@ -23,11 +23,14 @@ from typing_extensions import Annotated
 from airflow_client.client.models.task_instance_state import TaskInstanceState
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class BulkTaskInstanceBody(BaseModel):
     """
     Request body for bulk update, and delete task instances.
     """ # noqa: E501
+    dag_id: Optional[StrictStr] = None
+    dag_run_id: Optional[StrictStr] = None
     include_downstream: Optional[StrictBool] = False
     include_future: Optional[StrictBool] = False
     include_past: Optional[StrictBool] = False
@@ -36,10 +39,11 @@ class BulkTaskInstanceBody(BaseModel):
     new_state: Optional[TaskInstanceState] = None
     note: Optional[Annotated[str, Field(strict=True, max_length=1000)]] = None
     task_id: StrictStr
-    __properties: ClassVar[List[str]] = ["include_downstream", "include_future", "include_past", "include_upstream", "map_index", "new_state", "note", "task_id"]
+    __properties: ClassVar[List[str]] = ["dag_id", "dag_run_id", "include_downstream", "include_future", "include_past", "include_upstream", "map_index", "new_state", "note", "task_id"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -51,8 +55,7 @@ class BulkTaskInstanceBody(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -89,6 +92,8 @@ class BulkTaskInstanceBody(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "dag_id": obj.get("dag_id"),
+            "dag_run_id": obj.get("dag_run_id"),
             "include_downstream": obj.get("include_downstream") if obj.get("include_downstream") is not None else False,
             "include_future": obj.get("include_future") if obj.get("include_future") is not None else False,
             "include_past": obj.get("include_past") if obj.get("include_past") is not None else False,

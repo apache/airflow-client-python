@@ -39,6 +39,7 @@ class TestTriggerResponse(unittest.TestCase):
                 created_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 id = 56,
                 kwargs = '',
+                queue = '',
                 triggerer_id = 56
             )
         else:

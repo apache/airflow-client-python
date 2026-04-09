@@ -20,12 +20,14 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
+from uuid import UUID
 from airflow_client.client.models.dag_version_response import DagVersionResponse
 from airflow_client.client.models.job_response import JobResponse
 from airflow_client.client.models.task_instance_state import TaskInstanceState
 from airflow_client.client.models.trigger_response import TriggerResponse
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class TaskInstanceResponse(BaseModel):
     """
@@ -40,7 +42,7 @@ class TaskInstanceResponse(BaseModel):
     executor: Optional[StrictStr] = None
     executor_config: StrictStr
     hostname: Optional[StrictStr] = None
-    id: StrictStr
+    id: UUID
     logical_date: Optional[datetime] = None
     map_index: StrictInt
     max_tries: StrictInt
@@ -68,7 +70,8 @@ class TaskInstanceResponse(BaseModel):
     __properties: ClassVar[List[str]] = ["dag_display_name", "dag_id", "dag_run_id", "dag_version", "duration", "end_date", "executor", "executor_config", "hostname", "id", "logical_date", "map_index", "max_tries", "note", "operator", "operator_name", "pid", "pool", "pool_slots", "priority_weight", "queue", "queued_when", "rendered_fields", "rendered_map_index", "run_after", "scheduled_when", "start_date", "state", "task_display_name", "task_id", "trigger", "triggerer_job", "try_number", "unixname"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -80,8 +83,7 @@ class TaskInstanceResponse(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

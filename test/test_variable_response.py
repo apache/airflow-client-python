@@ -38,6 +38,7 @@ class TestVariableResponse(unittest.TestCase):
                 description = '',
                 is_encrypted = True,
                 key = '',
+                team_name = '',
                 value = ''
             )
         else:

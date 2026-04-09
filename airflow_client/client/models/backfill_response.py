@@ -24,6 +24,7 @@ from typing_extensions import Annotated
 from airflow_client.client.models.reprocess_behavior import ReprocessBehavior
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class BackfillResponse(BaseModel):
     """
@@ -33,7 +34,7 @@ class BackfillResponse(BaseModel):
     created_at: datetime
     dag_display_name: StrictStr
     dag_id: StrictStr
-    dag_run_conf: Dict[str, Any]
+    dag_run_conf: Optional[Dict[str, Any]] = None
     from_date: datetime
     id: Annotated[int, Field(strict=True, ge=0)]
     is_paused: StrictBool
@@ -44,7 +45,8 @@ class BackfillResponse(BaseModel):
     __properties: ClassVar[List[str]] = ["completed_at", "created_at", "dag_display_name", "dag_id", "dag_run_conf", "from_date", "id", "is_paused", "max_active_runs", "reprocess_behavior", "to_date", "updated_at"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -56,8 +58,7 @@ class BackfillResponse(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

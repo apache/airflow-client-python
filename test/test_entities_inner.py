@@ -35,6 +35,8 @@ class TestEntitiesInner(unittest.TestCase):
         model = EntitiesInner()
         if include_optional:
             return EntitiesInner(
+                dag_id = '',
+                dag_run_id = '',
                 include_downstream = True,
                 include_future = True,
                 include_past = True,

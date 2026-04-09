@@ -20,14 +20,17 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
+from airflow_client.client.models.dag_run_type import DagRunType
 from airflow_client.client.models.dag_tag_response import DagTagResponse
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class DAGResponse(BaseModel):
     """
     DAG serializer for responses.
     """ # noqa: E501
+    allowed_run_types: Optional[List[DagRunType]] = None
     bundle_name: Optional[StrictStr] = None
     bundle_version: Optional[StrictStr] = None
     dag_display_name: StrictStr
@@ -53,11 +56,13 @@ class DAGResponse(BaseModel):
     relative_fileloc: Optional[StrictStr] = None
     tags: List[DagTagResponse]
     timetable_description: Optional[StrictStr] = None
+    timetable_partitioned: StrictBool
     timetable_summary: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["bundle_name", "bundle_version", "dag_display_name", "dag_id", "description", "file_token", "fileloc", "has_import_errors", "has_task_concurrency_limits", "is_paused", "is_stale", "last_expired", "last_parse_duration", "last_parsed_time", "max_active_runs", "max_active_tasks", "max_consecutive_failed_dag_runs", "next_dagrun_data_interval_end", "next_dagrun_data_interval_start", "next_dagrun_logical_date", "next_dagrun_run_after", "owners", "relative_fileloc", "tags", "timetable_description", "timetable_summary"]
+    __properties: ClassVar[List[str]] = ["allowed_run_types", "bundle_name", "bundle_version", "dag_display_name", "dag_id", "description", "file_token", "fileloc", "has_import_errors", "has_task_concurrency_limits", "is_paused", "is_stale", "last_expired", "last_parse_duration", "last_parsed_time", "max_active_runs", "max_active_tasks", "max_consecutive_failed_dag_runs", "next_dagrun_data_interval_end", "next_dagrun_data_interval_start", "next_dagrun_logical_date", "next_dagrun_run_after", "owners", "relative_fileloc", "tags", "timetable_description", "timetable_partitioned", "timetable_summary"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -69,8 +74,7 @@ class DAGResponse(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -116,6 +120,7 @@ class DAGResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "allowed_run_types": obj.get("allowed_run_types"),
             "bundle_name": obj.get("bundle_name"),
             "bundle_version": obj.get("bundle_version"),
             "dag_display_name": obj.get("dag_display_name"),
@@ -141,6 +146,7 @@ class DAGResponse(BaseModel):
             "relative_fileloc": obj.get("relative_fileloc"),
             "tags": [DagTagResponse.from_dict(_item) for _item in obj["tags"]] if obj.get("tags") is not None else None,
             "timetable_description": obj.get("timetable_description"),
+            "timetable_partitioned": obj.get("timetable_partitioned"),
             "timetable_summary": obj.get("timetable_summary")
         })
         return _obj

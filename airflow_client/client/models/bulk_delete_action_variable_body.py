@@ -20,9 +20,10 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from airflow_client.client.models.bulk_action_not_on_existence import BulkActionNotOnExistence
-from airflow_client.client.models.entities_inner import EntitiesInner
+from airflow_client.client.models.entities_inner3 import EntitiesInner3
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class BulkDeleteActionVariableBody(BaseModel):
     """
@@ -30,7 +31,7 @@ class BulkDeleteActionVariableBody(BaseModel):
     """ # noqa: E501
     action: StrictStr = Field(description="The action to be performed on the entities.")
     action_on_non_existence: Optional[BulkActionNotOnExistence] = None
-    entities: List[EntitiesInner] = Field(description="A list of entity id/key or entity objects to be deleted.")
+    entities: List[EntitiesInner3] = Field(description="A list of entity id/key or entity objects to be deleted.")
     __properties: ClassVar[List[str]] = ["action", "action_on_non_existence", "entities"]
 
     @field_validator('action')
@@ -41,7 +42,8 @@ class BulkDeleteActionVariableBody(BaseModel):
         return value
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -53,8 +55,7 @@ class BulkDeleteActionVariableBody(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -100,7 +101,7 @@ class BulkDeleteActionVariableBody(BaseModel):
         _obj = cls.model_validate({
             "action": obj.get("action"),
             "action_on_non_existence": obj.get("action_on_non_existence"),
-            "entities": [EntitiesInner.from_dict(_item) for _item in obj["entities"]] if obj.get("entities") is not None else None
+            "entities": [EntitiesInner3.from_dict(_item) for _item in obj["entities"]] if obj.get("entities") is not None else None
         })
         return _obj
 

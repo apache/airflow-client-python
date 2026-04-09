@@ -17,10 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt
+from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class CreateAssetEventsBody(BaseModel):
     """
@@ -28,11 +29,13 @@ class CreateAssetEventsBody(BaseModel):
     """ # noqa: E501
     asset_id: StrictInt
     extra: Optional[Dict[str, Any]] = None
+    partition_key: Optional[StrictStr] = None
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["asset_id", "extra"]
+    __properties: ClassVar[List[str]] = ["asset_id", "extra", "partition_key"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -44,8 +47,7 @@ class CreateAssetEventsBody(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -90,7 +92,8 @@ class CreateAssetEventsBody(BaseModel):
 
         _obj = cls.model_validate({
             "asset_id": obj.get("asset_id"),
-            "extra": obj.get("extra")
+            "extra": obj.get("extra"),
+            "partition_key": obj.get("partition_key")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

@@ -47,7 +47,8 @@ class TestBulkCreateActionConnectionBody(unittest.TestCase):
                         login = '', 
                         password = '', 
                         port = 56, 
-                        schema = '', )
+                        schema = '', 
+                        team_name = '', )
                     ]
             )
         else:
@@ -63,7 +64,8 @@ class TestBulkCreateActionConnectionBody(unittest.TestCase):
                         login = '', 
                         password = '', 
                         port = 56, 
-                        schema = '', )
+                        schema = '', 
+                        team_name = '', )
                     ],
         )
         """

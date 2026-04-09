@@ -5,6 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**dag_id** | **str** |  | [optional] 
+**dag_run_id** | **str** |  | [optional] 
 **include_downstream** | **bool** |  | [optional] [default to False]
 **include_future** | **bool** |  | [optional] [default to False]
 **include_past** | **bool** |  | [optional] [default to False]

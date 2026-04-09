@@ -23,6 +23,7 @@ from typing import Any, ClassVar, Dict, List, Optional, Union
 from airflow_client.client.models.time_delta import TimeDelta
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class TaskResponse(BaseModel):
     """
@@ -45,7 +46,7 @@ class TaskResponse(BaseModel):
     queue: Optional[StrictStr] = None
     retries: Optional[Union[StrictFloat, StrictInt]] = None
     retry_delay: Optional[TimeDelta] = None
-    retry_exponential_backoff: StrictBool
+    retry_exponential_backoff: Union[StrictFloat, StrictInt]
     start_date: Optional[datetime] = None
     task_display_name: Optional[StrictStr] = None
     task_id: Optional[StrictStr] = None
@@ -58,7 +59,8 @@ class TaskResponse(BaseModel):
     __properties: ClassVar[List[str]] = ["class_ref", "depends_on_past", "doc_md", "downstream_task_ids", "end_date", "execution_timeout", "extra_links", "is_mapped", "operator_name", "owner", "params", "pool", "pool_slots", "priority_weight", "queue", "retries", "retry_delay", "retry_exponential_backoff", "start_date", "task_display_name", "task_id", "template_fields", "trigger_rule", "ui_color", "ui_fgcolor", "wait_for_downstream", "weight_rule"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -70,8 +72,7 @@ class TaskResponse(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -87,8 +88,10 @@ class TaskResponse(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
+            "extra_links",
         ])
 
         _dict = self.model_dump(

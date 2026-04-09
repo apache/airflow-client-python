@@ -570,7 +570,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     api_instance = airflow_client.client.AssetApi(api_client)
     limit = 50 # int |  (optional) (default to 50)
     offset = 0 # int |  (optional) (default to 0)
-    name_pattern = 'name_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported. (optional)
+    name_pattern = 'name_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported. (optional)
     order_by = ["id"] # List[str] | Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, name` (optional) (default to ["id"])
 
     try:
@@ -591,7 +591,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **int**|  | [optional] [default to 50]
  **offset** | **int**|  | [optional] [default to 0]
- **name_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). Regular expressions are **not** supported. | [optional] 
+ **name_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). or the pipe &#x60;|&#x60; operator for OR logic (e.g. &#x60;dag1 | dag2&#x60;). Regular expressions are **not** supported. | [optional] 
  **order_by** | [**List[str]**](str.md)| Attributes to order by, multi criteria sort is supported. Prefix with &#x60;-&#x60; for descending order. Supported attributes: &#x60;id, name&#x60; | [optional] [default to [&quot;id&quot;]]
 
 ### Return type
@@ -620,7 +620,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_asset_events**
-> AssetEventCollectionResponse get_asset_events(limit=limit, offset=offset, order_by=order_by, asset_id=asset_id, source_dag_id=source_dag_id, source_task_id=source_task_id, source_run_id=source_run_id, source_map_index=source_map_index, timestamp_gte=timestamp_gte, timestamp_gt=timestamp_gt, timestamp_lte=timestamp_lte, timestamp_lt=timestamp_lt)
+> AssetEventCollectionResponse get_asset_events(limit=limit, offset=offset, order_by=order_by, asset_id=asset_id, source_dag_id=source_dag_id, source_task_id=source_task_id, source_run_id=source_run_id, source_map_index=source_map_index, name_pattern=name_pattern, timestamp_gte=timestamp_gte, timestamp_gt=timestamp_gt, timestamp_lte=timestamp_lte, timestamp_lt=timestamp_lt)
 
 Get Asset Events
 
@@ -667,6 +667,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     source_task_id = 'source_task_id_example' # str |  (optional)
     source_run_id = 'source_run_id_example' # str |  (optional)
     source_map_index = 56 # int |  (optional)
+    name_pattern = 'name_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported. (optional)
     timestamp_gte = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
     timestamp_gt = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
     timestamp_lte = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
@@ -674,7 +675,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
 
     try:
         # Get Asset Events
-        api_response = api_instance.get_asset_events(limit=limit, offset=offset, order_by=order_by, asset_id=asset_id, source_dag_id=source_dag_id, source_task_id=source_task_id, source_run_id=source_run_id, source_map_index=source_map_index, timestamp_gte=timestamp_gte, timestamp_gt=timestamp_gt, timestamp_lte=timestamp_lte, timestamp_lt=timestamp_lt)
+        api_response = api_instance.get_asset_events(limit=limit, offset=offset, order_by=order_by, asset_id=asset_id, source_dag_id=source_dag_id, source_task_id=source_task_id, source_run_id=source_run_id, source_map_index=source_map_index, name_pattern=name_pattern, timestamp_gte=timestamp_gte, timestamp_gt=timestamp_gt, timestamp_lte=timestamp_lte, timestamp_lt=timestamp_lt)
         print("The response of AssetApi->get_asset_events:\n")
         pprint(api_response)
     except Exception as e:
@@ -696,6 +697,7 @@ Name | Type | Description  | Notes
  **source_task_id** | **str**|  | [optional] 
  **source_run_id** | **str**|  | [optional] 
  **source_map_index** | **int**|  | [optional] 
+ **name_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). or the pipe &#x60;|&#x60; operator for OR logic (e.g. &#x60;dag1 | dag2&#x60;). Regular expressions are **not** supported. | [optional] 
  **timestamp_gte** | **datetime**|  | [optional] 
  **timestamp_gt** | **datetime**|  | [optional] 
  **timestamp_lte** | **datetime**|  | [optional] 
@@ -854,8 +856,8 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     api_instance = airflow_client.client.AssetApi(api_client)
     limit = 50 # int |  (optional) (default to 50)
     offset = 0 # int |  (optional) (default to 0)
-    name_pattern = 'name_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported. (optional)
-    uri_pattern = 'uri_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported. (optional)
+    name_pattern = 'name_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported. (optional)
+    uri_pattern = 'uri_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported. (optional)
     dag_ids = ['dag_ids_example'] # List[str] |  (optional)
     only_active = True # bool |  (optional) (default to True)
     order_by = ["id"] # List[str] | Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, name, uri, created_at, updated_at` (optional) (default to ["id"])
@@ -878,8 +880,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **int**|  | [optional] [default to 50]
  **offset** | **int**|  | [optional] [default to 0]
- **name_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). Regular expressions are **not** supported. | [optional] 
- **uri_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). Regular expressions are **not** supported. | [optional] 
+ **name_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). or the pipe &#x60;|&#x60; operator for OR logic (e.g. &#x60;dag1 | dag2&#x60;). Regular expressions are **not** supported. | [optional] 
+ **uri_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). or the pipe &#x60;|&#x60; operator for OR logic (e.g. &#x60;dag1 | dag2&#x60;). Regular expressions are **not** supported. | [optional] 
  **dag_ids** | [**List[str]**](str.md)|  | [optional] 
  **only_active** | **bool**|  | [optional] [default to True]
  **order_by** | [**List[str]**](str.md)| Attributes to order by, multi criteria sort is supported. Prefix with &#x60;-&#x60; for descending order. Supported attributes: &#x60;id, name, uri, created_at, updated_at&#x60; | [optional] [default to [&quot;id&quot;]]
@@ -1162,6 +1164,7 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
+**400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |

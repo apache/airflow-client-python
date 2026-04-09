@@ -22,23 +22,26 @@ from pydantic import BaseModel, ConfigDict, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class DagRunAssetReference(BaseModel):
     """
-    DAGRun serializer for asset responses.
+    DagRun serializer for asset responses.
     """ # noqa: E501
     dag_id: StrictStr
     data_interval_end: Optional[datetime] = None
     data_interval_start: Optional[datetime] = None
     end_date: Optional[datetime] = None
     logical_date: Optional[datetime] = None
+    partition_key: Optional[StrictStr] = None
     run_id: StrictStr
     start_date: datetime
     state: StrictStr
-    __properties: ClassVar[List[str]] = ["dag_id", "data_interval_end", "data_interval_start", "end_date", "logical_date", "run_id", "start_date", "state"]
+    __properties: ClassVar[List[str]] = ["dag_id", "data_interval_end", "data_interval_start", "end_date", "logical_date", "partition_key", "run_id", "start_date", "state"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -50,8 +53,7 @@ class DagRunAssetReference(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -93,6 +95,7 @@ class DagRunAssetReference(BaseModel):
             "data_interval_start": obj.get("data_interval_start"),
             "end_date": obj.get("end_date"),
             "logical_date": obj.get("logical_date"),
+            "partition_key": obj.get("partition_key"),
             "run_id": obj.get("run_id"),
             "start_date": obj.get("start_date"),
             "state": obj.get("state")

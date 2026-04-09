@@ -37,7 +37,9 @@ class TestDryRunBackfillCollectionResponse(unittest.TestCase):
             return DryRunBackfillCollectionResponse(
                 backfills = [
                     airflow_client.client.models.dry_run_backfill_response.DryRunBackfillResponse(
-                        logical_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), )
+                        logical_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        partition_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        partition_key = '', )
                     ],
                 total_entries = 56
             )
@@ -45,7 +47,9 @@ class TestDryRunBackfillCollectionResponse(unittest.TestCase):
             return DryRunBackfillCollectionResponse(
                 backfills = [
                     airflow_client.client.models.dry_run_backfill_response.DryRunBackfillResponse(
-                        logical_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), )
+                        logical_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        partition_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        partition_key = '', )
                     ],
                 total_entries = 56,
         )

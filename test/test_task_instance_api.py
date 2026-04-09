@@ -61,6 +61,13 @@ class TestTaskInstanceApi(unittest.TestCase):
         """
         pass
 
+    def test_get_hitl_detail_try_detail(self) -> None:
+        """Test case for get_hitl_detail_try_detail
+
+        Get Hitl Detail Try Detail
+        """
+        pass
+
     def test_get_hitl_details(self) -> None:
         """Test case for get_hitl_details
 

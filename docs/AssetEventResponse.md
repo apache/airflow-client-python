@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **group** | **str** |  | [optional] 
 **id** | **int** |  | 
 **name** | **str** |  | [optional] 
+**partition_key** | **str** |  | [optional] 
 **source_dag_id** | **str** |  | [optional] 
 **source_map_index** | **int** |  | 
 **source_run_id** | **str** |  | [optional] 

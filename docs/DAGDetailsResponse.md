@@ -6,6 +6,8 @@ Specific serializer for DAG Details responses.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**active_runs_count** | **int** |  | [optional] [default to 0]
+**allowed_run_types** | [**List[DagRunType]**](DagRunType.md) |  | [optional] 
 **asset_expression** | **Dict[str, object]** |  | [optional] 
 **bundle_name** | **str** |  | [optional] 
 **bundle_version** | **str** |  | [optional] 
@@ -47,6 +49,7 @@ Name | Type | Description | Notes
 **tags** | [**List[DagTagResponse]**](DagTagResponse.md) |  | 
 **template_search_path** | **List[str]** |  | [optional] 
 **timetable_description** | **str** |  | [optional] 
+**timetable_partitioned** | **bool** |  | 
 **timetable_summary** | **str** |  | [optional] 
 **timezone** | **str** |  | [optional] 
 

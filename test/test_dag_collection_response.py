@@ -37,6 +37,9 @@ class TestDAGCollectionResponse(unittest.TestCase):
             return DAGCollectionResponse(
                 dags = [
                     airflow_client.client.models.dag_response.DAGResponse(
+                        allowed_run_types = [
+                            'backfill'
+                            ], 
                         bundle_name = '', 
                         bundle_version = '', 
                         dag_display_name = '', 
@@ -69,6 +72,7 @@ class TestDAGCollectionResponse(unittest.TestCase):
                                 name = '', )
                             ], 
                         timetable_description = '', 
+                        timetable_partitioned = True, 
                         timetable_summary = '', )
                     ],
                 total_entries = 56
@@ -77,6 +81,9 @@ class TestDAGCollectionResponse(unittest.TestCase):
             return DAGCollectionResponse(
                 dags = [
                     airflow_client.client.models.dag_response.DAGResponse(
+                        allowed_run_types = [
+                            'backfill'
+                            ], 
                         bundle_name = '', 
                         bundle_version = '', 
                         dag_display_name = '', 
@@ -109,6 +116,7 @@ class TestDAGCollectionResponse(unittest.TestCase):
                                 name = '', )
                             ], 
                         timetable_description = '', 
+                        timetable_partitioned = True, 
                         timetable_summary = '', )
                     ],
                 total_entries = 56,

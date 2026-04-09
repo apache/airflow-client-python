@@ -53,7 +53,6 @@ class TestBackfillResponse(unittest.TestCase):
                 created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 dag_display_name = '',
                 dag_id = '',
-                dag_run_conf = { },
                 from_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 id = 0.0,
                 is_paused = True,

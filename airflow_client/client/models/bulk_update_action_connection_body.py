@@ -23,6 +23,7 @@ from airflow_client.client.models.bulk_action_not_on_existence import BulkAction
 from airflow_client.client.models.connection_body import ConnectionBody
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class BulkUpdateActionConnectionBody(BaseModel):
     """
@@ -31,7 +32,8 @@ class BulkUpdateActionConnectionBody(BaseModel):
     action: StrictStr = Field(description="The action to be performed on the entities.")
     action_on_non_existence: Optional[BulkActionNotOnExistence] = None
     entities: List[ConnectionBody] = Field(description="A list of entities to be updated.")
-    __properties: ClassVar[List[str]] = ["action", "action_on_non_existence", "entities"]
+    update_mask: Optional[List[StrictStr]] = None
+    __properties: ClassVar[List[str]] = ["action", "action_on_non_existence", "entities", "update_mask"]
 
     @field_validator('action')
     def action_validate_enum(cls, value):
@@ -41,7 +43,8 @@ class BulkUpdateActionConnectionBody(BaseModel):
         return value
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -53,8 +56,7 @@ class BulkUpdateActionConnectionBody(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -100,7 +102,8 @@ class BulkUpdateActionConnectionBody(BaseModel):
         _obj = cls.model_validate({
             "action": obj.get("action"),
             "action_on_non_existence": obj.get("action_on_non_existence"),
-            "entities": [ConnectionBody.from_dict(_item) for _item in obj["entities"]] if obj.get("entities") is not None else None
+            "entities": [ConnectionBody.from_dict(_item) for _item in obj["entities"]] if obj.get("entities") is not None else None,
+            "update_mask": obj.get("update_mask")
         })
         return _obj
 

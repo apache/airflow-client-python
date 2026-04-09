@@ -39,6 +39,8 @@ class TestBulkUpdateActionBulkTaskInstanceBody(unittest.TestCase):
                 action_on_non_existence = 'fail',
                 entities = [
                     airflow_client.client.models.bulk_task_instance_body.BulkTaskInstanceBody(
+                        dag_id = '', 
+                        dag_run_id = '', 
                         include_downstream = True, 
                         include_future = True, 
                         include_past = True, 
@@ -47,6 +49,9 @@ class TestBulkUpdateActionBulkTaskInstanceBody(unittest.TestCase):
                         new_state = null, 
                         note = '', 
                         task_id = '', )
+                    ],
+                update_mask = [
+                    ''
                     ]
             )
         else:
@@ -54,6 +59,8 @@ class TestBulkUpdateActionBulkTaskInstanceBody(unittest.TestCase):
                 action = 'update',
                 entities = [
                     airflow_client.client.models.bulk_task_instance_body.BulkTaskInstanceBody(
+                        dag_id = '', 
+                        dag_run_id = '', 
                         include_downstream = True, 
                         include_future = True, 
                         include_past = True, 

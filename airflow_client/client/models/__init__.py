@@ -25,6 +25,7 @@ from airflow_client.client.models.asset_collection_response import AssetCollecti
 from airflow_client.client.models.asset_event_collection_response import AssetEventCollectionResponse
 from airflow_client.client.models.asset_event_response import AssetEventResponse
 from airflow_client.client.models.asset_response import AssetResponse
+from airflow_client.client.models.asset_watcher_response import AssetWatcherResponse
 from airflow_client.client.models.backfill_collection_response import BackfillCollectionResponse
 from airflow_client.client.models.backfill_post_body import BackfillPostBody
 from airflow_client.client.models.backfill_response import BackfillResponse
@@ -92,6 +93,9 @@ from airflow_client.client.models.detail import Detail
 from airflow_client.client.models.dry_run_backfill_collection_response import DryRunBackfillCollectionResponse
 from airflow_client.client.models.dry_run_backfill_response import DryRunBackfillResponse
 from airflow_client.client.models.entities_inner import EntitiesInner
+from airflow_client.client.models.entities_inner1 import EntitiesInner1
+from airflow_client.client.models.entities_inner2 import EntitiesInner2
+from airflow_client.client.models.entities_inner3 import EntitiesInner3
 from airflow_client.client.models.event_log_collection_response import EventLogCollectionResponse
 from airflow_client.client.models.event_log_response import EventLogResponse
 from airflow_client.client.models.external_log_url_response import ExternalLogUrlResponse
@@ -101,6 +105,7 @@ from airflow_client.client.models.fast_api_app_response import FastAPIAppRespons
 from airflow_client.client.models.fast_api_root_middleware_response import FastAPIRootMiddlewareResponse
 from airflow_client.client.models.hitl_detail import HITLDetail
 from airflow_client.client.models.hitl_detail_collection import HITLDetailCollection
+from airflow_client.client.models.hitl_detail_history import HITLDetailHistory
 from airflow_client.client.models.hitl_detail_response import HITLDetailResponse
 from airflow_client.client.models.hitl_user import HITLUser
 from airflow_client.client.models.http_exception_response import HTTPExceptionResponse

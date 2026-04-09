@@ -6,7 +6,12 @@ List DAG Runs body for batch endpoint.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**conf_contains** | **str** |  | [optional] 
 **dag_ids** | **List[str]** |  | [optional] 
+**duration_gt** | **float** |  | [optional] 
+**duration_gte** | **float** |  | [optional] 
+**duration_lt** | **float** |  | [optional] 
+**duration_lte** | **float** |  | [optional] 
 **end_date_gt** | **datetime** |  | [optional] 
 **end_date_gte** | **datetime** |  | [optional] 
 **end_date_lt** | **datetime** |  | [optional] 

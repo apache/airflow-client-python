@@ -397,7 +397,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     limit = 50 # int |  (optional) (default to 50)
     offset = 0 # int |  (optional) (default to 0)
     order_by = ["name"] # List[str] | Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `name` (optional) (default to ["name"])
-    tag_name_pattern = 'tag_name_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported. (optional)
+    tag_name_pattern = 'tag_name_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported. (optional)
 
     try:
         # Get Dag Tags
@@ -418,7 +418,7 @@ Name | Type | Description  | Notes
  **limit** | **int**|  | [optional] [default to 50]
  **offset** | **int**|  | [optional] [default to 0]
  **order_by** | [**List[str]**](str.md)| Attributes to order by, multi criteria sort is supported. Prefix with &#x60;-&#x60; for descending order. Supported attributes: &#x60;name&#x60; | [optional] [default to [&quot;name&quot;]]
- **tag_name_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). Regular expressions are **not** supported. | [optional] 
+ **tag_name_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). or the pipe &#x60;|&#x60; operator for OR logic (e.g. &#x60;dag1 | dag2&#x60;). Regular expressions are **not** supported. | [optional] 
 
 ### Return type
 
@@ -445,7 +445,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_dags**
-> DAGCollectionResponse get_dags(limit=limit, offset=offset, tags=tags, tags_match_mode=tags_match_mode, owners=owners, dag_id_pattern=dag_id_pattern, dag_display_name_pattern=dag_display_name_pattern, exclude_stale=exclude_stale, paused=paused, has_import_errors=has_import_errors, last_dag_run_state=last_dag_run_state, bundle_name=bundle_name, bundle_version=bundle_version, has_asset_schedule=has_asset_schedule, asset_dependency=asset_dependency, dag_run_start_date_gte=dag_run_start_date_gte, dag_run_start_date_gt=dag_run_start_date_gt, dag_run_start_date_lte=dag_run_start_date_lte, dag_run_start_date_lt=dag_run_start_date_lt, dag_run_end_date_gte=dag_run_end_date_gte, dag_run_end_date_gt=dag_run_end_date_gt, dag_run_end_date_lte=dag_run_end_date_lte, dag_run_end_date_lt=dag_run_end_date_lt, dag_run_state=dag_run_state, order_by=order_by, is_favorite=is_favorite)
+> DAGCollectionResponse get_dags(limit=limit, offset=offset, tags=tags, tags_match_mode=tags_match_mode, owners=owners, dag_id_pattern=dag_id_pattern, dag_display_name_pattern=dag_display_name_pattern, exclude_stale=exclude_stale, paused=paused, has_import_errors=has_import_errors, last_dag_run_state=last_dag_run_state, bundle_name=bundle_name, bundle_version=bundle_version, has_asset_schedule=has_asset_schedule, asset_dependency=asset_dependency, dag_run_start_date_gte=dag_run_start_date_gte, dag_run_start_date_gt=dag_run_start_date_gt, dag_run_start_date_lte=dag_run_start_date_lte, dag_run_start_date_lt=dag_run_start_date_lt, dag_run_end_date_gte=dag_run_end_date_gte, dag_run_end_date_gt=dag_run_end_date_gt, dag_run_end_date_lte=dag_run_end_date_lte, dag_run_end_date_lt=dag_run_end_date_lt, dag_run_state=dag_run_state, order_by=order_by, is_favorite=is_favorite, timetable_type=timetable_type)
 
 Get Dags
 
@@ -489,8 +489,8 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     tags = ['tags_example'] # List[str] |  (optional)
     tags_match_mode = 'tags_match_mode_example' # str |  (optional)
     owners = ['owners_example'] # List[str] |  (optional)
-    dag_id_pattern = 'dag_id_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported. (optional)
-    dag_display_name_pattern = 'dag_display_name_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported. (optional)
+    dag_id_pattern = 'dag_id_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported. (optional)
+    dag_display_name_pattern = 'dag_display_name_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported. (optional)
     exclude_stale = True # bool |  (optional) (default to True)
     paused = True # bool |  (optional)
     has_import_errors = True # bool | Filter Dags by having import errors. Only Dags that have been successfully loaded before will be returned. (optional)
@@ -510,10 +510,11 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     dag_run_state = ['dag_run_state_example'] # List[str] |  (optional)
     order_by = ["dag_id"] # List[str] | Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `dag_id, dag_display_name, next_dagrun, state, start_date, last_run_state, last_run_start_date` (optional) (default to ["dag_id"])
     is_favorite = True # bool |  (optional)
+    timetable_type = ['timetable_type_example'] # List[str] |  (optional)
 
     try:
         # Get Dags
-        api_response = api_instance.get_dags(limit=limit, offset=offset, tags=tags, tags_match_mode=tags_match_mode, owners=owners, dag_id_pattern=dag_id_pattern, dag_display_name_pattern=dag_display_name_pattern, exclude_stale=exclude_stale, paused=paused, has_import_errors=has_import_errors, last_dag_run_state=last_dag_run_state, bundle_name=bundle_name, bundle_version=bundle_version, has_asset_schedule=has_asset_schedule, asset_dependency=asset_dependency, dag_run_start_date_gte=dag_run_start_date_gte, dag_run_start_date_gt=dag_run_start_date_gt, dag_run_start_date_lte=dag_run_start_date_lte, dag_run_start_date_lt=dag_run_start_date_lt, dag_run_end_date_gte=dag_run_end_date_gte, dag_run_end_date_gt=dag_run_end_date_gt, dag_run_end_date_lte=dag_run_end_date_lte, dag_run_end_date_lt=dag_run_end_date_lt, dag_run_state=dag_run_state, order_by=order_by, is_favorite=is_favorite)
+        api_response = api_instance.get_dags(limit=limit, offset=offset, tags=tags, tags_match_mode=tags_match_mode, owners=owners, dag_id_pattern=dag_id_pattern, dag_display_name_pattern=dag_display_name_pattern, exclude_stale=exclude_stale, paused=paused, has_import_errors=has_import_errors, last_dag_run_state=last_dag_run_state, bundle_name=bundle_name, bundle_version=bundle_version, has_asset_schedule=has_asset_schedule, asset_dependency=asset_dependency, dag_run_start_date_gte=dag_run_start_date_gte, dag_run_start_date_gt=dag_run_start_date_gt, dag_run_start_date_lte=dag_run_start_date_lte, dag_run_start_date_lt=dag_run_start_date_lt, dag_run_end_date_gte=dag_run_end_date_gte, dag_run_end_date_gt=dag_run_end_date_gt, dag_run_end_date_lte=dag_run_end_date_lte, dag_run_end_date_lt=dag_run_end_date_lt, dag_run_state=dag_run_state, order_by=order_by, is_favorite=is_favorite, timetable_type=timetable_type)
         print("The response of DAGApi->get_dags:\n")
         pprint(api_response)
     except Exception as e:
@@ -532,8 +533,8 @@ Name | Type | Description  | Notes
  **tags** | [**List[str]**](str.md)|  | [optional] 
  **tags_match_mode** | **str**|  | [optional] 
  **owners** | [**List[str]**](str.md)|  | [optional] 
- **dag_id_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). Regular expressions are **not** supported. | [optional] 
- **dag_display_name_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). Regular expressions are **not** supported. | [optional] 
+ **dag_id_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). or the pipe &#x60;|&#x60; operator for OR logic (e.g. &#x60;dag1 | dag2&#x60;). Regular expressions are **not** supported. | [optional] 
+ **dag_display_name_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). or the pipe &#x60;|&#x60; operator for OR logic (e.g. &#x60;dag1 | dag2&#x60;). Regular expressions are **not** supported. | [optional] 
  **exclude_stale** | **bool**|  | [optional] [default to True]
  **paused** | **bool**|  | [optional] 
  **has_import_errors** | **bool**| Filter Dags by having import errors. Only Dags that have been successfully loaded before will be returned. | [optional] 
@@ -553,6 +554,7 @@ Name | Type | Description  | Notes
  **dag_run_state** | [**List[str]**](str.md)|  | [optional] 
  **order_by** | [**List[str]**](str.md)| Attributes to order by, multi criteria sort is supported. Prefix with &#x60;-&#x60; for descending order. Supported attributes: &#x60;dag_id, dag_display_name, next_dagrun, state, start_date, last_run_state, last_run_start_date&#x60; | [optional] [default to [&quot;dag_id&quot;]]
  **is_favorite** | **bool**|  | [optional] 
+ **timetable_type** | [**List[str]**](str.md)|  | [optional] 
 
 ### Return type
 
@@ -717,7 +719,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     tags = ['tags_example'] # List[str] |  (optional)
     tags_match_mode = 'tags_match_mode_example' # str |  (optional)
     owners = ['owners_example'] # List[str] |  (optional)
-    dag_id_pattern = 'dag_id_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). Regular expressions are **not** supported. (optional)
+    dag_id_pattern = 'dag_id_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported. (optional)
     exclude_stale = True # bool |  (optional) (default to True)
     paused = True # bool |  (optional)
 
@@ -744,7 +746,7 @@ Name | Type | Description  | Notes
  **tags** | [**List[str]**](str.md)|  | [optional] 
  **tags_match_mode** | **str**|  | [optional] 
  **owners** | [**List[str]**](str.md)|  | [optional] 
- **dag_id_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). Regular expressions are **not** supported. | [optional] 
+ **dag_id_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). or the pipe &#x60;|&#x60; operator for OR logic (e.g. &#x60;dag1 | dag2&#x60;). Regular expressions are **not** supported. | [optional] 
  **exclude_stale** | **bool**|  | [optional] [default to True]
  **paused** | **bool**|  | [optional] 
 

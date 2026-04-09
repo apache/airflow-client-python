@@ -39,6 +39,8 @@ class TestBulkCreateActionBulkTaskInstanceBody(unittest.TestCase):
                 action_on_existence = 'fail',
                 entities = [
                     airflow_client.client.models.bulk_task_instance_body.BulkTaskInstanceBody(
+                        dag_id = '', 
+                        dag_run_id = '', 
                         include_downstream = True, 
                         include_future = True, 
                         include_past = True, 
@@ -54,6 +56,8 @@ class TestBulkCreateActionBulkTaskInstanceBody(unittest.TestCase):
                 action = 'create',
                 entities = [
                     airflow_client.client.models.bulk_task_instance_body.BulkTaskInstanceBody(
+                        dag_id = '', 
+                        dag_run_id = '', 
                         include_downstream = True, 
                         include_future = True, 
                         include_past = True, 

@@ -30,6 +30,7 @@ class DagRunType(str, Enum):
     SCHEDULED = 'scheduled'
     MANUAL = 'manual'
     ASSET_TRIGGERED = 'asset_triggered'
+    ASSET_MATERIALIZATION = 'asset_materialization'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

@@ -35,6 +35,8 @@ class TestBulkTaskInstanceBody(unittest.TestCase):
         model = BulkTaskInstanceBody()
         if include_optional:
             return BulkTaskInstanceBody(
+                dag_id = '',
+                dag_run_id = '',
                 include_downstream = True,
                 include_future = True,
                 include_past = True,

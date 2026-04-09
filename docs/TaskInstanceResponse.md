@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **executor** | **str** |  | [optional] 
 **executor_config** | **str** |  | 
 **hostname** | **str** |  | [optional] 
-**id** | **str** |  | 
+**id** | **UUID** |  | 
 **logical_date** | **datetime** |  | [optional] 
 **map_index** | **int** |  | 
 **max_tries** | **int** |  | 

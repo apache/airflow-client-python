@@ -1,6 +1,6 @@
 # DagRunAssetReference
 
-DAGRun serializer for asset responses.
+DagRun serializer for asset responses.
 
 ## Properties
 
@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **data_interval_start** | **datetime** |  | [optional] 
 **end_date** | **datetime** |  | [optional] 
 **logical_date** | **datetime** |  | [optional] 
+**partition_key** | **str** |  | [optional] 
 **run_id** | **str** |  | 
 **start_date** | **datetime** |  | 
 **state** | **str** |  | 

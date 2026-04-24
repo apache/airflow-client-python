@@ -14,7 +14,7 @@
 """  # noqa: E501
 
 
-__version__ = "3.2.0"
+__version__ = "3.2.1"
 
 # Define package exports
 __all__ = [
@@ -157,6 +157,7 @@ __all__ = [
     "JobResponse",
     "LastAssetEventResponse",
     "LocationInner",
+    "MaterializeAssetBody",
     "PatchTaskInstanceBody",
     "PluginCollectionResponse",
     "PluginImportErrorCollectionResponse",
@@ -352,6 +353,7 @@ from airflow_client.client.models.job_collection_response import JobCollectionRe
 from airflow_client.client.models.job_response import JobResponse as JobResponse
 from airflow_client.client.models.last_asset_event_response import LastAssetEventResponse as LastAssetEventResponse
 from airflow_client.client.models.location_inner import LocationInner as LocationInner
+from airflow_client.client.models.materialize_asset_body import MaterializeAssetBody as MaterializeAssetBody
 from airflow_client.client.models.patch_task_instance_body import PatchTaskInstanceBody as PatchTaskInstanceBody
 from airflow_client.client.models.plugin_collection_response import PluginCollectionResponse as PluginCollectionResponse
 from airflow_client.client.models.plugin_import_error_collection_response import PluginImportErrorCollectionResponse as PluginImportErrorCollectionResponse

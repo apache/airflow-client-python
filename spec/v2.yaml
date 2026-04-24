@@ -2540,6 +2540,41 @@ components:
           type: string
       title: LastAssetEventResponse
       type: object
+    MaterializeAssetBody:
+      additionalProperties: false
+      description: Materialize asset request.
+      properties:
+        conf:
+          additionalProperties: true
+          nullable: true
+          type: object
+        dag_run_id:
+          nullable: true
+          type: string
+        data_interval_end:
+          format: date-time
+          nullable: true
+          type: string
+        data_interval_start:
+          format: date-time
+          nullable: true
+          type: string
+        logical_date:
+          format: date-time
+          nullable: true
+          type: string
+        note:
+          nullable: true
+          type: string
+        partition_key:
+          nullable: true
+          type: string
+        run_after:
+          format: date-time
+          nullable: true
+          type: string
+      title: MaterializeAssetBody
+      type: object
     PatchTaskInstanceBody:
       additionalProperties: false
       description: Request body for Clear Task Instances endpoint.
@@ -4525,6 +4560,12 @@ paths:
         schema:
           title: Asset Id
           type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MaterializeAssetBody'
+              nullable: true
       responses:
         '200':
           content:

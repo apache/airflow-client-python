@@ -1087,7 +1087,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **materialize_asset**
-> DAGRunResponse materialize_asset(asset_id)
+> DAGRunResponse materialize_asset(asset_id, materialize_asset_body=materialize_asset_body)
 
 Materialize Asset
 
@@ -1101,6 +1101,7 @@ Materialize an asset by triggering a DAG run that produces it.
 ```python
 import airflow_client.client
 from airflow_client.client.models.dag_run_response import DAGRunResponse
+from airflow_client.client.models.materialize_asset_body import MaterializeAssetBody
 from airflow_client.client.rest import ApiException
 from pprint import pprint
 
@@ -1127,10 +1128,11 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = airflow_client.client.AssetApi(api_client)
     asset_id = 56 # int | 
+    materialize_asset_body = airflow_client.client.MaterializeAssetBody() # MaterializeAssetBody |  (optional)
 
     try:
         # Materialize Asset
-        api_response = api_instance.materialize_asset(asset_id)
+        api_response = api_instance.materialize_asset(asset_id, materialize_asset_body=materialize_asset_body)
         print("The response of AssetApi->materialize_asset:\n")
         pprint(api_response)
     except Exception as e:
@@ -1145,6 +1147,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **asset_id** | **int**|  | 
+ **materialize_asset_body** | [**MaterializeAssetBody**](MaterializeAssetBody.md)|  | [optional] 
 
 ### Return type
 
@@ -1156,7 +1159,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 ### HTTP response details

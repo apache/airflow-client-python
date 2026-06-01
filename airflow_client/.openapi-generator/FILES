@@ -169,7 +169,7 @@ docs/DAGCollectionAllOf.md
 docs/DAGDetail.md
 docs/DAGDetailAllOf.md
 docs/DAGRun.md
-docs/DAGRunApi.md
+docs/DagRunApi.md
 docs/DAGRunCollection.md
 docs/DAGRunCollectionAllOf.md
 docs/DagProcessorStatus.md

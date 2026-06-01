@@ -6,9 +6,9 @@ Asset alias serializer for responses.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**group** | **str** |  | 
 **id** | **int** |  | 
 **name** | **str** |  | 
+**group** | **str** |  | 
 
 ## Example
 

@@ -34,20 +34,20 @@ class AssetResponse(BaseModel):
     """
     Asset serializer for responses.
     """ # noqa: E501
-    aliases: List[AssetAliasResponse]
-    consuming_tasks: List[TaskInletAssetReference]
-    created_at: datetime
-    extra: Optional[Dict[str, Any]] = None
-    group: StrictStr
     id: StrictInt
-    last_asset_event: Optional[LastAssetEventResponse] = None
     name: StrictStr
-    producing_tasks: List[TaskOutletAssetReference]
-    scheduled_dags: List[DagScheduleAssetReference]
-    updated_at: datetime
     uri: StrictStr
+    group: StrictStr
+    extra: Optional[Dict[str, Any]] = None
+    created_at: datetime
+    updated_at: datetime
+    scheduled_dags: List[DagScheduleAssetReference]
+    producing_tasks: List[TaskOutletAssetReference]
+    consuming_tasks: List[TaskInletAssetReference]
+    aliases: List[AssetAliasResponse]
     watchers: List[AssetWatcherResponse]
-    __properties: ClassVar[List[str]] = ["aliases", "consuming_tasks", "created_at", "extra", "group", "id", "last_asset_event", "name", "producing_tasks", "scheduled_dags", "updated_at", "uri", "watchers"]
+    last_asset_event: Optional[LastAssetEventResponse] = None
+    __properties: ClassVar[List[str]] = ["id", "name", "uri", "group", "extra", "created_at", "updated_at", "scheduled_dags", "producing_tasks", "consuming_tasks", "aliases", "watchers", "last_asset_event"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -88,30 +88,6 @@ class AssetResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in aliases (list)
-        _items = []
-        if self.aliases:
-            for _item_aliases in self.aliases:
-                if _item_aliases:
-                    _items.append(_item_aliases.to_dict())
-            _dict['aliases'] = _items
-        # override the default output from pydantic by calling `to_dict()` of each item in consuming_tasks (list)
-        _items = []
-        if self.consuming_tasks:
-            for _item_consuming_tasks in self.consuming_tasks:
-                if _item_consuming_tasks:
-                    _items.append(_item_consuming_tasks.to_dict())
-            _dict['consuming_tasks'] = _items
-        # override the default output from pydantic by calling `to_dict()` of last_asset_event
-        if self.last_asset_event:
-            _dict['last_asset_event'] = self.last_asset_event.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of each item in producing_tasks (list)
-        _items = []
-        if self.producing_tasks:
-            for _item_producing_tasks in self.producing_tasks:
-                if _item_producing_tasks:
-                    _items.append(_item_producing_tasks.to_dict())
-            _dict['producing_tasks'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in scheduled_dags (list)
         _items = []
         if self.scheduled_dags:
@@ -119,6 +95,27 @@ class AssetResponse(BaseModel):
                 if _item_scheduled_dags:
                     _items.append(_item_scheduled_dags.to_dict())
             _dict['scheduled_dags'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in producing_tasks (list)
+        _items = []
+        if self.producing_tasks:
+            for _item_producing_tasks in self.producing_tasks:
+                if _item_producing_tasks:
+                    _items.append(_item_producing_tasks.to_dict())
+            _dict['producing_tasks'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in consuming_tasks (list)
+        _items = []
+        if self.consuming_tasks:
+            for _item_consuming_tasks in self.consuming_tasks:
+                if _item_consuming_tasks:
+                    _items.append(_item_consuming_tasks.to_dict())
+            _dict['consuming_tasks'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in aliases (list)
+        _items = []
+        if self.aliases:
+            for _item_aliases in self.aliases:
+                if _item_aliases:
+                    _items.append(_item_aliases.to_dict())
+            _dict['aliases'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in watchers (list)
         _items = []
         if self.watchers:
@@ -126,6 +123,19 @@ class AssetResponse(BaseModel):
                 if _item_watchers:
                     _items.append(_item_watchers.to_dict())
             _dict['watchers'] = _items
+        # override the default output from pydantic by calling `to_dict()` of last_asset_event
+        if self.last_asset_event:
+            _dict['last_asset_event'] = self.last_asset_event.to_dict()
+        # set to None if extra (nullable) is None
+        # and model_fields_set contains the field
+        if self.extra is None and "extra" in self.model_fields_set:
+            _dict['extra'] = None
+
+        # set to None if last_asset_event (nullable) is None
+        # and model_fields_set contains the field
+        if self.last_asset_event is None and "last_asset_event" in self.model_fields_set:
+            _dict['last_asset_event'] = None
+
         return _dict
 
     @classmethod
@@ -138,19 +148,19 @@ class AssetResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "aliases": [AssetAliasResponse.from_dict(_item) for _item in obj["aliases"]] if obj.get("aliases") is not None else None,
-            "consuming_tasks": [TaskInletAssetReference.from_dict(_item) for _item in obj["consuming_tasks"]] if obj.get("consuming_tasks") is not None else None,
-            "created_at": obj.get("created_at"),
-            "extra": obj.get("extra"),
-            "group": obj.get("group"),
             "id": obj.get("id"),
-            "last_asset_event": LastAssetEventResponse.from_dict(obj["last_asset_event"]) if obj.get("last_asset_event") is not None else None,
             "name": obj.get("name"),
-            "producing_tasks": [TaskOutletAssetReference.from_dict(_item) for _item in obj["producing_tasks"]] if obj.get("producing_tasks") is not None else None,
-            "scheduled_dags": [DagScheduleAssetReference.from_dict(_item) for _item in obj["scheduled_dags"]] if obj.get("scheduled_dags") is not None else None,
-            "updated_at": obj.get("updated_at"),
             "uri": obj.get("uri"),
-            "watchers": [AssetWatcherResponse.from_dict(_item) for _item in obj["watchers"]] if obj.get("watchers") is not None else None
+            "group": obj.get("group"),
+            "extra": obj.get("extra"),
+            "created_at": obj.get("created_at"),
+            "updated_at": obj.get("updated_at"),
+            "scheduled_dags": [DagScheduleAssetReference.from_dict(_item) for _item in obj["scheduled_dags"]] if obj.get("scheduled_dags") is not None else None,
+            "producing_tasks": [TaskOutletAssetReference.from_dict(_item) for _item in obj["producing_tasks"]] if obj.get("producing_tasks") is not None else None,
+            "consuming_tasks": [TaskInletAssetReference.from_dict(_item) for _item in obj["consuming_tasks"]] if obj.get("consuming_tasks") is not None else None,
+            "aliases": [AssetAliasResponse.from_dict(_item) for _item in obj["aliases"]] if obj.get("aliases") is not None else None,
+            "watchers": [AssetWatcherResponse.from_dict(_item) for _item in obj["watchers"]] if obj.get("watchers") is not None else None,
+            "last_asset_event": LastAssetEventResponse.from_dict(obj["last_asset_event"]) if obj.get("last_asset_event") is not None else None
         })
         return _obj
 

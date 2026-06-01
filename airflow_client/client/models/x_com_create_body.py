@@ -28,9 +28,9 @@ class XComCreateBody(BaseModel):
     Payload serializer for creating an XCom entry.
     """ # noqa: E501
     key: StrictStr
-    map_index: Optional[StrictInt] = -1
     value: Optional[Any]
-    __properties: ClassVar[List[str]] = ["key", "map_index", "value"]
+    map_index: Optional[StrictInt] = -1
+    __properties: ClassVar[List[str]] = ["key", "value", "map_index"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -89,8 +89,8 @@ class XComCreateBody(BaseModel):
 
         _obj = cls.model_validate({
             "key": obj.get("key"),
-            "map_index": obj.get("map_index") if obj.get("map_index") is not None else -1,
-            "value": obj.get("value")
+            "value": obj.get("value"),
+            "map_index": obj.get("map_index") if obj.get("map_index") is not None else -1
         })
         return _obj
 

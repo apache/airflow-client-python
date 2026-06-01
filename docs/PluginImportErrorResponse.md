@@ -6,8 +6,8 @@ Plugin Import Error serializer for responses.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**error** | **str** |  | 
 **source** | **str** |  | 
+**error** | **str** |  | 
 
 ## Example
 

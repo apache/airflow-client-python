@@ -30,19 +30,19 @@ class BackfillResponse(BaseModel):
     """
     Base serializer for Backfill.
     """ # noqa: E501
-    completed_at: Optional[datetime] = None
-    created_at: datetime
-    dag_display_name: StrictStr
-    dag_id: StrictStr
-    dag_run_conf: Optional[Dict[str, Any]] = None
-    from_date: datetime
     id: Annotated[int, Field(strict=True, ge=0)]
-    is_paused: StrictBool
-    max_active_runs: StrictInt
-    reprocess_behavior: ReprocessBehavior
+    dag_id: StrictStr
+    from_date: datetime
     to_date: datetime
+    dag_run_conf: Optional[Dict[str, Any]]
+    is_paused: StrictBool
+    reprocess_behavior: ReprocessBehavior
+    max_active_runs: StrictInt
+    created_at: datetime
+    completed_at: Optional[datetime]
     updated_at: datetime
-    __properties: ClassVar[List[str]] = ["completed_at", "created_at", "dag_display_name", "dag_id", "dag_run_conf", "from_date", "id", "is_paused", "max_active_runs", "reprocess_behavior", "to_date", "updated_at"]
+    dag_display_name: StrictStr
+    __properties: ClassVar[List[str]] = ["id", "dag_id", "from_date", "to_date", "dag_run_conf", "is_paused", "reprocess_behavior", "max_active_runs", "created_at", "completed_at", "updated_at", "dag_display_name"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -83,6 +83,16 @@ class BackfillResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if dag_run_conf (nullable) is None
+        # and model_fields_set contains the field
+        if self.dag_run_conf is None and "dag_run_conf" in self.model_fields_set:
+            _dict['dag_run_conf'] = None
+
+        # set to None if completed_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.completed_at is None and "completed_at" in self.model_fields_set:
+            _dict['completed_at'] = None
+
         return _dict
 
     @classmethod
@@ -95,18 +105,18 @@ class BackfillResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "completed_at": obj.get("completed_at"),
-            "created_at": obj.get("created_at"),
-            "dag_display_name": obj.get("dag_display_name"),
-            "dag_id": obj.get("dag_id"),
-            "dag_run_conf": obj.get("dag_run_conf"),
-            "from_date": obj.get("from_date"),
             "id": obj.get("id"),
-            "is_paused": obj.get("is_paused"),
-            "max_active_runs": obj.get("max_active_runs"),
-            "reprocess_behavior": obj.get("reprocess_behavior"),
+            "dag_id": obj.get("dag_id"),
+            "from_date": obj.get("from_date"),
             "to_date": obj.get("to_date"),
-            "updated_at": obj.get("updated_at")
+            "dag_run_conf": obj.get("dag_run_conf"),
+            "is_paused": obj.get("is_paused"),
+            "reprocess_behavior": obj.get("reprocess_behavior"),
+            "max_active_runs": obj.get("max_active_runs"),
+            "created_at": obj.get("created_at"),
+            "completed_at": obj.get("completed_at"),
+            "updated_at": obj.get("updated_at"),
+            "dag_display_name": obj.get("dag_display_name")
         })
         return _obj
 

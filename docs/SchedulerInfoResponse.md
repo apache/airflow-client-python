@@ -6,8 +6,8 @@ Scheduler info serializer for responses.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**latest_scheduler_heartbeat** | **str** |  | [optional] 
-**status** | **str** |  | [optional] 
+**status** | **str** |  | 
+**latest_scheduler_heartbeat** | **str** |  | 
 
 ## Example
 

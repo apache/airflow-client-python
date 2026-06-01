@@ -30,33 +30,33 @@ class TaskInstanceHistoryResponse(BaseModel):
     """
     TaskInstanceHistory serializer for responses.
     """ # noqa: E501
-    dag_display_name: StrictStr
+    task_id: StrictStr
     dag_id: StrictStr
     dag_run_id: StrictStr
-    dag_version: Optional[DagVersionResponse] = None
-    duration: Optional[Union[StrictFloat, StrictInt]] = None
-    end_date: Optional[datetime] = None
-    executor: Optional[StrictStr] = None
-    executor_config: StrictStr
-    hostname: Optional[StrictStr] = None
     map_index: StrictInt
+    start_date: Optional[datetime]
+    end_date: Optional[datetime]
+    duration: Optional[Union[StrictFloat, StrictInt]]
+    state: Optional[TaskInstanceState]
+    try_number: StrictInt
     max_tries: StrictInt
-    operator: Optional[StrictStr] = None
-    operator_name: Optional[StrictStr] = None
-    pid: Optional[StrictInt] = None
+    task_display_name: StrictStr
+    dag_display_name: StrictStr
+    hostname: Optional[StrictStr]
+    unixname: Optional[StrictStr]
     pool: StrictStr
     pool_slots: StrictInt
-    priority_weight: Optional[StrictInt] = None
-    queue: Optional[StrictStr] = None
-    queued_when: Optional[datetime] = None
-    scheduled_when: Optional[datetime] = None
-    start_date: Optional[datetime] = None
-    state: Optional[TaskInstanceState] = None
-    task_display_name: StrictStr
-    task_id: StrictStr
-    try_number: StrictInt
-    unixname: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["dag_display_name", "dag_id", "dag_run_id", "dag_version", "duration", "end_date", "executor", "executor_config", "hostname", "map_index", "max_tries", "operator", "operator_name", "pid", "pool", "pool_slots", "priority_weight", "queue", "queued_when", "scheduled_when", "start_date", "state", "task_display_name", "task_id", "try_number", "unixname"]
+    queue: Optional[StrictStr]
+    priority_weight: Optional[StrictInt]
+    operator: Optional[StrictStr]
+    operator_name: Optional[StrictStr]
+    queued_when: Optional[datetime]
+    scheduled_when: Optional[datetime]
+    pid: Optional[StrictInt]
+    executor: Optional[StrictStr]
+    executor_config: StrictStr
+    dag_version: Optional[DagVersionResponse]
+    __properties: ClassVar[List[str]] = ["task_id", "dag_id", "dag_run_id", "map_index", "start_date", "end_date", "duration", "state", "try_number", "max_tries", "task_display_name", "dag_display_name", "hostname", "unixname", "pool", "pool_slots", "queue", "priority_weight", "operator", "operator_name", "queued_when", "scheduled_when", "pid", "executor", "executor_config", "dag_version"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -100,6 +100,81 @@ class TaskInstanceHistoryResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of dag_version
         if self.dag_version:
             _dict['dag_version'] = self.dag_version.to_dict()
+        # set to None if start_date (nullable) is None
+        # and model_fields_set contains the field
+        if self.start_date is None and "start_date" in self.model_fields_set:
+            _dict['start_date'] = None
+
+        # set to None if end_date (nullable) is None
+        # and model_fields_set contains the field
+        if self.end_date is None and "end_date" in self.model_fields_set:
+            _dict['end_date'] = None
+
+        # set to None if duration (nullable) is None
+        # and model_fields_set contains the field
+        if self.duration is None and "duration" in self.model_fields_set:
+            _dict['duration'] = None
+
+        # set to None if state (nullable) is None
+        # and model_fields_set contains the field
+        if self.state is None and "state" in self.model_fields_set:
+            _dict['state'] = None
+
+        # set to None if hostname (nullable) is None
+        # and model_fields_set contains the field
+        if self.hostname is None and "hostname" in self.model_fields_set:
+            _dict['hostname'] = None
+
+        # set to None if unixname (nullable) is None
+        # and model_fields_set contains the field
+        if self.unixname is None and "unixname" in self.model_fields_set:
+            _dict['unixname'] = None
+
+        # set to None if queue (nullable) is None
+        # and model_fields_set contains the field
+        if self.queue is None and "queue" in self.model_fields_set:
+            _dict['queue'] = None
+
+        # set to None if priority_weight (nullable) is None
+        # and model_fields_set contains the field
+        if self.priority_weight is None and "priority_weight" in self.model_fields_set:
+            _dict['priority_weight'] = None
+
+        # set to None if operator (nullable) is None
+        # and model_fields_set contains the field
+        if self.operator is None and "operator" in self.model_fields_set:
+            _dict['operator'] = None
+
+        # set to None if operator_name (nullable) is None
+        # and model_fields_set contains the field
+        if self.operator_name is None and "operator_name" in self.model_fields_set:
+            _dict['operator_name'] = None
+
+        # set to None if queued_when (nullable) is None
+        # and model_fields_set contains the field
+        if self.queued_when is None and "queued_when" in self.model_fields_set:
+            _dict['queued_when'] = None
+
+        # set to None if scheduled_when (nullable) is None
+        # and model_fields_set contains the field
+        if self.scheduled_when is None and "scheduled_when" in self.model_fields_set:
+            _dict['scheduled_when'] = None
+
+        # set to None if pid (nullable) is None
+        # and model_fields_set contains the field
+        if self.pid is None and "pid" in self.model_fields_set:
+            _dict['pid'] = None
+
+        # set to None if executor (nullable) is None
+        # and model_fields_set contains the field
+        if self.executor is None and "executor" in self.model_fields_set:
+            _dict['executor'] = None
+
+        # set to None if dag_version (nullable) is None
+        # and model_fields_set contains the field
+        if self.dag_version is None and "dag_version" in self.model_fields_set:
+            _dict['dag_version'] = None
+
         return _dict
 
     @classmethod
@@ -112,32 +187,32 @@ class TaskInstanceHistoryResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "dag_display_name": obj.get("dag_display_name"),
+            "task_id": obj.get("task_id"),
             "dag_id": obj.get("dag_id"),
             "dag_run_id": obj.get("dag_run_id"),
-            "dag_version": DagVersionResponse.from_dict(obj["dag_version"]) if obj.get("dag_version") is not None else None,
-            "duration": obj.get("duration"),
-            "end_date": obj.get("end_date"),
-            "executor": obj.get("executor"),
-            "executor_config": obj.get("executor_config"),
-            "hostname": obj.get("hostname"),
             "map_index": obj.get("map_index"),
+            "start_date": obj.get("start_date"),
+            "end_date": obj.get("end_date"),
+            "duration": obj.get("duration"),
+            "state": obj.get("state"),
+            "try_number": obj.get("try_number"),
             "max_tries": obj.get("max_tries"),
-            "operator": obj.get("operator"),
-            "operator_name": obj.get("operator_name"),
-            "pid": obj.get("pid"),
+            "task_display_name": obj.get("task_display_name"),
+            "dag_display_name": obj.get("dag_display_name"),
+            "hostname": obj.get("hostname"),
+            "unixname": obj.get("unixname"),
             "pool": obj.get("pool"),
             "pool_slots": obj.get("pool_slots"),
-            "priority_weight": obj.get("priority_weight"),
             "queue": obj.get("queue"),
+            "priority_weight": obj.get("priority_weight"),
+            "operator": obj.get("operator"),
+            "operator_name": obj.get("operator_name"),
             "queued_when": obj.get("queued_when"),
             "scheduled_when": obj.get("scheduled_when"),
-            "start_date": obj.get("start_date"),
-            "state": obj.get("state"),
-            "task_display_name": obj.get("task_display_name"),
-            "task_id": obj.get("task_id"),
-            "try_number": obj.get("try_number"),
-            "unixname": obj.get("unixname")
+            "pid": obj.get("pid"),
+            "executor": obj.get("executor"),
+            "executor_config": obj.get("executor_config"),
+            "dag_version": DagVersionResponse.from_dict(obj["dag_version"]) if obj.get("dag_version") is not None else None
         })
         return _obj
 

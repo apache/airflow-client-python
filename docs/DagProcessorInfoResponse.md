@@ -6,8 +6,8 @@ DagProcessor info serializer for responses.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**latest_dag_processor_heartbeat** | **str** |  | [optional] 
-**status** | **str** |  | [optional] 
+**status** | **str** |  | 
+**latest_dag_processor_heartbeat** | **str** |  | 
 
 ## Example
 

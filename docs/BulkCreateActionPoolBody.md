@@ -6,8 +6,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **action** | **str** | The action to be performed on the entities. | 
-**action_on_existence** | [**BulkActionOnExistence**](BulkActionOnExistence.md) |  | [optional] 
 **entities** | [**List[PoolBody]**](PoolBody.md) | A list of entities to be created. | 
+**action_on_existence** | [**BulkActionOnExistence**](BulkActionOnExistence.md) |  | [optional] 
 
 ## Example
 

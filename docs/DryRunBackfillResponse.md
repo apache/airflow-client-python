@@ -6,9 +6,9 @@ Backfill serializer for responses in dry-run mode.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**logical_date** | **datetime** |  | [optional] 
-**partition_date** | **datetime** |  | [optional] 
-**partition_key** | **str** |  | [optional] 
+**logical_date** | **datetime** |  | 
+**partition_key** | **str** |  | 
+**partition_date** | **datetime** |  | 
 
 ## Example
 

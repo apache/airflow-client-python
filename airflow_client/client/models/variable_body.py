@@ -28,11 +28,11 @@ class VariableBody(BaseModel):
     """
     Variable serializer for bodies.
     """ # noqa: E501
-    description: Optional[StrictStr] = None
     key: Annotated[str, Field(strict=True, max_length=250)]
-    team_name: Optional[Annotated[str, Field(strict=True, max_length=50)]] = None
     value: Optional[Any]
-    __properties: ClassVar[List[str]] = ["description", "key", "team_name", "value"]
+    description: Optional[StrictStr] = None
+    team_name: Optional[Annotated[str, Field(strict=True, max_length=50)]] = None
+    __properties: ClassVar[List[str]] = ["key", "value", "description", "team_name"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -78,6 +78,16 @@ class VariableBody(BaseModel):
         if self.value is None and "value" in self.model_fields_set:
             _dict['value'] = None
 
+        # set to None if description (nullable) is None
+        # and model_fields_set contains the field
+        if self.description is None and "description" in self.model_fields_set:
+            _dict['description'] = None
+
+        # set to None if team_name (nullable) is None
+        # and model_fields_set contains the field
+        if self.team_name is None and "team_name" in self.model_fields_set:
+            _dict['team_name'] = None
+
         return _dict
 
     @classmethod
@@ -90,10 +100,10 @@ class VariableBody(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "description": obj.get("description"),
             "key": obj.get("key"),
-            "team_name": obj.get("team_name"),
-            "value": obj.get("value")
+            "value": obj.get("value"),
+            "description": obj.get("description"),
+            "team_name": obj.get("team_name")
         })
         return _obj
 

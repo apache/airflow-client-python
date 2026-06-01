@@ -28,21 +28,24 @@ class ConnectionBody(BaseModel):
     """
     Connection Serializer for requests body.
     """ # noqa: E501
-    conn_type: StrictStr
     connection_id: Annotated[str, Field(strict=True, max_length=200)]
+    conn_type: StrictStr
     description: Optional[StrictStr] = None
-    extra: Optional[StrictStr] = None
     host: Optional[StrictStr] = None
     login: Optional[StrictStr] = None
-    password: Optional[StrictStr] = None
-    port: Optional[StrictInt] = None
     var_schema: Optional[StrictStr] = Field(default=None, alias="schema")
+    port: Optional[StrictInt] = None
+    password: Optional[StrictStr] = None
+    extra: Optional[StrictStr] = None
     team_name: Optional[Annotated[str, Field(strict=True, max_length=50)]] = None
-    __properties: ClassVar[List[str]] = ["conn_type", "connection_id", "description", "extra", "host", "login", "password", "port", "schema", "team_name"]
+    __properties: ClassVar[List[str]] = ["connection_id", "conn_type", "description", "host", "login", "schema", "port", "password", "extra", "team_name"]
 
     @field_validator('connection_id')
     def connection_id_validate_regular_expression(cls, value):
         """Validates the regular expression"""
+        if not isinstance(value, str):
+            value = str(value)
+
         if not re.match(r"^[\w.-]+$", value):
             raise ValueError(r"must validate the regular expression /^[\w.-]+$/")
         return value
@@ -86,6 +89,46 @@ class ConnectionBody(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if description (nullable) is None
+        # and model_fields_set contains the field
+        if self.description is None and "description" in self.model_fields_set:
+            _dict['description'] = None
+
+        # set to None if host (nullable) is None
+        # and model_fields_set contains the field
+        if self.host is None and "host" in self.model_fields_set:
+            _dict['host'] = None
+
+        # set to None if login (nullable) is None
+        # and model_fields_set contains the field
+        if self.login is None and "login" in self.model_fields_set:
+            _dict['login'] = None
+
+        # set to None if var_schema (nullable) is None
+        # and model_fields_set contains the field
+        if self.var_schema is None and "var_schema" in self.model_fields_set:
+            _dict['schema'] = None
+
+        # set to None if port (nullable) is None
+        # and model_fields_set contains the field
+        if self.port is None and "port" in self.model_fields_set:
+            _dict['port'] = None
+
+        # set to None if password (nullable) is None
+        # and model_fields_set contains the field
+        if self.password is None and "password" in self.model_fields_set:
+            _dict['password'] = None
+
+        # set to None if extra (nullable) is None
+        # and model_fields_set contains the field
+        if self.extra is None and "extra" in self.model_fields_set:
+            _dict['extra'] = None
+
+        # set to None if team_name (nullable) is None
+        # and model_fields_set contains the field
+        if self.team_name is None and "team_name" in self.model_fields_set:
+            _dict['team_name'] = None
+
         return _dict
 
     @classmethod
@@ -98,15 +141,15 @@ class ConnectionBody(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "conn_type": obj.get("conn_type"),
             "connection_id": obj.get("connection_id"),
+            "conn_type": obj.get("conn_type"),
             "description": obj.get("description"),
-            "extra": obj.get("extra"),
             "host": obj.get("host"),
             "login": obj.get("login"),
-            "password": obj.get("password"),
-            "port": obj.get("port"),
             "schema": obj.get("schema"),
+            "port": obj.get("port"),
+            "password": obj.get("password"),
+            "extra": obj.get("extra"),
             "team_name": obj.get("team_name")
         })
         return _obj

@@ -25,13 +25,13 @@ from pydantic_core import to_jsonable_python
 
 class DAGSourceResponse(BaseModel):
     """
-    DAG Source serializer for responses.
+    Dag Source serializer for responses.
     """ # noqa: E501
-    content: Optional[StrictStr] = None
-    dag_display_name: StrictStr
+    content: Optional[StrictStr]
     dag_id: StrictStr
-    version_number: Optional[StrictInt] = None
-    __properties: ClassVar[List[str]] = ["content", "dag_display_name", "dag_id", "version_number"]
+    version_number: Optional[StrictInt]
+    dag_display_name: StrictStr
+    __properties: ClassVar[List[str]] = ["content", "dag_id", "version_number", "dag_display_name"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -72,6 +72,16 @@ class DAGSourceResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if content (nullable) is None
+        # and model_fields_set contains the field
+        if self.content is None and "content" in self.model_fields_set:
+            _dict['content'] = None
+
+        # set to None if version_number (nullable) is None
+        # and model_fields_set contains the field
+        if self.version_number is None and "version_number" in self.model_fields_set:
+            _dict['version_number'] = None
+
         return _dict
 
     @classmethod
@@ -85,9 +95,9 @@ class DAGSourceResponse(BaseModel):
 
         _obj = cls.model_validate({
             "content": obj.get("content"),
-            "dag_display_name": obj.get("dag_display_name"),
             "dag_id": obj.get("dag_id"),
-            "version_number": obj.get("version_number")
+            "version_number": obj.get("version_number"),
+            "dag_display_name": obj.get("dag_display_name")
         })
         return _obj
 

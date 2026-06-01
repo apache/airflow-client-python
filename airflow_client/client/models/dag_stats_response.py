@@ -26,12 +26,12 @@ from pydantic_core import to_jsonable_python
 
 class DagStatsResponse(BaseModel):
     """
-    DAG Stats serializer for responses.
+    Dag Stats serializer for responses.
     """ # noqa: E501
-    dag_display_name: StrictStr
     dag_id: StrictStr
+    dag_display_name: StrictStr
     stats: List[DagStatsStateResponse]
-    __properties: ClassVar[List[str]] = ["dag_display_name", "dag_id", "stats"]
+    __properties: ClassVar[List[str]] = ["dag_id", "dag_display_name", "stats"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -91,8 +91,8 @@ class DagStatsResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "dag_display_name": obj.get("dag_display_name"),
             "dag_id": obj.get("dag_id"),
+            "dag_display_name": obj.get("dag_display_name"),
             "stats": [DagStatsStateResponse.from_dict(_item) for _item in obj["stats"]] if obj.get("stats") is not None else None
         })
         return _obj

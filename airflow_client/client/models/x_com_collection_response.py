@@ -28,9 +28,9 @@ class XComCollectionResponse(BaseModel):
     """
     XCom Collection serializer for responses.
     """ # noqa: E501
-    total_entries: StrictInt
     xcom_entries: List[XComResponse]
-    __properties: ClassVar[List[str]] = ["total_entries", "xcom_entries"]
+    total_entries: StrictInt
+    __properties: ClassVar[List[str]] = ["xcom_entries", "total_entries"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -90,8 +90,8 @@ class XComCollectionResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "total_entries": obj.get("total_entries"),
-            "xcom_entries": [XComResponse.from_dict(_item) for _item in obj["xcom_entries"]] if obj.get("xcom_entries") is not None else None
+            "xcom_entries": [XComResponse.from_dict(_item) for _item in obj["xcom_entries"]] if obj.get("xcom_entries") is not None else None,
+            "total_entries": obj.get("total_entries")
         })
         return _obj
 

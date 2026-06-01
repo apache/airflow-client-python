@@ -27,9 +27,9 @@ class VersionInfo(BaseModel):
     """
     Version information serializer for responses.
     """ # noqa: E501
-    git_version: Optional[StrictStr] = None
     version: StrictStr
-    __properties: ClassVar[List[str]] = ["git_version", "version"]
+    git_version: Optional[StrictStr]
+    __properties: ClassVar[List[str]] = ["version", "git_version"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -70,6 +70,11 @@ class VersionInfo(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if git_version (nullable) is None
+        # and model_fields_set contains the field
+        if self.git_version is None and "git_version" in self.model_fields_set:
+            _dict['git_version'] = None
+
         return _dict
 
     @classmethod
@@ -82,8 +87,8 @@ class VersionInfo(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "git_version": obj.get("git_version"),
-            "version": obj.get("version")
+            "version": obj.get("version"),
+            "git_version": obj.get("git_version")
         })
         return _obj
 

@@ -1,32 +1,32 @@
 # DAGRunResponse
 
-DAG Run serializer for responses.
+Dag Run serializer for responses.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**bundle_version** | **str** |  | [optional] 
-**conf** | **Dict[str, object]** |  | [optional] 
-**dag_display_name** | **str** |  | 
-**dag_id** | **str** |  | 
 **dag_run_id** | **str** |  | 
-**dag_versions** | [**List[DagVersionResponse]**](DagVersionResponse.md) |  | 
-**data_interval_end** | **datetime** |  | [optional] 
-**data_interval_start** | **datetime** |  | [optional] 
-**duration** | **float** |  | [optional] 
-**end_date** | **datetime** |  | [optional] 
-**last_scheduling_decision** | **datetime** |  | [optional] 
-**logical_date** | **datetime** |  | [optional] 
-**note** | **str** |  | [optional] 
-**partition_key** | **str** |  | [optional] 
-**queued_at** | **datetime** |  | [optional] 
+**dag_id** | **str** |  | 
+**logical_date** | **datetime** |  | 
+**queued_at** | **datetime** |  | 
+**start_date** | **datetime** |  | 
+**end_date** | **datetime** |  | 
+**duration** | **float** |  | 
+**data_interval_start** | **datetime** |  | 
+**data_interval_end** | **datetime** |  | 
 **run_after** | **datetime** |  | 
+**last_scheduling_decision** | **datetime** |  | 
 **run_type** | [**DagRunType**](DagRunType.md) |  | 
-**start_date** | **datetime** |  | [optional] 
 **state** | [**DagRunState**](DagRunState.md) |  | 
-**triggered_by** | [**DagRunTriggeredByType**](DagRunTriggeredByType.md) |  | [optional] 
-**triggering_user_name** | **str** |  | [optional] 
+**triggered_by** | [**DagRunTriggeredByType**](DagRunTriggeredByType.md) |  | 
+**triggering_user_name** | **str** |  | 
+**conf** | **Dict[str, object]** |  | 
+**note** | **str** |  | 
+**dag_versions** | [**List[DagVersionResponse]**](DagVersionResponse.md) |  | 
+**bundle_version** | **str** |  | 
+**dag_display_name** | **str** |  | 
+**partition_key** | **str** |  | 
 
 ## Example
 

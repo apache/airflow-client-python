@@ -6,14 +6,14 @@ Dag Version serializer for responses.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**bundle_name** | **str** |  | [optional] 
-**bundle_url** | **str** |  | [optional] 
-**bundle_version** | **str** |  | [optional] 
-**created_at** | **datetime** |  | 
-**dag_display_name** | **str** |  | 
-**dag_id** | **str** |  | 
 **id** | **UUID** |  | 
 **version_number** | **int** |  | 
+**dag_id** | **str** |  | 
+**bundle_name** | **str** |  | 
+**bundle_version** | **str** |  | 
+**created_at** | **datetime** |  | 
+**dag_display_name** | **str** |  | 
+**bundle_url** | **str** |  | 
 
 ## Example
 

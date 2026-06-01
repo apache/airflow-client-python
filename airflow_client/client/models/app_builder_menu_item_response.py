@@ -27,11 +27,11 @@ class AppBuilderMenuItemResponse(BaseModel):
     """
     Serializer for AppBuilder Menu Item responses.
     """ # noqa: E501
-    category: Optional[StrictStr] = None
-    href: StrictStr
     name: StrictStr
+    href: StrictStr
+    category: Optional[StrictStr] = None
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["category", "href", "name"]
+    __properties: ClassVar[List[str]] = ["name", "href", "category"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -79,6 +79,11 @@ class AppBuilderMenuItemResponse(BaseModel):
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
+        # set to None if category (nullable) is None
+        # and model_fields_set contains the field
+        if self.category is None and "category" in self.model_fields_set:
+            _dict['category'] = None
+
         return _dict
 
     @classmethod
@@ -91,9 +96,9 @@ class AppBuilderMenuItemResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "category": obj.get("category"),
+            "name": obj.get("name"),
             "href": obj.get("href"),
-            "name": obj.get("name")
+            "category": obj.get("category")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

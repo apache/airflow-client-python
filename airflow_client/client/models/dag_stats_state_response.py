@@ -28,9 +28,9 @@ class DagStatsStateResponse(BaseModel):
     """
     DagStatsState serializer for responses.
     """ # noqa: E501
-    count: StrictInt
     state: DagRunState
-    __properties: ClassVar[List[str]] = ["count", "state"]
+    count: StrictInt
+    __properties: ClassVar[List[str]] = ["state", "count"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -83,8 +83,8 @@ class DagStatsStateResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "count": obj.get("count"),
-            "state": obj.get("state")
+            "state": obj.get("state"),
+            "count": obj.get("count")
         })
         return _obj
 

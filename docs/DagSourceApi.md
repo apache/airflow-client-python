@@ -89,9 +89,9 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
-**400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
+**400** | Bad Request |  -  |
 **404** | Not Found |  -  |
 **406** | Not Acceptable |  -  |
 **422** | Validation Error |  -  |

@@ -28,11 +28,11 @@ class TaskOutletAssetReference(BaseModel):
     """
     Task outlet reference serializer for assets.
     """ # noqa: E501
-    created_at: datetime
     dag_id: StrictStr
     task_id: StrictStr
+    created_at: datetime
     updated_at: datetime
-    __properties: ClassVar[List[str]] = ["created_at", "dag_id", "task_id", "updated_at"]
+    __properties: ClassVar[List[str]] = ["dag_id", "task_id", "created_at", "updated_at"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -85,9 +85,9 @@ class TaskOutletAssetReference(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "created_at": obj.get("created_at"),
             "dag_id": obj.get("dag_id"),
             "task_id": obj.get("task_id"),
+            "created_at": obj.get("created_at"),
             "updated_at": obj.get("updated_at")
         })
         return _obj

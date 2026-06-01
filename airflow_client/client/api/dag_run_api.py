@@ -380,7 +380,7 @@ class DagRunApi:
     ) -> None:
         """Delete Dag Run
 
-        Delete a DAG Run entry.
+        Delete a Dag Run entry.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -419,9 +419,9 @@ class DagRunApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '204': None,
-            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
+            '400': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
@@ -456,7 +456,7 @@ class DagRunApi:
     ) -> ApiResponse[None]:
         """Delete Dag Run
 
-        Delete a DAG Run entry.
+        Delete a Dag Run entry.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -495,9 +495,9 @@ class DagRunApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '204': None,
-            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
+            '400': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
@@ -532,7 +532,7 @@ class DagRunApi:
     ) -> RESTResponseType:
         """Delete Dag Run
 
-        Delete a DAG Run entry.
+        Delete a Dag Run entry.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -571,9 +571,9 @@ class DagRunApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '204': None,
-            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
+            '400': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
@@ -942,6 +942,7 @@ class DagRunApi:
     def get_dag_runs(
         self,
         dag_id: StrictStr,
+        cursor: Annotated[Optional[StrictStr], Field(description="Cursor for keyset-based pagination. Pass an empty string for the first page, then use ``next_cursor`` from the response. When ``cursor`` is provided, ``offset`` is ignored.")] = None,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         run_after_gte: Optional[datetime] = None,
@@ -969,15 +970,20 @@ class DagRunApi:
         updated_at_lte: Optional[datetime] = None,
         updated_at_lt: Optional[datetime] = None,
         conf_contains: Optional[StrictStr] = None,
-        run_type: Optional[List[StrictStr]] = None,
-        state: Optional[List[StrictStr]] = None,
-        dag_version: Optional[List[StrictInt]] = None,
+        run_type: Optional[List[Optional[StrictStr]]] = None,
+        state: Optional[List[Optional[StrictStr]]] = None,
+        dag_version: Optional[List[Optional[StrictInt]]] = None,
         bundle_version: Optional[StrictStr] = None,
-        order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, state, dag_id, run_id, logical_date, run_after, start_date, end_date, updated_at, conf, duration, dag_run_id`")] = None,
-        run_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
-        triggering_user_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
-        dag_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
-        partition_key_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
+        order_by: Annotated[Optional[List[Optional[StrictStr]]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, state, dag_id, run_id, logical_date, run_after, start_date, end_date, updated_at, conf, duration, dag_run_id`")] = None,
+        run_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``run_id_prefix_pattern`` parameter when possible.")] = None,
+        run_id_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.")] = None,
+        triggering_user_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``triggering_user_name_prefix_pattern`` parameter when possible.")] = None,
+        triggering_user_name_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.")] = None,
+        dag_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``dag_id_prefix_pattern`` parameter when possible.")] = None,
+        dag_id_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.")] = None,
+        partition_key_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``partition_key_prefix_pattern`` parameter when possible.")] = None,
+        partition_key_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.")] = None,
+        consuming_asset_pattern: Annotated[Optional[StrictStr], Field(description="Filter by consuming asset name or URI using pattern matching")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -993,10 +999,12 @@ class DagRunApi:
     ) -> DAGRunCollectionResponse:
         """Get Dag Runs
 
-        Get all DAG Runs.  This endpoint allows specifying `~` as the dag_id to retrieve Dag Runs for all DAGs.
+        Get all Dag Runs.  This endpoint allows specifying `~` as the dag_id to retrieve Dag Runs for all Dags.  Supports two pagination modes:  **Offset (default):** use `limit` and `offset` query parameters. Returns `total_entries`.  **Cursor:** pass `cursor` (empty string for the first page, then `next_cursor` from the response). When `cursor` is provided, `offset` is ignored and `total_entries` is not returned. ``next_cursor`` is ``null`` when there are no more pages; ``previous_cursor`` is ``null`` on the first page.
 
         :param dag_id: (required)
         :type dag_id: str
+        :param cursor: Cursor for keyset-based pagination. Pass an empty string for the first page, then use ``next_cursor`` from the response. When ``cursor`` is provided, ``offset`` is ignored.
+        :type cursor: str
         :param limit:
         :type limit: int
         :param offset:
@@ -1052,23 +1060,33 @@ class DagRunApi:
         :param conf_contains:
         :type conf_contains: str
         :param run_type:
-        :type run_type: List[str]
+        :type run_type: List[Optional[str]]
         :param state:
-        :type state: List[str]
+        :type state: List[Optional[str]]
         :param dag_version:
-        :type dag_version: List[int]
+        :type dag_version: List[Optional[int]]
         :param bundle_version:
         :type bundle_version: str
         :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, state, dag_id, run_id, logical_date, run_after, start_date, end_date, updated_at, conf, duration, dag_run_id`
-        :type order_by: List[str]
-        :param run_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :type order_by: List[Optional[str]]
+        :param run_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``run_id_prefix_pattern`` parameter when possible.
         :type run_id_pattern: str
-        :param triggering_user_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :param run_id_prefix_pattern: Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.
+        :type run_id_prefix_pattern: str
+        :param triggering_user_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``triggering_user_name_prefix_pattern`` parameter when possible.
         :type triggering_user_name_pattern: str
-        :param dag_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :param triggering_user_name_prefix_pattern: Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.
+        :type triggering_user_name_prefix_pattern: str
+        :param dag_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``dag_id_prefix_pattern`` parameter when possible.
         :type dag_id_pattern: str
-        :param partition_key_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :param dag_id_prefix_pattern: Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.
+        :type dag_id_prefix_pattern: str
+        :param partition_key_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``partition_key_prefix_pattern`` parameter when possible.
         :type partition_key_pattern: str
+        :param partition_key_prefix_pattern: Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.
+        :type partition_key_prefix_pattern: str
+        :param consuming_asset_pattern: Filter by consuming asset name or URI using pattern matching
+        :type consuming_asset_pattern: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1093,6 +1111,7 @@ class DagRunApi:
 
         _param = self._get_dag_runs_serialize(
             dag_id=dag_id,
+            cursor=cursor,
             limit=limit,
             offset=offset,
             run_after_gte=run_after_gte,
@@ -1126,9 +1145,14 @@ class DagRunApi:
             bundle_version=bundle_version,
             order_by=order_by,
             run_id_pattern=run_id_pattern,
+            run_id_prefix_pattern=run_id_prefix_pattern,
             triggering_user_name_pattern=triggering_user_name_pattern,
+            triggering_user_name_prefix_pattern=triggering_user_name_prefix_pattern,
             dag_id_pattern=dag_id_pattern,
+            dag_id_prefix_pattern=dag_id_prefix_pattern,
             partition_key_pattern=partition_key_pattern,
+            partition_key_prefix_pattern=partition_key_prefix_pattern,
+            consuming_asset_pattern=consuming_asset_pattern,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1157,6 +1181,7 @@ class DagRunApi:
     def get_dag_runs_with_http_info(
         self,
         dag_id: StrictStr,
+        cursor: Annotated[Optional[StrictStr], Field(description="Cursor for keyset-based pagination. Pass an empty string for the first page, then use ``next_cursor`` from the response. When ``cursor`` is provided, ``offset`` is ignored.")] = None,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         run_after_gte: Optional[datetime] = None,
@@ -1184,15 +1209,20 @@ class DagRunApi:
         updated_at_lte: Optional[datetime] = None,
         updated_at_lt: Optional[datetime] = None,
         conf_contains: Optional[StrictStr] = None,
-        run_type: Optional[List[StrictStr]] = None,
-        state: Optional[List[StrictStr]] = None,
-        dag_version: Optional[List[StrictInt]] = None,
+        run_type: Optional[List[Optional[StrictStr]]] = None,
+        state: Optional[List[Optional[StrictStr]]] = None,
+        dag_version: Optional[List[Optional[StrictInt]]] = None,
         bundle_version: Optional[StrictStr] = None,
-        order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, state, dag_id, run_id, logical_date, run_after, start_date, end_date, updated_at, conf, duration, dag_run_id`")] = None,
-        run_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
-        triggering_user_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
-        dag_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
-        partition_key_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
+        order_by: Annotated[Optional[List[Optional[StrictStr]]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, state, dag_id, run_id, logical_date, run_after, start_date, end_date, updated_at, conf, duration, dag_run_id`")] = None,
+        run_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``run_id_prefix_pattern`` parameter when possible.")] = None,
+        run_id_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.")] = None,
+        triggering_user_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``triggering_user_name_prefix_pattern`` parameter when possible.")] = None,
+        triggering_user_name_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.")] = None,
+        dag_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``dag_id_prefix_pattern`` parameter when possible.")] = None,
+        dag_id_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.")] = None,
+        partition_key_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``partition_key_prefix_pattern`` parameter when possible.")] = None,
+        partition_key_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.")] = None,
+        consuming_asset_pattern: Annotated[Optional[StrictStr], Field(description="Filter by consuming asset name or URI using pattern matching")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1208,10 +1238,12 @@ class DagRunApi:
     ) -> ApiResponse[DAGRunCollectionResponse]:
         """Get Dag Runs
 
-        Get all DAG Runs.  This endpoint allows specifying `~` as the dag_id to retrieve Dag Runs for all DAGs.
+        Get all Dag Runs.  This endpoint allows specifying `~` as the dag_id to retrieve Dag Runs for all Dags.  Supports two pagination modes:  **Offset (default):** use `limit` and `offset` query parameters. Returns `total_entries`.  **Cursor:** pass `cursor` (empty string for the first page, then `next_cursor` from the response). When `cursor` is provided, `offset` is ignored and `total_entries` is not returned. ``next_cursor`` is ``null`` when there are no more pages; ``previous_cursor`` is ``null`` on the first page.
 
         :param dag_id: (required)
         :type dag_id: str
+        :param cursor: Cursor for keyset-based pagination. Pass an empty string for the first page, then use ``next_cursor`` from the response. When ``cursor`` is provided, ``offset`` is ignored.
+        :type cursor: str
         :param limit:
         :type limit: int
         :param offset:
@@ -1267,23 +1299,33 @@ class DagRunApi:
         :param conf_contains:
         :type conf_contains: str
         :param run_type:
-        :type run_type: List[str]
+        :type run_type: List[Optional[str]]
         :param state:
-        :type state: List[str]
+        :type state: List[Optional[str]]
         :param dag_version:
-        :type dag_version: List[int]
+        :type dag_version: List[Optional[int]]
         :param bundle_version:
         :type bundle_version: str
         :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, state, dag_id, run_id, logical_date, run_after, start_date, end_date, updated_at, conf, duration, dag_run_id`
-        :type order_by: List[str]
-        :param run_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :type order_by: List[Optional[str]]
+        :param run_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``run_id_prefix_pattern`` parameter when possible.
         :type run_id_pattern: str
-        :param triggering_user_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :param run_id_prefix_pattern: Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.
+        :type run_id_prefix_pattern: str
+        :param triggering_user_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``triggering_user_name_prefix_pattern`` parameter when possible.
         :type triggering_user_name_pattern: str
-        :param dag_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :param triggering_user_name_prefix_pattern: Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.
+        :type triggering_user_name_prefix_pattern: str
+        :param dag_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``dag_id_prefix_pattern`` parameter when possible.
         :type dag_id_pattern: str
-        :param partition_key_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :param dag_id_prefix_pattern: Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.
+        :type dag_id_prefix_pattern: str
+        :param partition_key_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``partition_key_prefix_pattern`` parameter when possible.
         :type partition_key_pattern: str
+        :param partition_key_prefix_pattern: Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.
+        :type partition_key_prefix_pattern: str
+        :param consuming_asset_pattern: Filter by consuming asset name or URI using pattern matching
+        :type consuming_asset_pattern: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1308,6 +1350,7 @@ class DagRunApi:
 
         _param = self._get_dag_runs_serialize(
             dag_id=dag_id,
+            cursor=cursor,
             limit=limit,
             offset=offset,
             run_after_gte=run_after_gte,
@@ -1341,9 +1384,14 @@ class DagRunApi:
             bundle_version=bundle_version,
             order_by=order_by,
             run_id_pattern=run_id_pattern,
+            run_id_prefix_pattern=run_id_prefix_pattern,
             triggering_user_name_pattern=triggering_user_name_pattern,
+            triggering_user_name_prefix_pattern=triggering_user_name_prefix_pattern,
             dag_id_pattern=dag_id_pattern,
+            dag_id_prefix_pattern=dag_id_prefix_pattern,
             partition_key_pattern=partition_key_pattern,
+            partition_key_prefix_pattern=partition_key_prefix_pattern,
+            consuming_asset_pattern=consuming_asset_pattern,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1372,6 +1420,7 @@ class DagRunApi:
     def get_dag_runs_without_preload_content(
         self,
         dag_id: StrictStr,
+        cursor: Annotated[Optional[StrictStr], Field(description="Cursor for keyset-based pagination. Pass an empty string for the first page, then use ``next_cursor`` from the response. When ``cursor`` is provided, ``offset`` is ignored.")] = None,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         run_after_gte: Optional[datetime] = None,
@@ -1399,15 +1448,20 @@ class DagRunApi:
         updated_at_lte: Optional[datetime] = None,
         updated_at_lt: Optional[datetime] = None,
         conf_contains: Optional[StrictStr] = None,
-        run_type: Optional[List[StrictStr]] = None,
-        state: Optional[List[StrictStr]] = None,
-        dag_version: Optional[List[StrictInt]] = None,
+        run_type: Optional[List[Optional[StrictStr]]] = None,
+        state: Optional[List[Optional[StrictStr]]] = None,
+        dag_version: Optional[List[Optional[StrictInt]]] = None,
         bundle_version: Optional[StrictStr] = None,
-        order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, state, dag_id, run_id, logical_date, run_after, start_date, end_date, updated_at, conf, duration, dag_run_id`")] = None,
-        run_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
-        triggering_user_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
-        dag_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
-        partition_key_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
+        order_by: Annotated[Optional[List[Optional[StrictStr]]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, state, dag_id, run_id, logical_date, run_after, start_date, end_date, updated_at, conf, duration, dag_run_id`")] = None,
+        run_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``run_id_prefix_pattern`` parameter when possible.")] = None,
+        run_id_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.")] = None,
+        triggering_user_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``triggering_user_name_prefix_pattern`` parameter when possible.")] = None,
+        triggering_user_name_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.")] = None,
+        dag_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``dag_id_prefix_pattern`` parameter when possible.")] = None,
+        dag_id_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.")] = None,
+        partition_key_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``partition_key_prefix_pattern`` parameter when possible.")] = None,
+        partition_key_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.")] = None,
+        consuming_asset_pattern: Annotated[Optional[StrictStr], Field(description="Filter by consuming asset name or URI using pattern matching")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1423,10 +1477,12 @@ class DagRunApi:
     ) -> RESTResponseType:
         """Get Dag Runs
 
-        Get all DAG Runs.  This endpoint allows specifying `~` as the dag_id to retrieve Dag Runs for all DAGs.
+        Get all Dag Runs.  This endpoint allows specifying `~` as the dag_id to retrieve Dag Runs for all Dags.  Supports two pagination modes:  **Offset (default):** use `limit` and `offset` query parameters. Returns `total_entries`.  **Cursor:** pass `cursor` (empty string for the first page, then `next_cursor` from the response). When `cursor` is provided, `offset` is ignored and `total_entries` is not returned. ``next_cursor`` is ``null`` when there are no more pages; ``previous_cursor`` is ``null`` on the first page.
 
         :param dag_id: (required)
         :type dag_id: str
+        :param cursor: Cursor for keyset-based pagination. Pass an empty string for the first page, then use ``next_cursor`` from the response. When ``cursor`` is provided, ``offset`` is ignored.
+        :type cursor: str
         :param limit:
         :type limit: int
         :param offset:
@@ -1482,23 +1538,33 @@ class DagRunApi:
         :param conf_contains:
         :type conf_contains: str
         :param run_type:
-        :type run_type: List[str]
+        :type run_type: List[Optional[str]]
         :param state:
-        :type state: List[str]
+        :type state: List[Optional[str]]
         :param dag_version:
-        :type dag_version: List[int]
+        :type dag_version: List[Optional[int]]
         :param bundle_version:
         :type bundle_version: str
         :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, state, dag_id, run_id, logical_date, run_after, start_date, end_date, updated_at, conf, duration, dag_run_id`
-        :type order_by: List[str]
-        :param run_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :type order_by: List[Optional[str]]
+        :param run_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``run_id_prefix_pattern`` parameter when possible.
         :type run_id_pattern: str
-        :param triggering_user_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :param run_id_prefix_pattern: Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.
+        :type run_id_prefix_pattern: str
+        :param triggering_user_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``triggering_user_name_prefix_pattern`` parameter when possible.
         :type triggering_user_name_pattern: str
-        :param dag_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :param triggering_user_name_prefix_pattern: Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.
+        :type triggering_user_name_prefix_pattern: str
+        :param dag_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``dag_id_prefix_pattern`` parameter when possible.
         :type dag_id_pattern: str
-        :param partition_key_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :param dag_id_prefix_pattern: Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.
+        :type dag_id_prefix_pattern: str
+        :param partition_key_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``partition_key_prefix_pattern`` parameter when possible.
         :type partition_key_pattern: str
+        :param partition_key_prefix_pattern: Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.
+        :type partition_key_prefix_pattern: str
+        :param consuming_asset_pattern: Filter by consuming asset name or URI using pattern matching
+        :type consuming_asset_pattern: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1523,6 +1589,7 @@ class DagRunApi:
 
         _param = self._get_dag_runs_serialize(
             dag_id=dag_id,
+            cursor=cursor,
             limit=limit,
             offset=offset,
             run_after_gte=run_after_gte,
@@ -1556,9 +1623,14 @@ class DagRunApi:
             bundle_version=bundle_version,
             order_by=order_by,
             run_id_pattern=run_id_pattern,
+            run_id_prefix_pattern=run_id_prefix_pattern,
             triggering_user_name_pattern=triggering_user_name_pattern,
+            triggering_user_name_prefix_pattern=triggering_user_name_prefix_pattern,
             dag_id_pattern=dag_id_pattern,
+            dag_id_prefix_pattern=dag_id_prefix_pattern,
             partition_key_pattern=partition_key_pattern,
+            partition_key_prefix_pattern=partition_key_prefix_pattern,
+            consuming_asset_pattern=consuming_asset_pattern,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1582,6 +1654,7 @@ class DagRunApi:
     def _get_dag_runs_serialize(
         self,
         dag_id,
+        cursor,
         limit,
         offset,
         run_after_gte,
@@ -1615,9 +1688,14 @@ class DagRunApi:
         bundle_version,
         order_by,
         run_id_pattern,
+        run_id_prefix_pattern,
         triggering_user_name_pattern,
+        triggering_user_name_prefix_pattern,
         dag_id_pattern,
+        dag_id_prefix_pattern,
         partition_key_pattern,
+        partition_key_prefix_pattern,
+        consuming_asset_pattern,
         _request_auth,
         _content_type,
         _headers,
@@ -1646,6 +1724,10 @@ class DagRunApi:
         if dag_id is not None:
             _path_params['dag_id'] = dag_id
         # process the query parameters
+        if cursor is not None:
+            
+            _query_params.append(('cursor', cursor))
+            
         if limit is not None:
             
             _query_params.append(('limit', limit))
@@ -1958,17 +2040,37 @@ class DagRunApi:
             
             _query_params.append(('run_id_pattern', run_id_pattern))
             
+        if run_id_prefix_pattern is not None:
+            
+            _query_params.append(('run_id_prefix_pattern', run_id_prefix_pattern))
+            
         if triggering_user_name_pattern is not None:
             
             _query_params.append(('triggering_user_name_pattern', triggering_user_name_pattern))
+            
+        if triggering_user_name_prefix_pattern is not None:
+            
+            _query_params.append(('triggering_user_name_prefix_pattern', triggering_user_name_prefix_pattern))
             
         if dag_id_pattern is not None:
             
             _query_params.append(('dag_id_pattern', dag_id_pattern))
             
+        if dag_id_prefix_pattern is not None:
+            
+            _query_params.append(('dag_id_prefix_pattern', dag_id_prefix_pattern))
+            
         if partition_key_pattern is not None:
             
             _query_params.append(('partition_key_pattern', partition_key_pattern))
+            
+        if partition_key_prefix_pattern is not None:
+            
+            _query_params.append(('partition_key_prefix_pattern', partition_key_prefix_pattern))
+            
+        if consuming_asset_pattern is not None:
+            
+            _query_params.append(('consuming_asset_pattern', consuming_asset_pattern))
             
         # process the header parameters
         # process the form parameters
@@ -2028,7 +2130,7 @@ class DagRunApi:
     ) -> DAGRunCollectionResponse:
         """Get List Dag Runs Batch
 
-        Get a list of DAG Runs.
+        Get a list of Dag Runs.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -2103,7 +2205,7 @@ class DagRunApi:
     ) -> ApiResponse[DAGRunCollectionResponse]:
         """Get List Dag Runs Batch
 
-        Get a list of DAG Runs.
+        Get a list of Dag Runs.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -2178,7 +2280,7 @@ class DagRunApi:
     ) -> RESTResponseType:
         """Get List Dag Runs Batch
 
-        Get a list of DAG Runs.
+        Get a list of Dag Runs.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -2621,7 +2723,7 @@ class DagRunApi:
     ) -> DAGRunResponse:
         """Patch Dag Run
 
-        Modify a DAG Run.
+        Modify a Dag Run.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -2666,9 +2768,9 @@ class DagRunApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DAGRunResponse",
-            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
+            '400': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
@@ -2705,7 +2807,7 @@ class DagRunApi:
     ) -> ApiResponse[DAGRunResponse]:
         """Patch Dag Run
 
-        Modify a DAG Run.
+        Modify a Dag Run.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -2750,9 +2852,9 @@ class DagRunApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DAGRunResponse",
-            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
+            '400': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
@@ -2789,7 +2891,7 @@ class DagRunApi:
     ) -> RESTResponseType:
         """Patch Dag Run
 
-        Modify a DAG Run.
+        Modify a Dag Run.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -2834,9 +2936,9 @@ class DagRunApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DAGRunResponse",
-            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
+            '400': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
@@ -2957,7 +3059,7 @@ class DagRunApi:
     ) -> DAGRunResponse:
         """Trigger Dag Run
 
-        Trigger a DAG.
+        Trigger a Dag.
 
         :param dag_id: (required)
         :type dag_id: object
@@ -2996,9 +3098,9 @@ class DagRunApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DAGRunResponse",
-            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
+            '400': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
             '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
@@ -3034,7 +3136,7 @@ class DagRunApi:
     ) -> ApiResponse[DAGRunResponse]:
         """Trigger Dag Run
 
-        Trigger a DAG.
+        Trigger a Dag.
 
         :param dag_id: (required)
         :type dag_id: object
@@ -3073,9 +3175,9 @@ class DagRunApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DAGRunResponse",
-            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
+            '400': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
             '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
@@ -3111,7 +3213,7 @@ class DagRunApi:
     ) -> RESTResponseType:
         """Trigger Dag Run
 
-        Trigger a DAG.
+        Trigger a Dag.
 
         :param dag_id: (required)
         :type dag_id: object
@@ -3150,9 +3252,9 @@ class DagRunApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DAGRunResponse",
-            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
+            '400': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
             '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
@@ -3267,7 +3369,7 @@ class DagRunApi:
     ) -> object:
         """Experimental: Wait for a dag run to complete, and return task results if requested.
 
-        🚧 This is an experimental endpoint and may change or be removed without notice.Successful response are streamed as newline-delimited JSON (NDJSON). Each line is a JSON object representing the DAG run state.
+        🚧 This is an experimental endpoint and may change or be removed without notice.Successful response are streamed as newline-delimited JSON (NDJSON). Each line is a JSON object representing the Dag run state.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -3350,7 +3452,7 @@ class DagRunApi:
     ) -> ApiResponse[object]:
         """Experimental: Wait for a dag run to complete, and return task results if requested.
 
-        🚧 This is an experimental endpoint and may change or be removed without notice.Successful response are streamed as newline-delimited JSON (NDJSON). Each line is a JSON object representing the DAG run state.
+        🚧 This is an experimental endpoint and may change or be removed without notice.Successful response are streamed as newline-delimited JSON (NDJSON). Each line is a JSON object representing the Dag run state.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -3433,7 +3535,7 @@ class DagRunApi:
     ) -> RESTResponseType:
         """Experimental: Wait for a dag run to complete, and return task results if requested.
 
-        🚧 This is an experimental endpoint and may change or be removed without notice.Successful response are streamed as newline-delimited JSON (NDJSON). Each line is a JSON object representing the DAG run state.
+        🚧 This is an experimental endpoint and may change or be removed without notice.Successful response are streamed as newline-delimited JSON (NDJSON). Each line is a JSON object representing the Dag run state.
 
         :param dag_id: (required)
         :type dag_id: str

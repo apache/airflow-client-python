@@ -1,57 +1,57 @@
 # DAGDetailsResponse
 
-Specific serializer for DAG Details responses.
+Specific serializer for Dag Details responses.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**active_runs_count** | **int** |  | [optional] [default to 0]
-**allowed_run_types** | [**List[DagRunType]**](DagRunType.md) |  | [optional] 
-**asset_expression** | **Dict[str, object]** |  | [optional] 
-**bundle_name** | **str** |  | [optional] 
-**bundle_version** | **str** |  | [optional] 
-**catchup** | **bool** |  | 
-**concurrency** | **int** | Return max_active_tasks as concurrency.  Deprecated: Use max_active_tasks instead. | [readonly] 
-**dag_display_name** | **str** |  | 
 **dag_id** | **str** |  | 
-**dag_run_timeout** | **str** |  | [optional] 
-**default_args** | **Dict[str, object]** |  | [optional] 
-**description** | **str** |  | [optional] 
-**doc_md** | **str** |  | [optional] 
-**end_date** | **datetime** |  | [optional] 
-**file_token** | **str** | Return file token. | [readonly] 
-**fileloc** | **str** |  | 
-**has_import_errors** | **bool** |  | 
-**has_task_concurrency_limits** | **bool** |  | 
-**is_favorite** | **bool** |  | [optional] [default to False]
+**dag_display_name** | **str** |  | 
 **is_paused** | **bool** |  | 
-**is_paused_upon_creation** | **bool** |  | [optional] 
 **is_stale** | **bool** |  | 
-**last_expired** | **datetime** |  | [optional] 
-**last_parse_duration** | **float** |  | [optional] 
-**last_parsed** | **datetime** |  | [optional] 
-**last_parsed_time** | **datetime** |  | [optional] 
-**latest_dag_version** | [**DagVersionResponse**](DagVersionResponse.md) |  | [optional] 
-**max_active_runs** | **int** |  | [optional] 
-**max_active_tasks** | **int** |  | 
-**max_consecutive_failed_dag_runs** | **int** |  | 
-**next_dagrun_data_interval_end** | **datetime** |  | [optional] 
-**next_dagrun_data_interval_start** | **datetime** |  | [optional] 
-**next_dagrun_logical_date** | **datetime** |  | [optional] 
-**next_dagrun_run_after** | **datetime** |  | [optional] 
-**owner_links** | **Dict[str, str]** |  | [optional] 
-**owners** | **List[str]** |  | 
-**params** | **Dict[str, object]** |  | [optional] 
-**relative_fileloc** | **str** |  | [optional] 
-**render_template_as_native_obj** | **bool** |  | 
-**start_date** | **datetime** |  | [optional] 
-**tags** | [**List[DagTagResponse]**](DagTagResponse.md) |  | 
-**template_search_path** | **List[str]** |  | [optional] 
-**timetable_description** | **str** |  | [optional] 
+**last_parsed_time** | **datetime** |  | 
+**last_parse_duration** | **float** |  | 
+**last_expired** | **datetime** |  | 
+**bundle_name** | **str** |  | 
+**bundle_version** | **str** |  | 
+**relative_fileloc** | **str** |  | 
+**fileloc** | **str** |  | 
+**description** | **str** |  | 
+**timetable_summary** | **str** |  | 
+**timetable_description** | **str** |  | 
 **timetable_partitioned** | **bool** |  | 
-**timetable_summary** | **str** |  | [optional] 
-**timezone** | **str** |  | [optional] 
+**tags** | [**List[DagTagResponse]**](DagTagResponse.md) |  | 
+**max_active_tasks** | **int** |  | 
+**max_active_runs** | **int** |  | 
+**max_consecutive_failed_dag_runs** | **int** |  | 
+**has_task_concurrency_limits** | **bool** |  | 
+**has_import_errors** | **bool** |  | 
+**next_dagrun_logical_date** | **datetime** |  | 
+**next_dagrun_data_interval_start** | **datetime** |  | 
+**next_dagrun_data_interval_end** | **datetime** |  | 
+**next_dagrun_run_after** | **datetime** |  | 
+**allowed_run_types** | [**List[DagRunType]**](DagRunType.md) |  | 
+**owners** | **List[str]** |  | 
+**catchup** | **bool** |  | 
+**dag_run_timeout** | **str** |  | 
+**asset_expression** | **Dict[str, object]** |  | 
+**doc_md** | **str** |  | 
+**start_date** | **datetime** |  | 
+**end_date** | **datetime** |  | 
+**is_paused_upon_creation** | **bool** |  | 
+**params** | **Dict[str, object]** |  | 
+**render_template_as_native_obj** | **bool** |  | 
+**template_search_path** | **List[str]** |  | 
+**timezone** | **str** |  | 
+**last_parsed** | **datetime** |  | 
+**default_args** | **Dict[str, object]** |  | 
+**owner_links** | **Dict[str, str]** |  | [optional] 
+**is_favorite** | **bool** |  | [optional] [default to False]
+**active_runs_count** | **int** |  | [optional] [default to 0]
+**file_token** | **str** | Return file token. | [readonly] 
+**concurrency** | **int** | Return max_active_tasks as concurrency.  Deprecated: Use max_active_tasks instead. | [readonly] 
+**latest_dag_version** | [**DagVersionResponse**](DagVersionResponse.md) | Return the latest DagVersion. | [readonly] 
 
 ## Example
 

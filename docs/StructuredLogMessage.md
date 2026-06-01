@@ -6,8 +6,8 @@ An individual log message.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**event** | **str** |  | 
 **timestamp** | **datetime** |  | [optional] 
+**event** | **str** |  | 
 
 ## Example
 

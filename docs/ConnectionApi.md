@@ -343,7 +343,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_connections**
-> ConnectionCollectionResponse get_connections(limit=limit, offset=offset, order_by=order_by, connection_id_pattern=connection_id_pattern)
+> ConnectionCollectionResponse get_connections(limit=limit, offset=offset, order_by=order_by, connection_id_pattern=connection_id_pattern, connection_id_prefix_pattern=connection_id_prefix_pattern)
 
 Get Connections
 
@@ -384,12 +384,13 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     api_instance = airflow_client.client.ConnectionApi(api_client)
     limit = 50 # int |  (optional) (default to 50)
     offset = 0 # int |  (optional) (default to 0)
-    order_by = ["id"] # List[str] | Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `conn_id, conn_type, description, host, port, id, team_name, connection_id` (optional) (default to ["id"])
-    connection_id_pattern = 'connection_id_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported. (optional)
+    order_by = ["id"] # List[Optional[str]] | Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `conn_id, conn_type, description, host, port, id, team_name, connection_id` (optional) (default to ["id"])
+    connection_id_pattern = 'connection_id_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``connection_id_prefix_pattern`` parameter when possible. (optional)
+    connection_id_prefix_pattern = 'connection_id_prefix_pattern_example' # str | Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`. (optional)
 
     try:
         # Get Connections
-        api_response = api_instance.get_connections(limit=limit, offset=offset, order_by=order_by, connection_id_pattern=connection_id_pattern)
+        api_response = api_instance.get_connections(limit=limit, offset=offset, order_by=order_by, connection_id_pattern=connection_id_pattern, connection_id_prefix_pattern=connection_id_prefix_pattern)
         print("The response of ConnectionApi->get_connections:\n")
         pprint(api_response)
     except Exception as e:
@@ -405,8 +406,9 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **int**|  | [optional] [default to 50]
  **offset** | **int**|  | [optional] [default to 0]
- **order_by** | [**List[str]**](str.md)| Attributes to order by, multi criteria sort is supported. Prefix with &#x60;-&#x60; for descending order. Supported attributes: &#x60;conn_id, conn_type, description, host, port, id, team_name, connection_id&#x60; | [optional] [default to [&quot;id&quot;]]
- **connection_id_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). or the pipe &#x60;|&#x60; operator for OR logic (e.g. &#x60;dag1 | dag2&#x60;). Regular expressions are **not** supported. | [optional] 
+ **order_by** | [**List[Optional[str]]**](str.md)| Attributes to order by, multi criteria sort is supported. Prefix with &#x60;-&#x60; for descending order. Supported attributes: &#x60;conn_id, conn_type, description, host, port, id, team_name, connection_id&#x60; | [optional] [default to [&quot;id&quot;]]
+ **connection_id_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). or the pipe &#x60;|&#x60; operator for OR logic (e.g. &#x60;dag1 | dag2&#x60;). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as &#x60;&#x60;ILIKE &#39;%term%&#39;&#x60;&#x60; and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent &#x60;&#x60;connection_id_prefix_pattern&#x60;&#x60; parameter when possible. | [optional] 
+ **connection_id_prefix_pattern** | **str**| Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe &#x60;|&#x60; operator for OR logic (e.g. &#x60;dag1|dag2&#x60;). Use &#x60;~&#x60; to match all. Wildcard characters (&#x60;%&#x60;, &#x60;_&#x60;) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. &#x60;test_&#x60; effectively matches items starting with &#x60;test&#x60;, and &#x60;s3://&#x60; matches items starting with &#x60;s3&#x60;. | [optional] 
 
 ### Return type
 
@@ -476,7 +478,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     api_instance = airflow_client.client.ConnectionApi(api_client)
     connection_id = 'connection_id_example' # str | 
     connection_body = airflow_client.client.ConnectionBody() # ConnectionBody | 
-    update_mask = ['update_mask_example'] # List[str] |  (optional)
+    update_mask = ['update_mask_example'] # List[Optional[str]] |  (optional)
 
     try:
         # Patch Connection
@@ -496,7 +498,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **connection_id** | **str**|  | 
  **connection_body** | [**ConnectionBody**](ConnectionBody.md)|  | 
- **update_mask** | [**List[str]**](str.md)|  | [optional] 
+ **update_mask** | [**List[Optional[str]]**](str.md)|  | [optional] 
 
 ### Return type
 
@@ -516,9 +518,9 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
-**400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
+**400** | Bad Request |  -  |
 **404** | Not Found |  -  |
 **422** | Validation Error |  -  |
 

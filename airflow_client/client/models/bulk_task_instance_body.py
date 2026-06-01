@@ -29,17 +29,17 @@ class BulkTaskInstanceBody(BaseModel):
     """
     Request body for bulk update, and delete task instances.
     """ # noqa: E501
-    dag_id: Optional[StrictStr] = None
-    dag_run_id: Optional[StrictStr] = None
+    new_state: Optional[TaskInstanceState] = None
+    note: Optional[Annotated[str, Field(strict=True, max_length=1000)]] = None
+    include_upstream: Optional[StrictBool] = False
     include_downstream: Optional[StrictBool] = False
     include_future: Optional[StrictBool] = False
     include_past: Optional[StrictBool] = False
-    include_upstream: Optional[StrictBool] = False
-    map_index: Optional[StrictInt] = None
-    new_state: Optional[TaskInstanceState] = None
-    note: Optional[Annotated[str, Field(strict=True, max_length=1000)]] = None
     task_id: StrictStr
-    __properties: ClassVar[List[str]] = ["dag_id", "dag_run_id", "include_downstream", "include_future", "include_past", "include_upstream", "map_index", "new_state", "note", "task_id"]
+    map_index: Optional[StrictInt] = None
+    dag_id: Optional[StrictStr] = None
+    dag_run_id: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["new_state", "note", "include_upstream", "include_downstream", "include_future", "include_past", "task_id", "map_index", "dag_id", "dag_run_id"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -80,6 +80,31 @@ class BulkTaskInstanceBody(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if new_state (nullable) is None
+        # and model_fields_set contains the field
+        if self.new_state is None and "new_state" in self.model_fields_set:
+            _dict['new_state'] = None
+
+        # set to None if note (nullable) is None
+        # and model_fields_set contains the field
+        if self.note is None and "note" in self.model_fields_set:
+            _dict['note'] = None
+
+        # set to None if map_index (nullable) is None
+        # and model_fields_set contains the field
+        if self.map_index is None and "map_index" in self.model_fields_set:
+            _dict['map_index'] = None
+
+        # set to None if dag_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.dag_id is None and "dag_id" in self.model_fields_set:
+            _dict['dag_id'] = None
+
+        # set to None if dag_run_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.dag_run_id is None and "dag_run_id" in self.model_fields_set:
+            _dict['dag_run_id'] = None
+
         return _dict
 
     @classmethod
@@ -92,16 +117,16 @@ class BulkTaskInstanceBody(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "dag_id": obj.get("dag_id"),
-            "dag_run_id": obj.get("dag_run_id"),
+            "new_state": obj.get("new_state"),
+            "note": obj.get("note"),
+            "include_upstream": obj.get("include_upstream") if obj.get("include_upstream") is not None else False,
             "include_downstream": obj.get("include_downstream") if obj.get("include_downstream") is not None else False,
             "include_future": obj.get("include_future") if obj.get("include_future") is not None else False,
             "include_past": obj.get("include_past") if obj.get("include_past") is not None else False,
-            "include_upstream": obj.get("include_upstream") if obj.get("include_upstream") is not None else False,
+            "task_id": obj.get("task_id"),
             "map_index": obj.get("map_index"),
-            "new_state": obj.get("new_state"),
-            "note": obj.get("note"),
-            "task_id": obj.get("task_id")
+            "dag_id": obj.get("dag_id"),
+            "dag_run_id": obj.get("dag_run_id")
         })
         return _obj
 

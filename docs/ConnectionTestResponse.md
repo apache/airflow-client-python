@@ -6,8 +6,8 @@ Connection Test serializer for responses.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**message** | **str** |  | 
 **status** | **bool** |  | 
+**message** | **str** |  | 
 
 ## Example
 

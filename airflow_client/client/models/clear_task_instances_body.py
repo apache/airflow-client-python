@@ -29,21 +29,21 @@ class ClearTaskInstancesBody(BaseModel):
     """
     Request body for Clear Task Instances endpoint.
     """ # noqa: E501
-    dag_run_id: Optional[StrictStr] = None
     dry_run: Optional[StrictBool] = True
+    start_date: Optional[datetime] = None
     end_date: Optional[datetime] = None
+    only_failed: Optional[StrictBool] = True
+    only_running: Optional[StrictBool] = False
+    reset_dag_runs: Optional[StrictBool] = True
+    task_ids: Optional[List[ClearTaskInstancesBodyTaskIdsInner]] = Field(default=None, description="A list of `task_id` or [`task_id`, `map_index`]. If only the `task_id` is provided for a mapped task, all of its map indices will be targeted.")
+    dag_run_id: Optional[StrictStr] = None
+    include_upstream: Optional[StrictBool] = False
     include_downstream: Optional[StrictBool] = False
     include_future: Optional[StrictBool] = False
     include_past: Optional[StrictBool] = False
-    include_upstream: Optional[StrictBool] = False
-    only_failed: Optional[StrictBool] = True
-    only_running: Optional[StrictBool] = False
-    prevent_running_task: Optional[StrictBool] = False
-    reset_dag_runs: Optional[StrictBool] = True
     run_on_latest_version: Optional[StrictBool] = Field(default=False, description="(Experimental) Run on the latest bundle version of the dag after clearing the task instances.")
-    start_date: Optional[datetime] = None
-    task_ids: Optional[List[ClearTaskInstancesBodyTaskIdsInner]] = None
-    __properties: ClassVar[List[str]] = ["dag_run_id", "dry_run", "end_date", "include_downstream", "include_future", "include_past", "include_upstream", "only_failed", "only_running", "prevent_running_task", "reset_dag_runs", "run_on_latest_version", "start_date", "task_ids"]
+    prevent_running_task: Optional[StrictBool] = False
+    __properties: ClassVar[List[str]] = ["dry_run", "start_date", "end_date", "only_failed", "only_running", "reset_dag_runs", "task_ids", "dag_run_id", "include_upstream", "include_downstream", "include_future", "include_past", "run_on_latest_version", "prevent_running_task"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -91,6 +91,26 @@ class ClearTaskInstancesBody(BaseModel):
                 if _item_task_ids:
                     _items.append(_item_task_ids.to_dict())
             _dict['task_ids'] = _items
+        # set to None if start_date (nullable) is None
+        # and model_fields_set contains the field
+        if self.start_date is None and "start_date" in self.model_fields_set:
+            _dict['start_date'] = None
+
+        # set to None if end_date (nullable) is None
+        # and model_fields_set contains the field
+        if self.end_date is None and "end_date" in self.model_fields_set:
+            _dict['end_date'] = None
+
+        # set to None if task_ids (nullable) is None
+        # and model_fields_set contains the field
+        if self.task_ids is None and "task_ids" in self.model_fields_set:
+            _dict['task_ids'] = None
+
+        # set to None if dag_run_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.dag_run_id is None and "dag_run_id" in self.model_fields_set:
+            _dict['dag_run_id'] = None
+
         return _dict
 
     @classmethod
@@ -103,20 +123,20 @@ class ClearTaskInstancesBody(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "dag_run_id": obj.get("dag_run_id"),
             "dry_run": obj.get("dry_run") if obj.get("dry_run") is not None else True,
+            "start_date": obj.get("start_date"),
             "end_date": obj.get("end_date"),
+            "only_failed": obj.get("only_failed") if obj.get("only_failed") is not None else True,
+            "only_running": obj.get("only_running") if obj.get("only_running") is not None else False,
+            "reset_dag_runs": obj.get("reset_dag_runs") if obj.get("reset_dag_runs") is not None else True,
+            "task_ids": [ClearTaskInstancesBodyTaskIdsInner.from_dict(_item) for _item in obj["task_ids"]] if obj.get("task_ids") is not None else None,
+            "dag_run_id": obj.get("dag_run_id"),
+            "include_upstream": obj.get("include_upstream") if obj.get("include_upstream") is not None else False,
             "include_downstream": obj.get("include_downstream") if obj.get("include_downstream") is not None else False,
             "include_future": obj.get("include_future") if obj.get("include_future") is not None else False,
             "include_past": obj.get("include_past") if obj.get("include_past") is not None else False,
-            "include_upstream": obj.get("include_upstream") if obj.get("include_upstream") is not None else False,
-            "only_failed": obj.get("only_failed") if obj.get("only_failed") is not None else True,
-            "only_running": obj.get("only_running") if obj.get("only_running") is not None else False,
-            "prevent_running_task": obj.get("prevent_running_task") if obj.get("prevent_running_task") is not None else False,
-            "reset_dag_runs": obj.get("reset_dag_runs") if obj.get("reset_dag_runs") is not None else True,
             "run_on_latest_version": obj.get("run_on_latest_version") if obj.get("run_on_latest_version") is not None else False,
-            "start_date": obj.get("start_date"),
-            "task_ids": [ClearTaskInstancesBodyTaskIdsInner.from_dict(_item) for _item in obj["task_ids"]] if obj.get("task_ids") is not None else None
+            "prevent_running_task": obj.get("prevent_running_task") if obj.get("prevent_running_task") is not None else False
         })
         return _obj
 

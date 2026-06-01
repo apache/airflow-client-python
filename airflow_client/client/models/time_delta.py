@@ -29,9 +29,9 @@ class TimeDelta(BaseModel):
     """ # noqa: E501
     type: Optional[StrictStr] = Field(default='TimeDelta', alias="__type")
     days: StrictInt
-    microseconds: StrictInt
     seconds: StrictInt
-    __properties: ClassVar[List[str]] = ["__type", "days", "microseconds", "seconds"]
+    microseconds: StrictInt
+    __properties: ClassVar[List[str]] = ["__type", "days", "seconds", "microseconds"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -86,8 +86,8 @@ class TimeDelta(BaseModel):
         _obj = cls.model_validate({
             "__type": obj.get("__type") if obj.get("__type") is not None else 'TimeDelta',
             "days": obj.get("days"),
-            "microseconds": obj.get("microseconds"),
-            "seconds": obj.get("seconds")
+            "seconds": obj.get("seconds"),
+            "microseconds": obj.get("microseconds")
         })
         return _obj
 

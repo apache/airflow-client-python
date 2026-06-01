@@ -6,9 +6,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **action** | **str** | The action to be performed on the entities. | 
-**action_on_non_existence** | [**BulkActionNotOnExistence**](BulkActionNotOnExistence.md) |  | [optional] 
 **entities** | [**List[VariableBody]**](VariableBody.md) | A list of entities to be updated. | 
-**update_mask** | **List[str]** |  | [optional] 
+**update_mask** | **List[str]** | A list of field names to update for each entity.Only these fields will be applied from the request body to the database model.Any extra fields provided will be ignored. | [optional] 
+**action_on_non_existence** | [**BulkActionNotOnExistence**](BulkActionNotOnExistence.md) |  | [optional] 
 
 ## Example
 

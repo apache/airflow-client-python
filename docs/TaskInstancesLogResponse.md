@@ -7,7 +7,7 @@ Log serializer for responses.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **content** | [**Content**](Content.md) |  | 
-**continuation_token** | **str** |  | [optional] 
+**continuation_token** | **str** |  | 
 
 ## Example
 

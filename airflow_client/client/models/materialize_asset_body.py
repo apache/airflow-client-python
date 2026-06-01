@@ -28,16 +28,15 @@ class MaterializeAssetBody(BaseModel):
     """
     Materialize asset request.
     """ # noqa: E501
-    conf: Optional[Dict[str, Any]] = None
     dag_run_id: Optional[StrictStr] = None
-    data_interval_end: Optional[datetime] = None
     data_interval_start: Optional[datetime] = None
+    data_interval_end: Optional[datetime] = None
     logical_date: Optional[datetime] = None
+    run_after: Optional[datetime] = None
+    conf: Optional[Dict[str, Any]] = None
     note: Optional[StrictStr] = None
     partition_key: Optional[StrictStr] = None
-    run_after: Optional[datetime] = None
-    additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["conf", "dag_run_id", "data_interval_end", "data_interval_start", "logical_date", "note", "partition_key", "run_after"]
+    __properties: ClassVar[List[str]] = ["dag_run_id", "data_interval_start", "data_interval_end", "logical_date", "run_after", "conf", "note", "partition_key"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -69,10 +68,8 @@ class MaterializeAssetBody(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
-        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
-            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -80,10 +77,45 @@ class MaterializeAssetBody(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # puts key-value pairs in additional_properties in the top level
-        if self.additional_properties is not None:
-            for _key, _value in self.additional_properties.items():
-                _dict[_key] = _value
+        # set to None if dag_run_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.dag_run_id is None and "dag_run_id" in self.model_fields_set:
+            _dict['dag_run_id'] = None
+
+        # set to None if data_interval_start (nullable) is None
+        # and model_fields_set contains the field
+        if self.data_interval_start is None and "data_interval_start" in self.model_fields_set:
+            _dict['data_interval_start'] = None
+
+        # set to None if data_interval_end (nullable) is None
+        # and model_fields_set contains the field
+        if self.data_interval_end is None and "data_interval_end" in self.model_fields_set:
+            _dict['data_interval_end'] = None
+
+        # set to None if logical_date (nullable) is None
+        # and model_fields_set contains the field
+        if self.logical_date is None and "logical_date" in self.model_fields_set:
+            _dict['logical_date'] = None
+
+        # set to None if run_after (nullable) is None
+        # and model_fields_set contains the field
+        if self.run_after is None and "run_after" in self.model_fields_set:
+            _dict['run_after'] = None
+
+        # set to None if conf (nullable) is None
+        # and model_fields_set contains the field
+        if self.conf is None and "conf" in self.model_fields_set:
+            _dict['conf'] = None
+
+        # set to None if note (nullable) is None
+        # and model_fields_set contains the field
+        if self.note is None and "note" in self.model_fields_set:
+            _dict['note'] = None
+
+        # set to None if partition_key (nullable) is None
+        # and model_fields_set contains the field
+        if self.partition_key is None and "partition_key" in self.model_fields_set:
+            _dict['partition_key'] = None
 
         return _dict
 
@@ -97,20 +129,15 @@ class MaterializeAssetBody(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "conf": obj.get("conf"),
             "dag_run_id": obj.get("dag_run_id"),
-            "data_interval_end": obj.get("data_interval_end"),
             "data_interval_start": obj.get("data_interval_start"),
+            "data_interval_end": obj.get("data_interval_end"),
             "logical_date": obj.get("logical_date"),
+            "run_after": obj.get("run_after"),
+            "conf": obj.get("conf"),
             "note": obj.get("note"),
-            "partition_key": obj.get("partition_key"),
-            "run_after": obj.get("run_after")
+            "partition_key": obj.get("partition_key")
         })
-        # store additional fields in additional_properties
-        for _key in obj.keys():
-            if _key not in cls.__properties:
-                _obj.additional_properties[_key] = obj.get(_key)
-
         return _obj
 
 

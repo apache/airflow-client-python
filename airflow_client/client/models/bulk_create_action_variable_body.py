@@ -30,9 +30,9 @@ class BulkCreateActionVariableBody(BaseModel):
     BulkCreateActionVariableBody
     """ # noqa: E501
     action: StrictStr = Field(description="The action to be performed on the entities.")
-    action_on_existence: Optional[BulkActionOnExistence] = None
     entities: List[VariableBody] = Field(description="A list of entities to be created.")
-    __properties: ClassVar[List[str]] = ["action", "action_on_existence", "entities"]
+    action_on_existence: Optional[BulkActionOnExistence] = None
+    __properties: ClassVar[List[str]] = ["action", "entities", "action_on_existence"]
 
     @field_validator('action')
     def action_validate_enum(cls, value):
@@ -100,8 +100,8 @@ class BulkCreateActionVariableBody(BaseModel):
 
         _obj = cls.model_validate({
             "action": obj.get("action"),
-            "action_on_existence": obj.get("action_on_existence"),
-            "entities": [VariableBody.from_dict(_item) for _item in obj["entities"]] if obj.get("entities") is not None else None
+            "entities": [VariableBody.from_dict(_item) for _item in obj["entities"]] if obj.get("entities") is not None else None,
+            "action_on_existence": obj.get("action_on_existence")
         })
         return _obj
 

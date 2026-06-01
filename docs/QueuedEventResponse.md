@@ -6,10 +6,10 @@ Queued Event serializer for responses..
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**dag_id** | **str** |  | 
 **asset_id** | **int** |  | 
 **created_at** | **datetime** |  | 
 **dag_display_name** | **str** |  | 
-**dag_id** | **str** |  | 
 
 ## Example
 

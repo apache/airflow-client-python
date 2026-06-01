@@ -17,8 +17,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt
-from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from airflow_client.client.models.dag_run_response import DAGRunResponse
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,11 +26,13 @@ from pydantic_core import to_jsonable_python
 
 class DAGRunCollectionResponse(BaseModel):
     """
-    DAG Run Collection serializer for responses.
+    Dag Run collection response supporting both offset and cursor pagination.  A single flat model is used instead of a discriminated union (``Annotated[Offset | Cursor, Field(discriminator=...)]``) because the OpenAPI ``oneOf`` + ``discriminator`` construct is not handled correctly by ``@hey-api/openapi-ts`` / ``@7nohe/openapi-react-query-codegen``: return types degrade to ``unknown`` in JSDoc and can produce incorrect TypeScript types (see hey-api/openapi-ts#1613, #3270).
     """ # noqa: E501
     dag_runs: List[DAGRunResponse]
-    total_entries: StrictInt
-    __properties: ClassVar[List[str]] = ["dag_runs", "total_entries"]
+    total_entries: Optional[StrictInt] = Field(default=None, description="Total number of matching items. Populated for offset pagination, ``null`` when using cursor pagination.")
+    next_cursor: Optional[StrictStr] = Field(default=None, description="Token pointing to the next page. Populated for cursor pagination, ``null`` when using offset pagination or when there is no next page.")
+    previous_cursor: Optional[StrictStr] = Field(default=None, description="Token pointing to the previous page. Populated for cursor pagination, ``null`` when using offset pagination or when on the first page.")
+    __properties: ClassVar[List[str]] = ["dag_runs", "total_entries", "next_cursor", "previous_cursor"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -78,6 +80,21 @@ class DAGRunCollectionResponse(BaseModel):
                 if _item_dag_runs:
                     _items.append(_item_dag_runs.to_dict())
             _dict['dag_runs'] = _items
+        # set to None if total_entries (nullable) is None
+        # and model_fields_set contains the field
+        if self.total_entries is None and "total_entries" in self.model_fields_set:
+            _dict['total_entries'] = None
+
+        # set to None if next_cursor (nullable) is None
+        # and model_fields_set contains the field
+        if self.next_cursor is None and "next_cursor" in self.model_fields_set:
+            _dict['next_cursor'] = None
+
+        # set to None if previous_cursor (nullable) is None
+        # and model_fields_set contains the field
+        if self.previous_cursor is None and "previous_cursor" in self.model_fields_set:
+            _dict['previous_cursor'] = None
+
         return _dict
 
     @classmethod
@@ -91,7 +108,9 @@ class DAGRunCollectionResponse(BaseModel):
 
         _obj = cls.model_validate({
             "dag_runs": [DAGRunResponse.from_dict(_item) for _item in obj["dag_runs"]] if obj.get("dag_runs") is not None else None,
-            "total_entries": obj.get("total_entries")
+            "total_entries": obj.get("total_entries"),
+            "next_cursor": obj.get("next_cursor"),
+            "previous_cursor": obj.get("previous_cursor")
         })
         return _obj
 

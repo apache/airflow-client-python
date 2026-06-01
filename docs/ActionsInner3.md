@@ -6,10 +6,10 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **action** | **str** | The action to be performed on the entities. | 
-**action_on_existence** | [**BulkActionOnExistence**](BulkActionOnExistence.md) |  | [optional] 
 **entities** | [**List[EntitiesInner3]**](EntitiesInner3.md) | A list of entity id/key or entity objects to be deleted. | 
+**action_on_existence** | [**BulkActionOnExistence**](BulkActionOnExistence.md) |  | [optional] 
+**update_mask** | **List[str]** | A list of field names to update for each entity.Only these fields will be applied from the request body to the database model.Any extra fields provided will be ignored. | [optional] 
 **action_on_non_existence** | [**BulkActionNotOnExistence**](BulkActionNotOnExistence.md) |  | [optional] 
-**update_mask** | **List[str]** |  | [optional] 
 
 ## Example
 

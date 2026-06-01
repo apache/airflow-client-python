@@ -30,30 +30,30 @@ from pydantic_core import to_jsonable_python
 
 class DAGRunResponse(BaseModel):
     """
-    DAG Run serializer for responses.
+    Dag Run serializer for responses.
     """ # noqa: E501
-    bundle_version: Optional[StrictStr] = None
-    conf: Optional[Dict[str, Any]] = None
-    dag_display_name: StrictStr
-    dag_id: StrictStr
     dag_run_id: StrictStr
-    dag_versions: List[DagVersionResponse]
-    data_interval_end: Optional[datetime] = None
-    data_interval_start: Optional[datetime] = None
-    duration: Optional[Union[StrictFloat, StrictInt]] = None
-    end_date: Optional[datetime] = None
-    last_scheduling_decision: Optional[datetime] = None
-    logical_date: Optional[datetime] = None
-    note: Optional[StrictStr] = None
-    partition_key: Optional[StrictStr] = None
-    queued_at: Optional[datetime] = None
+    dag_id: StrictStr
+    logical_date: Optional[datetime]
+    queued_at: Optional[datetime]
+    start_date: Optional[datetime]
+    end_date: Optional[datetime]
+    duration: Optional[Union[StrictFloat, StrictInt]]
+    data_interval_start: Optional[datetime]
+    data_interval_end: Optional[datetime]
     run_after: datetime
+    last_scheduling_decision: Optional[datetime]
     run_type: DagRunType
-    start_date: Optional[datetime] = None
     state: DagRunState
-    triggered_by: Optional[DagRunTriggeredByType] = None
-    triggering_user_name: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["bundle_version", "conf", "dag_display_name", "dag_id", "dag_run_id", "dag_versions", "data_interval_end", "data_interval_start", "duration", "end_date", "last_scheduling_decision", "logical_date", "note", "partition_key", "queued_at", "run_after", "run_type", "start_date", "state", "triggered_by", "triggering_user_name"]
+    triggered_by: Optional[DagRunTriggeredByType]
+    triggering_user_name: Optional[StrictStr]
+    conf: Optional[Dict[str, Any]]
+    note: Optional[StrictStr]
+    dag_versions: List[DagVersionResponse]
+    bundle_version: Optional[StrictStr]
+    dag_display_name: StrictStr
+    partition_key: Optional[StrictStr]
+    __properties: ClassVar[List[str]] = ["dag_run_id", "dag_id", "logical_date", "queued_at", "start_date", "end_date", "duration", "data_interval_start", "data_interval_end", "run_after", "last_scheduling_decision", "run_type", "state", "triggered_by", "triggering_user_name", "conf", "note", "dag_versions", "bundle_version", "dag_display_name", "partition_key"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -101,6 +101,76 @@ class DAGRunResponse(BaseModel):
                 if _item_dag_versions:
                     _items.append(_item_dag_versions.to_dict())
             _dict['dag_versions'] = _items
+        # set to None if logical_date (nullable) is None
+        # and model_fields_set contains the field
+        if self.logical_date is None and "logical_date" in self.model_fields_set:
+            _dict['logical_date'] = None
+
+        # set to None if queued_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.queued_at is None and "queued_at" in self.model_fields_set:
+            _dict['queued_at'] = None
+
+        # set to None if start_date (nullable) is None
+        # and model_fields_set contains the field
+        if self.start_date is None and "start_date" in self.model_fields_set:
+            _dict['start_date'] = None
+
+        # set to None if end_date (nullable) is None
+        # and model_fields_set contains the field
+        if self.end_date is None and "end_date" in self.model_fields_set:
+            _dict['end_date'] = None
+
+        # set to None if duration (nullable) is None
+        # and model_fields_set contains the field
+        if self.duration is None and "duration" in self.model_fields_set:
+            _dict['duration'] = None
+
+        # set to None if data_interval_start (nullable) is None
+        # and model_fields_set contains the field
+        if self.data_interval_start is None and "data_interval_start" in self.model_fields_set:
+            _dict['data_interval_start'] = None
+
+        # set to None if data_interval_end (nullable) is None
+        # and model_fields_set contains the field
+        if self.data_interval_end is None and "data_interval_end" in self.model_fields_set:
+            _dict['data_interval_end'] = None
+
+        # set to None if last_scheduling_decision (nullable) is None
+        # and model_fields_set contains the field
+        if self.last_scheduling_decision is None and "last_scheduling_decision" in self.model_fields_set:
+            _dict['last_scheduling_decision'] = None
+
+        # set to None if triggered_by (nullable) is None
+        # and model_fields_set contains the field
+        if self.triggered_by is None and "triggered_by" in self.model_fields_set:
+            _dict['triggered_by'] = None
+
+        # set to None if triggering_user_name (nullable) is None
+        # and model_fields_set contains the field
+        if self.triggering_user_name is None and "triggering_user_name" in self.model_fields_set:
+            _dict['triggering_user_name'] = None
+
+        # set to None if conf (nullable) is None
+        # and model_fields_set contains the field
+        if self.conf is None and "conf" in self.model_fields_set:
+            _dict['conf'] = None
+
+        # set to None if note (nullable) is None
+        # and model_fields_set contains the field
+        if self.note is None and "note" in self.model_fields_set:
+            _dict['note'] = None
+
+        # set to None if bundle_version (nullable) is None
+        # and model_fields_set contains the field
+        if self.bundle_version is None and "bundle_version" in self.model_fields_set:
+            _dict['bundle_version'] = None
+
+        # set to None if partition_key (nullable) is None
+        # and model_fields_set contains the field
+        if self.partition_key is None and "partition_key" in self.model_fields_set:
+            _dict['partition_key'] = None
+
         return _dict
 
     @classmethod
@@ -113,27 +183,27 @@ class DAGRunResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "bundle_version": obj.get("bundle_version"),
-            "conf": obj.get("conf"),
-            "dag_display_name": obj.get("dag_display_name"),
-            "dag_id": obj.get("dag_id"),
             "dag_run_id": obj.get("dag_run_id"),
-            "dag_versions": [DagVersionResponse.from_dict(_item) for _item in obj["dag_versions"]] if obj.get("dag_versions") is not None else None,
-            "data_interval_end": obj.get("data_interval_end"),
-            "data_interval_start": obj.get("data_interval_start"),
-            "duration": obj.get("duration"),
-            "end_date": obj.get("end_date"),
-            "last_scheduling_decision": obj.get("last_scheduling_decision"),
+            "dag_id": obj.get("dag_id"),
             "logical_date": obj.get("logical_date"),
-            "note": obj.get("note"),
-            "partition_key": obj.get("partition_key"),
             "queued_at": obj.get("queued_at"),
-            "run_after": obj.get("run_after"),
-            "run_type": obj.get("run_type"),
             "start_date": obj.get("start_date"),
+            "end_date": obj.get("end_date"),
+            "duration": obj.get("duration"),
+            "data_interval_start": obj.get("data_interval_start"),
+            "data_interval_end": obj.get("data_interval_end"),
+            "run_after": obj.get("run_after"),
+            "last_scheduling_decision": obj.get("last_scheduling_decision"),
+            "run_type": obj.get("run_type"),
             "state": obj.get("state"),
             "triggered_by": obj.get("triggered_by"),
-            "triggering_user_name": obj.get("triggering_user_name")
+            "triggering_user_name": obj.get("triggering_user_name"),
+            "conf": obj.get("conf"),
+            "note": obj.get("note"),
+            "dag_versions": [DagVersionResponse.from_dict(_item) for _item in obj["dag_versions"]] if obj.get("dag_versions") is not None else None,
+            "bundle_version": obj.get("bundle_version"),
+            "dag_display_name": obj.get("dag_display_name"),
+            "partition_key": obj.get("partition_key")
         })
         return _obj
 

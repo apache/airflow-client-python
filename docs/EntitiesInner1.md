@@ -5,15 +5,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**conn_type** | **str** |  | 
 **connection_id** | **str** |  | 
+**conn_type** | **str** |  | 
 **description** | **str** |  | [optional] 
-**extra** | **str** |  | [optional] 
 **host** | **str** |  | [optional] 
 **login** | **str** |  | [optional] 
-**password** | **str** |  | [optional] 
-**port** | **int** |  | [optional] 
 **var_schema** | **str** |  | [optional] 
+**port** | **int** |  | [optional] 
+**password** | **str** |  | [optional] 
+**extra** | **str** |  | [optional] 
 **team_name** | **str** |  | [optional] 
 
 ## Example

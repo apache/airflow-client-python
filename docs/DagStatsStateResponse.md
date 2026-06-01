@@ -6,8 +6,8 @@ DagStatsState serializer for responses.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**count** | **int** |  | 
 **state** | [**DagRunState**](DagRunState.md) |  | 
+**count** | **int** |  | 
 
 ## Example
 

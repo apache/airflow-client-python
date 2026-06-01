@@ -6,8 +6,8 @@ Version information serializer for responses.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**git_version** | **str** |  | [optional] 
 **version** | **str** |  | 
+**git_version** | **str** |  | 
 
 ## Example
 

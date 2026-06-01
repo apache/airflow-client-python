@@ -6,10 +6,10 @@ Health serializer for responses.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**dag_processor** | [**DagProcessorInfoResponse**](DagProcessorInfoResponse.md) |  | [optional] 
 **metadatabase** | [**BaseInfoResponse**](BaseInfoResponse.md) |  | 
 **scheduler** | [**SchedulerInfoResponse**](SchedulerInfoResponse.md) |  | 
 **triggerer** | [**TriggererInfoResponse**](TriggererInfoResponse.md) |  | 
+**dag_processor** | [**DagProcessorInfoResponse**](DagProcessorInfoResponse.md) |  | [optional] 
 
 ## Example
 

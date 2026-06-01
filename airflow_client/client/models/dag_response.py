@@ -28,37 +28,37 @@ from pydantic_core import to_jsonable_python
 
 class DAGResponse(BaseModel):
     """
-    DAG serializer for responses.
+    Dag serializer for responses.
     """ # noqa: E501
-    allowed_run_types: Optional[List[DagRunType]] = None
-    bundle_name: Optional[StrictStr] = None
-    bundle_version: Optional[StrictStr] = None
-    dag_display_name: StrictStr
     dag_id: StrictStr
-    description: Optional[StrictStr] = None
-    file_token: StrictStr = Field(description="Return file token.")
-    fileloc: StrictStr
-    has_import_errors: StrictBool
-    has_task_concurrency_limits: StrictBool
+    dag_display_name: StrictStr
     is_paused: StrictBool
     is_stale: StrictBool
-    last_expired: Optional[datetime] = None
-    last_parse_duration: Optional[Union[StrictFloat, StrictInt]] = None
-    last_parsed_time: Optional[datetime] = None
-    max_active_runs: Optional[StrictInt] = None
-    max_active_tasks: StrictInt
-    max_consecutive_failed_dag_runs: StrictInt
-    next_dagrun_data_interval_end: Optional[datetime] = None
-    next_dagrun_data_interval_start: Optional[datetime] = None
-    next_dagrun_logical_date: Optional[datetime] = None
-    next_dagrun_run_after: Optional[datetime] = None
-    owners: List[StrictStr]
-    relative_fileloc: Optional[StrictStr] = None
-    tags: List[DagTagResponse]
-    timetable_description: Optional[StrictStr] = None
+    last_parsed_time: Optional[datetime]
+    last_parse_duration: Optional[Union[StrictFloat, StrictInt]]
+    last_expired: Optional[datetime]
+    bundle_name: Optional[StrictStr]
+    bundle_version: Optional[StrictStr]
+    relative_fileloc: Optional[StrictStr]
+    fileloc: StrictStr
+    description: Optional[StrictStr]
+    timetable_summary: Optional[StrictStr]
+    timetable_description: Optional[StrictStr]
     timetable_partitioned: StrictBool
-    timetable_summary: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["allowed_run_types", "bundle_name", "bundle_version", "dag_display_name", "dag_id", "description", "file_token", "fileloc", "has_import_errors", "has_task_concurrency_limits", "is_paused", "is_stale", "last_expired", "last_parse_duration", "last_parsed_time", "max_active_runs", "max_active_tasks", "max_consecutive_failed_dag_runs", "next_dagrun_data_interval_end", "next_dagrun_data_interval_start", "next_dagrun_logical_date", "next_dagrun_run_after", "owners", "relative_fileloc", "tags", "timetable_description", "timetable_partitioned", "timetable_summary"]
+    tags: List[DagTagResponse]
+    max_active_tasks: StrictInt
+    max_active_runs: Optional[StrictInt]
+    max_consecutive_failed_dag_runs: StrictInt
+    has_task_concurrency_limits: StrictBool
+    has_import_errors: StrictBool
+    next_dagrun_logical_date: Optional[datetime]
+    next_dagrun_data_interval_start: Optional[datetime]
+    next_dagrun_data_interval_end: Optional[datetime]
+    next_dagrun_run_after: Optional[datetime]
+    allowed_run_types: Optional[List[DagRunType]]
+    owners: List[StrictStr]
+    file_token: StrictStr = Field(description="Return file token.")
+    __properties: ClassVar[List[str]] = ["dag_id", "dag_display_name", "is_paused", "is_stale", "last_parsed_time", "last_parse_duration", "last_expired", "bundle_name", "bundle_version", "relative_fileloc", "fileloc", "description", "timetable_summary", "timetable_description", "timetable_partitioned", "tags", "max_active_tasks", "max_active_runs", "max_consecutive_failed_dag_runs", "has_task_concurrency_limits", "has_import_errors", "next_dagrun_logical_date", "next_dagrun_data_interval_start", "next_dagrun_data_interval_end", "next_dagrun_run_after", "allowed_run_types", "owners", "file_token"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -108,6 +108,81 @@ class DAGResponse(BaseModel):
                 if _item_tags:
                     _items.append(_item_tags.to_dict())
             _dict['tags'] = _items
+        # set to None if last_parsed_time (nullable) is None
+        # and model_fields_set contains the field
+        if self.last_parsed_time is None and "last_parsed_time" in self.model_fields_set:
+            _dict['last_parsed_time'] = None
+
+        # set to None if last_parse_duration (nullable) is None
+        # and model_fields_set contains the field
+        if self.last_parse_duration is None and "last_parse_duration" in self.model_fields_set:
+            _dict['last_parse_duration'] = None
+
+        # set to None if last_expired (nullable) is None
+        # and model_fields_set contains the field
+        if self.last_expired is None and "last_expired" in self.model_fields_set:
+            _dict['last_expired'] = None
+
+        # set to None if bundle_name (nullable) is None
+        # and model_fields_set contains the field
+        if self.bundle_name is None and "bundle_name" in self.model_fields_set:
+            _dict['bundle_name'] = None
+
+        # set to None if bundle_version (nullable) is None
+        # and model_fields_set contains the field
+        if self.bundle_version is None and "bundle_version" in self.model_fields_set:
+            _dict['bundle_version'] = None
+
+        # set to None if relative_fileloc (nullable) is None
+        # and model_fields_set contains the field
+        if self.relative_fileloc is None and "relative_fileloc" in self.model_fields_set:
+            _dict['relative_fileloc'] = None
+
+        # set to None if description (nullable) is None
+        # and model_fields_set contains the field
+        if self.description is None and "description" in self.model_fields_set:
+            _dict['description'] = None
+
+        # set to None if timetable_summary (nullable) is None
+        # and model_fields_set contains the field
+        if self.timetable_summary is None and "timetable_summary" in self.model_fields_set:
+            _dict['timetable_summary'] = None
+
+        # set to None if timetable_description (nullable) is None
+        # and model_fields_set contains the field
+        if self.timetable_description is None and "timetable_description" in self.model_fields_set:
+            _dict['timetable_description'] = None
+
+        # set to None if max_active_runs (nullable) is None
+        # and model_fields_set contains the field
+        if self.max_active_runs is None and "max_active_runs" in self.model_fields_set:
+            _dict['max_active_runs'] = None
+
+        # set to None if next_dagrun_logical_date (nullable) is None
+        # and model_fields_set contains the field
+        if self.next_dagrun_logical_date is None and "next_dagrun_logical_date" in self.model_fields_set:
+            _dict['next_dagrun_logical_date'] = None
+
+        # set to None if next_dagrun_data_interval_start (nullable) is None
+        # and model_fields_set contains the field
+        if self.next_dagrun_data_interval_start is None and "next_dagrun_data_interval_start" in self.model_fields_set:
+            _dict['next_dagrun_data_interval_start'] = None
+
+        # set to None if next_dagrun_data_interval_end (nullable) is None
+        # and model_fields_set contains the field
+        if self.next_dagrun_data_interval_end is None and "next_dagrun_data_interval_end" in self.model_fields_set:
+            _dict['next_dagrun_data_interval_end'] = None
+
+        # set to None if next_dagrun_run_after (nullable) is None
+        # and model_fields_set contains the field
+        if self.next_dagrun_run_after is None and "next_dagrun_run_after" in self.model_fields_set:
+            _dict['next_dagrun_run_after'] = None
+
+        # set to None if allowed_run_types (nullable) is None
+        # and model_fields_set contains the field
+        if self.allowed_run_types is None and "allowed_run_types" in self.model_fields_set:
+            _dict['allowed_run_types'] = None
+
         return _dict
 
     @classmethod
@@ -120,34 +195,34 @@ class DAGResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "allowed_run_types": obj.get("allowed_run_types"),
-            "bundle_name": obj.get("bundle_name"),
-            "bundle_version": obj.get("bundle_version"),
-            "dag_display_name": obj.get("dag_display_name"),
             "dag_id": obj.get("dag_id"),
-            "description": obj.get("description"),
-            "file_token": obj.get("file_token"),
-            "fileloc": obj.get("fileloc"),
-            "has_import_errors": obj.get("has_import_errors"),
-            "has_task_concurrency_limits": obj.get("has_task_concurrency_limits"),
+            "dag_display_name": obj.get("dag_display_name"),
             "is_paused": obj.get("is_paused"),
             "is_stale": obj.get("is_stale"),
-            "last_expired": obj.get("last_expired"),
-            "last_parse_duration": obj.get("last_parse_duration"),
             "last_parsed_time": obj.get("last_parsed_time"),
-            "max_active_runs": obj.get("max_active_runs"),
-            "max_active_tasks": obj.get("max_active_tasks"),
-            "max_consecutive_failed_dag_runs": obj.get("max_consecutive_failed_dag_runs"),
-            "next_dagrun_data_interval_end": obj.get("next_dagrun_data_interval_end"),
-            "next_dagrun_data_interval_start": obj.get("next_dagrun_data_interval_start"),
-            "next_dagrun_logical_date": obj.get("next_dagrun_logical_date"),
-            "next_dagrun_run_after": obj.get("next_dagrun_run_after"),
-            "owners": obj.get("owners"),
+            "last_parse_duration": obj.get("last_parse_duration"),
+            "last_expired": obj.get("last_expired"),
+            "bundle_name": obj.get("bundle_name"),
+            "bundle_version": obj.get("bundle_version"),
             "relative_fileloc": obj.get("relative_fileloc"),
-            "tags": [DagTagResponse.from_dict(_item) for _item in obj["tags"]] if obj.get("tags") is not None else None,
+            "fileloc": obj.get("fileloc"),
+            "description": obj.get("description"),
+            "timetable_summary": obj.get("timetable_summary"),
             "timetable_description": obj.get("timetable_description"),
             "timetable_partitioned": obj.get("timetable_partitioned"),
-            "timetable_summary": obj.get("timetable_summary")
+            "tags": [DagTagResponse.from_dict(_item) for _item in obj["tags"]] if obj.get("tags") is not None else None,
+            "max_active_tasks": obj.get("max_active_tasks"),
+            "max_active_runs": obj.get("max_active_runs"),
+            "max_consecutive_failed_dag_runs": obj.get("max_consecutive_failed_dag_runs"),
+            "has_task_concurrency_limits": obj.get("has_task_concurrency_limits"),
+            "has_import_errors": obj.get("has_import_errors"),
+            "next_dagrun_logical_date": obj.get("next_dagrun_logical_date"),
+            "next_dagrun_data_interval_start": obj.get("next_dagrun_data_interval_start"),
+            "next_dagrun_data_interval_end": obj.get("next_dagrun_data_interval_end"),
+            "next_dagrun_run_after": obj.get("next_dagrun_run_after"),
+            "allowed_run_types": obj.get("allowed_run_types"),
+            "owners": obj.get("owners"),
+            "file_token": obj.get("file_token")
         })
         return _obj
 

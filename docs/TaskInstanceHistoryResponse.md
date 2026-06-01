@@ -6,32 +6,32 @@ TaskInstanceHistory serializer for responses.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**dag_display_name** | **str** |  | 
+**task_id** | **str** |  | 
 **dag_id** | **str** |  | 
 **dag_run_id** | **str** |  | 
-**dag_version** | [**DagVersionResponse**](DagVersionResponse.md) |  | [optional] 
-**duration** | **float** |  | [optional] 
-**end_date** | **datetime** |  | [optional] 
-**executor** | **str** |  | [optional] 
-**executor_config** | **str** |  | 
-**hostname** | **str** |  | [optional] 
 **map_index** | **int** |  | 
+**start_date** | **datetime** |  | 
+**end_date** | **datetime** |  | 
+**duration** | **float** |  | 
+**state** | [**TaskInstanceState**](TaskInstanceState.md) |  | 
+**try_number** | **int** |  | 
 **max_tries** | **int** |  | 
-**operator** | **str** |  | [optional] 
-**operator_name** | **str** |  | [optional] 
-**pid** | **int** |  | [optional] 
+**task_display_name** | **str** |  | 
+**dag_display_name** | **str** |  | 
+**hostname** | **str** |  | 
+**unixname** | **str** |  | 
 **pool** | **str** |  | 
 **pool_slots** | **int** |  | 
-**priority_weight** | **int** |  | [optional] 
-**queue** | **str** |  | [optional] 
-**queued_when** | **datetime** |  | [optional] 
-**scheduled_when** | **datetime** |  | [optional] 
-**start_date** | **datetime** |  | [optional] 
-**state** | [**TaskInstanceState**](TaskInstanceState.md) |  | [optional] 
-**task_display_name** | **str** |  | 
-**task_id** | **str** |  | 
-**try_number** | **int** |  | 
-**unixname** | **str** |  | [optional] 
+**queue** | **str** |  | 
+**priority_weight** | **int** |  | 
+**operator** | **str** |  | 
+**operator_name** | **str** |  | 
+**queued_when** | **datetime** |  | 
+**scheduled_when** | **datetime** |  | 
+**pid** | **int** |  | 
+**executor** | **str** |  | 
+**executor_config** | **str** |  | 
+**dag_version** | [**DagVersionResponse**](DagVersionResponse.md) |  | 
 
 ## Example
 

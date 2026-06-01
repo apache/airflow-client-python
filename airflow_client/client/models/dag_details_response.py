@@ -29,55 +29,55 @@ from pydantic_core import to_jsonable_python
 
 class DAGDetailsResponse(BaseModel):
     """
-    Specific serializer for DAG Details responses.
+    Specific serializer for Dag Details responses.
     """ # noqa: E501
-    active_runs_count: Optional[StrictInt] = 0
-    allowed_run_types: Optional[List[DagRunType]] = None
-    asset_expression: Optional[Dict[str, Any]] = None
-    bundle_name: Optional[StrictStr] = None
-    bundle_version: Optional[StrictStr] = None
-    catchup: StrictBool
-    concurrency: StrictInt = Field(description="Return max_active_tasks as concurrency.  Deprecated: Use max_active_tasks instead.")
-    dag_display_name: StrictStr
     dag_id: StrictStr
-    dag_run_timeout: Optional[StrictStr] = None
-    default_args: Optional[Dict[str, Any]] = None
-    description: Optional[StrictStr] = None
-    doc_md: Optional[StrictStr] = None
-    end_date: Optional[datetime] = None
-    file_token: StrictStr = Field(description="Return file token.")
-    fileloc: StrictStr
-    has_import_errors: StrictBool
-    has_task_concurrency_limits: StrictBool
-    is_favorite: Optional[StrictBool] = False
+    dag_display_name: StrictStr
     is_paused: StrictBool
-    is_paused_upon_creation: Optional[StrictBool] = None
     is_stale: StrictBool
-    last_expired: Optional[datetime] = None
-    last_parse_duration: Optional[Union[StrictFloat, StrictInt]] = None
-    last_parsed: Optional[datetime] = None
-    last_parsed_time: Optional[datetime] = None
-    latest_dag_version: Optional[DagVersionResponse] = None
-    max_active_runs: Optional[StrictInt] = None
-    max_active_tasks: StrictInt
-    max_consecutive_failed_dag_runs: StrictInt
-    next_dagrun_data_interval_end: Optional[datetime] = None
-    next_dagrun_data_interval_start: Optional[datetime] = None
-    next_dagrun_logical_date: Optional[datetime] = None
-    next_dagrun_run_after: Optional[datetime] = None
-    owner_links: Optional[Dict[str, StrictStr]] = None
-    owners: List[StrictStr]
-    params: Optional[Dict[str, Any]] = None
-    relative_fileloc: Optional[StrictStr] = None
-    render_template_as_native_obj: StrictBool
-    start_date: Optional[datetime] = None
-    tags: List[DagTagResponse]
-    template_search_path: Optional[List[StrictStr]] = None
-    timetable_description: Optional[StrictStr] = None
+    last_parsed_time: Optional[datetime]
+    last_parse_duration: Optional[Union[StrictFloat, StrictInt]]
+    last_expired: Optional[datetime]
+    bundle_name: Optional[StrictStr]
+    bundle_version: Optional[StrictStr]
+    relative_fileloc: Optional[StrictStr]
+    fileloc: StrictStr
+    description: Optional[StrictStr]
+    timetable_summary: Optional[StrictStr]
+    timetable_description: Optional[StrictStr]
     timetable_partitioned: StrictBool
-    timetable_summary: Optional[StrictStr] = None
-    timezone: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["active_runs_count", "allowed_run_types", "asset_expression", "bundle_name", "bundle_version", "catchup", "concurrency", "dag_display_name", "dag_id", "dag_run_timeout", "default_args", "description", "doc_md", "end_date", "file_token", "fileloc", "has_import_errors", "has_task_concurrency_limits", "is_favorite", "is_paused", "is_paused_upon_creation", "is_stale", "last_expired", "last_parse_duration", "last_parsed", "last_parsed_time", "latest_dag_version", "max_active_runs", "max_active_tasks", "max_consecutive_failed_dag_runs", "next_dagrun_data_interval_end", "next_dagrun_data_interval_start", "next_dagrun_logical_date", "next_dagrun_run_after", "owner_links", "owners", "params", "relative_fileloc", "render_template_as_native_obj", "start_date", "tags", "template_search_path", "timetable_description", "timetable_partitioned", "timetable_summary", "timezone"]
+    tags: List[DagTagResponse]
+    max_active_tasks: StrictInt
+    max_active_runs: Optional[StrictInt]
+    max_consecutive_failed_dag_runs: StrictInt
+    has_task_concurrency_limits: StrictBool
+    has_import_errors: StrictBool
+    next_dagrun_logical_date: Optional[datetime]
+    next_dagrun_data_interval_start: Optional[datetime]
+    next_dagrun_data_interval_end: Optional[datetime]
+    next_dagrun_run_after: Optional[datetime]
+    allowed_run_types: Optional[List[DagRunType]]
+    owners: List[StrictStr]
+    catchup: StrictBool
+    dag_run_timeout: Optional[StrictStr]
+    asset_expression: Optional[Dict[str, Any]]
+    doc_md: Optional[StrictStr]
+    start_date: Optional[datetime]
+    end_date: Optional[datetime]
+    is_paused_upon_creation: Optional[StrictBool]
+    params: Optional[Dict[str, Any]]
+    render_template_as_native_obj: StrictBool
+    template_search_path: Optional[List[StrictStr]]
+    timezone: Optional[StrictStr]
+    last_parsed: Optional[datetime]
+    default_args: Optional[Dict[str, Any]]
+    owner_links: Optional[Dict[str, StrictStr]] = None
+    is_favorite: Optional[StrictBool] = False
+    active_runs_count: Optional[StrictInt] = 0
+    file_token: StrictStr = Field(description="Return file token.")
+    concurrency: StrictInt = Field(description="Return max_active_tasks as concurrency.  Deprecated: Use max_active_tasks instead.")
+    latest_dag_version: Optional[DagVersionResponse] = Field(description="Return the latest DagVersion.")
+    __properties: ClassVar[List[str]] = ["dag_id", "dag_display_name", "is_paused", "is_stale", "last_parsed_time", "last_parse_duration", "last_expired", "bundle_name", "bundle_version", "relative_fileloc", "fileloc", "description", "timetable_summary", "timetable_description", "timetable_partitioned", "tags", "max_active_tasks", "max_active_runs", "max_consecutive_failed_dag_runs", "has_task_concurrency_limits", "has_import_errors", "next_dagrun_logical_date", "next_dagrun_data_interval_start", "next_dagrun_data_interval_end", "next_dagrun_run_after", "allowed_run_types", "owners", "catchup", "dag_run_timeout", "asset_expression", "doc_md", "start_date", "end_date", "is_paused_upon_creation", "params", "render_template_as_native_obj", "template_search_path", "timezone", "last_parsed", "default_args", "owner_links", "is_favorite", "active_runs_count", "file_token", "concurrency", "latest_dag_version"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -111,10 +111,12 @@ class DAGDetailsResponse(BaseModel):
           are ignored.
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
-            "concurrency",
             "file_token",
+            "concurrency",
+            "latest_dag_version",
         ])
 
         _dict = self.model_dump(
@@ -122,9 +124,6 @@ class DAGDetailsResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of latest_dag_version
-        if self.latest_dag_version:
-            _dict['latest_dag_version'] = self.latest_dag_version.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in tags (list)
         _items = []
         if self.tags:
@@ -132,6 +131,149 @@ class DAGDetailsResponse(BaseModel):
                 if _item_tags:
                     _items.append(_item_tags.to_dict())
             _dict['tags'] = _items
+        # override the default output from pydantic by calling `to_dict()` of latest_dag_version
+        if self.latest_dag_version:
+            _dict['latest_dag_version'] = self.latest_dag_version.to_dict()
+        # set to None if last_parsed_time (nullable) is None
+        # and model_fields_set contains the field
+        if self.last_parsed_time is None and "last_parsed_time" in self.model_fields_set:
+            _dict['last_parsed_time'] = None
+
+        # set to None if last_parse_duration (nullable) is None
+        # and model_fields_set contains the field
+        if self.last_parse_duration is None and "last_parse_duration" in self.model_fields_set:
+            _dict['last_parse_duration'] = None
+
+        # set to None if last_expired (nullable) is None
+        # and model_fields_set contains the field
+        if self.last_expired is None and "last_expired" in self.model_fields_set:
+            _dict['last_expired'] = None
+
+        # set to None if bundle_name (nullable) is None
+        # and model_fields_set contains the field
+        if self.bundle_name is None and "bundle_name" in self.model_fields_set:
+            _dict['bundle_name'] = None
+
+        # set to None if bundle_version (nullable) is None
+        # and model_fields_set contains the field
+        if self.bundle_version is None and "bundle_version" in self.model_fields_set:
+            _dict['bundle_version'] = None
+
+        # set to None if relative_fileloc (nullable) is None
+        # and model_fields_set contains the field
+        if self.relative_fileloc is None and "relative_fileloc" in self.model_fields_set:
+            _dict['relative_fileloc'] = None
+
+        # set to None if description (nullable) is None
+        # and model_fields_set contains the field
+        if self.description is None and "description" in self.model_fields_set:
+            _dict['description'] = None
+
+        # set to None if timetable_summary (nullable) is None
+        # and model_fields_set contains the field
+        if self.timetable_summary is None and "timetable_summary" in self.model_fields_set:
+            _dict['timetable_summary'] = None
+
+        # set to None if timetable_description (nullable) is None
+        # and model_fields_set contains the field
+        if self.timetable_description is None and "timetable_description" in self.model_fields_set:
+            _dict['timetable_description'] = None
+
+        # set to None if max_active_runs (nullable) is None
+        # and model_fields_set contains the field
+        if self.max_active_runs is None and "max_active_runs" in self.model_fields_set:
+            _dict['max_active_runs'] = None
+
+        # set to None if next_dagrun_logical_date (nullable) is None
+        # and model_fields_set contains the field
+        if self.next_dagrun_logical_date is None and "next_dagrun_logical_date" in self.model_fields_set:
+            _dict['next_dagrun_logical_date'] = None
+
+        # set to None if next_dagrun_data_interval_start (nullable) is None
+        # and model_fields_set contains the field
+        if self.next_dagrun_data_interval_start is None and "next_dagrun_data_interval_start" in self.model_fields_set:
+            _dict['next_dagrun_data_interval_start'] = None
+
+        # set to None if next_dagrun_data_interval_end (nullable) is None
+        # and model_fields_set contains the field
+        if self.next_dagrun_data_interval_end is None and "next_dagrun_data_interval_end" in self.model_fields_set:
+            _dict['next_dagrun_data_interval_end'] = None
+
+        # set to None if next_dagrun_run_after (nullable) is None
+        # and model_fields_set contains the field
+        if self.next_dagrun_run_after is None and "next_dagrun_run_after" in self.model_fields_set:
+            _dict['next_dagrun_run_after'] = None
+
+        # set to None if allowed_run_types (nullable) is None
+        # and model_fields_set contains the field
+        if self.allowed_run_types is None and "allowed_run_types" in self.model_fields_set:
+            _dict['allowed_run_types'] = None
+
+        # set to None if dag_run_timeout (nullable) is None
+        # and model_fields_set contains the field
+        if self.dag_run_timeout is None and "dag_run_timeout" in self.model_fields_set:
+            _dict['dag_run_timeout'] = None
+
+        # set to None if asset_expression (nullable) is None
+        # and model_fields_set contains the field
+        if self.asset_expression is None and "asset_expression" in self.model_fields_set:
+            _dict['asset_expression'] = None
+
+        # set to None if doc_md (nullable) is None
+        # and model_fields_set contains the field
+        if self.doc_md is None and "doc_md" in self.model_fields_set:
+            _dict['doc_md'] = None
+
+        # set to None if start_date (nullable) is None
+        # and model_fields_set contains the field
+        if self.start_date is None and "start_date" in self.model_fields_set:
+            _dict['start_date'] = None
+
+        # set to None if end_date (nullable) is None
+        # and model_fields_set contains the field
+        if self.end_date is None and "end_date" in self.model_fields_set:
+            _dict['end_date'] = None
+
+        # set to None if is_paused_upon_creation (nullable) is None
+        # and model_fields_set contains the field
+        if self.is_paused_upon_creation is None and "is_paused_upon_creation" in self.model_fields_set:
+            _dict['is_paused_upon_creation'] = None
+
+        # set to None if params (nullable) is None
+        # and model_fields_set contains the field
+        if self.params is None and "params" in self.model_fields_set:
+            _dict['params'] = None
+
+        # set to None if template_search_path (nullable) is None
+        # and model_fields_set contains the field
+        if self.template_search_path is None and "template_search_path" in self.model_fields_set:
+            _dict['template_search_path'] = None
+
+        # set to None if timezone (nullable) is None
+        # and model_fields_set contains the field
+        if self.timezone is None and "timezone" in self.model_fields_set:
+            _dict['timezone'] = None
+
+        # set to None if last_parsed (nullable) is None
+        # and model_fields_set contains the field
+        if self.last_parsed is None and "last_parsed" in self.model_fields_set:
+            _dict['last_parsed'] = None
+
+        # set to None if default_args (nullable) is None
+        # and model_fields_set contains the field
+        if self.default_args is None and "default_args" in self.model_fields_set:
+            _dict['default_args'] = None
+
+        # set to None if owner_links (nullable) is None
+        # and model_fields_set contains the field
+        if self.owner_links is None and "owner_links" in self.model_fields_set:
+            _dict['owner_links'] = None
+
+        # set to None if latest_dag_version (nullable) is None
+        # and model_fields_set contains the field
+        if self.latest_dag_version is None and "latest_dag_version" in self.model_fields_set:
+            _dict['latest_dag_version'] = None
+
         return _dict
 
     @classmethod
@@ -144,52 +286,52 @@ class DAGDetailsResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "active_runs_count": obj.get("active_runs_count") if obj.get("active_runs_count") is not None else 0,
-            "allowed_run_types": obj.get("allowed_run_types"),
-            "asset_expression": obj.get("asset_expression"),
+            "dag_id": obj.get("dag_id"),
+            "dag_display_name": obj.get("dag_display_name"),
+            "is_paused": obj.get("is_paused"),
+            "is_stale": obj.get("is_stale"),
+            "last_parsed_time": obj.get("last_parsed_time"),
+            "last_parse_duration": obj.get("last_parse_duration"),
+            "last_expired": obj.get("last_expired"),
             "bundle_name": obj.get("bundle_name"),
             "bundle_version": obj.get("bundle_version"),
-            "catchup": obj.get("catchup"),
-            "concurrency": obj.get("concurrency"),
-            "dag_display_name": obj.get("dag_display_name"),
-            "dag_id": obj.get("dag_id"),
-            "dag_run_timeout": obj.get("dag_run_timeout"),
-            "default_args": obj.get("default_args"),
-            "description": obj.get("description"),
-            "doc_md": obj.get("doc_md"),
-            "end_date": obj.get("end_date"),
-            "file_token": obj.get("file_token"),
-            "fileloc": obj.get("fileloc"),
-            "has_import_errors": obj.get("has_import_errors"),
-            "has_task_concurrency_limits": obj.get("has_task_concurrency_limits"),
-            "is_favorite": obj.get("is_favorite") if obj.get("is_favorite") is not None else False,
-            "is_paused": obj.get("is_paused"),
-            "is_paused_upon_creation": obj.get("is_paused_upon_creation"),
-            "is_stale": obj.get("is_stale"),
-            "last_expired": obj.get("last_expired"),
-            "last_parse_duration": obj.get("last_parse_duration"),
-            "last_parsed": obj.get("last_parsed"),
-            "last_parsed_time": obj.get("last_parsed_time"),
-            "latest_dag_version": DagVersionResponse.from_dict(obj["latest_dag_version"]) if obj.get("latest_dag_version") is not None else None,
-            "max_active_runs": obj.get("max_active_runs"),
-            "max_active_tasks": obj.get("max_active_tasks"),
-            "max_consecutive_failed_dag_runs": obj.get("max_consecutive_failed_dag_runs"),
-            "next_dagrun_data_interval_end": obj.get("next_dagrun_data_interval_end"),
-            "next_dagrun_data_interval_start": obj.get("next_dagrun_data_interval_start"),
-            "next_dagrun_logical_date": obj.get("next_dagrun_logical_date"),
-            "next_dagrun_run_after": obj.get("next_dagrun_run_after"),
-            "owner_links": obj.get("owner_links"),
-            "owners": obj.get("owners"),
-            "params": obj.get("params"),
             "relative_fileloc": obj.get("relative_fileloc"),
-            "render_template_as_native_obj": obj.get("render_template_as_native_obj"),
-            "start_date": obj.get("start_date"),
-            "tags": [DagTagResponse.from_dict(_item) for _item in obj["tags"]] if obj.get("tags") is not None else None,
-            "template_search_path": obj.get("template_search_path"),
+            "fileloc": obj.get("fileloc"),
+            "description": obj.get("description"),
+            "timetable_summary": obj.get("timetable_summary"),
             "timetable_description": obj.get("timetable_description"),
             "timetable_partitioned": obj.get("timetable_partitioned"),
-            "timetable_summary": obj.get("timetable_summary"),
-            "timezone": obj.get("timezone")
+            "tags": [DagTagResponse.from_dict(_item) for _item in obj["tags"]] if obj.get("tags") is not None else None,
+            "max_active_tasks": obj.get("max_active_tasks"),
+            "max_active_runs": obj.get("max_active_runs"),
+            "max_consecutive_failed_dag_runs": obj.get("max_consecutive_failed_dag_runs"),
+            "has_task_concurrency_limits": obj.get("has_task_concurrency_limits"),
+            "has_import_errors": obj.get("has_import_errors"),
+            "next_dagrun_logical_date": obj.get("next_dagrun_logical_date"),
+            "next_dagrun_data_interval_start": obj.get("next_dagrun_data_interval_start"),
+            "next_dagrun_data_interval_end": obj.get("next_dagrun_data_interval_end"),
+            "next_dagrun_run_after": obj.get("next_dagrun_run_after"),
+            "allowed_run_types": obj.get("allowed_run_types"),
+            "owners": obj.get("owners"),
+            "catchup": obj.get("catchup"),
+            "dag_run_timeout": obj.get("dag_run_timeout"),
+            "asset_expression": obj.get("asset_expression"),
+            "doc_md": obj.get("doc_md"),
+            "start_date": obj.get("start_date"),
+            "end_date": obj.get("end_date"),
+            "is_paused_upon_creation": obj.get("is_paused_upon_creation"),
+            "params": obj.get("params"),
+            "render_template_as_native_obj": obj.get("render_template_as_native_obj"),
+            "template_search_path": obj.get("template_search_path"),
+            "timezone": obj.get("timezone"),
+            "last_parsed": obj.get("last_parsed"),
+            "default_args": obj.get("default_args"),
+            "owner_links": obj.get("owner_links"),
+            "is_favorite": obj.get("is_favorite") if obj.get("is_favorite") is not None else False,
+            "active_runs_count": obj.get("active_runs_count") if obj.get("active_runs_count") is not None else 0,
+            "file_token": obj.get("file_token"),
+            "concurrency": obj.get("concurrency"),
+            "latest_dag_version": DagVersionResponse.from_dict(obj["latest_dag_version"]) if obj.get("latest_dag_version") is not None else None
         })
         return _obj
 

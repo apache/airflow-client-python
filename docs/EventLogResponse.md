@@ -6,19 +6,19 @@ Event Log Response.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**dag_display_name** | **str** |  | [optional] 
-**dag_id** | **str** |  | [optional] 
-**event** | **str** |  | 
 **event_log_id** | **int** |  | 
-**extra** | **str** |  | [optional] 
-**logical_date** | **datetime** |  | [optional] 
-**map_index** | **int** |  | [optional] 
-**owner** | **str** |  | [optional] 
-**run_id** | **str** |  | [optional] 
-**task_display_name** | **str** |  | [optional] 
-**task_id** | **str** |  | [optional] 
-**try_number** | **int** |  | [optional] 
 **when** | **datetime** |  | 
+**dag_id** | **str** |  | 
+**task_id** | **str** |  | 
+**run_id** | **str** |  | 
+**map_index** | **int** |  | 
+**try_number** | **int** |  | 
+**event** | **str** |  | 
+**logical_date** | **datetime** |  | 
+**owner** | **str** |  | 
+**extra** | **str** |  | 
+**dag_display_name** | **str** |  | [optional] 
+**task_display_name** | **str** |  | [optional] 
 
 ## Example
 

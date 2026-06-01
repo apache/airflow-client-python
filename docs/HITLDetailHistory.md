@@ -6,19 +6,19 @@ Schema for Human-in-the-loop detail history.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**assigned_users** | [**List[HITLUser]**](HITLUser.md) |  | [optional] 
+**options** | **List[str]** |  | 
+**subject** | **str** |  | 
 **body** | **str** |  | [optional] 
-**chosen_options** | **List[str]** |  | [optional] 
-**created_at** | **datetime** |  | 
 **defaults** | **List[str]** |  | [optional] 
 **multiple** | **bool** |  | [optional] [default to False]
-**options** | **List[str]** |  | 
 **params** | **Dict[str, object]** |  | [optional] 
-**params_input** | **Dict[str, object]** |  | [optional] 
-**responded_at** | **datetime** |  | [optional] 
+**assigned_users** | [**List[HITLUser]**](HITLUser.md) |  | [optional] 
+**created_at** | **datetime** |  | 
 **responded_by_user** | [**HITLUser**](HITLUser.md) |  | [optional] 
+**responded_at** | **datetime** |  | [optional] 
+**chosen_options** | **List[str]** |  | [optional] 
+**params_input** | **Dict[str, object]** |  | [optional] 
 **response_received** | **bool** |  | [optional] [default to False]
-**subject** | **str** |  | 
 **task_instance** | [**TaskInstanceHistoryResponse**](TaskInstanceHistoryResponse.md) |  | 
 
 ## Example

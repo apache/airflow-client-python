@@ -18,6 +18,16 @@
  -->
 
 
+# v3.2.2
+
+## Bug Fixes:
+
+ - Fix starlette `ServerErrorMiddleware` host-header injection (requires `starlette>=1.0.1`, `cadwyn>=6.1.1`) ([#66434](https://github.com/apache/airflow/pull/66434))
+ - Fix JWT tokens revoked on `/auth/logout` regardless of auth manager ([#66346](https://github.com/apache/airflow/pull/66346))
+ - Fix `max_active_runs` serialization in REST API ([#66295](https://github.com/apache/airflow/pull/66295))
+ - Fix N+1 query in bulk pool delete endpoint ([#66189](https://github.com/apache/airflow/pull/66189))
+ - Fix N+1 query in task instance states endpoint ([#66150](https://github.com/apache/airflow/pull/66150))
+
 # v3.2.1
 
 ## Bug Fixes:

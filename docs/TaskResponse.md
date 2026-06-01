@@ -6,33 +6,33 @@ Task serializer for responses.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**class_ref** | **Dict[str, object]** |  | [optional] 
+**task_id** | **str** |  | 
+**task_display_name** | **str** |  | 
+**owner** | **str** |  | 
+**start_date** | **datetime** |  | 
+**end_date** | **datetime** |  | 
+**trigger_rule** | **str** |  | 
 **depends_on_past** | **bool** |  | 
-**doc_md** | **str** |  | [optional] 
-**downstream_task_ids** | **List[str]** |  | [optional] 
-**end_date** | **datetime** |  | [optional] 
-**execution_timeout** | [**TimeDelta**](TimeDelta.md) |  | [optional] 
-**extra_links** | **List[str]** | Extract and return extra_links. | [readonly] 
-**is_mapped** | **bool** |  | [optional] 
-**operator_name** | **str** |  | [optional] 
-**owner** | **str** |  | [optional] 
-**params** | **Dict[str, object]** |  | [optional] 
-**pool** | **str** |  | [optional] 
-**pool_slots** | **float** |  | [optional] 
-**priority_weight** | **float** |  | [optional] 
-**queue** | **str** |  | [optional] 
-**retries** | **float** |  | [optional] 
-**retry_delay** | [**TimeDelta**](TimeDelta.md) |  | [optional] 
-**retry_exponential_backoff** | **float** |  | 
-**start_date** | **datetime** |  | [optional] 
-**task_display_name** | **str** |  | [optional] 
-**task_id** | **str** |  | [optional] 
-**template_fields** | **List[str]** |  | [optional] 
-**trigger_rule** | **str** |  | [optional] 
-**ui_color** | **str** |  | [optional] 
-**ui_fgcolor** | **str** |  | [optional] 
 **wait_for_downstream** | **bool** |  | 
-**weight_rule** | **str** |  | [optional] 
+**retries** | **float** |  | 
+**queue** | **str** |  | 
+**pool** | **str** |  | 
+**pool_slots** | **float** |  | 
+**execution_timeout** | [**TimeDelta**](TimeDelta.md) |  | 
+**retry_delay** | [**TimeDelta**](TimeDelta.md) |  | 
+**retry_exponential_backoff** | **float** |  | 
+**priority_weight** | **float** |  | 
+**weight_rule** | **str** |  | 
+**ui_color** | **str** |  | 
+**ui_fgcolor** | **str** |  | 
+**template_fields** | **List[str]** |  | 
+**downstream_task_ids** | **List[str]** |  | 
+**doc_md** | **str** |  | 
+**operator_name** | **str** |  | 
+**params** | **Dict[str, object]** |  | 
+**class_ref** | **Dict[str, object]** |  | 
+**is_mapped** | **bool** |  | 
+**extra_links** | **List[str]** | Extract and return extra_links. | [readonly] 
 
 ## Example
 

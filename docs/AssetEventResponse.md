@@ -6,19 +6,19 @@ Asset event serializer for responses.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**asset_id** | **int** |  | 
-**created_dagruns** | [**List[DagRunAssetReference]**](DagRunAssetReference.md) |  | 
-**extra** | **Dict[str, object]** |  | [optional] 
-**group** | **str** |  | [optional] 
 **id** | **int** |  | 
-**name** | **str** |  | [optional] 
-**partition_key** | **str** |  | [optional] 
-**source_dag_id** | **str** |  | [optional] 
-**source_map_index** | **int** |  | 
-**source_run_id** | **str** |  | [optional] 
-**source_task_id** | **str** |  | [optional] 
-**timestamp** | **datetime** |  | 
+**asset_id** | **int** |  | 
 **uri** | **str** |  | [optional] 
+**name** | **str** |  | [optional] 
+**group** | **str** |  | [optional] 
+**extra** | **Dict[str, object]** |  | [optional] 
+**source_task_id** | **str** |  | [optional] 
+**source_dag_id** | **str** |  | [optional] 
+**source_run_id** | **str** |  | [optional] 
+**source_map_index** | **int** |  | 
+**created_dagruns** | [**List[DagRunAssetReference]**](DagRunAssetReference.md) |  | 
+**timestamp** | **datetime** |  | 
+**partition_key** | **str** |  | [optional] 
 
 ## Example
 

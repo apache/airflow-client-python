@@ -27,9 +27,9 @@ class PluginImportErrorResponse(BaseModel):
     """
     Plugin Import Error serializer for responses.
     """ # noqa: E501
-    error: StrictStr
     source: StrictStr
-    __properties: ClassVar[List[str]] = ["error", "source"]
+    error: StrictStr
+    __properties: ClassVar[List[str]] = ["source", "error"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -82,8 +82,8 @@ class PluginImportErrorResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "error": obj.get("error"),
-            "source": obj.get("source")
+            "source": obj.get("source"),
+            "error": obj.get("error")
         })
         return _obj
 

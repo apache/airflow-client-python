@@ -6,13 +6,13 @@ Serializer for External View Plugin responses.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**category** | **str** |  | [optional] 
-**destination** | **str** |  | [optional] [default to 'nav']
-**href** | **str** |  | 
+**name** | **str** |  | 
 **icon** | **str** |  | [optional] 
 **icon_dark_mode** | **str** |  | [optional] 
-**name** | **str** |  | 
 **url_route** | **str** |  | [optional] 
+**category** | **str** |  | [optional] 
+**href** | **str** |  | 
+**destination** | **str** |  | [optional] [default to 'nav']
 
 ## Example
 

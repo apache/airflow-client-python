@@ -6,15 +6,15 @@ DagRun serializer for asset responses.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**dag_id** | **str** |  | 
-**data_interval_end** | **datetime** |  | [optional] 
-**data_interval_start** | **datetime** |  | [optional] 
-**end_date** | **datetime** |  | [optional] 
-**logical_date** | **datetime** |  | [optional] 
-**partition_key** | **str** |  | [optional] 
 **run_id** | **str** |  | 
+**dag_id** | **str** |  | 
+**logical_date** | **datetime** |  | 
 **start_date** | **datetime** |  | 
+**end_date** | **datetime** |  | 
 **state** | **str** |  | 
+**data_interval_start** | **datetime** |  | 
+**data_interval_end** | **datetime** |  | 
+**partition_key** | **str** |  | 
 
 ## Example
 

@@ -29,13 +29,13 @@ class PatchTaskInstanceBody(BaseModel):
     """
     Request body for Clear Task Instances endpoint.
     """ # noqa: E501
+    new_state: Optional[TaskInstanceState] = None
+    note: Optional[Annotated[str, Field(strict=True, max_length=1000)]] = None
+    include_upstream: Optional[StrictBool] = False
     include_downstream: Optional[StrictBool] = False
     include_future: Optional[StrictBool] = False
     include_past: Optional[StrictBool] = False
-    include_upstream: Optional[StrictBool] = False
-    new_state: Optional[TaskInstanceState] = None
-    note: Optional[Annotated[str, Field(strict=True, max_length=1000)]] = None
-    __properties: ClassVar[List[str]] = ["include_downstream", "include_future", "include_past", "include_upstream", "new_state", "note"]
+    __properties: ClassVar[List[str]] = ["new_state", "note", "include_upstream", "include_downstream", "include_future", "include_past"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -76,6 +76,16 @@ class PatchTaskInstanceBody(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if new_state (nullable) is None
+        # and model_fields_set contains the field
+        if self.new_state is None and "new_state" in self.model_fields_set:
+            _dict['new_state'] = None
+
+        # set to None if note (nullable) is None
+        # and model_fields_set contains the field
+        if self.note is None and "note" in self.model_fields_set:
+            _dict['note'] = None
+
         return _dict
 
     @classmethod
@@ -88,12 +98,12 @@ class PatchTaskInstanceBody(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "new_state": obj.get("new_state"),
+            "note": obj.get("note"),
+            "include_upstream": obj.get("include_upstream") if obj.get("include_upstream") is not None else False,
             "include_downstream": obj.get("include_downstream") if obj.get("include_downstream") is not None else False,
             "include_future": obj.get("include_future") if obj.get("include_future") is not None else False,
-            "include_past": obj.get("include_past") if obj.get("include_past") is not None else False,
-            "include_upstream": obj.get("include_upstream") if obj.get("include_upstream") is not None else False,
-            "new_state": obj.get("new_state"),
-            "note": obj.get("note")
+            "include_past": obj.get("include_past") if obj.get("include_past") is not None else False
         })
         return _obj
 

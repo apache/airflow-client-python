@@ -337,7 +337,7 @@ class DagVersionApi:
         version_number: Optional[StrictInt] = None,
         bundle_name: Optional[StrictStr] = None,
         bundle_version: Optional[StrictStr] = None,
-        order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, version_number, bundle_name, bundle_version`")] = None,
+        order_by: Annotated[Optional[List[Optional[StrictStr]]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, version_number, bundle_name, bundle_version`")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -353,7 +353,7 @@ class DagVersionApi:
     ) -> DAGVersionCollectionResponse:
         """Get Dag Versions
 
-        Get all DAG Versions.  This endpoint allows specifying `~` as the dag_id to retrieve DAG Versions for all DAGs.
+        Get all Dag Versions.  This endpoint allows specifying `~` as the dag_id to retrieve Dag Versions for all Dags.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -368,7 +368,7 @@ class DagVersionApi:
         :param bundle_version:
         :type bundle_version: str
         :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, version_number, bundle_name, bundle_version`
-        :type order_by: List[str]
+        :type order_by: List[Optional[str]]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -432,7 +432,7 @@ class DagVersionApi:
         version_number: Optional[StrictInt] = None,
         bundle_name: Optional[StrictStr] = None,
         bundle_version: Optional[StrictStr] = None,
-        order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, version_number, bundle_name, bundle_version`")] = None,
+        order_by: Annotated[Optional[List[Optional[StrictStr]]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, version_number, bundle_name, bundle_version`")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -448,7 +448,7 @@ class DagVersionApi:
     ) -> ApiResponse[DAGVersionCollectionResponse]:
         """Get Dag Versions
 
-        Get all DAG Versions.  This endpoint allows specifying `~` as the dag_id to retrieve DAG Versions for all DAGs.
+        Get all Dag Versions.  This endpoint allows specifying `~` as the dag_id to retrieve Dag Versions for all Dags.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -463,7 +463,7 @@ class DagVersionApi:
         :param bundle_version:
         :type bundle_version: str
         :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, version_number, bundle_name, bundle_version`
-        :type order_by: List[str]
+        :type order_by: List[Optional[str]]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -527,7 +527,7 @@ class DagVersionApi:
         version_number: Optional[StrictInt] = None,
         bundle_name: Optional[StrictStr] = None,
         bundle_version: Optional[StrictStr] = None,
-        order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, version_number, bundle_name, bundle_version`")] = None,
+        order_by: Annotated[Optional[List[Optional[StrictStr]]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, version_number, bundle_name, bundle_version`")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -543,7 +543,7 @@ class DagVersionApi:
     ) -> RESTResponseType:
         """Get Dag Versions
 
-        Get all DAG Versions.  This endpoint allows specifying `~` as the dag_id to retrieve DAG Versions for all DAGs.
+        Get all Dag Versions.  This endpoint allows specifying `~` as the dag_id to retrieve Dag Versions for all Dags.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -558,7 +558,7 @@ class DagVersionApi:
         :param bundle_version:
         :type bundle_version: str
         :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, version_number, bundle_name, bundle_version`
-        :type order_by: List[str]
+        :type order_by: List[Optional[str]]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of

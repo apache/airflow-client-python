@@ -27,9 +27,9 @@ class ConnectionTestResponse(BaseModel):
     """
     Connection Test serializer for responses.
     """ # noqa: E501
-    message: StrictStr
     status: StrictBool
-    __properties: ClassVar[List[str]] = ["message", "status"]
+    message: StrictStr
+    __properties: ClassVar[List[str]] = ["status", "message"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -82,8 +82,8 @@ class ConnectionTestResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "message": obj.get("message"),
-            "status": obj.get("status")
+            "status": obj.get("status"),
+            "message": obj.get("message")
         })
         return _obj
 

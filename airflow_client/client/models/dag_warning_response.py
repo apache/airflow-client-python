@@ -27,14 +27,14 @@ from pydantic_core import to_jsonable_python
 
 class DAGWarningResponse(BaseModel):
     """
-    DAG Warning serializer for responses.
+    Dag Warning serializer for responses.
     """ # noqa: E501
-    dag_display_name: StrictStr
     dag_id: StrictStr
+    warning_type: DagWarningType
     message: StrictStr
     timestamp: datetime
-    warning_type: DagWarningType
-    __properties: ClassVar[List[str]] = ["dag_display_name", "dag_id", "message", "timestamp", "warning_type"]
+    dag_display_name: StrictStr
+    __properties: ClassVar[List[str]] = ["dag_id", "warning_type", "message", "timestamp", "dag_display_name"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -87,11 +87,11 @@ class DAGWarningResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "dag_display_name": obj.get("dag_display_name"),
             "dag_id": obj.get("dag_id"),
+            "warning_type": obj.get("warning_type"),
             "message": obj.get("message"),
             "timestamp": obj.get("timestamp"),
-            "warning_type": obj.get("warning_type")
+            "dag_display_name": obj.get("dag_display_name")
         })
         return _obj
 

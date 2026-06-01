@@ -7,8 +7,8 @@ Create asset events request.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **asset_id** | **int** |  | 
-**extra** | **Dict[str, object]** |  | [optional] 
 **partition_key** | **str** |  | [optional] 
+**extra** | **Dict[str, object]** |  | [optional] 
 
 ## Example
 

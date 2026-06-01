@@ -1,37 +1,37 @@
 # DAGRunsBatchBody
 
-List DAG Runs body for batch endpoint.
+List Dag Runs body for batch endpoint.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**conf_contains** | **str** |  | [optional] 
-**dag_ids** | **List[str]** |  | [optional] 
-**duration_gt** | **float** |  | [optional] 
-**duration_gte** | **float** |  | [optional] 
-**duration_lt** | **float** |  | [optional] 
-**duration_lte** | **float** |  | [optional] 
-**end_date_gt** | **datetime** |  | [optional] 
-**end_date_gte** | **datetime** |  | [optional] 
-**end_date_lt** | **datetime** |  | [optional] 
-**end_date_lte** | **datetime** |  | [optional] 
-**logical_date_gt** | **datetime** |  | [optional] 
-**logical_date_gte** | **datetime** |  | [optional] 
-**logical_date_lt** | **datetime** |  | [optional] 
-**logical_date_lte** | **datetime** |  | [optional] 
 **order_by** | **str** |  | [optional] 
-**page_limit** | **int** |  | [optional] [default to 100]
 **page_offset** | **int** |  | [optional] [default to 0]
-**run_after_gt** | **datetime** |  | [optional] 
-**run_after_gte** | **datetime** |  | [optional] 
-**run_after_lt** | **datetime** |  | [optional] 
-**run_after_lte** | **datetime** |  | [optional] 
-**start_date_gt** | **datetime** |  | [optional] 
-**start_date_gte** | **datetime** |  | [optional] 
-**start_date_lt** | **datetime** |  | [optional] 
-**start_date_lte** | **datetime** |  | [optional] 
+**page_limit** | **int** |  | [optional] [default to 100]
+**dag_ids** | **List[str]** |  | [optional] 
 **states** | [**List[Optional[DagRunState]]**](DagRunState.md) |  | [optional] 
+**run_after_gte** | **datetime** |  | [optional] 
+**run_after_gt** | **datetime** |  | [optional] 
+**run_after_lte** | **datetime** |  | [optional] 
+**run_after_lt** | **datetime** |  | [optional] 
+**logical_date_gte** | **datetime** |  | [optional] 
+**logical_date_gt** | **datetime** |  | [optional] 
+**logical_date_lte** | **datetime** |  | [optional] 
+**logical_date_lt** | **datetime** |  | [optional] 
+**start_date_gte** | **datetime** |  | [optional] 
+**start_date_gt** | **datetime** |  | [optional] 
+**start_date_lte** | **datetime** |  | [optional] 
+**start_date_lt** | **datetime** |  | [optional] 
+**end_date_gte** | **datetime** |  | [optional] 
+**end_date_gt** | **datetime** |  | [optional] 
+**end_date_lte** | **datetime** |  | [optional] 
+**end_date_lt** | **datetime** |  | [optional] 
+**duration_gte** | **float** |  | [optional] 
+**duration_gt** | **float** |  | [optional] 
+**duration_lte** | **float** |  | [optional] 
+**duration_lt** | **float** |  | [optional] 
+**conf_contains** | **str** |  | [optional] 
 
 ## Example
 

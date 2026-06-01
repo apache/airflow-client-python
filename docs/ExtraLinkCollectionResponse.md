@@ -6,7 +6,7 @@ Extra Links Response.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**extra_links** | **Dict[str, str]** |  | 
+**extra_links** | [**Dict[str, ExtraLinksValue]**](ExtraLinksValue.md) |  | 
 **total_entries** | **int** |  | 
 
 ## Example

@@ -27,9 +27,9 @@ class DagProcessorInfoResponse(BaseModel):
     """
     DagProcessor info serializer for responses.
     """ # noqa: E501
-    latest_dag_processor_heartbeat: Optional[StrictStr] = None
-    status: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["latest_dag_processor_heartbeat", "status"]
+    status: Optional[StrictStr]
+    latest_dag_processor_heartbeat: Optional[StrictStr]
+    __properties: ClassVar[List[str]] = ["status", "latest_dag_processor_heartbeat"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -70,6 +70,16 @@ class DagProcessorInfoResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if status (nullable) is None
+        # and model_fields_set contains the field
+        if self.status is None and "status" in self.model_fields_set:
+            _dict['status'] = None
+
+        # set to None if latest_dag_processor_heartbeat (nullable) is None
+        # and model_fields_set contains the field
+        if self.latest_dag_processor_heartbeat is None and "latest_dag_processor_heartbeat" in self.model_fields_set:
+            _dict['latest_dag_processor_heartbeat'] = None
+
         return _dict
 
     @classmethod
@@ -82,8 +92,8 @@ class DagProcessorInfoResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "latest_dag_processor_heartbeat": obj.get("latest_dag_processor_heartbeat"),
-            "status": obj.get("status")
+            "status": obj.get("status"),
+            "latest_dag_processor_heartbeat": obj.get("latest_dag_processor_heartbeat")
         })
         return _obj
 

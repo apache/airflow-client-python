@@ -97,9 +97,9 @@ class TaskApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskResponse",
-            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
+            '400': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
@@ -173,9 +173,9 @@ class TaskApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskResponse",
-            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
+            '400': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
@@ -249,9 +249,9 @@ class TaskApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskResponse",
-            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
+            '400': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
@@ -350,7 +350,7 @@ class TaskApi:
     ) -> TaskCollectionResponse:
         """Get Tasks
 
-        Get tasks for DAG.
+        Get tasks for Dag.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -389,9 +389,9 @@ class TaskApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskCollectionResponse",
-            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
+            '400': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
@@ -426,7 +426,7 @@ class TaskApi:
     ) -> ApiResponse[TaskCollectionResponse]:
         """Get Tasks
 
-        Get tasks for DAG.
+        Get tasks for Dag.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -465,9 +465,9 @@ class TaskApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskCollectionResponse",
-            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
+            '400': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
@@ -502,7 +502,7 @@ class TaskApi:
     ) -> RESTResponseType:
         """Get Tasks
 
-        Get tasks for DAG.
+        Get tasks for Dag.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -541,9 +541,9 @@ class TaskApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskCollectionResponse",
-            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
+            '400': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }

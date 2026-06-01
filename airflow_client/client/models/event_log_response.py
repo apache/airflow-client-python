@@ -28,20 +28,20 @@ class EventLogResponse(BaseModel):
     """
     Event Log Response.
     """ # noqa: E501
-    dag_display_name: Optional[StrictStr] = None
-    dag_id: Optional[StrictStr] = None
-    event: StrictStr
     event_log_id: StrictInt
-    extra: Optional[StrictStr] = None
-    logical_date: Optional[datetime] = None
-    map_index: Optional[StrictInt] = None
-    owner: Optional[StrictStr] = None
-    run_id: Optional[StrictStr] = None
-    task_display_name: Optional[StrictStr] = None
-    task_id: Optional[StrictStr] = None
-    try_number: Optional[StrictInt] = None
     when: datetime
-    __properties: ClassVar[List[str]] = ["dag_display_name", "dag_id", "event", "event_log_id", "extra", "logical_date", "map_index", "owner", "run_id", "task_display_name", "task_id", "try_number", "when"]
+    dag_id: Optional[StrictStr]
+    task_id: Optional[StrictStr]
+    run_id: Optional[StrictStr]
+    map_index: Optional[StrictInt]
+    try_number: Optional[StrictInt]
+    event: StrictStr
+    logical_date: Optional[datetime]
+    owner: Optional[StrictStr]
+    extra: Optional[StrictStr]
+    dag_display_name: Optional[StrictStr] = None
+    task_display_name: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["event_log_id", "when", "dag_id", "task_id", "run_id", "map_index", "try_number", "event", "logical_date", "owner", "extra", "dag_display_name", "task_display_name"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -82,6 +82,56 @@ class EventLogResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if dag_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.dag_id is None and "dag_id" in self.model_fields_set:
+            _dict['dag_id'] = None
+
+        # set to None if task_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.task_id is None and "task_id" in self.model_fields_set:
+            _dict['task_id'] = None
+
+        # set to None if run_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.run_id is None and "run_id" in self.model_fields_set:
+            _dict['run_id'] = None
+
+        # set to None if map_index (nullable) is None
+        # and model_fields_set contains the field
+        if self.map_index is None and "map_index" in self.model_fields_set:
+            _dict['map_index'] = None
+
+        # set to None if try_number (nullable) is None
+        # and model_fields_set contains the field
+        if self.try_number is None and "try_number" in self.model_fields_set:
+            _dict['try_number'] = None
+
+        # set to None if logical_date (nullable) is None
+        # and model_fields_set contains the field
+        if self.logical_date is None and "logical_date" in self.model_fields_set:
+            _dict['logical_date'] = None
+
+        # set to None if owner (nullable) is None
+        # and model_fields_set contains the field
+        if self.owner is None and "owner" in self.model_fields_set:
+            _dict['owner'] = None
+
+        # set to None if extra (nullable) is None
+        # and model_fields_set contains the field
+        if self.extra is None and "extra" in self.model_fields_set:
+            _dict['extra'] = None
+
+        # set to None if dag_display_name (nullable) is None
+        # and model_fields_set contains the field
+        if self.dag_display_name is None and "dag_display_name" in self.model_fields_set:
+            _dict['dag_display_name'] = None
+
+        # set to None if task_display_name (nullable) is None
+        # and model_fields_set contains the field
+        if self.task_display_name is None and "task_display_name" in self.model_fields_set:
+            _dict['task_display_name'] = None
+
         return _dict
 
     @classmethod
@@ -94,19 +144,19 @@ class EventLogResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "dag_display_name": obj.get("dag_display_name"),
-            "dag_id": obj.get("dag_id"),
-            "event": obj.get("event"),
             "event_log_id": obj.get("event_log_id"),
-            "extra": obj.get("extra"),
-            "logical_date": obj.get("logical_date"),
-            "map_index": obj.get("map_index"),
-            "owner": obj.get("owner"),
-            "run_id": obj.get("run_id"),
-            "task_display_name": obj.get("task_display_name"),
+            "when": obj.get("when"),
+            "dag_id": obj.get("dag_id"),
             "task_id": obj.get("task_id"),
+            "run_id": obj.get("run_id"),
+            "map_index": obj.get("map_index"),
             "try_number": obj.get("try_number"),
-            "when": obj.get("when")
+            "event": obj.get("event"),
+            "logical_date": obj.get("logical_date"),
+            "owner": obj.get("owner"),
+            "extra": obj.get("extra"),
+            "dag_display_name": obj.get("dag_display_name"),
+            "task_display_name": obj.get("task_display_name")
         })
         return _obj
 

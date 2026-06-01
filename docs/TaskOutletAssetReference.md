@@ -6,9 +6,9 @@ Task outlet reference serializer for assets.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**created_at** | **datetime** |  | 
 **dag_id** | **str** |  | 
 **task_id** | **str** |  | 
+**created_at** | **datetime** |  | 
 **updated_at** | **datetime** |  | 
 
 ## Example

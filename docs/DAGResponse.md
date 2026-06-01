@@ -1,39 +1,39 @@
 # DAGResponse
 
-DAG serializer for responses.
+Dag serializer for responses.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**allowed_run_types** | [**List[DagRunType]**](DagRunType.md) |  | [optional] 
-**bundle_name** | **str** |  | [optional] 
-**bundle_version** | **str** |  | [optional] 
-**dag_display_name** | **str** |  | 
 **dag_id** | **str** |  | 
-**description** | **str** |  | [optional] 
-**file_token** | **str** | Return file token. | [readonly] 
-**fileloc** | **str** |  | 
-**has_import_errors** | **bool** |  | 
-**has_task_concurrency_limits** | **bool** |  | 
+**dag_display_name** | **str** |  | 
 **is_paused** | **bool** |  | 
 **is_stale** | **bool** |  | 
-**last_expired** | **datetime** |  | [optional] 
-**last_parse_duration** | **float** |  | [optional] 
-**last_parsed_time** | **datetime** |  | [optional] 
-**max_active_runs** | **int** |  | [optional] 
-**max_active_tasks** | **int** |  | 
-**max_consecutive_failed_dag_runs** | **int** |  | 
-**next_dagrun_data_interval_end** | **datetime** |  | [optional] 
-**next_dagrun_data_interval_start** | **datetime** |  | [optional] 
-**next_dagrun_logical_date** | **datetime** |  | [optional] 
-**next_dagrun_run_after** | **datetime** |  | [optional] 
-**owners** | **List[str]** |  | 
-**relative_fileloc** | **str** |  | [optional] 
-**tags** | [**List[DagTagResponse]**](DagTagResponse.md) |  | 
-**timetable_description** | **str** |  | [optional] 
+**last_parsed_time** | **datetime** |  | 
+**last_parse_duration** | **float** |  | 
+**last_expired** | **datetime** |  | 
+**bundle_name** | **str** |  | 
+**bundle_version** | **str** |  | 
+**relative_fileloc** | **str** |  | 
+**fileloc** | **str** |  | 
+**description** | **str** |  | 
+**timetable_summary** | **str** |  | 
+**timetable_description** | **str** |  | 
 **timetable_partitioned** | **bool** |  | 
-**timetable_summary** | **str** |  | [optional] 
+**tags** | [**List[DagTagResponse]**](DagTagResponse.md) |  | 
+**max_active_tasks** | **int** |  | 
+**max_active_runs** | **int** |  | 
+**max_consecutive_failed_dag_runs** | **int** |  | 
+**has_task_concurrency_limits** | **bool** |  | 
+**has_import_errors** | **bool** |  | 
+**next_dagrun_logical_date** | **datetime** |  | 
+**next_dagrun_data_interval_start** | **datetime** |  | 
+**next_dagrun_data_interval_end** | **datetime** |  | 
+**next_dagrun_run_after** | **datetime** |  | 
+**allowed_run_types** | [**List[DagRunType]**](DagRunType.md) |  | 
+**owners** | **List[str]** |  | 
+**file_token** | **str** | Return file token. | [readonly] 
 
 ## Example
 

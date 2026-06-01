@@ -28,11 +28,11 @@ class QueuedEventResponse(BaseModel):
     """
     Queued Event serializer for responses..
     """ # noqa: E501
+    dag_id: StrictStr
     asset_id: StrictInt
     created_at: datetime
     dag_display_name: StrictStr
-    dag_id: StrictStr
-    __properties: ClassVar[List[str]] = ["asset_id", "created_at", "dag_display_name", "dag_id"]
+    __properties: ClassVar[List[str]] = ["dag_id", "asset_id", "created_at", "dag_display_name"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -85,10 +85,10 @@ class QueuedEventResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "dag_id": obj.get("dag_id"),
             "asset_id": obj.get("asset_id"),
             "created_at": obj.get("created_at"),
-            "dag_display_name": obj.get("dag_display_name"),
-            "dag_id": obj.get("dag_id")
+            "dag_display_name": obj.get("dag_display_name")
         })
         return _obj
 

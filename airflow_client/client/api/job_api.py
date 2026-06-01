@@ -53,7 +53,7 @@ class JobApi:
         end_date_lt: Optional[datetime] = None,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, dag_id, state, job_type, start_date, end_date, latest_heartbeat, executor_class, hostname, unixname`")] = None,
+        order_by: Annotated[Optional[List[Optional[StrictStr]]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, dag_id, state, job_type, start_date, end_date, latest_heartbeat, executor_class, hostname, unixname`")] = None,
         job_state: Optional[StrictStr] = None,
         job_type: Optional[StrictStr] = None,
         hostname: Optional[StrictStr] = None,
@@ -98,7 +98,7 @@ class JobApi:
         :param offset:
         :type offset: int
         :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, dag_id, state, job_type, start_date, end_date, latest_heartbeat, executor_class, hostname, unixname`
-        :type order_by: List[str]
+        :type order_by: List[Optional[str]]
         :param job_state:
         :type job_state: str
         :param job_type:
@@ -154,9 +154,9 @@ class JobApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "JobCollectionResponse",
-            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
+            '400': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -184,7 +184,7 @@ class JobApi:
         end_date_lt: Optional[datetime] = None,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, dag_id, state, job_type, start_date, end_date, latest_heartbeat, executor_class, hostname, unixname`")] = None,
+        order_by: Annotated[Optional[List[Optional[StrictStr]]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, dag_id, state, job_type, start_date, end_date, latest_heartbeat, executor_class, hostname, unixname`")] = None,
         job_state: Optional[StrictStr] = None,
         job_type: Optional[StrictStr] = None,
         hostname: Optional[StrictStr] = None,
@@ -229,7 +229,7 @@ class JobApi:
         :param offset:
         :type offset: int
         :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, dag_id, state, job_type, start_date, end_date, latest_heartbeat, executor_class, hostname, unixname`
-        :type order_by: List[str]
+        :type order_by: List[Optional[str]]
         :param job_state:
         :type job_state: str
         :param job_type:
@@ -285,9 +285,9 @@ class JobApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "JobCollectionResponse",
-            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
+            '400': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -315,7 +315,7 @@ class JobApi:
         end_date_lt: Optional[datetime] = None,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, dag_id, state, job_type, start_date, end_date, latest_heartbeat, executor_class, hostname, unixname`")] = None,
+        order_by: Annotated[Optional[List[Optional[StrictStr]]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, dag_id, state, job_type, start_date, end_date, latest_heartbeat, executor_class, hostname, unixname`")] = None,
         job_state: Optional[StrictStr] = None,
         job_type: Optional[StrictStr] = None,
         hostname: Optional[StrictStr] = None,
@@ -360,7 +360,7 @@ class JobApi:
         :param offset:
         :type offset: int
         :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, dag_id, state, job_type, start_date, end_date, latest_heartbeat, executor_class, hostname, unixname`
-        :type order_by: List[str]
+        :type order_by: List[Optional[str]]
         :param job_state:
         :type job_state: str
         :param job_type:
@@ -416,9 +416,9 @@ class JobApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "JobCollectionResponse",
-            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
+            '400': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(

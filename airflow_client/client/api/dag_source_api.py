@@ -100,9 +100,9 @@ class DagSourceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DAGSourceResponse",
-            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
+            '400': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
             '406': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
@@ -181,9 +181,9 @@ class DagSourceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DAGSourceResponse",
-            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
+            '400': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
             '406': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
@@ -262,9 +262,9 @@ class DagSourceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DAGSourceResponse",
-            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
+            '400': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
             '406': "HTTPExceptionResponse",
             '422': "HTTPValidationError",

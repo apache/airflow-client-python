@@ -27,12 +27,12 @@ class AppBuilderViewResponse(BaseModel):
     """
     Serializer for AppBuilder View responses.
     """ # noqa: E501
-    category: Optional[StrictStr] = None
-    label: Optional[StrictStr] = None
     name: Optional[StrictStr] = None
+    category: Optional[StrictStr] = None
     view: Optional[StrictStr] = None
+    label: Optional[StrictStr] = None
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["category", "label", "name", "view"]
+    __properties: ClassVar[List[str]] = ["name", "category", "view", "label"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -80,6 +80,26 @@ class AppBuilderViewResponse(BaseModel):
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
+        # set to None if name (nullable) is None
+        # and model_fields_set contains the field
+        if self.name is None and "name" in self.model_fields_set:
+            _dict['name'] = None
+
+        # set to None if category (nullable) is None
+        # and model_fields_set contains the field
+        if self.category is None and "category" in self.model_fields_set:
+            _dict['category'] = None
+
+        # set to None if view (nullable) is None
+        # and model_fields_set contains the field
+        if self.view is None and "view" in self.model_fields_set:
+            _dict['view'] = None
+
+        # set to None if label (nullable) is None
+        # and model_fields_set contains the field
+        if self.label is None and "label" in self.model_fields_set:
+            _dict['label'] = None
+
         return _dict
 
     @classmethod
@@ -92,10 +112,10 @@ class AppBuilderViewResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "category": obj.get("category"),
-            "label": obj.get("label"),
             "name": obj.get("name"),
-            "view": obj.get("view")
+            "category": obj.get("category"),
+            "view": obj.get("view"),
+            "label": obj.get("label")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

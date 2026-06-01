@@ -1,13 +1,13 @@
 # DAGRunPatchBody
 
-DAG Run Serializer for PATCH requests.
+Dag Run Serializer for PATCH requests.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**note** | **str** |  | [optional] 
 **state** | [**DAGRunPatchStates**](DAGRunPatchStates.md) |  | [optional] 
+**note** | **str** |  | [optional] 
 
 ## Example
 

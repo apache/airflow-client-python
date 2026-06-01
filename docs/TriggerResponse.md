@@ -6,12 +6,12 @@ Trigger serializer for responses.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**classpath** | **str** |  | 
-**created_date** | **datetime** |  | 
 **id** | **int** |  | 
+**classpath** | **str** |  | 
 **kwargs** | **str** |  | 
-**queue** | **str** |  | [optional] 
-**triggerer_id** | **int** |  | [optional] 
+**created_date** | **datetime** |  | 
+**queue** | **str** |  | 
+**triggerer_id** | **int** |  | 
 
 ## Example
 

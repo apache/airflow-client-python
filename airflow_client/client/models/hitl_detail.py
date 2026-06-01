@@ -31,21 +31,21 @@ class HITLDetail(BaseModel):
     """
     Schema for Human-in-the-loop detail.
     """ # noqa: E501
-    assigned_users: Optional[List[HITLUser]] = None
+    options: Annotated[List[StrictStr], Field(min_length=1)]
+    subject: StrictStr
     body: Optional[StrictStr] = None
-    chosen_options: Optional[List[StrictStr]] = None
-    created_at: datetime
     defaults: Optional[List[StrictStr]] = None
     multiple: Optional[StrictBool] = False
-    options: Annotated[List[StrictStr], Field(min_length=1)]
     params: Optional[Dict[str, Any]] = None
-    params_input: Optional[Dict[str, Any]] = None
-    responded_at: Optional[datetime] = None
+    assigned_users: Optional[List[HITLUser]] = None
+    created_at: datetime
     responded_by_user: Optional[HITLUser] = None
+    responded_at: Optional[datetime] = None
+    chosen_options: Optional[List[StrictStr]] = None
+    params_input: Optional[Dict[str, Any]] = None
     response_received: Optional[StrictBool] = False
-    subject: StrictStr
     task_instance: TaskInstanceResponse
-    __properties: ClassVar[List[str]] = ["assigned_users", "body", "chosen_options", "created_at", "defaults", "multiple", "options", "params", "params_input", "responded_at", "responded_by_user", "response_received", "subject", "task_instance"]
+    __properties: ClassVar[List[str]] = ["options", "subject", "body", "defaults", "multiple", "params", "assigned_users", "created_at", "responded_by_user", "responded_at", "chosen_options", "params_input", "response_received", "task_instance"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -99,6 +99,31 @@ class HITLDetail(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of task_instance
         if self.task_instance:
             _dict['task_instance'] = self.task_instance.to_dict()
+        # set to None if body (nullable) is None
+        # and model_fields_set contains the field
+        if self.body is None and "body" in self.model_fields_set:
+            _dict['body'] = None
+
+        # set to None if defaults (nullable) is None
+        # and model_fields_set contains the field
+        if self.defaults is None and "defaults" in self.model_fields_set:
+            _dict['defaults'] = None
+
+        # set to None if responded_by_user (nullable) is None
+        # and model_fields_set contains the field
+        if self.responded_by_user is None and "responded_by_user" in self.model_fields_set:
+            _dict['responded_by_user'] = None
+
+        # set to None if responded_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.responded_at is None and "responded_at" in self.model_fields_set:
+            _dict['responded_at'] = None
+
+        # set to None if chosen_options (nullable) is None
+        # and model_fields_set contains the field
+        if self.chosen_options is None and "chosen_options" in self.model_fields_set:
+            _dict['chosen_options'] = None
+
         return _dict
 
     @classmethod
@@ -111,19 +136,19 @@ class HITLDetail(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "assigned_users": [HITLUser.from_dict(_item) for _item in obj["assigned_users"]] if obj.get("assigned_users") is not None else None,
+            "options": obj.get("options"),
+            "subject": obj.get("subject"),
             "body": obj.get("body"),
-            "chosen_options": obj.get("chosen_options"),
-            "created_at": obj.get("created_at"),
             "defaults": obj.get("defaults"),
             "multiple": obj.get("multiple") if obj.get("multiple") is not None else False,
-            "options": obj.get("options"),
             "params": obj.get("params"),
-            "params_input": obj.get("params_input"),
-            "responded_at": obj.get("responded_at"),
+            "assigned_users": [HITLUser.from_dict(_item) for _item in obj["assigned_users"]] if obj.get("assigned_users") is not None else None,
+            "created_at": obj.get("created_at"),
             "responded_by_user": HITLUser.from_dict(obj["responded_by_user"]) if obj.get("responded_by_user") is not None else None,
+            "responded_at": obj.get("responded_at"),
+            "chosen_options": obj.get("chosen_options"),
+            "params_input": obj.get("params_input"),
             "response_received": obj.get("response_received") if obj.get("response_received") is not None else False,
-            "subject": obj.get("subject"),
             "task_instance": TaskInstanceResponse.from_dict(obj["task_instance"]) if obj.get("task_instance") is not None else None
         })
         return _obj

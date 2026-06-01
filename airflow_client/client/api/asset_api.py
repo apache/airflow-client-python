@@ -647,7 +647,7 @@ class AssetApi:
     ) -> None:
         """Delete Dag Asset Queued Event
 
-        Delete a queued asset event for a DAG.
+        Delete a queued asset event for a Dag.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -727,7 +727,7 @@ class AssetApi:
     ) -> ApiResponse[None]:
         """Delete Dag Asset Queued Event
 
-        Delete a queued asset event for a DAG.
+        Delete a queued asset event for a Dag.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -807,7 +807,7 @@ class AssetApi:
     ) -> RESTResponseType:
         """Delete Dag Asset Queued Event
 
-        Delete a queued asset event for a DAG.
+        Delete a queued asset event for a Dag.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -1779,7 +1779,8 @@ class AssetApi:
         self,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
+        name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``name_prefix_pattern`` parameter when possible.")] = None,
+        name_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.")] = None,
         order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, name`")] = None,
         _request_timeout: Union[
             None,
@@ -1802,8 +1803,10 @@ class AssetApi:
         :type limit: int
         :param offset:
         :type offset: int
-        :param name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :param name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``name_prefix_pattern`` parameter when possible.
         :type name_pattern: str
+        :param name_prefix_pattern: Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.
+        :type name_prefix_pattern: str
         :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, name`
         :type order_by: List[str]
         :param _request_timeout: timeout setting for this request. If one
@@ -1832,6 +1835,7 @@ class AssetApi:
             limit=limit,
             offset=offset,
             name_pattern=name_pattern,
+            name_prefix_pattern=name_prefix_pattern,
             order_by=order_by,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1862,7 +1866,8 @@ class AssetApi:
         self,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
+        name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``name_prefix_pattern`` parameter when possible.")] = None,
+        name_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.")] = None,
         order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, name`")] = None,
         _request_timeout: Union[
             None,
@@ -1885,8 +1890,10 @@ class AssetApi:
         :type limit: int
         :param offset:
         :type offset: int
-        :param name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :param name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``name_prefix_pattern`` parameter when possible.
         :type name_pattern: str
+        :param name_prefix_pattern: Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.
+        :type name_prefix_pattern: str
         :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, name`
         :type order_by: List[str]
         :param _request_timeout: timeout setting for this request. If one
@@ -1915,6 +1922,7 @@ class AssetApi:
             limit=limit,
             offset=offset,
             name_pattern=name_pattern,
+            name_prefix_pattern=name_prefix_pattern,
             order_by=order_by,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1945,7 +1953,8 @@ class AssetApi:
         self,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
+        name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``name_prefix_pattern`` parameter when possible.")] = None,
+        name_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.")] = None,
         order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, name`")] = None,
         _request_timeout: Union[
             None,
@@ -1968,8 +1977,10 @@ class AssetApi:
         :type limit: int
         :param offset:
         :type offset: int
-        :param name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :param name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``name_prefix_pattern`` parameter when possible.
         :type name_pattern: str
+        :param name_prefix_pattern: Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.
+        :type name_prefix_pattern: str
         :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, name`
         :type order_by: List[str]
         :param _request_timeout: timeout setting for this request. If one
@@ -1998,6 +2009,7 @@ class AssetApi:
             limit=limit,
             offset=offset,
             name_pattern=name_pattern,
+            name_prefix_pattern=name_prefix_pattern,
             order_by=order_by,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2024,6 +2036,7 @@ class AssetApi:
         limit,
         offset,
         name_pattern,
+        name_prefix_pattern,
         order_by,
         _request_auth,
         _content_type,
@@ -2059,6 +2072,10 @@ class AssetApi:
         if name_pattern is not None:
             
             _query_params.append(('name_pattern', name_pattern))
+            
+        if name_prefix_pattern is not None:
+            
+            _query_params.append(('name_prefix_pattern', name_prefix_pattern))
             
         if order_by is not None:
             
@@ -2113,7 +2130,8 @@ class AssetApi:
         source_task_id: Optional[StrictStr] = None,
         source_run_id: Optional[StrictStr] = None,
         source_map_index: Optional[StrictInt] = None,
-        name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
+        name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``name_prefix_pattern`` parameter when possible.")] = None,
+        name_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.")] = None,
         timestamp_gte: Optional[datetime] = None,
         timestamp_gt: Optional[datetime] = None,
         timestamp_lte: Optional[datetime] = None,
@@ -2151,8 +2169,10 @@ class AssetApi:
         :type source_run_id: str
         :param source_map_index:
         :type source_map_index: int
-        :param name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :param name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``name_prefix_pattern`` parameter when possible.
         :type name_pattern: str
+        :param name_prefix_pattern: Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.
+        :type name_prefix_pattern: str
         :param timestamp_gte:
         :type timestamp_gte: datetime
         :param timestamp_gt:
@@ -2193,6 +2213,7 @@ class AssetApi:
             source_run_id=source_run_id,
             source_map_index=source_map_index,
             name_pattern=name_pattern,
+            name_prefix_pattern=name_prefix_pattern,
             timestamp_gte=timestamp_gte,
             timestamp_gt=timestamp_gt,
             timestamp_lte=timestamp_lte,
@@ -2232,7 +2253,8 @@ class AssetApi:
         source_task_id: Optional[StrictStr] = None,
         source_run_id: Optional[StrictStr] = None,
         source_map_index: Optional[StrictInt] = None,
-        name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
+        name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``name_prefix_pattern`` parameter when possible.")] = None,
+        name_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.")] = None,
         timestamp_gte: Optional[datetime] = None,
         timestamp_gt: Optional[datetime] = None,
         timestamp_lte: Optional[datetime] = None,
@@ -2270,8 +2292,10 @@ class AssetApi:
         :type source_run_id: str
         :param source_map_index:
         :type source_map_index: int
-        :param name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :param name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``name_prefix_pattern`` parameter when possible.
         :type name_pattern: str
+        :param name_prefix_pattern: Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.
+        :type name_prefix_pattern: str
         :param timestamp_gte:
         :type timestamp_gte: datetime
         :param timestamp_gt:
@@ -2312,6 +2336,7 @@ class AssetApi:
             source_run_id=source_run_id,
             source_map_index=source_map_index,
             name_pattern=name_pattern,
+            name_prefix_pattern=name_prefix_pattern,
             timestamp_gte=timestamp_gte,
             timestamp_gt=timestamp_gt,
             timestamp_lte=timestamp_lte,
@@ -2351,7 +2376,8 @@ class AssetApi:
         source_task_id: Optional[StrictStr] = None,
         source_run_id: Optional[StrictStr] = None,
         source_map_index: Optional[StrictInt] = None,
-        name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
+        name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``name_prefix_pattern`` parameter when possible.")] = None,
+        name_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.")] = None,
         timestamp_gte: Optional[datetime] = None,
         timestamp_gt: Optional[datetime] = None,
         timestamp_lte: Optional[datetime] = None,
@@ -2389,8 +2415,10 @@ class AssetApi:
         :type source_run_id: str
         :param source_map_index:
         :type source_map_index: int
-        :param name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :param name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``name_prefix_pattern`` parameter when possible.
         :type name_pattern: str
+        :param name_prefix_pattern: Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.
+        :type name_prefix_pattern: str
         :param timestamp_gte:
         :type timestamp_gte: datetime
         :param timestamp_gt:
@@ -2431,6 +2459,7 @@ class AssetApi:
             source_run_id=source_run_id,
             source_map_index=source_map_index,
             name_pattern=name_pattern,
+            name_prefix_pattern=name_prefix_pattern,
             timestamp_gte=timestamp_gte,
             timestamp_gt=timestamp_gt,
             timestamp_lte=timestamp_lte,
@@ -2466,6 +2495,7 @@ class AssetApi:
         source_run_id,
         source_map_index,
         name_pattern,
+        name_prefix_pattern,
         timestamp_gte,
         timestamp_gt,
         timestamp_lte,
@@ -2528,6 +2558,10 @@ class AssetApi:
         if name_pattern is not None:
             
             _query_params.append(('name_pattern', name_pattern))
+            
+        if name_prefix_pattern is not None:
+            
+            _query_params.append(('name_prefix_pattern', name_prefix_pattern))
             
         if timestamp_gte is not None:
             if isinstance(timestamp_gte, datetime):
@@ -2912,8 +2946,10 @@ class AssetApi:
         self,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
-        uri_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
+        name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``name_prefix_pattern`` parameter when possible.")] = None,
+        name_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.")] = None,
+        uri_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``uri_prefix_pattern`` parameter when possible.")] = None,
+        uri_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.")] = None,
         dag_ids: Optional[List[StrictStr]] = None,
         only_active: Optional[StrictBool] = None,
         order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, name, uri, created_at, updated_at`")] = None,
@@ -2938,10 +2974,14 @@ class AssetApi:
         :type limit: int
         :param offset:
         :type offset: int
-        :param name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :param name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``name_prefix_pattern`` parameter when possible.
         :type name_pattern: str
-        :param uri_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :param name_prefix_pattern: Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.
+        :type name_prefix_pattern: str
+        :param uri_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``uri_prefix_pattern`` parameter when possible.
         :type uri_pattern: str
+        :param uri_prefix_pattern: Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.
+        :type uri_prefix_pattern: str
         :param dag_ids:
         :type dag_ids: List[str]
         :param only_active:
@@ -2974,7 +3014,9 @@ class AssetApi:
             limit=limit,
             offset=offset,
             name_pattern=name_pattern,
+            name_prefix_pattern=name_prefix_pattern,
             uri_pattern=uri_pattern,
+            uri_prefix_pattern=uri_prefix_pattern,
             dag_ids=dag_ids,
             only_active=only_active,
             order_by=order_by,
@@ -3007,8 +3049,10 @@ class AssetApi:
         self,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
-        uri_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
+        name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``name_prefix_pattern`` parameter when possible.")] = None,
+        name_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.")] = None,
+        uri_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``uri_prefix_pattern`` parameter when possible.")] = None,
+        uri_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.")] = None,
         dag_ids: Optional[List[StrictStr]] = None,
         only_active: Optional[StrictBool] = None,
         order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, name, uri, created_at, updated_at`")] = None,
@@ -3033,10 +3077,14 @@ class AssetApi:
         :type limit: int
         :param offset:
         :type offset: int
-        :param name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :param name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``name_prefix_pattern`` parameter when possible.
         :type name_pattern: str
-        :param uri_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :param name_prefix_pattern: Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.
+        :type name_prefix_pattern: str
+        :param uri_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``uri_prefix_pattern`` parameter when possible.
         :type uri_pattern: str
+        :param uri_prefix_pattern: Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.
+        :type uri_prefix_pattern: str
         :param dag_ids:
         :type dag_ids: List[str]
         :param only_active:
@@ -3069,7 +3117,9 @@ class AssetApi:
             limit=limit,
             offset=offset,
             name_pattern=name_pattern,
+            name_prefix_pattern=name_prefix_pattern,
             uri_pattern=uri_pattern,
+            uri_prefix_pattern=uri_prefix_pattern,
             dag_ids=dag_ids,
             only_active=only_active,
             order_by=order_by,
@@ -3102,8 +3152,10 @@ class AssetApi:
         self,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
-        uri_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
+        name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``name_prefix_pattern`` parameter when possible.")] = None,
+        name_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.")] = None,
+        uri_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``uri_prefix_pattern`` parameter when possible.")] = None,
+        uri_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.")] = None,
         dag_ids: Optional[List[StrictStr]] = None,
         only_active: Optional[StrictBool] = None,
         order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, name, uri, created_at, updated_at`")] = None,
@@ -3128,10 +3180,14 @@ class AssetApi:
         :type limit: int
         :param offset:
         :type offset: int
-        :param name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :param name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``name_prefix_pattern`` parameter when possible.
         :type name_pattern: str
-        :param uri_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :param name_prefix_pattern: Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.
+        :type name_prefix_pattern: str
+        :param uri_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``uri_prefix_pattern`` parameter when possible.
         :type uri_pattern: str
+        :param uri_prefix_pattern: Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.
+        :type uri_prefix_pattern: str
         :param dag_ids:
         :type dag_ids: List[str]
         :param only_active:
@@ -3164,7 +3220,9 @@ class AssetApi:
             limit=limit,
             offset=offset,
             name_pattern=name_pattern,
+            name_prefix_pattern=name_prefix_pattern,
             uri_pattern=uri_pattern,
+            uri_prefix_pattern=uri_prefix_pattern,
             dag_ids=dag_ids,
             only_active=only_active,
             order_by=order_by,
@@ -3193,7 +3251,9 @@ class AssetApi:
         limit,
         offset,
         name_pattern,
+        name_prefix_pattern,
         uri_pattern,
+        uri_prefix_pattern,
         dag_ids,
         only_active,
         order_by,
@@ -3233,9 +3293,17 @@ class AssetApi:
             
             _query_params.append(('name_pattern', name_pattern))
             
+        if name_prefix_pattern is not None:
+            
+            _query_params.append(('name_prefix_pattern', name_prefix_pattern))
+            
         if uri_pattern is not None:
             
             _query_params.append(('uri_pattern', uri_pattern))
+            
+        if uri_prefix_pattern is not None:
+            
+            _query_params.append(('uri_prefix_pattern', uri_prefix_pattern))
             
         if dag_ids is not None:
             
@@ -3308,7 +3376,7 @@ class AssetApi:
     ) -> QueuedEventResponse:
         """Get Dag Asset Queued Event
 
-        Get a queued asset event for a DAG.
+        Get a queued asset event for a Dag.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -3387,7 +3455,7 @@ class AssetApi:
     ) -> ApiResponse[QueuedEventResponse]:
         """Get Dag Asset Queued Event
 
-        Get a queued asset event for a DAG.
+        Get a queued asset event for a Dag.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -3466,7 +3534,7 @@ class AssetApi:
     ) -> RESTResponseType:
         """Get Dag Asset Queued Event
 
-        Get a queued asset event for a DAG.
+        Get a queued asset event for a Dag.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -3613,7 +3681,7 @@ class AssetApi:
     ) -> QueuedEventCollectionResponse:
         """Get Dag Asset Queued Events
 
-        Get queued asset events for a DAG.
+        Get queued asset events for a Dag.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -3687,7 +3755,7 @@ class AssetApi:
     ) -> ApiResponse[QueuedEventCollectionResponse]:
         """Get Dag Asset Queued Events
 
-        Get queued asset events for a DAG.
+        Get queued asset events for a Dag.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -3761,7 +3829,7 @@ class AssetApi:
     ) -> RESTResponseType:
         """Get Dag Asset Queued Events
 
-        Get queued asset events for a DAG.
+        Get queued asset events for a Dag.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -3901,7 +3969,7 @@ class AssetApi:
     ) -> DAGRunResponse:
         """Materialize Asset
 
-        Materialize an asset by triggering a DAG run that produces it.
+        Materialize an asset by triggering a Dag run that produces it.
 
         :param asset_id: (required)
         :type asset_id: int
@@ -3978,7 +4046,7 @@ class AssetApi:
     ) -> ApiResponse[DAGRunResponse]:
         """Materialize Asset
 
-        Materialize an asset by triggering a DAG run that produces it.
+        Materialize an asset by triggering a Dag run that produces it.
 
         :param asset_id: (required)
         :type asset_id: int
@@ -4055,7 +4123,7 @@ class AssetApi:
     ) -> RESTResponseType:
         """Materialize Asset
 
-        Materialize an asset by triggering a DAG run that produces it.
+        Materialize an asset by triggering a Dag run that produces it.
 
         :param asset_id: (required)
         :type asset_id: int

@@ -25,7 +25,7 @@ from pydantic_core import to_jsonable_python
 
 class DAGSourceResponse(BaseModel):
     """
-    DAG Source serializer for responses.
+    Dag Source serializer for responses.
     """ # noqa: E501
     content: Optional[StrictStr] = None
     dag_display_name: StrictStr

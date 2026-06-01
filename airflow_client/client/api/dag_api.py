@@ -62,7 +62,7 @@ class DAGApi:
     ) -> object:
         """Delete Dag
 
-        Delete the specific DAG.
+        Delete the specific Dag.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -134,7 +134,7 @@ class DAGApi:
     ) -> ApiResponse[object]:
         """Delete Dag
 
-        Delete the specific DAG.
+        Delete the specific Dag.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -206,7 +206,7 @@ class DAGApi:
     ) -> RESTResponseType:
         """Delete Dag
 
-        Delete the specific DAG.
+        Delete the specific Dag.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -339,7 +339,7 @@ class DAGApi:
     ) -> None:
         """Favorite Dag
 
-        Mark the DAG as favorite.
+        Mark the Dag as favorite.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -410,7 +410,7 @@ class DAGApi:
     ) -> ApiResponse[None]:
         """Favorite Dag
 
-        Mark the DAG as favorite.
+        Mark the Dag as favorite.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -481,7 +481,7 @@ class DAGApi:
     ) -> RESTResponseType:
         """Favorite Dag
 
-        Mark the DAG as favorite.
+        Mark the Dag as favorite.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -613,7 +613,7 @@ class DAGApi:
     ) -> DAGResponse:
         """Get Dag
 
-        Get basic information about a DAG.
+        Get basic information about a Dag.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -685,7 +685,7 @@ class DAGApi:
     ) -> ApiResponse[DAGResponse]:
         """Get Dag
 
-        Get basic information about a DAG.
+        Get basic information about a Dag.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -757,7 +757,7 @@ class DAGApi:
     ) -> RESTResponseType:
         """Get Dag
 
-        Get basic information about a DAG.
+        Get basic information about a Dag.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -890,7 +890,7 @@ class DAGApi:
     ) -> DAGDetailsResponse:
         """Get Dag Details
 
-        Get details of DAG.
+        Get details of Dag.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -962,7 +962,7 @@ class DAGApi:
     ) -> ApiResponse[DAGDetailsResponse]:
         """Get Dag Details
 
-        Get details of DAG.
+        Get details of Dag.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -1034,7 +1034,7 @@ class DAGApi:
     ) -> RESTResponseType:
         """Get Dag Details
 
-        Get details of DAG.
+        Get details of Dag.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -1154,7 +1154,8 @@ class DAGApi:
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `name`")] = None,
-        tag_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
+        tag_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``tag_name_prefix_pattern`` parameter when possible.")] = None,
+        tag_name_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1170,7 +1171,7 @@ class DAGApi:
     ) -> DAGTagCollectionResponse:
         """Get Dag Tags
 
-        Get all DAG tags.
+        Get all Dag tags.
 
         :param limit:
         :type limit: int
@@ -1178,8 +1179,10 @@ class DAGApi:
         :type offset: int
         :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `name`
         :type order_by: List[str]
-        :param tag_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :param tag_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``tag_name_prefix_pattern`` parameter when possible.
         :type tag_name_pattern: str
+        :param tag_name_prefix_pattern: Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.
+        :type tag_name_prefix_pattern: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1207,6 +1210,7 @@ class DAGApi:
             offset=offset,
             order_by=order_by,
             tag_name_pattern=tag_name_pattern,
+            tag_name_prefix_pattern=tag_name_prefix_pattern,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1236,7 +1240,8 @@ class DAGApi:
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `name`")] = None,
-        tag_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
+        tag_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``tag_name_prefix_pattern`` parameter when possible.")] = None,
+        tag_name_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1252,7 +1257,7 @@ class DAGApi:
     ) -> ApiResponse[DAGTagCollectionResponse]:
         """Get Dag Tags
 
-        Get all DAG tags.
+        Get all Dag tags.
 
         :param limit:
         :type limit: int
@@ -1260,8 +1265,10 @@ class DAGApi:
         :type offset: int
         :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `name`
         :type order_by: List[str]
-        :param tag_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :param tag_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``tag_name_prefix_pattern`` parameter when possible.
         :type tag_name_pattern: str
+        :param tag_name_prefix_pattern: Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.
+        :type tag_name_prefix_pattern: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1289,6 +1296,7 @@ class DAGApi:
             offset=offset,
             order_by=order_by,
             tag_name_pattern=tag_name_pattern,
+            tag_name_prefix_pattern=tag_name_prefix_pattern,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1318,7 +1326,8 @@ class DAGApi:
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `name`")] = None,
-        tag_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
+        tag_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``tag_name_prefix_pattern`` parameter when possible.")] = None,
+        tag_name_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1334,7 +1343,7 @@ class DAGApi:
     ) -> RESTResponseType:
         """Get Dag Tags
 
-        Get all DAG tags.
+        Get all Dag tags.
 
         :param limit:
         :type limit: int
@@ -1342,8 +1351,10 @@ class DAGApi:
         :type offset: int
         :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `name`
         :type order_by: List[str]
-        :param tag_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :param tag_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``tag_name_prefix_pattern`` parameter when possible.
         :type tag_name_pattern: str
+        :param tag_name_prefix_pattern: Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.
+        :type tag_name_prefix_pattern: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1371,6 +1382,7 @@ class DAGApi:
             offset=offset,
             order_by=order_by,
             tag_name_pattern=tag_name_pattern,
+            tag_name_prefix_pattern=tag_name_prefix_pattern,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1396,6 +1408,7 @@ class DAGApi:
         offset,
         order_by,
         tag_name_pattern,
+        tag_name_prefix_pattern,
         _request_auth,
         _content_type,
         _headers,
@@ -1434,6 +1447,10 @@ class DAGApi:
         if tag_name_pattern is not None:
             
             _query_params.append(('tag_name_pattern', tag_name_pattern))
+            
+        if tag_name_prefix_pattern is not None:
+            
+            _query_params.append(('tag_name_prefix_pattern', tag_name_prefix_pattern))
             
         # process the header parameters
         # process the form parameters
@@ -1481,8 +1498,10 @@ class DAGApi:
         tags: Optional[List[StrictStr]] = None,
         tags_match_mode: Optional[StrictStr] = None,
         owners: Optional[List[StrictStr]] = None,
-        dag_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
-        dag_display_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
+        dag_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``dag_id_prefix_pattern`` parameter when possible.")] = None,
+        dag_id_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.")] = None,
+        dag_display_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``dag_display_name_prefix_pattern`` parameter when possible.")] = None,
+        dag_display_name_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.")] = None,
         exclude_stale: Optional[StrictBool] = None,
         paused: Optional[StrictBool] = None,
         has_import_errors: Annotated[Optional[StrictBool], Field(description="Filter Dags by having import errors. Only Dags that have been successfully loaded before will be returned.")] = None,
@@ -1518,7 +1537,7 @@ class DAGApi:
     ) -> DAGCollectionResponse:
         """Get Dags
 
-        Get all DAGs.
+        Get all Dags.
 
         :param limit:
         :type limit: int
@@ -1530,10 +1549,14 @@ class DAGApi:
         :type tags_match_mode: str
         :param owners:
         :type owners: List[str]
-        :param dag_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :param dag_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``dag_id_prefix_pattern`` parameter when possible.
         :type dag_id_pattern: str
-        :param dag_display_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :param dag_id_prefix_pattern: Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.
+        :type dag_id_prefix_pattern: str
+        :param dag_display_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``dag_display_name_prefix_pattern`` parameter when possible.
         :type dag_display_name_pattern: str
+        :param dag_display_name_prefix_pattern: Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.
+        :type dag_display_name_prefix_pattern: str
         :param exclude_stale:
         :type exclude_stale: bool
         :param paused:
@@ -1603,7 +1626,9 @@ class DAGApi:
             tags_match_mode=tags_match_mode,
             owners=owners,
             dag_id_pattern=dag_id_pattern,
+            dag_id_prefix_pattern=dag_id_prefix_pattern,
             dag_display_name_pattern=dag_display_name_pattern,
+            dag_display_name_prefix_pattern=dag_display_name_prefix_pattern,
             exclude_stale=exclude_stale,
             paused=paused,
             has_import_errors=has_import_errors,
@@ -1655,8 +1680,10 @@ class DAGApi:
         tags: Optional[List[StrictStr]] = None,
         tags_match_mode: Optional[StrictStr] = None,
         owners: Optional[List[StrictStr]] = None,
-        dag_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
-        dag_display_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
+        dag_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``dag_id_prefix_pattern`` parameter when possible.")] = None,
+        dag_id_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.")] = None,
+        dag_display_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``dag_display_name_prefix_pattern`` parameter when possible.")] = None,
+        dag_display_name_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.")] = None,
         exclude_stale: Optional[StrictBool] = None,
         paused: Optional[StrictBool] = None,
         has_import_errors: Annotated[Optional[StrictBool], Field(description="Filter Dags by having import errors. Only Dags that have been successfully loaded before will be returned.")] = None,
@@ -1692,7 +1719,7 @@ class DAGApi:
     ) -> ApiResponse[DAGCollectionResponse]:
         """Get Dags
 
-        Get all DAGs.
+        Get all Dags.
 
         :param limit:
         :type limit: int
@@ -1704,10 +1731,14 @@ class DAGApi:
         :type tags_match_mode: str
         :param owners:
         :type owners: List[str]
-        :param dag_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :param dag_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``dag_id_prefix_pattern`` parameter when possible.
         :type dag_id_pattern: str
-        :param dag_display_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :param dag_id_prefix_pattern: Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.
+        :type dag_id_prefix_pattern: str
+        :param dag_display_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``dag_display_name_prefix_pattern`` parameter when possible.
         :type dag_display_name_pattern: str
+        :param dag_display_name_prefix_pattern: Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.
+        :type dag_display_name_prefix_pattern: str
         :param exclude_stale:
         :type exclude_stale: bool
         :param paused:
@@ -1777,7 +1808,9 @@ class DAGApi:
             tags_match_mode=tags_match_mode,
             owners=owners,
             dag_id_pattern=dag_id_pattern,
+            dag_id_prefix_pattern=dag_id_prefix_pattern,
             dag_display_name_pattern=dag_display_name_pattern,
+            dag_display_name_prefix_pattern=dag_display_name_prefix_pattern,
             exclude_stale=exclude_stale,
             paused=paused,
             has_import_errors=has_import_errors,
@@ -1829,8 +1862,10 @@ class DAGApi:
         tags: Optional[List[StrictStr]] = None,
         tags_match_mode: Optional[StrictStr] = None,
         owners: Optional[List[StrictStr]] = None,
-        dag_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
-        dag_display_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
+        dag_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``dag_id_prefix_pattern`` parameter when possible.")] = None,
+        dag_id_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.")] = None,
+        dag_display_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``dag_display_name_prefix_pattern`` parameter when possible.")] = None,
+        dag_display_name_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.")] = None,
         exclude_stale: Optional[StrictBool] = None,
         paused: Optional[StrictBool] = None,
         has_import_errors: Annotated[Optional[StrictBool], Field(description="Filter Dags by having import errors. Only Dags that have been successfully loaded before will be returned.")] = None,
@@ -1866,7 +1901,7 @@ class DAGApi:
     ) -> RESTResponseType:
         """Get Dags
 
-        Get all DAGs.
+        Get all Dags.
 
         :param limit:
         :type limit: int
@@ -1878,10 +1913,14 @@ class DAGApi:
         :type tags_match_mode: str
         :param owners:
         :type owners: List[str]
-        :param dag_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :param dag_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``dag_id_prefix_pattern`` parameter when possible.
         :type dag_id_pattern: str
-        :param dag_display_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :param dag_id_prefix_pattern: Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.
+        :type dag_id_prefix_pattern: str
+        :param dag_display_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``dag_display_name_prefix_pattern`` parameter when possible.
         :type dag_display_name_pattern: str
+        :param dag_display_name_prefix_pattern: Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.
+        :type dag_display_name_prefix_pattern: str
         :param exclude_stale:
         :type exclude_stale: bool
         :param paused:
@@ -1951,7 +1990,9 @@ class DAGApi:
             tags_match_mode=tags_match_mode,
             owners=owners,
             dag_id_pattern=dag_id_pattern,
+            dag_id_prefix_pattern=dag_id_prefix_pattern,
             dag_display_name_pattern=dag_display_name_pattern,
+            dag_display_name_prefix_pattern=dag_display_name_prefix_pattern,
             exclude_stale=exclude_stale,
             paused=paused,
             has_import_errors=has_import_errors,
@@ -1999,7 +2040,9 @@ class DAGApi:
         tags_match_mode,
         owners,
         dag_id_pattern,
+        dag_id_prefix_pattern,
         dag_display_name_pattern,
+        dag_display_name_prefix_pattern,
         exclude_stale,
         paused,
         has_import_errors,
@@ -2071,9 +2114,17 @@ class DAGApi:
             
             _query_params.append(('dag_id_pattern', dag_id_pattern))
             
+        if dag_id_prefix_pattern is not None:
+            
+            _query_params.append(('dag_id_prefix_pattern', dag_id_prefix_pattern))
+            
         if dag_display_name_pattern is not None:
             
             _query_params.append(('dag_display_name_pattern', dag_display_name_pattern))
+            
+        if dag_display_name_prefix_pattern is not None:
+            
+            _query_params.append(('dag_display_name_prefix_pattern', dag_display_name_prefix_pattern))
             
         if exclude_stale is not None:
             
@@ -2286,7 +2337,7 @@ class DAGApi:
     ) -> DAGResponse:
         """Patch Dag
 
-        Patch the specific DAG.
+        Patch the specific Dag.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -2366,7 +2417,7 @@ class DAGApi:
     ) -> ApiResponse[DAGResponse]:
         """Patch Dag
 
-        Patch the specific DAG.
+        Patch the specific Dag.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -2446,7 +2497,7 @@ class DAGApi:
     ) -> RESTResponseType:
         """Patch Dag
 
-        Patch the specific DAG.
+        Patch the specific Dag.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -2598,7 +2649,8 @@ class DAGApi:
         tags: Optional[List[StrictStr]] = None,
         tags_match_mode: Optional[StrictStr] = None,
         owners: Optional[List[StrictStr]] = None,
-        dag_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
+        dag_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``dag_id_prefix_pattern`` parameter when possible.")] = None,
+        dag_id_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.")] = None,
         exclude_stale: Optional[StrictBool] = None,
         paused: Optional[StrictBool] = None,
         _request_timeout: Union[
@@ -2616,7 +2668,7 @@ class DAGApi:
     ) -> DAGCollectionResponse:
         """Patch Dags
 
-        Patch multiple DAGs.
+        Patch multiple Dags.  If neither `dag_id_pattern` nor `dag_id_prefix_pattern` is provided, no Dags will be matched regardless of other filters. To match all Dags, pass a wildcard value such as `~` or `%` for `dag_id_pattern`.
 
         :param dag_patch_body: (required)
         :type dag_patch_body: DAGPatchBody
@@ -2632,8 +2684,10 @@ class DAGApi:
         :type tags_match_mode: str
         :param owners:
         :type owners: List[str]
-        :param dag_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :param dag_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``dag_id_prefix_pattern`` parameter when possible.
         :type dag_id_pattern: str
+        :param dag_id_prefix_pattern: Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.
+        :type dag_id_prefix_pattern: str
         :param exclude_stale:
         :type exclude_stale: bool
         :param paused:
@@ -2669,6 +2723,7 @@ class DAGApi:
             tags_match_mode=tags_match_mode,
             owners=owners,
             dag_id_pattern=dag_id_pattern,
+            dag_id_prefix_pattern=dag_id_prefix_pattern,
             exclude_stale=exclude_stale,
             paused=paused,
             _request_auth=_request_auth,
@@ -2706,7 +2761,8 @@ class DAGApi:
         tags: Optional[List[StrictStr]] = None,
         tags_match_mode: Optional[StrictStr] = None,
         owners: Optional[List[StrictStr]] = None,
-        dag_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
+        dag_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``dag_id_prefix_pattern`` parameter when possible.")] = None,
+        dag_id_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.")] = None,
         exclude_stale: Optional[StrictBool] = None,
         paused: Optional[StrictBool] = None,
         _request_timeout: Union[
@@ -2724,7 +2780,7 @@ class DAGApi:
     ) -> ApiResponse[DAGCollectionResponse]:
         """Patch Dags
 
-        Patch multiple DAGs.
+        Patch multiple Dags.  If neither `dag_id_pattern` nor `dag_id_prefix_pattern` is provided, no Dags will be matched regardless of other filters. To match all Dags, pass a wildcard value such as `~` or `%` for `dag_id_pattern`.
 
         :param dag_patch_body: (required)
         :type dag_patch_body: DAGPatchBody
@@ -2740,8 +2796,10 @@ class DAGApi:
         :type tags_match_mode: str
         :param owners:
         :type owners: List[str]
-        :param dag_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :param dag_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``dag_id_prefix_pattern`` parameter when possible.
         :type dag_id_pattern: str
+        :param dag_id_prefix_pattern: Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.
+        :type dag_id_prefix_pattern: str
         :param exclude_stale:
         :type exclude_stale: bool
         :param paused:
@@ -2777,6 +2835,7 @@ class DAGApi:
             tags_match_mode=tags_match_mode,
             owners=owners,
             dag_id_pattern=dag_id_pattern,
+            dag_id_prefix_pattern=dag_id_prefix_pattern,
             exclude_stale=exclude_stale,
             paused=paused,
             _request_auth=_request_auth,
@@ -2814,7 +2873,8 @@ class DAGApi:
         tags: Optional[List[StrictStr]] = None,
         tags_match_mode: Optional[StrictStr] = None,
         owners: Optional[List[StrictStr]] = None,
-        dag_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
+        dag_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``dag_id_prefix_pattern`` parameter when possible.")] = None,
+        dag_id_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.")] = None,
         exclude_stale: Optional[StrictBool] = None,
         paused: Optional[StrictBool] = None,
         _request_timeout: Union[
@@ -2832,7 +2892,7 @@ class DAGApi:
     ) -> RESTResponseType:
         """Patch Dags
 
-        Patch multiple DAGs.
+        Patch multiple Dags.  If neither `dag_id_pattern` nor `dag_id_prefix_pattern` is provided, no Dags will be matched regardless of other filters. To match all Dags, pass a wildcard value such as `~` or `%` for `dag_id_pattern`.
 
         :param dag_patch_body: (required)
         :type dag_patch_body: DAGPatchBody
@@ -2848,8 +2908,10 @@ class DAGApi:
         :type tags_match_mode: str
         :param owners:
         :type owners: List[str]
-        :param dag_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :param dag_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``dag_id_prefix_pattern`` parameter when possible.
         :type dag_id_pattern: str
+        :param dag_id_prefix_pattern: Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.
+        :type dag_id_prefix_pattern: str
         :param exclude_stale:
         :type exclude_stale: bool
         :param paused:
@@ -2885,6 +2947,7 @@ class DAGApi:
             tags_match_mode=tags_match_mode,
             owners=owners,
             dag_id_pattern=dag_id_pattern,
+            dag_id_prefix_pattern=dag_id_prefix_pattern,
             exclude_stale=exclude_stale,
             paused=paused,
             _request_auth=_request_auth,
@@ -2918,6 +2981,7 @@ class DAGApi:
         tags_match_mode,
         owners,
         dag_id_pattern,
+        dag_id_prefix_pattern,
         exclude_stale,
         paused,
         _request_auth,
@@ -2972,6 +3036,10 @@ class DAGApi:
         if dag_id_pattern is not None:
             
             _query_params.append(('dag_id_pattern', dag_id_pattern))
+            
+        if dag_id_prefix_pattern is not None:
+            
+            _query_params.append(('dag_id_prefix_pattern', dag_id_prefix_pattern))
             
         if exclude_stale is not None:
             
@@ -3053,7 +3121,7 @@ class DAGApi:
     ) -> None:
         """Unfavorite Dag
 
-        Unmark the DAG as favorite.
+        Unmark the Dag as favorite.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -3125,7 +3193,7 @@ class DAGApi:
     ) -> ApiResponse[None]:
         """Unfavorite Dag
 
-        Unmark the DAG as favorite.
+        Unmark the Dag as favorite.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -3197,7 +3265,7 @@ class DAGApi:
     ) -> RESTResponseType:
         """Unfavorite Dag
 
-        Unmark the DAG as favorite.
+        Unmark the Dag as favorite.
 
         :param dag_id: (required)
         :type dag_id: str

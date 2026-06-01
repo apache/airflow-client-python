@@ -14,10 +14,10 @@
 
 import unittest
 
-from airflow_client.client.models.dag_run_clear_body import DAGRunClearBody
+from airflow_client.client.models.clear_task_instance_collection_response import ClearTaskInstanceCollectionResponse
 
-class TestDAGRunClearBody(unittest.TestCase):
-    """DAGRunClearBody unit test stubs"""
+class TestClearTaskInstanceCollectionResponse(unittest.TestCase):
+    """ClearTaskInstanceCollectionResponse unit test stubs"""
 
     def setUp(self):
         pass
@@ -25,28 +25,32 @@ class TestDAGRunClearBody(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> DAGRunClearBody:
-        """Test DAGRunClearBody
+    def make_instance(self, include_optional) -> ClearTaskInstanceCollectionResponse:
+        """Test ClearTaskInstanceCollectionResponse
             include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `DAGRunClearBody`
+        # uncomment below to create an instance of `ClearTaskInstanceCollectionResponse`
         """
-        model = DAGRunClearBody()
+        model = ClearTaskInstanceCollectionResponse()
         if include_optional:
-            return DAGRunClearBody(
-                dry_run = True,
-                only_failed = True,
-                only_new = True,
-                run_on_latest_version = True
+            return ClearTaskInstanceCollectionResponse(
+                task_instances = [
+                    null
+                    ],
+                total_entries = 56
             )
         else:
-            return DAGRunClearBody(
+            return ClearTaskInstanceCollectionResponse(
+                task_instances = [
+                    null
+                    ],
+                total_entries = 56,
         )
         """
 
-    def testDAGRunClearBody(self):
-        """Test DAGRunClearBody"""
+    def testClearTaskInstanceCollectionResponse(self):
+        """Test ClearTaskInstanceCollectionResponse"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

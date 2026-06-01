@@ -194,7 +194,7 @@ void (empty response body)
 
 Delete Dag Asset Queued Event
 
-Delete a queued asset event for a DAG.
+Delete a queued asset event for a Dag.
 
 ### Example
 
@@ -529,7 +529,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_asset_aliases**
-> AssetAliasCollectionResponse get_asset_aliases(limit=limit, offset=offset, name_pattern=name_pattern, order_by=order_by)
+> AssetAliasCollectionResponse get_asset_aliases(limit=limit, offset=offset, name_pattern=name_pattern, name_prefix_pattern=name_prefix_pattern, order_by=order_by)
 
 Get Asset Aliases
 
@@ -570,12 +570,13 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     api_instance = airflow_client.client.AssetApi(api_client)
     limit = 50 # int |  (optional) (default to 50)
     offset = 0 # int |  (optional) (default to 0)
-    name_pattern = 'name_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported. (optional)
+    name_pattern = 'name_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``name_prefix_pattern`` parameter when possible. (optional)
+    name_prefix_pattern = 'name_prefix_pattern_example' # str | Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`. (optional)
     order_by = ["id"] # List[str] | Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, name` (optional) (default to ["id"])
 
     try:
         # Get Asset Aliases
-        api_response = api_instance.get_asset_aliases(limit=limit, offset=offset, name_pattern=name_pattern, order_by=order_by)
+        api_response = api_instance.get_asset_aliases(limit=limit, offset=offset, name_pattern=name_pattern, name_prefix_pattern=name_prefix_pattern, order_by=order_by)
         print("The response of AssetApi->get_asset_aliases:\n")
         pprint(api_response)
     except Exception as e:
@@ -591,7 +592,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **int**|  | [optional] [default to 50]
  **offset** | **int**|  | [optional] [default to 0]
- **name_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). or the pipe &#x60;|&#x60; operator for OR logic (e.g. &#x60;dag1 | dag2&#x60;). Regular expressions are **not** supported. | [optional] 
+ **name_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). or the pipe &#x60;|&#x60; operator for OR logic (e.g. &#x60;dag1 | dag2&#x60;). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as &#x60;&#x60;ILIKE &#39;%term%&#39;&#x60;&#x60; and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent &#x60;&#x60;name_prefix_pattern&#x60;&#x60; parameter when possible. | [optional] 
+ **name_prefix_pattern** | **str**| Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe &#x60;|&#x60; operator for OR logic (e.g. &#x60;dag1|dag2&#x60;). Use &#x60;~&#x60; to match all. Wildcard characters (&#x60;%&#x60;, &#x60;_&#x60;) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. &#x60;test_&#x60; effectively matches items starting with &#x60;test&#x60;, and &#x60;s3://&#x60; matches items starting with &#x60;s3&#x60;. | [optional] 
  **order_by** | [**List[str]**](str.md)| Attributes to order by, multi criteria sort is supported. Prefix with &#x60;-&#x60; for descending order. Supported attributes: &#x60;id, name&#x60; | [optional] [default to [&quot;id&quot;]]
 
 ### Return type
@@ -620,7 +622,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_asset_events**
-> AssetEventCollectionResponse get_asset_events(limit=limit, offset=offset, order_by=order_by, asset_id=asset_id, source_dag_id=source_dag_id, source_task_id=source_task_id, source_run_id=source_run_id, source_map_index=source_map_index, name_pattern=name_pattern, timestamp_gte=timestamp_gte, timestamp_gt=timestamp_gt, timestamp_lte=timestamp_lte, timestamp_lt=timestamp_lt)
+> AssetEventCollectionResponse get_asset_events(limit=limit, offset=offset, order_by=order_by, asset_id=asset_id, source_dag_id=source_dag_id, source_task_id=source_task_id, source_run_id=source_run_id, source_map_index=source_map_index, name_pattern=name_pattern, name_prefix_pattern=name_prefix_pattern, timestamp_gte=timestamp_gte, timestamp_gt=timestamp_gt, timestamp_lte=timestamp_lte, timestamp_lt=timestamp_lt)
 
 Get Asset Events
 
@@ -667,7 +669,8 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     source_task_id = 'source_task_id_example' # str |  (optional)
     source_run_id = 'source_run_id_example' # str |  (optional)
     source_map_index = 56 # int |  (optional)
-    name_pattern = 'name_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported. (optional)
+    name_pattern = 'name_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``name_prefix_pattern`` parameter when possible. (optional)
+    name_prefix_pattern = 'name_prefix_pattern_example' # str | Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`. (optional)
     timestamp_gte = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
     timestamp_gt = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
     timestamp_lte = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
@@ -675,7 +678,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
 
     try:
         # Get Asset Events
-        api_response = api_instance.get_asset_events(limit=limit, offset=offset, order_by=order_by, asset_id=asset_id, source_dag_id=source_dag_id, source_task_id=source_task_id, source_run_id=source_run_id, source_map_index=source_map_index, name_pattern=name_pattern, timestamp_gte=timestamp_gte, timestamp_gt=timestamp_gt, timestamp_lte=timestamp_lte, timestamp_lt=timestamp_lt)
+        api_response = api_instance.get_asset_events(limit=limit, offset=offset, order_by=order_by, asset_id=asset_id, source_dag_id=source_dag_id, source_task_id=source_task_id, source_run_id=source_run_id, source_map_index=source_map_index, name_pattern=name_pattern, name_prefix_pattern=name_prefix_pattern, timestamp_gte=timestamp_gte, timestamp_gt=timestamp_gt, timestamp_lte=timestamp_lte, timestamp_lt=timestamp_lt)
         print("The response of AssetApi->get_asset_events:\n")
         pprint(api_response)
     except Exception as e:
@@ -697,7 +700,8 @@ Name | Type | Description  | Notes
  **source_task_id** | **str**|  | [optional] 
  **source_run_id** | **str**|  | [optional] 
  **source_map_index** | **int**|  | [optional] 
- **name_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). or the pipe &#x60;|&#x60; operator for OR logic (e.g. &#x60;dag1 | dag2&#x60;). Regular expressions are **not** supported. | [optional] 
+ **name_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). or the pipe &#x60;|&#x60; operator for OR logic (e.g. &#x60;dag1 | dag2&#x60;). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as &#x60;&#x60;ILIKE &#39;%term%&#39;&#x60;&#x60; and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent &#x60;&#x60;name_prefix_pattern&#x60;&#x60; parameter when possible. | [optional] 
+ **name_prefix_pattern** | **str**| Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe &#x60;|&#x60; operator for OR logic (e.g. &#x60;dag1|dag2&#x60;). Use &#x60;~&#x60; to match all. Wildcard characters (&#x60;%&#x60;, &#x60;_&#x60;) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. &#x60;test_&#x60; effectively matches items starting with &#x60;test&#x60;, and &#x60;s3://&#x60; matches items starting with &#x60;s3&#x60;. | [optional] 
  **timestamp_gte** | **datetime**|  | [optional] 
  **timestamp_gt** | **datetime**|  | [optional] 
  **timestamp_lte** | **datetime**|  | [optional] 
@@ -815,7 +819,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_assets**
-> AssetCollectionResponse get_assets(limit=limit, offset=offset, name_pattern=name_pattern, uri_pattern=uri_pattern, dag_ids=dag_ids, only_active=only_active, order_by=order_by)
+> AssetCollectionResponse get_assets(limit=limit, offset=offset, name_pattern=name_pattern, name_prefix_pattern=name_prefix_pattern, uri_pattern=uri_pattern, uri_prefix_pattern=uri_prefix_pattern, dag_ids=dag_ids, only_active=only_active, order_by=order_by)
 
 Get Assets
 
@@ -856,15 +860,17 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     api_instance = airflow_client.client.AssetApi(api_client)
     limit = 50 # int |  (optional) (default to 50)
     offset = 0 # int |  (optional) (default to 0)
-    name_pattern = 'name_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported. (optional)
-    uri_pattern = 'uri_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported. (optional)
+    name_pattern = 'name_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``name_prefix_pattern`` parameter when possible. (optional)
+    name_prefix_pattern = 'name_prefix_pattern_example' # str | Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`. (optional)
+    uri_pattern = 'uri_pattern_example' # str | SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``uri_prefix_pattern`` parameter when possible. (optional)
+    uri_prefix_pattern = 'uri_prefix_pattern_example' # str | Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`. (optional)
     dag_ids = ['dag_ids_example'] # List[str] |  (optional)
     only_active = True # bool |  (optional) (default to True)
     order_by = ["id"] # List[str] | Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, name, uri, created_at, updated_at` (optional) (default to ["id"])
 
     try:
         # Get Assets
-        api_response = api_instance.get_assets(limit=limit, offset=offset, name_pattern=name_pattern, uri_pattern=uri_pattern, dag_ids=dag_ids, only_active=only_active, order_by=order_by)
+        api_response = api_instance.get_assets(limit=limit, offset=offset, name_pattern=name_pattern, name_prefix_pattern=name_prefix_pattern, uri_pattern=uri_pattern, uri_prefix_pattern=uri_prefix_pattern, dag_ids=dag_ids, only_active=only_active, order_by=order_by)
         print("The response of AssetApi->get_assets:\n")
         pprint(api_response)
     except Exception as e:
@@ -880,8 +886,10 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **int**|  | [optional] [default to 50]
  **offset** | **int**|  | [optional] [default to 0]
- **name_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). or the pipe &#x60;|&#x60; operator for OR logic (e.g. &#x60;dag1 | dag2&#x60;). Regular expressions are **not** supported. | [optional] 
- **uri_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). or the pipe &#x60;|&#x60; operator for OR logic (e.g. &#x60;dag1 | dag2&#x60;). Regular expressions are **not** supported. | [optional] 
+ **name_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). or the pipe &#x60;|&#x60; operator for OR logic (e.g. &#x60;dag1 | dag2&#x60;). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as &#x60;&#x60;ILIKE &#39;%term%&#39;&#x60;&#x60; and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent &#x60;&#x60;name_prefix_pattern&#x60;&#x60; parameter when possible. | [optional] 
+ **name_prefix_pattern** | **str**| Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe &#x60;|&#x60; operator for OR logic (e.g. &#x60;dag1|dag2&#x60;). Use &#x60;~&#x60; to match all. Wildcard characters (&#x60;%&#x60;, &#x60;_&#x60;) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. &#x60;test_&#x60; effectively matches items starting with &#x60;test&#x60;, and &#x60;s3://&#x60; matches items starting with &#x60;s3&#x60;. | [optional] 
+ **uri_pattern** | **str**| SQL LIKE expression — use &#x60;%&#x60; / &#x60;_&#x60; wildcards (e.g. &#x60;%customer_%&#x60;). or the pipe &#x60;|&#x60; operator for OR logic (e.g. &#x60;dag1 | dag2&#x60;). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as &#x60;&#x60;ILIKE &#39;%term%&#39;&#x60;&#x60; and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent &#x60;&#x60;uri_prefix_pattern&#x60;&#x60; parameter when possible. | [optional] 
+ **uri_prefix_pattern** | **str**| Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe &#x60;|&#x60; operator for OR logic (e.g. &#x60;dag1|dag2&#x60;). Use &#x60;~&#x60; to match all. Wildcard characters (&#x60;%&#x60;, &#x60;_&#x60;) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. &#x60;test_&#x60; effectively matches items starting with &#x60;test&#x60;, and &#x60;s3://&#x60; matches items starting with &#x60;s3&#x60;. | [optional] 
  **dag_ids** | [**List[str]**](str.md)|  | [optional] 
  **only_active** | **bool**|  | [optional] [default to True]
  **order_by** | [**List[str]**](str.md)| Attributes to order by, multi criteria sort is supported. Prefix with &#x60;-&#x60; for descending order. Supported attributes: &#x60;id, name, uri, created_at, updated_at&#x60; | [optional] [default to [&quot;id&quot;]]
@@ -916,7 +924,7 @@ Name | Type | Description  | Notes
 
 Get Dag Asset Queued Event
 
-Get a queued asset event for a DAG.
+Get a queued asset event for a Dag.
 
 ### Example
 
@@ -1005,7 +1013,7 @@ Name | Type | Description  | Notes
 
 Get Dag Asset Queued Events
 
-Get queued asset events for a DAG.
+Get queued asset events for a Dag.
 
 ### Example
 
@@ -1091,7 +1099,7 @@ Name | Type | Description  | Notes
 
 Materialize Asset
 
-Materialize an asset by triggering a DAG run that produces it.
+Materialize an asset by triggering a Dag run that produces it.
 
 ### Example
 

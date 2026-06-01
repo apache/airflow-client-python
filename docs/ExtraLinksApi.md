@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **get_extra_links**
-> ExtraLinkCollectionResponse get_extra_links(dag_id, dag_run_id, task_id, map_index=map_index)
+> ExtraLinkCollectionResponse get_extra_links(dag_id, dag_run_id, task_id, map_index=map_index, try_number=try_number)
 
 Get Extra Links
 
@@ -51,10 +51,11 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     dag_run_id = 'dag_run_id_example' # str | 
     task_id = 'task_id_example' # str | 
     map_index = -1 # int |  (optional) (default to -1)
+    try_number = 56 # int |  (optional)
 
     try:
         # Get Extra Links
-        api_response = api_instance.get_extra_links(dag_id, dag_run_id, task_id, map_index=map_index)
+        api_response = api_instance.get_extra_links(dag_id, dag_run_id, task_id, map_index=map_index, try_number=try_number)
         print("The response of ExtraLinksApi->get_extra_links:\n")
         pprint(api_response)
     except Exception as e:
@@ -72,6 +73,7 @@ Name | Type | Description  | Notes
  **dag_run_id** | **str**|  | 
  **task_id** | **str**|  | 
  **map_index** | **int**|  | [optional] [default to -1]
+ **try_number** | **int**|  | [optional] 
 
 ### Return type
 

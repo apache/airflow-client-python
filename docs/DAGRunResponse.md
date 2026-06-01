@@ -1,6 +1,6 @@
 # DAGRunResponse
 
-DAG Run serializer for responses.
+Dag Run serializer for responses.
 
 ## Properties
 

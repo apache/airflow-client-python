@@ -19,18 +19,18 @@ import json
 
 from pydantic import BaseModel, ConfigDict, StrictInt
 from typing import Any, ClassVar, Dict, List
-from airflow_client.client.models.dag_stats_response import DagStatsResponse
+from airflow_client.client.models.task_instances_inner import TaskInstancesInner
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
 
-class DagStatsCollectionResponse(BaseModel):
+class ClearTaskInstanceCollectionResponse(BaseModel):
     """
-    Dag Stats Collection serializer for responses.
+    Response for clear dag run dry run, which may contain new tasks without full TaskInstance data.
     """ # noqa: E501
-    dags: List[DagStatsResponse]
+    task_instances: List[TaskInstancesInner]
     total_entries: StrictInt
-    __properties: ClassVar[List[str]] = ["dags", "total_entries"]
+    __properties: ClassVar[List[str]] = ["task_instances", "total_entries"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -50,7 +50,7 @@ class DagStatsCollectionResponse(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of DagStatsCollectionResponse from a JSON string"""
+        """Create an instance of ClearTaskInstanceCollectionResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -71,18 +71,18 @@ class DagStatsCollectionResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in dags (list)
+        # override the default output from pydantic by calling `to_dict()` of each item in task_instances (list)
         _items = []
-        if self.dags:
-            for _item_dags in self.dags:
-                if _item_dags:
-                    _items.append(_item_dags.to_dict())
-            _dict['dags'] = _items
+        if self.task_instances:
+            for _item_task_instances in self.task_instances:
+                if _item_task_instances:
+                    _items.append(_item_task_instances.to_dict())
+            _dict['task_instances'] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of DagStatsCollectionResponse from a dict"""
+        """Create an instance of ClearTaskInstanceCollectionResponse from a dict"""
         if obj is None:
             return None
 
@@ -90,7 +90,7 @@ class DagStatsCollectionResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "dags": [DagStatsResponse.from_dict(_item) for _item in obj["dags"]] if obj.get("dags") is not None else None,
+            "task_instances": [TaskInstancesInner.from_dict(_item) for _item in obj["task_instances"]] if obj.get("task_instances") is not None else None,
             "total_entries": obj.get("total_entries")
         })
         return _obj

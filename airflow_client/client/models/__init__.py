@@ -51,6 +51,7 @@ from airflow_client.client.models.bulk_update_action_bulk_task_instance_body imp
 from airflow_client.client.models.bulk_update_action_connection_body import BulkUpdateActionConnectionBody
 from airflow_client.client.models.bulk_update_action_pool_body import BulkUpdateActionPoolBody
 from airflow_client.client.models.bulk_update_action_variable_body import BulkUpdateActionVariableBody
+from airflow_client.client.models.clear_task_instance_collection_response import ClearTaskInstanceCollectionResponse
 from airflow_client.client.models.clear_task_instances_body import ClearTaskInstancesBody
 from airflow_client.client.models.clear_task_instances_body_task_ids_inner import ClearTaskInstancesBodyTaskIdsInner
 from airflow_client.client.models.config import Config
@@ -118,6 +119,7 @@ from airflow_client.client.models.job_response import JobResponse
 from airflow_client.client.models.last_asset_event_response import LastAssetEventResponse
 from airflow_client.client.models.location_inner import LocationInner
 from airflow_client.client.models.materialize_asset_body import MaterializeAssetBody
+from airflow_client.client.models.new_task_response import NewTaskResponse
 from airflow_client.client.models.patch_task_instance_body import PatchTaskInstanceBody
 from airflow_client.client.models.plugin_collection_response import PluginCollectionResponse
 from airflow_client.client.models.plugin_import_error_collection_response import PluginImportErrorCollectionResponse
@@ -147,6 +149,7 @@ from airflow_client.client.models.task_instance_history_response import TaskInst
 from airflow_client.client.models.task_instance_response import TaskInstanceResponse
 from airflow_client.client.models.task_instance_state import TaskInstanceState
 from airflow_client.client.models.task_instances_batch_body import TaskInstancesBatchBody
+from airflow_client.client.models.task_instances_inner import TaskInstancesInner
 from airflow_client.client.models.task_instances_log_response import TaskInstancesLogResponse
 from airflow_client.client.models.task_outlet_asset_reference import TaskOutletAssetReference
 from airflow_client.client.models.task_response import TaskResponse

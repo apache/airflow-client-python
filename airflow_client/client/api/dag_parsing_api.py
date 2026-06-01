@@ -55,7 +55,7 @@ class DAGParsingApi:
     ) -> object:
         """Reparse Dag File
 
-        Request re-parsing a DAG file.
+        Request re-parsing a Dag file.
 
         :param file_token: (required)
         :type file_token: str
@@ -126,7 +126,7 @@ class DAGParsingApi:
     ) -> ApiResponse[object]:
         """Reparse Dag File
 
-        Request re-parsing a DAG file.
+        Request re-parsing a Dag file.
 
         :param file_token: (required)
         :type file_token: str
@@ -197,7 +197,7 @@ class DAGParsingApi:
     ) -> RESTResponseType:
         """Reparse Dag File
 
-        Request re-parsing a DAG file.
+        Request re-parsing a Dag file.
 
         :param file_token: (required)
         :type file_token: str

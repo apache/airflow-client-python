@@ -1,6 +1,6 @@
 # DAGRunPatchStates
 
-Enum for DAG Run states when updating a DAG Run.
+Enum for Dag Run states when updating a Dag Run.
 
 ## Enum
 

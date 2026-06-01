@@ -1,6 +1,6 @@
 # DagStatsResponse
 
-DAG Stats serializer for responses.
+Dag Stats serializer for responses.
 
 ## Properties
 

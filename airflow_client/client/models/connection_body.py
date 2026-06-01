@@ -43,6 +43,9 @@ class ConnectionBody(BaseModel):
     @field_validator('connection_id')
     def connection_id_validate_regular_expression(cls, value):
         """Validates the regular expression"""
+        if not isinstance(value, str):
+            value = str(value)
+
         if not re.match(r"^[\w.-]+$", value):
             raise ValueError(r"must validate the regular expression /^[\w.-]+$/")
         return value

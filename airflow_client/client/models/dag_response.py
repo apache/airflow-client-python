@@ -28,7 +28,7 @@ from pydantic_core import to_jsonable_python
 
 class DAGResponse(BaseModel):
     """
-    DAG serializer for responses.
+    Dag serializer for responses.
     """ # noqa: E501
     allowed_run_types: Optional[List[DagRunType]] = None
     bundle_name: Optional[StrictStr] = None

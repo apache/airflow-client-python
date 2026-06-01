@@ -350,7 +350,7 @@ class TaskApi:
     ) -> TaskCollectionResponse:
         """Get Tasks
 
-        Get tasks for DAG.
+        Get tasks for Dag.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -426,7 +426,7 @@ class TaskApi:
     ) -> ApiResponse[TaskCollectionResponse]:
         """Get Tasks
 
-        Get tasks for DAG.
+        Get tasks for Dag.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -502,7 +502,7 @@ class TaskApi:
     ) -> RESTResponseType:
         """Get Tasks
 
-        Get tasks for DAG.
+        Get tasks for Dag.
 
         :param dag_id: (required)
         :type dag_id: str

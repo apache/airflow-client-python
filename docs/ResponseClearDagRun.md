@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**task_instances** | [**List[TaskInstanceResponse]**](TaskInstanceResponse.md) |  | 
+**task_instances** | [**List[TaskInstancesInner]**](TaskInstancesInner.md) |  | 
 **total_entries** | **int** |  | 
 **bundle_version** | **str** |  | [optional] 
 **conf** | **Dict[str, object]** |  | [optional] 

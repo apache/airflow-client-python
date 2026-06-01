@@ -14,10 +14,10 @@
 
 import unittest
 
-from airflow_client.client.models.dag_run_clear_body import DAGRunClearBody
+from airflow_client.client.models.new_task_response import NewTaskResponse
 
-class TestDAGRunClearBody(unittest.TestCase):
-    """DAGRunClearBody unit test stubs"""
+class TestNewTaskResponse(unittest.TestCase):
+    """NewTaskResponse unit test stubs"""
 
     def setUp(self):
         pass
@@ -25,28 +25,28 @@ class TestDAGRunClearBody(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> DAGRunClearBody:
-        """Test DAGRunClearBody
+    def make_instance(self, include_optional) -> NewTaskResponse:
+        """Test NewTaskResponse
             include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `DAGRunClearBody`
+        # uncomment below to create an instance of `NewTaskResponse`
         """
-        model = DAGRunClearBody()
+        model = NewTaskResponse()
         if include_optional:
-            return DAGRunClearBody(
-                dry_run = True,
-                only_failed = True,
-                only_new = True,
-                run_on_latest_version = True
+            return NewTaskResponse(
+                task_display_name = '',
+                task_id = ''
             )
         else:
-            return DAGRunClearBody(
+            return NewTaskResponse(
+                task_display_name = '',
+                task_id = '',
         )
         """
 
-    def testDAGRunClearBody(self):
-        """Test DAGRunClearBody"""
+    def testNewTaskResponse(self):
+        """Test NewTaskResponse"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

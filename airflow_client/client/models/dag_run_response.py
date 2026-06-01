@@ -30,7 +30,7 @@ from pydantic_core import to_jsonable_python
 
 class DAGRunResponse(BaseModel):
     """
-    DAG Run serializer for responses.
+    Dag Run serializer for responses.
     """ # noqa: E501
     bundle_version: Optional[StrictStr] = None
     conf: Optional[Dict[str, Any]] = None

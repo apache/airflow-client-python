@@ -6,8 +6,8 @@ XCom Collection serializer for responses.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**total_entries** | **int** |  | 
 **xcom_entries** | [**List[XComResponse]**](XComResponse.md) |  | 
+**total_entries** | **int** |  | 
 
 ## Example
 

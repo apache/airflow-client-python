@@ -6,18 +6,18 @@ Base serializer for Backfill.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**completed_at** | **datetime** |  | [optional] 
-**created_at** | **datetime** |  | 
-**dag_display_name** | **str** |  | 
-**dag_id** | **str** |  | 
-**dag_run_conf** | **Dict[str, object]** |  | [optional] 
-**from_date** | **datetime** |  | 
 **id** | **int** |  | 
-**is_paused** | **bool** |  | 
-**max_active_runs** | **int** |  | 
-**reprocess_behavior** | [**ReprocessBehavior**](ReprocessBehavior.md) |  | 
+**dag_id** | **str** |  | 
+**from_date** | **datetime** |  | 
 **to_date** | **datetime** |  | 
+**dag_run_conf** | **Dict[str, object]** |  | 
+**is_paused** | **bool** |  | 
+**reprocess_behavior** | [**ReprocessBehavior**](ReprocessBehavior.md) |  | 
+**max_active_runs** | **int** |  | 
+**created_at** | **datetime** |  | 
+**completed_at** | **datetime** |  | 
 **updated_at** | **datetime** |  | 
+**dag_display_name** | **str** |  | 
 
 ## Example
 

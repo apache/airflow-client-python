@@ -6,8 +6,8 @@ Variable Collection serializer for responses.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**total_entries** | **int** |  | 
 **variables** | [**List[VariableResponse]**](VariableResponse.md) |  | 
+**total_entries** | **int** |  | 
 
 ## Example
 

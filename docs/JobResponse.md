@@ -6,17 +6,17 @@ Job serializer for responses.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**dag_display_name** | **str** |  | [optional] 
-**dag_id** | **str** |  | [optional] 
-**end_date** | **datetime** |  | [optional] 
-**executor_class** | **str** |  | [optional] 
-**hostname** | **str** |  | [optional] 
 **id** | **int** |  | 
-**job_type** | **str** |  | [optional] 
-**latest_heartbeat** | **datetime** |  | [optional] 
-**start_date** | **datetime** |  | [optional] 
-**state** | **str** |  | [optional] 
-**unixname** | **str** |  | [optional] 
+**dag_id** | **str** |  | 
+**state** | **str** |  | 
+**job_type** | **str** |  | 
+**start_date** | **datetime** |  | 
+**end_date** | **datetime** |  | 
+**latest_heartbeat** | **datetime** |  | 
+**executor_class** | **str** |  | 
+**hostname** | **str** |  | 
+**unixname** | **str** |  | 
+**dag_display_name** | **str** |  | [optional] 
 
 ## Example
 

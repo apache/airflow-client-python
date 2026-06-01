@@ -27,9 +27,9 @@ class XComUpdateBody(BaseModel):
     """
     Payload serializer for updating an XCom entry.
     """ # noqa: E501
-    map_index: Optional[StrictInt] = -1
     value: Optional[Any]
-    __properties: ClassVar[List[str]] = ["map_index", "value"]
+    map_index: Optional[StrictInt] = -1
+    __properties: ClassVar[List[str]] = ["value", "map_index"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -87,8 +87,8 @@ class XComUpdateBody(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "map_index": obj.get("map_index") if obj.get("map_index") is not None else -1,
-            "value": obj.get("value")
+            "value": obj.get("value"),
+            "map_index": obj.get("map_index") if obj.get("map_index") is not None else -1
         })
         return _obj
 

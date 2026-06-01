@@ -28,12 +28,12 @@ class PoolBody(BaseModel):
     """
     Pool serializer for post bodies.
     """ # noqa: E501
-    description: Optional[StrictStr] = None
-    include_deferred: Optional[StrictBool] = False
     name: Annotated[str, Field(strict=True, max_length=256)]
     slots: Annotated[int, Field(strict=True, ge=-1)] = Field(description="Number of slots. Use -1 for unlimited.")
+    description: Optional[StrictStr] = None
+    include_deferred: Optional[StrictBool] = False
     team_name: Optional[Annotated[str, Field(strict=True, max_length=50)]] = None
-    __properties: ClassVar[List[str]] = ["description", "include_deferred", "name", "slots", "team_name"]
+    __properties: ClassVar[List[str]] = ["name", "slots", "description", "include_deferred", "team_name"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -74,6 +74,16 @@ class PoolBody(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if description (nullable) is None
+        # and model_fields_set contains the field
+        if self.description is None and "description" in self.model_fields_set:
+            _dict['description'] = None
+
+        # set to None if team_name (nullable) is None
+        # and model_fields_set contains the field
+        if self.team_name is None and "team_name" in self.model_fields_set:
+            _dict['team_name'] = None
+
         return _dict
 
     @classmethod
@@ -86,10 +96,10 @@ class PoolBody(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "description": obj.get("description"),
-            "include_deferred": obj.get("include_deferred") if obj.get("include_deferred") is not None else False,
             "name": obj.get("name"),
             "slots": obj.get("slots"),
+            "description": obj.get("description"),
+            "include_deferred": obj.get("include_deferred") if obj.get("include_deferred") is not None else False,
             "team_name": obj.get("team_name")
         })
         return _obj

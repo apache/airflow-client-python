@@ -28,12 +28,12 @@ class ImportErrorResponse(BaseModel):
     """
     Import Error Response.
     """ # noqa: E501
-    bundle_name: Optional[StrictStr] = None
-    filename: StrictStr
     import_error_id: StrictInt
-    stack_trace: StrictStr
     timestamp: datetime
-    __properties: ClassVar[List[str]] = ["bundle_name", "filename", "import_error_id", "stack_trace", "timestamp"]
+    filename: StrictStr
+    bundle_name: Optional[StrictStr]
+    stack_trace: StrictStr
+    __properties: ClassVar[List[str]] = ["import_error_id", "timestamp", "filename", "bundle_name", "stack_trace"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -74,6 +74,11 @@ class ImportErrorResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if bundle_name (nullable) is None
+        # and model_fields_set contains the field
+        if self.bundle_name is None and "bundle_name" in self.model_fields_set:
+            _dict['bundle_name'] = None
+
         return _dict
 
     @classmethod
@@ -86,11 +91,11 @@ class ImportErrorResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "bundle_name": obj.get("bundle_name"),
-            "filename": obj.get("filename"),
             "import_error_id": obj.get("import_error_id"),
-            "stack_trace": obj.get("stack_trace"),
-            "timestamp": obj.get("timestamp")
+            "timestamp": obj.get("timestamp"),
+            "filename": obj.get("filename"),
+            "bundle_name": obj.get("bundle_name"),
+            "stack_trace": obj.get("stack_trace")
         })
         return _obj
 

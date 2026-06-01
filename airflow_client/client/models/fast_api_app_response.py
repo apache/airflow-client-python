@@ -28,10 +28,10 @@ class FastAPIAppResponse(BaseModel):
     Serializer for Plugin FastAPI App responses.
     """ # noqa: E501
     app: StrictStr
-    name: StrictStr
     url_prefix: StrictStr
+    name: StrictStr
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["app", "name", "url_prefix"]
+    __properties: ClassVar[List[str]] = ["app", "url_prefix", "name"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -92,8 +92,8 @@ class FastAPIAppResponse(BaseModel):
 
         _obj = cls.model_validate({
             "app": obj.get("app"),
-            "name": obj.get("name"),
-            "url_prefix": obj.get("url_prefix")
+            "url_prefix": obj.get("url_prefix"),
+            "name": obj.get("name")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

@@ -6,8 +6,8 @@ Triggerer info serializer for responses.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**latest_triggerer_heartbeat** | **str** |  | [optional] 
-**status** | **str** |  | [optional] 
+**status** | **str** |  | 
+**latest_triggerer_heartbeat** | **str** |  | 
 
 ## Example
 

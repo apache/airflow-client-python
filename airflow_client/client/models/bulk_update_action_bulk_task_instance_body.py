@@ -30,10 +30,10 @@ class BulkUpdateActionBulkTaskInstanceBody(BaseModel):
     BulkUpdateActionBulkTaskInstanceBody
     """ # noqa: E501
     action: StrictStr = Field(description="The action to be performed on the entities.")
-    action_on_non_existence: Optional[BulkActionNotOnExistence] = None
     entities: List[BulkTaskInstanceBody] = Field(description="A list of entities to be updated.")
-    update_mask: Optional[List[StrictStr]] = None
-    __properties: ClassVar[List[str]] = ["action", "action_on_non_existence", "entities", "update_mask"]
+    update_mask: Optional[List[StrictStr]] = Field(default=None, description="A list of field names to update for each entity.Only these fields will be applied from the request body to the database model.Any extra fields provided will be ignored.")
+    action_on_non_existence: Optional[BulkActionNotOnExistence] = None
+    __properties: ClassVar[List[str]] = ["action", "entities", "update_mask", "action_on_non_existence"]
 
     @field_validator('action')
     def action_validate_enum(cls, value):
@@ -88,6 +88,11 @@ class BulkUpdateActionBulkTaskInstanceBody(BaseModel):
                 if _item_entities:
                     _items.append(_item_entities.to_dict())
             _dict['entities'] = _items
+        # set to None if update_mask (nullable) is None
+        # and model_fields_set contains the field
+        if self.update_mask is None and "update_mask" in self.model_fields_set:
+            _dict['update_mask'] = None
+
         return _dict
 
     @classmethod
@@ -101,9 +106,9 @@ class BulkUpdateActionBulkTaskInstanceBody(BaseModel):
 
         _obj = cls.model_validate({
             "action": obj.get("action"),
-            "action_on_non_existence": obj.get("action_on_non_existence"),
             "entities": [BulkTaskInstanceBody.from_dict(_item) for _item in obj["entities"]] if obj.get("entities") is not None else None,
-            "update_mask": obj.get("update_mask")
+            "update_mask": obj.get("update_mask"),
+            "action_on_non_existence": obj.get("action_on_non_existence")
         })
         return _obj
 

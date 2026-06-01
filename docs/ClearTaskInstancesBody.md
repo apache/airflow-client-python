@@ -6,20 +6,20 @@ Request body for Clear Task Instances endpoint.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**dag_run_id** | **str** |  | [optional] 
 **dry_run** | **bool** |  | [optional] [default to True]
+**start_date** | **datetime** |  | [optional] 
 **end_date** | **datetime** |  | [optional] 
+**only_failed** | **bool** |  | [optional] [default to True]
+**only_running** | **bool** |  | [optional] [default to False]
+**reset_dag_runs** | **bool** |  | [optional] [default to True]
+**task_ids** | [**List[ClearTaskInstancesBodyTaskIdsInner]**](ClearTaskInstancesBodyTaskIdsInner.md) | A list of &#x60;task_id&#x60; or [&#x60;task_id&#x60;, &#x60;map_index&#x60;]. If only the &#x60;task_id&#x60; is provided for a mapped task, all of its map indices will be targeted. | [optional] 
+**dag_run_id** | **str** |  | [optional] 
+**include_upstream** | **bool** |  | [optional] [default to False]
 **include_downstream** | **bool** |  | [optional] [default to False]
 **include_future** | **bool** |  | [optional] [default to False]
 **include_past** | **bool** |  | [optional] [default to False]
-**include_upstream** | **bool** |  | [optional] [default to False]
-**only_failed** | **bool** |  | [optional] [default to True]
-**only_running** | **bool** |  | [optional] [default to False]
-**prevent_running_task** | **bool** |  | [optional] [default to False]
-**reset_dag_runs** | **bool** |  | [optional] [default to True]
 **run_on_latest_version** | **bool** | (Experimental) Run on the latest bundle version of the dag after clearing the task instances. | [optional] [default to False]
-**start_date** | **datetime** |  | [optional] 
-**task_ids** | [**List[ClearTaskInstancesBodyTaskIdsInner]**](ClearTaskInstancesBodyTaskIdsInner.md) |  | [optional] 
+**prevent_running_task** | **bool** |  | [optional] [default to False]
 
 ## Example
 

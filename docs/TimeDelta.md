@@ -8,8 +8,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **type** | **str** |  | [optional] [default to 'TimeDelta']
 **days** | **int** |  | 
-**microseconds** | **int** |  | 
 **seconds** | **int** |  | 
+**microseconds** | **int** |  | 
 
 ## Example
 

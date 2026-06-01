@@ -28,10 +28,10 @@ class CreateAssetEventsBody(BaseModel):
     Create asset events request.
     """ # noqa: E501
     asset_id: StrictInt
-    extra: Optional[Dict[str, Any]] = None
     partition_key: Optional[StrictStr] = None
+    extra: Optional[Dict[str, Any]] = None
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["asset_id", "extra", "partition_key"]
+    __properties: ClassVar[List[str]] = ["asset_id", "partition_key", "extra"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -79,6 +79,11 @@ class CreateAssetEventsBody(BaseModel):
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
+        # set to None if partition_key (nullable) is None
+        # and model_fields_set contains the field
+        if self.partition_key is None and "partition_key" in self.model_fields_set:
+            _dict['partition_key'] = None
+
         return _dict
 
     @classmethod
@@ -92,8 +97,8 @@ class CreateAssetEventsBody(BaseModel):
 
         _obj = cls.model_validate({
             "asset_id": obj.get("asset_id"),
-            "extra": obj.get("extra"),
-            "partition_key": obj.get("partition_key")
+            "partition_key": obj.get("partition_key"),
+            "extra": obj.get("extra")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

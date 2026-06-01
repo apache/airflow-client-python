@@ -6,16 +6,16 @@ XCom response serializer with native return type.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**dag_display_name** | **str** |  | 
-**dag_id** | **str** |  | 
 **key** | **str** |  | 
-**logical_date** | **datetime** |  | [optional] 
-**map_index** | **int** |  | 
-**run_after** | **datetime** |  | 
-**run_id** | **str** |  | 
-**task_display_name** | **str** |  | 
-**task_id** | **str** |  | 
 **timestamp** | **datetime** |  | 
+**logical_date** | **datetime** |  | 
+**map_index** | **int** |  | 
+**task_id** | **str** |  | 
+**dag_id** | **str** |  | 
+**run_id** | **str** |  | 
+**dag_display_name** | **str** |  | 
+**task_display_name** | **str** |  | 
+**run_after** | **datetime** |  | 
 **value** | **object** |  | 
 
 ## Example

@@ -6,8 +6,8 @@ Payload serializer for updating an XCom entry.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**map_index** | **int** |  | [optional] [default to -1]
 **value** | **object** |  | 
+**map_index** | **int** |  | [optional] [default to -1]
 
 ## Example
 

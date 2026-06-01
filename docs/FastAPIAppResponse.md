@@ -7,8 +7,8 @@ Serializer for Plugin FastAPI App responses.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **app** | **str** |  | 
-**name** | **str** |  | 
 **url_prefix** | **str** |  | 
+**name** | **str** |  | 
 
 ## Example
 

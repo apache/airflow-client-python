@@ -28,10 +28,10 @@ class StructuredLogMessage(BaseModel):
     """
     An individual log message.
     """ # noqa: E501
-    event: StrictStr
     timestamp: Optional[datetime] = None
+    event: StrictStr
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["event", "timestamp"]
+    __properties: ClassVar[List[str]] = ["timestamp", "event"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -91,8 +91,8 @@ class StructuredLogMessage(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "event": obj.get("event"),
-            "timestamp": obj.get("timestamp")
+            "timestamp": obj.get("timestamp"),
+            "event": obj.get("event")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

@@ -19,28 +19,28 @@ import pprint
 import re  # noqa: F401
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, field_validator
 from typing import Optional
+from airflow_client.client.models.clear_task_instance_collection_response import ClearTaskInstanceCollectionResponse
 from airflow_client.client.models.dag_run_response import DAGRunResponse
-from airflow_client.client.models.task_instance_collection_response import TaskInstanceCollectionResponse
 from typing import Union, Any, List, Set, TYPE_CHECKING, Optional, Dict
 from typing_extensions import Literal, Self
 from pydantic import Field
 
-RESPONSECLEARDAGRUN_ANY_OF_SCHEMAS = ["DAGRunResponse", "TaskInstanceCollectionResponse"]
+RESPONSECLEARDAGRUN_ANY_OF_SCHEMAS = ["ClearTaskInstanceCollectionResponse", "DAGRunResponse"]
 
 class ResponseClearDagRun(BaseModel):
     """
     ResponseClearDagRun
     """
 
-    # data type: TaskInstanceCollectionResponse
-    anyof_schema_1_validator: Optional[TaskInstanceCollectionResponse] = None
+    # data type: ClearTaskInstanceCollectionResponse
+    anyof_schema_1_validator: Optional[ClearTaskInstanceCollectionResponse] = None
     # data type: DAGRunResponse
     anyof_schema_2_validator: Optional[DAGRunResponse] = None
     if TYPE_CHECKING:
-        actual_instance: Optional[Union[DAGRunResponse, TaskInstanceCollectionResponse]] = None
+        actual_instance: Optional[Union[ClearTaskInstanceCollectionResponse, DAGRunResponse]] = None
     else:
         actual_instance: Any = None
-    any_of_schemas: Set[str] = { "DAGRunResponse", "TaskInstanceCollectionResponse" }
+    any_of_schemas: Set[str] = { "ClearTaskInstanceCollectionResponse", "DAGRunResponse" }
 
     model_config = {
         "validate_assignment": True,
@@ -61,9 +61,9 @@ class ResponseClearDagRun(BaseModel):
     def actual_instance_must_validate_anyof(cls, v):
         instance = ResponseClearDagRun.model_construct()
         error_messages = []
-        # validate data type: TaskInstanceCollectionResponse
-        if not isinstance(v, TaskInstanceCollectionResponse):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `TaskInstanceCollectionResponse`")
+        # validate data type: ClearTaskInstanceCollectionResponse
+        if not isinstance(v, ClearTaskInstanceCollectionResponse):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `ClearTaskInstanceCollectionResponse`")
         else:
             return v
 
@@ -75,7 +75,7 @@ class ResponseClearDagRun(BaseModel):
 
         if error_messages:
             # no match
-            raise ValueError("No match found when setting the actual_instance in ResponseClearDagRun with anyOf schemas: DAGRunResponse, TaskInstanceCollectionResponse. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting the actual_instance in ResponseClearDagRun with anyOf schemas: ClearTaskInstanceCollectionResponse, DAGRunResponse. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -88,9 +88,9 @@ class ResponseClearDagRun(BaseModel):
         """Returns the object represented by the json string"""
         instance = cls.model_construct()
         error_messages = []
-        # anyof_schema_1_validator: Optional[TaskInstanceCollectionResponse] = None
+        # anyof_schema_1_validator: Optional[ClearTaskInstanceCollectionResponse] = None
         try:
-            instance.actual_instance = TaskInstanceCollectionResponse.from_json(json_str)
+            instance.actual_instance = ClearTaskInstanceCollectionResponse.from_json(json_str)
             return instance
         except (ValidationError, ValueError) as e:
              error_messages.append(str(e))
@@ -103,7 +103,7 @@ class ResponseClearDagRun(BaseModel):
 
         if error_messages:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into ResponseClearDagRun with anyOf schemas: DAGRunResponse, TaskInstanceCollectionResponse. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into ResponseClearDagRun with anyOf schemas: ClearTaskInstanceCollectionResponse, DAGRunResponse. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -117,7 +117,7 @@ class ResponseClearDagRun(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], DAGRunResponse, TaskInstanceCollectionResponse]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], ClearTaskInstanceCollectionResponse, DAGRunResponse]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None

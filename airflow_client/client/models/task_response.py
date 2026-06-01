@@ -29,34 +29,34 @@ class TaskResponse(BaseModel):
     """
     Task serializer for responses.
     """ # noqa: E501
-    class_ref: Optional[Dict[str, Any]] = None
+    task_id: Optional[StrictStr]
+    task_display_name: Optional[StrictStr]
+    owner: Optional[StrictStr]
+    start_date: Optional[datetime]
+    end_date: Optional[datetime]
+    trigger_rule: Optional[StrictStr]
     depends_on_past: StrictBool
-    doc_md: Optional[StrictStr] = None
-    downstream_task_ids: Optional[List[StrictStr]] = None
-    end_date: Optional[datetime] = None
-    execution_timeout: Optional[TimeDelta] = None
-    extra_links: List[StrictStr] = Field(description="Extract and return extra_links.")
-    is_mapped: Optional[StrictBool] = None
-    operator_name: Optional[StrictStr] = None
-    owner: Optional[StrictStr] = None
-    params: Optional[Dict[str, Any]] = None
-    pool: Optional[StrictStr] = None
-    pool_slots: Optional[Union[StrictFloat, StrictInt]] = None
-    priority_weight: Optional[Union[StrictFloat, StrictInt]] = None
-    queue: Optional[StrictStr] = None
-    retries: Optional[Union[StrictFloat, StrictInt]] = None
-    retry_delay: Optional[TimeDelta] = None
-    retry_exponential_backoff: Union[StrictFloat, StrictInt]
-    start_date: Optional[datetime] = None
-    task_display_name: Optional[StrictStr] = None
-    task_id: Optional[StrictStr] = None
-    template_fields: Optional[List[StrictStr]] = None
-    trigger_rule: Optional[StrictStr] = None
-    ui_color: Optional[StrictStr] = None
-    ui_fgcolor: Optional[StrictStr] = None
     wait_for_downstream: StrictBool
-    weight_rule: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["class_ref", "depends_on_past", "doc_md", "downstream_task_ids", "end_date", "execution_timeout", "extra_links", "is_mapped", "operator_name", "owner", "params", "pool", "pool_slots", "priority_weight", "queue", "retries", "retry_delay", "retry_exponential_backoff", "start_date", "task_display_name", "task_id", "template_fields", "trigger_rule", "ui_color", "ui_fgcolor", "wait_for_downstream", "weight_rule"]
+    retries: Optional[Union[StrictFloat, StrictInt]]
+    queue: Optional[StrictStr]
+    pool: Optional[StrictStr]
+    pool_slots: Optional[Union[StrictFloat, StrictInt]]
+    execution_timeout: Optional[TimeDelta]
+    retry_delay: Optional[TimeDelta]
+    retry_exponential_backoff: Union[StrictFloat, StrictInt]
+    priority_weight: Optional[Union[StrictFloat, StrictInt]]
+    weight_rule: Optional[StrictStr]
+    ui_color: Optional[StrictStr]
+    ui_fgcolor: Optional[StrictStr]
+    template_fields: Optional[List[StrictStr]]
+    downstream_task_ids: Optional[List[StrictStr]]
+    doc_md: Optional[StrictStr]
+    operator_name: Optional[StrictStr]
+    params: Optional[Dict[str, Any]]
+    class_ref: Optional[Dict[str, Any]]
+    is_mapped: Optional[StrictBool]
+    extra_links: List[StrictStr] = Field(description="Extract and return extra_links.")
+    __properties: ClassVar[List[str]] = ["task_id", "task_display_name", "owner", "start_date", "end_date", "trigger_rule", "depends_on_past", "wait_for_downstream", "retries", "queue", "pool", "pool_slots", "execution_timeout", "retry_delay", "retry_exponential_backoff", "priority_weight", "weight_rule", "ui_color", "ui_fgcolor", "template_fields", "downstream_task_ids", "doc_md", "operator_name", "params", "class_ref", "is_mapped", "extra_links"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -105,6 +105,121 @@ class TaskResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of retry_delay
         if self.retry_delay:
             _dict['retry_delay'] = self.retry_delay.to_dict()
+        # set to None if task_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.task_id is None and "task_id" in self.model_fields_set:
+            _dict['task_id'] = None
+
+        # set to None if task_display_name (nullable) is None
+        # and model_fields_set contains the field
+        if self.task_display_name is None and "task_display_name" in self.model_fields_set:
+            _dict['task_display_name'] = None
+
+        # set to None if owner (nullable) is None
+        # and model_fields_set contains the field
+        if self.owner is None and "owner" in self.model_fields_set:
+            _dict['owner'] = None
+
+        # set to None if start_date (nullable) is None
+        # and model_fields_set contains the field
+        if self.start_date is None and "start_date" in self.model_fields_set:
+            _dict['start_date'] = None
+
+        # set to None if end_date (nullable) is None
+        # and model_fields_set contains the field
+        if self.end_date is None and "end_date" in self.model_fields_set:
+            _dict['end_date'] = None
+
+        # set to None if trigger_rule (nullable) is None
+        # and model_fields_set contains the field
+        if self.trigger_rule is None and "trigger_rule" in self.model_fields_set:
+            _dict['trigger_rule'] = None
+
+        # set to None if retries (nullable) is None
+        # and model_fields_set contains the field
+        if self.retries is None and "retries" in self.model_fields_set:
+            _dict['retries'] = None
+
+        # set to None if queue (nullable) is None
+        # and model_fields_set contains the field
+        if self.queue is None and "queue" in self.model_fields_set:
+            _dict['queue'] = None
+
+        # set to None if pool (nullable) is None
+        # and model_fields_set contains the field
+        if self.pool is None and "pool" in self.model_fields_set:
+            _dict['pool'] = None
+
+        # set to None if pool_slots (nullable) is None
+        # and model_fields_set contains the field
+        if self.pool_slots is None and "pool_slots" in self.model_fields_set:
+            _dict['pool_slots'] = None
+
+        # set to None if execution_timeout (nullable) is None
+        # and model_fields_set contains the field
+        if self.execution_timeout is None and "execution_timeout" in self.model_fields_set:
+            _dict['execution_timeout'] = None
+
+        # set to None if retry_delay (nullable) is None
+        # and model_fields_set contains the field
+        if self.retry_delay is None and "retry_delay" in self.model_fields_set:
+            _dict['retry_delay'] = None
+
+        # set to None if priority_weight (nullable) is None
+        # and model_fields_set contains the field
+        if self.priority_weight is None and "priority_weight" in self.model_fields_set:
+            _dict['priority_weight'] = None
+
+        # set to None if weight_rule (nullable) is None
+        # and model_fields_set contains the field
+        if self.weight_rule is None and "weight_rule" in self.model_fields_set:
+            _dict['weight_rule'] = None
+
+        # set to None if ui_color (nullable) is None
+        # and model_fields_set contains the field
+        if self.ui_color is None and "ui_color" in self.model_fields_set:
+            _dict['ui_color'] = None
+
+        # set to None if ui_fgcolor (nullable) is None
+        # and model_fields_set contains the field
+        if self.ui_fgcolor is None and "ui_fgcolor" in self.model_fields_set:
+            _dict['ui_fgcolor'] = None
+
+        # set to None if template_fields (nullable) is None
+        # and model_fields_set contains the field
+        if self.template_fields is None and "template_fields" in self.model_fields_set:
+            _dict['template_fields'] = None
+
+        # set to None if downstream_task_ids (nullable) is None
+        # and model_fields_set contains the field
+        if self.downstream_task_ids is None and "downstream_task_ids" in self.model_fields_set:
+            _dict['downstream_task_ids'] = None
+
+        # set to None if doc_md (nullable) is None
+        # and model_fields_set contains the field
+        if self.doc_md is None and "doc_md" in self.model_fields_set:
+            _dict['doc_md'] = None
+
+        # set to None if operator_name (nullable) is None
+        # and model_fields_set contains the field
+        if self.operator_name is None and "operator_name" in self.model_fields_set:
+            _dict['operator_name'] = None
+
+        # set to None if params (nullable) is None
+        # and model_fields_set contains the field
+        if self.params is None and "params" in self.model_fields_set:
+            _dict['params'] = None
+
+        # set to None if class_ref (nullable) is None
+        # and model_fields_set contains the field
+        if self.class_ref is None and "class_ref" in self.model_fields_set:
+            _dict['class_ref'] = None
+
+        # set to None if is_mapped (nullable) is None
+        # and model_fields_set contains the field
+        if self.is_mapped is None and "is_mapped" in self.model_fields_set:
+            _dict['is_mapped'] = None
+
         return _dict
 
     @classmethod
@@ -117,33 +232,33 @@ class TaskResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "class_ref": obj.get("class_ref"),
-            "depends_on_past": obj.get("depends_on_past"),
-            "doc_md": obj.get("doc_md"),
-            "downstream_task_ids": obj.get("downstream_task_ids"),
-            "end_date": obj.get("end_date"),
-            "execution_timeout": TimeDelta.from_dict(obj["execution_timeout"]) if obj.get("execution_timeout") is not None else None,
-            "extra_links": obj.get("extra_links"),
-            "is_mapped": obj.get("is_mapped"),
-            "operator_name": obj.get("operator_name"),
+            "task_id": obj.get("task_id"),
+            "task_display_name": obj.get("task_display_name"),
             "owner": obj.get("owner"),
-            "params": obj.get("params"),
+            "start_date": obj.get("start_date"),
+            "end_date": obj.get("end_date"),
+            "trigger_rule": obj.get("trigger_rule"),
+            "depends_on_past": obj.get("depends_on_past"),
+            "wait_for_downstream": obj.get("wait_for_downstream"),
+            "retries": obj.get("retries"),
+            "queue": obj.get("queue"),
             "pool": obj.get("pool"),
             "pool_slots": obj.get("pool_slots"),
-            "priority_weight": obj.get("priority_weight"),
-            "queue": obj.get("queue"),
-            "retries": obj.get("retries"),
+            "execution_timeout": TimeDelta.from_dict(obj["execution_timeout"]) if obj.get("execution_timeout") is not None else None,
             "retry_delay": TimeDelta.from_dict(obj["retry_delay"]) if obj.get("retry_delay") is not None else None,
             "retry_exponential_backoff": obj.get("retry_exponential_backoff"),
-            "start_date": obj.get("start_date"),
-            "task_display_name": obj.get("task_display_name"),
-            "task_id": obj.get("task_id"),
-            "template_fields": obj.get("template_fields"),
-            "trigger_rule": obj.get("trigger_rule"),
+            "priority_weight": obj.get("priority_weight"),
+            "weight_rule": obj.get("weight_rule"),
             "ui_color": obj.get("ui_color"),
             "ui_fgcolor": obj.get("ui_fgcolor"),
-            "wait_for_downstream": obj.get("wait_for_downstream"),
-            "weight_rule": obj.get("weight_rule")
+            "template_fields": obj.get("template_fields"),
+            "downstream_task_ids": obj.get("downstream_task_ids"),
+            "doc_md": obj.get("doc_md"),
+            "operator_name": obj.get("operator_name"),
+            "params": obj.get("params"),
+            "class_ref": obj.get("class_ref"),
+            "is_mapped": obj.get("is_mapped"),
+            "extra_links": obj.get("extra_links")
         })
         return _obj
 

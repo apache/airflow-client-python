@@ -28,10 +28,10 @@ class DryRunBackfillResponse(BaseModel):
     """
     Backfill serializer for responses in dry-run mode.
     """ # noqa: E501
-    logical_date: Optional[datetime] = None
-    partition_date: Optional[datetime] = None
-    partition_key: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["logical_date", "partition_date", "partition_key"]
+    logical_date: Optional[datetime]
+    partition_key: Optional[StrictStr]
+    partition_date: Optional[datetime]
+    __properties: ClassVar[List[str]] = ["logical_date", "partition_key", "partition_date"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -72,6 +72,21 @@ class DryRunBackfillResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if logical_date (nullable) is None
+        # and model_fields_set contains the field
+        if self.logical_date is None and "logical_date" in self.model_fields_set:
+            _dict['logical_date'] = None
+
+        # set to None if partition_key (nullable) is None
+        # and model_fields_set contains the field
+        if self.partition_key is None and "partition_key" in self.model_fields_set:
+            _dict['partition_key'] = None
+
+        # set to None if partition_date (nullable) is None
+        # and model_fields_set contains the field
+        if self.partition_date is None and "partition_date" in self.model_fields_set:
+            _dict['partition_date'] = None
+
         return _dict
 
     @classmethod
@@ -85,8 +100,8 @@ class DryRunBackfillResponse(BaseModel):
 
         _obj = cls.model_validate({
             "logical_date": obj.get("logical_date"),
-            "partition_date": obj.get("partition_date"),
-            "partition_key": obj.get("partition_key")
+            "partition_key": obj.get("partition_key"),
+            "partition_date": obj.get("partition_date")
         })
         return _obj
 

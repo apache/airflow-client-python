@@ -6,10 +6,10 @@ Response of updating a Human-in-the-loop detail.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**responded_by** | [**HITLUser**](HITLUser.md) |  | 
+**responded_at** | **datetime** |  | 
 **chosen_options** | **List[str]** |  | 
 **params_input** | **Dict[str, object]** |  | [optional] 
-**responded_at** | **datetime** |  | 
-**responded_by** | [**HITLUser**](HITLUser.md) |  | 
 
 ## Example
 

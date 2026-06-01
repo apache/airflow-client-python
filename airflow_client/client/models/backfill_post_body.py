@@ -30,15 +30,14 @@ class BackfillPostBody(BaseModel):
     Object used for create backfill request.
     """ # noqa: E501
     dag_id: StrictStr
-    dag_run_conf: Optional[Dict[str, Any]] = None
     from_date: datetime
-    max_active_runs: Optional[StrictInt] = 10
-    reprocess_behavior: Optional[ReprocessBehavior] = None
-    run_backwards: Optional[StrictBool] = False
-    run_on_latest_version: Optional[StrictBool] = True
     to_date: datetime
-    additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["dag_id", "dag_run_conf", "from_date", "max_active_runs", "reprocess_behavior", "run_backwards", "run_on_latest_version", "to_date"]
+    run_backwards: Optional[StrictBool] = False
+    dag_run_conf: Optional[Dict[str, Any]] = None
+    reprocess_behavior: Optional[ReprocessBehavior] = None
+    max_active_runs: Optional[StrictInt] = 10
+    run_on_latest_version: Optional[StrictBool] = True
+    __properties: ClassVar[List[str]] = ["dag_id", "from_date", "to_date", "run_backwards", "dag_run_conf", "reprocess_behavior", "max_active_runs", "run_on_latest_version"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -70,10 +69,8 @@ class BackfillPostBody(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
-        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
-            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -81,10 +78,10 @@ class BackfillPostBody(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # puts key-value pairs in additional_properties in the top level
-        if self.additional_properties is not None:
-            for _key, _value in self.additional_properties.items():
-                _dict[_key] = _value
+        # set to None if dag_run_conf (nullable) is None
+        # and model_fields_set contains the field
+        if self.dag_run_conf is None and "dag_run_conf" in self.model_fields_set:
+            _dict['dag_run_conf'] = None
 
         return _dict
 
@@ -99,19 +96,14 @@ class BackfillPostBody(BaseModel):
 
         _obj = cls.model_validate({
             "dag_id": obj.get("dag_id"),
-            "dag_run_conf": obj.get("dag_run_conf"),
             "from_date": obj.get("from_date"),
-            "max_active_runs": obj.get("max_active_runs") if obj.get("max_active_runs") is not None else 10,
-            "reprocess_behavior": obj.get("reprocess_behavior"),
+            "to_date": obj.get("to_date"),
             "run_backwards": obj.get("run_backwards") if obj.get("run_backwards") is not None else False,
-            "run_on_latest_version": obj.get("run_on_latest_version") if obj.get("run_on_latest_version") is not None else True,
-            "to_date": obj.get("to_date")
+            "dag_run_conf": obj.get("dag_run_conf"),
+            "reprocess_behavior": obj.get("reprocess_behavior"),
+            "max_active_runs": obj.get("max_active_runs") if obj.get("max_active_runs") is not None else 10,
+            "run_on_latest_version": obj.get("run_on_latest_version") if obj.get("run_on_latest_version") is not None else True
         })
-        # store additional fields in additional_properties
-        for _key in obj.keys():
-            if _key not in cls.__properties:
-                _obj.additional_properties[_key] = obj.get(_key)
-
         return _obj
 
 

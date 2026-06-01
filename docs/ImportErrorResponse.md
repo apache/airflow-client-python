@@ -6,11 +6,11 @@ Import Error Response.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**bundle_name** | **str** |  | [optional] 
-**filename** | **str** |  | 
 **import_error_id** | **int** |  | 
-**stack_trace** | **str** |  | 
 **timestamp** | **datetime** |  | 
+**filename** | **str** |  | 
+**bundle_name** | **str** |  | 
+**stack_trace** | **str** |  | 
 
 ## Example
 

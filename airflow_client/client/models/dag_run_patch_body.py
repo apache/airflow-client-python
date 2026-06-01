@@ -27,11 +27,11 @@ from pydantic_core import to_jsonable_python
 
 class DAGRunPatchBody(BaseModel):
     """
-    DAG Run Serializer for PATCH requests.
+    Dag Run Serializer for PATCH requests.
     """ # noqa: E501
-    note: Optional[Annotated[str, Field(strict=True, max_length=1000)]] = None
     state: Optional[DAGRunPatchStates] = None
-    __properties: ClassVar[List[str]] = ["note", "state"]
+    note: Optional[Annotated[str, Field(strict=True, max_length=1000)]] = None
+    __properties: ClassVar[List[str]] = ["state", "note"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -72,6 +72,16 @@ class DAGRunPatchBody(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if state (nullable) is None
+        # and model_fields_set contains the field
+        if self.state is None and "state" in self.model_fields_set:
+            _dict['state'] = None
+
+        # set to None if note (nullable) is None
+        # and model_fields_set contains the field
+        if self.note is None and "note" in self.model_fields_set:
+            _dict['note'] = None
+
         return _dict
 
     @classmethod
@@ -84,8 +94,8 @@ class DAGRunPatchBody(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "note": obj.get("note"),
-            "state": obj.get("state")
+            "state": obj.get("state"),
+            "note": obj.get("note")
         })
         return _obj
 

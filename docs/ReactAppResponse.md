@@ -6,13 +6,13 @@ Serializer for React App Plugin responses.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**bundle_url** | **str** |  | 
-**category** | **str** |  | [optional] 
-**destination** | **str** |  | [optional] [default to 'nav']
+**name** | **str** |  | 
 **icon** | **str** |  | [optional] 
 **icon_dark_mode** | **str** |  | [optional] 
-**name** | **str** |  | 
 **url_route** | **str** |  | [optional] 
+**category** | **str** |  | [optional] 
+**bundle_url** | **str** |  | 
+**destination** | **str** |  | [optional] [default to 'nav']
 
 ## Example
 

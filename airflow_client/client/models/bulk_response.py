@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
 from airflow_client.client.models.bulk_action_response import BulkActionResponse
 from typing import Optional, Set
@@ -28,10 +28,10 @@ class BulkResponse(BaseModel):
     """
     Serializer for responses to bulk entity operations.  This represents the results of create, update, and delete actions performed on entity in bulk. Each action (if requested) is represented as a field containing details about successful keys and any encountered errors. Fields are populated in the response only if the respective action was part of the request, else are set None.
     """ # noqa: E501
-    create: Optional[BulkActionResponse] = None
-    delete: Optional[BulkActionResponse] = None
-    update: Optional[BulkActionResponse] = None
-    __properties: ClassVar[List[str]] = ["create", "delete", "update"]
+    create: Optional[BulkActionResponse] = Field(default=None, description="Details of the bulk create operation, including successful keys and errors.")
+    update: Optional[BulkActionResponse] = Field(default=None, description="Details of the bulk update operation, including successful keys and errors.")
+    delete: Optional[BulkActionResponse] = Field(default=None, description="Details of the bulk delete operation, including successful keys and errors.")
+    __properties: ClassVar[List[str]] = ["create", "update", "delete"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -75,12 +75,27 @@ class BulkResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of create
         if self.create:
             _dict['create'] = self.create.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of delete
-        if self.delete:
-            _dict['delete'] = self.delete.to_dict()
         # override the default output from pydantic by calling `to_dict()` of update
         if self.update:
             _dict['update'] = self.update.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of delete
+        if self.delete:
+            _dict['delete'] = self.delete.to_dict()
+        # set to None if create (nullable) is None
+        # and model_fields_set contains the field
+        if self.create is None and "create" in self.model_fields_set:
+            _dict['create'] = None
+
+        # set to None if update (nullable) is None
+        # and model_fields_set contains the field
+        if self.update is None and "update" in self.model_fields_set:
+            _dict['update'] = None
+
+        # set to None if delete (nullable) is None
+        # and model_fields_set contains the field
+        if self.delete is None and "delete" in self.model_fields_set:
+            _dict['delete'] = None
+
         return _dict
 
     @classmethod
@@ -94,8 +109,8 @@ class BulkResponse(BaseModel):
 
         _obj = cls.model_validate({
             "create": BulkActionResponse.from_dict(obj["create"]) if obj.get("create") is not None else None,
-            "delete": BulkActionResponse.from_dict(obj["delete"]) if obj.get("delete") is not None else None,
-            "update": BulkActionResponse.from_dict(obj["update"]) if obj.get("update") is not None else None
+            "update": BulkActionResponse.from_dict(obj["update"]) if obj.get("update") is not None else None,
+            "delete": BulkActionResponse.from_dict(obj["delete"]) if obj.get("delete") is not None else None
         })
         return _obj
 

@@ -28,10 +28,10 @@ class AssetWatcherResponse(BaseModel):
     """
     Asset watcher serializer for responses.
     """ # noqa: E501
-    created_date: datetime
     name: StrictStr
     trigger_id: StrictInt
-    __properties: ClassVar[List[str]] = ["created_date", "name", "trigger_id"]
+    created_date: datetime
+    __properties: ClassVar[List[str]] = ["name", "trigger_id", "created_date"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -84,9 +84,9 @@ class AssetWatcherResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "created_date": obj.get("created_date"),
             "name": obj.get("name"),
-            "trigger_id": obj.get("trigger_id")
+            "trigger_id": obj.get("trigger_id"),
+            "created_date": obj.get("created_date")
         })
         return _obj
 

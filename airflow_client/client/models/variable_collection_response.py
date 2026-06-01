@@ -28,9 +28,9 @@ class VariableCollectionResponse(BaseModel):
     """
     Variable Collection serializer for responses.
     """ # noqa: E501
-    total_entries: StrictInt
     variables: List[VariableResponse]
-    __properties: ClassVar[List[str]] = ["total_entries", "variables"]
+    total_entries: StrictInt
+    __properties: ClassVar[List[str]] = ["variables", "total_entries"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -90,8 +90,8 @@ class VariableCollectionResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "total_entries": obj.get("total_entries"),
-            "variables": [VariableResponse.from_dict(_item) for _item in obj["variables"]] if obj.get("variables") is not None else None
+            "variables": [VariableResponse.from_dict(_item) for _item in obj["variables"]] if obj.get("variables") is not None else None,
+            "total_entries": obj.get("total_entries")
         })
         return _obj
 

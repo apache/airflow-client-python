@@ -6,16 +6,16 @@ Connection serializer for responses.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**conn_type** | **str** |  | 
 **connection_id** | **str** |  | 
-**description** | **str** |  | [optional] 
-**extra** | **str** |  | [optional] 
-**host** | **str** |  | [optional] 
-**login** | **str** |  | [optional] 
-**password** | **str** |  | [optional] 
-**port** | **int** |  | [optional] 
-**var_schema** | **str** |  | [optional] 
-**team_name** | **str** |  | [optional] 
+**conn_type** | **str** |  | 
+**description** | **str** |  | 
+**host** | **str** |  | 
+**login** | **str** |  | 
+**var_schema** | **str** |  | 
+**port** | **int** |  | 
+**password** | **str** |  | 
+**extra** | **str** |  | 
+**team_name** | **str** |  | 
 
 ## Example
 

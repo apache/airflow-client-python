@@ -45,7 +45,7 @@ class DagWarningApi:
         warning_type: Optional[Any] = None,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `dag_id, warning_type, message, timestamp`")] = None,
+        order_by: Annotated[Optional[List[Optional[StrictStr]]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `dag_id, warning_type, message, timestamp`")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -61,7 +61,7 @@ class DagWarningApi:
     ) -> DAGWarningCollectionResponse:
         """List Dag Warnings
 
-        Get a list of DAG warnings.
+        Get a list of Dag warnings.
 
         :param dag_id:
         :type dag_id: str
@@ -72,7 +72,7 @@ class DagWarningApi:
         :param offset:
         :type offset: int
         :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `dag_id, warning_type, message, timestamp`
-        :type order_by: List[str]
+        :type order_by: List[Optional[str]]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -131,7 +131,7 @@ class DagWarningApi:
         warning_type: Optional[Any] = None,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `dag_id, warning_type, message, timestamp`")] = None,
+        order_by: Annotated[Optional[List[Optional[StrictStr]]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `dag_id, warning_type, message, timestamp`")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -147,7 +147,7 @@ class DagWarningApi:
     ) -> ApiResponse[DAGWarningCollectionResponse]:
         """List Dag Warnings
 
-        Get a list of DAG warnings.
+        Get a list of Dag warnings.
 
         :param dag_id:
         :type dag_id: str
@@ -158,7 +158,7 @@ class DagWarningApi:
         :param offset:
         :type offset: int
         :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `dag_id, warning_type, message, timestamp`
-        :type order_by: List[str]
+        :type order_by: List[Optional[str]]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -217,7 +217,7 @@ class DagWarningApi:
         warning_type: Optional[Any] = None,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `dag_id, warning_type, message, timestamp`")] = None,
+        order_by: Annotated[Optional[List[Optional[StrictStr]]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `dag_id, warning_type, message, timestamp`")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -233,7 +233,7 @@ class DagWarningApi:
     ) -> RESTResponseType:
         """List Dag Warnings
 
-        Get a list of DAG warnings.
+        Get a list of Dag warnings.
 
         :param dag_id:
         :type dag_id: str
@@ -244,7 +244,7 @@ class DagWarningApi:
         :param offset:
         :type offset: int
         :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `dag_id, warning_type, message, timestamp`
-        :type order_by: List[str]
+        :type order_by: List[Optional[str]]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of

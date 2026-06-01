@@ -29,20 +29,20 @@ class AssetEventResponse(BaseModel):
     """
     Asset event serializer for responses.
     """ # noqa: E501
-    asset_id: StrictInt
-    created_dagruns: List[DagRunAssetReference]
-    extra: Optional[Dict[str, Any]] = None
-    group: Optional[StrictStr] = None
     id: StrictInt
-    name: Optional[StrictStr] = None
-    partition_key: Optional[StrictStr] = None
-    source_dag_id: Optional[StrictStr] = None
-    source_map_index: StrictInt
-    source_run_id: Optional[StrictStr] = None
-    source_task_id: Optional[StrictStr] = None
-    timestamp: datetime
+    asset_id: StrictInt
     uri: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["asset_id", "created_dagruns", "extra", "group", "id", "name", "partition_key", "source_dag_id", "source_map_index", "source_run_id", "source_task_id", "timestamp", "uri"]
+    name: Optional[StrictStr] = None
+    group: Optional[StrictStr] = None
+    extra: Optional[Dict[str, Any]] = None
+    source_task_id: Optional[StrictStr] = None
+    source_dag_id: Optional[StrictStr] = None
+    source_run_id: Optional[StrictStr] = None
+    source_map_index: StrictInt
+    created_dagruns: List[DagRunAssetReference]
+    timestamp: datetime
+    partition_key: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["id", "asset_id", "uri", "name", "group", "extra", "source_task_id", "source_dag_id", "source_run_id", "source_map_index", "created_dagruns", "timestamp", "partition_key"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -90,6 +90,46 @@ class AssetEventResponse(BaseModel):
                 if _item_created_dagruns:
                     _items.append(_item_created_dagruns.to_dict())
             _dict['created_dagruns'] = _items
+        # set to None if uri (nullable) is None
+        # and model_fields_set contains the field
+        if self.uri is None and "uri" in self.model_fields_set:
+            _dict['uri'] = None
+
+        # set to None if name (nullable) is None
+        # and model_fields_set contains the field
+        if self.name is None and "name" in self.model_fields_set:
+            _dict['name'] = None
+
+        # set to None if group (nullable) is None
+        # and model_fields_set contains the field
+        if self.group is None and "group" in self.model_fields_set:
+            _dict['group'] = None
+
+        # set to None if extra (nullable) is None
+        # and model_fields_set contains the field
+        if self.extra is None and "extra" in self.model_fields_set:
+            _dict['extra'] = None
+
+        # set to None if source_task_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.source_task_id is None and "source_task_id" in self.model_fields_set:
+            _dict['source_task_id'] = None
+
+        # set to None if source_dag_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.source_dag_id is None and "source_dag_id" in self.model_fields_set:
+            _dict['source_dag_id'] = None
+
+        # set to None if source_run_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.source_run_id is None and "source_run_id" in self.model_fields_set:
+            _dict['source_run_id'] = None
+
+        # set to None if partition_key (nullable) is None
+        # and model_fields_set contains the field
+        if self.partition_key is None and "partition_key" in self.model_fields_set:
+            _dict['partition_key'] = None
+
         return _dict
 
     @classmethod
@@ -102,19 +142,19 @@ class AssetEventResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "asset_id": obj.get("asset_id"),
-            "created_dagruns": [DagRunAssetReference.from_dict(_item) for _item in obj["created_dagruns"]] if obj.get("created_dagruns") is not None else None,
-            "extra": obj.get("extra"),
-            "group": obj.get("group"),
             "id": obj.get("id"),
+            "asset_id": obj.get("asset_id"),
+            "uri": obj.get("uri"),
             "name": obj.get("name"),
-            "partition_key": obj.get("partition_key"),
-            "source_dag_id": obj.get("source_dag_id"),
-            "source_map_index": obj.get("source_map_index"),
-            "source_run_id": obj.get("source_run_id"),
+            "group": obj.get("group"),
+            "extra": obj.get("extra"),
             "source_task_id": obj.get("source_task_id"),
+            "source_dag_id": obj.get("source_dag_id"),
+            "source_run_id": obj.get("source_run_id"),
+            "source_map_index": obj.get("source_map_index"),
+            "created_dagruns": [DagRunAssetReference.from_dict(_item) for _item in obj["created_dagruns"]] if obj.get("created_dagruns") is not None else None,
             "timestamp": obj.get("timestamp"),
-            "uri": obj.get("uri")
+            "partition_key": obj.get("partition_key")
         })
         return _obj
 

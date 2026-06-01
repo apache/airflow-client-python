@@ -29,15 +29,15 @@ class DagVersionResponse(BaseModel):
     """
     Dag Version serializer for responses.
     """ # noqa: E501
-    bundle_name: Optional[StrictStr] = None
-    bundle_url: Optional[StrictStr] = None
-    bundle_version: Optional[StrictStr] = None
-    created_at: datetime
-    dag_display_name: StrictStr
-    dag_id: StrictStr
     id: UUID
     version_number: StrictInt
-    __properties: ClassVar[List[str]] = ["bundle_name", "bundle_url", "bundle_version", "created_at", "dag_display_name", "dag_id", "id", "version_number"]
+    dag_id: StrictStr
+    bundle_name: Optional[StrictStr]
+    bundle_version: Optional[StrictStr]
+    created_at: datetime
+    dag_display_name: StrictStr
+    bundle_url: Optional[StrictStr]
+    __properties: ClassVar[List[str]] = ["id", "version_number", "dag_id", "bundle_name", "bundle_version", "created_at", "dag_display_name", "bundle_url"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -78,6 +78,21 @@ class DagVersionResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if bundle_name (nullable) is None
+        # and model_fields_set contains the field
+        if self.bundle_name is None and "bundle_name" in self.model_fields_set:
+            _dict['bundle_name'] = None
+
+        # set to None if bundle_version (nullable) is None
+        # and model_fields_set contains the field
+        if self.bundle_version is None and "bundle_version" in self.model_fields_set:
+            _dict['bundle_version'] = None
+
+        # set to None if bundle_url (nullable) is None
+        # and model_fields_set contains the field
+        if self.bundle_url is None and "bundle_url" in self.model_fields_set:
+            _dict['bundle_url'] = None
+
         return _dict
 
     @classmethod
@@ -90,14 +105,14 @@ class DagVersionResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "id": obj.get("id"),
+            "version_number": obj.get("version_number"),
+            "dag_id": obj.get("dag_id"),
             "bundle_name": obj.get("bundle_name"),
-            "bundle_url": obj.get("bundle_url"),
             "bundle_version": obj.get("bundle_version"),
             "created_at": obj.get("created_at"),
             "dag_display_name": obj.get("dag_display_name"),
-            "dag_id": obj.get("dag_id"),
-            "id": obj.get("id"),
-            "version_number": obj.get("version_number")
+            "bundle_url": obj.get("bundle_url")
         })
         return _obj
 

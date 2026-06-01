@@ -7,8 +7,8 @@ Payload serializer for creating an XCom entry.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **key** | **str** |  | 
-**map_index** | **int** |  | [optional] [default to -1]
 **value** | **object** |  | 
+**map_index** | **int** |  | [optional] [default to -1]
 
 ## Example
 

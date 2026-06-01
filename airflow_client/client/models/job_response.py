@@ -28,18 +28,18 @@ class JobResponse(BaseModel):
     """
     Job serializer for responses.
     """ # noqa: E501
-    dag_display_name: Optional[StrictStr] = None
-    dag_id: Optional[StrictStr] = None
-    end_date: Optional[datetime] = None
-    executor_class: Optional[StrictStr] = None
-    hostname: Optional[StrictStr] = None
     id: StrictInt
-    job_type: Optional[StrictStr] = None
-    latest_heartbeat: Optional[datetime] = None
-    start_date: Optional[datetime] = None
-    state: Optional[StrictStr] = None
-    unixname: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["dag_display_name", "dag_id", "end_date", "executor_class", "hostname", "id", "job_type", "latest_heartbeat", "start_date", "state", "unixname"]
+    dag_id: Optional[StrictStr]
+    state: Optional[StrictStr]
+    job_type: Optional[StrictStr]
+    start_date: Optional[datetime]
+    end_date: Optional[datetime]
+    latest_heartbeat: Optional[datetime]
+    executor_class: Optional[StrictStr]
+    hostname: Optional[StrictStr]
+    unixname: Optional[StrictStr]
+    dag_display_name: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["id", "dag_id", "state", "job_type", "start_date", "end_date", "latest_heartbeat", "executor_class", "hostname", "unixname", "dag_display_name"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -80,6 +80,56 @@ class JobResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if dag_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.dag_id is None and "dag_id" in self.model_fields_set:
+            _dict['dag_id'] = None
+
+        # set to None if state (nullable) is None
+        # and model_fields_set contains the field
+        if self.state is None and "state" in self.model_fields_set:
+            _dict['state'] = None
+
+        # set to None if job_type (nullable) is None
+        # and model_fields_set contains the field
+        if self.job_type is None and "job_type" in self.model_fields_set:
+            _dict['job_type'] = None
+
+        # set to None if start_date (nullable) is None
+        # and model_fields_set contains the field
+        if self.start_date is None and "start_date" in self.model_fields_set:
+            _dict['start_date'] = None
+
+        # set to None if end_date (nullable) is None
+        # and model_fields_set contains the field
+        if self.end_date is None and "end_date" in self.model_fields_set:
+            _dict['end_date'] = None
+
+        # set to None if latest_heartbeat (nullable) is None
+        # and model_fields_set contains the field
+        if self.latest_heartbeat is None and "latest_heartbeat" in self.model_fields_set:
+            _dict['latest_heartbeat'] = None
+
+        # set to None if executor_class (nullable) is None
+        # and model_fields_set contains the field
+        if self.executor_class is None and "executor_class" in self.model_fields_set:
+            _dict['executor_class'] = None
+
+        # set to None if hostname (nullable) is None
+        # and model_fields_set contains the field
+        if self.hostname is None and "hostname" in self.model_fields_set:
+            _dict['hostname'] = None
+
+        # set to None if unixname (nullable) is None
+        # and model_fields_set contains the field
+        if self.unixname is None and "unixname" in self.model_fields_set:
+            _dict['unixname'] = None
+
+        # set to None if dag_display_name (nullable) is None
+        # and model_fields_set contains the field
+        if self.dag_display_name is None and "dag_display_name" in self.model_fields_set:
+            _dict['dag_display_name'] = None
+
         return _dict
 
     @classmethod
@@ -92,17 +142,17 @@ class JobResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "dag_display_name": obj.get("dag_display_name"),
+            "id": obj.get("id"),
             "dag_id": obj.get("dag_id"),
+            "state": obj.get("state"),
+            "job_type": obj.get("job_type"),
+            "start_date": obj.get("start_date"),
             "end_date": obj.get("end_date"),
+            "latest_heartbeat": obj.get("latest_heartbeat"),
             "executor_class": obj.get("executor_class"),
             "hostname": obj.get("hostname"),
-            "id": obj.get("id"),
-            "job_type": obj.get("job_type"),
-            "latest_heartbeat": obj.get("latest_heartbeat"),
-            "start_date": obj.get("start_date"),
-            "state": obj.get("state"),
-            "unixname": obj.get("unixname")
+            "unixname": obj.get("unixname"),
+            "dag_display_name": obj.get("dag_display_name")
         })
         return _obj
 

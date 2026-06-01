@@ -26,7 +26,7 @@ from pydantic_core import to_jsonable_python
 
 class DAGVersionCollectionResponse(BaseModel):
     """
-    DAG Version Collection serializer for responses.
+    Dag Version Collection serializer for responses.
     """ # noqa: E501
     dag_versions: List[DagVersionResponse]
     total_entries: StrictInt

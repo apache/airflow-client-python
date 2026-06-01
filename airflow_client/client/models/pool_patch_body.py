@@ -28,12 +28,12 @@ class PoolPatchBody(BaseModel):
     """
     Pool serializer for patch bodies.
     """ # noqa: E501
-    description: Optional[StrictStr] = None
-    include_deferred: Optional[StrictBool] = None
     pool: Optional[StrictStr] = None
     slots: Optional[Annotated[int, Field(strict=True, ge=-1)]] = Field(default=None, description="Number of slots. Use -1 for unlimited.")
+    description: Optional[StrictStr] = None
+    include_deferred: Optional[StrictBool] = None
     team_name: Optional[Annotated[str, Field(strict=True, max_length=50)]] = None
-    __properties: ClassVar[List[str]] = ["description", "include_deferred", "pool", "slots", "team_name"]
+    __properties: ClassVar[List[str]] = ["pool", "slots", "description", "include_deferred", "team_name"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -74,6 +74,31 @@ class PoolPatchBody(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if pool (nullable) is None
+        # and model_fields_set contains the field
+        if self.pool is None and "pool" in self.model_fields_set:
+            _dict['pool'] = None
+
+        # set to None if slots (nullable) is None
+        # and model_fields_set contains the field
+        if self.slots is None and "slots" in self.model_fields_set:
+            _dict['slots'] = None
+
+        # set to None if description (nullable) is None
+        # and model_fields_set contains the field
+        if self.description is None and "description" in self.model_fields_set:
+            _dict['description'] = None
+
+        # set to None if include_deferred (nullable) is None
+        # and model_fields_set contains the field
+        if self.include_deferred is None and "include_deferred" in self.model_fields_set:
+            _dict['include_deferred'] = None
+
+        # set to None if team_name (nullable) is None
+        # and model_fields_set contains the field
+        if self.team_name is None and "team_name" in self.model_fields_set:
+            _dict['team_name'] = None
+
         return _dict
 
     @classmethod
@@ -86,10 +111,10 @@ class PoolPatchBody(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "description": obj.get("description"),
-            "include_deferred": obj.get("include_deferred"),
             "pool": obj.get("pool"),
             "slots": obj.get("slots"),
+            "description": obj.get("description"),
+            "include_deferred": obj.get("include_deferred"),
             "team_name": obj.get("team_name")
         })
         return _obj

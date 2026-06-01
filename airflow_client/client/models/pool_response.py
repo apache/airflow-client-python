@@ -28,18 +28,18 @@ class PoolResponse(BaseModel):
     """
     Pool serializer for responses.
     """ # noqa: E501
-    deferred_slots: StrictInt
+    name: StrictStr
+    slots: Annotated[int, Field(strict=True, ge=-1)] = Field(description="Number of slots. Use -1 for unlimited.")
     description: Optional[StrictStr] = None
     include_deferred: StrictBool
-    name: StrictStr
     occupied_slots: StrictInt
-    open_slots: StrictInt
-    queued_slots: StrictInt
     running_slots: StrictInt
+    queued_slots: StrictInt
     scheduled_slots: StrictInt
-    slots: Annotated[int, Field(strict=True, ge=-1)] = Field(description="Number of slots. Use -1 for unlimited.")
-    team_name: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["deferred_slots", "description", "include_deferred", "name", "occupied_slots", "open_slots", "queued_slots", "running_slots", "scheduled_slots", "slots", "team_name"]
+    open_slots: StrictInt
+    deferred_slots: StrictInt
+    team_name: Optional[StrictStr]
+    __properties: ClassVar[List[str]] = ["name", "slots", "description", "include_deferred", "occupied_slots", "running_slots", "queued_slots", "scheduled_slots", "open_slots", "deferred_slots", "team_name"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -80,6 +80,16 @@ class PoolResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if description (nullable) is None
+        # and model_fields_set contains the field
+        if self.description is None and "description" in self.model_fields_set:
+            _dict['description'] = None
+
+        # set to None if team_name (nullable) is None
+        # and model_fields_set contains the field
+        if self.team_name is None and "team_name" in self.model_fields_set:
+            _dict['team_name'] = None
+
         return _dict
 
     @classmethod
@@ -92,16 +102,16 @@ class PoolResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "deferred_slots": obj.get("deferred_slots"),
+            "name": obj.get("name"),
+            "slots": obj.get("slots"),
             "description": obj.get("description"),
             "include_deferred": obj.get("include_deferred"),
-            "name": obj.get("name"),
             "occupied_slots": obj.get("occupied_slots"),
-            "open_slots": obj.get("open_slots"),
-            "queued_slots": obj.get("queued_slots"),
             "running_slots": obj.get("running_slots"),
+            "queued_slots": obj.get("queued_slots"),
             "scheduled_slots": obj.get("scheduled_slots"),
-            "slots": obj.get("slots"),
+            "open_slots": obj.get("open_slots"),
+            "deferred_slots": obj.get("deferred_slots"),
             "team_name": obj.get("team_name")
         })
         return _obj

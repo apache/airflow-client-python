@@ -26,7 +26,7 @@ from pydantic_core import to_jsonable_python
 
 class DagStatsCollectionResponse(BaseModel):
     """
-    DAG Stats Collection serializer for responses.
+    Dag Stats Collection serializer for responses.
     """ # noqa: E501
     dags: List[DagStatsResponse]
     total_entries: StrictInt

@@ -28,12 +28,12 @@ class ValidationError(BaseModel):
     """
     ValidationError
     """ # noqa: E501
-    ctx: Optional[Dict[str, Any]] = None
-    input: Optional[Any] = None
     loc: List[LocationInner]
     msg: StrictStr
     type: StrictStr
-    __properties: ClassVar[List[str]] = ["ctx", "input", "loc", "msg", "type"]
+    input: Optional[Any] = None
+    ctx: Optional[Dict[str, Any]] = None
+    __properties: ClassVar[List[str]] = ["loc", "msg", "type", "input", "ctx"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -98,11 +98,11 @@ class ValidationError(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "ctx": obj.get("ctx"),
-            "input": obj.get("input"),
             "loc": [LocationInner.from_dict(_item) for _item in obj["loc"]] if obj.get("loc") is not None else None,
             "msg": obj.get("msg"),
-            "type": obj.get("type")
+            "type": obj.get("type"),
+            "input": obj.get("input"),
+            "ctx": obj.get("ctx")
         })
         return _obj
 

@@ -6,10 +6,10 @@ Pool serializer for patch bodies.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**description** | **str** |  | [optional] 
-**include_deferred** | **bool** |  | [optional] 
 **pool** | **str** |  | [optional] 
 **slots** | **int** | Number of slots. Use -1 for unlimited. | [optional] 
+**description** | **str** |  | [optional] 
+**include_deferred** | **bool** |  | [optional] 
 **team_name** | **str** |  | [optional] 
 
 ## Example

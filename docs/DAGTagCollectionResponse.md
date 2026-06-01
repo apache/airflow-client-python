@@ -1,6 +1,6 @@
 # DAGTagCollectionResponse
 
-DAG Tags Collection serializer for responses.
+Dag Tags Collection serializer for responses.
 
 ## Properties
 

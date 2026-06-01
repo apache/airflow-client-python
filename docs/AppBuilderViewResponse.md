@@ -6,10 +6,10 @@ Serializer for AppBuilder View responses.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**category** | **str** |  | [optional] 
-**label** | **str** |  | [optional] 
 **name** | **str** |  | [optional] 
+**category** | **str** |  | [optional] 
 **view** | **str** |  | [optional] 
+**label** | **str** |  | [optional] 
 
 ## Example
 

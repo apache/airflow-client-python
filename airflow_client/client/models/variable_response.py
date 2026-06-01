@@ -27,12 +27,12 @@ class VariableResponse(BaseModel):
     """
     Variable serializer for responses.
     """ # noqa: E501
-    description: Optional[StrictStr] = None
-    is_encrypted: StrictBool
     key: StrictStr
-    team_name: Optional[StrictStr] = None
     value: StrictStr
-    __properties: ClassVar[List[str]] = ["description", "is_encrypted", "key", "team_name", "value"]
+    description: Optional[StrictStr]
+    is_encrypted: StrictBool
+    team_name: Optional[StrictStr]
+    __properties: ClassVar[List[str]] = ["key", "value", "description", "is_encrypted", "team_name"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -73,6 +73,16 @@ class VariableResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if description (nullable) is None
+        # and model_fields_set contains the field
+        if self.description is None and "description" in self.model_fields_set:
+            _dict['description'] = None
+
+        # set to None if team_name (nullable) is None
+        # and model_fields_set contains the field
+        if self.team_name is None and "team_name" in self.model_fields_set:
+            _dict['team_name'] = None
+
         return _dict
 
     @classmethod
@@ -85,11 +95,11 @@ class VariableResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "key": obj.get("key"),
+            "value": obj.get("value"),
             "description": obj.get("description"),
             "is_encrypted": obj.get("is_encrypted"),
-            "key": obj.get("key"),
-            "team_name": obj.get("team_name"),
-            "value": obj.get("value")
+            "team_name": obj.get("team_name")
         })
         return _obj
 

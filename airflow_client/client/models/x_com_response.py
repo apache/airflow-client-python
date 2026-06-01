@@ -28,17 +28,17 @@ class XComResponse(BaseModel):
     """
     Serializer for a xcom item.
     """ # noqa: E501
-    dag_display_name: StrictStr
-    dag_id: StrictStr
     key: StrictStr
-    logical_date: Optional[datetime] = None
-    map_index: StrictInt
-    run_after: datetime
-    run_id: StrictStr
-    task_display_name: StrictStr
-    task_id: StrictStr
     timestamp: datetime
-    __properties: ClassVar[List[str]] = ["dag_display_name", "dag_id", "key", "logical_date", "map_index", "run_after", "run_id", "task_display_name", "task_id", "timestamp"]
+    logical_date: Optional[datetime]
+    map_index: StrictInt
+    task_id: StrictStr
+    dag_id: StrictStr
+    run_id: StrictStr
+    dag_display_name: StrictStr
+    task_display_name: StrictStr
+    run_after: datetime
+    __properties: ClassVar[List[str]] = ["key", "timestamp", "logical_date", "map_index", "task_id", "dag_id", "run_id", "dag_display_name", "task_display_name", "run_after"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -79,6 +79,11 @@ class XComResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if logical_date (nullable) is None
+        # and model_fields_set contains the field
+        if self.logical_date is None and "logical_date" in self.model_fields_set:
+            _dict['logical_date'] = None
+
         return _dict
 
     @classmethod
@@ -91,16 +96,16 @@ class XComResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "dag_display_name": obj.get("dag_display_name"),
-            "dag_id": obj.get("dag_id"),
             "key": obj.get("key"),
+            "timestamp": obj.get("timestamp"),
             "logical_date": obj.get("logical_date"),
             "map_index": obj.get("map_index"),
-            "run_after": obj.get("run_after"),
-            "run_id": obj.get("run_id"),
-            "task_display_name": obj.get("task_display_name"),
             "task_id": obj.get("task_id"),
-            "timestamp": obj.get("timestamp")
+            "dag_id": obj.get("dag_id"),
+            "run_id": obj.get("run_id"),
+            "dag_display_name": obj.get("dag_display_name"),
+            "task_display_name": obj.get("task_display_name"),
+            "run_after": obj.get("run_after")
         })
         return _obj
 

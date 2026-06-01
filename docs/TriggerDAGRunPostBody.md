@@ -1,19 +1,19 @@
 # TriggerDAGRunPostBody
 
-Trigger DAG Run Serializer for POST body.
+Trigger Dag Run Serializer for POST body.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**conf** | **Dict[str, object]** |  | [optional] 
 **dag_run_id** | **str** |  | [optional] 
-**data_interval_end** | **datetime** |  | [optional] 
 **data_interval_start** | **datetime** |  | [optional] 
-**logical_date** | **datetime** |  | [optional] 
+**data_interval_end** | **datetime** |  | [optional] 
+**logical_date** | **datetime** |  | 
+**run_after** | **datetime** |  | [optional] 
+**conf** | **Dict[str, object]** |  | [optional] 
 **note** | **str** |  | [optional] 
 **partition_key** | **str** |  | [optional] 
-**run_after** | **datetime** |  | [optional] 
 
 ## Example
 

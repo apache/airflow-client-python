@@ -17,8 +17,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, ConfigDict, StrictInt
+from typing import Any, ClassVar, Dict, List, Optional
+from airflow_client.client.models.extra_links_value import ExtraLinksValue
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -27,7 +28,7 @@ class ExtraLinkCollectionResponse(BaseModel):
     """
     Extra Links Response.
     """ # noqa: E501
-    extra_links: Dict[str, StrictStr]
+    extra_links: Dict[str, Optional[ExtraLinksValue]]
     total_entries: StrictInt
     __properties: ClassVar[List[str]] = ["extra_links", "total_entries"]
 
@@ -70,6 +71,13 @@ class ExtraLinkCollectionResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each value in extra_links (dict)
+        _field_dict = {}
+        if self.extra_links:
+            for _key_extra_links in self.extra_links:
+                if self.extra_links[_key_extra_links]:
+                    _field_dict[_key_extra_links] = self.extra_links[_key_extra_links].to_dict()
+            _dict['extra_links'] = _field_dict
         return _dict
 
     @classmethod
@@ -82,7 +90,12 @@ class ExtraLinkCollectionResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "extra_links": obj.get("extra_links"),
+            "extra_links": dict(
+                (_k, ExtraLinksValue.from_dict(_v))
+                for _k, _v in obj["extra_links"].items()
+            )
+            if obj.get("extra_links") is not None
+            else None,
             "total_entries": obj.get("total_entries")
         })
         return _obj

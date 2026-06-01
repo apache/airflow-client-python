@@ -6,10 +6,10 @@ Variable serializer for bodies.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**description** | **str** |  | [optional] 
 **key** | **str** |  | 
-**team_name** | **str** |  | [optional] 
 **value** | **object** |  | 
+**description** | **str** |  | [optional] 
+**team_name** | **str** |  | [optional] 
 
 ## Example
 

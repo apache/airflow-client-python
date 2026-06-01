@@ -1,6 +1,6 @@
 # DAGRunClearBody
 
-DAG Run serializer for clear endpoint body.
+Dag Run serializer for clear endpoint body.
 
 ## Properties
 
@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **dry_run** | **bool** |  | [optional] [default to True]
 **only_failed** | **bool** |  | [optional] [default to False]
+**only_new** | **bool** | Only queue newly added tasks in the latest DAG version without clearing existing tasks. | [optional] [default to False]
 **run_on_latest_version** | **bool** | (Experimental) Run on the latest bundle version of the Dag after clearing the Dag Run. | [optional] [default to False]
 
 ## Example

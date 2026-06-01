@@ -27,9 +27,9 @@ class BulkActionResponse(BaseModel):
     """
     Serializer for individual bulk action responses.  Represents the outcome of a single bulk operation (create, update, or delete). The response includes a list of successful keys and any errors encountered during the operation. This structure helps users understand which key actions succeeded and which failed.
     """ # noqa: E501
-    errors: Optional[List[Dict[str, Any]]] = Field(default=None, description="A list of errors encountered during the operation, each containing details about the issue.")
     success: Optional[List[StrictStr]] = Field(default=None, description="A list of unique id/key representing successful operations.")
-    __properties: ClassVar[List[str]] = ["errors", "success"]
+    errors: Optional[List[Dict[str, Any]]] = Field(default=None, description="A list of errors encountered during the operation, each containing details about the issue.")
+    __properties: ClassVar[List[str]] = ["success", "errors"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -82,8 +82,8 @@ class BulkActionResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "errors": obj.get("errors"),
-            "success": obj.get("success")
+            "success": obj.get("success"),
+            "errors": obj.get("errors")
         })
         return _obj
 

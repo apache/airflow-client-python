@@ -1,13 +1,13 @@
 # DagStatsResponse
 
-DAG Stats serializer for responses.
+Dag Stats serializer for responses.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**dag_display_name** | **str** |  | 
 **dag_id** | **str** |  | 
+**dag_display_name** | **str** |  | 
 **stats** | [**List[DagStatsStateResponse]**](DagStatsStateResponse.md) |  | 
 
 ## Example

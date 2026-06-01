@@ -27,11 +27,11 @@ class ProviderResponse(BaseModel):
     """
     Provider serializer for responses.
     """ # noqa: E501
-    description: StrictStr
-    documentation_url: Optional[StrictStr] = None
     package_name: StrictStr
+    description: StrictStr
     version: StrictStr
-    __properties: ClassVar[List[str]] = ["description", "documentation_url", "package_name", "version"]
+    documentation_url: Optional[StrictStr]
+    __properties: ClassVar[List[str]] = ["package_name", "description", "version", "documentation_url"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -72,6 +72,11 @@ class ProviderResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if documentation_url (nullable) is None
+        # and model_fields_set contains the field
+        if self.documentation_url is None and "documentation_url" in self.model_fields_set:
+            _dict['documentation_url'] = None
+
         return _dict
 
     @classmethod
@@ -84,10 +89,10 @@ class ProviderResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "description": obj.get("description"),
-            "documentation_url": obj.get("documentation_url"),
             "package_name": obj.get("package_name"),
-            "version": obj.get("version")
+            "description": obj.get("description"),
+            "version": obj.get("version"),
+            "documentation_url": obj.get("documentation_url")
         })
         return _obj
 

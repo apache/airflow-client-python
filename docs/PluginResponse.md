@@ -6,19 +6,19 @@ Plugin serializer.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**appbuilder_menu_items** | [**List[AppBuilderMenuItemResponse]**](AppBuilderMenuItemResponse.md) |  | 
-**appbuilder_views** | [**List[AppBuilderViewResponse]**](AppBuilderViewResponse.md) |  | 
-**external_views** | [**List[ExternalViewResponse]**](ExternalViewResponse.md) | Aggregate all external views. Both &#39;external_views&#39; and &#39;appbuilder_menu_items&#39; are included here. | 
+**name** | **str** |  | 
+**macros** | **List[str]** |  | 
+**flask_blueprints** | **List[str]** |  | 
 **fastapi_apps** | [**List[FastAPIAppResponse]**](FastAPIAppResponse.md) |  | 
 **fastapi_root_middlewares** | [**List[FastAPIRootMiddlewareResponse]**](FastAPIRootMiddlewareResponse.md) |  | 
-**flask_blueprints** | **List[str]** |  | 
-**global_operator_extra_links** | **List[str]** |  | 
-**listeners** | **List[str]** |  | 
-**macros** | **List[str]** |  | 
-**name** | **str** |  | 
-**operator_extra_links** | **List[str]** |  | 
+**external_views** | [**List[ExternalViewResponse]**](ExternalViewResponse.md) | Aggregate all external views. Both &#39;external_views&#39; and &#39;appbuilder_menu_items&#39; are included here. | 
 **react_apps** | [**List[ReactAppResponse]**](ReactAppResponse.md) |  | 
+**appbuilder_views** | [**List[AppBuilderViewResponse]**](AppBuilderViewResponse.md) |  | 
+**appbuilder_menu_items** | [**List[AppBuilderMenuItemResponse]**](AppBuilderMenuItemResponse.md) |  | 
+**global_operator_extra_links** | **List[str]** |  | 
+**operator_extra_links** | **List[str]** |  | 
 **source** | **str** |  | 
+**listeners** | **List[str]** |  | 
 **timetables** | **List[str]** |  | 
 
 ## Example

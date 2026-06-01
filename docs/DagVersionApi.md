@@ -100,9 +100,9 @@ Name | Type | Description  | Notes
 
 Get Dag Versions
 
-Get all DAG Versions.
+Get all Dag Versions.
 
-This endpoint allows specifying `~` as the dag_id to retrieve DAG Versions for all DAGs.
+This endpoint allows specifying `~` as the dag_id to retrieve Dag Versions for all Dags.
 
 ### Example
 
@@ -143,7 +143,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     version_number = 56 # int |  (optional)
     bundle_name = 'bundle_name_example' # str |  (optional)
     bundle_version = 'bundle_version_example' # str |  (optional)
-    order_by = ["id"] # List[str] | Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, version_number, bundle_name, bundle_version` (optional) (default to ["id"])
+    order_by = ["id"] # List[Optional[str]] | Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, version_number, bundle_name, bundle_version` (optional) (default to ["id"])
 
     try:
         # Get Dag Versions
@@ -167,7 +167,7 @@ Name | Type | Description  | Notes
  **version_number** | **int**|  | [optional] 
  **bundle_name** | **str**|  | [optional] 
  **bundle_version** | **str**|  | [optional] 
- **order_by** | [**List[str]**](str.md)| Attributes to order by, multi criteria sort is supported. Prefix with &#x60;-&#x60; for descending order. Supported attributes: &#x60;id, version_number, bundle_name, bundle_version&#x60; | [optional] [default to [&quot;id&quot;]]
+ **order_by** | [**List[Optional[str]]**](str.md)| Attributes to order by, multi criteria sort is supported. Prefix with &#x60;-&#x60; for descending order. Supported attributes: &#x60;id, version_number, bundle_name, bundle_version&#x60; | [optional] [default to [&quot;id&quot;]]
 
 ### Return type
 

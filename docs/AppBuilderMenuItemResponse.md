@@ -6,9 +6,9 @@ Serializer for AppBuilder Menu Item responses.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**category** | **str** |  | [optional] 
-**href** | **str** |  | 
 **name** | **str** |  | 
+**href** | **str** |  | 
+**category** | **str** |  | [optional] 
 
 ## Example
 

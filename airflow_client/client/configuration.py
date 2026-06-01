@@ -111,8 +111,8 @@ HTTPSignatureAuthSetting = TypedDict(
 AuthSettings = TypedDict(
     "AuthSettings",
     {
-        "HTTPBearer": BearerAuthSetting,
         "OAuth2PasswordBearer": OAuth2AuthSetting,
+        "HTTPBearer": BearerAuthSetting,
     },
     total=False,
 )
@@ -196,7 +196,7 @@ class Configuration:
         server_operation_variables: Optional[Dict[int, ServerVariablesT]]=None,
         ignore_operation_servers: bool=False,
         ssl_ca_cert: Optional[str]=None,
-        retries: Optional[Union[int, Any]] = None,
+        retries: Optional[Union[int, urllib3.util.retry.Retry]] = None,
         ca_cert_data: Optional[Union[str, bytes]] = None,
         cert_file: Optional[str]=None,
         key_file: Optional[str]=None,
@@ -517,15 +517,15 @@ class Configuration:
         """
         auth: AuthSettings = {}
         if self.access_token is not None:
-            auth['HTTPBearer'] = {
-                'type': 'bearer',
+            auth['OAuth2PasswordBearer'] = {
+                'type': 'oauth2',
                 'in': 'header',
                 'key': 'Authorization',
                 'value': 'Bearer ' + self.access_token
             }
         if self.access_token is not None:
-            auth['OAuth2PasswordBearer'] = {
-                'type': 'oauth2',
+            auth['HTTPBearer'] = {
+                'type': 'bearer',
                 'in': 'header',
                 'key': 'Authorization',
                 'value': 'Bearer ' + self.access_token
@@ -541,7 +541,7 @@ class Configuration:
                "OS: {env}\n"\
                "Python Version: {pyversion}\n"\
                "Version of the API: 2\n"\
-               "SDK Package Version: 3.2.1".\
+               "SDK Package Version: 1.0.0".\
                format(env=sys.platform, pyversion=sys.version)
 
     def get_host_settings(self) -> List[HostSetting]:

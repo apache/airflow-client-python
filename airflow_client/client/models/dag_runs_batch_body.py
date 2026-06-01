@@ -28,35 +28,35 @@ from pydantic_core import to_jsonable_python
 
 class DAGRunsBatchBody(BaseModel):
     """
-    List DAG Runs body for batch endpoint.
+    List Dag Runs body for batch endpoint.
     """ # noqa: E501
-    conf_contains: Optional[StrictStr] = None
-    dag_ids: Optional[List[StrictStr]] = None
-    duration_gt: Optional[Union[StrictFloat, StrictInt]] = None
-    duration_gte: Optional[Union[StrictFloat, StrictInt]] = None
-    duration_lt: Optional[Union[StrictFloat, StrictInt]] = None
-    duration_lte: Optional[Union[StrictFloat, StrictInt]] = None
-    end_date_gt: Optional[datetime] = None
-    end_date_gte: Optional[datetime] = None
-    end_date_lt: Optional[datetime] = None
-    end_date_lte: Optional[datetime] = None
-    logical_date_gt: Optional[datetime] = None
-    logical_date_gte: Optional[datetime] = None
-    logical_date_lt: Optional[datetime] = None
-    logical_date_lte: Optional[datetime] = None
     order_by: Optional[StrictStr] = None
-    page_limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = 100
     page_offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = 0
-    run_after_gt: Optional[datetime] = None
-    run_after_gte: Optional[datetime] = None
-    run_after_lt: Optional[datetime] = None
-    run_after_lte: Optional[datetime] = None
-    start_date_gt: Optional[datetime] = None
-    start_date_gte: Optional[datetime] = None
-    start_date_lt: Optional[datetime] = None
-    start_date_lte: Optional[datetime] = None
+    page_limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = 100
+    dag_ids: Optional[List[StrictStr]] = None
     states: Optional[List[Optional[DagRunState]]] = None
-    __properties: ClassVar[List[str]] = ["conf_contains", "dag_ids", "duration_gt", "duration_gte", "duration_lt", "duration_lte", "end_date_gt", "end_date_gte", "end_date_lt", "end_date_lte", "logical_date_gt", "logical_date_gte", "logical_date_lt", "logical_date_lte", "order_by", "page_limit", "page_offset", "run_after_gt", "run_after_gte", "run_after_lt", "run_after_lte", "start_date_gt", "start_date_gte", "start_date_lt", "start_date_lte", "states"]
+    run_after_gte: Optional[datetime] = None
+    run_after_gt: Optional[datetime] = None
+    run_after_lte: Optional[datetime] = None
+    run_after_lt: Optional[datetime] = None
+    logical_date_gte: Optional[datetime] = None
+    logical_date_gt: Optional[datetime] = None
+    logical_date_lte: Optional[datetime] = None
+    logical_date_lt: Optional[datetime] = None
+    start_date_gte: Optional[datetime] = None
+    start_date_gt: Optional[datetime] = None
+    start_date_lte: Optional[datetime] = None
+    start_date_lt: Optional[datetime] = None
+    end_date_gte: Optional[datetime] = None
+    end_date_gt: Optional[datetime] = None
+    end_date_lte: Optional[datetime] = None
+    end_date_lt: Optional[datetime] = None
+    duration_gte: Optional[Union[StrictFloat, StrictInt]] = None
+    duration_gt: Optional[Union[StrictFloat, StrictInt]] = None
+    duration_lte: Optional[Union[StrictFloat, StrictInt]] = None
+    duration_lt: Optional[Union[StrictFloat, StrictInt]] = None
+    conf_contains: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["order_by", "page_offset", "page_limit", "dag_ids", "states", "run_after_gte", "run_after_gt", "run_after_lte", "run_after_lt", "logical_date_gte", "logical_date_gt", "logical_date_lte", "logical_date_lt", "start_date_gte", "start_date_gt", "start_date_lte", "start_date_lt", "end_date_gte", "end_date_gt", "end_date_lte", "end_date_lt", "duration_gte", "duration_gt", "duration_lte", "duration_lt", "conf_contains"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -97,6 +97,126 @@ class DAGRunsBatchBody(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if order_by (nullable) is None
+        # and model_fields_set contains the field
+        if self.order_by is None and "order_by" in self.model_fields_set:
+            _dict['order_by'] = None
+
+        # set to None if dag_ids (nullable) is None
+        # and model_fields_set contains the field
+        if self.dag_ids is None and "dag_ids" in self.model_fields_set:
+            _dict['dag_ids'] = None
+
+        # set to None if states (nullable) is None
+        # and model_fields_set contains the field
+        if self.states is None and "states" in self.model_fields_set:
+            _dict['states'] = None
+
+        # set to None if run_after_gte (nullable) is None
+        # and model_fields_set contains the field
+        if self.run_after_gte is None and "run_after_gte" in self.model_fields_set:
+            _dict['run_after_gte'] = None
+
+        # set to None if run_after_gt (nullable) is None
+        # and model_fields_set contains the field
+        if self.run_after_gt is None and "run_after_gt" in self.model_fields_set:
+            _dict['run_after_gt'] = None
+
+        # set to None if run_after_lte (nullable) is None
+        # and model_fields_set contains the field
+        if self.run_after_lte is None and "run_after_lte" in self.model_fields_set:
+            _dict['run_after_lte'] = None
+
+        # set to None if run_after_lt (nullable) is None
+        # and model_fields_set contains the field
+        if self.run_after_lt is None and "run_after_lt" in self.model_fields_set:
+            _dict['run_after_lt'] = None
+
+        # set to None if logical_date_gte (nullable) is None
+        # and model_fields_set contains the field
+        if self.logical_date_gte is None and "logical_date_gte" in self.model_fields_set:
+            _dict['logical_date_gte'] = None
+
+        # set to None if logical_date_gt (nullable) is None
+        # and model_fields_set contains the field
+        if self.logical_date_gt is None and "logical_date_gt" in self.model_fields_set:
+            _dict['logical_date_gt'] = None
+
+        # set to None if logical_date_lte (nullable) is None
+        # and model_fields_set contains the field
+        if self.logical_date_lte is None and "logical_date_lte" in self.model_fields_set:
+            _dict['logical_date_lte'] = None
+
+        # set to None if logical_date_lt (nullable) is None
+        # and model_fields_set contains the field
+        if self.logical_date_lt is None and "logical_date_lt" in self.model_fields_set:
+            _dict['logical_date_lt'] = None
+
+        # set to None if start_date_gte (nullable) is None
+        # and model_fields_set contains the field
+        if self.start_date_gte is None and "start_date_gte" in self.model_fields_set:
+            _dict['start_date_gte'] = None
+
+        # set to None if start_date_gt (nullable) is None
+        # and model_fields_set contains the field
+        if self.start_date_gt is None and "start_date_gt" in self.model_fields_set:
+            _dict['start_date_gt'] = None
+
+        # set to None if start_date_lte (nullable) is None
+        # and model_fields_set contains the field
+        if self.start_date_lte is None and "start_date_lte" in self.model_fields_set:
+            _dict['start_date_lte'] = None
+
+        # set to None if start_date_lt (nullable) is None
+        # and model_fields_set contains the field
+        if self.start_date_lt is None and "start_date_lt" in self.model_fields_set:
+            _dict['start_date_lt'] = None
+
+        # set to None if end_date_gte (nullable) is None
+        # and model_fields_set contains the field
+        if self.end_date_gte is None and "end_date_gte" in self.model_fields_set:
+            _dict['end_date_gte'] = None
+
+        # set to None if end_date_gt (nullable) is None
+        # and model_fields_set contains the field
+        if self.end_date_gt is None and "end_date_gt" in self.model_fields_set:
+            _dict['end_date_gt'] = None
+
+        # set to None if end_date_lte (nullable) is None
+        # and model_fields_set contains the field
+        if self.end_date_lte is None and "end_date_lte" in self.model_fields_set:
+            _dict['end_date_lte'] = None
+
+        # set to None if end_date_lt (nullable) is None
+        # and model_fields_set contains the field
+        if self.end_date_lt is None and "end_date_lt" in self.model_fields_set:
+            _dict['end_date_lt'] = None
+
+        # set to None if duration_gte (nullable) is None
+        # and model_fields_set contains the field
+        if self.duration_gte is None and "duration_gte" in self.model_fields_set:
+            _dict['duration_gte'] = None
+
+        # set to None if duration_gt (nullable) is None
+        # and model_fields_set contains the field
+        if self.duration_gt is None and "duration_gt" in self.model_fields_set:
+            _dict['duration_gt'] = None
+
+        # set to None if duration_lte (nullable) is None
+        # and model_fields_set contains the field
+        if self.duration_lte is None and "duration_lte" in self.model_fields_set:
+            _dict['duration_lte'] = None
+
+        # set to None if duration_lt (nullable) is None
+        # and model_fields_set contains the field
+        if self.duration_lt is None and "duration_lt" in self.model_fields_set:
+            _dict['duration_lt'] = None
+
+        # set to None if conf_contains (nullable) is None
+        # and model_fields_set contains the field
+        if self.conf_contains is None and "conf_contains" in self.model_fields_set:
+            _dict['conf_contains'] = None
+
         return _dict
 
     @classmethod
@@ -109,32 +229,32 @@ class DAGRunsBatchBody(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "conf_contains": obj.get("conf_contains"),
-            "dag_ids": obj.get("dag_ids"),
-            "duration_gt": obj.get("duration_gt"),
-            "duration_gte": obj.get("duration_gte"),
-            "duration_lt": obj.get("duration_lt"),
-            "duration_lte": obj.get("duration_lte"),
-            "end_date_gt": obj.get("end_date_gt"),
-            "end_date_gte": obj.get("end_date_gte"),
-            "end_date_lt": obj.get("end_date_lt"),
-            "end_date_lte": obj.get("end_date_lte"),
-            "logical_date_gt": obj.get("logical_date_gt"),
-            "logical_date_gte": obj.get("logical_date_gte"),
-            "logical_date_lt": obj.get("logical_date_lt"),
-            "logical_date_lte": obj.get("logical_date_lte"),
             "order_by": obj.get("order_by"),
-            "page_limit": obj.get("page_limit") if obj.get("page_limit") is not None else 100,
             "page_offset": obj.get("page_offset") if obj.get("page_offset") is not None else 0,
-            "run_after_gt": obj.get("run_after_gt"),
+            "page_limit": obj.get("page_limit") if obj.get("page_limit") is not None else 100,
+            "dag_ids": obj.get("dag_ids"),
+            "states": obj.get("states"),
             "run_after_gte": obj.get("run_after_gte"),
-            "run_after_lt": obj.get("run_after_lt"),
+            "run_after_gt": obj.get("run_after_gt"),
             "run_after_lte": obj.get("run_after_lte"),
-            "start_date_gt": obj.get("start_date_gt"),
+            "run_after_lt": obj.get("run_after_lt"),
+            "logical_date_gte": obj.get("logical_date_gte"),
+            "logical_date_gt": obj.get("logical_date_gt"),
+            "logical_date_lte": obj.get("logical_date_lte"),
+            "logical_date_lt": obj.get("logical_date_lt"),
             "start_date_gte": obj.get("start_date_gte"),
-            "start_date_lt": obj.get("start_date_lt"),
+            "start_date_gt": obj.get("start_date_gt"),
             "start_date_lte": obj.get("start_date_lte"),
-            "states": obj.get("states")
+            "start_date_lt": obj.get("start_date_lt"),
+            "end_date_gte": obj.get("end_date_gte"),
+            "end_date_gt": obj.get("end_date_gt"),
+            "end_date_lte": obj.get("end_date_lte"),
+            "end_date_lt": obj.get("end_date_lt"),
+            "duration_gte": obj.get("duration_gte"),
+            "duration_gt": obj.get("duration_gt"),
+            "duration_lte": obj.get("duration_lte"),
+            "duration_lt": obj.get("duration_lt"),
+            "conf_contains": obj.get("conf_contains")
         })
         return _obj
 

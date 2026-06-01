@@ -27,15 +27,15 @@ class ExternalViewResponse(BaseModel):
     """
     Serializer for External View Plugin responses.
     """ # noqa: E501
-    category: Optional[StrictStr] = None
-    destination: Optional[StrictStr] = 'nav'
-    href: StrictStr
+    name: StrictStr
     icon: Optional[StrictStr] = None
     icon_dark_mode: Optional[StrictStr] = None
-    name: StrictStr
     url_route: Optional[StrictStr] = None
+    category: Optional[StrictStr] = None
+    href: StrictStr
+    destination: Optional[StrictStr] = 'nav'
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["category", "destination", "href", "icon", "icon_dark_mode", "name", "url_route"]
+    __properties: ClassVar[List[str]] = ["name", "icon", "icon_dark_mode", "url_route", "category", "href", "destination"]
 
     @field_validator('destination')
     def destination_validate_enum(cls, value):
@@ -93,6 +93,26 @@ class ExternalViewResponse(BaseModel):
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
+        # set to None if icon (nullable) is None
+        # and model_fields_set contains the field
+        if self.icon is None and "icon" in self.model_fields_set:
+            _dict['icon'] = None
+
+        # set to None if icon_dark_mode (nullable) is None
+        # and model_fields_set contains the field
+        if self.icon_dark_mode is None and "icon_dark_mode" in self.model_fields_set:
+            _dict['icon_dark_mode'] = None
+
+        # set to None if url_route (nullable) is None
+        # and model_fields_set contains the field
+        if self.url_route is None and "url_route" in self.model_fields_set:
+            _dict['url_route'] = None
+
+        # set to None if category (nullable) is None
+        # and model_fields_set contains the field
+        if self.category is None and "category" in self.model_fields_set:
+            _dict['category'] = None
+
         return _dict
 
     @classmethod
@@ -105,13 +125,13 @@ class ExternalViewResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "category": obj.get("category"),
-            "destination": obj.get("destination") if obj.get("destination") is not None else 'nav',
-            "href": obj.get("href"),
+            "name": obj.get("name"),
             "icon": obj.get("icon"),
             "icon_dark_mode": obj.get("icon_dark_mode"),
-            "name": obj.get("name"),
-            "url_route": obj.get("url_route")
+            "url_route": obj.get("url_route"),
+            "category": obj.get("category"),
+            "href": obj.get("href"),
+            "destination": obj.get("destination") if obj.get("destination") is not None else 'nav'
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

@@ -1,16 +1,16 @@
 # DAGWarningResponse
 
-DAG Warning serializer for responses.
+Dag Warning serializer for responses.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**dag_display_name** | **str** |  | 
 **dag_id** | **str** |  | 
+**warning_type** | [**DagWarningType**](DagWarningType.md) |  | 
 **message** | **str** |  | 
 **timestamp** | **datetime** |  | 
-**warning_type** | [**DagWarningType**](DagWarningType.md) |  | 
+**dag_display_name** | **str** |  | 
 
 ## Example
 

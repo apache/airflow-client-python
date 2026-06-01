@@ -27,9 +27,9 @@ class TriggererInfoResponse(BaseModel):
     """
     Triggerer info serializer for responses.
     """ # noqa: E501
-    latest_triggerer_heartbeat: Optional[StrictStr] = None
-    status: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["latest_triggerer_heartbeat", "status"]
+    status: Optional[StrictStr]
+    latest_triggerer_heartbeat: Optional[StrictStr]
+    __properties: ClassVar[List[str]] = ["status", "latest_triggerer_heartbeat"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -70,6 +70,16 @@ class TriggererInfoResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if status (nullable) is None
+        # and model_fields_set contains the field
+        if self.status is None and "status" in self.model_fields_set:
+            _dict['status'] = None
+
+        # set to None if latest_triggerer_heartbeat (nullable) is None
+        # and model_fields_set contains the field
+        if self.latest_triggerer_heartbeat is None and "latest_triggerer_heartbeat" in self.model_fields_set:
+            _dict['latest_triggerer_heartbeat'] = None
+
         return _dict
 
     @classmethod
@@ -82,8 +92,8 @@ class TriggererInfoResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "latest_triggerer_heartbeat": obj.get("latest_triggerer_heartbeat"),
-            "status": obj.get("status")
+            "status": obj.get("status"),
+            "latest_triggerer_heartbeat": obj.get("latest_triggerer_heartbeat")
         })
         return _obj
 

@@ -6,9 +6,9 @@ Asset watcher serializer for responses.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**created_date** | **datetime** |  | 
 **name** | **str** |  | 
 **trigger_id** | **int** |  | 
+**created_date** | **datetime** |  | 
 
 ## Example
 

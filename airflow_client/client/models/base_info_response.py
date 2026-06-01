@@ -27,7 +27,7 @@ class BaseInfoResponse(BaseModel):
     """
     Base info serializer for responses.
     """ # noqa: E501
-    status: Optional[StrictStr] = None
+    status: Optional[StrictStr]
     __properties: ClassVar[List[str]] = ["status"]
 
     model_config = ConfigDict(
@@ -69,6 +69,11 @@ class BaseInfoResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if status (nullable) is None
+        # and model_fields_set contains the field
+        if self.status is None and "status" in self.model_fields_set:
+            _dict['status'] = None
+
         return _dict
 
     @classmethod

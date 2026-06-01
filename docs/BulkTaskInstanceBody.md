@@ -6,16 +6,16 @@ Request body for bulk update, and delete task instances.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**dag_id** | **str** |  | [optional] 
-**dag_run_id** | **str** |  | [optional] 
+**new_state** | [**TaskInstanceState**](TaskInstanceState.md) |  | [optional] 
+**note** | **str** |  | [optional] 
+**include_upstream** | **bool** |  | [optional] [default to False]
 **include_downstream** | **bool** |  | [optional] [default to False]
 **include_future** | **bool** |  | [optional] [default to False]
 **include_past** | **bool** |  | [optional] [default to False]
-**include_upstream** | **bool** |  | [optional] [default to False]
-**map_index** | **int** |  | [optional] 
-**new_state** | [**TaskInstanceState**](TaskInstanceState.md) |  | [optional] 
-**note** | **str** |  | [optional] 
 **task_id** | **str** |  | 
+**map_index** | **int** |  | [optional] 
+**dag_id** | **str** |  | [optional] 
+**dag_run_id** | **str** |  | [optional] 
 
 ## Example
 

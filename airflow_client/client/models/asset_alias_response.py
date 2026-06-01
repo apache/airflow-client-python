@@ -27,10 +27,10 @@ class AssetAliasResponse(BaseModel):
     """
     Asset alias serializer for responses.
     """ # noqa: E501
-    group: StrictStr
     id: StrictInt
     name: StrictStr
-    __properties: ClassVar[List[str]] = ["group", "id", "name"]
+    group: StrictStr
+    __properties: ClassVar[List[str]] = ["id", "name", "group"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -83,9 +83,9 @@ class AssetAliasResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "group": obj.get("group"),
             "id": obj.get("id"),
-            "name": obj.get("name")
+            "name": obj.get("name"),
+            "group": obj.get("group")
         })
         return _obj
 

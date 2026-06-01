@@ -29,7 +29,7 @@ class TaskInstancesLogResponse(BaseModel):
     Log serializer for responses.
     """ # noqa: E501
     content: Content
-    continuation_token: Optional[StrictStr] = None
+    continuation_token: Optional[StrictStr]
     __properties: ClassVar[List[str]] = ["content", "continuation_token"]
 
     model_config = ConfigDict(
@@ -74,6 +74,11 @@ class TaskInstancesLogResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of content
         if self.content:
             _dict['content'] = self.content.to_dict()
+        # set to None if continuation_token (nullable) is None
+        # and model_fields_set contains the field
+        if self.continuation_token is None and "continuation_token" in self.model_fields_set:
+            _dict['continuation_token'] = None
+
         return _dict
 
     @classmethod

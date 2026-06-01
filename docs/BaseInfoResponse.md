@@ -6,7 +6,7 @@ Base info serializer for responses.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**status** | **str** |  | [optional] 
+**status** | **str** |  | 
 
 ## Example
 

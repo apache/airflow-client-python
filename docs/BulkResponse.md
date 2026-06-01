@@ -6,9 +6,9 @@ Serializer for responses to bulk entity operations.  This represents the results
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**create** | [**BulkActionResponse**](BulkActionResponse.md) |  | [optional] 
-**delete** | [**BulkActionResponse**](BulkActionResponse.md) |  | [optional] 
-**update** | [**BulkActionResponse**](BulkActionResponse.md) |  | [optional] 
+**create** | [**BulkActionResponse**](BulkActionResponse.md) | Details of the bulk create operation, including successful keys and errors. | [optional] 
+**update** | [**BulkActionResponse**](BulkActionResponse.md) | Details of the bulk update operation, including successful keys and errors. | [optional] 
+**delete** | [**BulkActionResponse**](BulkActionResponse.md) | Details of the bulk delete operation, including successful keys and errors. | [optional] 
 
 ## Example
 

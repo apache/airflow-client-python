@@ -6,17 +6,17 @@ Pool serializer for responses.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**deferred_slots** | **int** |  | 
+**name** | **str** |  | 
+**slots** | **int** | Number of slots. Use -1 for unlimited. | 
 **description** | **str** |  | [optional] 
 **include_deferred** | **bool** |  | 
-**name** | **str** |  | 
 **occupied_slots** | **int** |  | 
-**open_slots** | **int** |  | 
-**queued_slots** | **int** |  | 
 **running_slots** | **int** |  | 
+**queued_slots** | **int** |  | 
 **scheduled_slots** | **int** |  | 
-**slots** | **int** | Number of slots. Use -1 for unlimited. | 
-**team_name** | **str** |  | [optional] 
+**open_slots** | **int** |  | 
+**deferred_slots** | **int** |  | 
+**team_name** | **str** |  | 
 
 ## Example
 

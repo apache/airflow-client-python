@@ -30,11 +30,11 @@ class HITLDetailResponse(BaseModel):
     """
     Response of updating a Human-in-the-loop detail.
     """ # noqa: E501
+    responded_by: HITLUser
+    responded_at: datetime
     chosen_options: Annotated[List[StrictStr], Field(min_length=1)]
     params_input: Optional[Dict[str, Any]] = None
-    responded_at: datetime
-    responded_by: HITLUser
-    __properties: ClassVar[List[str]] = ["chosen_options", "params_input", "responded_at", "responded_by"]
+    __properties: ClassVar[List[str]] = ["responded_by", "responded_at", "chosen_options", "params_input"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -90,10 +90,10 @@ class HITLDetailResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "chosen_options": obj.get("chosen_options"),
-            "params_input": obj.get("params_input"),
+            "responded_by": HITLUser.from_dict(obj["responded_by"]) if obj.get("responded_by") is not None else None,
             "responded_at": obj.get("responded_at"),
-            "responded_by": HITLUser.from_dict(obj["responded_by"]) if obj.get("responded_by") is not None else None
+            "chosen_options": obj.get("chosen_options"),
+            "params_input": obj.get("params_input")
         })
         return _obj
 

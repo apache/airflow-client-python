@@ -30,9 +30,9 @@ class BulkDeleteActionPoolBody(BaseModel):
     BulkDeleteActionPoolBody
     """ # noqa: E501
     action: StrictStr = Field(description="The action to be performed on the entities.")
-    action_on_non_existence: Optional[BulkActionNotOnExistence] = None
     entities: List[EntitiesInner2] = Field(description="A list of entity id/key or entity objects to be deleted.")
-    __properties: ClassVar[List[str]] = ["action", "action_on_non_existence", "entities"]
+    action_on_non_existence: Optional[BulkActionNotOnExistence] = None
+    __properties: ClassVar[List[str]] = ["action", "entities", "action_on_non_existence"]
 
     @field_validator('action')
     def action_validate_enum(cls, value):
@@ -100,8 +100,8 @@ class BulkDeleteActionPoolBody(BaseModel):
 
         _obj = cls.model_validate({
             "action": obj.get("action"),
-            "action_on_non_existence": obj.get("action_on_non_existence"),
-            "entities": [EntitiesInner2.from_dict(_item) for _item in obj["entities"]] if obj.get("entities") is not None else None
+            "entities": [EntitiesInner2.from_dict(_item) for _item in obj["entities"]] if obj.get("entities") is not None else None,
+            "action_on_non_existence": obj.get("action_on_non_existence")
         })
         return _obj
 

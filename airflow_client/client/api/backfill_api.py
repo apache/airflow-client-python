@@ -369,9 +369,9 @@ class BackfillApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BackfillResponse",
-            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
+            '400': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
             '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
@@ -441,9 +441,9 @@ class BackfillApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BackfillResponse",
-            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
+            '400': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
             '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
@@ -513,9 +513,9 @@ class BackfillApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BackfillResponse",
-            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
+            '400': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
             '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
@@ -1169,7 +1169,7 @@ class BackfillApi:
         dag_id: StrictStr,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id`")] = None,
+        order_by: Annotated[Optional[List[Optional[StrictStr]]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id`")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1193,7 +1193,7 @@ class BackfillApi:
         :param offset:
         :type offset: int
         :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id`
-        :type order_by: List[str]
+        :type order_by: List[Optional[str]]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1250,7 +1250,7 @@ class BackfillApi:
         dag_id: StrictStr,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id`")] = None,
+        order_by: Annotated[Optional[List[Optional[StrictStr]]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id`")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1274,7 +1274,7 @@ class BackfillApi:
         :param offset:
         :type offset: int
         :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id`
-        :type order_by: List[str]
+        :type order_by: List[Optional[str]]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1331,7 +1331,7 @@ class BackfillApi:
         dag_id: StrictStr,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id`")] = None,
+        order_by: Annotated[Optional[List[Optional[StrictStr]]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id`")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1355,7 +1355,7 @@ class BackfillApi:
         :param offset:
         :type offset: int
         :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id`
-        :type order_by: List[str]
+        :type order_by: List[Optional[str]]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of

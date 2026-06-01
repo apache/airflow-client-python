@@ -1,14 +1,14 @@
 # DagTagResponse
 
-DAG Tag serializer for responses.
+Dag Tag serializer for responses.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**dag_display_name** | **str** |  | 
-**dag_id** | **str** |  | 
 **name** | **str** |  | 
+**dag_id** | **str** |  | 
+**dag_display_name** | **str** |  | 
 
 ## Example
 

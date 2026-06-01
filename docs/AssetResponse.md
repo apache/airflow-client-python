@@ -6,19 +6,19 @@ Asset serializer for responses.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**aliases** | [**List[AssetAliasResponse]**](AssetAliasResponse.md) |  | 
-**consuming_tasks** | [**List[TaskInletAssetReference]**](TaskInletAssetReference.md) |  | 
-**created_at** | **datetime** |  | 
-**extra** | **Dict[str, object]** |  | [optional] 
-**group** | **str** |  | 
 **id** | **int** |  | 
-**last_asset_event** | [**LastAssetEventResponse**](LastAssetEventResponse.md) |  | [optional] 
 **name** | **str** |  | 
-**producing_tasks** | [**List[TaskOutletAssetReference]**](TaskOutletAssetReference.md) |  | 
-**scheduled_dags** | [**List[DagScheduleAssetReference]**](DagScheduleAssetReference.md) |  | 
-**updated_at** | **datetime** |  | 
 **uri** | **str** |  | 
+**group** | **str** |  | 
+**extra** | **Dict[str, object]** |  | [optional] 
+**created_at** | **datetime** |  | 
+**updated_at** | **datetime** |  | 
+**scheduled_dags** | [**List[DagScheduleAssetReference]**](DagScheduleAssetReference.md) |  | 
+**producing_tasks** | [**List[TaskOutletAssetReference]**](TaskOutletAssetReference.md) |  | 
+**consuming_tasks** | [**List[TaskInletAssetReference]**](TaskInletAssetReference.md) |  | 
+**aliases** | [**List[AssetAliasResponse]**](AssetAliasResponse.md) |  | 
 **watchers** | [**List[AssetWatcherResponse]**](AssetWatcherResponse.md) |  | 
+**last_asset_event** | [**LastAssetEventResponse**](LastAssetEventResponse.md) |  | [optional] 
 
 ## Example
 

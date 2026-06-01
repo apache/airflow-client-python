@@ -6,10 +6,10 @@ Provider serializer for responses.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**description** | **str** |  | 
-**documentation_url** | **str** |  | [optional] 
 **package_name** | **str** |  | 
+**description** | **str** |  | 
 **version** | **str** |  | 
+**documentation_url** | **str** |  | 
 
 ## Example
 

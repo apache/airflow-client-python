@@ -28,16 +28,16 @@ class DagRunAssetReference(BaseModel):
     """
     DagRun serializer for asset responses.
     """ # noqa: E501
-    dag_id: StrictStr
-    data_interval_end: Optional[datetime] = None
-    data_interval_start: Optional[datetime] = None
-    end_date: Optional[datetime] = None
-    logical_date: Optional[datetime] = None
-    partition_key: Optional[StrictStr] = None
     run_id: StrictStr
+    dag_id: StrictStr
+    logical_date: Optional[datetime]
     start_date: datetime
+    end_date: Optional[datetime]
     state: StrictStr
-    __properties: ClassVar[List[str]] = ["dag_id", "data_interval_end", "data_interval_start", "end_date", "logical_date", "partition_key", "run_id", "start_date", "state"]
+    data_interval_start: Optional[datetime]
+    data_interval_end: Optional[datetime]
+    partition_key: Optional[StrictStr]
+    __properties: ClassVar[List[str]] = ["run_id", "dag_id", "logical_date", "start_date", "end_date", "state", "data_interval_start", "data_interval_end", "partition_key"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -78,6 +78,31 @@ class DagRunAssetReference(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if logical_date (nullable) is None
+        # and model_fields_set contains the field
+        if self.logical_date is None and "logical_date" in self.model_fields_set:
+            _dict['logical_date'] = None
+
+        # set to None if end_date (nullable) is None
+        # and model_fields_set contains the field
+        if self.end_date is None and "end_date" in self.model_fields_set:
+            _dict['end_date'] = None
+
+        # set to None if data_interval_start (nullable) is None
+        # and model_fields_set contains the field
+        if self.data_interval_start is None and "data_interval_start" in self.model_fields_set:
+            _dict['data_interval_start'] = None
+
+        # set to None if data_interval_end (nullable) is None
+        # and model_fields_set contains the field
+        if self.data_interval_end is None and "data_interval_end" in self.model_fields_set:
+            _dict['data_interval_end'] = None
+
+        # set to None if partition_key (nullable) is None
+        # and model_fields_set contains the field
+        if self.partition_key is None and "partition_key" in self.model_fields_set:
+            _dict['partition_key'] = None
+
         return _dict
 
     @classmethod
@@ -90,15 +115,15 @@ class DagRunAssetReference(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "dag_id": obj.get("dag_id"),
-            "data_interval_end": obj.get("data_interval_end"),
-            "data_interval_start": obj.get("data_interval_start"),
-            "end_date": obj.get("end_date"),
-            "logical_date": obj.get("logical_date"),
-            "partition_key": obj.get("partition_key"),
             "run_id": obj.get("run_id"),
+            "dag_id": obj.get("dag_id"),
+            "logical_date": obj.get("logical_date"),
             "start_date": obj.get("start_date"),
-            "state": obj.get("state")
+            "end_date": obj.get("end_date"),
+            "state": obj.get("state"),
+            "data_interval_start": obj.get("data_interval_start"),
+            "data_interval_end": obj.get("data_interval_end"),
+            "partition_key": obj.get("partition_key")
         })
         return _obj
 

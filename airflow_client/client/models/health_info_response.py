@@ -31,11 +31,11 @@ class HealthInfoResponse(BaseModel):
     """
     Health serializer for responses.
     """ # noqa: E501
-    dag_processor: Optional[DagProcessorInfoResponse] = None
     metadatabase: BaseInfoResponse
     scheduler: SchedulerInfoResponse
     triggerer: TriggererInfoResponse
-    __properties: ClassVar[List[str]] = ["dag_processor", "metadatabase", "scheduler", "triggerer"]
+    dag_processor: Optional[DagProcessorInfoResponse] = None
+    __properties: ClassVar[List[str]] = ["metadatabase", "scheduler", "triggerer", "dag_processor"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -76,9 +76,6 @@ class HealthInfoResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of dag_processor
-        if self.dag_processor:
-            _dict['dag_processor'] = self.dag_processor.to_dict()
         # override the default output from pydantic by calling `to_dict()` of metadatabase
         if self.metadatabase:
             _dict['metadatabase'] = self.metadatabase.to_dict()
@@ -88,6 +85,14 @@ class HealthInfoResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of triggerer
         if self.triggerer:
             _dict['triggerer'] = self.triggerer.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of dag_processor
+        if self.dag_processor:
+            _dict['dag_processor'] = self.dag_processor.to_dict()
+        # set to None if dag_processor (nullable) is None
+        # and model_fields_set contains the field
+        if self.dag_processor is None and "dag_processor" in self.model_fields_set:
+            _dict['dag_processor'] = None
+
         return _dict
 
     @classmethod
@@ -100,10 +105,10 @@ class HealthInfoResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "dag_processor": DagProcessorInfoResponse.from_dict(obj["dag_processor"]) if obj.get("dag_processor") is not None else None,
             "metadatabase": BaseInfoResponse.from_dict(obj["metadatabase"]) if obj.get("metadatabase") is not None else None,
             "scheduler": SchedulerInfoResponse.from_dict(obj["scheduler"]) if obj.get("scheduler") is not None else None,
-            "triggerer": TriggererInfoResponse.from_dict(obj["triggerer"]) if obj.get("triggerer") is not None else None
+            "triggerer": TriggererInfoResponse.from_dict(obj["triggerer"]) if obj.get("triggerer") is not None else None,
+            "dag_processor": DagProcessorInfoResponse.from_dict(obj["dag_processor"]) if obj.get("dag_processor") is not None else None
         })
         return _obj
 

@@ -28,13 +28,13 @@ class TriggerResponse(BaseModel):
     """
     Trigger serializer for responses.
     """ # noqa: E501
-    classpath: StrictStr
-    created_date: datetime
     id: StrictInt
+    classpath: StrictStr
     kwargs: StrictStr
-    queue: Optional[StrictStr] = None
-    triggerer_id: Optional[StrictInt] = None
-    __properties: ClassVar[List[str]] = ["classpath", "created_date", "id", "kwargs", "queue", "triggerer_id"]
+    created_date: datetime
+    queue: Optional[StrictStr]
+    triggerer_id: Optional[StrictInt]
+    __properties: ClassVar[List[str]] = ["id", "classpath", "kwargs", "created_date", "queue", "triggerer_id"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -75,6 +75,16 @@ class TriggerResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if queue (nullable) is None
+        # and model_fields_set contains the field
+        if self.queue is None and "queue" in self.model_fields_set:
+            _dict['queue'] = None
+
+        # set to None if triggerer_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.triggerer_id is None and "triggerer_id" in self.model_fields_set:
+            _dict['triggerer_id'] = None
+
         return _dict
 
     @classmethod
@@ -87,10 +97,10 @@ class TriggerResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "classpath": obj.get("classpath"),
-            "created_date": obj.get("created_date"),
             "id": obj.get("id"),
+            "classpath": obj.get("classpath"),
             "kwargs": obj.get("kwargs"),
+            "created_date": obj.get("created_date"),
             "queue": obj.get("queue"),
             "triggerer_id": obj.get("triggerer_id")
         })

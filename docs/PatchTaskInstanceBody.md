@@ -6,12 +6,12 @@ Request body for Clear Task Instances endpoint.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**new_state** | [**TaskInstanceState**](TaskInstanceState.md) |  | [optional] 
+**note** | **str** |  | [optional] 
+**include_upstream** | **bool** |  | [optional] [default to False]
 **include_downstream** | **bool** |  | [optional] [default to False]
 **include_future** | **bool** |  | [optional] [default to False]
 **include_past** | **bool** |  | [optional] [default to False]
-**include_upstream** | **bool** |  | [optional] [default to False]
-**new_state** | [**TaskInstanceState**](TaskInstanceState.md) |  | [optional] 
-**note** | **str** |  | [optional] 
 
 ## Example
 

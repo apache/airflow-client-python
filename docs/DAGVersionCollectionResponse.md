@@ -1,6 +1,6 @@
 # DAGVersionCollectionResponse
 
-DAG Version Collection serializer for responses.
+Dag Version Collection serializer for responses.
 
 ## Properties
 

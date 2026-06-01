@@ -17,8 +17,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt
-from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from airflow_client.client.models.task_instance_response import TaskInstanceResponse
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,11 +26,13 @@ from pydantic_core import to_jsonable_python
 
 class TaskInstanceCollectionResponse(BaseModel):
     """
-    Task Instance Collection serializer for responses.
+    Task instance collection response supporting both offset and cursor pagination.  A single flat model is used instead of a discriminated union (``Annotated[Offset | Cursor, Field(discriminator=...)]``) because the OpenAPI ``oneOf`` + ``discriminator`` construct is not handled correctly by ``@hey-api/openapi-ts`` / ``@7nohe/openapi-react-query-codegen``: return types degrade to ``unknown`` in JSDoc and can produce incorrect TypeScript types (see hey-api/openapi-ts#1613, #3270).
     """ # noqa: E501
+    next_cursor: Optional[StrictStr] = None
+    previous_cursor: Optional[StrictStr] = None
     task_instances: List[TaskInstanceResponse]
-    total_entries: StrictInt
-    __properties: ClassVar[List[str]] = ["task_instances", "total_entries"]
+    total_entries: Optional[StrictInt] = None
+    __properties: ClassVar[List[str]] = ["next_cursor", "previous_cursor", "task_instances", "total_entries"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -90,6 +92,8 @@ class TaskInstanceCollectionResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "next_cursor": obj.get("next_cursor"),
+            "previous_cursor": obj.get("previous_cursor"),
             "task_instances": [TaskInstanceResponse.from_dict(_item) for _item in obj["task_instances"]] if obj.get("task_instances") is not None else None,
             "total_entries": obj.get("total_entries")
         })

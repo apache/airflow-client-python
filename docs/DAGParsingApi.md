@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 Reparse Dag File
 
-Request re-parsing a DAG file.
+Request re-parsing a Dag file.
 
 ### Example
 

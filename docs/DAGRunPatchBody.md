@@ -1,6 +1,6 @@
 # DAGRunPatchBody
 
-DAG Run Serializer for PATCH requests.
+Dag Run Serializer for PATCH requests.
 
 ## Properties
 

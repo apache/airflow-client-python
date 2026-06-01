@@ -27,7 +27,7 @@ from pydantic_core import to_jsonable_python
 
 class DAGWarningResponse(BaseModel):
     """
-    DAG Warning serializer for responses.
+    Dag Warning serializer for responses.
     """ # noqa: E501
     dag_display_name: StrictStr
     dag_id: StrictStr

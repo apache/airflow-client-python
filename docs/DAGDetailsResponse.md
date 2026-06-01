@@ -1,6 +1,6 @@
 # DAGDetailsResponse
 
-Specific serializer for DAG Details responses.
+Specific serializer for Dag Details responses.
 
 ## Properties
 

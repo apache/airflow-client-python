@@ -1,6 +1,6 @@
 # DAGRunsBatchBody
 
-List DAG Runs body for batch endpoint.
+List Dag Runs body for batch endpoint.
 
 ## Properties
 

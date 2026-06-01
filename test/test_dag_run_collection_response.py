@@ -69,6 +69,8 @@ class TestDAGRunCollectionResponse(unittest.TestCase):
                         triggered_by = null, 
                         triggering_user_name = '', )
                     ],
+                next_cursor = '',
+                previous_cursor = '',
                 total_entries = 56
             )
         else:
@@ -107,7 +109,6 @@ class TestDAGRunCollectionResponse(unittest.TestCase):
                         triggered_by = null, 
                         triggering_user_name = '', )
                     ],
-                total_entries = 56,
         )
         """
 

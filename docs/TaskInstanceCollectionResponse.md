@@ -1,13 +1,15 @@
 # TaskInstanceCollectionResponse
 
-Task Instance Collection serializer for responses.
+Task instance collection response supporting both offset and cursor pagination.  A single flat model is used instead of a discriminated union (``Annotated[Offset | Cursor, Field(discriminator=...)]``) because the OpenAPI ``oneOf`` + ``discriminator`` construct is not handled correctly by ``@hey-api/openapi-ts`` / ``@7nohe/openapi-react-query-codegen``: return types degrade to ``unknown`` in JSDoc and can produce incorrect TypeScript types (see hey-api/openapi-ts#1613, #3270).
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**next_cursor** | **str** |  | [optional] 
+**previous_cursor** | **str** |  | [optional] 
 **task_instances** | [**List[TaskInstanceResponse]**](TaskInstanceResponse.md) |  | 
-**total_entries** | **int** |  | 
+**total_entries** | **int** |  | [optional] 
 
 ## Example
 

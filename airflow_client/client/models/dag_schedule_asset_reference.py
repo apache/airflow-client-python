@@ -26,7 +26,7 @@ from pydantic_core import to_jsonable_python
 
 class DagScheduleAssetReference(BaseModel):
     """
-    DAG schedule reference serializer for assets.
+    Dag schedule reference serializer for assets.
     """ # noqa: E501
     created_at: datetime
     dag_id: StrictStr

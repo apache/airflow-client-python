@@ -29,7 +29,7 @@ from pydantic_core import to_jsonable_python
 
 class DAGDetailsResponse(BaseModel):
     """
-    Specific serializer for DAG Details responses.
+    Specific serializer for Dag Details responses.
     """ # noqa: E501
     active_runs_count: Optional[StrictInt] = 0
     allowed_run_types: Optional[List[DagRunType]] = None

@@ -101,7 +101,7 @@ Name | Type | Description  | Notes
 
 Get Tasks
 
-Get tasks for DAG.
+Get tasks for Dag.
 
 ### Example
 

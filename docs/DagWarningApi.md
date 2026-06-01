@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 List Dag Warnings
 
-Get a list of DAG warnings.
+Get a list of Dag warnings.
 
 ### Example
 

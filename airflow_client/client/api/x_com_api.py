@@ -17,7 +17,7 @@ from typing_extensions import Annotated
 
 from datetime import datetime
 from pydantic import Field, StrictBool, StrictInt, StrictStr
-from typing import Optional
+from typing import List, Optional
 from typing_extensions import Annotated
 from airflow_client.client.models.response_get_xcom_entry import ResponseGetXcomEntry
 from airflow_client.client.models.x_com_collection_response import XComCollectionResponse
@@ -727,10 +727,14 @@ class XComApi:
         map_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        xcom_key_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
-        dag_display_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
-        run_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
-        task_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
+        xcom_key_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``xcom_key_prefix_pattern`` parameter when possible.")] = None,
+        xcom_key_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.")] = None,
+        dag_display_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``dag_display_name_prefix_pattern`` parameter when possible.")] = None,
+        dag_display_name_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.")] = None,
+        run_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``run_id_prefix_pattern`` parameter when possible.")] = None,
+        run_id_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.")] = None,
+        task_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``task_id_prefix_pattern`` parameter when possible.")] = None,
+        task_id_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.")] = None,
         map_index_filter: Optional[StrictInt] = None,
         logical_date_gte: Optional[datetime] = None,
         logical_date_gt: Optional[datetime] = None,
@@ -740,6 +744,7 @@ class XComApi:
         run_after_gt: Optional[datetime] = None,
         run_after_lte: Optional[datetime] = None,
         run_after_lt: Optional[datetime] = None,
+        order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `key, dag_id, run_id, task_id, map_index, timestamp, run_after`")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -755,7 +760,7 @@ class XComApi:
     ) -> XComCollectionResponse:
         """Get Xcom Entries
 
-        Get all XCom entries.  This endpoint allows specifying `~` as the dag_id, dag_run_id, task_id to retrieve XCom entries for all DAGs.
+        Get all XCom entries.  This endpoint allows specifying `~` as the dag_id, dag_run_id, task_id to retrieve XCom entries for all Dags.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -771,14 +776,22 @@ class XComApi:
         :type limit: int
         :param offset:
         :type offset: int
-        :param xcom_key_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :param xcom_key_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``xcom_key_prefix_pattern`` parameter when possible.
         :type xcom_key_pattern: str
-        :param dag_display_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :param xcom_key_prefix_pattern: Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.
+        :type xcom_key_prefix_pattern: str
+        :param dag_display_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``dag_display_name_prefix_pattern`` parameter when possible.
         :type dag_display_name_pattern: str
-        :param run_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :param dag_display_name_prefix_pattern: Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.
+        :type dag_display_name_prefix_pattern: str
+        :param run_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``run_id_prefix_pattern`` parameter when possible.
         :type run_id_pattern: str
-        :param task_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :param run_id_prefix_pattern: Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.
+        :type run_id_prefix_pattern: str
+        :param task_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``task_id_prefix_pattern`` parameter when possible.
         :type task_id_pattern: str
+        :param task_id_prefix_pattern: Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.
+        :type task_id_prefix_pattern: str
         :param map_index_filter:
         :type map_index_filter: int
         :param logical_date_gte:
@@ -797,6 +810,8 @@ class XComApi:
         :type run_after_lte: datetime
         :param run_after_lt:
         :type run_after_lt: datetime
+        :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `key, dag_id, run_id, task_id, map_index, timestamp, run_after`
+        :type order_by: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -828,9 +843,13 @@ class XComApi:
             limit=limit,
             offset=offset,
             xcom_key_pattern=xcom_key_pattern,
+            xcom_key_prefix_pattern=xcom_key_prefix_pattern,
             dag_display_name_pattern=dag_display_name_pattern,
+            dag_display_name_prefix_pattern=dag_display_name_prefix_pattern,
             run_id_pattern=run_id_pattern,
+            run_id_prefix_pattern=run_id_prefix_pattern,
             task_id_pattern=task_id_pattern,
+            task_id_prefix_pattern=task_id_prefix_pattern,
             map_index_filter=map_index_filter,
             logical_date_gte=logical_date_gte,
             logical_date_gt=logical_date_gt,
@@ -840,6 +859,7 @@ class XComApi:
             run_after_gt=run_after_gt,
             run_after_lte=run_after_lte,
             run_after_lt=run_after_lt,
+            order_by=order_by,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -875,10 +895,14 @@ class XComApi:
         map_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        xcom_key_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
-        dag_display_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
-        run_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
-        task_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
+        xcom_key_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``xcom_key_prefix_pattern`` parameter when possible.")] = None,
+        xcom_key_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.")] = None,
+        dag_display_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``dag_display_name_prefix_pattern`` parameter when possible.")] = None,
+        dag_display_name_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.")] = None,
+        run_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``run_id_prefix_pattern`` parameter when possible.")] = None,
+        run_id_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.")] = None,
+        task_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``task_id_prefix_pattern`` parameter when possible.")] = None,
+        task_id_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.")] = None,
         map_index_filter: Optional[StrictInt] = None,
         logical_date_gte: Optional[datetime] = None,
         logical_date_gt: Optional[datetime] = None,
@@ -888,6 +912,7 @@ class XComApi:
         run_after_gt: Optional[datetime] = None,
         run_after_lte: Optional[datetime] = None,
         run_after_lt: Optional[datetime] = None,
+        order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `key, dag_id, run_id, task_id, map_index, timestamp, run_after`")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -903,7 +928,7 @@ class XComApi:
     ) -> ApiResponse[XComCollectionResponse]:
         """Get Xcom Entries
 
-        Get all XCom entries.  This endpoint allows specifying `~` as the dag_id, dag_run_id, task_id to retrieve XCom entries for all DAGs.
+        Get all XCom entries.  This endpoint allows specifying `~` as the dag_id, dag_run_id, task_id to retrieve XCom entries for all Dags.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -919,14 +944,22 @@ class XComApi:
         :type limit: int
         :param offset:
         :type offset: int
-        :param xcom_key_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :param xcom_key_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``xcom_key_prefix_pattern`` parameter when possible.
         :type xcom_key_pattern: str
-        :param dag_display_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :param xcom_key_prefix_pattern: Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.
+        :type xcom_key_prefix_pattern: str
+        :param dag_display_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``dag_display_name_prefix_pattern`` parameter when possible.
         :type dag_display_name_pattern: str
-        :param run_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :param dag_display_name_prefix_pattern: Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.
+        :type dag_display_name_prefix_pattern: str
+        :param run_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``run_id_prefix_pattern`` parameter when possible.
         :type run_id_pattern: str
-        :param task_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :param run_id_prefix_pattern: Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.
+        :type run_id_prefix_pattern: str
+        :param task_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``task_id_prefix_pattern`` parameter when possible.
         :type task_id_pattern: str
+        :param task_id_prefix_pattern: Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.
+        :type task_id_prefix_pattern: str
         :param map_index_filter:
         :type map_index_filter: int
         :param logical_date_gte:
@@ -945,6 +978,8 @@ class XComApi:
         :type run_after_lte: datetime
         :param run_after_lt:
         :type run_after_lt: datetime
+        :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `key, dag_id, run_id, task_id, map_index, timestamp, run_after`
+        :type order_by: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -976,9 +1011,13 @@ class XComApi:
             limit=limit,
             offset=offset,
             xcom_key_pattern=xcom_key_pattern,
+            xcom_key_prefix_pattern=xcom_key_prefix_pattern,
             dag_display_name_pattern=dag_display_name_pattern,
+            dag_display_name_prefix_pattern=dag_display_name_prefix_pattern,
             run_id_pattern=run_id_pattern,
+            run_id_prefix_pattern=run_id_prefix_pattern,
             task_id_pattern=task_id_pattern,
+            task_id_prefix_pattern=task_id_prefix_pattern,
             map_index_filter=map_index_filter,
             logical_date_gte=logical_date_gte,
             logical_date_gt=logical_date_gt,
@@ -988,6 +1027,7 @@ class XComApi:
             run_after_gt=run_after_gt,
             run_after_lte=run_after_lte,
             run_after_lt=run_after_lt,
+            order_by=order_by,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1023,10 +1063,14 @@ class XComApi:
         map_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        xcom_key_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
-        dag_display_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
-        run_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
-        task_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.")] = None,
+        xcom_key_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``xcom_key_prefix_pattern`` parameter when possible.")] = None,
+        xcom_key_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.")] = None,
+        dag_display_name_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``dag_display_name_prefix_pattern`` parameter when possible.")] = None,
+        dag_display_name_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.")] = None,
+        run_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``run_id_prefix_pattern`` parameter when possible.")] = None,
+        run_id_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.")] = None,
+        task_id_pattern: Annotated[Optional[StrictStr], Field(description="SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``task_id_prefix_pattern`` parameter when possible.")] = None,
+        task_id_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.")] = None,
         map_index_filter: Optional[StrictInt] = None,
         logical_date_gte: Optional[datetime] = None,
         logical_date_gt: Optional[datetime] = None,
@@ -1036,6 +1080,7 @@ class XComApi:
         run_after_gt: Optional[datetime] = None,
         run_after_lte: Optional[datetime] = None,
         run_after_lt: Optional[datetime] = None,
+        order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `key, dag_id, run_id, task_id, map_index, timestamp, run_after`")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1051,7 +1096,7 @@ class XComApi:
     ) -> RESTResponseType:
         """Get Xcom Entries
 
-        Get all XCom entries.  This endpoint allows specifying `~` as the dag_id, dag_run_id, task_id to retrieve XCom entries for all DAGs.
+        Get all XCom entries.  This endpoint allows specifying `~` as the dag_id, dag_run_id, task_id to retrieve XCom entries for all Dags.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -1067,14 +1112,22 @@ class XComApi:
         :type limit: int
         :param offset:
         :type offset: int
-        :param xcom_key_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :param xcom_key_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``xcom_key_prefix_pattern`` parameter when possible.
         :type xcom_key_pattern: str
-        :param dag_display_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :param xcom_key_prefix_pattern: Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.
+        :type xcom_key_prefix_pattern: str
+        :param dag_display_name_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``dag_display_name_prefix_pattern`` parameter when possible.
         :type dag_display_name_pattern: str
-        :param run_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :param dag_display_name_prefix_pattern: Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.
+        :type dag_display_name_prefix_pattern: str
+        :param run_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``run_id_prefix_pattern`` parameter when possible.
         :type run_id_pattern: str
-        :param task_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.
+        :param run_id_prefix_pattern: Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.
+        :type run_id_prefix_pattern: str
+        :param task_id_pattern: SQL LIKE expression — use `%` / `_` wildcards (e.g. `%customer_%`). or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions are **not** supported.   **Performance note:** this full-match pattern is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database from using B-tree indexes, which can be very slow on large tables. Prefer the equivalent ``task_id_prefix_pattern`` parameter when possible.
         :type task_id_pattern: str
+        :param task_id_prefix_pattern: Prefix match — returns items whose value starts with the given string (case-sensitive, index-friendly). Use the pipe `|` operator for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric characters in the prefix are stripped before matching so the range scan stays index-compatible under locale-aware collations — e.g. `test_` effectively matches items starting with `test`, and `s3://` matches items starting with `s3`.
+        :type task_id_prefix_pattern: str
         :param map_index_filter:
         :type map_index_filter: int
         :param logical_date_gte:
@@ -1093,6 +1146,8 @@ class XComApi:
         :type run_after_lte: datetime
         :param run_after_lt:
         :type run_after_lt: datetime
+        :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `key, dag_id, run_id, task_id, map_index, timestamp, run_after`
+        :type order_by: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1124,9 +1179,13 @@ class XComApi:
             limit=limit,
             offset=offset,
             xcom_key_pattern=xcom_key_pattern,
+            xcom_key_prefix_pattern=xcom_key_prefix_pattern,
             dag_display_name_pattern=dag_display_name_pattern,
+            dag_display_name_prefix_pattern=dag_display_name_prefix_pattern,
             run_id_pattern=run_id_pattern,
+            run_id_prefix_pattern=run_id_prefix_pattern,
             task_id_pattern=task_id_pattern,
+            task_id_prefix_pattern=task_id_prefix_pattern,
             map_index_filter=map_index_filter,
             logical_date_gte=logical_date_gte,
             logical_date_gt=logical_date_gt,
@@ -1136,6 +1195,7 @@ class XComApi:
             run_after_gt=run_after_gt,
             run_after_lte=run_after_lte,
             run_after_lt=run_after_lt,
+            order_by=order_by,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1167,9 +1227,13 @@ class XComApi:
         limit,
         offset,
         xcom_key_pattern,
+        xcom_key_prefix_pattern,
         dag_display_name_pattern,
+        dag_display_name_prefix_pattern,
         run_id_pattern,
+        run_id_prefix_pattern,
         task_id_pattern,
+        task_id_prefix_pattern,
         map_index_filter,
         logical_date_gte,
         logical_date_gt,
@@ -1179,6 +1243,7 @@ class XComApi:
         run_after_gt,
         run_after_lte,
         run_after_lt,
+        order_by,
         _request_auth,
         _content_type,
         _headers,
@@ -1188,6 +1253,7 @@ class XComApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
+            'order_by': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1227,17 +1293,33 @@ class XComApi:
             
             _query_params.append(('xcom_key_pattern', xcom_key_pattern))
             
+        if xcom_key_prefix_pattern is not None:
+            
+            _query_params.append(('xcom_key_prefix_pattern', xcom_key_prefix_pattern))
+            
         if dag_display_name_pattern is not None:
             
             _query_params.append(('dag_display_name_pattern', dag_display_name_pattern))
+            
+        if dag_display_name_prefix_pattern is not None:
+            
+            _query_params.append(('dag_display_name_prefix_pattern', dag_display_name_prefix_pattern))
             
         if run_id_pattern is not None:
             
             _query_params.append(('run_id_pattern', run_id_pattern))
             
+        if run_id_prefix_pattern is not None:
+            
+            _query_params.append(('run_id_prefix_pattern', run_id_prefix_pattern))
+            
         if task_id_pattern is not None:
             
             _query_params.append(('task_id_pattern', task_id_pattern))
+            
+        if task_id_prefix_pattern is not None:
+            
+            _query_params.append(('task_id_prefix_pattern', task_id_prefix_pattern))
             
         if map_index_filter is not None:
             
@@ -1346,6 +1428,10 @@ class XComApi:
                 )
             else:
                 _query_params.append(('run_after_lt', run_after_lt))
+            
+        if order_by is not None:
+            
+            _query_params.append(('order_by', order_by))
             
         # process the header parameters
         # process the form parameters

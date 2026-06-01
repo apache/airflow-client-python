@@ -1,6 +1,6 @@
 # DAGResponse
 
-DAG serializer for responses.
+Dag serializer for responses.
 
 ## Properties
 

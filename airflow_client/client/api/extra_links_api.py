@@ -44,6 +44,7 @@ class ExtraLinksApi:
         dag_run_id: StrictStr,
         task_id: StrictStr,
         map_index: Optional[StrictInt] = None,
+        try_number: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -69,6 +70,8 @@ class ExtraLinksApi:
         :type task_id: str
         :param map_index:
         :type map_index: int
+        :param try_number:
+        :type try_number: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -96,6 +99,7 @@ class ExtraLinksApi:
             dag_run_id=dag_run_id,
             task_id=task_id,
             map_index=map_index,
+            try_number=try_number,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -127,6 +131,7 @@ class ExtraLinksApi:
         dag_run_id: StrictStr,
         task_id: StrictStr,
         map_index: Optional[StrictInt] = None,
+        try_number: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -152,6 +157,8 @@ class ExtraLinksApi:
         :type task_id: str
         :param map_index:
         :type map_index: int
+        :param try_number:
+        :type try_number: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -179,6 +186,7 @@ class ExtraLinksApi:
             dag_run_id=dag_run_id,
             task_id=task_id,
             map_index=map_index,
+            try_number=try_number,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -210,6 +218,7 @@ class ExtraLinksApi:
         dag_run_id: StrictStr,
         task_id: StrictStr,
         map_index: Optional[StrictInt] = None,
+        try_number: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -235,6 +244,8 @@ class ExtraLinksApi:
         :type task_id: str
         :param map_index:
         :type map_index: int
+        :param try_number:
+        :type try_number: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -262,6 +273,7 @@ class ExtraLinksApi:
             dag_run_id=dag_run_id,
             task_id=task_id,
             map_index=map_index,
+            try_number=try_number,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -288,6 +300,7 @@ class ExtraLinksApi:
         dag_run_id,
         task_id,
         map_index,
+        try_number,
         _request_auth,
         _content_type,
         _headers,
@@ -319,6 +332,10 @@ class ExtraLinksApi:
         if map_index is not None:
             
             _query_params.append(('map_index', map_index))
+            
+        if try_number is not None:
+            
+            _query_params.append(('try_number', try_number))
             
         # process the header parameters
         # process the form parameters

@@ -20,7 +20,7 @@ from typing_extensions import Self
 
 class DAGRunPatchStates(str, Enum):
     """
-    Enum for DAG Run states when updating a DAG Run.
+    Enum for Dag Run states when updating a Dag Run.
     """
 
     """

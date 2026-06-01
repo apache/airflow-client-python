@@ -353,7 +353,7 @@ class DagVersionApi:
     ) -> DAGVersionCollectionResponse:
         """Get Dag Versions
 
-        Get all DAG Versions.  This endpoint allows specifying `~` as the dag_id to retrieve DAG Versions for all DAGs.
+        Get all Dag Versions.  This endpoint allows specifying `~` as the dag_id to retrieve Dag Versions for all Dags.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -448,7 +448,7 @@ class DagVersionApi:
     ) -> ApiResponse[DAGVersionCollectionResponse]:
         """Get Dag Versions
 
-        Get all DAG Versions.  This endpoint allows specifying `~` as the dag_id to retrieve DAG Versions for all DAGs.
+        Get all Dag Versions.  This endpoint allows specifying `~` as the dag_id to retrieve Dag Versions for all Dags.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -543,7 +543,7 @@ class DagVersionApi:
     ) -> RESTResponseType:
         """Get Dag Versions
 
-        Get all DAG Versions.  This endpoint allows specifying `~` as the dag_id to retrieve DAG Versions for all DAGs.
+        Get all Dag Versions.  This endpoint allows specifying `~` as the dag_id to retrieve Dag Versions for all Dags.
 
         :param dag_id: (required)
         :type dag_id: str

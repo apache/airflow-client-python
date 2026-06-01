@@ -27,7 +27,7 @@ from pydantic_core import to_jsonable_python
 
 class DAGRunPatchBody(BaseModel):
     """
-    DAG Run Serializer for PATCH requests.
+    Dag Run Serializer for PATCH requests.
     """ # noqa: E501
     note: Optional[Annotated[str, Field(strict=True, max_length=1000)]] = None
     state: Optional[DAGRunPatchStates] = None

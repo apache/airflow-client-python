@@ -1,6 +1,6 @@
 # TriggerDAGRunPostBody
 
-Trigger DAG Run Serializer for POST body.
+Trigger Dag Run Serializer for POST body.
 
 ## Properties
 

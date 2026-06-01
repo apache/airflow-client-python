@@ -61,7 +61,7 @@ class DagWarningApi:
     ) -> DAGWarningCollectionResponse:
         """List Dag Warnings
 
-        Get a list of DAG warnings.
+        Get a list of Dag warnings.
 
         :param dag_id:
         :type dag_id: str
@@ -147,7 +147,7 @@ class DagWarningApi:
     ) -> ApiResponse[DAGWarningCollectionResponse]:
         """List Dag Warnings
 
-        Get a list of DAG warnings.
+        Get a list of Dag warnings.
 
         :param dag_id:
         :type dag_id: str
@@ -233,7 +233,7 @@ class DagWarningApi:
     ) -> RESTResponseType:
         """List Dag Warnings
 
-        Get a list of DAG warnings.
+        Get a list of Dag warnings.
 
         :param dag_id:
         :type dag_id: str

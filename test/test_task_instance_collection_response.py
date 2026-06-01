@@ -35,6 +35,8 @@ class TestTaskInstanceCollectionResponse(unittest.TestCase):
         model = TaskInstanceCollectionResponse()
         if include_optional:
             return TaskInstanceCollectionResponse(
+                next_cursor = '',
+                previous_cursor = '',
                 task_instances = [
                     airflow_client.client.models.task_instance_response.TaskInstanceResponse(
                         dag_display_name = '', 
@@ -113,7 +115,6 @@ class TestTaskInstanceCollectionResponse(unittest.TestCase):
                         try_number = 56, 
                         unixname = '', )
                     ],
-                total_entries = 56,
         )
         """
 

@@ -1,6 +1,6 @@
 # DAGWarningResponse
 
-DAG Warning serializer for responses.
+Dag Warning serializer for responses.
 
 ## Properties
 

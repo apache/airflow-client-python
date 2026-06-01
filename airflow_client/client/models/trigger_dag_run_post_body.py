@@ -21,7 +21,7 @@ from pydantic_core import to_jsonable_python
 
 class TriggerDAGRunPostBody(BaseModel):
     """
-    Trigger DAG Run Serializer for POST body.
+    Trigger Dag Run Serializer for POST body.
     """
     conf: Optional[Dict[str, Any]] = None
     dag_run_id: Optional[StrictStr] = None

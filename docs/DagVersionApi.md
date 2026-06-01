@@ -100,9 +100,9 @@ Name | Type | Description  | Notes
 
 Get Dag Versions
 
-Get all DAG Versions.
+Get all Dag Versions.
 
-This endpoint allows specifying `~` as the dag_id to retrieve DAG Versions for all DAGs.
+This endpoint allows specifying `~` as the dag_id to retrieve Dag Versions for all Dags.
 
 ### Example
 

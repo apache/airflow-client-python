@@ -1,6 +1,6 @@
 # DagScheduleAssetReference
 
-DAG schedule reference serializer for assets.
+Dag schedule reference serializer for assets.
 
 ## Properties
 

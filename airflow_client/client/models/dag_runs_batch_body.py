@@ -28,7 +28,7 @@ from pydantic_core import to_jsonable_python
 
 class DAGRunsBatchBody(BaseModel):
     """
-    List DAG Runs body for batch endpoint.
+    List Dag Runs body for batch endpoint.
     """ # noqa: E501
     conf_contains: Optional[StrictStr] = None
     dag_ids: Optional[List[StrictStr]] = None

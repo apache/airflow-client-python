@@ -19,6 +19,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from airflow_client.client.models.asset_event_access_control import AssetEventAccessControl
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -27,11 +28,12 @@ class CreateAssetEventsBody(BaseModel):
     """
     Create asset events request.
     """ # noqa: E501
+    access_control: Optional[AssetEventAccessControl] = None
     asset_id: StrictInt
     extra: Optional[Dict[str, Any]] = None
     partition_key: Optional[StrictStr] = None
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["asset_id", "extra", "partition_key"]
+    __properties: ClassVar[List[str]] = ["access_control", "asset_id", "extra", "partition_key"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -74,6 +76,9 @@ class CreateAssetEventsBody(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of access_control
+        if self.access_control:
+            _dict['access_control'] = self.access_control.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -91,6 +96,7 @@ class CreateAssetEventsBody(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "access_control": AssetEventAccessControl.from_dict(obj["access_control"]) if obj.get("access_control") is not None else None,
             "asset_id": obj.get("asset_id"),
             "extra": obj.get("extra"),
             "partition_key": obj.get("partition_key")

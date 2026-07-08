@@ -92,6 +92,7 @@ class LoginApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "object",
             '307': "HTTPExceptionResponse",
+            '400': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -161,6 +162,7 @@ class LoginApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "object",
             '307': "HTTPExceptionResponse",
+            '400': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -230,6 +232,7 @@ class LoginApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "object",
             '307': "HTTPExceptionResponse",
+            '400': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(

@@ -49,6 +49,7 @@ class TestDAGCollectionResponse(unittest.TestCase):
                         fileloc = '', 
                         has_import_errors = True, 
                         has_task_concurrency_limits = True, 
+                        is_backfillable = True, 
                         is_paused = True, 
                         is_stale = True, 
                         last_expired = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
@@ -73,6 +74,7 @@ class TestDAGCollectionResponse(unittest.TestCase):
                             ], 
                         timetable_description = '', 
                         timetable_partitioned = True, 
+                        timetable_periodic = True, 
                         timetable_summary = '', )
                     ],
                 total_entries = 56
@@ -93,6 +95,7 @@ class TestDAGCollectionResponse(unittest.TestCase):
                         fileloc = '', 
                         has_import_errors = True, 
                         has_task_concurrency_limits = True, 
+                        is_backfillable = True, 
                         is_paused = True, 
                         is_stale = True, 
                         last_expired = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
@@ -117,6 +120,7 @@ class TestDAGCollectionResponse(unittest.TestCase):
                             ], 
                         timetable_description = '', 
                         timetable_partitioned = True, 
+                        timetable_periodic = True, 
                         timetable_summary = '', )
                     ],
                 total_entries = 56,

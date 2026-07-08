@@ -45,7 +45,6 @@ class TestVariableResponse(unittest.TestCase):
             return VariableResponse(
                 is_encrypted = True,
                 key = '',
-                value = '',
         )
         """
 

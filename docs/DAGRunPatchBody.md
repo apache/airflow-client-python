@@ -7,7 +7,7 @@ Dag Run Serializer for PATCH requests.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **note** | **str** |  | [optional] 
-**state** | [**DAGRunPatchStates**](DAGRunPatchStates.md) |  | [optional] 
+**state** | [**DagRunMutableStates**](DagRunMutableStates.md) |  | [optional] 
 
 ## Example
 

@@ -6,9 +6,10 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **description** | **str** |  | [optional] 
-**key** | **str** |  | 
+**include_deferred** | **bool** |  | [optional] [default to False]
+**name** | **str** |  | 
+**slots** | **int** | Number of slots. Use -1 for unlimited. | 
 **team_name** | **str** |  | [optional] 
-**value** | **object** |  | 
 
 ## Example
 

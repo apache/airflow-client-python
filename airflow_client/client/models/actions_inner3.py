@@ -17,27 +17,27 @@ import json
 import pprint
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, field_validator
 from typing import Any, List, Optional
-from airflow_client.client.models.bulk_create_action_variable_body import BulkCreateActionVariableBody
-from airflow_client.client.models.bulk_delete_action_variable_body import BulkDeleteActionVariableBody
-from airflow_client.client.models.bulk_update_action_variable_body import BulkUpdateActionVariableBody
+from airflow_client.client.models.bulk_create_action_pool_body import BulkCreateActionPoolBody
+from airflow_client.client.models.bulk_delete_action_pool_body import BulkDeleteActionPoolBody
+from airflow_client.client.models.bulk_update_action_pool_body import BulkUpdateActionPoolBody
 from pydantic import StrictStr, Field
 from typing import Union, List, Set, Optional, Dict
 from typing_extensions import Literal, Self
 
-ACTIONSINNER3_ONE_OF_SCHEMAS = ["BulkCreateActionVariableBody", "BulkDeleteActionVariableBody", "BulkUpdateActionVariableBody"]
+ACTIONSINNER3_ONE_OF_SCHEMAS = ["BulkCreateActionPoolBody", "BulkDeleteActionPoolBody", "BulkUpdateActionPoolBody"]
 
 class ActionsInner3(BaseModel):
     """
     ActionsInner3
     """
-    # data type: BulkCreateActionVariableBody
-    oneof_schema_1_validator: Optional[BulkCreateActionVariableBody] = None
-    # data type: BulkUpdateActionVariableBody
-    oneof_schema_2_validator: Optional[BulkUpdateActionVariableBody] = None
-    # data type: BulkDeleteActionVariableBody
-    oneof_schema_3_validator: Optional[BulkDeleteActionVariableBody] = None
-    actual_instance: Optional[Union[BulkCreateActionVariableBody, BulkDeleteActionVariableBody, BulkUpdateActionVariableBody]] = None
-    one_of_schemas: Set[str] = { "BulkCreateActionVariableBody", "BulkDeleteActionVariableBody", "BulkUpdateActionVariableBody" }
+    # data type: BulkCreateActionPoolBody
+    oneof_schema_1_validator: Optional[BulkCreateActionPoolBody] = None
+    # data type: BulkUpdateActionPoolBody
+    oneof_schema_2_validator: Optional[BulkUpdateActionPoolBody] = None
+    # data type: BulkDeleteActionPoolBody
+    oneof_schema_3_validator: Optional[BulkDeleteActionPoolBody] = None
+    actual_instance: Optional[Union[BulkCreateActionPoolBody, BulkDeleteActionPoolBody, BulkUpdateActionPoolBody]] = None
+    one_of_schemas: Set[str] = { "BulkCreateActionPoolBody", "BulkDeleteActionPoolBody", "BulkUpdateActionPoolBody" }
 
     model_config = ConfigDict(
         validate_assignment=True,
@@ -60,27 +60,27 @@ class ActionsInner3(BaseModel):
         instance = ActionsInner3.model_construct()
         error_messages = []
         match = 0
-        # validate data type: BulkCreateActionVariableBody
-        if not isinstance(v, BulkCreateActionVariableBody):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `BulkCreateActionVariableBody`")
+        # validate data type: BulkCreateActionPoolBody
+        if not isinstance(v, BulkCreateActionPoolBody):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `BulkCreateActionPoolBody`")
         else:
             match += 1
-        # validate data type: BulkUpdateActionVariableBody
-        if not isinstance(v, BulkUpdateActionVariableBody):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `BulkUpdateActionVariableBody`")
+        # validate data type: BulkUpdateActionPoolBody
+        if not isinstance(v, BulkUpdateActionPoolBody):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `BulkUpdateActionPoolBody`")
         else:
             match += 1
-        # validate data type: BulkDeleteActionVariableBody
-        if not isinstance(v, BulkDeleteActionVariableBody):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `BulkDeleteActionVariableBody`")
+        # validate data type: BulkDeleteActionPoolBody
+        if not isinstance(v, BulkDeleteActionPoolBody):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `BulkDeleteActionPoolBody`")
         else:
             match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in ActionsInner3 with oneOf schemas: BulkCreateActionVariableBody, BulkDeleteActionVariableBody, BulkUpdateActionVariableBody. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in ActionsInner3 with oneOf schemas: BulkCreateActionPoolBody, BulkDeleteActionPoolBody, BulkUpdateActionPoolBody. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in ActionsInner3 with oneOf schemas: BulkCreateActionVariableBody, BulkDeleteActionVariableBody, BulkUpdateActionVariableBody. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in ActionsInner3 with oneOf schemas: BulkCreateActionPoolBody, BulkDeleteActionPoolBody, BulkUpdateActionPoolBody. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -95,31 +95,31 @@ class ActionsInner3(BaseModel):
         error_messages = []
         match = 0
 
-        # deserialize data into BulkCreateActionVariableBody
+        # deserialize data into BulkCreateActionPoolBody
         try:
-            instance.actual_instance = BulkCreateActionVariableBody.from_json(json_str)
+            instance.actual_instance = BulkCreateActionPoolBody.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into BulkUpdateActionVariableBody
+        # deserialize data into BulkUpdateActionPoolBody
         try:
-            instance.actual_instance = BulkUpdateActionVariableBody.from_json(json_str)
+            instance.actual_instance = BulkUpdateActionPoolBody.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into BulkDeleteActionVariableBody
+        # deserialize data into BulkDeleteActionPoolBody
         try:
-            instance.actual_instance = BulkDeleteActionVariableBody.from_json(json_str)
+            instance.actual_instance = BulkDeleteActionPoolBody.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into ActionsInner3 with oneOf schemas: BulkCreateActionVariableBody, BulkDeleteActionVariableBody, BulkUpdateActionVariableBody. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into ActionsInner3 with oneOf schemas: BulkCreateActionPoolBody, BulkDeleteActionPoolBody, BulkUpdateActionPoolBody. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into ActionsInner3 with oneOf schemas: BulkCreateActionVariableBody, BulkDeleteActionVariableBody, BulkUpdateActionVariableBody. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into ActionsInner3 with oneOf schemas: BulkCreateActionPoolBody, BulkDeleteActionPoolBody, BulkUpdateActionPoolBody. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -133,7 +133,7 @@ class ActionsInner3(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], BulkCreateActionVariableBody, BulkDeleteActionVariableBody, BulkUpdateActionVariableBody]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], BulkCreateActionPoolBody, BulkDeleteActionPoolBody, BulkUpdateActionPoolBody]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None

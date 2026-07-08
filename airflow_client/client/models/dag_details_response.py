@@ -49,6 +49,7 @@ class DAGDetailsResponse(BaseModel):
     fileloc: StrictStr
     has_import_errors: StrictBool
     has_task_concurrency_limits: StrictBool
+    is_backfillable: StrictBool = Field(description="Whether this Dag's schedule supports backfilling.")
     is_favorite: Optional[StrictBool] = False
     is_paused: StrictBool
     is_paused_upon_creation: Optional[StrictBool] = None
@@ -70,14 +71,16 @@ class DAGDetailsResponse(BaseModel):
     params: Optional[Dict[str, Any]] = None
     relative_fileloc: Optional[StrictStr] = None
     render_template_as_native_obj: StrictBool
+    rerun_with_latest_version: Optional[StrictBool] = None
     start_date: Optional[datetime] = None
     tags: List[DagTagResponse]
     template_search_path: Optional[List[StrictStr]] = None
     timetable_description: Optional[StrictStr] = None
     timetable_partitioned: StrictBool
+    timetable_periodic: StrictBool
     timetable_summary: Optional[StrictStr] = None
     timezone: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["active_runs_count", "allowed_run_types", "asset_expression", "bundle_name", "bundle_version", "catchup", "concurrency", "dag_display_name", "dag_id", "dag_run_timeout", "default_args", "description", "doc_md", "end_date", "file_token", "fileloc", "has_import_errors", "has_task_concurrency_limits", "is_favorite", "is_paused", "is_paused_upon_creation", "is_stale", "last_expired", "last_parse_duration", "last_parsed", "last_parsed_time", "latest_dag_version", "max_active_runs", "max_active_tasks", "max_consecutive_failed_dag_runs", "next_dagrun_data_interval_end", "next_dagrun_data_interval_start", "next_dagrun_logical_date", "next_dagrun_run_after", "owner_links", "owners", "params", "relative_fileloc", "render_template_as_native_obj", "start_date", "tags", "template_search_path", "timetable_description", "timetable_partitioned", "timetable_summary", "timezone"]
+    __properties: ClassVar[List[str]] = ["active_runs_count", "allowed_run_types", "asset_expression", "bundle_name", "bundle_version", "catchup", "concurrency", "dag_display_name", "dag_id", "dag_run_timeout", "default_args", "description", "doc_md", "end_date", "file_token", "fileloc", "has_import_errors", "has_task_concurrency_limits", "is_backfillable", "is_favorite", "is_paused", "is_paused_upon_creation", "is_stale", "last_expired", "last_parse_duration", "last_parsed", "last_parsed_time", "latest_dag_version", "max_active_runs", "max_active_tasks", "max_consecutive_failed_dag_runs", "next_dagrun_data_interval_end", "next_dagrun_data_interval_start", "next_dagrun_logical_date", "next_dagrun_run_after", "owner_links", "owners", "params", "relative_fileloc", "render_template_as_native_obj", "rerun_with_latest_version", "start_date", "tags", "template_search_path", "timetable_description", "timetable_partitioned", "timetable_periodic", "timetable_summary", "timezone"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -111,10 +114,12 @@ class DAGDetailsResponse(BaseModel):
           are ignored.
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
             "concurrency",
             "file_token",
+            "is_backfillable",
         ])
 
         _dict = self.model_dump(
@@ -162,6 +167,7 @@ class DAGDetailsResponse(BaseModel):
             "fileloc": obj.get("fileloc"),
             "has_import_errors": obj.get("has_import_errors"),
             "has_task_concurrency_limits": obj.get("has_task_concurrency_limits"),
+            "is_backfillable": obj.get("is_backfillable"),
             "is_favorite": obj.get("is_favorite") if obj.get("is_favorite") is not None else False,
             "is_paused": obj.get("is_paused"),
             "is_paused_upon_creation": obj.get("is_paused_upon_creation"),
@@ -183,11 +189,13 @@ class DAGDetailsResponse(BaseModel):
             "params": obj.get("params"),
             "relative_fileloc": obj.get("relative_fileloc"),
             "render_template_as_native_obj": obj.get("render_template_as_native_obj"),
+            "rerun_with_latest_version": obj.get("rerun_with_latest_version"),
             "start_date": obj.get("start_date"),
             "tags": [DagTagResponse.from_dict(_item) for _item in obj["tags"]] if obj.get("tags") is not None else None,
             "template_search_path": obj.get("template_search_path"),
             "timetable_description": obj.get("timetable_description"),
             "timetable_partitioned": obj.get("timetable_partitioned"),
+            "timetable_periodic": obj.get("timetable_periodic"),
             "timetable_summary": obj.get("timetable_summary"),
             "timezone": obj.get("timezone")
         })

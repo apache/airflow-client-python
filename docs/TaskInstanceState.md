@@ -28,6 +28,8 @@ All possible states that a Task Instance can be in.  Note that None is also allo
 
 * `DEFERRED` (value: `'deferred'`)
 
+* `AWAITING_INPUT` (value: `'awaiting_input'`)
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

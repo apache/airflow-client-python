@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **fileloc** | **str** |  | 
 **has_import_errors** | **bool** |  | 
 **has_task_concurrency_limits** | **bool** |  | 
+**is_backfillable** | **bool** | Whether this Dag&#39;s schedule supports backfilling. | [readonly] 
 **is_paused** | **bool** |  | 
 **is_stale** | **bool** |  | 
 **last_expired** | **datetime** |  | [optional] 
@@ -33,6 +34,7 @@ Name | Type | Description | Notes
 **tags** | [**List[DagTagResponse]**](DagTagResponse.md) |  | 
 **timetable_description** | **str** |  | [optional] 
 **timetable_partitioned** | **bool** |  | 
+**timetable_periodic** | **bool** |  | 
 **timetable_summary** | **str** |  | [optional] 
 
 ## Example

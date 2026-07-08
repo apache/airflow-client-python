@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -33,9 +33,10 @@ class ExternalViewResponse(BaseModel):
     icon: Optional[StrictStr] = None
     icon_dark_mode: Optional[StrictStr] = None
     name: StrictStr
+    nav_top_level: Optional[StrictBool] = None
     url_route: Optional[StrictStr] = None
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["category", "destination", "href", "icon", "icon_dark_mode", "name", "url_route"]
+    __properties: ClassVar[List[str]] = ["category", "destination", "href", "icon", "icon_dark_mode", "name", "nav_top_level", "url_route"]
 
     @field_validator('destination')
     def destination_validate_enum(cls, value):
@@ -111,6 +112,7 @@ class ExternalViewResponse(BaseModel):
             "icon": obj.get("icon"),
             "icon_dark_mode": obj.get("icon_dark_mode"),
             "name": obj.get("name"),
+            "nav_top_level": obj.get("nav_top_level"),
             "url_route": obj.get("url_route")
         })
         # store additional fields in additional_properties

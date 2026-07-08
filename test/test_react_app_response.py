@@ -41,6 +41,7 @@ class TestReactAppResponse(unittest.TestCase):
                 icon = '',
                 icon_dark_mode = '',
                 name = '',
+                nav_top_level = True,
                 url_route = ''
             )
         else:

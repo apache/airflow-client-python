@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **is_encrypted** | **bool** |  | 
 **key** | **str** |  | 
 **team_name** | **str** |  | [optional] 
-**value** | **str** |  | 
+**value** | **str** |  | [optional] 
 
 ## Example
 

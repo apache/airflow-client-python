@@ -47,10 +47,24 @@ class TestConnectionApi(unittest.TestCase):
         """
         pass
 
+    def test_enqueue_connection_test(self) -> None:
+        """Test case for enqueue_connection_test
+
+        Enqueue Connection Test
+        """
+        pass
+
     def test_get_connection(self) -> None:
         """Test case for get_connection
 
         Get Connection
+        """
+        pass
+
+    def test_get_connection_test(self) -> None:
+        """Test case for get_connection_test
+
+        Get Connection Test
         """
         pass
 

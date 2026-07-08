@@ -20,6 +20,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from airflow_client.client.models.clear_task_instances_body_task_ids_inner import ClearTaskInstancesBodyTaskIdsInner
 from typing import Optional, Set
 from typing_extensions import Self
@@ -36,14 +37,15 @@ class ClearTaskInstancesBody(BaseModel):
     include_future: Optional[StrictBool] = False
     include_past: Optional[StrictBool] = False
     include_upstream: Optional[StrictBool] = False
+    note: Optional[Annotated[str, Field(strict=True, max_length=1000)]] = None
     only_failed: Optional[StrictBool] = True
     only_running: Optional[StrictBool] = False
     prevent_running_task: Optional[StrictBool] = False
     reset_dag_runs: Optional[StrictBool] = True
-    run_on_latest_version: Optional[StrictBool] = Field(default=False, description="(Experimental) Run on the latest bundle version of the dag after clearing the task instances.")
+    run_on_latest_version: Optional[StrictBool] = None
     start_date: Optional[datetime] = None
     task_ids: Optional[List[ClearTaskInstancesBodyTaskIdsInner]] = None
-    __properties: ClassVar[List[str]] = ["dag_run_id", "dry_run", "end_date", "include_downstream", "include_future", "include_past", "include_upstream", "only_failed", "only_running", "prevent_running_task", "reset_dag_runs", "run_on_latest_version", "start_date", "task_ids"]
+    __properties: ClassVar[List[str]] = ["dag_run_id", "dry_run", "end_date", "include_downstream", "include_future", "include_past", "include_upstream", "note", "only_failed", "only_running", "prevent_running_task", "reset_dag_runs", "run_on_latest_version", "start_date", "task_ids"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -110,11 +112,12 @@ class ClearTaskInstancesBody(BaseModel):
             "include_future": obj.get("include_future") if obj.get("include_future") is not None else False,
             "include_past": obj.get("include_past") if obj.get("include_past") is not None else False,
             "include_upstream": obj.get("include_upstream") if obj.get("include_upstream") is not None else False,
+            "note": obj.get("note"),
             "only_failed": obj.get("only_failed") if obj.get("only_failed") is not None else True,
             "only_running": obj.get("only_running") if obj.get("only_running") is not None else False,
             "prevent_running_task": obj.get("prevent_running_task") if obj.get("prevent_running_task") is not None else False,
             "reset_dag_runs": obj.get("reset_dag_runs") if obj.get("reset_dag_runs") is not None else True,
-            "run_on_latest_version": obj.get("run_on_latest_version") if obj.get("run_on_latest_version") is not None else False,
+            "run_on_latest_version": obj.get("run_on_latest_version"),
             "start_date": obj.get("start_date"),
             "task_ids": [ClearTaskInstancesBodyTaskIdsInner.from_dict(_item) for _item in obj["task_ids"]] if obj.get("task_ids") is not None else None
         })

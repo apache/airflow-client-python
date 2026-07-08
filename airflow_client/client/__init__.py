@@ -14,11 +14,12 @@
 """  # noqa: E501
 
 
-__version__ = "3.2.2"
+__version__ = "3.3.0"
 
 # Define package exports
 __all__ = [
     "AssetApi",
+    "AssetStateStoreApi",
     "BackfillApi",
     "ConfigApi",
     "ConnectionApi",
@@ -40,6 +41,7 @@ __all__ = [
     "ProviderApi",
     "TaskApi",
     "TaskInstanceApi",
+    "TaskStateStoreApi",
     "VariableApi",
     "VersionApi",
     "XComApi",
@@ -57,15 +59,23 @@ __all__ = [
     "ActionsInner1",
     "ActionsInner2",
     "ActionsInner3",
+    "ActionsInner4",
     "AppBuilderMenuItemResponse",
     "AppBuilderViewResponse",
     "AssetAliasCollectionResponse",
     "AssetAliasResponse",
     "AssetCollectionResponse",
+    "AssetEventAccessControl",
     "AssetEventCollectionResponse",
     "AssetEventResponse",
     "AssetResponse",
+    "AssetStateStoreBody",
+    "AssetStateStoreCollectionResponse",
+    "AssetStateStoreLastUpdatedBy",
+    "AssetStateStoreResponse",
+    "AssetStateStoreWriterKind",
     "AssetWatcherResponse",
+    "AsyncConnectionTestResponse",
     "BackfillCollectionResponse",
     "BackfillPostBody",
     "BackfillResponse",
@@ -73,24 +83,32 @@ __all__ = [
     "BulkActionNotOnExistence",
     "BulkActionOnExistence",
     "BulkActionResponse",
+    "BulkBodyBulkDAGRunBody",
     "BulkBodyBulkTaskInstanceBody",
     "BulkBodyConnectionBody",
     "BulkBodyPoolBody",
     "BulkBodyVariableBody",
+    "BulkCreateActionBulkDAGRunBody",
     "BulkCreateActionBulkTaskInstanceBody",
     "BulkCreateActionConnectionBody",
     "BulkCreateActionPoolBody",
     "BulkCreateActionVariableBody",
+    "BulkDAGRunBody",
+    "BulkDAGRunClearBody",
+    "BulkDeleteActionBulkDAGRunBody",
     "BulkDeleteActionBulkTaskInstanceBody",
     "BulkDeleteActionConnectionBody",
     "BulkDeleteActionPoolBody",
     "BulkDeleteActionVariableBody",
     "BulkResponse",
     "BulkTaskInstanceBody",
+    "BulkUpdateActionBulkDAGRunBody",
     "BulkUpdateActionBulkTaskInstanceBody",
     "BulkUpdateActionConnectionBody",
     "BulkUpdateActionPoolBody",
     "BulkUpdateActionVariableBody",
+    "ClearPartitionsBody",
+    "ClearPartitionsResponse",
     "ClearTaskInstanceCollectionResponse",
     "ClearTaskInstancesBody",
     "ClearTaskInstancesBodyTaskIdsInner",
@@ -100,6 +118,8 @@ __all__ = [
     "ConnectionBody",
     "ConnectionCollectionResponse",
     "ConnectionResponse",
+    "ConnectionTestQueuedResponse",
+    "ConnectionTestRequestBody",
     "ConnectionTestResponse",
     "Content",
     "CreateAssetEventsBody",
@@ -110,7 +130,6 @@ __all__ = [
     "DAGRunClearBody",
     "DAGRunCollectionResponse",
     "DAGRunPatchBody",
-    "DAGRunPatchStates",
     "DAGRunResponse",
     "DAGRunsBatchBody",
     "DAGSourceResponse",
@@ -120,6 +139,7 @@ __all__ = [
     "DAGWarningResponse",
     "DagProcessorInfoResponse",
     "DagRunAssetReference",
+    "DagRunMutableStates",
     "DagRunState",
     "DagRunTriggeredByType",
     "DagRunType",
@@ -137,8 +157,10 @@ __all__ = [
     "EntitiesInner1",
     "EntitiesInner2",
     "EntitiesInner3",
+    "EntitiesInner4",
     "EventLogCollectionResponse",
     "EventLogResponse",
+    "ExpiresAt",
     "ExternalLogUrlResponse",
     "ExternalViewResponse",
     "ExtraLinkCollectionResponse",
@@ -176,6 +198,7 @@ __all__ = [
     "ReactAppResponse",
     "ReprocessBehavior",
     "ResponseClearDagRun",
+    "ResponseClearDagRuns",
     "ResponseGetXcomEntry",
     "SchedulerInfoResponse",
     "StructuredLogMessage",
@@ -193,6 +216,10 @@ __all__ = [
     "TaskInstancesLogResponse",
     "TaskOutletAssetReference",
     "TaskResponse",
+    "TaskStateStoreBody",
+    "TaskStateStoreCollectionResponse",
+    "TaskStateStorePatchBody",
+    "TaskStateStoreResponse",
     "TimeDelta",
     "TriggerDAGRunPostBody",
     "TriggerResponse",
@@ -214,6 +241,7 @@ __all__ = [
 
 # import apis into sdk package
 from airflow_client.client.api.asset_api import AssetApi as AssetApi
+from airflow_client.client.api.asset_state_store_api import AssetStateStoreApi as AssetStateStoreApi
 from airflow_client.client.api.backfill_api import BackfillApi as BackfillApi
 from airflow_client.client.api.config_api import ConfigApi as ConfigApi
 from airflow_client.client.api.connection_api import ConnectionApi as ConnectionApi
@@ -235,6 +263,7 @@ from airflow_client.client.api.pool_api import PoolApi as PoolApi
 from airflow_client.client.api.provider_api import ProviderApi as ProviderApi
 from airflow_client.client.api.task_api import TaskApi as TaskApi
 from airflow_client.client.api.task_instance_api import TaskInstanceApi as TaskInstanceApi
+from airflow_client.client.api.task_state_store_api import TaskStateStoreApi as TaskStateStoreApi
 from airflow_client.client.api.variable_api import VariableApi as VariableApi
 from airflow_client.client.api.version_api import VersionApi as VersionApi
 from airflow_client.client.api.x_com_api import XComApi as XComApi
@@ -256,15 +285,23 @@ from airflow_client.client.models.actions_inner import ActionsInner as ActionsIn
 from airflow_client.client.models.actions_inner1 import ActionsInner1 as ActionsInner1
 from airflow_client.client.models.actions_inner2 import ActionsInner2 as ActionsInner2
 from airflow_client.client.models.actions_inner3 import ActionsInner3 as ActionsInner3
+from airflow_client.client.models.actions_inner4 import ActionsInner4 as ActionsInner4
 from airflow_client.client.models.app_builder_menu_item_response import AppBuilderMenuItemResponse as AppBuilderMenuItemResponse
 from airflow_client.client.models.app_builder_view_response import AppBuilderViewResponse as AppBuilderViewResponse
 from airflow_client.client.models.asset_alias_collection_response import AssetAliasCollectionResponse as AssetAliasCollectionResponse
 from airflow_client.client.models.asset_alias_response import AssetAliasResponse as AssetAliasResponse
 from airflow_client.client.models.asset_collection_response import AssetCollectionResponse as AssetCollectionResponse
+from airflow_client.client.models.asset_event_access_control import AssetEventAccessControl as AssetEventAccessControl
 from airflow_client.client.models.asset_event_collection_response import AssetEventCollectionResponse as AssetEventCollectionResponse
 from airflow_client.client.models.asset_event_response import AssetEventResponse as AssetEventResponse
 from airflow_client.client.models.asset_response import AssetResponse as AssetResponse
+from airflow_client.client.models.asset_state_store_body import AssetStateStoreBody as AssetStateStoreBody
+from airflow_client.client.models.asset_state_store_collection_response import AssetStateStoreCollectionResponse as AssetStateStoreCollectionResponse
+from airflow_client.client.models.asset_state_store_last_updated_by import AssetStateStoreLastUpdatedBy as AssetStateStoreLastUpdatedBy
+from airflow_client.client.models.asset_state_store_response import AssetStateStoreResponse as AssetStateStoreResponse
+from airflow_client.client.models.asset_state_store_writer_kind import AssetStateStoreWriterKind as AssetStateStoreWriterKind
 from airflow_client.client.models.asset_watcher_response import AssetWatcherResponse as AssetWatcherResponse
+from airflow_client.client.models.async_connection_test_response import AsyncConnectionTestResponse as AsyncConnectionTestResponse
 from airflow_client.client.models.backfill_collection_response import BackfillCollectionResponse as BackfillCollectionResponse
 from airflow_client.client.models.backfill_post_body import BackfillPostBody as BackfillPostBody
 from airflow_client.client.models.backfill_response import BackfillResponse as BackfillResponse
@@ -272,24 +309,32 @@ from airflow_client.client.models.base_info_response import BaseInfoResponse as 
 from airflow_client.client.models.bulk_action_not_on_existence import BulkActionNotOnExistence as BulkActionNotOnExistence
 from airflow_client.client.models.bulk_action_on_existence import BulkActionOnExistence as BulkActionOnExistence
 from airflow_client.client.models.bulk_action_response import BulkActionResponse as BulkActionResponse
+from airflow_client.client.models.bulk_body_bulk_dag_run_body import BulkBodyBulkDAGRunBody as BulkBodyBulkDAGRunBody
 from airflow_client.client.models.bulk_body_bulk_task_instance_body import BulkBodyBulkTaskInstanceBody as BulkBodyBulkTaskInstanceBody
 from airflow_client.client.models.bulk_body_connection_body import BulkBodyConnectionBody as BulkBodyConnectionBody
 from airflow_client.client.models.bulk_body_pool_body import BulkBodyPoolBody as BulkBodyPoolBody
 from airflow_client.client.models.bulk_body_variable_body import BulkBodyVariableBody as BulkBodyVariableBody
+from airflow_client.client.models.bulk_create_action_bulk_dag_run_body import BulkCreateActionBulkDAGRunBody as BulkCreateActionBulkDAGRunBody
 from airflow_client.client.models.bulk_create_action_bulk_task_instance_body import BulkCreateActionBulkTaskInstanceBody as BulkCreateActionBulkTaskInstanceBody
 from airflow_client.client.models.bulk_create_action_connection_body import BulkCreateActionConnectionBody as BulkCreateActionConnectionBody
 from airflow_client.client.models.bulk_create_action_pool_body import BulkCreateActionPoolBody as BulkCreateActionPoolBody
 from airflow_client.client.models.bulk_create_action_variable_body import BulkCreateActionVariableBody as BulkCreateActionVariableBody
+from airflow_client.client.models.bulk_dag_run_body import BulkDAGRunBody as BulkDAGRunBody
+from airflow_client.client.models.bulk_dag_run_clear_body import BulkDAGRunClearBody as BulkDAGRunClearBody
+from airflow_client.client.models.bulk_delete_action_bulk_dag_run_body import BulkDeleteActionBulkDAGRunBody as BulkDeleteActionBulkDAGRunBody
 from airflow_client.client.models.bulk_delete_action_bulk_task_instance_body import BulkDeleteActionBulkTaskInstanceBody as BulkDeleteActionBulkTaskInstanceBody
 from airflow_client.client.models.bulk_delete_action_connection_body import BulkDeleteActionConnectionBody as BulkDeleteActionConnectionBody
 from airflow_client.client.models.bulk_delete_action_pool_body import BulkDeleteActionPoolBody as BulkDeleteActionPoolBody
 from airflow_client.client.models.bulk_delete_action_variable_body import BulkDeleteActionVariableBody as BulkDeleteActionVariableBody
 from airflow_client.client.models.bulk_response import BulkResponse as BulkResponse
 from airflow_client.client.models.bulk_task_instance_body import BulkTaskInstanceBody as BulkTaskInstanceBody
+from airflow_client.client.models.bulk_update_action_bulk_dag_run_body import BulkUpdateActionBulkDAGRunBody as BulkUpdateActionBulkDAGRunBody
 from airflow_client.client.models.bulk_update_action_bulk_task_instance_body import BulkUpdateActionBulkTaskInstanceBody as BulkUpdateActionBulkTaskInstanceBody
 from airflow_client.client.models.bulk_update_action_connection_body import BulkUpdateActionConnectionBody as BulkUpdateActionConnectionBody
 from airflow_client.client.models.bulk_update_action_pool_body import BulkUpdateActionPoolBody as BulkUpdateActionPoolBody
 from airflow_client.client.models.bulk_update_action_variable_body import BulkUpdateActionVariableBody as BulkUpdateActionVariableBody
+from airflow_client.client.models.clear_partitions_body import ClearPartitionsBody as ClearPartitionsBody
+from airflow_client.client.models.clear_partitions_response import ClearPartitionsResponse as ClearPartitionsResponse
 from airflow_client.client.models.clear_task_instance_collection_response import ClearTaskInstanceCollectionResponse as ClearTaskInstanceCollectionResponse
 from airflow_client.client.models.clear_task_instances_body import ClearTaskInstancesBody as ClearTaskInstancesBody
 from airflow_client.client.models.clear_task_instances_body_task_ids_inner import ClearTaskInstancesBodyTaskIdsInner as ClearTaskInstancesBodyTaskIdsInner
@@ -299,6 +344,8 @@ from airflow_client.client.models.config_section import ConfigSection as ConfigS
 from airflow_client.client.models.connection_body import ConnectionBody as ConnectionBody
 from airflow_client.client.models.connection_collection_response import ConnectionCollectionResponse as ConnectionCollectionResponse
 from airflow_client.client.models.connection_response import ConnectionResponse as ConnectionResponse
+from airflow_client.client.models.connection_test_queued_response import ConnectionTestQueuedResponse as ConnectionTestQueuedResponse
+from airflow_client.client.models.connection_test_request_body import ConnectionTestRequestBody as ConnectionTestRequestBody
 from airflow_client.client.models.connection_test_response import ConnectionTestResponse as ConnectionTestResponse
 from airflow_client.client.models.content import Content as Content
 from airflow_client.client.models.create_asset_events_body import CreateAssetEventsBody as CreateAssetEventsBody
@@ -309,7 +356,6 @@ from airflow_client.client.models.dag_response import DAGResponse as DAGResponse
 from airflow_client.client.models.dag_run_clear_body import DAGRunClearBody as DAGRunClearBody
 from airflow_client.client.models.dag_run_collection_response import DAGRunCollectionResponse as DAGRunCollectionResponse
 from airflow_client.client.models.dag_run_patch_body import DAGRunPatchBody as DAGRunPatchBody
-from airflow_client.client.models.dag_run_patch_states import DAGRunPatchStates as DAGRunPatchStates
 from airflow_client.client.models.dag_run_response import DAGRunResponse as DAGRunResponse
 from airflow_client.client.models.dag_runs_batch_body import DAGRunsBatchBody as DAGRunsBatchBody
 from airflow_client.client.models.dag_source_response import DAGSourceResponse as DAGSourceResponse
@@ -319,6 +365,7 @@ from airflow_client.client.models.dag_warning_collection_response import DAGWarn
 from airflow_client.client.models.dag_warning_response import DAGWarningResponse as DAGWarningResponse
 from airflow_client.client.models.dag_processor_info_response import DagProcessorInfoResponse as DagProcessorInfoResponse
 from airflow_client.client.models.dag_run_asset_reference import DagRunAssetReference as DagRunAssetReference
+from airflow_client.client.models.dag_run_mutable_states import DagRunMutableStates as DagRunMutableStates
 from airflow_client.client.models.dag_run_state import DagRunState as DagRunState
 from airflow_client.client.models.dag_run_triggered_by_type import DagRunTriggeredByType as DagRunTriggeredByType
 from airflow_client.client.models.dag_run_type import DagRunType as DagRunType
@@ -336,8 +383,10 @@ from airflow_client.client.models.entities_inner import EntitiesInner as Entitie
 from airflow_client.client.models.entities_inner1 import EntitiesInner1 as EntitiesInner1
 from airflow_client.client.models.entities_inner2 import EntitiesInner2 as EntitiesInner2
 from airflow_client.client.models.entities_inner3 import EntitiesInner3 as EntitiesInner3
+from airflow_client.client.models.entities_inner4 import EntitiesInner4 as EntitiesInner4
 from airflow_client.client.models.event_log_collection_response import EventLogCollectionResponse as EventLogCollectionResponse
 from airflow_client.client.models.event_log_response import EventLogResponse as EventLogResponse
+from airflow_client.client.models.expires_at import ExpiresAt as ExpiresAt
 from airflow_client.client.models.external_log_url_response import ExternalLogUrlResponse as ExternalLogUrlResponse
 from airflow_client.client.models.external_view_response import ExternalViewResponse as ExternalViewResponse
 from airflow_client.client.models.extra_link_collection_response import ExtraLinkCollectionResponse as ExtraLinkCollectionResponse
@@ -375,6 +424,7 @@ from airflow_client.client.models.queued_event_response import QueuedEventRespon
 from airflow_client.client.models.react_app_response import ReactAppResponse as ReactAppResponse
 from airflow_client.client.models.reprocess_behavior import ReprocessBehavior as ReprocessBehavior
 from airflow_client.client.models.response_clear_dag_run import ResponseClearDagRun as ResponseClearDagRun
+from airflow_client.client.models.response_clear_dag_runs import ResponseClearDagRuns as ResponseClearDagRuns
 from airflow_client.client.models.response_get_xcom_entry import ResponseGetXcomEntry as ResponseGetXcomEntry
 from airflow_client.client.models.scheduler_info_response import SchedulerInfoResponse as SchedulerInfoResponse
 from airflow_client.client.models.structured_log_message import StructuredLogMessage as StructuredLogMessage
@@ -392,6 +442,10 @@ from airflow_client.client.models.task_instances_inner import TaskInstancesInner
 from airflow_client.client.models.task_instances_log_response import TaskInstancesLogResponse as TaskInstancesLogResponse
 from airflow_client.client.models.task_outlet_asset_reference import TaskOutletAssetReference as TaskOutletAssetReference
 from airflow_client.client.models.task_response import TaskResponse as TaskResponse
+from airflow_client.client.models.task_state_store_body import TaskStateStoreBody as TaskStateStoreBody
+from airflow_client.client.models.task_state_store_collection_response import TaskStateStoreCollectionResponse as TaskStateStoreCollectionResponse
+from airflow_client.client.models.task_state_store_patch_body import TaskStateStorePatchBody as TaskStateStorePatchBody
+from airflow_client.client.models.task_state_store_response import TaskStateStoreResponse as TaskStateStoreResponse
 from airflow_client.client.models.time_delta import TimeDelta as TimeDelta
 from airflow_client.client.models.trigger_dag_run_post_body import TriggerDAGRunPostBody as TriggerDAGRunPostBody
 from airflow_client.client.models.trigger_response import TriggerResponse as TriggerResponse

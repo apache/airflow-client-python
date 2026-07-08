@@ -18,21 +18,21 @@ from enum import Enum
 from typing_extensions import Self
 
 
-class DAGRunPatchStates(str, Enum):
+class AssetStateStoreWriterKind(str, Enum):
     """
-    Enum for Dag Run states when updating a Dag Run.
+    Identifies what kind of writer last updated an asset state store entry.  ``TASK`` — written by a task via the execution API. ``WATCHER`` — written by a ``BaseEventTrigger`` (no task instance). ``API`` — written directly through the Core API (e.g. manual admin write).
     """
 
     """
     allowed enum values
     """
-    QUEUED = 'queued'
-    SUCCESS = 'success'
-    FAILED = 'failed'
+    TASK = 'task'
+    WATCHER = 'watcher'
+    API = 'api'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
-        """Create an instance of DAGRunPatchStates from a JSON string"""
+        """Create an instance of AssetStateStoreWriterKind from a JSON string"""
         return cls(json.loads(json_str))
 
 

@@ -13,11 +13,12 @@ Name | Type | Description | Notes
 **include_future** | **bool** |  | [optional] [default to False]
 **include_past** | **bool** |  | [optional] [default to False]
 **include_upstream** | **bool** |  | [optional] [default to False]
+**note** | **str** |  | [optional] 
 **only_failed** | **bool** |  | [optional] [default to True]
 **only_running** | **bool** |  | [optional] [default to False]
 **prevent_running_task** | **bool** |  | [optional] [default to False]
 **reset_dag_runs** | **bool** |  | [optional] [default to True]
-**run_on_latest_version** | **bool** | (Experimental) Run on the latest bundle version of the dag after clearing the task instances. | [optional] [default to False]
+**run_on_latest_version** | **bool** |  | [optional] 
 **start_date** | **datetime** |  | [optional] 
 **task_ids** | [**List[ClearTaskInstancesBodyTaskIdsInner]**](ClearTaskInstancesBodyTaskIdsInner.md) |  | [optional] 
 

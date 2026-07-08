@@ -2,6 +2,7 @@
 
 # import apis into api package
 from airflow_client.client.api.asset_api import AssetApi
+from airflow_client.client.api.asset_state_store_api import AssetStateStoreApi
 from airflow_client.client.api.backfill_api import BackfillApi
 from airflow_client.client.api.config_api import ConfigApi
 from airflow_client.client.api.connection_api import ConnectionApi
@@ -23,6 +24,7 @@ from airflow_client.client.api.pool_api import PoolApi
 from airflow_client.client.api.provider_api import ProviderApi
 from airflow_client.client.api.task_api import TaskApi
 from airflow_client.client.api.task_instance_api import TaskInstanceApi
+from airflow_client.client.api.task_state_store_api import TaskStateStoreApi
 from airflow_client.client.api.variable_api import VariableApi
 from airflow_client.client.api.version_api import VersionApi
 from airflow_client.client.api.x_com_api import XComApi

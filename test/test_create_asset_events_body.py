@@ -35,6 +35,11 @@ class TestCreateAssetEventsBody(unittest.TestCase):
         model = CreateAssetEventsBody()
         if include_optional:
             return CreateAssetEventsBody(
+                access_control = airflow_client.client.models.asset_event_access_control.AssetEventAccessControl(
+                    allow_global = True, 
+                    consumer_teams = [
+                        ''
+                        ], ),
                 asset_id = 56,
                 extra = { },
                 partition_key = ''

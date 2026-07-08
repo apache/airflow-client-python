@@ -37,18 +37,12 @@ class TestEntitiesInner(unittest.TestCase):
             return EntitiesInner(
                 dag_id = '',
                 dag_run_id = '',
-                include_downstream = True,
-                include_future = True,
-                include_past = True,
-                include_upstream = True,
-                map_index = 56,
-                new_state = 'removed',
                 note = '',
-                task_id = ''
+                state = 'queued'
             )
         else:
             return EntitiesInner(
-                task_id = '',
+                dag_run_id = '',
         )
         """
 

@@ -27,7 +27,7 @@ from pydantic_core import to_jsonable_python
 
 class PatchTaskInstanceBody(BaseModel):
     """
-    Request body for Clear Task Instances endpoint.
+    Request body for patching task instance state.
     """ # noqa: E501
     include_downstream: Optional[StrictBool] = False
     include_future: Optional[StrictBool] = False

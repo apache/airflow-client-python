@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **icon** | **str** |  | [optional] 
 **icon_dark_mode** | **str** |  | [optional] 
 **name** | **str** |  | 
+**nav_top_level** | **bool** |  | [optional] 
 **url_route** | **str** |  | [optional] 
 
 ## Example

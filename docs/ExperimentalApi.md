@@ -49,7 +49,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     dag_id = 'dag_id_example' # str | 
     dag_run_id = 'dag_run_id_example' # str | 
     interval = 3.4 # float | Seconds to wait between dag run state checks
-    result = ['result_example'] # List[str] | Collect result XCom from task. Can be set multiple times. (optional)
+    result = ['result_example'] # List[str] | Collect result XCom from task. Can be set multiple times. If unset, return value of the return task as specified in the dag (in present) is returned by default. (optional)
 
     try:
         # Experimental: Wait for a dag run to complete, and return task results if requested.
@@ -70,7 +70,7 @@ Name | Type | Description  | Notes
  **dag_id** | **str**|  | 
  **dag_run_id** | **str**|  | 
  **interval** | **float**| Seconds to wait between dag run state checks | 
- **result** | [**List[str]**](str.md)| Collect result XCom from task. Can be set multiple times. | [optional] 
+ **result** | [**List[str]**](str.md)| Collect result XCom from task. Can be set multiple times. If unset, return value of the return task as specified in the dag (in present) is returned by default. | [optional] 
 
 ### Return type
 

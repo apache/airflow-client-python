@@ -1,6 +1,6 @@
 # PatchTaskInstanceBody
 
-Request body for Clear Task Instances endpoint.
+Request body for patching task instance state.
 
 ## Properties
 

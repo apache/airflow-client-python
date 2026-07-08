@@ -10,6 +10,8 @@ Class with DagRun types.
 
 * `MANUAL` (value: `'manual'`)
 
+* `OPERATOR_TRIGGERED` (value: `'operator_triggered'`)
+
 * `ASSET_TRIGGERED` (value: `'asset_triggered'`)
 
 * `ASSET_MATERIALIZATION` (value: `'asset_materialization'`)

@@ -35,21 +35,20 @@ class TestEntitiesInner1(unittest.TestCase):
         model = EntitiesInner1()
         if include_optional:
             return EntitiesInner1(
-                conn_type = '',
-                connection_id = '2',
-                description = '',
-                extra = '',
-                host = '',
-                login = '',
-                password = '',
-                port = 56,
-                var_schema = '',
-                team_name = ''
+                dag_id = '',
+                dag_run_id = '',
+                include_downstream = True,
+                include_future = True,
+                include_past = True,
+                include_upstream = True,
+                map_index = 56,
+                new_state = 'removed',
+                note = '',
+                task_id = ''
             )
         else:
             return EntitiesInner1(
-                conn_type = '',
-                connection_id = '2',
+                task_id = '',
         )
         """
 

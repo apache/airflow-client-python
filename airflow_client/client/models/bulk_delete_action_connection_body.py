@@ -20,7 +20,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from airflow_client.client.models.bulk_action_not_on_existence import BulkActionNotOnExistence
-from airflow_client.client.models.entities_inner1 import EntitiesInner1
+from airflow_client.client.models.entities_inner2 import EntitiesInner2
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -31,7 +31,7 @@ class BulkDeleteActionConnectionBody(BaseModel):
     """ # noqa: E501
     action: StrictStr = Field(description="The action to be performed on the entities.")
     action_on_non_existence: Optional[BulkActionNotOnExistence] = None
-    entities: List[EntitiesInner1] = Field(description="A list of entity id/key or entity objects to be deleted.")
+    entities: List[EntitiesInner2] = Field(description="A list of entity id/key or entity objects to be deleted.")
     __properties: ClassVar[List[str]] = ["action", "action_on_non_existence", "entities"]
 
     @field_validator('action')
@@ -101,7 +101,7 @@ class BulkDeleteActionConnectionBody(BaseModel):
         _obj = cls.model_validate({
             "action": obj.get("action"),
             "action_on_non_existence": obj.get("action_on_non_existence"),
-            "entities": [EntitiesInner1.from_dict(_item) for _item in obj["entities"]] if obj.get("entities") is not None else None
+            "entities": [EntitiesInner2.from_dict(_item) for _item in obj["entities"]] if obj.get("entities") is not None else None
         })
         return _obj
 

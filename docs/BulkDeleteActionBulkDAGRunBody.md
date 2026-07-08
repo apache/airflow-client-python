@@ -1,0 +1,31 @@
+# BulkDeleteActionBulkDAGRunBody
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**action** | **str** | The action to be performed on the entities. | 
+**action_on_non_existence** | [**BulkActionNotOnExistence**](BulkActionNotOnExistence.md) |  | [optional] 
+**entities** | [**List[EntitiesInner]**](EntitiesInner.md) | A list of entity id/key or entity objects to be deleted. | 
+
+## Example
+
+```python
+from airflow_client.client.models.bulk_delete_action_bulk_dag_run_body import BulkDeleteActionBulkDAGRunBody
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of BulkDeleteActionBulkDAGRunBody from a JSON string
+bulk_delete_action_bulk_dag_run_body_instance = BulkDeleteActionBulkDAGRunBody.from_json(json)
+# print the JSON string representation of the object
+print(BulkDeleteActionBulkDAGRunBody.to_json())
+
+# convert the object into a dict
+bulk_delete_action_bulk_dag_run_body_dict = bulk_delete_action_bulk_dag_run_body_instance.to_dict()
+# create an instance of BulkDeleteActionBulkDAGRunBody from a dict
+bulk_delete_action_bulk_dag_run_body_from_dict = BulkDeleteActionBulkDAGRunBody.from_dict(bulk_delete_action_bulk_dag_run_body_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

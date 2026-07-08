@@ -159,6 +159,20 @@ class TestTaskInstanceApi(unittest.TestCase):
         """
         pass
 
+    def test_patch_task_group_instances(self) -> None:
+        """Test case for patch_task_group_instances
+
+        Patch Task Group Instances
+        """
+        pass
+
+    def test_patch_task_group_instances_dry_run(self) -> None:
+        """Test case for patch_task_group_instances_dry_run
+
+        Patch Task Group Instances Dry Run
+        """
+        pass
+
     def test_patch_task_instance(self) -> None:
         """Test case for patch_task_instance
 

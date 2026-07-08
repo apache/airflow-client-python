@@ -38,6 +38,7 @@ class TaskInstanceState(str, Enum):
     UPSTREAM_FAILED = 'upstream_failed'
     SKIPPED = 'skipped'
     DEFERRED = 'deferred'
+    AWAITING_INPUT = 'awaiting_input'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

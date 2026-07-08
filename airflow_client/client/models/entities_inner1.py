@@ -19,12 +19,12 @@ import pprint
 import re  # noqa: F401
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, field_validator
 from typing import Optional
-from airflow_client.client.models.connection_body import ConnectionBody
+from airflow_client.client.models.bulk_task_instance_body import BulkTaskInstanceBody
 from typing import Union, Any, List, Set, TYPE_CHECKING, Optional, Dict
 from typing_extensions import Literal, Self
 from pydantic import Field
 
-ENTITIESINNER1_ANY_OF_SCHEMAS = ["ConnectionBody", "str"]
+ENTITIESINNER1_ANY_OF_SCHEMAS = ["BulkTaskInstanceBody", "str"]
 
 class EntitiesInner1(BaseModel):
     """
@@ -33,13 +33,13 @@ class EntitiesInner1(BaseModel):
 
     # data type: str
     anyof_schema_1_validator: Optional[StrictStr] = None
-    # data type: ConnectionBody
-    anyof_schema_2_validator: Optional[ConnectionBody] = None
+    # data type: BulkTaskInstanceBody
+    anyof_schema_2_validator: Optional[BulkTaskInstanceBody] = None
     if TYPE_CHECKING:
-        actual_instance: Optional[Union[ConnectionBody, str]] = None
+        actual_instance: Optional[Union[BulkTaskInstanceBody, str]] = None
     else:
         actual_instance: Any = None
-    any_of_schemas: Set[str] = { "ConnectionBody", "str" }
+    any_of_schemas: Set[str] = { "BulkTaskInstanceBody", "str" }
 
     model_config = {
         "validate_assignment": True,
@@ -66,15 +66,15 @@ class EntitiesInner1(BaseModel):
             return v
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # validate data type: ConnectionBody
-        if not isinstance(v, ConnectionBody):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `ConnectionBody`")
+        # validate data type: BulkTaskInstanceBody
+        if not isinstance(v, BulkTaskInstanceBody):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `BulkTaskInstanceBody`")
         else:
             return v
 
         if error_messages:
             # no match
-            raise ValueError("No match found when setting the actual_instance in EntitiesInner1 with anyOf schemas: ConnectionBody, str. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting the actual_instance in EntitiesInner1 with anyOf schemas: BulkTaskInstanceBody, str. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -96,16 +96,16 @@ class EntitiesInner1(BaseModel):
             return instance
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # anyof_schema_2_validator: Optional[ConnectionBody] = None
+        # anyof_schema_2_validator: Optional[BulkTaskInstanceBody] = None
         try:
-            instance.actual_instance = ConnectionBody.from_json(json_str)
+            instance.actual_instance = BulkTaskInstanceBody.from_json(json_str)
             return instance
         except (ValidationError, ValueError) as e:
              error_messages.append(str(e))
 
         if error_messages:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into EntitiesInner1 with anyOf schemas: ConnectionBody, str. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into EntitiesInner1 with anyOf schemas: BulkTaskInstanceBody, str. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -119,7 +119,7 @@ class EntitiesInner1(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], ConnectionBody, str]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], BulkTaskInstanceBody, str]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None

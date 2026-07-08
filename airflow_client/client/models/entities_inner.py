@@ -19,12 +19,12 @@ import pprint
 import re  # noqa: F401
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, field_validator
 from typing import Optional
-from airflow_client.client.models.bulk_task_instance_body import BulkTaskInstanceBody
+from airflow_client.client.models.bulk_dag_run_body import BulkDAGRunBody
 from typing import Union, Any, List, Set, TYPE_CHECKING, Optional, Dict
 from typing_extensions import Literal, Self
 from pydantic import Field
 
-ENTITIESINNER_ANY_OF_SCHEMAS = ["BulkTaskInstanceBody", "str"]
+ENTITIESINNER_ANY_OF_SCHEMAS = ["BulkDAGRunBody", "str"]
 
 class EntitiesInner(BaseModel):
     """
@@ -33,13 +33,13 @@ class EntitiesInner(BaseModel):
 
     # data type: str
     anyof_schema_1_validator: Optional[StrictStr] = None
-    # data type: BulkTaskInstanceBody
-    anyof_schema_2_validator: Optional[BulkTaskInstanceBody] = None
+    # data type: BulkDAGRunBody
+    anyof_schema_2_validator: Optional[BulkDAGRunBody] = None
     if TYPE_CHECKING:
-        actual_instance: Optional[Union[BulkTaskInstanceBody, str]] = None
+        actual_instance: Optional[Union[BulkDAGRunBody, str]] = None
     else:
         actual_instance: Any = None
-    any_of_schemas: Set[str] = { "BulkTaskInstanceBody", "str" }
+    any_of_schemas: Set[str] = { "BulkDAGRunBody", "str" }
 
     model_config = {
         "validate_assignment": True,
@@ -66,15 +66,15 @@ class EntitiesInner(BaseModel):
             return v
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # validate data type: BulkTaskInstanceBody
-        if not isinstance(v, BulkTaskInstanceBody):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `BulkTaskInstanceBody`")
+        # validate data type: BulkDAGRunBody
+        if not isinstance(v, BulkDAGRunBody):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `BulkDAGRunBody`")
         else:
             return v
 
         if error_messages:
             # no match
-            raise ValueError("No match found when setting the actual_instance in EntitiesInner with anyOf schemas: BulkTaskInstanceBody, str. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting the actual_instance in EntitiesInner with anyOf schemas: BulkDAGRunBody, str. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -96,16 +96,16 @@ class EntitiesInner(BaseModel):
             return instance
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # anyof_schema_2_validator: Optional[BulkTaskInstanceBody] = None
+        # anyof_schema_2_validator: Optional[BulkDAGRunBody] = None
         try:
-            instance.actual_instance = BulkTaskInstanceBody.from_json(json_str)
+            instance.actual_instance = BulkDAGRunBody.from_json(json_str)
             return instance
         except (ValidationError, ValueError) as e:
              error_messages.append(str(e))
 
         if error_messages:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into EntitiesInner with anyOf schemas: BulkTaskInstanceBody, str. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into EntitiesInner with anyOf schemas: BulkDAGRunBody, str. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -119,7 +119,7 @@ class EntitiesInner(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], BulkTaskInstanceBody, str]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], BulkDAGRunBody, str]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None

@@ -17,27 +17,27 @@ import json
 import pprint
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, field_validator
 from typing import Any, List, Optional
-from airflow_client.client.models.bulk_create_action_connection_body import BulkCreateActionConnectionBody
-from airflow_client.client.models.bulk_delete_action_connection_body import BulkDeleteActionConnectionBody
-from airflow_client.client.models.bulk_update_action_connection_body import BulkUpdateActionConnectionBody
+from airflow_client.client.models.bulk_create_action_bulk_task_instance_body import BulkCreateActionBulkTaskInstanceBody
+from airflow_client.client.models.bulk_delete_action_bulk_task_instance_body import BulkDeleteActionBulkTaskInstanceBody
+from airflow_client.client.models.bulk_update_action_bulk_task_instance_body import BulkUpdateActionBulkTaskInstanceBody
 from pydantic import StrictStr, Field
 from typing import Union, List, Set, Optional, Dict
 from typing_extensions import Literal, Self
 
-ACTIONSINNER1_ONE_OF_SCHEMAS = ["BulkCreateActionConnectionBody", "BulkDeleteActionConnectionBody", "BulkUpdateActionConnectionBody"]
+ACTIONSINNER1_ONE_OF_SCHEMAS = ["BulkCreateActionBulkTaskInstanceBody", "BulkDeleteActionBulkTaskInstanceBody", "BulkUpdateActionBulkTaskInstanceBody"]
 
 class ActionsInner1(BaseModel):
     """
     ActionsInner1
     """
-    # data type: BulkCreateActionConnectionBody
-    oneof_schema_1_validator: Optional[BulkCreateActionConnectionBody] = None
-    # data type: BulkUpdateActionConnectionBody
-    oneof_schema_2_validator: Optional[BulkUpdateActionConnectionBody] = None
-    # data type: BulkDeleteActionConnectionBody
-    oneof_schema_3_validator: Optional[BulkDeleteActionConnectionBody] = None
-    actual_instance: Optional[Union[BulkCreateActionConnectionBody, BulkDeleteActionConnectionBody, BulkUpdateActionConnectionBody]] = None
-    one_of_schemas: Set[str] = { "BulkCreateActionConnectionBody", "BulkDeleteActionConnectionBody", "BulkUpdateActionConnectionBody" }
+    # data type: BulkCreateActionBulkTaskInstanceBody
+    oneof_schema_1_validator: Optional[BulkCreateActionBulkTaskInstanceBody] = None
+    # data type: BulkUpdateActionBulkTaskInstanceBody
+    oneof_schema_2_validator: Optional[BulkUpdateActionBulkTaskInstanceBody] = None
+    # data type: BulkDeleteActionBulkTaskInstanceBody
+    oneof_schema_3_validator: Optional[BulkDeleteActionBulkTaskInstanceBody] = None
+    actual_instance: Optional[Union[BulkCreateActionBulkTaskInstanceBody, BulkDeleteActionBulkTaskInstanceBody, BulkUpdateActionBulkTaskInstanceBody]] = None
+    one_of_schemas: Set[str] = { "BulkCreateActionBulkTaskInstanceBody", "BulkDeleteActionBulkTaskInstanceBody", "BulkUpdateActionBulkTaskInstanceBody" }
 
     model_config = ConfigDict(
         validate_assignment=True,
@@ -60,27 +60,27 @@ class ActionsInner1(BaseModel):
         instance = ActionsInner1.model_construct()
         error_messages = []
         match = 0
-        # validate data type: BulkCreateActionConnectionBody
-        if not isinstance(v, BulkCreateActionConnectionBody):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `BulkCreateActionConnectionBody`")
+        # validate data type: BulkCreateActionBulkTaskInstanceBody
+        if not isinstance(v, BulkCreateActionBulkTaskInstanceBody):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `BulkCreateActionBulkTaskInstanceBody`")
         else:
             match += 1
-        # validate data type: BulkUpdateActionConnectionBody
-        if not isinstance(v, BulkUpdateActionConnectionBody):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `BulkUpdateActionConnectionBody`")
+        # validate data type: BulkUpdateActionBulkTaskInstanceBody
+        if not isinstance(v, BulkUpdateActionBulkTaskInstanceBody):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `BulkUpdateActionBulkTaskInstanceBody`")
         else:
             match += 1
-        # validate data type: BulkDeleteActionConnectionBody
-        if not isinstance(v, BulkDeleteActionConnectionBody):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `BulkDeleteActionConnectionBody`")
+        # validate data type: BulkDeleteActionBulkTaskInstanceBody
+        if not isinstance(v, BulkDeleteActionBulkTaskInstanceBody):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `BulkDeleteActionBulkTaskInstanceBody`")
         else:
             match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in ActionsInner1 with oneOf schemas: BulkCreateActionConnectionBody, BulkDeleteActionConnectionBody, BulkUpdateActionConnectionBody. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in ActionsInner1 with oneOf schemas: BulkCreateActionBulkTaskInstanceBody, BulkDeleteActionBulkTaskInstanceBody, BulkUpdateActionBulkTaskInstanceBody. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in ActionsInner1 with oneOf schemas: BulkCreateActionConnectionBody, BulkDeleteActionConnectionBody, BulkUpdateActionConnectionBody. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in ActionsInner1 with oneOf schemas: BulkCreateActionBulkTaskInstanceBody, BulkDeleteActionBulkTaskInstanceBody, BulkUpdateActionBulkTaskInstanceBody. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -95,31 +95,31 @@ class ActionsInner1(BaseModel):
         error_messages = []
         match = 0
 
-        # deserialize data into BulkCreateActionConnectionBody
+        # deserialize data into BulkCreateActionBulkTaskInstanceBody
         try:
-            instance.actual_instance = BulkCreateActionConnectionBody.from_json(json_str)
+            instance.actual_instance = BulkCreateActionBulkTaskInstanceBody.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into BulkUpdateActionConnectionBody
+        # deserialize data into BulkUpdateActionBulkTaskInstanceBody
         try:
-            instance.actual_instance = BulkUpdateActionConnectionBody.from_json(json_str)
+            instance.actual_instance = BulkUpdateActionBulkTaskInstanceBody.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into BulkDeleteActionConnectionBody
+        # deserialize data into BulkDeleteActionBulkTaskInstanceBody
         try:
-            instance.actual_instance = BulkDeleteActionConnectionBody.from_json(json_str)
+            instance.actual_instance = BulkDeleteActionBulkTaskInstanceBody.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into ActionsInner1 with oneOf schemas: BulkCreateActionConnectionBody, BulkDeleteActionConnectionBody, BulkUpdateActionConnectionBody. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into ActionsInner1 with oneOf schemas: BulkCreateActionBulkTaskInstanceBody, BulkDeleteActionBulkTaskInstanceBody, BulkUpdateActionBulkTaskInstanceBody. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into ActionsInner1 with oneOf schemas: BulkCreateActionConnectionBody, BulkDeleteActionConnectionBody, BulkUpdateActionConnectionBody. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into ActionsInner1 with oneOf schemas: BulkCreateActionBulkTaskInstanceBody, BulkDeleteActionBulkTaskInstanceBody, BulkUpdateActionBulkTaskInstanceBody. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -133,7 +133,7 @@ class ActionsInner1(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], BulkCreateActionConnectionBody, BulkDeleteActionConnectionBody, BulkUpdateActionConnectionBody]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], BulkCreateActionBulkTaskInstanceBody, BulkDeleteActionBulkTaskInstanceBody, BulkUpdateActionBulkTaskInstanceBody]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None

@@ -1,6 +1,6 @@
 # ConnectionTestResponse
 
-Connection Test serializer for responses.
+Connection Test serializer for synchronous test responses.
 
 ## Properties
 

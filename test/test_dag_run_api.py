@@ -26,10 +26,31 @@ class TestDagRunApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
+    def test_bulk_dag_runs(self) -> None:
+        """Test case for bulk_dag_runs
+
+        Bulk Dag Runs
+        """
+        pass
+
     def test_clear_dag_run(self) -> None:
         """Test case for clear_dag_run
 
         Clear Dag Run
+        """
+        pass
+
+    def test_clear_dag_run_partitions(self) -> None:
+        """Test case for clear_dag_run_partitions
+
+        Clear Dag Run Partitions
+        """
+        pass
+
+    def test_clear_dag_runs(self) -> None:
+        """Test case for clear_dag_runs
+
+        Clear Dag Runs
         """
         pass
 

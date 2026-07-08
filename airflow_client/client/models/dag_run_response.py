@@ -45,6 +45,7 @@ class DAGRunResponse(BaseModel):
     last_scheduling_decision: Optional[datetime] = None
     logical_date: Optional[datetime] = None
     note: Optional[StrictStr] = None
+    partition_date: Optional[datetime] = None
     partition_key: Optional[StrictStr] = None
     queued_at: Optional[datetime] = None
     run_after: datetime
@@ -53,7 +54,7 @@ class DAGRunResponse(BaseModel):
     state: DagRunState
     triggered_by: Optional[DagRunTriggeredByType] = None
     triggering_user_name: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["bundle_version", "conf", "dag_display_name", "dag_id", "dag_run_id", "dag_versions", "data_interval_end", "data_interval_start", "duration", "end_date", "last_scheduling_decision", "logical_date", "note", "partition_key", "queued_at", "run_after", "run_type", "start_date", "state", "triggered_by", "triggering_user_name"]
+    __properties: ClassVar[List[str]] = ["bundle_version", "conf", "dag_display_name", "dag_id", "dag_run_id", "dag_versions", "data_interval_end", "data_interval_start", "duration", "end_date", "last_scheduling_decision", "logical_date", "note", "partition_date", "partition_key", "queued_at", "run_after", "run_type", "start_date", "state", "triggered_by", "triggering_user_name"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -126,6 +127,7 @@ class DAGRunResponse(BaseModel):
             "last_scheduling_decision": obj.get("last_scheduling_decision"),
             "logical_date": obj.get("logical_date"),
             "note": obj.get("note"),
+            "partition_date": obj.get("partition_date"),
             "partition_key": obj.get("partition_key"),
             "queued_at": obj.get("queued_at"),
             "run_after": obj.get("run_after"),

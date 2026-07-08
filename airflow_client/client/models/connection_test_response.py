@@ -25,7 +25,7 @@ from pydantic_core import to_jsonable_python
 
 class ConnectionTestResponse(BaseModel):
     """
-    Connection Test serializer for responses.
+    Connection Test serializer for synchronous test responses.
     """ # noqa: E501
     message: StrictStr
     status: StrictBool

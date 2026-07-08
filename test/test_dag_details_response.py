@@ -55,6 +55,7 @@ class TestDAGDetailsResponse(unittest.TestCase):
                 fileloc = '',
                 has_import_errors = True,
                 has_task_concurrency_limits = True,
+                is_backfillable = True,
                 is_favorite = True,
                 is_paused = True,
                 is_paused_upon_creation = True,
@@ -88,6 +89,7 @@ class TestDAGDetailsResponse(unittest.TestCase):
                 params = { },
                 relative_fileloc = '',
                 render_template_as_native_obj = True,
+                rerun_with_latest_version = True,
                 start_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 tags = [
                     airflow_client.client.models.dag_tag_response.DagTagResponse(
@@ -100,6 +102,7 @@ class TestDAGDetailsResponse(unittest.TestCase):
                     ],
                 timetable_description = '',
                 timetable_partitioned = True,
+                timetable_periodic = True,
                 timetable_summary = '',
                 timezone = ''
             )
@@ -113,6 +116,7 @@ class TestDAGDetailsResponse(unittest.TestCase):
                 fileloc = '',
                 has_import_errors = True,
                 has_task_concurrency_limits = True,
+                is_backfillable = True,
                 is_paused = True,
                 is_stale = True,
                 max_active_tasks = 56,
@@ -128,6 +132,7 @@ class TestDAGDetailsResponse(unittest.TestCase):
                         name = '', )
                     ],
                 timetable_partitioned = True,
+                timetable_periodic = True,
         )
         """
 

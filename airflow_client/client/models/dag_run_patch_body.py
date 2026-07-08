@@ -20,7 +20,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
-from airflow_client.client.models.dag_run_patch_states import DAGRunPatchStates
+from airflow_client.client.models.dag_run_mutable_states import DagRunMutableStates
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -30,7 +30,7 @@ class DAGRunPatchBody(BaseModel):
     Dag Run Serializer for PATCH requests.
     """ # noqa: E501
     note: Optional[Annotated[str, Field(strict=True, max_length=1000)]] = None
-    state: Optional[DAGRunPatchStates] = None
+    state: Optional[DagRunMutableStates] = None
     __properties: ClassVar[List[str]] = ["note", "state"]
 
     model_config = ConfigDict(

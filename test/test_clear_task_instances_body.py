@@ -42,6 +42,7 @@ class TestClearTaskInstancesBody(unittest.TestCase):
                 include_future = True,
                 include_past = True,
                 include_upstream = True,
+                note = '',
                 only_failed = True,
                 only_running = True,
                 prevent_running_task = True,

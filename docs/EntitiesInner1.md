@@ -5,16 +5,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**conn_type** | **str** |  | 
-**connection_id** | **str** |  | 
-**description** | **str** |  | [optional] 
-**extra** | **str** |  | [optional] 
-**host** | **str** |  | [optional] 
-**login** | **str** |  | [optional] 
-**password** | **str** |  | [optional] 
-**port** | **int** |  | [optional] 
-**var_schema** | **str** |  | [optional] 
-**team_name** | **str** |  | [optional] 
+**dag_id** | **str** |  | [optional] 
+**dag_run_id** | **str** |  | [optional] 
+**include_downstream** | **bool** |  | [optional] [default to False]
+**include_future** | **bool** |  | [optional] [default to False]
+**include_past** | **bool** |  | [optional] [default to False]
+**include_upstream** | **bool** |  | [optional] [default to False]
+**map_index** | **int** |  | [optional] 
+**new_state** | [**TaskInstanceState**](TaskInstanceState.md) |  | [optional] 
+**note** | **str** |  | [optional] 
+**task_id** | **str** |  | 
 
 ## Example
 

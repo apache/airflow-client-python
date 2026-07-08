@@ -14,10 +14,10 @@
 
 import unittest
 
-from airflow_client.client.models.dag_run_patch_states import DAGRunPatchStates
+from airflow_client.client.models.dag_run_mutable_states import DagRunMutableStates
 
-class TestDAGRunPatchStates(unittest.TestCase):
-    """DAGRunPatchStates unit test stubs"""
+class TestDagRunMutableStates(unittest.TestCase):
+    """DagRunMutableStates unit test stubs"""
 
     def setUp(self):
         pass
@@ -25,9 +25,9 @@ class TestDAGRunPatchStates(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def testDAGRunPatchStates(self):
-        """Test DAGRunPatchStates"""
-        # inst = DAGRunPatchStates()
+    def testDagRunMutableStates(self):
+        """Test DagRunMutableStates"""
+        # inst = DagRunMutableStates()
 
 if __name__ == '__main__':
     unittest.main()

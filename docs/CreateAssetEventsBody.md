@@ -6,6 +6,7 @@ Create asset events request.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**access_control** | [**AssetEventAccessControl**](AssetEventAccessControl.md) |  | [optional] 
 **asset_id** | **int** |  | 
 **extra** | **Dict[str, object]** |  | [optional] 
 **partition_key** | **str** |  | [optional] 

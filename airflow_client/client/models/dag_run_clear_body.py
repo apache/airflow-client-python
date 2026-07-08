@@ -19,6 +19,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -28,10 +29,11 @@ class DAGRunClearBody(BaseModel):
     Dag Run serializer for clear endpoint body.
     """ # noqa: E501
     dry_run: Optional[StrictBool] = True
+    note: Optional[Annotated[str, Field(strict=True, max_length=1000)]] = None
     only_failed: Optional[StrictBool] = False
-    only_new: Optional[StrictBool] = Field(default=False, description="Only queue newly added tasks in the latest DAG version without clearing existing tasks.")
-    run_on_latest_version: Optional[StrictBool] = Field(default=False, description="(Experimental) Run on the latest bundle version of the Dag after clearing the Dag Run.")
-    __properties: ClassVar[List[str]] = ["dry_run", "only_failed", "only_new", "run_on_latest_version"]
+    only_new: Optional[StrictBool] = Field(default=False, description="Only queue newly added tasks in the latest Dag version without clearing existing tasks.")
+    run_on_latest_version: Optional[StrictBool] = None
+    __properties: ClassVar[List[str]] = ["dry_run", "note", "only_failed", "only_new", "run_on_latest_version"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -85,9 +87,10 @@ class DAGRunClearBody(BaseModel):
 
         _obj = cls.model_validate({
             "dry_run": obj.get("dry_run") if obj.get("dry_run") is not None else True,
+            "note": obj.get("note"),
             "only_failed": obj.get("only_failed") if obj.get("only_failed") is not None else False,
             "only_new": obj.get("only_new") if obj.get("only_new") is not None else False,
-            "run_on_latest_version": obj.get("run_on_latest_version") if obj.get("run_on_latest_version") is not None else False
+            "run_on_latest_version": obj.get("run_on_latest_version")
         })
         return _obj
 

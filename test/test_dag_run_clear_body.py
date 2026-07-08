@@ -36,6 +36,7 @@ class TestDAGRunClearBody(unittest.TestCase):
         if include_optional:
             return DAGRunClearBody(
                 dry_run = True,
+                note = '',
                 only_failed = True,
                 only_new = True,
                 run_on_latest_version = True

@@ -19,12 +19,12 @@ import pprint
 import re  # noqa: F401
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, field_validator
 from typing import Optional
-from airflow_client.client.models.pool_body import PoolBody
+from airflow_client.client.models.connection_body import ConnectionBody
 from typing import Union, Any, List, Set, TYPE_CHECKING, Optional, Dict
 from typing_extensions import Literal, Self
 from pydantic import Field
 
-ENTITIESINNER2_ANY_OF_SCHEMAS = ["PoolBody", "str"]
+ENTITIESINNER2_ANY_OF_SCHEMAS = ["ConnectionBody", "str"]
 
 class EntitiesInner2(BaseModel):
     """
@@ -33,13 +33,13 @@ class EntitiesInner2(BaseModel):
 
     # data type: str
     anyof_schema_1_validator: Optional[StrictStr] = None
-    # data type: PoolBody
-    anyof_schema_2_validator: Optional[PoolBody] = None
+    # data type: ConnectionBody
+    anyof_schema_2_validator: Optional[ConnectionBody] = None
     if TYPE_CHECKING:
-        actual_instance: Optional[Union[PoolBody, str]] = None
+        actual_instance: Optional[Union[ConnectionBody, str]] = None
     else:
         actual_instance: Any = None
-    any_of_schemas: Set[str] = { "PoolBody", "str" }
+    any_of_schemas: Set[str] = { "ConnectionBody", "str" }
 
     model_config = {
         "validate_assignment": True,
@@ -66,15 +66,15 @@ class EntitiesInner2(BaseModel):
             return v
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # validate data type: PoolBody
-        if not isinstance(v, PoolBody):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `PoolBody`")
+        # validate data type: ConnectionBody
+        if not isinstance(v, ConnectionBody):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `ConnectionBody`")
         else:
             return v
 
         if error_messages:
             # no match
-            raise ValueError("No match found when setting the actual_instance in EntitiesInner2 with anyOf schemas: PoolBody, str. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting the actual_instance in EntitiesInner2 with anyOf schemas: ConnectionBody, str. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -96,16 +96,16 @@ class EntitiesInner2(BaseModel):
             return instance
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # anyof_schema_2_validator: Optional[PoolBody] = None
+        # anyof_schema_2_validator: Optional[ConnectionBody] = None
         try:
-            instance.actual_instance = PoolBody.from_json(json_str)
+            instance.actual_instance = ConnectionBody.from_json(json_str)
             return instance
         except (ValidationError, ValueError) as e:
              error_messages.append(str(e))
 
         if error_messages:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into EntitiesInner2 with anyOf schemas: PoolBody, str. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into EntitiesInner2 with anyOf schemas: ConnectionBody, str. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -119,7 +119,7 @@ class EntitiesInner2(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], PoolBody, str]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], ConnectionBody, str]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None

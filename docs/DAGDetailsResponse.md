@@ -24,6 +24,7 @@ Name | Type | Description | Notes
 **fileloc** | **str** |  | 
 **has_import_errors** | **bool** |  | 
 **has_task_concurrency_limits** | **bool** |  | 
+**is_backfillable** | **bool** | Whether this Dag&#39;s schedule supports backfilling. | [readonly] 
 **is_favorite** | **bool** |  | [optional] [default to False]
 **is_paused** | **bool** |  | 
 **is_paused_upon_creation** | **bool** |  | [optional] 
@@ -45,11 +46,13 @@ Name | Type | Description | Notes
 **params** | **Dict[str, object]** |  | [optional] 
 **relative_fileloc** | **str** |  | [optional] 
 **render_template_as_native_obj** | **bool** |  | 
+**rerun_with_latest_version** | **bool** |  | [optional] 
 **start_date** | **datetime** |  | [optional] 
 **tags** | [**List[DagTagResponse]**](DagTagResponse.md) |  | 
 **template_search_path** | **List[str]** |  | [optional] 
 **timetable_description** | **str** |  | [optional] 
 **timetable_partitioned** | **bool** |  | 
+**timetable_periodic** | **bool** |  | 
 **timetable_summary** | **str** |  | [optional] 
 **timezone** | **str** |  | [optional] 
 

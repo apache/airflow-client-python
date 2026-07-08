@@ -1,6 +1,6 @@
-# DAGRunPatchStates
+# DagRunMutableStates
 
-Enum for Dag Run states when updating a Dag Run.
+Dag Run states from which the run may be mutated (patched, deleted).
 
 ## Enum
 

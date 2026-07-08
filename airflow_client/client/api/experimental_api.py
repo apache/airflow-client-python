@@ -43,7 +43,7 @@ class ExperimentalApi:
         dag_id: StrictStr,
         dag_run_id: StrictStr,
         interval: Annotated[Union[Annotated[float, Field(strict=True, gt=0.0)], Annotated[int, Field(strict=True, gt=0)]], Field(description="Seconds to wait between dag run state checks")],
-        result: Annotated[Optional[List[StrictStr]], Field(description="Collect result XCom from task. Can be set multiple times.")] = None,
+        result: Annotated[Optional[List[StrictStr]], Field(description="Collect result XCom from task. Can be set multiple times. If unset, return value of the return task as specified in the dag (in present) is returned by default.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -67,7 +67,7 @@ class ExperimentalApi:
         :type dag_run_id: str
         :param interval: Seconds to wait between dag run state checks (required)
         :type interval: float
-        :param result: Collect result XCom from task. Can be set multiple times.
+        :param result: Collect result XCom from task. Can be set multiple times. If unset, return value of the return task as specified in the dag (in present) is returned by default.
         :type result: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -126,7 +126,7 @@ class ExperimentalApi:
         dag_id: StrictStr,
         dag_run_id: StrictStr,
         interval: Annotated[Union[Annotated[float, Field(strict=True, gt=0.0)], Annotated[int, Field(strict=True, gt=0)]], Field(description="Seconds to wait between dag run state checks")],
-        result: Annotated[Optional[List[StrictStr]], Field(description="Collect result XCom from task. Can be set multiple times.")] = None,
+        result: Annotated[Optional[List[StrictStr]], Field(description="Collect result XCom from task. Can be set multiple times. If unset, return value of the return task as specified in the dag (in present) is returned by default.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -150,7 +150,7 @@ class ExperimentalApi:
         :type dag_run_id: str
         :param interval: Seconds to wait between dag run state checks (required)
         :type interval: float
-        :param result: Collect result XCom from task. Can be set multiple times.
+        :param result: Collect result XCom from task. Can be set multiple times. If unset, return value of the return task as specified in the dag (in present) is returned by default.
         :type result: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -209,7 +209,7 @@ class ExperimentalApi:
         dag_id: StrictStr,
         dag_run_id: StrictStr,
         interval: Annotated[Union[Annotated[float, Field(strict=True, gt=0.0)], Annotated[int, Field(strict=True, gt=0)]], Field(description="Seconds to wait between dag run state checks")],
-        result: Annotated[Optional[List[StrictStr]], Field(description="Collect result XCom from task. Can be set multiple times.")] = None,
+        result: Annotated[Optional[List[StrictStr]], Field(description="Collect result XCom from task. Can be set multiple times. If unset, return value of the return task as specified in the dag (in present) is returned by default.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -233,7 +233,7 @@ class ExperimentalApi:
         :type dag_run_id: str
         :param interval: Seconds to wait between dag run state checks (required)
         :type interval: float
-        :param result: Collect result XCom from task. Can be set multiple times.
+        :param result: Collect result XCom from task. Can be set multiple times. If unset, return value of the return task as specified in the dag (in present) is returned by default.
         :type result: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

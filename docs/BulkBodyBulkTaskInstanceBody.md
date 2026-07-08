@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**actions** | [**List[ActionsInner]**](ActionsInner.md) |  | 
+**actions** | [**List[ActionsInner1]**](ActionsInner1.md) |  | 
 
 ## Example
 

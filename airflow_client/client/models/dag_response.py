@@ -40,6 +40,7 @@ class DAGResponse(BaseModel):
     fileloc: StrictStr
     has_import_errors: StrictBool
     has_task_concurrency_limits: StrictBool
+    is_backfillable: StrictBool = Field(description="Whether this Dag's schedule supports backfilling.")
     is_paused: StrictBool
     is_stale: StrictBool
     last_expired: Optional[datetime] = None
@@ -57,8 +58,9 @@ class DAGResponse(BaseModel):
     tags: List[DagTagResponse]
     timetable_description: Optional[StrictStr] = None
     timetable_partitioned: StrictBool
+    timetable_periodic: StrictBool
     timetable_summary: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["allowed_run_types", "bundle_name", "bundle_version", "dag_display_name", "dag_id", "description", "file_token", "fileloc", "has_import_errors", "has_task_concurrency_limits", "is_paused", "is_stale", "last_expired", "last_parse_duration", "last_parsed_time", "max_active_runs", "max_active_tasks", "max_consecutive_failed_dag_runs", "next_dagrun_data_interval_end", "next_dagrun_data_interval_start", "next_dagrun_logical_date", "next_dagrun_run_after", "owners", "relative_fileloc", "tags", "timetable_description", "timetable_partitioned", "timetable_summary"]
+    __properties: ClassVar[List[str]] = ["allowed_run_types", "bundle_name", "bundle_version", "dag_display_name", "dag_id", "description", "file_token", "fileloc", "has_import_errors", "has_task_concurrency_limits", "is_backfillable", "is_paused", "is_stale", "last_expired", "last_parse_duration", "last_parsed_time", "max_active_runs", "max_active_tasks", "max_consecutive_failed_dag_runs", "next_dagrun_data_interval_end", "next_dagrun_data_interval_start", "next_dagrun_logical_date", "next_dagrun_run_after", "owners", "relative_fileloc", "tags", "timetable_description", "timetable_partitioned", "timetable_periodic", "timetable_summary"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -91,9 +93,11 @@ class DAGResponse(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
             "file_token",
+            "is_backfillable",
         ])
 
         _dict = self.model_dump(
@@ -130,6 +134,7 @@ class DAGResponse(BaseModel):
             "fileloc": obj.get("fileloc"),
             "has_import_errors": obj.get("has_import_errors"),
             "has_task_concurrency_limits": obj.get("has_task_concurrency_limits"),
+            "is_backfillable": obj.get("is_backfillable"),
             "is_paused": obj.get("is_paused"),
             "is_stale": obj.get("is_stale"),
             "last_expired": obj.get("last_expired"),
@@ -147,6 +152,7 @@ class DAGResponse(BaseModel):
             "tags": [DagTagResponse.from_dict(_item) for _item in obj["tags"]] if obj.get("tags") is not None else None,
             "timetable_description": obj.get("timetable_description"),
             "timetable_partitioned": obj.get("timetable_partitioned"),
+            "timetable_periodic": obj.get("timetable_periodic"),
             "timetable_summary": obj.get("timetable_summary")
         })
         return _obj

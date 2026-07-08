@@ -31,7 +31,7 @@ class VariableResponse(BaseModel):
     is_encrypted: StrictBool
     key: StrictStr
     team_name: Optional[StrictStr] = None
-    value: StrictStr
+    value: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["description", "is_encrypted", "key", "team_name", "value"]
 
     model_config = ConfigDict(

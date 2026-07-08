@@ -86,6 +86,21 @@ components:
       - total_entries
       title: AssetCollectionResponse
       type: object
+    AssetEventAccessControl:
+      additionalProperties: false
+      description: Access control settings for asset event consumer team filtering.
+      properties:
+        allow_global:
+          default: true
+          title: Allow Global
+          type: boolean
+        consumer_teams:
+          items:
+            type: string
+          nullable: true
+          type: array
+      title: AssetEventAccessControl
+      type: object
     AssetEventCollectionResponse:
       description: Asset event collection response.
       properties:
@@ -227,6 +242,85 @@ components:
       - watchers
       title: AssetResponse
       type: object
+    AssetStateStoreBody:
+      additionalProperties: false
+      description: Request body for setting an asset state store value.
+      properties:
+        value:
+          $ref: '#/components/schemas/JsonValue'
+      required:
+      - value
+      title: AssetStateStoreBody
+      type: object
+    AssetStateStoreCollectionResponse:
+      description: All asset state store entries for an asset.
+      properties:
+        asset_state_store:
+          items:
+            $ref: '#/components/schemas/AssetStateStoreResponse'
+          title: Asset State Store
+          type: array
+        total_entries:
+          title: Total Entries
+          type: integer
+      required:
+      - asset_state_store
+      - total_entries
+      title: AssetStateStoreCollectionResponse
+      type: object
+    AssetStateStoreLastUpdatedBy:
+      description: Writer info for the last write to an asset state store entry.
+      properties:
+        dag_id:
+          nullable: true
+          type: string
+        kind:
+          $ref: '#/components/schemas/AssetStateStoreWriterKind'
+        map_index:
+          nullable: true
+          type: integer
+        run_id:
+          nullable: true
+          type: string
+        task_id:
+          nullable: true
+          type: string
+      required:
+      - kind
+      title: AssetStateStoreLastUpdatedBy
+      type: object
+    AssetStateStoreResponse:
+      description: A single asset state store key/value pair with metadata.
+      properties:
+        key:
+          title: Key
+          type: string
+        last_updated_by:
+          $ref: '#/components/schemas/AssetStateStoreLastUpdatedBy'
+          nullable: true
+        updated_at:
+          format: date-time
+          title: Updated At
+          type: string
+        value:
+          $ref: '#/components/schemas/JsonValue'
+      required:
+      - key
+      - value
+      - updated_at
+      title: AssetStateStoreResponse
+      type: object
+    AssetStateStoreWriterKind:
+      description: "Identifies what kind of writer last updated an asset state store\
+        \ entry.\n\n``TASK`` \u2014 written by a task via the execution API.\n``WATCHER``\
+        \ \u2014 written by a ``BaseEventTrigger`` (no task instance).\n``API`` \u2014\
+        \ written directly through the Core API (e.g. manual admin write)."
+      enum:
+      - task
+      - watcher
+      - api
+      title: AssetStateStoreWriterKind
+      type: string
     AssetWatcherResponse:
       description: Asset watcher serializer for responses.
       properties:
@@ -245,6 +339,33 @@ components:
       - trigger_id
       - created_date
       title: AssetWatcherResponse
+      type: object
+    AsyncConnectionTestResponse:
+      description: Response returned when polling for the status of an enqueued connection
+        test.
+      properties:
+        connection_id:
+          title: Connection Id
+          type: string
+        created_at:
+          format: date-time
+          title: Created At
+          type: string
+        result_message:
+          nullable: true
+          type: string
+        state:
+          title: State
+          type: string
+        token:
+          title: Token
+          type: string
+      required:
+      - token
+      - connection_id
+      - state
+      - created_at
+      title: AsyncConnectionTestResponse
       type: object
     BackfillCollectionResponse:
       description: Backfill Collection serializer for responses.
@@ -289,8 +410,7 @@ components:
           title: Run Backwards
           type: boolean
         run_on_latest_version:
-          default: true
-          title: Run On Latest Version
+          nullable: true
           type: boolean
         to_date:
           format: date-time
@@ -414,6 +534,21 @@ components:
           type: array
       title: BulkActionResponse
       type: object
+    BulkBody_BulkDAGRunBody_:
+      additionalProperties: false
+      properties:
+        actions:
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/BulkCreateAction_BulkDAGRunBody_'
+            - $ref: '#/components/schemas/BulkUpdateAction_BulkDAGRunBody_'
+            - $ref: '#/components/schemas/BulkDeleteAction_BulkDAGRunBody_'
+          title: Actions
+          type: array
+      required:
+      - actions
+      title: BulkBody[BulkDAGRunBody]
+      type: object
     BulkBody_BulkTaskInstanceBody_:
       additionalProperties: false
       properties:
@@ -473,6 +608,28 @@ components:
       required:
       - actions
       title: BulkBody[VariableBody]
+      type: object
+    BulkCreateAction_BulkDAGRunBody_:
+      additionalProperties: false
+      properties:
+        action:
+          const: create
+          description: The action to be performed on the entities.
+          title: Action
+          type: string
+        action_on_existence:
+          $ref: '#/components/schemas/BulkActionOnExistence'
+          default: fail
+        entities:
+          description: A list of entities to be created.
+          items:
+            $ref: '#/components/schemas/BulkDAGRunBody'
+          title: Entities
+          type: array
+      required:
+      - action
+      - entities
+      title: BulkCreateAction[BulkDAGRunBody]
       type: object
     BulkCreateAction_BulkTaskInstanceBody_:
       additionalProperties: false
@@ -561,6 +718,94 @@ components:
       - action
       - entities
       title: BulkCreateAction[VariableBody]
+      type: object
+    BulkDAGRunBody:
+      additionalProperties: false
+      description: Request body for bulk operations on Dag Runs.
+      properties:
+        dag_id:
+          nullable: true
+          type: string
+        dag_run_id:
+          title: Dag Run Id
+          type: string
+        note:
+          maxLength: 1000
+          nullable: true
+          type: string
+        state:
+          $ref: '#/components/schemas/DagRunMutableStates'
+          nullable: true
+      required:
+      - dag_run_id
+      title: BulkDAGRunBody
+      type: object
+    BulkDAGRunClearBody:
+      additionalProperties: false
+      description: Request body for the bulk clear Dag Runs endpoint.
+      properties:
+        dag_runs:
+          items:
+            $ref: '#/components/schemas/BulkDAGRunBody'
+          title: Dag Runs
+          type: array
+        dry_run:
+          default: true
+          title: Dry Run
+          type: boolean
+        note:
+          maxLength: 1000
+          nullable: true
+          type: string
+        only_failed:
+          default: false
+          title: Only Failed
+          type: boolean
+        only_new:
+          default: false
+          description: Only queue newly added tasks in the latest Dag version without
+            clearing existing tasks.
+          title: Only New
+          type: boolean
+        partition_date_end:
+          format: date-time
+          nullable: true
+          type: string
+        partition_date_start:
+          format: date-time
+          nullable: true
+          type: string
+        partition_key:
+          nullable: true
+          type: string
+        run_on_latest_version:
+          nullable: true
+          type: boolean
+      title: BulkDAGRunClearBody
+      type: object
+    BulkDeleteAction_BulkDAGRunBody_:
+      additionalProperties: false
+      properties:
+        action:
+          const: delete
+          description: The action to be performed on the entities.
+          title: Action
+          type: string
+        action_on_non_existence:
+          $ref: '#/components/schemas/BulkActionNotOnExistence'
+          default: fail
+        entities:
+          description: A list of entity id/key or entity objects to be deleted.
+          items:
+            anyOf:
+            - type: string
+            - $ref: '#/components/schemas/BulkDAGRunBody'
+          title: Entities
+          type: array
+      required:
+      - action
+      - entities
+      title: BulkDeleteAction[BulkDAGRunBody]
       type: object
     BulkDeleteAction_BulkTaskInstanceBody_:
       additionalProperties: false
@@ -725,6 +970,33 @@ components:
       - task_id
       title: BulkTaskInstanceBody
       type: object
+    BulkUpdateAction_BulkDAGRunBody_:
+      additionalProperties: false
+      properties:
+        action:
+          const: update
+          description: The action to be performed on the entities.
+          title: Action
+          type: string
+        action_on_non_existence:
+          $ref: '#/components/schemas/BulkActionNotOnExistence'
+          default: fail
+        entities:
+          description: A list of entities to be updated.
+          items:
+            $ref: '#/components/schemas/BulkDAGRunBody'
+          title: Entities
+          type: array
+        update_mask:
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+      - action
+      - entities
+      title: BulkUpdateAction[BulkDAGRunBody]
+      type: object
     BulkUpdateAction_BulkTaskInstanceBody_:
       additionalProperties: false
       properties:
@@ -833,6 +1105,55 @@ components:
       - entities
       title: BulkUpdateAction[VariableBody]
       type: object
+    ClearPartitionsBody:
+      additionalProperties: false
+      description: 'Request body for the clearPartitions endpoint (column-reset: set
+        partition fields to None).'
+      properties:
+        clear_task_instances:
+          default: false
+          description: Also clear task instances on the matched runs.
+          title: Clear Task Instances
+          type: boolean
+        dry_run:
+          default: true
+          description: If True, compute counts without writing any changes.
+          title: Dry Run
+          type: boolean
+        partition_date_end:
+          format: date-time
+          nullable: true
+          type: string
+        partition_date_start:
+          format: date-time
+          nullable: true
+          type: string
+        partition_key:
+          nullable: true
+          type: string
+        run_id:
+          nullable: true
+          type: string
+      title: ClearPartitionsBody
+      type: object
+    ClearPartitionsResponse:
+      description: Response for the clearPartitions endpoint.
+      properties:
+        dag_runs_cleared:
+          title: Dag Runs Cleared
+          type: integer
+        dry_run:
+          title: Dry Run
+          type: boolean
+        task_instances_cleared:
+          title: Task Instances Cleared
+          type: integer
+      required:
+      - dag_runs_cleared
+      - task_instances_cleared
+      - dry_run
+      title: ClearPartitionsResponse
+      type: object
     ClearTaskInstanceCollectionResponse:
       description: Response for clear dag run dry run, which may contain new tasks
         without full TaskInstance data.
@@ -883,6 +1204,10 @@ components:
           default: false
           title: Include Upstream
           type: boolean
+        note:
+          maxLength: 1000
+          nullable: true
+          type: string
         only_failed:
           default: true
           title: Only Failed
@@ -900,10 +1225,7 @@ components:
           title: Reset Dag Runs
           type: boolean
         run_on_latest_version:
-          default: false
-          description: (Experimental) Run on the latest bundle version of the dag
-            after clearing the task instances.
-          title: Run On Latest Version
+          nullable: true
           type: boolean
         start_date:
           format: date-time
@@ -1071,8 +1393,88 @@ components:
       - conn_type
       title: ConnectionResponse
       type: object
+    ConnectionTestQueuedResponse:
+      description: Response returned when a connection test has been enqueued for
+        worker execution.
+      properties:
+        connection_id:
+          title: Connection Id
+          type: string
+        state:
+          title: State
+          type: string
+        token:
+          title: Token
+          type: string
+      required:
+      - token
+      - connection_id
+      - state
+      title: ConnectionTestQueuedResponse
+      type: object
+    ConnectionTestRequestBody:
+      additionalProperties: false
+      description: 'Request body for enqueueing a connection test on a worker.
+
+
+        Inherits ``connection_id`` pattern, ``extra`` JSON validation, and
+
+        ``team_name`` handling from ``ConnectionBody`` so tested connections share
+
+        the same input contract as persisted ones.'
+      properties:
+        commit_on_success:
+          default: false
+          description: If True, save or update the connection in the connection table
+            when the test succeeds.
+          title: Commit On Success
+          type: boolean
+        conn_type:
+          title: Conn Type
+          type: string
+        connection_id:
+          maxLength: 200
+          pattern: ^[\w.-]+$
+          title: Connection Id
+          type: string
+        description:
+          nullable: true
+          type: string
+        executor:
+          nullable: true
+          type: string
+        extra:
+          nullable: true
+          type: string
+        host:
+          nullable: true
+          type: string
+        login:
+          nullable: true
+          type: string
+        password:
+          nullable: true
+          type: string
+        port:
+          nullable: true
+          type: integer
+        queue:
+          nullable: true
+          type: string
+        schema:
+          nullable: true
+          type: string
+        team_name:
+          maxLength: 50
+          nullable: true
+          type: string
+      required:
+      - connection_id
+      - conn_type
+      title: ConnectionTestRequestBody
+      type: object
     ConnectionTestResponse:
-      description: Connection Test serializer for responses.
+      description: Connection Test serializer for synchronous test responses.
       properties:
         message:
           title: Message
@@ -1089,6 +1491,9 @@ components:
       additionalProperties: false
       description: Create asset events request.
       properties:
+        access_control:
+          $ref: '#/components/schemas/AssetEventAccessControl'
+          nullable: true
         asset_id:
           title: Asset Id
           type: integer
@@ -1191,6 +1596,11 @@ components:
         has_task_concurrency_limits:
           title: Has Task Concurrency Limits
           type: boolean
+        is_backfillable:
+          description: Whether this Dag's schedule supports backfilling.
+          readOnly: true
+          title: Is Backfillable
+          type: boolean
         is_favorite:
           default: false
           title: Is Favorite
@@ -1267,6 +1677,9 @@ components:
         render_template_as_native_obj:
           title: Render Template As Native Obj
           type: boolean
+        rerun_with_latest_version:
+          nullable: true
+          type: boolean
         start_date:
           format: date-time
           nullable: true
@@ -1287,6 +1700,9 @@ components:
         timetable_partitioned:
           title: Timetable Partitioned
           type: boolean
+        timetable_periodic:
+          title: Timetable Periodic
+          type: boolean
         timetable_summary:
           nullable: true
           type: string
@@ -1300,6 +1716,7 @@ components:
       - is_stale
       - fileloc
       - timetable_partitioned
+      - timetable_periodic
       - tags
       - max_active_tasks
       - max_consecutive_failed_dag_runs
@@ -1308,6 +1725,7 @@ components:
       - owners
       - catchup
       - render_template_as_native_obj
+      - is_backfillable
       - file_token
       - concurrency
       title: DAGDetailsResponse
@@ -1359,6 +1777,11 @@ components:
           type: boolean
         has_task_concurrency_limits:
           title: Has Task Concurrency Limits
+          type: boolean
+        is_backfillable:
+          description: Whether this Dag's schedule supports backfilling.
+          readOnly: true
+          title: Is Backfillable
           type: boolean
         is_paused:
           title: Is Paused
@@ -1421,6 +1844,9 @@ components:
         timetable_partitioned:
           title: Timetable Partitioned
           type: boolean
+        timetable_periodic:
+          title: Timetable Periodic
+          type: boolean
         timetable_summary:
           nullable: true
           type: string
@@ -1431,12 +1857,14 @@ components:
       - is_stale
       - fileloc
       - timetable_partitioned
+      - timetable_periodic
       - tags
       - max_active_tasks
       - max_consecutive_failed_dag_runs
       - has_task_concurrency_limits
       - has_import_errors
       - owners
+      - is_backfillable
       - file_token
       title: DAGResponse
       type: object
@@ -1448,21 +1876,22 @@ components:
           default: true
           title: Dry Run
           type: boolean
+        note:
+          maxLength: 1000
+          nullable: true
+          type: string
         only_failed:
           default: false
           title: Only Failed
           type: boolean
         only_new:
           default: false
-          description: Only queue newly added tasks in the latest DAG version without
+          description: Only queue newly added tasks in the latest Dag version without
             clearing existing tasks.
           title: Only New
           type: boolean
         run_on_latest_version:
-          default: false
-          description: (Experimental) Run on the latest bundle version of the Dag
-            after clearing the Dag Run.
-          title: Run On Latest Version
+          nullable: true
           type: boolean
       title: DAGRunClearBody
       type: object
@@ -1510,18 +1939,10 @@ components:
           nullable: true
           type: string
         state:
-          $ref: '#/components/schemas/DAGRunPatchStates'
+          $ref: '#/components/schemas/DagRunMutableStates'
           nullable: true
       title: DAGRunPatchBody
       type: object
-    DAGRunPatchStates:
-      description: Enum for Dag Run states when updating a Dag Run.
-      enum:
-      - queued
-      - success
-      - failed
-      title: DAGRunPatchStates
-      type: string
     DAGRunResponse:
       description: Dag Run serializer for responses.
       properties:
@@ -1570,6 +1991,10 @@ components:
           nullable: true
           type: string
         note:
+          nullable: true
+          type: string
+        partition_date:
+          format: date-time
           nullable: true
           type: string
         partition_key:
@@ -1866,6 +2291,14 @@ components:
       - state
       title: DagRunAssetReference
       type: object
+    DagRunMutableStates:
+      description: Dag Run states from which the run may be mutated (patched, deleted).
+      enum:
+      - queued
+      - success
+      - failed
+      title: DagRunMutableStates
+      type: string
     DagRunState:
       description: 'All possible states that a DagRun can be in.
 
@@ -1901,6 +2334,7 @@ components:
       - backfill
       - scheduled
       - manual
+      - operator_triggered
       - asset_triggered
       - asset_materialization
       title: DagRunType
@@ -2182,6 +2616,9 @@ components:
         name:
           title: Name
           type: string
+        nav_top_level:
+          nullable: true
+          type: boolean
         url_route:
           nullable: true
           type: string
@@ -2635,7 +3072,7 @@ components:
       type: object
     PatchTaskInstanceBody:
       additionalProperties: false
-      description: Request body for Clear Task Instances endpoint.
+      description: Request body for patching task instance state.
       properties:
         include_downstream:
           default: false
@@ -3023,6 +3460,9 @@ components:
         name:
           title: Name
           type: string
+        nav_top_level:
+          nullable: true
+          type: boolean
         url_route:
           nullable: true
           type: string
@@ -3433,6 +3873,7 @@ components:
       - upstream_failed
       - skipped
       - deferred
+      - awaiting_input
       title: TaskInstanceState
       type: string
     TaskInstancesBatchBody:
@@ -3714,6 +4155,84 @@ components:
       - extra_links
       title: TaskResponse
       type: object
+    TaskStateStoreBody:
+      additionalProperties: false
+      description: 'Request body for setting a task state store value.
+
+
+        ``expires_at`` controls expiry:
+
+
+        - ``"default"``: apply the configured ``[state_store] default_retention_days``.
+
+        - ``null``: never expire.
+
+        - aware datetime: expire at that time.'
+      properties:
+        expires_at:
+          anyOf:
+          - format: date-time
+            type: string
+          - const: default
+            type: string
+          - type: 'null'
+          default: default
+          title: Expires At
+        value:
+          $ref: '#/components/schemas/JsonValue'
+      required:
+      - value
+      title: TaskStateStoreBody
+      type: object
+    TaskStateStoreCollectionResponse:
+      description: All task state store entries for a task instance.
+      properties:
+        task_state_store:
+          items:
+            $ref: '#/components/schemas/TaskStateStoreResponse'
+          title: Task State Store
+          type: array
+        total_entries:
+          title: Total Entries
+          type: integer
+      required:
+      - task_state_store
+      - total_entries
+      title: TaskStateStoreCollectionResponse
+      type: object
+    TaskStateStorePatchBody:
+      additionalProperties: false
+      description: Request body for patching only the value of an existing task state
+        store key.
+      properties:
+        value:
+          $ref: '#/components/schemas/JsonValue'
+      required:
+      - value
+      title: TaskStateStorePatchBody
+      type: object
+    TaskStateStoreResponse:
+      description: A single task state store key/value pair with metadata.
+      properties:
+        expires_at:
+          format: date-time
+          nullable: true
+          type: string
+        key:
+          title: Key
+          type: string
+        updated_at:
+          format: date-time
+          title: Updated At
+          type: string
+        value:
+          $ref: '#/components/schemas/JsonValue'
+      required:
+      - key
+      - value
+      - updated_at
+      title: TaskStateStoreResponse
+      type: object
     TimeDelta:
       description: TimeDelta can be used to interact with datetime.timedelta objects.
       properties:
@@ -3786,6 +4305,7 @@ components:
           title: Id
           type: integer
         kwargs:
+          deprecated: true
           title: Kwargs
           type: string
         queue:
@@ -3910,11 +4430,10 @@ components:
           nullable: true
           type: string
         value:
-          title: Value
+          nullable: true
           type: string
       required:
       - key
-      - value
       - is_encrypted
       title: VariableResponse
       type: object
@@ -4178,7 +4697,7 @@ paths:
           title: Offset
           type: integer
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ Use the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
           \ are **not** supported. \n\n**Performance note:** this full-match pattern\
           \ is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database\
           \ from using B-tree indexes, which can be very slow on large tables. Prefer\
@@ -4204,7 +4723,7 @@ paths:
           nullable: true
           type: string
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ Use the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
           \ are **not** supported. \n\n**Performance note:** this full-match pattern\
           \ is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database\
           \ from using B-tree indexes, which can be very slow on large tables. Prefer\
@@ -4319,7 +4838,7 @@ paths:
           title: Offset
           type: integer
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ Use the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
           \ are **not** supported. \n\n**Performance note:** this full-match pattern\
           \ is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database\
           \ from using B-tree indexes, which can be very slow on large tables. Prefer\
@@ -4510,7 +5029,7 @@ paths:
           nullable: true
           type: integer
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ Use the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
           \ are **not** supported. \n\n**Performance note:** this full-match pattern\
           \ is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database\
           \ from using B-tree indexes, which can be very slow on large tables. Prefer\
@@ -4857,6 +5376,272 @@ paths:
       summary: Get Asset Queued Events
       tags:
       - Asset
+  /api/v2/assets/{asset_id}/state-store:
+    delete:
+      description: Delete all state store keys for an asset.
+      operationId: clear_asset_state_store
+      parameters:
+      - in: path
+        name: asset_id
+        required: true
+        schema:
+          title: Asset Id
+          type: integer
+      responses:
+        '204':
+          description: Successful Response
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      - HTTPBearer: []
+      summary: Clear Asset State Store
+      tags:
+      - Asset State Store
+    get:
+      description: List all state store entries for an asset.
+      operationId: list_asset_state_store
+      parameters:
+      - in: path
+        name: asset_id
+        required: true
+        schema:
+          title: Asset Id
+          type: integer
+      - in: query
+        name: limit
+        required: false
+        schema:
+          default: 50
+          minimum: 0
+          title: Limit
+          type: integer
+      - in: query
+        name: offset
+        required: false
+        schema:
+          default: 0
+          minimum: 0
+          title: Offset
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssetStateStoreCollectionResponse'
+          description: Successful Response
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      - HTTPBearer: []
+      summary: List Asset State Store
+      tags:
+      - Asset State Store
+  /api/v2/assets/{asset_id}/state-store/{key}:
+    delete:
+      description: Delete a single asset state store key. No-op if the key does not
+        exist.
+      operationId: delete_asset_state_store
+      parameters:
+      - in: path
+        name: key
+        required: true
+        schema:
+          title: Key
+          type: string
+      - in: path
+        name: asset_id
+        required: true
+        schema:
+          title: Asset Id
+          type: integer
+      responses:
+        '204':
+          description: Successful Response
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      - HTTPBearer: []
+      summary: Delete Asset State Store
+      tags:
+      - Asset State Store
+    get:
+      description: Get a single asset state store entry.
+      operationId: get_asset_state_store
+      parameters:
+      - in: path
+        name: key
+        required: true
+        schema:
+          title: Key
+          type: string
+      - in: path
+        name: asset_id
+        required: true
+        schema:
+          title: Asset Id
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssetStateStoreResponse'
+          description: Successful Response
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      - HTTPBearer: []
+      summary: Get Asset State Store
+      tags:
+      - Asset State Store
+    put:
+      description: Set an asset state store value. Creates or overwrites the key.
+      operationId: set_asset_state_store
+      parameters:
+      - in: path
+        name: key
+        required: true
+        schema:
+          title: Key
+          type: string
+      - in: path
+        name: asset_id
+        required: true
+        schema:
+          title: Asset Id
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssetStateStoreBody'
+        required: true
+      responses:
+        '204':
+          description: Successful Response
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      - HTTPBearer: []
+      summary: Set Asset State Store
+      tags:
+      - Asset State Store
   /api/v2/auth/login:
     get:
       description: Redirect to the login URL depending on the AuthManager configured.
@@ -4880,6 +5665,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPExceptionResponse'
           description: Temporary Redirect
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Bad Request
         '422':
           content:
             application/json:
@@ -5497,7 +6288,7 @@ paths:
           title: Order By
           type: array
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ Use the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
           \ are **not** supported. \n\n**Performance note:** this full-match pattern\
           \ is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database\
           \ from using B-tree indexes, which can be very slow on large tables. Prefer\
@@ -5668,6 +6459,102 @@ paths:
       - OAuth2PasswordBearer: []
       - HTTPBearer: []
       summary: Create Default Connections
+      tags:
+      - Connection
+  /api/v2/connections/enqueue-test:
+    get:
+      description: Poll for the status of an enqueued connection test by its token
+        (passed as a header).
+      operationId: get_connection_test
+      parameters:
+      - in: header
+        name: Airflow-Connection-Test-Token
+        required: true
+        schema:
+          title: Airflow-Connection-Test-Token
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncConnectionTestResponse'
+          description: Successful Response
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      - HTTPBearer: []
+      summary: Get Connection Test
+      tags:
+      - Connection
+    post:
+      description: Enqueue a connection test for deferred execution on a worker; returns
+        a polling token.
+      operationId: enqueue_connection_test
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConnectionTestRequestBody'
+        required: true
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectionTestQueuedResponse'
+          description: Successful Response
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Forbidden
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Conflict
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Unprocessable Entity
+      security:
+      - OAuth2PasswordBearer: []
+      - HTTPBearer: []
+      summary: Enqueue Connection Test
       tags:
       - Connection
   /api/v2/connections/test:
@@ -6051,7 +6938,7 @@ paths:
           title: Order By
           type: array
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ Use the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
           \ are **not** supported. \n\n**Performance note:** this full-match pattern\
           \ is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database\
           \ from using B-tree indexes, which can be very slow on large tables. Prefer\
@@ -6234,7 +7121,7 @@ paths:
           title: Owners
           type: array
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ Use the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
           \ are **not** supported. \n\n**Performance note:** this full-match pattern\
           \ is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database\
           \ from using B-tree indexes, which can be very slow on large tables. Prefer\
@@ -6260,7 +7147,7 @@ paths:
           nullable: true
           type: string
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ Use the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
           \ are **not** supported. \n\n**Performance note:** this full-match pattern\
           \ is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database\
           \ from using B-tree indexes, which can be very slow on large tables. Prefer\
@@ -6526,7 +7413,7 @@ paths:
           title: Owners
           type: array
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ Use the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
           \ are **not** supported. \n\n**Performance note:** this full-match pattern\
           \ is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database\
           \ from using B-tree indexes, which can be very slow on large tables. Prefer\
@@ -7009,6 +7896,129 @@ paths:
       summary: Get Dag Asset Queued Event
       tags:
       - Asset
+  /api/v2/dags/{dag_id}/clearDagRuns:
+    post:
+      description: Clear multiple Dag Runs in a single request.
+      operationId: clear_dag_runs
+      parameters:
+      - in: path
+        name: dag_id
+        required: true
+        schema:
+          title: Dag Id
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkDAGRunClearBody'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/ClearTaskInstanceCollectionResponse'
+                - $ref: '#/components/schemas/DAGRunCollectionResponse'
+                title: Response Clear Dag Runs
+          description: Successful Response
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      - HTTPBearer: []
+      summary: Clear Dag Runs
+      tags:
+      - DagRun
+  /api/v2/dags/{dag_id}/clearPartitions:
+    post:
+      description: Reset partition_key and partition_date fields on matching Dag Runs.
+      operationId: clear_dag_run_partitions
+      parameters:
+      - in: path
+        name: dag_id
+        required: true
+        schema:
+          title: Dag Id
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClearPartitionsBody'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClearPartitionsResponse'
+          description: Successful Response
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      - HTTPBearer: []
+      summary: Clear Dag Run Partitions
+      tags:
+      - DagRun
   /api/v2/dags/{dag_id}/clearTaskInstances:
     post:
       description: Clear task instances.
@@ -7346,7 +8356,7 @@ paths:
           title: Order By
           type: array
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ Use the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
           \ are **not** supported. \n\n**Performance note:** this full-match pattern\
           \ is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database\
           \ from using B-tree indexes, which can be very slow on large tables. Prefer\
@@ -7372,7 +8382,7 @@ paths:
           nullable: true
           type: string
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ Use the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
           \ are **not** supported. \n\n**Performance note:** this full-match pattern\
           \ is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database\
           \ from using B-tree indexes, which can be very slow on large tables. Prefer\
@@ -7399,7 +8409,7 @@ paths:
           nullable: true
           type: string
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ Use the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
           \ are **not** supported. \n\n**Performance note:** this full-match pattern\
           \ is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database\
           \ from using B-tree indexes, which can be very slow on large tables. Prefer\
@@ -7425,7 +8435,7 @@ paths:
           nullable: true
           type: string
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ The pipe `|` is matched literally, not as an OR separator. Regular expressions\
           \ are **not** supported. \n\n**Performance note:** this full-match pattern\
           \ is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database\
           \ from using B-tree indexes, which can be very slow on large tables. Prefer\
@@ -7437,8 +8447,8 @@ paths:
           nullable: true
           type: string
       - description: "Prefix match \u2014 returns items whose value starts with the\
-          \ given string (case-sensitive, index-friendly). Use the pipe `|` operator\
-          \ for OR logic (e.g. `dag1|dag2`). Use `~` to match all. Wildcard characters\
+          \ given string (case-sensitive, index-friendly). The pipe `|` is part of\
+          \ the prefix, not an OR separator. Use `~` to match all. Wildcard characters\
           \ (`%`, `_`) are treated as literal characters. Trailing non-alphanumeric\
           \ characters in the prefix are stripped before matching so the range scan\
           \ stays index-compatible under locale-aware collations \u2014 e.g. `test_`\
@@ -7492,6 +8502,53 @@ paths:
       - OAuth2PasswordBearer: []
       - HTTPBearer: []
       summary: Get Dag Runs
+      tags:
+      - DagRun
+    patch:
+      description: Bulk update or delete Dag Runs.
+      operationId: bulk_dag_runs
+      parameters:
+      - in: path
+        name: dag_id
+        required: true
+        schema:
+          title: Dag Id
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkBody_BulkDAGRunBody_'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkResponse'
+          description: Successful Response
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Forbidden
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      - HTTPBearer: []
+      summary: Bulk Dag Runs
       tags:
       - DagRun
     post:
@@ -7910,7 +8967,7 @@ paths:
           title: Order By
           type: array
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ Use the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
           \ are **not** supported. \n\n**Performance note:** this full-match pattern\
           \ is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database\
           \ from using B-tree indexes, which can be very slow on large tables. Prefer\
@@ -7942,7 +8999,7 @@ paths:
           nullable: true
           type: string
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ Use the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
           \ are **not** supported. \n\n**Performance note:** this full-match pattern\
           \ is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database\
           \ from using B-tree indexes, which can be very slow on large tables. Prefer\
@@ -8004,7 +9061,7 @@ paths:
           title: Responded By User Name
           type: array
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ Use the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
           \ are **not** supported. \n\n**Performance note:** this full-match pattern\
           \ is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database\
           \ from using B-tree indexes, which can be very slow on large tables. Prefer\
@@ -8016,7 +9073,7 @@ paths:
           nullable: true
           type: string
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ Use the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
           \ are **not** supported. \n\n**Performance note:** this full-match pattern\
           \ is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database\
           \ from using B-tree indexes, which can be very slow on large tables. Prefer\
@@ -8084,6 +9141,164 @@ paths:
       - OAuth2PasswordBearer: []
       - HTTPBearer: []
       summary: Get Hitl Details
+      tags:
+      - Task Instance
+  /api/v2/dags/{dag_id}/dagRuns/{dag_run_id}/taskGroupInstances/{group_id}:
+    patch:
+      description: Update the state of all task instances in a task group.
+      operationId: patch_task_group_instances
+      parameters:
+      - in: path
+        name: dag_id
+        required: true
+        schema:
+          title: Dag Id
+          type: string
+      - in: path
+        name: dag_run_id
+        required: true
+        schema:
+          title: Dag Run Id
+          type: string
+      - in: path
+        name: group_id
+        required: true
+        schema:
+          title: Group Id
+          type: string
+      - in: query
+        name: update_mask
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchTaskInstanceBody'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskInstanceCollectionResponse'
+          description: Successful Response
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Not Found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Conflict
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      - HTTPBearer: []
+      summary: Patch Task Group Instances
+      tags:
+      - Task Instance
+  /api/v2/dags/{dag_id}/dagRuns/{dag_run_id}/taskGroupInstances/{group_id}/dry_run:
+    patch:
+      description: Dry-run of updating the state of all task instances in a task group.
+      operationId: patch_task_group_instances_dry_run
+      parameters:
+      - in: path
+        name: dag_id
+        required: true
+        schema:
+          title: Dag Id
+          type: string
+      - in: path
+        name: dag_run_id
+        required: true
+        schema:
+          title: Dag Run Id
+          type: string
+      - in: path
+        name: group_id
+        required: true
+        schema:
+          title: Group Id
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchTaskInstanceBody'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskInstanceCollectionResponse'
+          description: Successful Response
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      - HTTPBearer: []
+      summary: Patch Task Group Instances Dry Run
       tags:
       - Task Instance
   /api/v2/dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances:
@@ -8306,7 +9521,7 @@ paths:
           nullable: true
           type: number
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ Use the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
           \ are **not** supported. \n\n**Performance note:** this full-match pattern\
           \ is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database\
           \ from using B-tree indexes, which can be very slow on large tables. Prefer\
@@ -8339,7 +9554,7 @@ paths:
           nullable: true
           type: string
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ Use the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
           \ are **not** supported. \n\n**Performance note:** this full-match pattern\
           \ is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database\
           \ from using B-tree indexes, which can be very slow on large tables. Prefer\
@@ -8365,7 +9580,7 @@ paths:
           nullable: true
           type: string
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ Use the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
           \ are **not** supported. \n\n**Performance note:** this full-match pattern\
           \ is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database\
           \ from using B-tree indexes, which can be very slow on large tables. Prefer\
@@ -8407,7 +9622,7 @@ paths:
           title: Pool
           type: array
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ Use the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
           \ are **not** supported. \n\n**Performance note:** this full-match pattern\
           \ is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database\
           \ from using B-tree indexes, which can be very slow on large tables. Prefer\
@@ -8441,7 +9656,7 @@ paths:
           title: Queue
           type: array
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ Use the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
           \ are **not** supported. \n\n**Performance note:** this full-match pattern\
           \ is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database\
           \ from using B-tree indexes, which can be very slow on large tables. Prefer\
@@ -8499,7 +9714,7 @@ paths:
           title: Operator
           type: array
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ Use the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
           \ are **not** supported. \n\n**Performance note:** this full-match pattern\
           \ is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database\
           \ from using B-tree indexes, which can be very slow on large tables. Prefer\
@@ -8533,7 +9748,7 @@ paths:
           title: Map Index
           type: array
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ Use the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
           \ are **not** supported. \n\n**Performance note:** this full-match pattern\
           \ is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database\
           \ from using B-tree indexes, which can be very slow on large tables. Prefer\
@@ -8577,8 +9792,7 @@ paths:
       - description: 'Attributes to order by, multi criteria sort is supported. Prefix
           with `-` for descending order. Supported attributes: `id, state, duration,
           start_date, end_date, map_index, try_number, logical_date, run_after, data_interval_start,
-          data_interval_end, rendered_map_index, operator, logical_date, run_after,
-          data_interval_start, data_interval_end`'
+          data_interval_end, rendered_map_index, operator`'
         in: query
         name: order_by
         required: false
@@ -8588,8 +9802,7 @@ paths:
           description: 'Attributes to order by, multi criteria sort is supported.
             Prefix with `-` for descending order. Supported attributes: `id, state,
             duration, start_date, end_date, map_index, try_number, logical_date, run_after,
-            data_interval_start, data_interval_end, rendered_map_index, operator,
-            logical_date, run_after, data_interval_start, data_interval_end`'
+            data_interval_start, data_interval_end, rendered_map_index, operator`'
           items:
             type: string
           title: Order By
@@ -9479,7 +10692,7 @@ paths:
           title: Pool
           type: array
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ Use the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
           \ are **not** supported. \n\n**Performance note:** this full-match pattern\
           \ is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database\
           \ from using B-tree indexes, which can be very slow on large tables. Prefer\
@@ -9513,7 +10726,7 @@ paths:
           title: Queue
           type: array
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ Use the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
           \ are **not** supported. \n\n**Performance note:** this full-match pattern\
           \ is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database\
           \ from using B-tree indexes, which can be very slow on large tables. Prefer\
@@ -9571,7 +10784,7 @@ paths:
           title: Operator
           type: array
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ Use the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
           \ are **not** supported. \n\n**Performance note:** this full-match pattern\
           \ is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database\
           \ from using B-tree indexes, which can be very slow on large tables. Prefer\
@@ -9605,7 +10818,7 @@ paths:
           title: Map Index
           type: array
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ Use the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
           \ are **not** supported. \n\n**Performance note:** this full-match pattern\
           \ is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database\
           \ from using B-tree indexes, which can be very slow on large tables. Prefer\
@@ -9649,8 +10862,7 @@ paths:
       - description: 'Attributes to order by, multi criteria sort is supported. Prefix
           with `-` for descending order. Supported attributes: `id, state, duration,
           start_date, end_date, map_index, try_number, logical_date, run_after, data_interval_start,
-          data_interval_end, rendered_map_index, operator, run_after, logical_date,
-          data_interval_start, data_interval_end`'
+          data_interval_end, rendered_map_index, operator`'
         in: query
         name: order_by
         required: false
@@ -9660,8 +10872,7 @@ paths:
           description: 'Attributes to order by, multi criteria sort is supported.
             Prefix with `-` for descending order. Supported attributes: `id, state,
             duration, start_date, end_date, map_index, try_number, logical_date, run_after,
-            data_interval_start, data_interval_end, rendered_map_index, operator,
-            run_after, logical_date, data_interval_start, data_interval_end`'
+            data_interval_start, data_interval_end, rendered_map_index, operator`'
           items:
             type: string
           title: Order By
@@ -9809,6 +11020,463 @@ paths:
       summary: Get Log
       tags:
       - Task Instance
+  /api/v2/dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/state-store:
+    delete:
+      description: 'Delete all task state store keys for a task instance.
+
+
+        When ``all_map_indices=true``, state store is cleared for every map index
+        of the task and
+
+        the ``map_index`` parameter is ignored.'
+      operationId: clear_task_state_store
+      parameters:
+      - in: path
+        name: dag_id
+        required: true
+        schema:
+          title: Dag Id
+          type: string
+      - in: path
+        name: dag_run_id
+        required: true
+        schema:
+          title: Dag Run Id
+          type: string
+      - in: path
+        name: task_id
+        required: true
+        schema:
+          title: Task Id
+          type: string
+      - in: query
+        name: map_index
+        required: false
+        schema:
+          default: -1
+          minimum: -1
+          title: Map Index
+          type: integer
+      - in: query
+        name: all_map_indices
+        required: false
+        schema:
+          default: false
+          title: All Map Indices
+          type: boolean
+      responses:
+        '204':
+          description: Successful Response
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      - HTTPBearer: []
+      summary: Clear Task State Store
+      tags:
+      - Task State Store
+    get:
+      description: List all task state store entries for a task instance.
+      operationId: list_task_state_store
+      parameters:
+      - in: path
+        name: dag_id
+        required: true
+        schema:
+          title: Dag Id
+          type: string
+      - in: path
+        name: dag_run_id
+        required: true
+        schema:
+          title: Dag Run Id
+          type: string
+      - in: path
+        name: task_id
+        required: true
+        schema:
+          title: Task Id
+          type: string
+      - in: query
+        name: map_index
+        required: false
+        schema:
+          default: -1
+          minimum: -1
+          title: Map Index
+          type: integer
+      - in: query
+        name: limit
+        required: false
+        schema:
+          default: 50
+          minimum: 0
+          title: Limit
+          type: integer
+      - in: query
+        name: offset
+        required: false
+        schema:
+          default: 0
+          minimum: 0
+          title: Offset
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskStateStoreCollectionResponse'
+          description: Successful Response
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      - HTTPBearer: []
+      summary: List Task State Store
+      tags:
+      - Task State Store
+  /api/v2/dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/state-store/{key}:
+    delete:
+      description: Delete a single task state store key. No-op if the key does not
+        exist.
+      operationId: delete_task_state_store
+      parameters:
+      - in: path
+        name: dag_id
+        required: true
+        schema:
+          title: Dag Id
+          type: string
+      - in: path
+        name: dag_run_id
+        required: true
+        schema:
+          title: Dag Run Id
+          type: string
+      - in: path
+        name: task_id
+        required: true
+        schema:
+          title: Task Id
+          type: string
+      - in: path
+        name: key
+        required: true
+        schema:
+          title: Key
+          type: string
+      - in: query
+        name: map_index
+        required: false
+        schema:
+          default: -1
+          minimum: -1
+          title: Map Index
+          type: integer
+      responses:
+        '204':
+          description: Successful Response
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      - HTTPBearer: []
+      summary: Delete Task State Store
+      tags:
+      - Task State Store
+    get:
+      description: Get a single task state store entry.
+      operationId: get_task_state_store
+      parameters:
+      - in: path
+        name: dag_id
+        required: true
+        schema:
+          title: Dag Id
+          type: string
+      - in: path
+        name: dag_run_id
+        required: true
+        schema:
+          title: Dag Run Id
+          type: string
+      - in: path
+        name: task_id
+        required: true
+        schema:
+          title: Task Id
+          type: string
+      - in: path
+        name: key
+        required: true
+        schema:
+          title: Key
+          type: string
+      - in: query
+        name: map_index
+        required: false
+        schema:
+          default: -1
+          minimum: -1
+          title: Map Index
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskStateStoreResponse'
+          description: Successful Response
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      - HTTPBearer: []
+      summary: Get Task State Store
+      tags:
+      - Task State Store
+    patch:
+      description: Update the value of an existing task state store key.
+      operationId: patch_task_state_store
+      parameters:
+      - in: path
+        name: dag_id
+        required: true
+        schema:
+          title: Dag Id
+          type: string
+      - in: path
+        name: dag_run_id
+        required: true
+        schema:
+          title: Dag Run Id
+          type: string
+      - in: path
+        name: task_id
+        required: true
+        schema:
+          title: Task Id
+          type: string
+      - in: path
+        name: key
+        required: true
+        schema:
+          title: Key
+          type: string
+      - in: query
+        name: map_index
+        required: false
+        schema:
+          default: -1
+          minimum: -1
+          title: Map Index
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskStateStorePatchBody'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      - HTTPBearer: []
+      summary: Patch Task State Store
+      tags:
+      - Task State Store
+    put:
+      description: Set a task state store value. Creates or overwrites the key.
+      operationId: set_task_state_store
+      parameters:
+      - in: path
+        name: dag_id
+        required: true
+        schema:
+          title: Dag Id
+          type: string
+      - in: path
+        name: dag_run_id
+        required: true
+        schema:
+          title: Dag Run Id
+          type: string
+      - in: path
+        name: task_id
+        required: true
+        schema:
+          title: Task Id
+          type: string
+      - in: path
+        name: key
+        required: true
+        schema:
+          title: Key
+          type: string
+      - in: query
+        name: map_index
+        required: false
+        schema:
+          default: -1
+          minimum: -1
+          title: Map Index
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskStateStoreBody'
+        required: true
+      responses:
+        '204':
+          description: Successful Response
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      security:
+      - OAuth2PasswordBearer: []
+      - HTTPBearer: []
+      summary: Set Task State Store
+      tags:
+      - Task State Store
   /api/v2/dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/tries:
     get:
       description: Get list of task instances history.
@@ -10006,7 +11674,7 @@ paths:
           title: Offset
           type: integer
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ Use the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
           \ are **not** supported. \n\n**Performance note:** this full-match pattern\
           \ is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database\
           \ from using B-tree indexes, which can be very slow on large tables. Prefer\
@@ -10032,7 +11700,7 @@ paths:
           nullable: true
           type: string
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ Use the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
           \ are **not** supported. \n\n**Performance note:** this full-match pattern\
           \ is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database\
           \ from using B-tree indexes, which can be very slow on large tables. Prefer\
@@ -10058,7 +11726,7 @@ paths:
           nullable: true
           type: string
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ Use the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
           \ are **not** supported. \n\n**Performance note:** this full-match pattern\
           \ is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database\
           \ from using B-tree indexes, which can be very slow on large tables. Prefer\
@@ -10084,7 +11752,7 @@ paths:
           nullable: true
           type: string
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ Use the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
           \ are **not** supported. \n\n**Performance note:** this full-match pattern\
           \ is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database\
           \ from using B-tree indexes, which can be very slow on large tables. Prefer\
@@ -11297,7 +12965,9 @@ paths:
           exclusiveMinimum: 0.0
           title: Interval
           type: number
-      - description: Collect result XCom from task. Can be set multiple times.
+      - description: Collect result XCom from task. Can be set multiple times. If
+          unset, return value of the return task as specified in the dag (in present)
+          is returned by default.
         in: query
         name: result
         required: false
@@ -11886,7 +13556,7 @@ paths:
           nullable: true
           type: string
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ Use the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
           \ are **not** supported. \n\n**Performance note:** this full-match pattern\
           \ is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database\
           \ from using B-tree indexes, which can be very slow on large tables. Prefer\
@@ -11898,7 +13568,7 @@ paths:
           nullable: true
           type: string
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ Use the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
           \ are **not** supported. \n\n**Performance note:** this full-match pattern\
           \ is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database\
           \ from using B-tree indexes, which can be very slow on large tables. Prefer\
@@ -11910,7 +13580,7 @@ paths:
           nullable: true
           type: string
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ Use the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
           \ are **not** supported. \n\n**Performance note:** this full-match pattern\
           \ is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database\
           \ from using B-tree indexes, which can be very slow on large tables. Prefer\
@@ -11922,7 +13592,7 @@ paths:
           nullable: true
           type: string
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ Use the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
           \ are **not** supported. \n\n**Performance note:** this full-match pattern\
           \ is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database\
           \ from using B-tree indexes, which can be very slow on large tables. Prefer\
@@ -11934,7 +13604,7 @@ paths:
           nullable: true
           type: string
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ Use the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
           \ are **not** supported. \n\n**Performance note:** this full-match pattern\
           \ is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database\
           \ from using B-tree indexes, which can be very slow on large tables. Prefer\
@@ -12131,7 +13801,7 @@ paths:
           title: Order By
           type: array
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ Use the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
           \ are **not** supported. \n\n**Performance note:** this full-match pattern\
           \ is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database\
           \ from using B-tree indexes, which can be very slow on large tables. Prefer\
@@ -12152,6 +13822,22 @@ paths:
           \ starting with `s3`."
         in: query
         name: filename_prefix_pattern
+        required: false
+        schema:
+          nullable: true
+          type: string
+      - description: Exact filename match. Returns only the import error for this
+          specific file path.
+        in: query
+        name: filename
+        required: false
+        schema:
+          nullable: true
+          type: string
+      - description: Exact bundle name match. Returns only import errors from this
+          specific bundle.
+        in: query
+        name: bundle_name
         required: false
         schema:
           nullable: true
@@ -12573,7 +14259,7 @@ paths:
           title: Order By
           type: array
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ Use the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
           \ are **not** supported. \n\n**Performance note:** this full-match pattern\
           \ is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database\
           \ from using B-tree indexes, which can be very slow on large tables. Prefer\
@@ -12617,12 +14303,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPExceptionResponse'
           description: Forbidden
-        '404':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPExceptionResponse'
-          description: Not Found
         '422':
           content:
             application/json:
@@ -12975,7 +14655,7 @@ paths:
           title: Order By
           type: array
       - description: "SQL LIKE expression \u2014 use `%` / `_` wildcards (e.g. `%customer_%`).\
-          \ or the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
+          \ Use the pipe `|` operator for OR logic (e.g. `dag1 | dag2`). Regular expressions\
           \ are **not** supported. \n\n**Performance note:** this full-match pattern\
           \ is evaluated as ``ILIKE '%term%'`` and most of the time prevents the database\
           \ from using B-tree indexes, which can be very slow on large tables. Prefer\

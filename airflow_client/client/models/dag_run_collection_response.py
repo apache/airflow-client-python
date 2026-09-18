@@ -32,7 +32,8 @@ class DAGRunCollectionResponse(BaseModel):
     next_cursor: Optional[StrictStr] = None
     previous_cursor: Optional[StrictStr] = None
     total_entries: Optional[StrictInt] = None
-    __properties: ClassVar[List[str]] = ["dag_runs", "next_cursor", "previous_cursor", "total_entries"]
+    total_entries_limit: Optional[StrictInt] = None
+    __properties: ClassVar[List[str]] = ["dag_runs", "next_cursor", "previous_cursor", "total_entries", "total_entries_limit"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -77,8 +78,7 @@ class DAGRunCollectionResponse(BaseModel):
         _items = []
         if self.dag_runs:
             for _item_dag_runs in self.dag_runs:
-                if _item_dag_runs:
-                    _items.append(_item_dag_runs.to_dict())
+                _items.append(_item_dag_runs.to_dict() if _item_dag_runs is not None else None)
             _dict['dag_runs'] = _items
         return _dict
 
@@ -95,7 +95,8 @@ class DAGRunCollectionResponse(BaseModel):
             "dag_runs": [DAGRunResponse.from_dict(_item) for _item in obj["dag_runs"]] if obj.get("dag_runs") is not None else None,
             "next_cursor": obj.get("next_cursor"),
             "previous_cursor": obj.get("previous_cursor"),
-            "total_entries": obj.get("total_entries")
+            "total_entries": obj.get("total_entries"),
+            "total_entries_limit": obj.get("total_entries_limit")
         })
         return _obj
 

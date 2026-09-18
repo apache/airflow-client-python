@@ -1928,6 +1928,9 @@ components:
         total_entries:
           nullable: true
           type: integer
+        total_entries_limit:
+          nullable: true
+          type: integer
       required:
       - dag_runs
       title: DAGRunCollectionResponse
@@ -2286,11 +2289,18 @@ components:
         state:
           title: State
           type: string
+        triggering:
+          description: Whether this asset event triggered the referenced dag run.
+            Only a run's most recent consumed asset event triggers it; earlier consumed
+            events are included in the run but did not trigger it.
+          title: Triggering
+          type: boolean
       required:
       - run_id
       - dag_id
       - start_date
       - state
+      - triggering
       title: DagRunAssetReference
       type: object
     DagRunMutableStates:
@@ -3607,6 +3617,9 @@ components:
           title: Task Instances
           type: array
         total_entries:
+          nullable: true
+          type: integer
+        total_entries_limit:
           nullable: true
           type: integer
       required:
@@ -5674,6 +5687,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPExceptionResponse'
           description: Temporary Redirect
+      security:
+      - OAuth2PasswordBearer: []
+      - HTTPBearer: []
       summary: Logout
       tags:
       - Login
@@ -5827,6 +5843,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/DryRunBackfillCollectionResponse'
           description: Successful Response
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Bad Request
         '401':
           content:
             application/json:
@@ -7486,6 +7508,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPExceptionResponse'
           description: Not Found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Conflict
         '422':
           content:
             application/json:
@@ -7988,6 +8016,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/TaskInstanceCollectionResponse'
           description: Successful Response
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Bad Request
         '401':
           content:
             application/json:
@@ -8042,8 +8076,11 @@ paths:
         **Cursor:** pass `cursor` (empty string for the first page, then `next_cursor`
         from the response).
 
-        When `cursor` is provided, `offset` is ignored and `total_entries` is not
-        returned.
+        When `cursor` is provided, `offset` is ignored and `total_entries` is capped
+        at
+
+        `total_entries_limit` (a value equal to that limit means at least that many
+        runs match).
 
         ``next_cursor`` is ``null`` when there are no more pages; ``previous_cursor``
         is ``null``
@@ -8404,6 +8441,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/DAGRunCollectionResponse'
           description: Successful Response
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Bad Request
         '401':
           content:
             application/json:
@@ -8644,6 +8687,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPExceptionResponse'
           description: Not Found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Conflict
         '422':
           content:
             application/json:
@@ -9226,13 +9275,16 @@ paths:
         **Cursor:** pass `cursor` (empty string for the first page, then `next_cursor`
         from the response).
 
-        When `cursor` is provided, `offset` is ignored and `total_entries` is not
-        returned.
+        When `cursor` is provided, `offset` is ignored and `total_entries` is capped
+        at
 
-        ``next_cursor`` is ``null`` when there are no more pages; ``previous_cursor``
-        is ``null``
+        `total_entries_limit` (a value equal to that limit means at least that many
+        task instances
 
-        on the first page.'
+        match). ``next_cursor`` is ``null`` when there are no more pages; ``previous_cursor``
+        is
+
+        ``null`` on the first page.'
       operationId: get_task_instances
       parameters:
       - in: path
@@ -10860,6 +10912,13 @@ paths:
           title: Task Id
           type: string
       - in: query
+        name: all_map_indices
+        required: false
+        schema:
+          default: false
+          title: All Map Indices
+          type: boolean
+      - in: query
         name: map_index
         required: false
         schema:
@@ -10867,13 +10926,6 @@ paths:
           minimum: -1
           title: Map Index
           type: integer
-      - in: query
-        name: all_map_indices
-        required: false
-        schema:
-          default: false
-          title: All Map Indices
-          type: boolean
       responses:
         '204':
           description: Successful Response
@@ -10972,12 +11024,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPExceptionResponse'
           description: Forbidden
-        '404':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPExceptionResponse'
-          description: Not Found
         '422':
           content:
             application/json:
@@ -10997,6 +11043,12 @@ paths:
       operationId: delete_task_state_store
       parameters:
       - in: path
+        name: key
+        required: true
+        schema:
+          title: Key
+          type: string
+      - in: path
         name: dag_id
         required: true
         schema:
@@ -11013,12 +11065,6 @@ paths:
         required: true
         schema:
           title: Task Id
-          type: string
-      - in: path
-        name: key
-        required: true
-        schema:
-          title: Key
           type: string
       - in: query
         name: map_index
@@ -11066,6 +11112,12 @@ paths:
       operationId: get_task_state_store
       parameters:
       - in: path
+        name: key
+        required: true
+        schema:
+          title: Key
+          type: string
+      - in: path
         name: dag_id
         required: true
         schema:
@@ -11082,12 +11134,6 @@ paths:
         required: true
         schema:
           title: Task Id
-          type: string
-      - in: path
-        name: key
-        required: true
-        schema:
-          title: Key
           type: string
       - in: query
         name: map_index
@@ -11139,6 +11185,12 @@ paths:
       operationId: patch_task_state_store
       parameters:
       - in: path
+        name: key
+        required: true
+        schema:
+          title: Key
+          type: string
+      - in: path
         name: dag_id
         required: true
         schema:
@@ -11155,12 +11207,6 @@ paths:
         required: true
         schema:
           title: Task Id
-          type: string
-      - in: path
-        name: key
-        required: true
-        schema:
-          title: Key
           type: string
       - in: query
         name: map_index
@@ -11217,6 +11263,12 @@ paths:
       operationId: set_task_state_store
       parameters:
       - in: path
+        name: key
+        required: true
+        schema:
+          title: Key
+          type: string
+      - in: path
         name: dag_id
         required: true
         schema:
@@ -11233,12 +11285,6 @@ paths:
         required: true
         schema:
           title: Task Id
-          type: string
-      - in: path
-        name: key
-        required: true
-        schema:
-          title: Key
           type: string
       - in: query
         name: map_index
@@ -12418,6 +12464,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/HITLDetailResponse'
           description: Successful Response
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPExceptionResponse'
+          description: Bad Request
         '401':
           content:
             application/json:

@@ -75,8 +75,7 @@ class JobCollectionResponse(BaseModel):
         _items = []
         if self.jobs:
             for _item_jobs in self.jobs:
-                if _item_jobs:
-                    _items.append(_item_jobs.to_dict())
+                _items.append(_item_jobs.to_dict() if _item_jobs is not None else None)
             _dict['jobs'] = _items
         return _dict
 

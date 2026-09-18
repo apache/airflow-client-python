@@ -92,15 +92,13 @@ class AssetResponse(BaseModel):
         _items = []
         if self.aliases:
             for _item_aliases in self.aliases:
-                if _item_aliases:
-                    _items.append(_item_aliases.to_dict())
+                _items.append(_item_aliases.to_dict() if _item_aliases is not None else None)
             _dict['aliases'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in consuming_tasks (list)
         _items = []
         if self.consuming_tasks:
             for _item_consuming_tasks in self.consuming_tasks:
-                if _item_consuming_tasks:
-                    _items.append(_item_consuming_tasks.to_dict())
+                _items.append(_item_consuming_tasks.to_dict() if _item_consuming_tasks is not None else None)
             _dict['consuming_tasks'] = _items
         # override the default output from pydantic by calling `to_dict()` of last_asset_event
         if self.last_asset_event:
@@ -109,22 +107,19 @@ class AssetResponse(BaseModel):
         _items = []
         if self.producing_tasks:
             for _item_producing_tasks in self.producing_tasks:
-                if _item_producing_tasks:
-                    _items.append(_item_producing_tasks.to_dict())
+                _items.append(_item_producing_tasks.to_dict() if _item_producing_tasks is not None else None)
             _dict['producing_tasks'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in scheduled_dags (list)
         _items = []
         if self.scheduled_dags:
             for _item_scheduled_dags in self.scheduled_dags:
-                if _item_scheduled_dags:
-                    _items.append(_item_scheduled_dags.to_dict())
+                _items.append(_item_scheduled_dags.to_dict() if _item_scheduled_dags is not None else None)
             _dict['scheduled_dags'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in watchers (list)
         _items = []
         if self.watchers:
             for _item_watchers in self.watchers:
-                if _item_watchers:
-                    _items.append(_item_watchers.to_dict())
+                _items.append(_item_watchers.to_dict() if _item_watchers is not None else None)
             _dict['watchers'] = _items
         return _dict
 

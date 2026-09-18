@@ -43,13 +43,10 @@ class ConnectionTestRequestBody(BaseModel):
     team_name: Optional[Annotated[str, Field(strict=True, max_length=50)]] = None
     __properties: ClassVar[List[str]] = ["commit_on_success", "conn_type", "connection_id", "description", "executor", "extra", "host", "login", "password", "port", "queue", "schema", "team_name"]
 
-    @field_validator('connection_id')
+    @field_validator('connection_id', mode="before")
     def connection_id_validate_regular_expression(cls, value):
         """Validates the regular expression"""
-        if not isinstance(value, str):
-            value = str(value)
-
-        if not re.match(r"^[\w.-]+$", value):
+        if isinstance(value, str) and not re.match(r"^[\w.-]+$", value):
             raise ValueError(r"must validate the regular expression /^[\w.-]+$/")
         return value
 

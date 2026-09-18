@@ -1338,6 +1338,7 @@ class DagRunApi:
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -1414,6 +1415,7 @@ class DagRunApi:
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -1490,6 +1492,7 @@ class DagRunApi:
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -1916,7 +1919,7 @@ class DagRunApi:
     ) -> DAGRunCollectionResponse:
         """Get Dag Runs
 
-        Get all Dag Runs.  This endpoint allows specifying `~` as the dag_id to retrieve Dag Runs for all Dags.  Supports two pagination modes:  **Offset (default):** use `limit` and `offset` query parameters. Returns `total_entries`.  **Cursor:** pass `cursor` (empty string for the first page, then `next_cursor` from the response). When `cursor` is provided, `offset` is ignored and `total_entries` is not returned. ``next_cursor`` is ``null`` when there are no more pages; ``previous_cursor`` is ``null`` on the first page.
+        Get all Dag Runs.  This endpoint allows specifying `~` as the dag_id to retrieve Dag Runs for all Dags.  Supports two pagination modes:  **Offset (default):** use `limit` and `offset` query parameters. Returns `total_entries`.  **Cursor:** pass `cursor` (empty string for the first page, then `next_cursor` from the response). When `cursor` is provided, `offset` is ignored and `total_entries` is capped at `total_entries_limit` (a value equal to that limit means at least that many runs match). ``next_cursor`` is ``null`` when there are no more pages; ``previous_cursor`` is ``null`` on the first page.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -2084,6 +2087,7 @@ class DagRunApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DAGRunCollectionResponse",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
@@ -2163,7 +2167,7 @@ class DagRunApi:
     ) -> ApiResponse[DAGRunCollectionResponse]:
         """Get Dag Runs
 
-        Get all Dag Runs.  This endpoint allows specifying `~` as the dag_id to retrieve Dag Runs for all Dags.  Supports two pagination modes:  **Offset (default):** use `limit` and `offset` query parameters. Returns `total_entries`.  **Cursor:** pass `cursor` (empty string for the first page, then `next_cursor` from the response). When `cursor` is provided, `offset` is ignored and `total_entries` is not returned. ``next_cursor`` is ``null`` when there are no more pages; ``previous_cursor`` is ``null`` on the first page.
+        Get all Dag Runs.  This endpoint allows specifying `~` as the dag_id to retrieve Dag Runs for all Dags.  Supports two pagination modes:  **Offset (default):** use `limit` and `offset` query parameters. Returns `total_entries`.  **Cursor:** pass `cursor` (empty string for the first page, then `next_cursor` from the response). When `cursor` is provided, `offset` is ignored and `total_entries` is capped at `total_entries_limit` (a value equal to that limit means at least that many runs match). ``next_cursor`` is ``null`` when there are no more pages; ``previous_cursor`` is ``null`` on the first page.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -2331,6 +2335,7 @@ class DagRunApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DAGRunCollectionResponse",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
@@ -2410,7 +2415,7 @@ class DagRunApi:
     ) -> RESTResponseType:
         """Get Dag Runs
 
-        Get all Dag Runs.  This endpoint allows specifying `~` as the dag_id to retrieve Dag Runs for all Dags.  Supports two pagination modes:  **Offset (default):** use `limit` and `offset` query parameters. Returns `total_entries`.  **Cursor:** pass `cursor` (empty string for the first page, then `next_cursor` from the response). When `cursor` is provided, `offset` is ignored and `total_entries` is not returned. ``next_cursor`` is ``null`` when there are no more pages; ``previous_cursor`` is ``null`` on the first page.
+        Get all Dag Runs.  This endpoint allows specifying `~` as the dag_id to retrieve Dag Runs for all Dags.  Supports two pagination modes:  **Offset (default):** use `limit` and `offset` query parameters. Returns `total_entries`.  **Cursor:** pass `cursor` (empty string for the first page, then `next_cursor` from the response). When `cursor` is provided, `offset` is ignored and `total_entries` is capped at `total_entries_limit` (a value equal to that limit means at least that many runs match). ``next_cursor`` is ``null`` when there are no more pages; ``previous_cursor`` is ``null`` on the first page.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -2578,6 +2583,7 @@ class DagRunApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DAGRunCollectionResponse",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",

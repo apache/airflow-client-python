@@ -75,7 +75,8 @@ class TestResponseClearDagRuns(unittest.TestCase):
                         triggering_user_name = '', )
                     ],
                 next_cursor = '',
-                previous_cursor = ''
+                previous_cursor = '',
+                total_entries_limit = 56
             )
         else:
             return ResponseClearDagRuns(

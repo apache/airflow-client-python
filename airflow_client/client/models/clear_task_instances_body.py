@@ -90,8 +90,7 @@ class ClearTaskInstancesBody(BaseModel):
         _items = []
         if self.task_ids:
             for _item_task_ids in self.task_ids:
-                if _item_task_ids:
-                    _items.append(_item_task_ids.to_dict())
+                _items.append(_item_task_ids.to_dict() if _item_task_ids is not None else None)
             _dict['task_ids'] = _items
         return _dict
 

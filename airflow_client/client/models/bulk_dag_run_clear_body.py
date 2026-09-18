@@ -84,8 +84,7 @@ class BulkDAGRunClearBody(BaseModel):
         _items = []
         if self.dag_runs:
             for _item_dag_runs in self.dag_runs:
-                if _item_dag_runs:
-                    _items.append(_item_dag_runs.to_dict())
+                _items.append(_item_dag_runs.to_dict() if _item_dag_runs is not None else None)
             _dict['dag_runs'] = _items
         return _dict
 

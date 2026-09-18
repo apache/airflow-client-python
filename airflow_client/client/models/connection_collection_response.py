@@ -75,8 +75,7 @@ class ConnectionCollectionResponse(BaseModel):
         _items = []
         if self.connections:
             for _item_connections in self.connections:
-                if _item_connections:
-                    _items.append(_item_connections.to_dict())
+                _items.append(_item_connections.to_dict() if _item_connections is not None else None)
             _dict['connections'] = _items
         return _dict
 

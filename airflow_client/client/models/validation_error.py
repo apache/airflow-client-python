@@ -78,8 +78,7 @@ class ValidationError(BaseModel):
         _items = []
         if self.loc:
             for _item_loc in self.loc:
-                if _item_loc:
-                    _items.append(_item_loc.to_dict())
+                _items.append(_item_loc.to_dict() if _item_loc is not None else None)
             _dict['loc'] = _items
         # set to None if input (nullable) is None
         # and model_fields_set contains the field

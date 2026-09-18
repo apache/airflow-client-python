@@ -75,8 +75,7 @@ class DAGCollectionResponse(BaseModel):
         _items = []
         if self.dags:
             for _item_dags in self.dags:
-                if _item_dags:
-                    _items.append(_item_dags.to_dict())
+                _items.append(_item_dags.to_dict() if _item_dags is not None else None)
             _dict['dags'] = _items
         return _dict
 

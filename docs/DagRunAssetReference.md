@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **run_id** | **str** |  | 
 **start_date** | **datetime** |  | 
 **state** | **str** |  | 
+**triggering** | **bool** | Whether this asset event triggered the referenced dag run. Only a run&#39;s most recent consumed asset event triggers it; earlier consumed events are included in the run but did not trigger it. | 
 
 ## Example
 

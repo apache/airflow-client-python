@@ -47,8 +47,8 @@ class TaskStateStoreApi:
         dag_id: StrictStr,
         dag_run_id: StrictStr,
         task_id: StrictStr,
-        map_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         all_map_indices: Optional[StrictBool] = None,
+        map_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -72,10 +72,10 @@ class TaskStateStoreApi:
         :type dag_run_id: str
         :param task_id: (required)
         :type task_id: str
-        :param map_index:
-        :type map_index: int
         :param all_map_indices:
         :type all_map_indices: bool
+        :param map_index:
+        :type map_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -102,8 +102,8 @@ class TaskStateStoreApi:
             dag_id=dag_id,
             dag_run_id=dag_run_id,
             task_id=task_id,
-            map_index=map_index,
             all_map_indices=all_map_indices,
+            map_index=map_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -134,8 +134,8 @@ class TaskStateStoreApi:
         dag_id: StrictStr,
         dag_run_id: StrictStr,
         task_id: StrictStr,
-        map_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         all_map_indices: Optional[StrictBool] = None,
+        map_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -159,10 +159,10 @@ class TaskStateStoreApi:
         :type dag_run_id: str
         :param task_id: (required)
         :type task_id: str
-        :param map_index:
-        :type map_index: int
         :param all_map_indices:
         :type all_map_indices: bool
+        :param map_index:
+        :type map_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -189,8 +189,8 @@ class TaskStateStoreApi:
             dag_id=dag_id,
             dag_run_id=dag_run_id,
             task_id=task_id,
-            map_index=map_index,
             all_map_indices=all_map_indices,
+            map_index=map_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -221,8 +221,8 @@ class TaskStateStoreApi:
         dag_id: StrictStr,
         dag_run_id: StrictStr,
         task_id: StrictStr,
-        map_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         all_map_indices: Optional[StrictBool] = None,
+        map_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -246,10 +246,10 @@ class TaskStateStoreApi:
         :type dag_run_id: str
         :param task_id: (required)
         :type task_id: str
-        :param map_index:
-        :type map_index: int
         :param all_map_indices:
         :type all_map_indices: bool
+        :param map_index:
+        :type map_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -276,8 +276,8 @@ class TaskStateStoreApi:
             dag_id=dag_id,
             dag_run_id=dag_run_id,
             task_id=task_id,
-            map_index=map_index,
             all_map_indices=all_map_indices,
+            map_index=map_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -303,8 +303,8 @@ class TaskStateStoreApi:
         dag_id,
         dag_run_id,
         task_id,
-        map_index,
         all_map_indices,
+        map_index,
         _request_auth,
         _content_type,
         _headers,
@@ -333,13 +333,13 @@ class TaskStateStoreApi:
         if task_id is not None:
             _path_params['task_id'] = task_id
         # process the query parameters
-        if map_index is not None:
-            
-            _query_params.append(('map_index', map_index))
-            
         if all_map_indices is not None:
             
             _query_params.append(('all_map_indices', all_map_indices))
+            
+        if map_index is not None:
+            
+            _query_params.append(('map_index', map_index))
             
         # process the header parameters
         # process the form parameters
@@ -382,10 +382,10 @@ class TaskStateStoreApi:
     @validate_call
     def delete_task_state_store(
         self,
+        key: StrictStr,
         dag_id: StrictStr,
         dag_run_id: StrictStr,
         task_id: StrictStr,
-        key: StrictStr,
         map_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         _request_timeout: Union[
             None,
@@ -404,14 +404,14 @@ class TaskStateStoreApi:
 
         Delete a single task state store key. No-op if the key does not exist.
 
+        :param key: (required)
+        :type key: str
         :param dag_id: (required)
         :type dag_id: str
         :param dag_run_id: (required)
         :type dag_run_id: str
         :param task_id: (required)
         :type task_id: str
-        :param key: (required)
-        :type key: str
         :param map_index:
         :type map_index: int
         :param _request_timeout: timeout setting for this request. If one
@@ -437,10 +437,10 @@ class TaskStateStoreApi:
         """ # noqa: E501
 
         _param = self._delete_task_state_store_serialize(
+            key=key,
             dag_id=dag_id,
             dag_run_id=dag_run_id,
             task_id=task_id,
-            key=key,
             map_index=map_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -469,10 +469,10 @@ class TaskStateStoreApi:
     @validate_call
     def delete_task_state_store_with_http_info(
         self,
+        key: StrictStr,
         dag_id: StrictStr,
         dag_run_id: StrictStr,
         task_id: StrictStr,
-        key: StrictStr,
         map_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         _request_timeout: Union[
             None,
@@ -491,14 +491,14 @@ class TaskStateStoreApi:
 
         Delete a single task state store key. No-op if the key does not exist.
 
+        :param key: (required)
+        :type key: str
         :param dag_id: (required)
         :type dag_id: str
         :param dag_run_id: (required)
         :type dag_run_id: str
         :param task_id: (required)
         :type task_id: str
-        :param key: (required)
-        :type key: str
         :param map_index:
         :type map_index: int
         :param _request_timeout: timeout setting for this request. If one
@@ -524,10 +524,10 @@ class TaskStateStoreApi:
         """ # noqa: E501
 
         _param = self._delete_task_state_store_serialize(
+            key=key,
             dag_id=dag_id,
             dag_run_id=dag_run_id,
             task_id=task_id,
-            key=key,
             map_index=map_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -556,10 +556,10 @@ class TaskStateStoreApi:
     @validate_call
     def delete_task_state_store_without_preload_content(
         self,
+        key: StrictStr,
         dag_id: StrictStr,
         dag_run_id: StrictStr,
         task_id: StrictStr,
-        key: StrictStr,
         map_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         _request_timeout: Union[
             None,
@@ -578,14 +578,14 @@ class TaskStateStoreApi:
 
         Delete a single task state store key. No-op if the key does not exist.
 
+        :param key: (required)
+        :type key: str
         :param dag_id: (required)
         :type dag_id: str
         :param dag_run_id: (required)
         :type dag_run_id: str
         :param task_id: (required)
         :type task_id: str
-        :param key: (required)
-        :type key: str
         :param map_index:
         :type map_index: int
         :param _request_timeout: timeout setting for this request. If one
@@ -611,10 +611,10 @@ class TaskStateStoreApi:
         """ # noqa: E501
 
         _param = self._delete_task_state_store_serialize(
+            key=key,
             dag_id=dag_id,
             dag_run_id=dag_run_id,
             task_id=task_id,
-            key=key,
             map_index=map_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -638,10 +638,10 @@ class TaskStateStoreApi:
 
     def _delete_task_state_store_serialize(
         self,
+        key,
         dag_id,
         dag_run_id,
         task_id,
-        key,
         map_index,
         _request_auth,
         _content_type,
@@ -664,14 +664,14 @@ class TaskStateStoreApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
+        if key is not None:
+            _path_params['key'] = key
         if dag_id is not None:
             _path_params['dag_id'] = dag_id
         if dag_run_id is not None:
             _path_params['dag_run_id'] = dag_run_id
         if task_id is not None:
             _path_params['task_id'] = task_id
-        if key is not None:
-            _path_params['key'] = key
         # process the query parameters
         if map_index is not None:
             
@@ -718,10 +718,10 @@ class TaskStateStoreApi:
     @validate_call
     def get_task_state_store(
         self,
+        key: StrictStr,
         dag_id: StrictStr,
         dag_run_id: StrictStr,
         task_id: StrictStr,
-        key: StrictStr,
         map_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         _request_timeout: Union[
             None,
@@ -740,14 +740,14 @@ class TaskStateStoreApi:
 
         Get a single task state store entry.
 
+        :param key: (required)
+        :type key: str
         :param dag_id: (required)
         :type dag_id: str
         :param dag_run_id: (required)
         :type dag_run_id: str
         :param task_id: (required)
         :type task_id: str
-        :param key: (required)
-        :type key: str
         :param map_index:
         :type map_index: int
         :param _request_timeout: timeout setting for this request. If one
@@ -773,10 +773,10 @@ class TaskStateStoreApi:
         """ # noqa: E501
 
         _param = self._get_task_state_store_serialize(
+            key=key,
             dag_id=dag_id,
             dag_run_id=dag_run_id,
             task_id=task_id,
-            key=key,
             map_index=map_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -805,10 +805,10 @@ class TaskStateStoreApi:
     @validate_call
     def get_task_state_store_with_http_info(
         self,
+        key: StrictStr,
         dag_id: StrictStr,
         dag_run_id: StrictStr,
         task_id: StrictStr,
-        key: StrictStr,
         map_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         _request_timeout: Union[
             None,
@@ -827,14 +827,14 @@ class TaskStateStoreApi:
 
         Get a single task state store entry.
 
+        :param key: (required)
+        :type key: str
         :param dag_id: (required)
         :type dag_id: str
         :param dag_run_id: (required)
         :type dag_run_id: str
         :param task_id: (required)
         :type task_id: str
-        :param key: (required)
-        :type key: str
         :param map_index:
         :type map_index: int
         :param _request_timeout: timeout setting for this request. If one
@@ -860,10 +860,10 @@ class TaskStateStoreApi:
         """ # noqa: E501
 
         _param = self._get_task_state_store_serialize(
+            key=key,
             dag_id=dag_id,
             dag_run_id=dag_run_id,
             task_id=task_id,
-            key=key,
             map_index=map_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -892,10 +892,10 @@ class TaskStateStoreApi:
     @validate_call
     def get_task_state_store_without_preload_content(
         self,
+        key: StrictStr,
         dag_id: StrictStr,
         dag_run_id: StrictStr,
         task_id: StrictStr,
-        key: StrictStr,
         map_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         _request_timeout: Union[
             None,
@@ -914,14 +914,14 @@ class TaskStateStoreApi:
 
         Get a single task state store entry.
 
+        :param key: (required)
+        :type key: str
         :param dag_id: (required)
         :type dag_id: str
         :param dag_run_id: (required)
         :type dag_run_id: str
         :param task_id: (required)
         :type task_id: str
-        :param key: (required)
-        :type key: str
         :param map_index:
         :type map_index: int
         :param _request_timeout: timeout setting for this request. If one
@@ -947,10 +947,10 @@ class TaskStateStoreApi:
         """ # noqa: E501
 
         _param = self._get_task_state_store_serialize(
+            key=key,
             dag_id=dag_id,
             dag_run_id=dag_run_id,
             task_id=task_id,
-            key=key,
             map_index=map_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -974,10 +974,10 @@ class TaskStateStoreApi:
 
     def _get_task_state_store_serialize(
         self,
+        key,
         dag_id,
         dag_run_id,
         task_id,
-        key,
         map_index,
         _request_auth,
         _content_type,
@@ -1000,14 +1000,14 @@ class TaskStateStoreApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
+        if key is not None:
+            _path_params['key'] = key
         if dag_id is not None:
             _path_params['dag_id'] = dag_id
         if dag_run_id is not None:
             _path_params['dag_run_id'] = dag_run_id
         if task_id is not None:
             _path_params['task_id'] = task_id
-        if key is not None:
-            _path_params['key'] = key
         # process the query parameters
         if map_index is not None:
             
@@ -1128,7 +1128,6 @@ class TaskStateStoreApi:
             '200': "TaskStateStoreCollectionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
-            '404': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -1219,7 +1218,6 @@ class TaskStateStoreApi:
             '200': "TaskStateStoreCollectionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
-            '404': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -1310,7 +1308,6 @@ class TaskStateStoreApi:
             '200': "TaskStateStoreCollectionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
-            '404': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -1409,10 +1406,10 @@ class TaskStateStoreApi:
     @validate_call
     def patch_task_state_store(
         self,
+        key: StrictStr,
         dag_id: StrictStr,
         dag_run_id: StrictStr,
         task_id: StrictStr,
-        key: StrictStr,
         task_state_store_patch_body: TaskStateStorePatchBody,
         map_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         _request_timeout: Union[
@@ -1432,14 +1429,14 @@ class TaskStateStoreApi:
 
         Update the value of an existing task state store key.
 
+        :param key: (required)
+        :type key: str
         :param dag_id: (required)
         :type dag_id: str
         :param dag_run_id: (required)
         :type dag_run_id: str
         :param task_id: (required)
         :type task_id: str
-        :param key: (required)
-        :type key: str
         :param task_state_store_patch_body: (required)
         :type task_state_store_patch_body: TaskStateStorePatchBody
         :param map_index:
@@ -1467,10 +1464,10 @@ class TaskStateStoreApi:
         """ # noqa: E501
 
         _param = self._patch_task_state_store_serialize(
+            key=key,
             dag_id=dag_id,
             dag_run_id=dag_run_id,
             task_id=task_id,
-            key=key,
             task_state_store_patch_body=task_state_store_patch_body,
             map_index=map_index,
             _request_auth=_request_auth,
@@ -1500,10 +1497,10 @@ class TaskStateStoreApi:
     @validate_call
     def patch_task_state_store_with_http_info(
         self,
+        key: StrictStr,
         dag_id: StrictStr,
         dag_run_id: StrictStr,
         task_id: StrictStr,
-        key: StrictStr,
         task_state_store_patch_body: TaskStateStorePatchBody,
         map_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         _request_timeout: Union[
@@ -1523,14 +1520,14 @@ class TaskStateStoreApi:
 
         Update the value of an existing task state store key.
 
+        :param key: (required)
+        :type key: str
         :param dag_id: (required)
         :type dag_id: str
         :param dag_run_id: (required)
         :type dag_run_id: str
         :param task_id: (required)
         :type task_id: str
-        :param key: (required)
-        :type key: str
         :param task_state_store_patch_body: (required)
         :type task_state_store_patch_body: TaskStateStorePatchBody
         :param map_index:
@@ -1558,10 +1555,10 @@ class TaskStateStoreApi:
         """ # noqa: E501
 
         _param = self._patch_task_state_store_serialize(
+            key=key,
             dag_id=dag_id,
             dag_run_id=dag_run_id,
             task_id=task_id,
-            key=key,
             task_state_store_patch_body=task_state_store_patch_body,
             map_index=map_index,
             _request_auth=_request_auth,
@@ -1591,10 +1588,10 @@ class TaskStateStoreApi:
     @validate_call
     def patch_task_state_store_without_preload_content(
         self,
+        key: StrictStr,
         dag_id: StrictStr,
         dag_run_id: StrictStr,
         task_id: StrictStr,
-        key: StrictStr,
         task_state_store_patch_body: TaskStateStorePatchBody,
         map_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         _request_timeout: Union[
@@ -1614,14 +1611,14 @@ class TaskStateStoreApi:
 
         Update the value of an existing task state store key.
 
+        :param key: (required)
+        :type key: str
         :param dag_id: (required)
         :type dag_id: str
         :param dag_run_id: (required)
         :type dag_run_id: str
         :param task_id: (required)
         :type task_id: str
-        :param key: (required)
-        :type key: str
         :param task_state_store_patch_body: (required)
         :type task_state_store_patch_body: TaskStateStorePatchBody
         :param map_index:
@@ -1649,10 +1646,10 @@ class TaskStateStoreApi:
         """ # noqa: E501
 
         _param = self._patch_task_state_store_serialize(
+            key=key,
             dag_id=dag_id,
             dag_run_id=dag_run_id,
             task_id=task_id,
-            key=key,
             task_state_store_patch_body=task_state_store_patch_body,
             map_index=map_index,
             _request_auth=_request_auth,
@@ -1677,10 +1674,10 @@ class TaskStateStoreApi:
 
     def _patch_task_state_store_serialize(
         self,
+        key,
         dag_id,
         dag_run_id,
         task_id,
-        key,
         task_state_store_patch_body,
         map_index,
         _request_auth,
@@ -1704,14 +1701,14 @@ class TaskStateStoreApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
+        if key is not None:
+            _path_params['key'] = key
         if dag_id is not None:
             _path_params['dag_id'] = dag_id
         if dag_run_id is not None:
             _path_params['dag_run_id'] = dag_run_id
         if task_id is not None:
             _path_params['task_id'] = task_id
-        if key is not None:
-            _path_params['key'] = key
         # process the query parameters
         if map_index is not None:
             
@@ -1773,10 +1770,10 @@ class TaskStateStoreApi:
     @validate_call
     def set_task_state_store(
         self,
+        key: StrictStr,
         dag_id: StrictStr,
         dag_run_id: StrictStr,
         task_id: StrictStr,
-        key: StrictStr,
         task_state_store_body: TaskStateStoreBody,
         map_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         _request_timeout: Union[
@@ -1796,14 +1793,14 @@ class TaskStateStoreApi:
 
         Set a task state store value. Creates or overwrites the key.
 
+        :param key: (required)
+        :type key: str
         :param dag_id: (required)
         :type dag_id: str
         :param dag_run_id: (required)
         :type dag_run_id: str
         :param task_id: (required)
         :type task_id: str
-        :param key: (required)
-        :type key: str
         :param task_state_store_body: (required)
         :type task_state_store_body: TaskStateStoreBody
         :param map_index:
@@ -1831,10 +1828,10 @@ class TaskStateStoreApi:
         """ # noqa: E501
 
         _param = self._set_task_state_store_serialize(
+            key=key,
             dag_id=dag_id,
             dag_run_id=dag_run_id,
             task_id=task_id,
-            key=key,
             task_state_store_body=task_state_store_body,
             map_index=map_index,
             _request_auth=_request_auth,
@@ -1864,10 +1861,10 @@ class TaskStateStoreApi:
     @validate_call
     def set_task_state_store_with_http_info(
         self,
+        key: StrictStr,
         dag_id: StrictStr,
         dag_run_id: StrictStr,
         task_id: StrictStr,
-        key: StrictStr,
         task_state_store_body: TaskStateStoreBody,
         map_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         _request_timeout: Union[
@@ -1887,14 +1884,14 @@ class TaskStateStoreApi:
 
         Set a task state store value. Creates or overwrites the key.
 
+        :param key: (required)
+        :type key: str
         :param dag_id: (required)
         :type dag_id: str
         :param dag_run_id: (required)
         :type dag_run_id: str
         :param task_id: (required)
         :type task_id: str
-        :param key: (required)
-        :type key: str
         :param task_state_store_body: (required)
         :type task_state_store_body: TaskStateStoreBody
         :param map_index:
@@ -1922,10 +1919,10 @@ class TaskStateStoreApi:
         """ # noqa: E501
 
         _param = self._set_task_state_store_serialize(
+            key=key,
             dag_id=dag_id,
             dag_run_id=dag_run_id,
             task_id=task_id,
-            key=key,
             task_state_store_body=task_state_store_body,
             map_index=map_index,
             _request_auth=_request_auth,
@@ -1955,10 +1952,10 @@ class TaskStateStoreApi:
     @validate_call
     def set_task_state_store_without_preload_content(
         self,
+        key: StrictStr,
         dag_id: StrictStr,
         dag_run_id: StrictStr,
         task_id: StrictStr,
-        key: StrictStr,
         task_state_store_body: TaskStateStoreBody,
         map_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         _request_timeout: Union[
@@ -1978,14 +1975,14 @@ class TaskStateStoreApi:
 
         Set a task state store value. Creates or overwrites the key.
 
+        :param key: (required)
+        :type key: str
         :param dag_id: (required)
         :type dag_id: str
         :param dag_run_id: (required)
         :type dag_run_id: str
         :param task_id: (required)
         :type task_id: str
-        :param key: (required)
-        :type key: str
         :param task_state_store_body: (required)
         :type task_state_store_body: TaskStateStoreBody
         :param map_index:
@@ -2013,10 +2010,10 @@ class TaskStateStoreApi:
         """ # noqa: E501
 
         _param = self._set_task_state_store_serialize(
+            key=key,
             dag_id=dag_id,
             dag_run_id=dag_run_id,
             task_id=task_id,
-            key=key,
             task_state_store_body=task_state_store_body,
             map_index=map_index,
             _request_auth=_request_auth,
@@ -2041,10 +2038,10 @@ class TaskStateStoreApi:
 
     def _set_task_state_store_serialize(
         self,
+        key,
         dag_id,
         dag_run_id,
         task_id,
-        key,
         task_state_store_body,
         map_index,
         _request_auth,
@@ -2068,14 +2065,14 @@ class TaskStateStoreApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
+        if key is not None:
+            _path_params['key'] = key
         if dag_id is not None:
             _path_params['dag_id'] = dag_id
         if dag_run_id is not None:
             _path_params['dag_run_id'] = dag_run_id
         if task_id is not None:
             _path_params['task_id'] = task_id
-        if key is not None:
-            _path_params['key'] = key
         # process the query parameters
         if map_index is not None:
             

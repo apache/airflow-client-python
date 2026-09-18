@@ -75,8 +75,7 @@ class TaskInstanceHistoryCollectionResponse(BaseModel):
         _items = []
         if self.task_instances:
             for _item_task_instances in self.task_instances:
-                if _item_task_instances:
-                    _items.append(_item_task_instances.to_dict())
+                _items.append(_item_task_instances.to_dict() if _item_task_instances is not None else None)
             _dict['task_instances'] = _items
         return _dict
 

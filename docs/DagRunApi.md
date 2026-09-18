@@ -452,6 +452,7 @@ void (empty response body)
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
+**409** | Conflict |  -  |
 **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -555,7 +556,8 @@ Supports two pagination modes:
 **Offset (default):** use `limit` and `offset` query parameters. Returns `total_entries`.
 
 **Cursor:** pass `cursor` (empty string for the first page, then `next_cursor` from the response).
-When `cursor` is provided, `offset` is ignored and `total_entries` is not returned.
+When `cursor` is provided, `offset` is ignored and `total_entries` is capped at
+`total_entries_limit` (a value equal to that limit means at least that many runs match).
 ``next_cursor`` is ``null`` when there are no more pages; ``previous_cursor`` is ``null``
 on the first page.
 
@@ -718,6 +720,7 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
+**400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |

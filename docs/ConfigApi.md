@@ -47,7 +47,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = airflow_client.client.ConfigApi(api_client)
     section = 'section_example' # str |  (optional)
-    accept = */* # str |  (optional) (default to */*)
+    accept = '*/*' # str |  (optional) (default to '*/*')
 
     try:
         # Get Config
@@ -66,7 +66,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **section** | **str**|  | [optional] 
- **accept** | **str**|  | [optional] [default to */*]
+ **accept** | **str**|  | [optional] [default to &#39;*/*&#39;]
 
 ### Return type
 
@@ -134,7 +134,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     api_instance = airflow_client.client.ConfigApi(api_client)
     section = 'section_example' # str | 
     option = 'option_example' # str | 
-    accept = */* # str |  (optional) (default to */*)
+    accept = '*/*' # str |  (optional) (default to '*/*')
 
     try:
         # Get Config Value
@@ -154,7 +154,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **section** | **str**|  | 
  **option** | **str**|  | 
- **accept** | **str**|  | [optional] [default to */*]
+ **accept** | **str**|  | [optional] [default to &#39;*/*&#39;]
 
 ### Return type
 

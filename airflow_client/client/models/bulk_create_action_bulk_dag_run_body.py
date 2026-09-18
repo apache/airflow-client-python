@@ -84,8 +84,7 @@ class BulkCreateActionBulkDAGRunBody(BaseModel):
         _items = []
         if self.entities:
             for _item_entities in self.entities:
-                if _item_entities:
-                    _items.append(_item_entities.to_dict())
+                _items.append(_item_entities.to_dict() if _item_entities is not None else None)
             _dict['entities'] = _items
         return _dict
 

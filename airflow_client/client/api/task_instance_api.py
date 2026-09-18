@@ -6919,7 +6919,7 @@ class TaskInstanceApi:
     ) -> TaskInstanceCollectionResponse:
         """Get Task Instances
 
-        Get list of task instances.  This endpoint allows specifying `~` as the dag_id, dag_run_id to retrieve task instances for all Dags and Dag runs.  Supports two pagination modes:  **Offset (default):** use `limit` and `offset` query parameters. Returns `total_entries`.  **Cursor:** pass `cursor` (empty string for the first page, then `next_cursor` from the response). When `cursor` is provided, `offset` is ignored and `total_entries` is not returned. ``next_cursor`` is ``null`` when there are no more pages; ``previous_cursor`` is ``null`` on the first page.
+        Get list of task instances.  This endpoint allows specifying `~` as the dag_id, dag_run_id to retrieve task instances for all Dags and Dag runs.  Supports two pagination modes:  **Offset (default):** use `limit` and `offset` query parameters. Returns `total_entries`.  **Cursor:** pass `cursor` (empty string for the first page, then `next_cursor` from the response). When `cursor` is provided, `offset` is ignored and `total_entries` is capped at `total_entries_limit` (a value equal to that limit means at least that many task instances match). ``next_cursor`` is ``null`` when there are no more pages; ``previous_cursor`` is ``null`` on the first page.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -7203,7 +7203,7 @@ class TaskInstanceApi:
     ) -> ApiResponse[TaskInstanceCollectionResponse]:
         """Get Task Instances
 
-        Get list of task instances.  This endpoint allows specifying `~` as the dag_id, dag_run_id to retrieve task instances for all Dags and Dag runs.  Supports two pagination modes:  **Offset (default):** use `limit` and `offset` query parameters. Returns `total_entries`.  **Cursor:** pass `cursor` (empty string for the first page, then `next_cursor` from the response). When `cursor` is provided, `offset` is ignored and `total_entries` is not returned. ``next_cursor`` is ``null`` when there are no more pages; ``previous_cursor`` is ``null`` on the first page.
+        Get list of task instances.  This endpoint allows specifying `~` as the dag_id, dag_run_id to retrieve task instances for all Dags and Dag runs.  Supports two pagination modes:  **Offset (default):** use `limit` and `offset` query parameters. Returns `total_entries`.  **Cursor:** pass `cursor` (empty string for the first page, then `next_cursor` from the response). When `cursor` is provided, `offset` is ignored and `total_entries` is capped at `total_entries_limit` (a value equal to that limit means at least that many task instances match). ``next_cursor`` is ``null`` when there are no more pages; ``previous_cursor`` is ``null`` on the first page.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -7487,7 +7487,7 @@ class TaskInstanceApi:
     ) -> RESTResponseType:
         """Get Task Instances
 
-        Get list of task instances.  This endpoint allows specifying `~` as the dag_id, dag_run_id to retrieve task instances for all Dags and Dag runs.  Supports two pagination modes:  **Offset (default):** use `limit` and `offset` query parameters. Returns `total_entries`.  **Cursor:** pass `cursor` (empty string for the first page, then `next_cursor` from the response). When `cursor` is provided, `offset` is ignored and `total_entries` is not returned. ``next_cursor`` is ``null`` when there are no more pages; ``previous_cursor`` is ``null`` on the first page.
+        Get list of task instances.  This endpoint allows specifying `~` as the dag_id, dag_run_id to retrieve task instances for all Dags and Dag runs.  Supports two pagination modes:  **Offset (default):** use `limit` and `offset` query parameters. Returns `total_entries`.  **Cursor:** pass `cursor` (empty string for the first page, then `next_cursor` from the response). When `cursor` is provided, `offset` is ignored and `total_entries` is capped at `total_entries_limit` (a value equal to that limit means at least that many task instances match). ``next_cursor`` is ``null`` when there are no more pages; ``previous_cursor`` is ``null`` on the first page.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -10761,6 +10761,7 @@ class TaskInstanceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskInstanceCollectionResponse",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
@@ -10837,6 +10838,7 @@ class TaskInstanceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskInstanceCollectionResponse",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
@@ -10913,6 +10915,7 @@ class TaskInstanceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskInstanceCollectionResponse",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
@@ -11078,6 +11081,7 @@ class TaskInstanceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "HITLDetailResponse",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
@@ -11166,6 +11170,7 @@ class TaskInstanceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "HITLDetailResponse",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
@@ -11254,6 +11259,7 @@ class TaskInstanceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "HITLDetailResponse",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",

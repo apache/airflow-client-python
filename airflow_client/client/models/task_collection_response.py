@@ -75,8 +75,7 @@ class TaskCollectionResponse(BaseModel):
         _items = []
         if self.tasks:
             for _item_tasks in self.tasks:
-                if _item_tasks:
-                    _items.append(_item_tasks.to_dict())
+                _items.append(_item_tasks.to_dict() if _item_tasks is not None else None)
             _dict['tasks'] = _items
         return _dict
 

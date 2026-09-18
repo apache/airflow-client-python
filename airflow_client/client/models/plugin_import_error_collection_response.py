@@ -75,8 +75,7 @@ class PluginImportErrorCollectionResponse(BaseModel):
         _items = []
         if self.import_errors:
             for _item_import_errors in self.import_errors:
-                if _item_import_errors:
-                    _items.append(_item_import_errors.to_dict())
+                _items.append(_item_import_errors.to_dict() if _item_import_errors is not None else None)
             _dict['import_errors'] = _items
         return _dict
 

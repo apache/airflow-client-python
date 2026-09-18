@@ -72,7 +72,8 @@ class TestDAGRunCollectionResponse(unittest.TestCase):
                     ],
                 next_cursor = '',
                 previous_cursor = '',
-                total_entries = 56
+                total_entries = 56,
+                total_entries_limit = 56
             )
         else:
             return DAGRunCollectionResponse(

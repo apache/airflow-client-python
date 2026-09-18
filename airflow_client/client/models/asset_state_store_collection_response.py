@@ -75,8 +75,7 @@ class AssetStateStoreCollectionResponse(BaseModel):
         _items = []
         if self.asset_state_store:
             for _item_asset_state_store in self.asset_state_store:
-                if _item_asset_state_store:
-                    _items.append(_item_asset_state_store.to_dict())
+                _items.append(_item_asset_state_store.to_dict() if _item_asset_state_store is not None else None)
             _dict['asset_state_store'] = _items
         return _dict
 

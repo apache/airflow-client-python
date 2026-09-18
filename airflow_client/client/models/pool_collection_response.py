@@ -75,8 +75,7 @@ class PoolCollectionResponse(BaseModel):
         _items = []
         if self.pools:
             for _item_pools in self.pools:
-                if _item_pools:
-                    _items.append(_item_pools.to_dict())
+                _items.append(_item_pools.to_dict() if _item_pools is not None else None)
             _dict['pools'] = _items
         return _dict
 

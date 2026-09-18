@@ -754,7 +754,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     full_content = False # bool |  (optional) (default to False)
     map_index = -1 # int |  (optional) (default to -1)
     token = 'token_example' # str |  (optional)
-    accept = */* # str |  (optional) (default to */*)
+    accept = '*/*' # str |  (optional) (default to '*/*')
 
     try:
         # Get Log
@@ -779,7 +779,7 @@ Name | Type | Description  | Notes
  **full_content** | **bool**|  | [optional] [default to False]
  **map_index** | **int**|  | [optional] [default to -1]
  **token** | **str**|  | [optional] 
- **accept** | **str**|  | [optional] [default to */*]
+ **accept** | **str**|  | [optional] [default to &#39;*/*&#39;]
 
 ### Return type
 
@@ -1722,9 +1722,10 @@ Supports two pagination modes:
 **Offset (default):** use `limit` and `offset` query parameters. Returns `total_entries`.
 
 **Cursor:** pass `cursor` (empty string for the first page, then `next_cursor` from the response).
-When `cursor` is provided, `offset` is ignored and `total_entries` is not returned.
-``next_cursor`` is ``null`` when there are no more pages; ``previous_cursor`` is ``null``
-on the first page.
+When `cursor` is provided, `offset` is ignored and `total_entries` is capped at
+`total_entries_limit` (a value equal to that limit means at least that many task instances
+match). ``next_cursor`` is ``null`` when there are no more pages; ``previous_cursor`` is
+``null`` on the first page.
 
 ### Example
 
@@ -2661,6 +2662,7 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
+**400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
@@ -2756,6 +2758,7 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
+**400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |

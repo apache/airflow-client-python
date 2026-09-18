@@ -74,8 +74,7 @@ class Config(BaseModel):
         _items = []
         if self.sections:
             for _item_sections in self.sections:
-                if _item_sections:
-                    _items.append(_item_sections.to_dict())
+                _items.append(_item_sections.to_dict() if _item_sections is not None else None)
             _dict['sections'] = _items
         return _dict
 

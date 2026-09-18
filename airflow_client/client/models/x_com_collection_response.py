@@ -75,8 +75,7 @@ class XComCollectionResponse(BaseModel):
         _items = []
         if self.xcom_entries:
             for _item_xcom_entries in self.xcom_entries:
-                if _item_xcom_entries:
-                    _items.append(_item_xcom_entries.to_dict())
+                _items.append(_item_xcom_entries.to_dict() if _item_xcom_entries is not None else None)
             _dict['xcom_entries'] = _items
         return _dict
 

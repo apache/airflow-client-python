@@ -75,8 +75,7 @@ class ProviderCollectionResponse(BaseModel):
         _items = []
         if self.providers:
             for _item_providers in self.providers:
-                if _item_providers:
-                    _items.append(_item_providers.to_dict())
+                _items.append(_item_providers.to_dict() if _item_providers is not None else None)
             _dict['providers'] = _items
         return _dict
 

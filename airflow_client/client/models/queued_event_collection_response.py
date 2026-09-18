@@ -75,8 +75,7 @@ class QueuedEventCollectionResponse(BaseModel):
         _items = []
         if self.queued_events:
             for _item_queued_events in self.queued_events:
-                if _item_queued_events:
-                    _items.append(_item_queued_events.to_dict())
+                _items.append(_item_queued_events.to_dict() if _item_queued_events is not None else None)
             _dict['queued_events'] = _items
         return _dict
 

@@ -75,8 +75,7 @@ class AssetEventCollectionResponse(BaseModel):
         _items = []
         if self.asset_events:
             for _item_asset_events in self.asset_events:
-                if _item_asset_events:
-                    _items.append(_item_asset_events.to_dict())
+                _items.append(_item_asset_events.to_dict() if _item_asset_events is not None else None)
             _dict['asset_events'] = _items
         return _dict
 

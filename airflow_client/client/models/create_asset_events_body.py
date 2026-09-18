@@ -36,16 +36,13 @@ class CreateAssetEventsBody(BaseModel):
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["access_control", "asset_id", "extra", "partition_key"]
 
-    @field_validator('partition_key')
+    @field_validator('partition_key', mode="before")
     def partition_key_validate_regular_expression(cls, value):
         """Validates the regular expression"""
         if value is None:
             return value
 
-        if not isinstance(value, str):
-            value = str(value)
-
-        if not re.match(r"\S", value):
+        if isinstance(value, str) and not re.match(r"\S", value):
             raise ValueError(r"must validate the regular expression /\S/")
         return value
 

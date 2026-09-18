@@ -75,8 +75,7 @@ class DAGVersionCollectionResponse(BaseModel):
         _items = []
         if self.dag_versions:
             for _item_dag_versions in self.dag_versions:
-                if _item_dag_versions:
-                    _items.append(_item_dag_versions.to_dict())
+                _items.append(_item_dag_versions.to_dict() if _item_dag_versions is not None else None)
             _dict['dag_versions'] = _items
         return _dict
 

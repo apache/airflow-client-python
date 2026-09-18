@@ -46,7 +46,8 @@ class TestAssetEventResponse(unittest.TestCase):
                         partition_key = '', 
                         run_id = '', 
                         start_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
-                        state = '', )
+                        state = '', 
+                        triggering = True, )
                     ],
                 extra = {
                     'key' : null
@@ -75,7 +76,8 @@ class TestAssetEventResponse(unittest.TestCase):
                         partition_key = '', 
                         run_id = '', 
                         start_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
-                        state = '', )
+                        state = '', 
+                        triggering = True, )
                     ],
                 id = 56,
                 source_map_index = 56,

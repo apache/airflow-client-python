@@ -75,8 +75,7 @@ class BackfillCollectionResponse(BaseModel):
         _items = []
         if self.backfills:
             for _item_backfills in self.backfills:
-                if _item_backfills:
-                    _items.append(_item_backfills.to_dict())
+                _items.append(_item_backfills.to_dict() if _item_backfills is not None else None)
             _dict['backfills'] = _items
         return _dict
 

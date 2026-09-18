@@ -92,43 +92,37 @@ class PluginResponse(BaseModel):
         _items = []
         if self.appbuilder_menu_items:
             for _item_appbuilder_menu_items in self.appbuilder_menu_items:
-                if _item_appbuilder_menu_items:
-                    _items.append(_item_appbuilder_menu_items.to_dict())
+                _items.append(_item_appbuilder_menu_items.to_dict() if _item_appbuilder_menu_items is not None else None)
             _dict['appbuilder_menu_items'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in appbuilder_views (list)
         _items = []
         if self.appbuilder_views:
             for _item_appbuilder_views in self.appbuilder_views:
-                if _item_appbuilder_views:
-                    _items.append(_item_appbuilder_views.to_dict())
+                _items.append(_item_appbuilder_views.to_dict() if _item_appbuilder_views is not None else None)
             _dict['appbuilder_views'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in external_views (list)
         _items = []
         if self.external_views:
             for _item_external_views in self.external_views:
-                if _item_external_views:
-                    _items.append(_item_external_views.to_dict())
+                _items.append(_item_external_views.to_dict() if _item_external_views is not None else None)
             _dict['external_views'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in fastapi_apps (list)
         _items = []
         if self.fastapi_apps:
             for _item_fastapi_apps in self.fastapi_apps:
-                if _item_fastapi_apps:
-                    _items.append(_item_fastapi_apps.to_dict())
+                _items.append(_item_fastapi_apps.to_dict() if _item_fastapi_apps is not None else None)
             _dict['fastapi_apps'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in fastapi_root_middlewares (list)
         _items = []
         if self.fastapi_root_middlewares:
             for _item_fastapi_root_middlewares in self.fastapi_root_middlewares:
-                if _item_fastapi_root_middlewares:
-                    _items.append(_item_fastapi_root_middlewares.to_dict())
+                _items.append(_item_fastapi_root_middlewares.to_dict() if _item_fastapi_root_middlewares is not None else None)
             _dict['fastapi_root_middlewares'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in react_apps (list)
         _items = []
         if self.react_apps:
             for _item_react_apps in self.react_apps:
-                if _item_react_apps:
-                    _items.append(_item_react_apps.to_dict())
+                _items.append(_item_react_apps.to_dict() if _item_react_apps is not None else None)
             _dict['react_apps'] = _items
         return _dict
 

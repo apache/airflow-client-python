@@ -75,8 +75,7 @@ class TaskStateStoreCollectionResponse(BaseModel):
         _items = []
         if self.task_state_store:
             for _item_task_state_store in self.task_state_store:
-                if _item_task_state_store:
-                    _items.append(_item_task_state_store.to_dict())
+                _items.append(_item_task_state_store.to_dict() if _item_task_state_store is not None else None)
             _dict['task_state_store'] = _items
         return _dict
 

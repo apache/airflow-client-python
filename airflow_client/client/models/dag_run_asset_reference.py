@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -37,7 +37,8 @@ class DagRunAssetReference(BaseModel):
     run_id: StrictStr
     start_date: datetime
     state: StrictStr
-    __properties: ClassVar[List[str]] = ["dag_id", "data_interval_end", "data_interval_start", "end_date", "logical_date", "partition_key", "run_id", "start_date", "state"]
+    triggering: StrictBool = Field(description="Whether this asset event triggered the referenced dag run. Only a run's most recent consumed asset event triggers it; earlier consumed events are included in the run but did not trigger it.")
+    __properties: ClassVar[List[str]] = ["dag_id", "data_interval_end", "data_interval_start", "end_date", "logical_date", "partition_key", "run_id", "start_date", "state", "triggering"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -98,7 +99,8 @@ class DagRunAssetReference(BaseModel):
             "partition_key": obj.get("partition_key"),
             "run_id": obj.get("run_id"),
             "start_date": obj.get("start_date"),
-            "state": obj.get("state")
+            "state": obj.get("state"),
+            "triggering": obj.get("triggering")
         })
         return _obj
 

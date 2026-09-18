@@ -74,7 +74,8 @@ class TestTaskInstanceCollectionResponse(unittest.TestCase):
                         try_number = 56, 
                         unixname = '', )
                     ],
-                total_entries = 56
+                total_entries = 56,
+                total_entries_limit = 56
             )
         else:
             return TaskInstanceCollectionResponse(

@@ -75,8 +75,7 @@ class EventLogCollectionResponse(BaseModel):
         _items = []
         if self.event_logs:
             for _item_event_logs in self.event_logs:
-                if _item_event_logs:
-                    _items.append(_item_event_logs.to_dict())
+                _items.append(_item_event_logs.to_dict() if _item_event_logs is not None else None)
             _dict['event_logs'] = _items
         return _dict
 

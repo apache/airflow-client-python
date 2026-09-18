@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **previous_cursor** | **str** |  | [optional] 
 **task_instances** | [**List[TaskInstanceResponse]**](TaskInstanceResponse.md) |  | 
 **total_entries** | **int** |  | [optional] 
+**total_entries_limit** | **int** |  | [optional] 
 
 ## Example
 

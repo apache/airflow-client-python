@@ -75,8 +75,7 @@ class AssetCollectionResponse(BaseModel):
         _items = []
         if self.assets:
             for _item_assets in self.assets:
-                if _item_assets:
-                    _items.append(_item_assets.to_dict())
+                _items.append(_item_assets.to_dict() if _item_assets is not None else None)
             _dict['assets'] = _items
         return _dict
 

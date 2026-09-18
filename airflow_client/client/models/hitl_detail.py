@@ -90,8 +90,7 @@ class HITLDetail(BaseModel):
         _items = []
         if self.assigned_users:
             for _item_assigned_users in self.assigned_users:
-                if _item_assigned_users:
-                    _items.append(_item_assigned_users.to_dict())
+                _items.append(_item_assigned_users.to_dict() if _item_assigned_users is not None else None)
             _dict['assigned_users'] = _items
         # override the default output from pydantic by calling `to_dict()` of responded_by_user
         if self.responded_by_user:

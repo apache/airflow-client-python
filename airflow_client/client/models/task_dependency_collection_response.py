@@ -74,8 +74,7 @@ class TaskDependencyCollectionResponse(BaseModel):
         _items = []
         if self.dependencies:
             for _item_dependencies in self.dependencies:
-                if _item_dependencies:
-                    _items.append(_item_dependencies.to_dict())
+                _items.append(_item_dependencies.to_dict() if _item_dependencies is not None else None)
             _dict['dependencies'] = _items
         return _dict
 

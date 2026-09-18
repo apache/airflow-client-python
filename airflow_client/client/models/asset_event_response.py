@@ -87,8 +87,7 @@ class AssetEventResponse(BaseModel):
         _items = []
         if self.created_dagruns:
             for _item_created_dagruns in self.created_dagruns:
-                if _item_created_dagruns:
-                    _items.append(_item_created_dagruns.to_dict())
+                _items.append(_item_created_dagruns.to_dict() if _item_created_dagruns is not None else None)
             _dict['created_dagruns'] = _items
         return _dict
 

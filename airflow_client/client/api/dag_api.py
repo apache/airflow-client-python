@@ -102,6 +102,7 @@ class DAGApi:
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPExceptionResponse",
         }
         response_data = self.api_client.call_api(
@@ -174,6 +175,7 @@ class DAGApi:
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPExceptionResponse",
         }
         response_data = self.api_client.call_api(
@@ -246,6 +248,7 @@ class DAGApi:
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPExceptionResponse",
         }
         response_data = self.api_client.call_api(

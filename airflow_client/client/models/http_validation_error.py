@@ -74,8 +74,7 @@ class HTTPValidationError(BaseModel):
         _items = []
         if self.detail:
             for _item_detail in self.detail:
-                if _item_detail:
-                    _items.append(_item_detail.to_dict())
+                _items.append(_item_detail.to_dict() if _item_detail is not None else None)
             _dict['detail'] = _items
         return _dict
 

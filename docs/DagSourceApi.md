@@ -49,7 +49,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     api_instance = airflow_client.client.DagSourceApi(api_client)
     dag_id = 'dag_id_example' # str | 
     version_number = 56 # int |  (optional)
-    accept = */* # str |  (optional) (default to */*)
+    accept = '*/*' # str |  (optional) (default to '*/*')
 
     try:
         # Get Dag Source
@@ -69,7 +69,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **dag_id** | **str**|  | 
  **version_number** | **int**|  | [optional] 
- **accept** | **str**|  | [optional] [default to */*]
+ **accept** | **str**|  | [optional] [default to &#39;*/*&#39;]
 
 ### Return type
 

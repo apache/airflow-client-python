@@ -75,8 +75,7 @@ class HITLDetailCollection(BaseModel):
         _items = []
         if self.hitl_details:
             for _item_hitl_details in self.hitl_details:
-                if _item_hitl_details:
-                    _items.append(_item_hitl_details.to_dict())
+                _items.append(_item_hitl_details.to_dict() if _item_hitl_details is not None else None)
             _dict['hitl_details'] = _items
         return _dict
 

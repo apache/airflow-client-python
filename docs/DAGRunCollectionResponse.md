@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **next_cursor** | **str** |  | [optional] 
 **previous_cursor** | **str** |  | [optional] 
 **total_entries** | **int** |  | [optional] 
+**total_entries_limit** | **int** |  | [optional] 
 
 ## Example
 

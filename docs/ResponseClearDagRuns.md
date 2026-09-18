@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **dag_runs** | [**List[DAGRunResponse]**](DAGRunResponse.md) |  | 
 **next_cursor** | **str** |  | [optional] 
 **previous_cursor** | **str** |  | [optional] 
+**total_entries_limit** | **int** |  | [optional] 
 
 ## Example
 

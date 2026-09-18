@@ -75,8 +75,7 @@ class PluginCollectionResponse(BaseModel):
         _items = []
         if self.plugins:
             for _item_plugins in self.plugins:
-                if _item_plugins:
-                    _items.append(_item_plugins.to_dict())
+                _items.append(_item_plugins.to_dict() if _item_plugins is not None else None)
             _dict['plugins'] = _items
         return _dict
 

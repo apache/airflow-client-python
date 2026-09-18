@@ -75,8 +75,7 @@ class VariableCollectionResponse(BaseModel):
         _items = []
         if self.variables:
             for _item_variables in self.variables:
-                if _item_variables:
-                    _items.append(_item_variables.to_dict())
+                _items.append(_item_variables.to_dict() if _item_variables is not None else None)
             _dict['variables'] = _items
         return _dict
 

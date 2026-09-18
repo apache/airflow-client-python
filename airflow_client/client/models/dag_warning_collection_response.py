@@ -75,8 +75,7 @@ class DAGWarningCollectionResponse(BaseModel):
         _items = []
         if self.dag_warnings:
             for _item_dag_warnings in self.dag_warnings:
-                if _item_dag_warnings:
-                    _items.append(_item_dag_warnings.to_dict())
+                _items.append(_item_dag_warnings.to_dict() if _item_dag_warnings is not None else None)
             _dict['dag_warnings'] = _items
         return _dict
 

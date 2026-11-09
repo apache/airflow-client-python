@@ -28,6 +28,7 @@ class JobResponse(BaseModel):
     """
     Job serializer for responses.
     """ # noqa: E501
+    bundle_names: Optional[List[StrictStr]] = None
     dag_display_name: Optional[StrictStr] = None
     dag_id: Optional[StrictStr] = None
     end_date: Optional[datetime] = None
@@ -38,8 +39,9 @@ class JobResponse(BaseModel):
     latest_heartbeat: Optional[datetime] = None
     start_date: Optional[datetime] = None
     state: Optional[StrictStr] = None
+    team_names: Optional[List[StrictStr]] = None
     unixname: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["dag_display_name", "dag_id", "end_date", "executor_class", "hostname", "id", "job_type", "latest_heartbeat", "start_date", "state", "unixname"]
+    __properties: ClassVar[List[str]] = ["bundle_names", "dag_display_name", "dag_id", "end_date", "executor_class", "hostname", "id", "job_type", "latest_heartbeat", "start_date", "state", "team_names", "unixname"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -92,6 +94,7 @@ class JobResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "bundle_names": obj.get("bundle_names"),
             "dag_display_name": obj.get("dag_display_name"),
             "dag_id": obj.get("dag_id"),
             "end_date": obj.get("end_date"),
@@ -102,6 +105,7 @@ class JobResponse(BaseModel):
             "latest_heartbeat": obj.get("latest_heartbeat"),
             "start_date": obj.get("start_date"),
             "state": obj.get("state"),
+            "team_names": obj.get("team_names"),
             "unixname": obj.get("unixname")
         })
         return _obj

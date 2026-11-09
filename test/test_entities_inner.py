@@ -36,13 +36,12 @@ class TestEntitiesInner(unittest.TestCase):
         if include_optional:
             return EntitiesInner(
                 dag_id = '',
-                dag_run_id = '',
-                note = '',
-                state = 'queued'
+                is_paused = True,
+                scheduling_state = 'active'
             )
         else:
             return EntitiesInner(
-                dag_run_id = '',
+                dag_id = '',
         )
         """
 

@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from typing import Optional, Set
@@ -34,6 +34,13 @@ class PoolBody(BaseModel):
     slots: Annotated[int, Field(strict=True, ge=-1)] = Field(description="Number of slots. Use -1 for unlimited.")
     team_name: Optional[Annotated[str, Field(strict=True, max_length=50)]] = None
     __properties: ClassVar[List[str]] = ["description", "include_deferred", "name", "slots", "team_name"]
+
+    @field_validator('name', mode="before")
+    def name_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if isinstance(value, str) and not re.match(r"\S", value):
+            raise ValueError(r"must validate the regular expression /\S/")
+        return value
 
     model_config = ConfigDict(
         validate_by_name=True,

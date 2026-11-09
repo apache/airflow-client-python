@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -31,8 +31,9 @@ class TaskOutletAssetReference(BaseModel):
     created_at: datetime
     dag_id: StrictStr
     task_id: StrictStr
+    team_name: Optional[StrictStr] = None
     updated_at: datetime
-    __properties: ClassVar[List[str]] = ["created_at", "dag_id", "task_id", "updated_at"]
+    __properties: ClassVar[List[str]] = ["created_at", "dag_id", "task_id", "team_name", "updated_at"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -88,6 +89,7 @@ class TaskOutletAssetReference(BaseModel):
             "created_at": obj.get("created_at"),
             "dag_id": obj.get("dag_id"),
             "task_id": obj.get("task_id"),
+            "team_name": obj.get("team_name"),
             "updated_at": obj.get("updated_at")
         })
         return _obj

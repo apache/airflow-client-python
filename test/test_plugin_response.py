@@ -70,8 +70,12 @@ class TestPluginResponse(unittest.TestCase):
                     { }
                     ],
                 source = '',
+                team_name = '',
                 timetables = [
                     ''
+                    ],
+                ui_actions = [
+                    null
                     ]
             )
         else:

@@ -19,6 +19,7 @@ from datetime import datetime
 from pydantic import Field, StrictInt, StrictStr
 from typing import List, Optional
 from typing_extensions import Annotated
+from uuid import UUID
 from airflow_client.client.models.event_log_collection_response import EventLogCollectionResponse
 from airflow_client.client.models.event_log_response import EventLogResponse
 
@@ -262,7 +263,7 @@ class EventLogApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -279,7 +280,7 @@ class EventLogApi:
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -314,11 +315,14 @@ class EventLogApi:
     @validate_call
     def get_event_logs(
         self,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, dttm, dag_id, task_id, run_id, event, logical_date, owner, extra, when, event_log_id`")] = None,
+        order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, dttm, dag_id, task_id, run_id, event, logical_date, owner, owner_display_name, extra, when, event_log_id`")] = None,
         dag_id: Optional[StrictStr] = None,
         task_id: Optional[StrictStr] = None,
+        task_instance_id: Optional[UUID] = None,
         run_id: Optional[StrictStr] = None,
         map_index: Optional[StrictInt] = None,
         try_number: Optional[StrictInt] = None,
@@ -332,12 +336,15 @@ class EventLogApi:
         task_id_pattern: Annotated[Optional[StrictStr], Field(description="Case-insensitive substring match (SQL `ILIKE`). Slower than `task_id_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".")] = None,
         run_id_pattern: Annotated[Optional[StrictStr], Field(description="Case-insensitive substring match (SQL `ILIKE`). Slower than `run_id_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".")] = None,
         owner_pattern: Annotated[Optional[StrictStr], Field(description="Case-insensitive substring match (SQL `ILIKE`). Slower than `owner_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".")] = None,
+        owner_display_name_pattern: Annotated[Optional[StrictStr], Field(description="Case-insensitive substring match (SQL `ILIKE`). Slower than `owner_display_name_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".")] = None,
         event_pattern: Annotated[Optional[StrictStr], Field(description="Case-insensitive substring match (SQL `ILIKE`). Slower than `event_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".")] = None,
         dag_id_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".")] = None,
         task_id_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".")] = None,
         run_id_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".")] = None,
         owner_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".")] = None,
+        owner_display_name_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".")] = None,
         event_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".")] = None,
+        teams: Optional[List[StrictStr]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -355,16 +362,22 @@ class EventLogApi:
 
         Get all Event Logs.
 
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param limit:
         :type limit: int
         :param offset:
         :type offset: int
-        :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, dttm, dag_id, task_id, run_id, event, logical_date, owner, extra, when, event_log_id`
+        :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, dttm, dag_id, task_id, run_id, event, logical_date, owner, owner_display_name, extra, when, event_log_id`
         :type order_by: List[str]
         :param dag_id:
         :type dag_id: str
         :param task_id:
         :type task_id: str
+        :param task_instance_id:
+        :type task_instance_id: UUID
         :param run_id:
         :type run_id: str
         :param map_index:
@@ -391,6 +404,8 @@ class EventLogApi:
         :type run_id_pattern: str
         :param owner_pattern: Case-insensitive substring match (SQL `ILIKE`). Slower than `owner_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".
         :type owner_pattern: str
+        :param owner_display_name_pattern: Case-insensitive substring match (SQL `ILIKE`). Slower than `owner_display_name_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".
+        :type owner_display_name_pattern: str
         :param event_pattern: Case-insensitive substring match (SQL `ILIKE`). Slower than `event_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".
         :type event_pattern: str
         :param dag_id_prefix_pattern: Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".
@@ -401,8 +416,12 @@ class EventLogApi:
         :type run_id_prefix_pattern: str
         :param owner_prefix_pattern: Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".
         :type owner_prefix_pattern: str
+        :param owner_display_name_prefix_pattern: Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".
+        :type owner_display_name_prefix_pattern: str
         :param event_prefix_pattern: Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".
         :type event_prefix_pattern: str
+        :param teams:
+        :type teams: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -426,11 +445,14 @@ class EventLogApi:
         """ # noqa: E501
 
         _param = self._get_event_logs_serialize(
+            region_id=region_id,
+            region_index=region_index,
             limit=limit,
             offset=offset,
             order_by=order_by,
             dag_id=dag_id,
             task_id=task_id,
+            task_instance_id=task_instance_id,
             run_id=run_id,
             map_index=map_index,
             try_number=try_number,
@@ -444,12 +466,15 @@ class EventLogApi:
             task_id_pattern=task_id_pattern,
             run_id_pattern=run_id_pattern,
             owner_pattern=owner_pattern,
+            owner_display_name_pattern=owner_display_name_pattern,
             event_pattern=event_pattern,
             dag_id_prefix_pattern=dag_id_prefix_pattern,
             task_id_prefix_pattern=task_id_prefix_pattern,
             run_id_prefix_pattern=run_id_prefix_pattern,
             owner_prefix_pattern=owner_prefix_pattern,
+            owner_display_name_prefix_pattern=owner_display_name_prefix_pattern,
             event_prefix_pattern=event_prefix_pattern,
+            teams=teams,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -458,6 +483,7 @@ class EventLogApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EventLogCollectionResponse",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
@@ -476,11 +502,14 @@ class EventLogApi:
     @validate_call
     def get_event_logs_with_http_info(
         self,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, dttm, dag_id, task_id, run_id, event, logical_date, owner, extra, when, event_log_id`")] = None,
+        order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, dttm, dag_id, task_id, run_id, event, logical_date, owner, owner_display_name, extra, when, event_log_id`")] = None,
         dag_id: Optional[StrictStr] = None,
         task_id: Optional[StrictStr] = None,
+        task_instance_id: Optional[UUID] = None,
         run_id: Optional[StrictStr] = None,
         map_index: Optional[StrictInt] = None,
         try_number: Optional[StrictInt] = None,
@@ -494,12 +523,15 @@ class EventLogApi:
         task_id_pattern: Annotated[Optional[StrictStr], Field(description="Case-insensitive substring match (SQL `ILIKE`). Slower than `task_id_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".")] = None,
         run_id_pattern: Annotated[Optional[StrictStr], Field(description="Case-insensitive substring match (SQL `ILIKE`). Slower than `run_id_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".")] = None,
         owner_pattern: Annotated[Optional[StrictStr], Field(description="Case-insensitive substring match (SQL `ILIKE`). Slower than `owner_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".")] = None,
+        owner_display_name_pattern: Annotated[Optional[StrictStr], Field(description="Case-insensitive substring match (SQL `ILIKE`). Slower than `owner_display_name_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".")] = None,
         event_pattern: Annotated[Optional[StrictStr], Field(description="Case-insensitive substring match (SQL `ILIKE`). Slower than `event_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".")] = None,
         dag_id_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".")] = None,
         task_id_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".")] = None,
         run_id_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".")] = None,
         owner_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".")] = None,
+        owner_display_name_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".")] = None,
         event_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".")] = None,
+        teams: Optional[List[StrictStr]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -517,16 +549,22 @@ class EventLogApi:
 
         Get all Event Logs.
 
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param limit:
         :type limit: int
         :param offset:
         :type offset: int
-        :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, dttm, dag_id, task_id, run_id, event, logical_date, owner, extra, when, event_log_id`
+        :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, dttm, dag_id, task_id, run_id, event, logical_date, owner, owner_display_name, extra, when, event_log_id`
         :type order_by: List[str]
         :param dag_id:
         :type dag_id: str
         :param task_id:
         :type task_id: str
+        :param task_instance_id:
+        :type task_instance_id: UUID
         :param run_id:
         :type run_id: str
         :param map_index:
@@ -553,6 +591,8 @@ class EventLogApi:
         :type run_id_pattern: str
         :param owner_pattern: Case-insensitive substring match (SQL `ILIKE`). Slower than `owner_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".
         :type owner_pattern: str
+        :param owner_display_name_pattern: Case-insensitive substring match (SQL `ILIKE`). Slower than `owner_display_name_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".
+        :type owner_display_name_pattern: str
         :param event_pattern: Case-insensitive substring match (SQL `ILIKE`). Slower than `event_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".
         :type event_pattern: str
         :param dag_id_prefix_pattern: Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".
@@ -563,8 +603,12 @@ class EventLogApi:
         :type run_id_prefix_pattern: str
         :param owner_prefix_pattern: Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".
         :type owner_prefix_pattern: str
+        :param owner_display_name_prefix_pattern: Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".
+        :type owner_display_name_prefix_pattern: str
         :param event_prefix_pattern: Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".
         :type event_prefix_pattern: str
+        :param teams:
+        :type teams: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -588,11 +632,14 @@ class EventLogApi:
         """ # noqa: E501
 
         _param = self._get_event_logs_serialize(
+            region_id=region_id,
+            region_index=region_index,
             limit=limit,
             offset=offset,
             order_by=order_by,
             dag_id=dag_id,
             task_id=task_id,
+            task_instance_id=task_instance_id,
             run_id=run_id,
             map_index=map_index,
             try_number=try_number,
@@ -606,12 +653,15 @@ class EventLogApi:
             task_id_pattern=task_id_pattern,
             run_id_pattern=run_id_pattern,
             owner_pattern=owner_pattern,
+            owner_display_name_pattern=owner_display_name_pattern,
             event_pattern=event_pattern,
             dag_id_prefix_pattern=dag_id_prefix_pattern,
             task_id_prefix_pattern=task_id_prefix_pattern,
             run_id_prefix_pattern=run_id_prefix_pattern,
             owner_prefix_pattern=owner_prefix_pattern,
+            owner_display_name_prefix_pattern=owner_display_name_prefix_pattern,
             event_prefix_pattern=event_prefix_pattern,
+            teams=teams,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -620,6 +670,7 @@ class EventLogApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EventLogCollectionResponse",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
@@ -638,11 +689,14 @@ class EventLogApi:
     @validate_call
     def get_event_logs_without_preload_content(
         self,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, dttm, dag_id, task_id, run_id, event, logical_date, owner, extra, when, event_log_id`")] = None,
+        order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, dttm, dag_id, task_id, run_id, event, logical_date, owner, owner_display_name, extra, when, event_log_id`")] = None,
         dag_id: Optional[StrictStr] = None,
         task_id: Optional[StrictStr] = None,
+        task_instance_id: Optional[UUID] = None,
         run_id: Optional[StrictStr] = None,
         map_index: Optional[StrictInt] = None,
         try_number: Optional[StrictInt] = None,
@@ -656,12 +710,15 @@ class EventLogApi:
         task_id_pattern: Annotated[Optional[StrictStr], Field(description="Case-insensitive substring match (SQL `ILIKE`). Slower than `task_id_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".")] = None,
         run_id_pattern: Annotated[Optional[StrictStr], Field(description="Case-insensitive substring match (SQL `ILIKE`). Slower than `run_id_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".")] = None,
         owner_pattern: Annotated[Optional[StrictStr], Field(description="Case-insensitive substring match (SQL `ILIKE`). Slower than `owner_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".")] = None,
+        owner_display_name_pattern: Annotated[Optional[StrictStr], Field(description="Case-insensitive substring match (SQL `ILIKE`). Slower than `owner_display_name_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".")] = None,
         event_pattern: Annotated[Optional[StrictStr], Field(description="Case-insensitive substring match (SQL `ILIKE`). Slower than `event_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".")] = None,
         dag_id_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".")] = None,
         task_id_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".")] = None,
         run_id_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".")] = None,
         owner_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".")] = None,
+        owner_display_name_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".")] = None,
         event_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".")] = None,
+        teams: Optional[List[StrictStr]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -679,16 +736,22 @@ class EventLogApi:
 
         Get all Event Logs.
 
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param limit:
         :type limit: int
         :param offset:
         :type offset: int
-        :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, dttm, dag_id, task_id, run_id, event, logical_date, owner, extra, when, event_log_id`
+        :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, dttm, dag_id, task_id, run_id, event, logical_date, owner, owner_display_name, extra, when, event_log_id`
         :type order_by: List[str]
         :param dag_id:
         :type dag_id: str
         :param task_id:
         :type task_id: str
+        :param task_instance_id:
+        :type task_instance_id: UUID
         :param run_id:
         :type run_id: str
         :param map_index:
@@ -715,6 +778,8 @@ class EventLogApi:
         :type run_id_pattern: str
         :param owner_pattern: Case-insensitive substring match (SQL `ILIKE`). Slower than `owner_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".
         :type owner_pattern: str
+        :param owner_display_name_pattern: Case-insensitive substring match (SQL `ILIKE`). Slower than `owner_display_name_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".
+        :type owner_display_name_pattern: str
         :param event_pattern: Case-insensitive substring match (SQL `ILIKE`). Slower than `event_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".
         :type event_pattern: str
         :param dag_id_prefix_pattern: Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".
@@ -725,8 +790,12 @@ class EventLogApi:
         :type run_id_prefix_pattern: str
         :param owner_prefix_pattern: Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".
         :type owner_prefix_pattern: str
+        :param owner_display_name_prefix_pattern: Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".
+        :type owner_display_name_prefix_pattern: str
         :param event_prefix_pattern: Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".
         :type event_prefix_pattern: str
+        :param teams:
+        :type teams: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -750,11 +819,14 @@ class EventLogApi:
         """ # noqa: E501
 
         _param = self._get_event_logs_serialize(
+            region_id=region_id,
+            region_index=region_index,
             limit=limit,
             offset=offset,
             order_by=order_by,
             dag_id=dag_id,
             task_id=task_id,
+            task_instance_id=task_instance_id,
             run_id=run_id,
             map_index=map_index,
             try_number=try_number,
@@ -768,12 +840,15 @@ class EventLogApi:
             task_id_pattern=task_id_pattern,
             run_id_pattern=run_id_pattern,
             owner_pattern=owner_pattern,
+            owner_display_name_pattern=owner_display_name_pattern,
             event_pattern=event_pattern,
             dag_id_prefix_pattern=dag_id_prefix_pattern,
             task_id_prefix_pattern=task_id_prefix_pattern,
             run_id_prefix_pattern=run_id_prefix_pattern,
             owner_prefix_pattern=owner_prefix_pattern,
+            owner_display_name_prefix_pattern=owner_display_name_prefix_pattern,
             event_prefix_pattern=event_prefix_pattern,
+            teams=teams,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -782,6 +857,7 @@ class EventLogApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EventLogCollectionResponse",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
@@ -795,11 +871,14 @@ class EventLogApi:
 
     def _get_event_logs_serialize(
         self,
+        region_id,
+        region_index,
         limit,
         offset,
         order_by,
         dag_id,
         task_id,
+        task_instance_id,
         run_id,
         map_index,
         try_number,
@@ -813,12 +892,15 @@ class EventLogApi:
         task_id_pattern,
         run_id_pattern,
         owner_pattern,
+        owner_display_name_pattern,
         event_pattern,
         dag_id_prefix_pattern,
         task_id_prefix_pattern,
         run_id_prefix_pattern,
         owner_prefix_pattern,
+        owner_display_name_prefix_pattern,
         event_prefix_pattern,
+        teams,
         _request_auth,
         _content_type,
         _headers,
@@ -831,11 +913,12 @@ class EventLogApi:
             'order_by': 'multi',
             'excluded_events': 'multi',
             'included_events': 'multi',
+            'teams': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -844,6 +927,14 @@ class EventLogApi:
 
         # process the path parameters
         # process the query parameters
+        if region_id is not None:
+            
+            _query_params.append(('region_id', region_id))
+            
+        if region_index is not None:
+            
+            _query_params.append(('region_index', region_index))
+            
         if limit is not None:
             
             _query_params.append(('limit', limit))
@@ -863,6 +954,10 @@ class EventLogApi:
         if task_id is not None:
             
             _query_params.append(('task_id', task_id))
+            
+        if task_instance_id is not None:
+            
+            _query_params.append(('task_instance_id', task_instance_id))
             
         if run_id is not None:
             
@@ -934,6 +1029,10 @@ class EventLogApi:
             
             _query_params.append(('owner_pattern', owner_pattern))
             
+        if owner_display_name_pattern is not None:
+            
+            _query_params.append(('owner_display_name_pattern', owner_display_name_pattern))
+            
         if event_pattern is not None:
             
             _query_params.append(('event_pattern', event_pattern))
@@ -954,9 +1053,17 @@ class EventLogApi:
             
             _query_params.append(('owner_prefix_pattern', owner_prefix_pattern))
             
+        if owner_display_name_prefix_pattern is not None:
+            
+            _query_params.append(('owner_display_name_prefix_pattern', owner_display_name_prefix_pattern))
+            
         if event_prefix_pattern is not None:
             
             _query_params.append(('event_prefix_pattern', event_prefix_pattern))
+            
+        if teams is not None:
+            
+            _query_params.append(('teams', teams))
             
         # process the header parameters
         # process the form parameters
@@ -964,7 +1071,7 @@ class EventLogApi:
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'

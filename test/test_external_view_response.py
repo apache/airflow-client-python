@@ -35,6 +35,11 @@ class TestExternalViewResponse(unittest.TestCase):
         model = ExternalViewResponse()
         if include_optional:
             return ExternalViewResponse(
+                applies_to = {
+                    'key' : [
+                        ''
+                        ]
+                    },
                 category = '',
                 destination = 'nav',
                 href = '',

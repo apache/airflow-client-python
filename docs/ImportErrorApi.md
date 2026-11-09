@@ -135,7 +135,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     api_instance = airflow_client.client.ImportErrorApi(api_client)
     limit = 50 # int |  (optional) (default to 50)
     offset = 0 # int |  (optional) (default to 0)
-    order_by = ["id"] # List[str] | Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, timestamp, filename, bundle_name, stacktrace, import_error_id` (optional) (default to ["id"])
+    order_by = ["id"] # List[str] | Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, timestamp, filename, source_reference, bundle_name, stacktrace, import_error_id` (optional) (default to ["id"])
     filename_pattern = 'filename_pattern_example' # str | Case-insensitive substring match (SQL `ILIKE`). Slower than `filename_prefix_pattern` on large tables — see \"Filtering with pattern parameters\". (optional)
     filename_prefix_pattern = 'filename_prefix_pattern_example' # str | Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\". (optional)
     filename = 'filename_example' # str | Exact filename match. Returns only the import error for this specific file path. (optional)
@@ -159,7 +159,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **int**|  | [optional] [default to 50]
  **offset** | **int**|  | [optional] [default to 0]
- **order_by** | [**List[str]**](str.md)| Attributes to order by, multi criteria sort is supported. Prefix with &#x60;-&#x60; for descending order. Supported attributes: &#x60;id, timestamp, filename, bundle_name, stacktrace, import_error_id&#x60; | [optional] [default to [&quot;id&quot;]]
+ **order_by** | [**List[str]**](str.md)| Attributes to order by, multi criteria sort is supported. Prefix with &#x60;-&#x60; for descending order. Supported attributes: &#x60;id, timestamp, filename, source_reference, bundle_name, stacktrace, import_error_id&#x60; | [optional] [default to [&quot;id&quot;]]
  **filename_pattern** | **str**| Case-insensitive substring match (SQL &#x60;ILIKE&#x60;). Slower than &#x60;filename_prefix_pattern&#x60; on large tables — see \&quot;Filtering with pattern parameters\&quot;. | [optional] 
  **filename_prefix_pattern** | **str**| Case-sensitive, index-friendly prefix match. See \&quot;Filtering with pattern parameters\&quot;. | [optional] 
  **filename** | **str**| Exact filename match. Returns only the import error for this specific file path. | [optional] 

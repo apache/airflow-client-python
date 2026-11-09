@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **dag_id** | **str** |  | 
 **description** | **str** |  | [optional] 
 **file_token** | **str** | Return file token. | [readonly] 
-**fileloc** | **str** |  | 
+**fileloc** | **str** |  | [optional] 
 **has_import_errors** | **bool** |  | 
 **has_task_concurrency_limits** | **bool** |  | 
 **is_backfillable** | **bool** | Whether this Dag&#39;s schedule supports backfilling. | [readonly] 
@@ -31,6 +31,7 @@ Name | Type | Description | Notes
 **next_dagrun_run_after** | **datetime** |  | [optional] 
 **owners** | **List[str]** |  | 
 **relative_fileloc** | **str** |  | [optional] 
+**scheduling_state** | [**DagSchedulingState**](DagSchedulingState.md) |  | [optional] 
 **tags** | [**List[DagTagResponse]**](DagTagResponse.md) |  | 
 **timetable_description** | **str** |  | [optional] 
 **timetable_partitioned** | **bool** |  | 

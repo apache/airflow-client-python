@@ -264,7 +264,7 @@ class ImportErrorApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -281,7 +281,7 @@ class ImportErrorApi:
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -318,7 +318,7 @@ class ImportErrorApi:
         self,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, timestamp, filename, bundle_name, stacktrace, import_error_id`")] = None,
+        order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, timestamp, filename, source_reference, bundle_name, stacktrace, import_error_id`")] = None,
         filename_pattern: Annotated[Optional[StrictStr], Field(description="Case-insensitive substring match (SQL `ILIKE`). Slower than `filename_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".")] = None,
         filename_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".")] = None,
         filename: Annotated[Optional[StrictStr], Field(description="Exact filename match. Returns only the import error for this specific file path.")] = None,
@@ -344,7 +344,7 @@ class ImportErrorApi:
         :type limit: int
         :param offset:
         :type offset: int
-        :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, timestamp, filename, bundle_name, stacktrace, import_error_id`
+        :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, timestamp, filename, source_reference, bundle_name, stacktrace, import_error_id`
         :type order_by: List[str]
         :param filename_pattern: Case-insensitive substring match (SQL `ILIKE`). Slower than `filename_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".
         :type filename_pattern: str
@@ -412,7 +412,7 @@ class ImportErrorApi:
         self,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, timestamp, filename, bundle_name, stacktrace, import_error_id`")] = None,
+        order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, timestamp, filename, source_reference, bundle_name, stacktrace, import_error_id`")] = None,
         filename_pattern: Annotated[Optional[StrictStr], Field(description="Case-insensitive substring match (SQL `ILIKE`). Slower than `filename_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".")] = None,
         filename_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".")] = None,
         filename: Annotated[Optional[StrictStr], Field(description="Exact filename match. Returns only the import error for this specific file path.")] = None,
@@ -438,7 +438,7 @@ class ImportErrorApi:
         :type limit: int
         :param offset:
         :type offset: int
-        :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, timestamp, filename, bundle_name, stacktrace, import_error_id`
+        :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, timestamp, filename, source_reference, bundle_name, stacktrace, import_error_id`
         :type order_by: List[str]
         :param filename_pattern: Case-insensitive substring match (SQL `ILIKE`). Slower than `filename_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".
         :type filename_pattern: str
@@ -506,7 +506,7 @@ class ImportErrorApi:
         self,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, timestamp, filename, bundle_name, stacktrace, import_error_id`")] = None,
+        order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, timestamp, filename, source_reference, bundle_name, stacktrace, import_error_id`")] = None,
         filename_pattern: Annotated[Optional[StrictStr], Field(description="Case-insensitive substring match (SQL `ILIKE`). Slower than `filename_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".")] = None,
         filename_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".")] = None,
         filename: Annotated[Optional[StrictStr], Field(description="Exact filename match. Returns only the import error for this specific file path.")] = None,
@@ -532,7 +532,7 @@ class ImportErrorApi:
         :type limit: int
         :param offset:
         :type offset: int
-        :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, timestamp, filename, bundle_name, stacktrace, import_error_id`
+        :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, timestamp, filename, source_reference, bundle_name, stacktrace, import_error_id`
         :type order_by: List[str]
         :param filename_pattern: Case-insensitive substring match (SQL `ILIKE`). Slower than `filename_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".
         :type filename_pattern: str
@@ -614,7 +614,7 @@ class ImportErrorApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -657,7 +657,7 @@ class ImportErrorApi:
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'

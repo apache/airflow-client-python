@@ -12,6 +12,8 @@ Name | Type | Description | Notes
 **include_upstream** | **bool** |  | [optional] [default to False]
 **new_state** | [**TaskInstanceState**](TaskInstanceState.md) |  | [optional] 
 **note** | **str** |  | [optional] 
+**region_id** | **UUID** |  | [optional] 
+**region_index** | **int** |  | [optional] 
 
 ## Example
 

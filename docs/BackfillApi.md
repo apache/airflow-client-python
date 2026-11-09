@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**create_backfill**](BackfillApi.md#create_backfill) | **POST** /api/v2/backfills | Create Backfill
 [**create_backfill_dry_run**](BackfillApi.md#create_backfill_dry_run) | **POST** /api/v2/backfills/dry_run | Create Backfill Dry Run
 [**get_backfill**](BackfillApi.md#get_backfill) | **GET** /api/v2/backfills/{backfill_id} | Get Backfill
+[**list_backfill_dag_runs**](BackfillApi.md#list_backfill_dag_runs) | **GET** /api/v2/backfills/{backfill_id}/dag_runs | List Backfill Dag Runs
 [**list_backfills**](BackfillApi.md#list_backfills) | **GET** /api/v2/backfills | List Backfills
 [**pause_backfill**](BackfillApi.md#pause_backfill) | **PUT** /api/v2/backfills/{backfill_id}/pause | Pause Backfill
 [**unpause_backfill**](BackfillApi.md#unpause_backfill) | **PUT** /api/v2/backfills/{backfill_id}/unpause | Unpause Backfill
@@ -332,6 +333,97 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**BackfillResponse**](BackfillResponse.md)
+
+### Authorization
+
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **list_backfill_dag_runs**
+> BackfillDagRunCollectionResponse list_backfill_dag_runs(backfill_id, limit=limit, offset=offset, order_by=order_by)
+
+List Backfill Dag Runs
+
+List Dag runs associated with a backfill, including skipped slots.
+
+### Example
+
+* OAuth Authentication (OAuth2PasswordBearer):
+* Bearer Authentication (HTTPBearer):
+
+```python
+import airflow_client.client
+from airflow_client.client.models.backfill_dag_run_collection_response import BackfillDagRunCollectionResponse
+from airflow_client.client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = airflow_client.client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure Bearer authorization: HTTPBearer
+configuration = airflow_client.client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with airflow_client.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = airflow_client.client.BackfillApi(api_client)
+    backfill_id = 56 # int | 
+    limit = 50 # int |  (optional) (default to 50)
+    offset = 0 # int |  (optional) (default to 0)
+    order_by = ["sort_ordinal"] # List[str] | Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, sort_ordinal` (optional) (default to ["sort_ordinal"])
+
+    try:
+        # List Backfill Dag Runs
+        api_response = api_instance.list_backfill_dag_runs(backfill_id, limit=limit, offset=offset, order_by=order_by)
+        print("The response of BackfillApi->list_backfill_dag_runs:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling BackfillApi->list_backfill_dag_runs: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **backfill_id** | **int**|  | 
+ **limit** | **int**|  | [optional] [default to 50]
+ **offset** | **int**|  | [optional] [default to 0]
+ **order_by** | [**List[str]**](str.md)| Attributes to order by, multi criteria sort is supported. Prefix with &#x60;-&#x60; for descending order. Supported attributes: &#x60;id, sort_ordinal&#x60; | [optional] [default to [&quot;sort_ordinal&quot;]]
+
+### Return type
+
+[**BackfillDagRunCollectionResponse**](BackfillDagRunCollectionResponse.md)
 
 ### Authorization
 

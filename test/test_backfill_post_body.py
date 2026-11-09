@@ -37,8 +37,9 @@ class TestBackfillPostBody(unittest.TestCase):
             return BackfillPostBody(
                 dag_id = '',
                 dag_run_conf = { },
+                drain_dag = True,
                 from_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
-                max_active_runs = 56,
+                max_active_runs = 1.0,
                 reprocess_behavior = 'failed',
                 run_backwards = True,
                 run_on_latest_version = True,

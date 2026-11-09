@@ -19,6 +19,9 @@ import json
 
 from pydantic import BaseModel, ConfigDict, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from airflow_client.client.models.dag_processor_instance_info_response import DagProcessorInstanceInfoResponse
+from airflow_client.client.models.detailed_health_status import DetailedHealthStatus
+from airflow_client.client.models.health_status import HealthStatus
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -27,9 +30,11 @@ class DagProcessorInfoResponse(BaseModel):
     """
     DagProcessor info serializer for responses.
     """ # noqa: E501
+    detailed_status: Optional[DetailedHealthStatus] = None
+    instances: Optional[List[DagProcessorInstanceInfoResponse]] = None
     latest_dag_processor_heartbeat: Optional[StrictStr] = None
-    status: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["latest_dag_processor_heartbeat", "status"]
+    status: Optional[HealthStatus] = None
+    __properties: ClassVar[List[str]] = ["detailed_status", "instances", "latest_dag_processor_heartbeat", "status"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -70,6 +75,12 @@ class DagProcessorInfoResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in instances (list)
+        _items = []
+        if self.instances:
+            for _item_instances in self.instances:
+                _items.append(_item_instances.to_dict() if _item_instances is not None else None)
+            _dict['instances'] = _items
         return _dict
 
     @classmethod
@@ -82,6 +93,8 @@ class DagProcessorInfoResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "detailed_status": obj.get("detailed_status"),
+            "instances": [DagProcessorInstanceInfoResponse.from_dict(_item) for _item in obj["instances"]] if obj.get("instances") is not None else None,
             "latest_dag_processor_heartbeat": obj.get("latest_dag_processor_heartbeat"),
             "status": obj.get("status")
         })

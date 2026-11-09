@@ -35,8 +35,14 @@ class TestSchedulerInfoResponse(unittest.TestCase):
         model = SchedulerInfoResponse()
         if include_optional:
             return SchedulerInfoResponse(
+                detailed_status = 'healthy',
+                instances = [
+                    airflow_client.client.models.scheduler_instance_info_response.SchedulerInstanceInfoResponse(
+                        hostname = '', 
+                        latest_scheduler_heartbeat = '', )
+                    ],
                 latest_scheduler_heartbeat = '',
-                status = ''
+                status = 'healthy'
             )
         else:
             return SchedulerInfoResponse(

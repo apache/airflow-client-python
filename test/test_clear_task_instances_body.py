@@ -40,8 +40,10 @@ class TestClearTaskInstancesBody(unittest.TestCase):
                 end_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 include_downstream = True,
                 include_future = True,
+                include_later_loop_iterations = True,
                 include_past = True,
                 include_upstream = True,
+                keep_task_state = True,
                 note = '',
                 only_failed = True,
                 only_running = True,
@@ -49,8 +51,15 @@ class TestClearTaskInstancesBody(unittest.TestCase):
                 reset_dag_runs = True,
                 run_on_latest_version = True,
                 start_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+                task_group_id = '',
                 task_ids = [
                     null
+                    ],
+                task_instance_ids = [
+                    ''
+                    ],
+                whole_expansion_ids = [
+                    ''
                     ]
             )
         else:

@@ -15,6 +15,8 @@ Name | Type | Description | Notes
 **map_index** | **int** |  | [optional] 
 **new_state** | [**TaskInstanceState**](TaskInstanceState.md) |  | [optional] 
 **note** | **str** |  | [optional] 
+**region_id** | **UUID** |  | [optional] 
+**region_index** | **int** |  | [optional] 
 **task_id** | **str** |  | 
 
 ## Example

@@ -38,7 +38,8 @@ class TestUpdateHITLDetailPayload(unittest.TestCase):
                 chosen_options = [
                     ''
                     ],
-                params_input = { }
+                params_input = { },
+                request_created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f')
             )
         else:
             return UpdateHITLDetailPayload(

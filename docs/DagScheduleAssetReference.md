@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **created_at** | **datetime** |  | 
 **dag_id** | **str** |  | 
+**team_name** | **str** |  | [optional] 
 **updated_at** | **datetime** |  | 
 
 ## Example

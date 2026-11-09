@@ -18,13 +18,14 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from airflow_client.client.models.app_builder_menu_item_response import AppBuilderMenuItemResponse
 from airflow_client.client.models.app_builder_view_response import AppBuilderViewResponse
 from airflow_client.client.models.external_view_response import ExternalViewResponse
 from airflow_client.client.models.fast_api_app_response import FastAPIAppResponse
 from airflow_client.client.models.fast_api_root_middleware_response import FastAPIRootMiddlewareResponse
 from airflow_client.client.models.react_app_response import ReactAppResponse
+from airflow_client.client.models.ui_actions_inner import UiActionsInner
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -46,8 +47,10 @@ class PluginResponse(BaseModel):
     operator_extra_links: List[StrictStr]
     react_apps: List[ReactAppResponse]
     source: StrictStr
+    team_name: Optional[StrictStr] = None
     timetables: List[StrictStr]
-    __properties: ClassVar[List[str]] = ["appbuilder_menu_items", "appbuilder_views", "external_views", "fastapi_apps", "fastapi_root_middlewares", "flask_blueprints", "global_operator_extra_links", "listeners", "macros", "name", "operator_extra_links", "react_apps", "source", "timetables"]
+    ui_actions: Optional[List[UiActionsInner]] = Field(default=None, description="User-defined actions rendered on Dag, Dag Run, and Task Instance table rows and header cards.")
+    __properties: ClassVar[List[str]] = ["appbuilder_menu_items", "appbuilder_views", "external_views", "fastapi_apps", "fastapi_root_middlewares", "flask_blueprints", "global_operator_extra_links", "listeners", "macros", "name", "operator_extra_links", "react_apps", "source", "team_name", "timetables", "ui_actions"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -124,6 +127,12 @@ class PluginResponse(BaseModel):
             for _item_react_apps in self.react_apps:
                 _items.append(_item_react_apps.to_dict() if _item_react_apps is not None else None)
             _dict['react_apps'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in ui_actions (list)
+        _items = []
+        if self.ui_actions:
+            for _item_ui_actions in self.ui_actions:
+                _items.append(_item_ui_actions.to_dict() if _item_ui_actions is not None else None)
+            _dict['ui_actions'] = _items
         return _dict
 
     @classmethod
@@ -149,7 +158,9 @@ class PluginResponse(BaseModel):
             "operator_extra_links": obj.get("operator_extra_links"),
             "react_apps": [ReactAppResponse.from_dict(_item) for _item in obj["react_apps"]] if obj.get("react_apps") is not None else None,
             "source": obj.get("source"),
-            "timetables": obj.get("timetables")
+            "team_name": obj.get("team_name"),
+            "timetables": obj.get("timetables"),
+            "ui_actions": [UiActionsInner.from_dict(_item) for _item in obj["ui_actions"]] if obj.get("ui_actions") is not None else None
         })
         return _obj
 

@@ -18,7 +18,8 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, StrictBool
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
+from airflow_client.client.models.dag_scheduling_state import DagSchedulingState
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -27,8 +28,9 @@ class DAGPatchBody(BaseModel):
     """
     Dag Serializer for updatable bodies.
     """ # noqa: E501
-    is_paused: StrictBool
-    __properties: ClassVar[List[str]] = ["is_paused"]
+    is_paused: Optional[StrictBool] = None
+    scheduling_state: Optional[DagSchedulingState] = None
+    __properties: ClassVar[List[str]] = ["is_paused", "scheduling_state"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -81,7 +83,8 @@ class DAGPatchBody(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "is_paused": obj.get("is_paused")
+            "is_paused": obj.get("is_paused"),
+            "scheduling_state": obj.get("scheduling_state")
         })
         return _obj
 

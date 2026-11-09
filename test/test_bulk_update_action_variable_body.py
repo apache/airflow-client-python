@@ -40,7 +40,7 @@ class TestBulkUpdateActionVariableBody(unittest.TestCase):
                 entities = [
                     airflow_client.client.models.variable_body.VariableBody(
                         description = '', 
-                        key = '', 
+                        key = 'o', 
                         team_name = '', 
                         value = null, )
                     ],
@@ -54,7 +54,7 @@ class TestBulkUpdateActionVariableBody(unittest.TestCase):
                 entities = [
                     airflow_client.client.models.variable_body.VariableBody(
                         description = '', 
-                        key = '', 
+                        key = 'o', 
                         team_name = '', 
                         value = null, )
                     ],

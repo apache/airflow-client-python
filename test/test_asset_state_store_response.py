@@ -40,8 +40,12 @@ class TestAssetStateStoreResponse(unittest.TestCase):
                     dag_id = '', 
                     kind = 'task', 
                     map_index = 56, 
+                    region_id = '', 
+                    region_index = 56, 
                     run_id = '', 
-                    task_id = '', ),
+                    task_id = '', 
+                    task_instance_id = '', 
+                    try_number = 56, ),
                 updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 value = None
             )

@@ -38,8 +38,10 @@ class TestImportErrorCollectionResponse(unittest.TestCase):
                 import_errors = [
                     airflow_client.client.models.import_error_response.ImportErrorResponse(
                         bundle_name = '', 
+                        file_token = '', 
                         filename = '', 
                         import_error_id = 56, 
+                        source_reference = '', 
                         stack_trace = '', 
                         timestamp = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), )
                     ],
@@ -50,8 +52,10 @@ class TestImportErrorCollectionResponse(unittest.TestCase):
                 import_errors = [
                     airflow_client.client.models.import_error_response.ImportErrorResponse(
                         bundle_name = '', 
+                        file_token = '', 
                         filename = '', 
                         import_error_id = 56, 
+                        source_reference = '', 
                         stack_trace = '', 
                         timestamp = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), )
                     ],

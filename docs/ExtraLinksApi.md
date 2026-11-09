@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **get_extra_links**
-> ExtraLinkCollectionResponse get_extra_links(dag_id, dag_run_id, task_id, map_index=map_index, try_number=try_number)
+> ExtraLinkCollectionResponse get_extra_links(dag_id, dag_run_id, task_id, map_index=map_index, region_id=region_id, region_index=region_index, try_number=try_number)
 
 Get Extra Links
 
@@ -51,11 +51,13 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     dag_run_id = 'dag_run_id_example' # str | 
     task_id = 'task_id_example' # str | 
     map_index = -1 # int |  (optional) (default to -1)
+    region_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID |  (optional)
+    region_index = 56 # int |  (optional)
     try_number = 56 # int |  (optional)
 
     try:
         # Get Extra Links
-        api_response = api_instance.get_extra_links(dag_id, dag_run_id, task_id, map_index=map_index, try_number=try_number)
+        api_response = api_instance.get_extra_links(dag_id, dag_run_id, task_id, map_index=map_index, region_id=region_id, region_index=region_index, try_number=try_number)
         print("The response of ExtraLinksApi->get_extra_links:\n")
         pprint(api_response)
     except Exception as e:
@@ -73,6 +75,8 @@ Name | Type | Description  | Notes
  **dag_run_id** | **str**|  | 
  **task_id** | **str**|  | 
  **map_index** | **int**|  | [optional] [default to -1]
+ **region_id** | **UUID**|  | [optional] 
+ **region_index** | **int**|  | [optional] 
  **try_number** | **int**|  | [optional] 
 
 ### Return type
@@ -93,9 +97,11 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
+**400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
+**409** | Conflict |  -  |
 **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

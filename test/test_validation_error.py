@@ -35,7 +35,7 @@ class TestValidationError(unittest.TestCase):
         model = ValidationError()
         if include_optional:
             return ValidationError(
-                ctx = airflow_client.client.models.context.Context(),
+                ctx = { },
                 input = None,
                 loc = [
                     null

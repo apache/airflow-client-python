@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **dag_id** | **str** |  | 
 **dag_run_conf** | **Dict[str, object]** |  | [optional] 
+**drain_dag** | **bool** | Drain the Dag together with the backfill. Draining changes the whole Dag: unfinished runs can start or resume except those held by paused backfills. No scheduled runs are created, and the Dag pauses once all unfinished runs finish. Paused backfills must be resumed for draining to complete. Requires the same permission as pausing the Dag. Ignored by the dry-run endpoint. | [optional] [default to False]
 **from_date** | **datetime** |  | 
 **max_active_runs** | **int** |  | [optional] [default to 10]
 **reprocess_behavior** | [**ReprocessBehavior**](ReprocessBehavior.md) |  | [optional] 

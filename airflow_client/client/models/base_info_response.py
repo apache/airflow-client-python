@@ -17,8 +17,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict
 from typing import Any, ClassVar, Dict, List, Optional
+from airflow_client.client.models.health_status import HealthStatus
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -27,7 +28,7 @@ class BaseInfoResponse(BaseModel):
     """
     Base info serializer for responses.
     """ # noqa: E501
-    status: Optional[StrictStr] = None
+    status: Optional[HealthStatus] = None
     __properties: ClassVar[List[str]] = ["status"]
 
     model_config = ConfigDict(

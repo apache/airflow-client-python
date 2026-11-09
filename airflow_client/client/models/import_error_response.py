@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,11 +29,13 @@ class ImportErrorResponse(BaseModel):
     Import Error Response.
     """ # noqa: E501
     bundle_name: Optional[StrictStr] = None
+    file_token: StrictStr = Field(description="Return a signed token identifying the file, used to request its reparse.")
     filename: StrictStr
     import_error_id: StrictInt
+    source_reference: Optional[StrictStr] = None
     stack_trace: StrictStr
     timestamp: datetime
-    __properties: ClassVar[List[str]] = ["bundle_name", "filename", "import_error_id", "stack_trace", "timestamp"]
+    __properties: ClassVar[List[str]] = ["bundle_name", "file_token", "filename", "import_error_id", "source_reference", "stack_trace", "timestamp"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -65,8 +67,10 @@ class ImportErrorResponse(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
+            "file_token",
         ])
 
         _dict = self.model_dump(
@@ -87,8 +91,10 @@ class ImportErrorResponse(BaseModel):
 
         _obj = cls.model_validate({
             "bundle_name": obj.get("bundle_name"),
+            "file_token": obj.get("file_token"),
             "filename": obj.get("filename"),
             "import_error_id": obj.get("import_error_id"),
+            "source_reference": obj.get("source_reference"),
             "stack_trace": obj.get("stack_trace"),
             "timestamp": obj.get("timestamp")
         })

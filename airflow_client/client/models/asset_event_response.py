@@ -20,6 +20,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from airflow_client.client.models.dag_run_asset_reference import DagRunAssetReference
 from typing import Optional, Set
 from typing_extensions import Self
@@ -40,9 +41,10 @@ class AssetEventResponse(BaseModel):
     source_map_index: StrictInt
     source_run_id: Optional[StrictStr] = None
     source_task_id: Optional[StrictStr] = None
+    source_task_instance_id: Optional[UUID] = None
     timestamp: datetime
     uri: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["asset_id", "created_dagruns", "extra", "group", "id", "name", "partition_key", "source_dag_id", "source_map_index", "source_run_id", "source_task_id", "timestamp", "uri"]
+    __properties: ClassVar[List[str]] = ["asset_id", "created_dagruns", "extra", "group", "id", "name", "partition_key", "source_dag_id", "source_map_index", "source_run_id", "source_task_id", "source_task_instance_id", "timestamp", "uri"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -112,6 +114,7 @@ class AssetEventResponse(BaseModel):
             "source_map_index": obj.get("source_map_index"),
             "source_run_id": obj.get("source_run_id"),
             "source_task_id": obj.get("source_task_id"),
+            "source_task_instance_id": obj.get("source_task_instance_id"),
             "timestamp": obj.get("timestamp"),
             "uri": obj.get("uri")
         })

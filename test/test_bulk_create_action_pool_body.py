@@ -41,7 +41,7 @@ class TestBulkCreateActionPoolBody(unittest.TestCase):
                     airflow_client.client.models.pool_body.PoolBody(
                         description = '', 
                         include_deferred = True, 
-                        name = '', 
+                        name = 'o', 
                         slots = -1.0, 
                         team_name = '', )
                     ]
@@ -53,7 +53,7 @@ class TestBulkCreateActionPoolBody(unittest.TestCase):
                     airflow_client.client.models.pool_body.PoolBody(
                         description = '', 
                         include_deferred = True, 
-                        name = '', 
+                        name = 'o', 
                         slots = -1.0, 
                         team_name = '', )
                     ],

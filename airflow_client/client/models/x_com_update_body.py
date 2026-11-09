@@ -17,8 +17,10 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt
+from pydantic import BaseModel, ConfigDict, Field, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
+from uuid import UUID
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -28,8 +30,10 @@ class XComUpdateBody(BaseModel):
     Payload serializer for updating an XCom entry.
     """ # noqa: E501
     map_index: Optional[StrictInt] = -1
+    region_id: Optional[UUID] = None
+    region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None
     value: Optional[Any]
-    __properties: ClassVar[List[str]] = ["map_index", "value"]
+    __properties: ClassVar[List[str]] = ["map_index", "region_id", "region_index", "value"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -88,6 +92,8 @@ class XComUpdateBody(BaseModel):
 
         _obj = cls.model_validate({
             "map_index": obj.get("map_index") if obj.get("map_index") is not None else -1,
+            "region_id": obj.get("region_id"),
+            "region_index": obj.get("region_index"),
             "value": obj.get("value")
         })
         return _obj

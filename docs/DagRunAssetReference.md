@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **logical_date** | **datetime** |  | [optional] 
 **partition_key** | **str** |  | [optional] 
 **run_id** | **str** |  | 
-**start_date** | **datetime** |  | 
+**start_date** | **datetime** |  | [optional] 
 **state** | **str** |  | 
 **triggering** | **bool** | Whether this asset event triggered the referenced dag run. Only a run&#39;s most recent consumed asset event triggers it; earlier consumed events are included in the run but did not trigger it. | 
 

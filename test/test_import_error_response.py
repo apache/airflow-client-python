@@ -36,13 +36,16 @@ class TestImportErrorResponse(unittest.TestCase):
         if include_optional:
             return ImportErrorResponse(
                 bundle_name = '',
+                file_token = '',
                 filename = '',
                 import_error_id = 56,
+                source_reference = '',
                 stack_trace = '',
                 timestamp = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f')
             )
         else:
             return ImportErrorResponse(
+                file_token = '',
                 filename = '',
                 import_error_id = 56,
                 stack_trace = '',

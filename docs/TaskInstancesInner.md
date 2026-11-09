@@ -15,7 +15,9 @@ Name | Type | Description | Notes
 **executor_config** | **str** |  | 
 **hostname** | **str** |  | [optional] 
 **id** | **UUID** |  | 
+**in_loop** | **bool** |  | 
 **logical_date** | **datetime** |  | [optional] 
+**loop_iteration** | [**LoopIterationResponse**](LoopIterationResponse.md) |  | [optional] 
 **map_index** | **int** |  | 
 **max_tries** | **int** |  | 
 **note** | **str** |  | [optional] 
@@ -27,14 +29,19 @@ Name | Type | Description | Notes
 **priority_weight** | **int** |  | [optional] 
 **queue** | **str** |  | [optional] 
 **queued_when** | **datetime** |  | [optional] 
+**region_id** | **UUID** |  | [optional] 
+**region_index** | **int** |  | [optional] 
 **rendered_fields** | **Dict[str, object]** |  | [optional] 
 **rendered_map_index** | **str** |  | [optional] 
+**retry_at** | **datetime** |  | [optional] 
 **run_after** | **datetime** |  | 
 **scheduled_when** | **datetime** |  | [optional] 
 **start_date** | **datetime** |  | [optional] 
 **state** | [**TaskInstanceState**](TaskInstanceState.md) |  | [optional] 
+**state_reason** | **str** |  | [optional] 
 **task_display_name** | **str** |  | 
 **task_id** | **str** |  | 
+**team_name** | **str** |  | [optional] 
 **trigger** | [**TriggerResponse**](TriggerResponse.md) |  | [optional] 
 **triggerer_job** | [**JobResponse**](JobResponse.md) |  | [optional] 
 **try_number** | **int** |  | 

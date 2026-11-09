@@ -11,10 +11,13 @@ Name | Type | Description | Notes
 **key** | **str** |  | 
 **logical_date** | **datetime** |  | [optional] 
 **map_index** | **int** |  | 
+**region_id** | **UUID** |  | [optional] 
+**region_index** | **int** |  | [optional] 
 **run_after** | **datetime** |  | 
 **run_id** | **str** |  | 
 **task_display_name** | **str** |  | 
 **task_id** | **str** |  | 
+**team_name** | **str** |  | [optional] 
 **timestamp** | **datetime** |  | 
 **value** | **str** |  | [optional] 
 

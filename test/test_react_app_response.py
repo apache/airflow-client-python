@@ -35,6 +35,11 @@ class TestReactAppResponse(unittest.TestCase):
         model = ReactAppResponse()
         if include_optional:
             return ReactAppResponse(
+                applies_to = {
+                    'key' : [
+                        ''
+                        ]
+                    },
                 bundle_url = '',
                 category = '',
                 destination = 'nav',

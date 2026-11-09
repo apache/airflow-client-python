@@ -48,6 +48,8 @@ class TestBulkUpdateActionBulkTaskInstanceBody(unittest.TestCase):
                         map_index = 56, 
                         new_state = null, 
                         note = '', 
+                        region_id = '', 
+                        region_index = 56, 
                         task_id = '', )
                     ],
                 update_mask = [
@@ -68,6 +70,8 @@ class TestBulkUpdateActionBulkTaskInstanceBody(unittest.TestCase):
                         map_index = 56, 
                         new_state = null, 
                         note = '', 
+                        region_id = '', 
+                        region_index = 56, 
                         task_id = '', )
                     ],
         )

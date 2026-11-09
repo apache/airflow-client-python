@@ -36,27 +36,66 @@ class TestHealthInfoResponse(unittest.TestCase):
         if include_optional:
             return HealthInfoResponse(
                 dag_processor = airflow_client.client.models.dag_processor_info_response.DagProcessorInfoResponse(
+                    detailed_status = null, 
+                    instances = [
+                        airflow_client.client.models.dag_processor_instance_info_response.DagProcessorInstanceInfoResponse(
+                            bundle_names = [
+                                ''
+                                ], 
+                            hostname = '', 
+                            latest_dag_processor_heartbeat = '', )
+                        ], 
                     latest_dag_processor_heartbeat = '', 
-                    status = '', ),
+                    status = null, ),
                 metadatabase = airflow_client.client.models.base_info_response.BaseInfoResponse(
-                    status = '', ),
+                    status = null, ),
                 scheduler = airflow_client.client.models.scheduler_info_response.SchedulerInfoResponse(
+                    detailed_status = null, 
+                    instances = [
+                        airflow_client.client.models.scheduler_instance_info_response.SchedulerInstanceInfoResponse(
+                            hostname = '', 
+                            latest_scheduler_heartbeat = '', )
+                        ], 
                     latest_scheduler_heartbeat = '', 
-                    status = '', ),
+                    status = null, ),
                 triggerer = airflow_client.client.models.triggerer_info_response.TriggererInfoResponse(
+                    detailed_status = null, 
+                    instances = [
+                        airflow_client.client.models.triggerer_instance_info_response.TriggererInstanceInfoResponse(
+                            hostname = '', 
+                            latest_triggerer_heartbeat = '', 
+                            team_names = [
+                                ''
+                                ], )
+                        ], 
                     latest_triggerer_heartbeat = '', 
-                    status = '', )
+                    status = null, )
             )
         else:
             return HealthInfoResponse(
                 metadatabase = airflow_client.client.models.base_info_response.BaseInfoResponse(
-                    status = '', ),
+                    status = null, ),
                 scheduler = airflow_client.client.models.scheduler_info_response.SchedulerInfoResponse(
+                    detailed_status = null, 
+                    instances = [
+                        airflow_client.client.models.scheduler_instance_info_response.SchedulerInstanceInfoResponse(
+                            hostname = '', 
+                            latest_scheduler_heartbeat = '', )
+                        ], 
                     latest_scheduler_heartbeat = '', 
-                    status = '', ),
+                    status = null, ),
                 triggerer = airflow_client.client.models.triggerer_info_response.TriggererInfoResponse(
+                    detailed_status = null, 
+                    instances = [
+                        airflow_client.client.models.triggerer_instance_info_response.TriggererInstanceInfoResponse(
+                            hostname = '', 
+                            latest_triggerer_heartbeat = '', 
+                            team_names = [
+                                ''
+                                ], )
+                        ], 
                     latest_triggerer_heartbeat = '', 
-                    status = '', ),
+                    status = null, ),
         )
         """
 

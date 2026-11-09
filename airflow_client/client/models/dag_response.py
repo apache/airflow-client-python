@@ -21,6 +21,7 @@ from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from airflow_client.client.models.dag_run_type import DagRunType
+from airflow_client.client.models.dag_scheduling_state import DagSchedulingState
 from airflow_client.client.models.dag_tag_response import DagTagResponse
 from typing import Optional, Set
 from typing_extensions import Self
@@ -37,7 +38,7 @@ class DAGResponse(BaseModel):
     dag_id: StrictStr
     description: Optional[StrictStr] = None
     file_token: StrictStr = Field(description="Return file token.")
-    fileloc: StrictStr
+    fileloc: Optional[StrictStr] = None
     has_import_errors: StrictBool
     has_task_concurrency_limits: StrictBool
     is_backfillable: StrictBool = Field(description="Whether this Dag's schedule supports backfilling.")
@@ -55,12 +56,13 @@ class DAGResponse(BaseModel):
     next_dagrun_run_after: Optional[datetime] = None
     owners: List[StrictStr]
     relative_fileloc: Optional[StrictStr] = None
+    scheduling_state: Optional[DagSchedulingState] = None
     tags: List[DagTagResponse]
     timetable_description: Optional[StrictStr] = None
     timetable_partitioned: StrictBool
     timetable_periodic: StrictBool
     timetable_summary: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["allowed_run_types", "bundle_name", "bundle_version", "dag_display_name", "dag_id", "description", "file_token", "fileloc", "has_import_errors", "has_task_concurrency_limits", "is_backfillable", "is_paused", "is_stale", "last_expired", "last_parse_duration", "last_parsed_time", "max_active_runs", "max_active_tasks", "max_consecutive_failed_dag_runs", "next_dagrun_data_interval_end", "next_dagrun_data_interval_start", "next_dagrun_logical_date", "next_dagrun_run_after", "owners", "relative_fileloc", "tags", "timetable_description", "timetable_partitioned", "timetable_periodic", "timetable_summary"]
+    __properties: ClassVar[List[str]] = ["allowed_run_types", "bundle_name", "bundle_version", "dag_display_name", "dag_id", "description", "file_token", "fileloc", "has_import_errors", "has_task_concurrency_limits", "is_backfillable", "is_paused", "is_stale", "last_expired", "last_parse_duration", "last_parsed_time", "max_active_runs", "max_active_tasks", "max_consecutive_failed_dag_runs", "next_dagrun_data_interval_end", "next_dagrun_data_interval_start", "next_dagrun_logical_date", "next_dagrun_run_after", "owners", "relative_fileloc", "scheduling_state", "tags", "timetable_description", "timetable_partitioned", "timetable_periodic", "timetable_summary"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -148,6 +150,7 @@ class DAGResponse(BaseModel):
             "next_dagrun_run_after": obj.get("next_dagrun_run_after"),
             "owners": obj.get("owners"),
             "relative_fileloc": obj.get("relative_fileloc"),
+            "scheduling_state": obj.get("scheduling_state"),
             "tags": [DagTagResponse.from_dict(_item) for _item in obj["tags"]] if obj.get("tags") is not None else None,
             "timetable_description": obj.get("timetable_description"),
             "timetable_partitioned": obj.get("timetable_partitioned"),

@@ -6,8 +6,10 @@ Scheduler info serializer for responses.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**detailed_status** | [**DetailedHealthStatus**](DetailedHealthStatus.md) |  | [optional] 
+**instances** | [**List[SchedulerInstanceInfoResponse]**](SchedulerInstanceInfoResponse.md) |  | [optional] 
 **latest_scheduler_heartbeat** | **str** |  | [optional] 
-**status** | **str** |  | [optional] 
+**status** | [**HealthStatus**](HealthStatus.md) |  | [optional] 
 
 ## Example
 

@@ -35,16 +35,21 @@ class TestEntitiesInner3(unittest.TestCase):
         model = EntitiesInner3()
         if include_optional:
             return EntitiesInner3(
+                conn_type = '',
+                connection_id = '2',
                 description = '',
-                include_deferred = True,
-                name = '',
-                slots = -1.0,
+                extra = '',
+                host = '',
+                login = '',
+                password = '',
+                port = 56,
+                var_schema = '',
                 team_name = ''
             )
         else:
             return EntitiesInner3(
-                name = '',
-                slots = -1.0,
+                conn_type = '',
+                connection_id = '2',
         )
         """
 

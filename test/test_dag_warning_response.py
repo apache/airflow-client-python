@@ -39,7 +39,7 @@ class TestDAGWarningResponse(unittest.TestCase):
                 dag_id = '',
                 message = '',
                 timestamp = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
-                warning_type = 'asset conflict'
+                warning_type = None
             )
         else:
             return DAGWarningResponse(
@@ -47,7 +47,7 @@ class TestDAGWarningResponse(unittest.TestCase):
                 dag_id = '',
                 message = '',
                 timestamp = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
-                warning_type = 'asset conflict',
+                warning_type = None,
         )
         """
 

@@ -66,6 +66,7 @@ class TestDAGCollectionResponse(unittest.TestCase):
                             ''
                             ], 
                         relative_fileloc = '', 
+                        scheduling_state = null, 
                         tags = [
                             airflow_client.client.models.dag_tag_response.DagTagResponse(
                                 dag_display_name = '', 
@@ -112,6 +113,7 @@ class TestDAGCollectionResponse(unittest.TestCase):
                             ''
                             ], 
                         relative_fileloc = '', 
+                        scheduling_state = null, 
                         tags = [
                             airflow_client.client.models.dag_tag_response.DagTagResponse(
                                 dag_display_name = '', 

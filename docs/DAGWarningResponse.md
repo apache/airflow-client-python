@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **dag_id** | **str** |  | 
 **message** | **str** |  | 
 **timestamp** | **datetime** |  | 
-**warning_type** | [**DagWarningType**](DagWarningType.md) |  | 
+**warning_type** | [**WarningType1**](WarningType1.md) |  | 
 
 ## Example
 

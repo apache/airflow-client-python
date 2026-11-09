@@ -35,8 +35,17 @@ class TestTriggererInfoResponse(unittest.TestCase):
         model = TriggererInfoResponse()
         if include_optional:
             return TriggererInfoResponse(
+                detailed_status = 'healthy',
+                instances = [
+                    airflow_client.client.models.triggerer_instance_info_response.TriggererInstanceInfoResponse(
+                        hostname = '', 
+                        latest_triggerer_heartbeat = '', 
+                        team_names = [
+                            ''
+                            ], )
+                    ],
                 latest_triggerer_heartbeat = '',
-                status = ''
+                status = 'healthy'
             )
         else:
             return TriggererInfoResponse(

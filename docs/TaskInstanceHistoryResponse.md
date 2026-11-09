@@ -15,8 +15,11 @@ Name | Type | Description | Notes
 **executor** | **str** |  | [optional] 
 **executor_config** | **str** |  | 
 **hostname** | **str** |  | [optional] 
+**id** | **UUID** |  | 
+**loop_iteration** | [**LoopIterationResponse**](LoopIterationResponse.md) |  | [optional] 
 **map_index** | **int** |  | 
 **max_tries** | **int** |  | 
+**note** | **str** |  | [optional] 
 **operator** | **str** |  | [optional] 
 **operator_name** | **str** |  | [optional] 
 **pid** | **int** |  | [optional] 
@@ -25,9 +28,13 @@ Name | Type | Description | Notes
 **priority_weight** | **int** |  | [optional] 
 **queue** | **str** |  | [optional] 
 **queued_when** | **datetime** |  | [optional] 
+**region_id** | **UUID** |  | [optional] 
+**region_index** | **int** |  | [optional] 
+**retry_at** | **datetime** |  | [optional] 
 **scheduled_when** | **datetime** |  | [optional] 
 **start_date** | **datetime** |  | [optional] 
 **state** | [**TaskInstanceState**](TaskInstanceState.md) |  | [optional] 
+**state_reason** | **str** |  | [optional] 
 **task_display_name** | **str** |  | 
 **task_id** | **str** |  | 
 **try_number** | **int** |  | 

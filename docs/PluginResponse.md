@@ -19,7 +19,9 @@ Name | Type | Description | Notes
 **operator_extra_links** | **List[str]** |  | 
 **react_apps** | [**List[ReactAppResponse]**](ReactAppResponse.md) |  | 
 **source** | **str** |  | 
+**team_name** | **str** |  | [optional] 
 **timetables** | **List[str]** |  | 
+**ui_actions** | [**List[UiActionsInner]**](UiActionsInner.md) | User-defined actions rendered on Dag, Dag Run, and Task Instance table rows and header cards. | [optional] 
 
 ## Example
 

@@ -106,7 +106,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_xcom_entry**
-> delete_xcom_entry(dag_id, task_id, dag_run_id, xcom_key, map_index=map_index)
+> delete_xcom_entry(dag_id, task_id, dag_run_id, xcom_key, map_index=map_index, region_id=region_id, region_index=region_index)
 
 Delete Xcom Entry
 
@@ -149,10 +149,12 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     dag_run_id = 'dag_run_id_example' # str | 
     xcom_key = 'xcom_key_example' # str | 
     map_index = -1 # int |  (optional) (default to -1)
+    region_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID |  (optional)
+    region_index = 56 # int |  (optional)
 
     try:
         # Delete Xcom Entry
-        api_instance.delete_xcom_entry(dag_id, task_id, dag_run_id, xcom_key, map_index=map_index)
+        api_instance.delete_xcom_entry(dag_id, task_id, dag_run_id, xcom_key, map_index=map_index, region_id=region_id, region_index=region_index)
     except Exception as e:
         print("Exception when calling XComApi->delete_xcom_entry: %s\n" % e)
 ```
@@ -169,6 +171,8 @@ Name | Type | Description  | Notes
  **dag_run_id** | **str**|  | 
  **xcom_key** | **str**|  | 
  **map_index** | **int**|  | [optional] [default to -1]
+ **region_id** | **UUID**|  | [optional] 
+ **region_index** | **int**|  | [optional] 
 
 ### Return type
 
@@ -192,12 +196,13 @@ void (empty response body)
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
+**409** | Conflict |  -  |
 **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_xcom_entries**
-> XComCollectionResponse get_xcom_entries(dag_id, dag_run_id, task_id, xcom_key=xcom_key, map_index=map_index, limit=limit, offset=offset, xcom_key_pattern=xcom_key_pattern, xcom_key_prefix_pattern=xcom_key_prefix_pattern, dag_display_name_pattern=dag_display_name_pattern, dag_display_name_prefix_pattern=dag_display_name_prefix_pattern, run_id_pattern=run_id_pattern, run_id_prefix_pattern=run_id_prefix_pattern, task_id_pattern=task_id_pattern, task_id_prefix_pattern=task_id_prefix_pattern, map_index_filter=map_index_filter, logical_date_gte=logical_date_gte, logical_date_gt=logical_date_gt, logical_date_lte=logical_date_lte, logical_date_lt=logical_date_lt, run_after_gte=run_after_gte, run_after_gt=run_after_gt, run_after_lte=run_after_lte, run_after_lt=run_after_lt, order_by=order_by)
+> XComCollectionResponse get_xcom_entries(dag_id, dag_run_id, task_id, xcom_key=xcom_key, map_index=map_index, region_id=region_id, region_index=region_index, exclude_internal_keys=exclude_internal_keys, limit=limit, offset=offset, xcom_key_pattern=xcom_key_pattern, xcom_key_prefix_pattern=xcom_key_prefix_pattern, dag_display_name_pattern=dag_display_name_pattern, dag_display_name_prefix_pattern=dag_display_name_prefix_pattern, run_id_pattern=run_id_pattern, run_id_prefix_pattern=run_id_prefix_pattern, task_id_pattern=task_id_pattern, task_id_prefix_pattern=task_id_prefix_pattern, map_index_filter=map_index_filter, logical_date_gte=logical_date_gte, logical_date_gt=logical_date_gt, logical_date_lte=logical_date_lte, logical_date_lt=logical_date_lt, run_after_gte=run_after_gte, run_after_gt=run_after_gt, run_after_lte=run_after_lte, run_after_lt=run_after_lt, teams=teams, order_by=order_by)
 
 Get Xcom Entries
 
@@ -243,6 +248,9 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     task_id = 'task_id_example' # str | 
     xcom_key = 'xcom_key_example' # str |  (optional)
     map_index = 56 # int |  (optional)
+    region_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID |  (optional)
+    region_index = 56 # int |  (optional)
+    exclude_internal_keys = False # bool | Leave out XComs whose keys Airflow reserves for itself, such as loop decision reasons. (optional) (default to False)
     limit = 50 # int |  (optional) (default to 50)
     offset = 0 # int |  (optional) (default to 0)
     xcom_key_pattern = 'xcom_key_pattern_example' # str | Case-insensitive substring match (SQL `ILIKE`). Slower than `xcom_key_prefix_pattern` on large tables — see \"Filtering with pattern parameters\". (optional)
@@ -262,11 +270,12 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     run_after_gt = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
     run_after_lte = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
     run_after_lt = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
-    order_by = ["dag_id","task_id","run_id","map_index","key"] # List[str] | Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `key, dag_id, run_id, task_id, map_index, timestamp, run_after` (optional) (default to ["dag_id","task_id","run_id","map_index","key"])
+    teams = ['teams_example'] # List[str] |  (optional)
+    order_by = ["dag_id","task_id","run_id","region_id","region_index","key"] # List[str] | Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `key, dag_id, run_id, task_id, map_index, region_id, region_index, timestamp, run_after` (optional) (default to ["dag_id","task_id","run_id","region_id","region_index","key"])
 
     try:
         # Get Xcom Entries
-        api_response = api_instance.get_xcom_entries(dag_id, dag_run_id, task_id, xcom_key=xcom_key, map_index=map_index, limit=limit, offset=offset, xcom_key_pattern=xcom_key_pattern, xcom_key_prefix_pattern=xcom_key_prefix_pattern, dag_display_name_pattern=dag_display_name_pattern, dag_display_name_prefix_pattern=dag_display_name_prefix_pattern, run_id_pattern=run_id_pattern, run_id_prefix_pattern=run_id_prefix_pattern, task_id_pattern=task_id_pattern, task_id_prefix_pattern=task_id_prefix_pattern, map_index_filter=map_index_filter, logical_date_gte=logical_date_gte, logical_date_gt=logical_date_gt, logical_date_lte=logical_date_lte, logical_date_lt=logical_date_lt, run_after_gte=run_after_gte, run_after_gt=run_after_gt, run_after_lte=run_after_lte, run_after_lt=run_after_lt, order_by=order_by)
+        api_response = api_instance.get_xcom_entries(dag_id, dag_run_id, task_id, xcom_key=xcom_key, map_index=map_index, region_id=region_id, region_index=region_index, exclude_internal_keys=exclude_internal_keys, limit=limit, offset=offset, xcom_key_pattern=xcom_key_pattern, xcom_key_prefix_pattern=xcom_key_prefix_pattern, dag_display_name_pattern=dag_display_name_pattern, dag_display_name_prefix_pattern=dag_display_name_prefix_pattern, run_id_pattern=run_id_pattern, run_id_prefix_pattern=run_id_prefix_pattern, task_id_pattern=task_id_pattern, task_id_prefix_pattern=task_id_prefix_pattern, map_index_filter=map_index_filter, logical_date_gte=logical_date_gte, logical_date_gt=logical_date_gt, logical_date_lte=logical_date_lte, logical_date_lt=logical_date_lt, run_after_gte=run_after_gte, run_after_gt=run_after_gt, run_after_lte=run_after_lte, run_after_lt=run_after_lt, teams=teams, order_by=order_by)
         print("The response of XComApi->get_xcom_entries:\n")
         pprint(api_response)
     except Exception as e:
@@ -285,6 +294,9 @@ Name | Type | Description  | Notes
  **task_id** | **str**|  | 
  **xcom_key** | **str**|  | [optional] 
  **map_index** | **int**|  | [optional] 
+ **region_id** | **UUID**|  | [optional] 
+ **region_index** | **int**|  | [optional] 
+ **exclude_internal_keys** | **bool**| Leave out XComs whose keys Airflow reserves for itself, such as loop decision reasons. | [optional] [default to False]
  **limit** | **int**|  | [optional] [default to 50]
  **offset** | **int**|  | [optional] [default to 0]
  **xcom_key_pattern** | **str**| Case-insensitive substring match (SQL &#x60;ILIKE&#x60;). Slower than &#x60;xcom_key_prefix_pattern&#x60; on large tables — see \&quot;Filtering with pattern parameters\&quot;. | [optional] 
@@ -304,7 +316,8 @@ Name | Type | Description  | Notes
  **run_after_gt** | **datetime**|  | [optional] 
  **run_after_lte** | **datetime**|  | [optional] 
  **run_after_lt** | **datetime**|  | [optional] 
- **order_by** | [**List[str]**](str.md)| Attributes to order by, multi criteria sort is supported. Prefix with &#x60;-&#x60; for descending order. Supported attributes: &#x60;key, dag_id, run_id, task_id, map_index, timestamp, run_after&#x60; | [optional] [default to [&quot;dag_id&quot;,&quot;task_id&quot;,&quot;run_id&quot;,&quot;map_index&quot;,&quot;key&quot;]]
+ **teams** | [**List[str]**](str.md)|  | [optional] 
+ **order_by** | [**List[str]**](str.md)| Attributes to order by, multi criteria sort is supported. Prefix with &#x60;-&#x60; for descending order. Supported attributes: &#x60;key, dag_id, run_id, task_id, map_index, region_id, region_index, timestamp, run_after&#x60; | [optional] [default to [&quot;dag_id&quot;,&quot;task_id&quot;,&quot;run_id&quot;,&quot;region_id&quot;,&quot;region_index&quot;,&quot;key&quot;]]
 
 ### Return type
 
@@ -333,7 +346,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_xcom_entry**
-> ResponseGetXcomEntry get_xcom_entry(dag_id, task_id, dag_run_id, xcom_key, map_index=map_index, deserialize=deserialize, stringify=stringify)
+> ResponseGetXcomEntry get_xcom_entry(dag_id, task_id, dag_run_id, xcom_key, map_index=map_index, region_id=region_id, region_index=region_index, deserialize=deserialize, stringify=stringify)
 
 Get Xcom Entry
 
@@ -377,12 +390,14 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     dag_run_id = 'dag_run_id_example' # str | 
     xcom_key = 'xcom_key_example' # str | 
     map_index = -1 # int |  (optional) (default to -1)
+    region_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID |  (optional)
+    region_index = 56 # int |  (optional)
     deserialize = False # bool |  (optional) (default to False)
     stringify = False # bool |  (optional) (default to False)
 
     try:
         # Get Xcom Entry
-        api_response = api_instance.get_xcom_entry(dag_id, task_id, dag_run_id, xcom_key, map_index=map_index, deserialize=deserialize, stringify=stringify)
+        api_response = api_instance.get_xcom_entry(dag_id, task_id, dag_run_id, xcom_key, map_index=map_index, region_id=region_id, region_index=region_index, deserialize=deserialize, stringify=stringify)
         print("The response of XComApi->get_xcom_entry:\n")
         pprint(api_response)
     except Exception as e:
@@ -401,6 +416,8 @@ Name | Type | Description  | Notes
  **dag_run_id** | **str**|  | 
  **xcom_key** | **str**|  | 
  **map_index** | **int**|  | [optional] [default to -1]
+ **region_id** | **UUID**|  | [optional] 
+ **region_index** | **int**|  | [optional] 
  **deserialize** | **bool**|  | [optional] [default to False]
  **stringify** | **bool**|  | [optional] [default to False]
 
@@ -426,6 +443,7 @@ Name | Type | Description  | Notes
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
+**409** | Conflict |  -  |
 **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -521,6 +539,7 @@ Name | Type | Description  | Notes
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
+**409** | Conflict |  -  |
 **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

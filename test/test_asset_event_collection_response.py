@@ -62,6 +62,7 @@ class TestAssetEventCollectionResponse(unittest.TestCase):
                         source_map_index = 56, 
                         source_run_id = '', 
                         source_task_id = '', 
+                        source_task_instance_id = '', 
                         timestamp = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                         uri = '', )
                     ],
@@ -96,6 +97,7 @@ class TestAssetEventCollectionResponse(unittest.TestCase):
                         source_map_index = 56, 
                         source_run_id = '', 
                         source_task_id = '', 
+                        source_task_instance_id = '', 
                         timestamp = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                         uri = '', )
                     ],

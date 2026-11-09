@@ -36,14 +36,15 @@ class TestEntitiesInner4(unittest.TestCase):
         if include_optional:
             return EntitiesInner4(
                 description = '',
-                key = '',
-                team_name = '',
-                value = None
+                include_deferred = True,
+                name = 'o',
+                slots = -1.0,
+                team_name = ''
             )
         else:
             return EntitiesInner4(
-                key = '',
-                value = None,
+                name = 'o',
+                slots = -1.0,
         )
         """
 

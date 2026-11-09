@@ -37,6 +37,8 @@ class TestXComCreateBody(unittest.TestCase):
             return XComCreateBody(
                 key = '',
                 map_index = 56,
+                region_id = '',
+                region_index = -1.0,
                 value = None
             )
         else:

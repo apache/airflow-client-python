@@ -20,6 +20,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
+from uuid import UUID
 from airflow_client.client.models.task_instance_state import TaskInstanceState
 from typing import Optional, Set
 from typing_extensions import Self
@@ -38,8 +39,10 @@ class BulkTaskInstanceBody(BaseModel):
     map_index: Optional[StrictInt] = None
     new_state: Optional[TaskInstanceState] = None
     note: Optional[Annotated[str, Field(strict=True, max_length=1000)]] = None
+    region_id: Optional[UUID] = None
+    region_index: Optional[StrictInt] = None
     task_id: StrictStr
-    __properties: ClassVar[List[str]] = ["dag_id", "dag_run_id", "include_downstream", "include_future", "include_past", "include_upstream", "map_index", "new_state", "note", "task_id"]
+    __properties: ClassVar[List[str]] = ["dag_id", "dag_run_id", "include_downstream", "include_future", "include_past", "include_upstream", "map_index", "new_state", "note", "region_id", "region_index", "task_id"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -101,6 +104,8 @@ class BulkTaskInstanceBody(BaseModel):
             "map_index": obj.get("map_index"),
             "new_state": obj.get("new_state"),
             "note": obj.get("note"),
+            "region_id": obj.get("region_id"),
+            "region_index": obj.get("region_index"),
             "task_id": obj.get("task_id")
         })
         return _obj

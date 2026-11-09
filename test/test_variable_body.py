@@ -36,13 +36,13 @@ class TestVariableBody(unittest.TestCase):
         if include_optional:
             return VariableBody(
                 description = '',
-                key = '',
+                key = 'o',
                 team_name = '',
                 value = None
             )
         else:
             return VariableBody(
-                key = '',
+                key = 'o',
                 value = None,
         )
         """

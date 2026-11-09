@@ -19,7 +19,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict
 from typing import Any, ClassVar, Dict, List
-from airflow_client.client.models.actions_inner4 import ActionsInner4
+from airflow_client.client.models.actions_inner5 import ActionsInner5
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -28,7 +28,7 @@ class BulkBodyVariableBody(BaseModel):
     """
     BulkBodyVariableBody
     """ # noqa: E501
-    actions: List[ActionsInner4]
+    actions: List[ActionsInner5]
     __properties: ClassVar[List[str]] = ["actions"]
 
     model_config = ConfigDict(
@@ -88,7 +88,7 @@ class BulkBodyVariableBody(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "actions": [ActionsInner4.from_dict(_item) for _item in obj["actions"]] if obj.get("actions") is not None else None
+            "actions": [ActionsInner5.from_dict(_item) for _item in obj["actions"]] if obj.get("actions") is not None else None
         })
         return _obj
 

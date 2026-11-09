@@ -543,7 +543,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_dag_runs**
-> DAGRunCollectionResponse get_dag_runs(dag_id, partition_date_gte=partition_date_gte, partition_date_lte=partition_date_lte, cursor=cursor, limit=limit, offset=offset, run_after_gte=run_after_gte, run_after_gt=run_after_gt, run_after_lte=run_after_lte, run_after_lt=run_after_lt, logical_date_gte=logical_date_gte, logical_date_gt=logical_date_gt, logical_date_lte=logical_date_lte, logical_date_lt=logical_date_lt, start_date_gte=start_date_gte, start_date_gt=start_date_gt, start_date_lte=start_date_lte, start_date_lt=start_date_lt, end_date_gte=end_date_gte, end_date_gt=end_date_gt, end_date_lte=end_date_lte, end_date_lt=end_date_lt, duration_gte=duration_gte, duration_gt=duration_gt, duration_lte=duration_lte, duration_lt=duration_lt, updated_at_gte=updated_at_gte, updated_at_gt=updated_at_gt, updated_at_lte=updated_at_lte, updated_at_lt=updated_at_lt, conf_contains=conf_contains, run_type=run_type, state=state, dag_version=dag_version, bundle_version=bundle_version, order_by=order_by, run_id_pattern=run_id_pattern, run_id_prefix_pattern=run_id_prefix_pattern, triggering_user_name_pattern=triggering_user_name_pattern, triggering_user_name_prefix_pattern=triggering_user_name_prefix_pattern, dag_id_pattern=dag_id_pattern, dag_id_prefix_pattern=dag_id_prefix_pattern, partition_key_pattern=partition_key_pattern, partition_key_prefix_pattern=partition_key_prefix_pattern, consuming_asset_pattern=consuming_asset_pattern)
+> DAGRunCollectionResponse get_dag_runs(dag_id, partition_date_gte=partition_date_gte, partition_date_lte=partition_date_lte, cursor=cursor, limit=limit, offset=offset, run_after_gte=run_after_gte, run_after_gt=run_after_gt, run_after_lte=run_after_lte, run_after_lt=run_after_lt, logical_date_gte=logical_date_gte, logical_date_gt=logical_date_gt, logical_date_lte=logical_date_lte, logical_date_lt=logical_date_lt, start_date_gte=start_date_gte, start_date_gt=start_date_gt, start_date_lte=start_date_lte, start_date_lt=start_date_lt, end_date_gte=end_date_gte, end_date_gt=end_date_gt, end_date_lte=end_date_lte, end_date_lt=end_date_lt, duration_gte=duration_gte, duration_gt=duration_gt, duration_lte=duration_lte, duration_lt=duration_lt, updated_at_gte=updated_at_gte, updated_at_gt=updated_at_gt, updated_at_lte=updated_at_lte, updated_at_lt=updated_at_lt, conf_contains=conf_contains, run_type=run_type, state=state, dag_version=dag_version, bundle_version=bundle_version, teams=teams, tags=tags, tags_match_mode=tags_match_mode, order_by=order_by, run_id_pattern=run_id_pattern, run_id_prefix_pattern=run_id_prefix_pattern, triggering_user_name_pattern=triggering_user_name_pattern, triggering_user_name_prefix_pattern=triggering_user_name_prefix_pattern, dag_id_pattern=dag_id_pattern, dag_id_prefix_pattern=dag_id_prefix_pattern, partition_key_pattern=partition_key_pattern, partition_key_prefix_pattern=partition_key_prefix_pattern, consuming_asset_pattern=consuming_asset_pattern)
 
 Get Dag Runs
 
@@ -629,6 +629,9 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     state = ['state_example'] # List[str] |  (optional)
     dag_version = [56] # List[int] |  (optional)
     bundle_version = 'bundle_version_example' # str |  (optional)
+    teams = ['teams_example'] # List[str] |  (optional)
+    tags = ['tags_example'] # List[str] |  (optional)
+    tags_match_mode = 'tags_match_mode_example' # str |  (optional)
     order_by = ["id"] # List[str] | Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, state, dag_id, run_id, logical_date, partition_date, run_after, start_date, end_date, updated_at, conf, duration, dag_run_id` (optional) (default to ["id"])
     run_id_pattern = 'run_id_pattern_example' # str | Case-insensitive substring match (SQL `ILIKE`). Slower than `run_id_prefix_pattern` on large tables — see \"Filtering with pattern parameters\". (optional)
     run_id_prefix_pattern = 'run_id_prefix_pattern_example' # str | Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\". (optional)
@@ -642,7 +645,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
 
     try:
         # Get Dag Runs
-        api_response = api_instance.get_dag_runs(dag_id, partition_date_gte=partition_date_gte, partition_date_lte=partition_date_lte, cursor=cursor, limit=limit, offset=offset, run_after_gte=run_after_gte, run_after_gt=run_after_gt, run_after_lte=run_after_lte, run_after_lt=run_after_lt, logical_date_gte=logical_date_gte, logical_date_gt=logical_date_gt, logical_date_lte=logical_date_lte, logical_date_lt=logical_date_lt, start_date_gte=start_date_gte, start_date_gt=start_date_gt, start_date_lte=start_date_lte, start_date_lt=start_date_lt, end_date_gte=end_date_gte, end_date_gt=end_date_gt, end_date_lte=end_date_lte, end_date_lt=end_date_lt, duration_gte=duration_gte, duration_gt=duration_gt, duration_lte=duration_lte, duration_lt=duration_lt, updated_at_gte=updated_at_gte, updated_at_gt=updated_at_gt, updated_at_lte=updated_at_lte, updated_at_lt=updated_at_lt, conf_contains=conf_contains, run_type=run_type, state=state, dag_version=dag_version, bundle_version=bundle_version, order_by=order_by, run_id_pattern=run_id_pattern, run_id_prefix_pattern=run_id_prefix_pattern, triggering_user_name_pattern=triggering_user_name_pattern, triggering_user_name_prefix_pattern=triggering_user_name_prefix_pattern, dag_id_pattern=dag_id_pattern, dag_id_prefix_pattern=dag_id_prefix_pattern, partition_key_pattern=partition_key_pattern, partition_key_prefix_pattern=partition_key_prefix_pattern, consuming_asset_pattern=consuming_asset_pattern)
+        api_response = api_instance.get_dag_runs(dag_id, partition_date_gte=partition_date_gte, partition_date_lte=partition_date_lte, cursor=cursor, limit=limit, offset=offset, run_after_gte=run_after_gte, run_after_gt=run_after_gt, run_after_lte=run_after_lte, run_after_lt=run_after_lt, logical_date_gte=logical_date_gte, logical_date_gt=logical_date_gt, logical_date_lte=logical_date_lte, logical_date_lt=logical_date_lt, start_date_gte=start_date_gte, start_date_gt=start_date_gt, start_date_lte=start_date_lte, start_date_lt=start_date_lt, end_date_gte=end_date_gte, end_date_gt=end_date_gt, end_date_lte=end_date_lte, end_date_lt=end_date_lt, duration_gte=duration_gte, duration_gt=duration_gt, duration_lte=duration_lte, duration_lt=duration_lt, updated_at_gte=updated_at_gte, updated_at_gt=updated_at_gt, updated_at_lte=updated_at_lte, updated_at_lt=updated_at_lt, conf_contains=conf_contains, run_type=run_type, state=state, dag_version=dag_version, bundle_version=bundle_version, teams=teams, tags=tags, tags_match_mode=tags_match_mode, order_by=order_by, run_id_pattern=run_id_pattern, run_id_prefix_pattern=run_id_prefix_pattern, triggering_user_name_pattern=triggering_user_name_pattern, triggering_user_name_prefix_pattern=triggering_user_name_prefix_pattern, dag_id_pattern=dag_id_pattern, dag_id_prefix_pattern=dag_id_prefix_pattern, partition_key_pattern=partition_key_pattern, partition_key_prefix_pattern=partition_key_prefix_pattern, consuming_asset_pattern=consuming_asset_pattern)
         print("The response of DagRunApi->get_dag_runs:\n")
         pprint(api_response)
     except Exception as e:
@@ -691,6 +694,9 @@ Name | Type | Description  | Notes
  **state** | [**List[str]**](str.md)|  | [optional] 
  **dag_version** | [**List[int]**](int.md)|  | [optional] 
  **bundle_version** | **str**|  | [optional] 
+ **teams** | [**List[str]**](str.md)|  | [optional] 
+ **tags** | [**List[str]**](str.md)|  | [optional] 
+ **tags_match_mode** | **str**|  | [optional] 
  **order_by** | [**List[str]**](str.md)| Attributes to order by, multi criteria sort is supported. Prefix with &#x60;-&#x60; for descending order. Supported attributes: &#x60;id, state, dag_id, run_id, logical_date, partition_date, run_after, start_date, end_date, updated_at, conf, duration, dag_run_id&#x60; | [optional] [default to [&quot;id&quot;]]
  **run_id_pattern** | **str**| Case-insensitive substring match (SQL &#x60;ILIKE&#x60;). Slower than &#x60;run_id_prefix_pattern&#x60; on large tables — see \&quot;Filtering with pattern parameters\&quot;. | [optional] 
  **run_id_prefix_pattern** | **str**| Case-sensitive, index-friendly prefix match. See \&quot;Filtering with pattern parameters\&quot;. | [optional] 
@@ -1172,6 +1178,7 @@ Name | Type | Description  | Notes
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
+**409** | Conflict |  -  |
 **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

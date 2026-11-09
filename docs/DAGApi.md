@@ -4,6 +4,7 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**bulk_dags**](DAGApi.md#bulk_dags) | **PATCH** /api/v2/dags/bulk | Bulk Dags
 [**delete_dag**](DAGApi.md#delete_dag) | **DELETE** /api/v2/dags/{dag_id} | Delete Dag
 [**favorite_dag**](DAGApi.md#favorite_dag) | **POST** /api/v2/dags/{dag_id}/favorite | Favorite Dag
 [**get_dag**](DAGApi.md#get_dag) | **GET** /api/v2/dags/{dag_id} | Get Dag
@@ -14,6 +15,91 @@ Method | HTTP request | Description
 [**patch_dags**](DAGApi.md#patch_dags) | **PATCH** /api/v2/dags | Patch Dags
 [**unfavorite_dag**](DAGApi.md#unfavorite_dag) | **POST** /api/v2/dags/{dag_id}/unfavorite | Unfavorite Dag
 
+
+# **bulk_dags**
+> BulkResponse bulk_dags(bulk_body_bulk_dag_body)
+
+Bulk Dags
+
+Bulk pause, resume, or drain Dags by id.
+
+### Example
+
+* OAuth Authentication (OAuth2PasswordBearer):
+* Bearer Authentication (HTTPBearer):
+
+```python
+import airflow_client.client
+from airflow_client.client.models.bulk_body_bulk_dag_body import BulkBodyBulkDAGBody
+from airflow_client.client.models.bulk_response import BulkResponse
+from airflow_client.client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = airflow_client.client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Configure Bearer authorization: HTTPBearer
+configuration = airflow_client.client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with airflow_client.client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = airflow_client.client.DAGApi(api_client)
+    bulk_body_bulk_dag_body = airflow_client.client.BulkBodyBulkDAGBody() # BulkBodyBulkDAGBody | 
+
+    try:
+        # Bulk Dags
+        api_response = api_instance.bulk_dags(bulk_body_bulk_dag_body)
+        print("The response of DAGApi->bulk_dags:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DAGApi->bulk_dags: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **bulk_body_bulk_dag_body** | [**BulkBodyBulkDAGBody**](BulkBodyBulkDAGBody.md)|  | 
+
+### Return type
+
+[**BulkResponse**](BulkResponse.md)
+
+### Authorization
+
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer), [HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_dag**
 > object delete_dag(dag_id)
@@ -179,6 +265,7 @@ void (empty response body)
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
+**409** | Conflict |  -  |
 **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -448,7 +535,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_dags**
-> DAGCollectionResponse get_dags(limit=limit, offset=offset, tags=tags, tags_match_mode=tags_match_mode, owners=owners, dag_id_pattern=dag_id_pattern, dag_id_prefix_pattern=dag_id_prefix_pattern, dag_display_name_pattern=dag_display_name_pattern, dag_display_name_prefix_pattern=dag_display_name_prefix_pattern, exclude_stale=exclude_stale, paused=paused, has_import_errors=has_import_errors, last_dag_run_state=last_dag_run_state, bundle_name=bundle_name, bundle_version=bundle_version, has_asset_schedule=has_asset_schedule, asset_dependency=asset_dependency, dag_run_start_date_gte=dag_run_start_date_gte, dag_run_start_date_gt=dag_run_start_date_gt, dag_run_start_date_lte=dag_run_start_date_lte, dag_run_start_date_lt=dag_run_start_date_lt, dag_run_end_date_gte=dag_run_end_date_gte, dag_run_end_date_gt=dag_run_end_date_gt, dag_run_end_date_lte=dag_run_end_date_lte, dag_run_end_date_lt=dag_run_end_date_lt, dag_run_state=dag_run_state, order_by=order_by, is_favorite=is_favorite, timetable_type=timetable_type)
+> DAGCollectionResponse get_dags(is_scheduled=is_scheduled, limit=limit, offset=offset, tags=tags, tags_match_mode=tags_match_mode, owners=owners, dag_id_pattern=dag_id_pattern, dag_id_prefix_pattern=dag_id_prefix_pattern, dag_display_name_pattern=dag_display_name_pattern, dag_display_name_prefix_pattern=dag_display_name_prefix_pattern, exclude_stale=exclude_stale, paused=paused, has_import_errors=has_import_errors, last_dag_run_state=last_dag_run_state, bundle_name=bundle_name, bundle_version=bundle_version, has_asset_schedule=has_asset_schedule, asset_dependency=asset_dependency, dag_run_start_date_gte=dag_run_start_date_gte, dag_run_start_date_gt=dag_run_start_date_gt, dag_run_start_date_lte=dag_run_start_date_lte, dag_run_start_date_lt=dag_run_start_date_lt, dag_run_end_date_gte=dag_run_end_date_gte, dag_run_end_date_gt=dag_run_end_date_gt, dag_run_end_date_lte=dag_run_end_date_lte, dag_run_end_date_lt=dag_run_end_date_lt, dag_run_state=dag_run_state, order_by=order_by, is_favorite=is_favorite, timetable_type=timetable_type)
 
 Get Dags
 
@@ -487,6 +574,7 @@ configuration = airflow_client.client.Configuration(
 with airflow_client.client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = airflow_client.client.DAGApi(api_client)
+    is_scheduled = True # bool | Filter Dags by whether their timetable can create scheduled runs. (optional)
     limit = 50 # int |  (optional) (default to 50)
     offset = 0 # int |  (optional) (default to 0)
     tags = ['tags_example'] # List[str] |  (optional)
@@ -513,13 +601,13 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     dag_run_end_date_lte = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
     dag_run_end_date_lt = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
     dag_run_state = ['dag_run_state_example'] # List[str] |  (optional)
-    order_by = ["dag_id"] # List[str] | Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `dag_id, dag_display_name, next_dagrun, state, start_date, last_run_state, last_run_start_date` (optional) (default to ["dag_id"])
+    order_by = ["dag_id"] # List[str] | Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `dag_id, dag_display_name, next_dagrun, last_run_state, last_run_start_date` (optional) (default to ["dag_id"])
     is_favorite = True # bool |  (optional)
     timetable_type = ['timetable_type_example'] # List[str] |  (optional)
 
     try:
         # Get Dags
-        api_response = api_instance.get_dags(limit=limit, offset=offset, tags=tags, tags_match_mode=tags_match_mode, owners=owners, dag_id_pattern=dag_id_pattern, dag_id_prefix_pattern=dag_id_prefix_pattern, dag_display_name_pattern=dag_display_name_pattern, dag_display_name_prefix_pattern=dag_display_name_prefix_pattern, exclude_stale=exclude_stale, paused=paused, has_import_errors=has_import_errors, last_dag_run_state=last_dag_run_state, bundle_name=bundle_name, bundle_version=bundle_version, has_asset_schedule=has_asset_schedule, asset_dependency=asset_dependency, dag_run_start_date_gte=dag_run_start_date_gte, dag_run_start_date_gt=dag_run_start_date_gt, dag_run_start_date_lte=dag_run_start_date_lte, dag_run_start_date_lt=dag_run_start_date_lt, dag_run_end_date_gte=dag_run_end_date_gte, dag_run_end_date_gt=dag_run_end_date_gt, dag_run_end_date_lte=dag_run_end_date_lte, dag_run_end_date_lt=dag_run_end_date_lt, dag_run_state=dag_run_state, order_by=order_by, is_favorite=is_favorite, timetable_type=timetable_type)
+        api_response = api_instance.get_dags(is_scheduled=is_scheduled, limit=limit, offset=offset, tags=tags, tags_match_mode=tags_match_mode, owners=owners, dag_id_pattern=dag_id_pattern, dag_id_prefix_pattern=dag_id_prefix_pattern, dag_display_name_pattern=dag_display_name_pattern, dag_display_name_prefix_pattern=dag_display_name_prefix_pattern, exclude_stale=exclude_stale, paused=paused, has_import_errors=has_import_errors, last_dag_run_state=last_dag_run_state, bundle_name=bundle_name, bundle_version=bundle_version, has_asset_schedule=has_asset_schedule, asset_dependency=asset_dependency, dag_run_start_date_gte=dag_run_start_date_gte, dag_run_start_date_gt=dag_run_start_date_gt, dag_run_start_date_lte=dag_run_start_date_lte, dag_run_start_date_lt=dag_run_start_date_lt, dag_run_end_date_gte=dag_run_end_date_gte, dag_run_end_date_gt=dag_run_end_date_gt, dag_run_end_date_lte=dag_run_end_date_lte, dag_run_end_date_lt=dag_run_end_date_lt, dag_run_state=dag_run_state, order_by=order_by, is_favorite=is_favorite, timetable_type=timetable_type)
         print("The response of DAGApi->get_dags:\n")
         pprint(api_response)
     except Exception as e:
@@ -533,6 +621,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **is_scheduled** | **bool**| Filter Dags by whether their timetable can create scheduled runs. | [optional] 
  **limit** | **int**|  | [optional] [default to 50]
  **offset** | **int**|  | [optional] [default to 0]
  **tags** | [**List[str]**](str.md)|  | [optional] 
@@ -559,7 +648,7 @@ Name | Type | Description  | Notes
  **dag_run_end_date_lte** | **datetime**|  | [optional] 
  **dag_run_end_date_lt** | **datetime**|  | [optional] 
  **dag_run_state** | [**List[str]**](str.md)|  | [optional] 
- **order_by** | [**List[str]**](str.md)| Attributes to order by, multi criteria sort is supported. Prefix with &#x60;-&#x60; for descending order. Supported attributes: &#x60;dag_id, dag_display_name, next_dagrun, state, start_date, last_run_state, last_run_start_date&#x60; | [optional] [default to [&quot;dag_id&quot;]]
+ **order_by** | [**List[str]**](str.md)| Attributes to order by, multi criteria sort is supported. Prefix with &#x60;-&#x60; for descending order. Supported attributes: &#x60;dag_id, dag_display_name, next_dagrun, last_run_state, last_run_start_date&#x60; | [optional] [default to [&quot;dag_id&quot;]]
  **is_favorite** | **bool**|  | [optional] 
  **timetable_type** | [**List[str]**](str.md)|  | [optional] 
 

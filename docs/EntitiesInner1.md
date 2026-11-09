@@ -6,15 +6,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **dag_id** | **str** |  | [optional] 
-**dag_run_id** | **str** |  | [optional] 
-**include_downstream** | **bool** |  | [optional] [default to False]
-**include_future** | **bool** |  | [optional] [default to False]
-**include_past** | **bool** |  | [optional] [default to False]
-**include_upstream** | **bool** |  | [optional] [default to False]
-**map_index** | **int** |  | [optional] 
-**new_state** | [**TaskInstanceState**](TaskInstanceState.md) |  | [optional] 
+**dag_run_id** | **str** |  | 
 **note** | **str** |  | [optional] 
-**task_id** | **str** |  | 
+**state** | [**DagRunMutableStates**](DagRunMutableStates.md) |  | [optional] 
 
 ## Example
 

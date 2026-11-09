@@ -5,10 +5,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**conn_type** | **str** |  | 
+**connection_id** | **str** |  | 
 **description** | **str** |  | [optional] 
-**include_deferred** | **bool** |  | [optional] [default to False]
-**name** | **str** |  | 
-**slots** | **int** | Number of slots. Use -1 for unlimited. | 
+**extra** | **str** |  | [optional] 
+**host** | **str** |  | [optional] 
+**login** | **str** |  | [optional] 
+**password** | **str** |  | [optional] 
+**port** | **int** |  | [optional] 
+**var_schema** | **str** |  | [optional] 
 **team_name** | **str** |  | [optional] 
 
 ## Example

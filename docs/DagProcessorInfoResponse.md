@@ -6,8 +6,10 @@ DagProcessor info serializer for responses.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**detailed_status** | [**DetailedHealthStatus**](DetailedHealthStatus.md) |  | [optional] 
+**instances** | [**List[DagProcessorInstanceInfoResponse]**](DagProcessorInstanceInfoResponse.md) |  | [optional] 
 **latest_dag_processor_heartbeat** | **str** |  | [optional] 
-**status** | **str** |  | [optional] 
+**status** | [**HealthStatus**](HealthStatus.md) |  | [optional] 
 
 ## Example
 

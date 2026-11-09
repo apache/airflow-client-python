@@ -44,6 +44,8 @@ class TestBulkTaskInstanceBody(unittest.TestCase):
                 map_index = 56,
                 new_state = 'removed',
                 note = '',
+                region_id = '',
+                region_index = 56,
                 task_id = ''
             )
         else:

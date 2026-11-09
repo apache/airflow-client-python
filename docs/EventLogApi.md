@@ -92,7 +92,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_event_logs**
-> EventLogCollectionResponse get_event_logs(limit=limit, offset=offset, order_by=order_by, dag_id=dag_id, task_id=task_id, run_id=run_id, map_index=map_index, try_number=try_number, owner=owner, event=event, excluded_events=excluded_events, included_events=included_events, before=before, after=after, dag_id_pattern=dag_id_pattern, task_id_pattern=task_id_pattern, run_id_pattern=run_id_pattern, owner_pattern=owner_pattern, event_pattern=event_pattern, dag_id_prefix_pattern=dag_id_prefix_pattern, task_id_prefix_pattern=task_id_prefix_pattern, run_id_prefix_pattern=run_id_prefix_pattern, owner_prefix_pattern=owner_prefix_pattern, event_prefix_pattern=event_prefix_pattern)
+> EventLogCollectionResponse get_event_logs(region_id=region_id, region_index=region_index, limit=limit, offset=offset, order_by=order_by, dag_id=dag_id, task_id=task_id, task_instance_id=task_instance_id, run_id=run_id, map_index=map_index, try_number=try_number, owner=owner, event=event, excluded_events=excluded_events, included_events=included_events, before=before, after=after, dag_id_pattern=dag_id_pattern, task_id_pattern=task_id_pattern, run_id_pattern=run_id_pattern, owner_pattern=owner_pattern, owner_display_name_pattern=owner_display_name_pattern, event_pattern=event_pattern, dag_id_prefix_pattern=dag_id_prefix_pattern, task_id_prefix_pattern=task_id_prefix_pattern, run_id_prefix_pattern=run_id_prefix_pattern, owner_prefix_pattern=owner_prefix_pattern, owner_display_name_prefix_pattern=owner_display_name_prefix_pattern, event_prefix_pattern=event_prefix_pattern, teams=teams)
 
 Get Event Logs
 
@@ -131,11 +131,14 @@ configuration = airflow_client.client.Configuration(
 with airflow_client.client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = airflow_client.client.EventLogApi(api_client)
+    region_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID |  (optional)
+    region_index = 56 # int |  (optional)
     limit = 50 # int |  (optional) (default to 50)
     offset = 0 # int |  (optional) (default to 0)
-    order_by = ["id"] # List[str] | Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, dttm, dag_id, task_id, run_id, event, logical_date, owner, extra, when, event_log_id` (optional) (default to ["id"])
+    order_by = ["id"] # List[str] | Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, dttm, dag_id, task_id, run_id, event, logical_date, owner, owner_display_name, extra, when, event_log_id` (optional) (default to ["id"])
     dag_id = 'dag_id_example' # str |  (optional)
     task_id = 'task_id_example' # str |  (optional)
+    task_instance_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID |  (optional)
     run_id = 'run_id_example' # str |  (optional)
     map_index = 56 # int |  (optional)
     try_number = 56 # int |  (optional)
@@ -149,16 +152,19 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     task_id_pattern = 'task_id_pattern_example' # str | Case-insensitive substring match (SQL `ILIKE`). Slower than `task_id_prefix_pattern` on large tables — see \"Filtering with pattern parameters\". (optional)
     run_id_pattern = 'run_id_pattern_example' # str | Case-insensitive substring match (SQL `ILIKE`). Slower than `run_id_prefix_pattern` on large tables — see \"Filtering with pattern parameters\". (optional)
     owner_pattern = 'owner_pattern_example' # str | Case-insensitive substring match (SQL `ILIKE`). Slower than `owner_prefix_pattern` on large tables — see \"Filtering with pattern parameters\". (optional)
+    owner_display_name_pattern = 'owner_display_name_pattern_example' # str | Case-insensitive substring match (SQL `ILIKE`). Slower than `owner_display_name_prefix_pattern` on large tables — see \"Filtering with pattern parameters\". (optional)
     event_pattern = 'event_pattern_example' # str | Case-insensitive substring match (SQL `ILIKE`). Slower than `event_prefix_pattern` on large tables — see \"Filtering with pattern parameters\". (optional)
     dag_id_prefix_pattern = 'dag_id_prefix_pattern_example' # str | Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\". (optional)
     task_id_prefix_pattern = 'task_id_prefix_pattern_example' # str | Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\". (optional)
     run_id_prefix_pattern = 'run_id_prefix_pattern_example' # str | Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\". (optional)
     owner_prefix_pattern = 'owner_prefix_pattern_example' # str | Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\". (optional)
+    owner_display_name_prefix_pattern = 'owner_display_name_prefix_pattern_example' # str | Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\". (optional)
     event_prefix_pattern = 'event_prefix_pattern_example' # str | Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\". (optional)
+    teams = ['teams_example'] # List[str] |  (optional)
 
     try:
         # Get Event Logs
-        api_response = api_instance.get_event_logs(limit=limit, offset=offset, order_by=order_by, dag_id=dag_id, task_id=task_id, run_id=run_id, map_index=map_index, try_number=try_number, owner=owner, event=event, excluded_events=excluded_events, included_events=included_events, before=before, after=after, dag_id_pattern=dag_id_pattern, task_id_pattern=task_id_pattern, run_id_pattern=run_id_pattern, owner_pattern=owner_pattern, event_pattern=event_pattern, dag_id_prefix_pattern=dag_id_prefix_pattern, task_id_prefix_pattern=task_id_prefix_pattern, run_id_prefix_pattern=run_id_prefix_pattern, owner_prefix_pattern=owner_prefix_pattern, event_prefix_pattern=event_prefix_pattern)
+        api_response = api_instance.get_event_logs(region_id=region_id, region_index=region_index, limit=limit, offset=offset, order_by=order_by, dag_id=dag_id, task_id=task_id, task_instance_id=task_instance_id, run_id=run_id, map_index=map_index, try_number=try_number, owner=owner, event=event, excluded_events=excluded_events, included_events=included_events, before=before, after=after, dag_id_pattern=dag_id_pattern, task_id_pattern=task_id_pattern, run_id_pattern=run_id_pattern, owner_pattern=owner_pattern, owner_display_name_pattern=owner_display_name_pattern, event_pattern=event_pattern, dag_id_prefix_pattern=dag_id_prefix_pattern, task_id_prefix_pattern=task_id_prefix_pattern, run_id_prefix_pattern=run_id_prefix_pattern, owner_prefix_pattern=owner_prefix_pattern, owner_display_name_prefix_pattern=owner_display_name_prefix_pattern, event_prefix_pattern=event_prefix_pattern, teams=teams)
         print("The response of EventLogApi->get_event_logs:\n")
         pprint(api_response)
     except Exception as e:
@@ -172,11 +178,14 @@ with airflow_client.client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **region_id** | **UUID**|  | [optional] 
+ **region_index** | **int**|  | [optional] 
  **limit** | **int**|  | [optional] [default to 50]
  **offset** | **int**|  | [optional] [default to 0]
- **order_by** | [**List[str]**](str.md)| Attributes to order by, multi criteria sort is supported. Prefix with &#x60;-&#x60; for descending order. Supported attributes: &#x60;id, dttm, dag_id, task_id, run_id, event, logical_date, owner, extra, when, event_log_id&#x60; | [optional] [default to [&quot;id&quot;]]
+ **order_by** | [**List[str]**](str.md)| Attributes to order by, multi criteria sort is supported. Prefix with &#x60;-&#x60; for descending order. Supported attributes: &#x60;id, dttm, dag_id, task_id, run_id, event, logical_date, owner, owner_display_name, extra, when, event_log_id&#x60; | [optional] [default to [&quot;id&quot;]]
  **dag_id** | **str**|  | [optional] 
  **task_id** | **str**|  | [optional] 
+ **task_instance_id** | **UUID**|  | [optional] 
  **run_id** | **str**|  | [optional] 
  **map_index** | **int**|  | [optional] 
  **try_number** | **int**|  | [optional] 
@@ -190,12 +199,15 @@ Name | Type | Description  | Notes
  **task_id_pattern** | **str**| Case-insensitive substring match (SQL &#x60;ILIKE&#x60;). Slower than &#x60;task_id_prefix_pattern&#x60; on large tables — see \&quot;Filtering with pattern parameters\&quot;. | [optional] 
  **run_id_pattern** | **str**| Case-insensitive substring match (SQL &#x60;ILIKE&#x60;). Slower than &#x60;run_id_prefix_pattern&#x60; on large tables — see \&quot;Filtering with pattern parameters\&quot;. | [optional] 
  **owner_pattern** | **str**| Case-insensitive substring match (SQL &#x60;ILIKE&#x60;). Slower than &#x60;owner_prefix_pattern&#x60; on large tables — see \&quot;Filtering with pattern parameters\&quot;. | [optional] 
+ **owner_display_name_pattern** | **str**| Case-insensitive substring match (SQL &#x60;ILIKE&#x60;). Slower than &#x60;owner_display_name_prefix_pattern&#x60; on large tables — see \&quot;Filtering with pattern parameters\&quot;. | [optional] 
  **event_pattern** | **str**| Case-insensitive substring match (SQL &#x60;ILIKE&#x60;). Slower than &#x60;event_prefix_pattern&#x60; on large tables — see \&quot;Filtering with pattern parameters\&quot;. | [optional] 
  **dag_id_prefix_pattern** | **str**| Case-sensitive, index-friendly prefix match. See \&quot;Filtering with pattern parameters\&quot;. | [optional] 
  **task_id_prefix_pattern** | **str**| Case-sensitive, index-friendly prefix match. See \&quot;Filtering with pattern parameters\&quot;. | [optional] 
  **run_id_prefix_pattern** | **str**| Case-sensitive, index-friendly prefix match. See \&quot;Filtering with pattern parameters\&quot;. | [optional] 
  **owner_prefix_pattern** | **str**| Case-sensitive, index-friendly prefix match. See \&quot;Filtering with pattern parameters\&quot;. | [optional] 
+ **owner_display_name_prefix_pattern** | **str**| Case-sensitive, index-friendly prefix match. See \&quot;Filtering with pattern parameters\&quot;. | [optional] 
  **event_prefix_pattern** | **str**| Case-sensitive, index-friendly prefix match. See \&quot;Filtering with pattern parameters\&quot;. | [optional] 
+ **teams** | [**List[str]**](str.md)|  | [optional] 
 
 ### Return type
 
@@ -215,6 +227,7 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
+**400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **422** | Validation Error |  -  |

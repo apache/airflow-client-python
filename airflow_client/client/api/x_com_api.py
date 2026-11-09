@@ -19,6 +19,7 @@ from datetime import datetime
 from pydantic import Field, StrictBool, StrictInt, StrictStr
 from typing import List, Optional
 from typing_extensions import Annotated
+from uuid import UUID
 from airflow_client.client.models.response_get_xcom_entry import ResponseGetXcomEntry
 from airflow_client.client.models.x_com_collection_response import XComCollectionResponse
 from airflow_client.client.models.x_com_create_body import XComCreateBody
@@ -313,7 +314,7 @@ class XComApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -336,7 +337,7 @@ class XComApi:
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -345,7 +346,7 @@ class XComApi:
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            self.api_client._set_header(_header_params, 'Content-Type', _content_type)
         else:
             _default_content_type = (
                 self.api_client.select_header_content_type(
@@ -355,7 +356,7 @@ class XComApi:
                 )
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                self.api_client._set_header(_header_params, 'Content-Type', _default_content_type)
 
         # authentication setting
         _auth_settings: List[str] = [
@@ -388,7 +389,9 @@ class XComApi:
         task_id: StrictStr,
         dag_run_id: StrictStr,
         xcom_key: StrictStr,
-        map_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
+        map_index: Optional[StrictInt] = None,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -416,6 +419,10 @@ class XComApi:
         :type xcom_key: str
         :param map_index:
         :type map_index: int
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -444,6 +451,8 @@ class XComApi:
             dag_run_id=dag_run_id,
             xcom_key=xcom_key,
             map_index=map_index,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -456,6 +465,7 @@ class XComApi:
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -476,7 +486,9 @@ class XComApi:
         task_id: StrictStr,
         dag_run_id: StrictStr,
         xcom_key: StrictStr,
-        map_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
+        map_index: Optional[StrictInt] = None,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -504,6 +516,10 @@ class XComApi:
         :type xcom_key: str
         :param map_index:
         :type map_index: int
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -532,6 +548,8 @@ class XComApi:
             dag_run_id=dag_run_id,
             xcom_key=xcom_key,
             map_index=map_index,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -544,6 +562,7 @@ class XComApi:
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -564,7 +583,9 @@ class XComApi:
         task_id: StrictStr,
         dag_run_id: StrictStr,
         xcom_key: StrictStr,
-        map_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
+        map_index: Optional[StrictInt] = None,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -592,6 +613,10 @@ class XComApi:
         :type xcom_key: str
         :param map_index:
         :type map_index: int
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -620,6 +645,8 @@ class XComApi:
             dag_run_id=dag_run_id,
             xcom_key=xcom_key,
             map_index=map_index,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -632,6 +659,7 @@ class XComApi:
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -648,6 +676,8 @@ class XComApi:
         dag_run_id,
         xcom_key,
         map_index,
+        region_id,
+        region_index,
         _request_auth,
         _content_type,
         _headers,
@@ -661,7 +691,7 @@ class XComApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -682,13 +712,21 @@ class XComApi:
             
             _query_params.append(('map_index', map_index))
             
+        if region_id is not None:
+            
+            _query_params.append(('region_id', region_id))
+            
+        if region_index is not None:
+            
+            _query_params.append(('region_index', region_index))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -728,6 +766,9 @@ class XComApi:
         task_id: StrictStr,
         xcom_key: Optional[StrictStr] = None,
         map_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
+        exclude_internal_keys: Annotated[Optional[StrictBool], Field(description="Leave out XComs whose keys Airflow reserves for itself, such as loop decision reasons.")] = None,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         xcom_key_pattern: Annotated[Optional[StrictStr], Field(description="Case-insensitive substring match (SQL `ILIKE`). Slower than `xcom_key_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".")] = None,
@@ -747,7 +788,8 @@ class XComApi:
         run_after_gt: Optional[datetime] = None,
         run_after_lte: Optional[datetime] = None,
         run_after_lt: Optional[datetime] = None,
-        order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `key, dag_id, run_id, task_id, map_index, timestamp, run_after`")] = None,
+        teams: Optional[List[StrictStr]] = None,
+        order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `key, dag_id, run_id, task_id, map_index, region_id, region_index, timestamp, run_after`")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -775,6 +817,12 @@ class XComApi:
         :type xcom_key: str
         :param map_index:
         :type map_index: int
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
+        :param exclude_internal_keys: Leave out XComs whose keys Airflow reserves for itself, such as loop decision reasons.
+        :type exclude_internal_keys: bool
         :param limit:
         :type limit: int
         :param offset:
@@ -813,7 +861,9 @@ class XComApi:
         :type run_after_lte: datetime
         :param run_after_lt:
         :type run_after_lt: datetime
-        :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `key, dag_id, run_id, task_id, map_index, timestamp, run_after`
+        :param teams:
+        :type teams: List[str]
+        :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `key, dag_id, run_id, task_id, map_index, region_id, region_index, timestamp, run_after`
         :type order_by: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -843,6 +893,9 @@ class XComApi:
             task_id=task_id,
             xcom_key=xcom_key,
             map_index=map_index,
+            region_id=region_id,
+            region_index=region_index,
+            exclude_internal_keys=exclude_internal_keys,
             limit=limit,
             offset=offset,
             xcom_key_pattern=xcom_key_pattern,
@@ -862,6 +915,7 @@ class XComApi:
             run_after_gt=run_after_gt,
             run_after_lte=run_after_lte,
             run_after_lt=run_after_lt,
+            teams=teams,
             order_by=order_by,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -896,6 +950,9 @@ class XComApi:
         task_id: StrictStr,
         xcom_key: Optional[StrictStr] = None,
         map_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
+        exclude_internal_keys: Annotated[Optional[StrictBool], Field(description="Leave out XComs whose keys Airflow reserves for itself, such as loop decision reasons.")] = None,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         xcom_key_pattern: Annotated[Optional[StrictStr], Field(description="Case-insensitive substring match (SQL `ILIKE`). Slower than `xcom_key_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".")] = None,
@@ -915,7 +972,8 @@ class XComApi:
         run_after_gt: Optional[datetime] = None,
         run_after_lte: Optional[datetime] = None,
         run_after_lt: Optional[datetime] = None,
-        order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `key, dag_id, run_id, task_id, map_index, timestamp, run_after`")] = None,
+        teams: Optional[List[StrictStr]] = None,
+        order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `key, dag_id, run_id, task_id, map_index, region_id, region_index, timestamp, run_after`")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -943,6 +1001,12 @@ class XComApi:
         :type xcom_key: str
         :param map_index:
         :type map_index: int
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
+        :param exclude_internal_keys: Leave out XComs whose keys Airflow reserves for itself, such as loop decision reasons.
+        :type exclude_internal_keys: bool
         :param limit:
         :type limit: int
         :param offset:
@@ -981,7 +1045,9 @@ class XComApi:
         :type run_after_lte: datetime
         :param run_after_lt:
         :type run_after_lt: datetime
-        :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `key, dag_id, run_id, task_id, map_index, timestamp, run_after`
+        :param teams:
+        :type teams: List[str]
+        :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `key, dag_id, run_id, task_id, map_index, region_id, region_index, timestamp, run_after`
         :type order_by: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1011,6 +1077,9 @@ class XComApi:
             task_id=task_id,
             xcom_key=xcom_key,
             map_index=map_index,
+            region_id=region_id,
+            region_index=region_index,
+            exclude_internal_keys=exclude_internal_keys,
             limit=limit,
             offset=offset,
             xcom_key_pattern=xcom_key_pattern,
@@ -1030,6 +1099,7 @@ class XComApi:
             run_after_gt=run_after_gt,
             run_after_lte=run_after_lte,
             run_after_lt=run_after_lt,
+            teams=teams,
             order_by=order_by,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1064,6 +1134,9 @@ class XComApi:
         task_id: StrictStr,
         xcom_key: Optional[StrictStr] = None,
         map_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
+        exclude_internal_keys: Annotated[Optional[StrictBool], Field(description="Leave out XComs whose keys Airflow reserves for itself, such as loop decision reasons.")] = None,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         xcom_key_pattern: Annotated[Optional[StrictStr], Field(description="Case-insensitive substring match (SQL `ILIKE`). Slower than `xcom_key_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".")] = None,
@@ -1083,7 +1156,8 @@ class XComApi:
         run_after_gt: Optional[datetime] = None,
         run_after_lte: Optional[datetime] = None,
         run_after_lt: Optional[datetime] = None,
-        order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `key, dag_id, run_id, task_id, map_index, timestamp, run_after`")] = None,
+        teams: Optional[List[StrictStr]] = None,
+        order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `key, dag_id, run_id, task_id, map_index, region_id, region_index, timestamp, run_after`")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1111,6 +1185,12 @@ class XComApi:
         :type xcom_key: str
         :param map_index:
         :type map_index: int
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
+        :param exclude_internal_keys: Leave out XComs whose keys Airflow reserves for itself, such as loop decision reasons.
+        :type exclude_internal_keys: bool
         :param limit:
         :type limit: int
         :param offset:
@@ -1149,7 +1229,9 @@ class XComApi:
         :type run_after_lte: datetime
         :param run_after_lt:
         :type run_after_lt: datetime
-        :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `key, dag_id, run_id, task_id, map_index, timestamp, run_after`
+        :param teams:
+        :type teams: List[str]
+        :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `key, dag_id, run_id, task_id, map_index, region_id, region_index, timestamp, run_after`
         :type order_by: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1179,6 +1261,9 @@ class XComApi:
             task_id=task_id,
             xcom_key=xcom_key,
             map_index=map_index,
+            region_id=region_id,
+            region_index=region_index,
+            exclude_internal_keys=exclude_internal_keys,
             limit=limit,
             offset=offset,
             xcom_key_pattern=xcom_key_pattern,
@@ -1198,6 +1283,7 @@ class XComApi:
             run_after_gt=run_after_gt,
             run_after_lte=run_after_lte,
             run_after_lt=run_after_lt,
+            teams=teams,
             order_by=order_by,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1227,6 +1313,9 @@ class XComApi:
         task_id,
         xcom_key,
         map_index,
+        region_id,
+        region_index,
+        exclude_internal_keys,
         limit,
         offset,
         xcom_key_pattern,
@@ -1246,6 +1335,7 @@ class XComApi:
         run_after_gt,
         run_after_lte,
         run_after_lt,
+        teams,
         order_by,
         _request_auth,
         _content_type,
@@ -1256,12 +1346,13 @@ class XComApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
+            'teams': 'multi',
             'order_by': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -1283,6 +1374,18 @@ class XComApi:
         if map_index is not None:
             
             _query_params.append(('map_index', map_index))
+            
+        if region_id is not None:
+            
+            _query_params.append(('region_id', region_id))
+            
+        if region_index is not None:
+            
+            _query_params.append(('region_index', region_index))
+            
+        if exclude_internal_keys is not None:
+            
+            _query_params.append(('exclude_internal_keys', exclude_internal_keys))
             
         if limit is not None:
             
@@ -1432,6 +1535,10 @@ class XComApi:
             else:
                 _query_params.append(('run_after_lt', run_after_lt))
             
+        if teams is not None:
+            
+            _query_params.append(('teams', teams))
+            
         if order_by is not None:
             
             _query_params.append(('order_by', order_by))
@@ -1442,7 +1549,7 @@ class XComApi:
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -1481,7 +1588,9 @@ class XComApi:
         task_id: StrictStr,
         dag_run_id: StrictStr,
         xcom_key: StrictStr,
-        map_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
+        map_index: Optional[StrictInt] = None,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         deserialize: Optional[StrictBool] = None,
         stringify: Optional[StrictBool] = None,
         _request_timeout: Union[
@@ -1511,6 +1620,10 @@ class XComApi:
         :type xcom_key: str
         :param map_index:
         :type map_index: int
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param deserialize:
         :type deserialize: bool
         :param stringify:
@@ -1543,6 +1656,8 @@ class XComApi:
             dag_run_id=dag_run_id,
             xcom_key=xcom_key,
             map_index=map_index,
+            region_id=region_id,
+            region_index=region_index,
             deserialize=deserialize,
             stringify=stringify,
             _request_auth=_request_auth,
@@ -1557,6 +1672,7 @@ class XComApi:
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -1577,7 +1693,9 @@ class XComApi:
         task_id: StrictStr,
         dag_run_id: StrictStr,
         xcom_key: StrictStr,
-        map_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
+        map_index: Optional[StrictInt] = None,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         deserialize: Optional[StrictBool] = None,
         stringify: Optional[StrictBool] = None,
         _request_timeout: Union[
@@ -1607,6 +1725,10 @@ class XComApi:
         :type xcom_key: str
         :param map_index:
         :type map_index: int
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param deserialize:
         :type deserialize: bool
         :param stringify:
@@ -1639,6 +1761,8 @@ class XComApi:
             dag_run_id=dag_run_id,
             xcom_key=xcom_key,
             map_index=map_index,
+            region_id=region_id,
+            region_index=region_index,
             deserialize=deserialize,
             stringify=stringify,
             _request_auth=_request_auth,
@@ -1653,6 +1777,7 @@ class XComApi:
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -1673,7 +1798,9 @@ class XComApi:
         task_id: StrictStr,
         dag_run_id: StrictStr,
         xcom_key: StrictStr,
-        map_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
+        map_index: Optional[StrictInt] = None,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         deserialize: Optional[StrictBool] = None,
         stringify: Optional[StrictBool] = None,
         _request_timeout: Union[
@@ -1703,6 +1830,10 @@ class XComApi:
         :type xcom_key: str
         :param map_index:
         :type map_index: int
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param deserialize:
         :type deserialize: bool
         :param stringify:
@@ -1735,6 +1866,8 @@ class XComApi:
             dag_run_id=dag_run_id,
             xcom_key=xcom_key,
             map_index=map_index,
+            region_id=region_id,
+            region_index=region_index,
             deserialize=deserialize,
             stringify=stringify,
             _request_auth=_request_auth,
@@ -1749,6 +1882,7 @@ class XComApi:
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -1765,6 +1899,8 @@ class XComApi:
         dag_run_id,
         xcom_key,
         map_index,
+        region_id,
+        region_index,
         deserialize,
         stringify,
         _request_auth,
@@ -1780,7 +1916,7 @@ class XComApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -1801,6 +1937,14 @@ class XComApi:
             
             _query_params.append(('map_index', map_index))
             
+        if region_id is not None:
+            
+            _query_params.append(('region_id', region_id))
+            
+        if region_index is not None:
+            
+            _query_params.append(('region_index', region_index))
+            
         if deserialize is not None:
             
             _query_params.append(('deserialize', deserialize))
@@ -1815,7 +1959,7 @@ class XComApi:
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -1922,6 +2066,7 @@ class XComApi:
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -2010,6 +2155,7 @@ class XComApi:
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -2098,6 +2244,7 @@ class XComApi:
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -2127,7 +2274,7 @@ class XComApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -2152,7 +2299,7 @@ class XComApi:
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -2161,7 +2308,7 @@ class XComApi:
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            self.api_client._set_header(_header_params, 'Content-Type', _content_type)
         else:
             _default_content_type = (
                 self.api_client.select_header_content_type(
@@ -2171,7 +2318,7 @@ class XComApi:
                 )
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                self.api_client._set_header(_header_params, 'Content-Type', _default_content_type)
 
         # authentication setting
         _auth_settings: List[str] = [

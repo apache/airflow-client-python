@@ -13,6 +13,7 @@ from airflow_client.client.api.dag_source_api import DagSourceApi
 from airflow_client.client.api.dag_stats_api import DagStatsApi
 from airflow_client.client.api.dag_version_api import DagVersionApi
 from airflow_client.client.api.dag_warning_api import DagWarningApi
+from airflow_client.client.api.dag_bundle_api import DagBundleApi
 from airflow_client.client.api.event_log_api import EventLogApi
 from airflow_client.client.api.extra_links_api import ExtraLinksApi
 from airflow_client.client.api.import_error_api import ImportErrorApi

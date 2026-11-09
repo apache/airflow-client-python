@@ -35,7 +35,7 @@ class TestBaseInfoResponse(unittest.TestCase):
         model = BaseInfoResponse()
         if include_optional:
             return BaseInfoResponse(
-                status = ''
+                status = 'healthy'
             )
         else:
             return BaseInfoResponse(

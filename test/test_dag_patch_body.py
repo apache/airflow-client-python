@@ -35,11 +35,11 @@ class TestDAGPatchBody(unittest.TestCase):
         model = DAGPatchBody()
         if include_optional:
             return DAGPatchBody(
-                is_paused = True
+                is_paused = True,
+                scheduling_state = 'active'
             )
         else:
             return DAGPatchBody(
-                is_paused = True,
         )
         """
 

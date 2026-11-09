@@ -123,7 +123,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_task_instance**
-> object delete_task_instance(dag_id, dag_run_id, task_id, map_index=map_index)
+> object delete_task_instance(dag_id, dag_run_id, task_id, map_index=map_index, region_id=region_id, region_index=region_index)
 
 Delete Task Instance
 
@@ -165,10 +165,12 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     dag_run_id = 'dag_run_id_example' # str | 
     task_id = 'task_id_example' # str | 
     map_index = -1 # int |  (optional) (default to -1)
+    region_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID |  (optional)
+    region_index = 56 # int |  (optional)
 
     try:
         # Delete Task Instance
-        api_response = api_instance.delete_task_instance(dag_id, dag_run_id, task_id, map_index=map_index)
+        api_response = api_instance.delete_task_instance(dag_id, dag_run_id, task_id, map_index=map_index, region_id=region_id, region_index=region_index)
         print("The response of TaskInstanceApi->delete_task_instance:\n")
         pprint(api_response)
     except Exception as e:
@@ -186,6 +188,8 @@ Name | Type | Description  | Notes
  **dag_run_id** | **str**|  | 
  **task_id** | **str**|  | 
  **map_index** | **int**|  | [optional] [default to -1]
+ **region_id** | **UUID**|  | [optional] 
+ **region_index** | **int**|  | [optional] 
 
 ### Return type
 
@@ -205,15 +209,17 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
+**400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
+**409** | Conflict |  -  |
 **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_external_log_url**
-> ExternalLogUrlResponse get_external_log_url(dag_id, dag_run_id, task_id, try_number, map_index=map_index)
+> ExternalLogUrlResponse get_external_log_url(dag_id, dag_run_id, task_id, try_number, map_index=map_index, region_id=region_id, region_index=region_index)
 
 Get External Log Url
 
@@ -257,10 +263,12 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     task_id = 'task_id_example' # str | 
     try_number = 56 # int | 
     map_index = -1 # int |  (optional) (default to -1)
+    region_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID |  (optional)
+    region_index = 56 # int |  (optional)
 
     try:
         # Get External Log Url
-        api_response = api_instance.get_external_log_url(dag_id, dag_run_id, task_id, try_number, map_index=map_index)
+        api_response = api_instance.get_external_log_url(dag_id, dag_run_id, task_id, try_number, map_index=map_index, region_id=region_id, region_index=region_index)
         print("The response of TaskInstanceApi->get_external_log_url:\n")
         pprint(api_response)
     except Exception as e:
@@ -279,6 +287,8 @@ Name | Type | Description  | Notes
  **task_id** | **str**|  | 
  **try_number** | **int**|  | 
  **map_index** | **int**|  | [optional] [default to -1]
+ **region_id** | **UUID**|  | [optional] 
+ **region_index** | **int**|  | [optional] 
 
 ### Return type
 
@@ -302,12 +312,13 @@ Name | Type | Description  | Notes
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
+**409** | Conflict |  -  |
 **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_extra_links**
-> ExtraLinkCollectionResponse get_extra_links(dag_id, dag_run_id, task_id, map_index=map_index, try_number=try_number)
+> ExtraLinkCollectionResponse get_extra_links(dag_id, dag_run_id, task_id, map_index=map_index, region_id=region_id, region_index=region_index, try_number=try_number)
 
 Get Extra Links
 
@@ -350,11 +361,13 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     dag_run_id = 'dag_run_id_example' # str | 
     task_id = 'task_id_example' # str | 
     map_index = -1 # int |  (optional) (default to -1)
+    region_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID |  (optional)
+    region_index = 56 # int |  (optional)
     try_number = 56 # int |  (optional)
 
     try:
         # Get Extra Links
-        api_response = api_instance.get_extra_links(dag_id, dag_run_id, task_id, map_index=map_index, try_number=try_number)
+        api_response = api_instance.get_extra_links(dag_id, dag_run_id, task_id, map_index=map_index, region_id=region_id, region_index=region_index, try_number=try_number)
         print("The response of TaskInstanceApi->get_extra_links:\n")
         pprint(api_response)
     except Exception as e:
@@ -372,6 +385,8 @@ Name | Type | Description  | Notes
  **dag_run_id** | **str**|  | 
  **task_id** | **str**|  | 
  **map_index** | **int**|  | [optional] [default to -1]
+ **region_id** | **UUID**|  | [optional] 
+ **region_index** | **int**|  | [optional] 
  **try_number** | **int**|  | [optional] 
 
 ### Return type
@@ -392,15 +407,17 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
+**400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
+**409** | Conflict |  -  |
 **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_hitl_detail**
-> HITLDetail get_hitl_detail(dag_id, dag_run_id, task_id, map_index)
+> HITLDetail get_hitl_detail(dag_id, dag_run_id, task_id, map_index, region_id=region_id, region_index=region_index)
 
 Get Hitl Detail
 
@@ -443,10 +460,12 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     dag_run_id = 'dag_run_id_example' # str | 
     task_id = 'task_id_example' # str | 
     map_index = 56 # int | 
+    region_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID |  (optional)
+    region_index = 56 # int |  (optional)
 
     try:
         # Get Hitl Detail
-        api_response = api_instance.get_hitl_detail(dag_id, dag_run_id, task_id, map_index)
+        api_response = api_instance.get_hitl_detail(dag_id, dag_run_id, task_id, map_index, region_id=region_id, region_index=region_index)
         print("The response of TaskInstanceApi->get_hitl_detail:\n")
         pprint(api_response)
     except Exception as e:
@@ -464,6 +483,8 @@ Name | Type | Description  | Notes
  **dag_run_id** | **str**|  | 
  **task_id** | **str**|  | 
  **map_index** | **int**|  | 
+ **region_id** | **UUID**|  | [optional] 
+ **region_index** | **int**|  | [optional] 
 
 ### Return type
 
@@ -483,15 +504,17 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
+**400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
+**409** | Conflict |  -  |
 **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_hitl_detail_try_detail**
-> HITLDetailHistory get_hitl_detail_try_detail(dag_id, dag_run_id, task_id, map_index, try_number)
+> HITLDetailHistory get_hitl_detail_try_detail(dag_id, dag_run_id, task_id, map_index, try_number, region_id=region_id, region_index=region_index)
 
 Get Hitl Detail Try Detail
 
@@ -535,10 +558,12 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     task_id = 'task_id_example' # str | 
     map_index = 56 # int | 
     try_number = 56 # int | 
+    region_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID |  (optional)
+    region_index = 56 # int |  (optional)
 
     try:
         # Get Hitl Detail Try Detail
-        api_response = api_instance.get_hitl_detail_try_detail(dag_id, dag_run_id, task_id, map_index, try_number)
+        api_response = api_instance.get_hitl_detail_try_detail(dag_id, dag_run_id, task_id, map_index, try_number, region_id=region_id, region_index=region_index)
         print("The response of TaskInstanceApi->get_hitl_detail_try_detail:\n")
         pprint(api_response)
     except Exception as e:
@@ -557,6 +582,8 @@ Name | Type | Description  | Notes
  **task_id** | **str**|  | 
  **map_index** | **int**|  | 
  **try_number** | **int**|  | 
+ **region_id** | **UUID**|  | [optional] 
+ **region_index** | **int**|  | [optional] 
 
 ### Return type
 
@@ -576,15 +603,17 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
+**400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
+**409** | Conflict |  -  |
 **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_hitl_details**
-> HITLDetailCollection get_hitl_details(dag_id, dag_run_id, limit=limit, offset=offset, order_by=order_by, dag_id_pattern=dag_id_pattern, dag_id_prefix_pattern=dag_id_prefix_pattern, task_id=task_id, task_id_pattern=task_id_pattern, task_id_prefix_pattern=task_id_prefix_pattern, map_index=map_index, state=state, response_received=response_received, responded_by_user_id=responded_by_user_id, responded_by_user_name=responded_by_user_name, subject_search=subject_search, body_search=body_search, created_at_gte=created_at_gte, created_at_gt=created_at_gt, created_at_lte=created_at_lte, created_at_lt=created_at_lt)
+> HITLDetailCollection get_hitl_details(dag_id, dag_run_id, region_id=region_id, region_index=region_index, limit=limit, offset=offset, order_by=order_by, dag_id_pattern=dag_id_pattern, dag_id_prefix_pattern=dag_id_prefix_pattern, task_id=task_id, task_id_pattern=task_id_pattern, task_id_prefix_pattern=task_id_prefix_pattern, map_index=map_index, state=state, teams=teams, response_received=response_received, responded_by_user_id=responded_by_user_id, responded_by_user_name=responded_by_user_name, subject_search=subject_search, body_search=body_search, created_at_gte=created_at_gte, created_at_gt=created_at_gt, created_at_lte=created_at_lte, created_at_lt=created_at_lt)
 
 Get Hitl Details
 
@@ -625,6 +654,8 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     api_instance = airflow_client.client.TaskInstanceApi(api_client)
     dag_id = 'dag_id_example' # str | 
     dag_run_id = 'dag_run_id_example' # str | 
+    region_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID |  (optional)
+    region_index = 56 # int |  (optional)
     limit = 50 # int |  (optional) (default to 50)
     offset = 0 # int |  (optional) (default to 0)
     order_by = ["ti_id"] # List[str] | Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `ti_id, subject, responded_at, created_at, responded_by_user_id, responded_by_user_name, dag_id, run_id, task_display_name, run_after, rendered_map_index, task_instance_operator, task_instance_state` (optional) (default to ["ti_id"])
@@ -635,6 +666,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     task_id_prefix_pattern = 'task_id_prefix_pattern_example' # str | Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\". (optional)
     map_index = 56 # int |  (optional)
     state = ['state_example'] # List[str] |  (optional)
+    teams = ['teams_example'] # List[str] |  (optional)
     response_received = True # bool |  (optional)
     responded_by_user_id = ['responded_by_user_id_example'] # List[str] |  (optional)
     responded_by_user_name = ['responded_by_user_name_example'] # List[str] |  (optional)
@@ -647,7 +679,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
 
     try:
         # Get Hitl Details
-        api_response = api_instance.get_hitl_details(dag_id, dag_run_id, limit=limit, offset=offset, order_by=order_by, dag_id_pattern=dag_id_pattern, dag_id_prefix_pattern=dag_id_prefix_pattern, task_id=task_id, task_id_pattern=task_id_pattern, task_id_prefix_pattern=task_id_prefix_pattern, map_index=map_index, state=state, response_received=response_received, responded_by_user_id=responded_by_user_id, responded_by_user_name=responded_by_user_name, subject_search=subject_search, body_search=body_search, created_at_gte=created_at_gte, created_at_gt=created_at_gt, created_at_lte=created_at_lte, created_at_lt=created_at_lt)
+        api_response = api_instance.get_hitl_details(dag_id, dag_run_id, region_id=region_id, region_index=region_index, limit=limit, offset=offset, order_by=order_by, dag_id_pattern=dag_id_pattern, dag_id_prefix_pattern=dag_id_prefix_pattern, task_id=task_id, task_id_pattern=task_id_pattern, task_id_prefix_pattern=task_id_prefix_pattern, map_index=map_index, state=state, teams=teams, response_received=response_received, responded_by_user_id=responded_by_user_id, responded_by_user_name=responded_by_user_name, subject_search=subject_search, body_search=body_search, created_at_gte=created_at_gte, created_at_gt=created_at_gt, created_at_lte=created_at_lte, created_at_lt=created_at_lt)
         print("The response of TaskInstanceApi->get_hitl_details:\n")
         pprint(api_response)
     except Exception as e:
@@ -663,6 +695,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **dag_id** | **str**|  | 
  **dag_run_id** | **str**|  | 
+ **region_id** | **UUID**|  | [optional] 
+ **region_index** | **int**|  | [optional] 
  **limit** | **int**|  | [optional] [default to 50]
  **offset** | **int**|  | [optional] [default to 0]
  **order_by** | [**List[str]**](str.md)| Attributes to order by, multi criteria sort is supported. Prefix with &#x60;-&#x60; for descending order. Supported attributes: &#x60;ti_id, subject, responded_at, created_at, responded_by_user_id, responded_by_user_name, dag_id, run_id, task_display_name, run_after, rendered_map_index, task_instance_operator, task_instance_state&#x60; | [optional] [default to [&quot;ti_id&quot;]]
@@ -673,6 +707,7 @@ Name | Type | Description  | Notes
  **task_id_prefix_pattern** | **str**| Case-sensitive, index-friendly prefix match. See \&quot;Filtering with pattern parameters\&quot;. | [optional] 
  **map_index** | **int**|  | [optional] 
  **state** | [**List[str]**](str.md)|  | [optional] 
+ **teams** | [**List[str]**](str.md)|  | [optional] 
  **response_received** | **bool**|  | [optional] 
  **responded_by_user_id** | [**List[str]**](str.md)|  | [optional] 
  **responded_by_user_name** | [**List[str]**](str.md)|  | [optional] 
@@ -701,6 +736,7 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
+**400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **422** | Validation Error |  -  |
@@ -708,7 +744,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_log**
-> TaskInstancesLogResponse get_log(dag_id, dag_run_id, task_id, try_number, full_content=full_content, map_index=map_index, token=token, accept=accept)
+> TaskInstancesLogResponse get_log(dag_id, dag_run_id, task_id, try_number, full_content=full_content, token=token, map_index=map_index, region_id=region_id, region_index=region_index, accept=accept)
 
 Get Log
 
@@ -752,13 +788,15 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     task_id = 'task_id_example' # str | 
     try_number = 56 # int | 
     full_content = False # bool |  (optional) (default to False)
-    map_index = -1 # int |  (optional) (default to -1)
     token = 'token_example' # str |  (optional)
+    map_index = -1 # int |  (optional) (default to -1)
+    region_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID |  (optional)
+    region_index = 56 # int |  (optional)
     accept = '*/*' # str |  (optional) (default to '*/*')
 
     try:
         # Get Log
-        api_response = api_instance.get_log(dag_id, dag_run_id, task_id, try_number, full_content=full_content, map_index=map_index, token=token, accept=accept)
+        api_response = api_instance.get_log(dag_id, dag_run_id, task_id, try_number, full_content=full_content, token=token, map_index=map_index, region_id=region_id, region_index=region_index, accept=accept)
         print("The response of TaskInstanceApi->get_log:\n")
         pprint(api_response)
     except Exception as e:
@@ -777,8 +815,10 @@ Name | Type | Description  | Notes
  **task_id** | **str**|  | 
  **try_number** | **int**|  | 
  **full_content** | **bool**|  | [optional] [default to False]
- **map_index** | **int**|  | [optional] [default to -1]
  **token** | **str**|  | [optional] 
+ **map_index** | **int**|  | [optional] [default to -1]
+ **region_id** | **UUID**|  | [optional] 
+ **region_index** | **int**|  | [optional] 
  **accept** | **str**|  | [optional] [default to &#39;*/*&#39;]
 
 ### Return type
@@ -799,15 +839,17 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
+**400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
+**409** | Conflict |  -  |
 **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_mapped_task_instance**
-> TaskInstanceResponse get_mapped_task_instance(dag_id, dag_run_id, task_id, map_index)
+> TaskInstanceResponse get_mapped_task_instance(dag_id, dag_run_id, task_id, map_index, region_id=region_id, region_index=region_index)
 
 Get Mapped Task Instance
 
@@ -850,10 +892,12 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     dag_run_id = 'dag_run_id_example' # str | 
     task_id = 'task_id_example' # str | 
     map_index = 56 # int | 
+    region_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID |  (optional)
+    region_index = 56 # int |  (optional)
 
     try:
         # Get Mapped Task Instance
-        api_response = api_instance.get_mapped_task_instance(dag_id, dag_run_id, task_id, map_index)
+        api_response = api_instance.get_mapped_task_instance(dag_id, dag_run_id, task_id, map_index, region_id=region_id, region_index=region_index)
         print("The response of TaskInstanceApi->get_mapped_task_instance:\n")
         pprint(api_response)
     except Exception as e:
@@ -871,6 +915,8 @@ Name | Type | Description  | Notes
  **dag_run_id** | **str**|  | 
  **task_id** | **str**|  | 
  **map_index** | **int**|  | 
+ **region_id** | **UUID**|  | [optional] 
+ **region_index** | **int**|  | [optional] 
 
 ### Return type
 
@@ -890,17 +936,23 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
+**400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
+**409** | Conflict |  -  |
 **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_mapped_task_instance_tries**
-> TaskInstanceHistoryCollectionResponse get_mapped_task_instance_tries(dag_id, dag_run_id, task_id, map_index)
+> TaskInstanceHistoryCollectionResponse get_mapped_task_instance_tries(dag_id, dag_run_id, task_id, map_index, region_id=region_id, region_index=region_index)
 
 Get Mapped Task Instance Tries
+
+Get list of task instances history for a mapped task instance.
+
+Tries recorded before the task had regions are not included once it has them.
 
 ### Example
 
@@ -939,10 +991,12 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     dag_run_id = 'dag_run_id_example' # str | 
     task_id = 'task_id_example' # str | 
     map_index = 56 # int | 
+    region_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID |  (optional)
+    region_index = 56 # int |  (optional)
 
     try:
         # Get Mapped Task Instance Tries
-        api_response = api_instance.get_mapped_task_instance_tries(dag_id, dag_run_id, task_id, map_index)
+        api_response = api_instance.get_mapped_task_instance_tries(dag_id, dag_run_id, task_id, map_index, region_id=region_id, region_index=region_index)
         print("The response of TaskInstanceApi->get_mapped_task_instance_tries:\n")
         pprint(api_response)
     except Exception as e:
@@ -960,6 +1014,8 @@ Name | Type | Description  | Notes
  **dag_run_id** | **str**|  | 
  **task_id** | **str**|  | 
  **map_index** | **int**|  | 
+ **region_id** | **UUID**|  | [optional] 
+ **region_index** | **int**|  | [optional] 
 
 ### Return type
 
@@ -979,15 +1035,17 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
+**400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
+**409** | Conflict |  -  |
 **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_mapped_task_instance_try_details**
-> TaskInstanceHistoryResponse get_mapped_task_instance_try_details(dag_id, dag_run_id, task_id, task_try_number, map_index)
+> TaskInstanceHistoryResponse get_mapped_task_instance_try_details(dag_id, dag_run_id, task_id, task_try_number, map_index, region_id=region_id, region_index=region_index)
 
 Get Mapped Task Instance Try Details
 
@@ -1029,10 +1087,12 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     task_id = 'task_id_example' # str | 
     task_try_number = 56 # int | 
     map_index = 56 # int | 
+    region_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID |  (optional)
+    region_index = 56 # int |  (optional)
 
     try:
         # Get Mapped Task Instance Try Details
-        api_response = api_instance.get_mapped_task_instance_try_details(dag_id, dag_run_id, task_id, task_try_number, map_index)
+        api_response = api_instance.get_mapped_task_instance_try_details(dag_id, dag_run_id, task_id, task_try_number, map_index, region_id=region_id, region_index=region_index)
         print("The response of TaskInstanceApi->get_mapped_task_instance_try_details:\n")
         pprint(api_response)
     except Exception as e:
@@ -1051,6 +1111,8 @@ Name | Type | Description  | Notes
  **task_id** | **str**|  | 
  **task_try_number** | **int**|  | 
  **map_index** | **int**|  | 
+ **region_id** | **UUID**|  | [optional] 
+ **region_index** | **int**|  | [optional] 
 
 ### Return type
 
@@ -1070,15 +1132,17 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
+**400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
+**409** | Conflict |  -  |
 **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_mapped_task_instances**
-> TaskInstanceCollectionResponse get_mapped_task_instances(dag_id, dag_run_id, task_id, run_after_gte=run_after_gte, run_after_gt=run_after_gt, run_after_lte=run_after_lte, run_after_lt=run_after_lt, logical_date_gte=logical_date_gte, logical_date_gt=logical_date_gt, logical_date_lte=logical_date_lte, logical_date_lt=logical_date_lt, start_date_gte=start_date_gte, start_date_gt=start_date_gt, start_date_lte=start_date_lte, start_date_lt=start_date_lt, end_date_gte=end_date_gte, end_date_gt=end_date_gt, end_date_lte=end_date_lte, end_date_lt=end_date_lt, updated_at_gte=updated_at_gte, updated_at_gt=updated_at_gt, updated_at_lte=updated_at_lte, updated_at_lt=updated_at_lt, duration_gte=duration_gte, duration_gt=duration_gt, duration_lte=duration_lte, duration_lt=duration_lt, state=state, pool=pool, pool_name_pattern=pool_name_pattern, pool_name_prefix_pattern=pool_name_prefix_pattern, queue=queue, queue_name_pattern=queue_name_pattern, queue_name_prefix_pattern=queue_name_prefix_pattern, executor=executor, version_number=version_number, try_number=try_number, operator=operator, operator_name_pattern=operator_name_pattern, operator_name_prefix_pattern=operator_name_prefix_pattern, map_index=map_index, rendered_map_index_pattern=rendered_map_index_pattern, rendered_map_index_prefix_pattern=rendered_map_index_prefix_pattern, limit=limit, offset=offset, order_by=order_by)
+> TaskInstanceCollectionResponse get_mapped_task_instances(dag_id, dag_run_id, task_id, region_id=region_id, region_index=region_index, run_after_gte=run_after_gte, run_after_gt=run_after_gt, run_after_lte=run_after_lte, run_after_lt=run_after_lt, logical_date_gte=logical_date_gte, logical_date_gt=logical_date_gt, logical_date_lte=logical_date_lte, logical_date_lt=logical_date_lt, start_date_gte=start_date_gte, start_date_gt=start_date_gt, start_date_lte=start_date_lte, start_date_lt=start_date_lt, end_date_gte=end_date_gte, end_date_gt=end_date_gt, end_date_lte=end_date_lte, end_date_lt=end_date_lt, updated_at_gte=updated_at_gte, updated_at_gt=updated_at_gt, updated_at_lte=updated_at_lte, updated_at_lt=updated_at_lt, duration_gte=duration_gte, duration_gt=duration_gt, duration_lte=duration_lte, duration_lt=duration_lt, state=state, pool=pool, pool_name_pattern=pool_name_pattern, pool_name_prefix_pattern=pool_name_prefix_pattern, queue=queue, queue_name_pattern=queue_name_pattern, queue_name_prefix_pattern=queue_name_prefix_pattern, executor=executor, version_number=version_number, try_number=try_number, operator=operator, operator_name_pattern=operator_name_pattern, operator_name_prefix_pattern=operator_name_prefix_pattern, map_index=map_index, rendered_map_index_pattern=rendered_map_index_pattern, rendered_map_index_prefix_pattern=rendered_map_index_prefix_pattern, limit=limit, offset=offset, order_by=order_by)
 
 Get Mapped Task Instances
 
@@ -1120,6 +1184,8 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     dag_id = 'dag_id_example' # str | 
     dag_run_id = 'dag_run_id_example' # str | 
     task_id = 'task_id_example' # str | 
+    region_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID |  (optional)
+    region_index = 56 # int |  (optional)
     run_after_gte = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
     run_after_gt = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
     run_after_lte = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
@@ -1166,7 +1232,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
 
     try:
         # Get Mapped Task Instances
-        api_response = api_instance.get_mapped_task_instances(dag_id, dag_run_id, task_id, run_after_gte=run_after_gte, run_after_gt=run_after_gt, run_after_lte=run_after_lte, run_after_lt=run_after_lt, logical_date_gte=logical_date_gte, logical_date_gt=logical_date_gt, logical_date_lte=logical_date_lte, logical_date_lt=logical_date_lt, start_date_gte=start_date_gte, start_date_gt=start_date_gt, start_date_lte=start_date_lte, start_date_lt=start_date_lt, end_date_gte=end_date_gte, end_date_gt=end_date_gt, end_date_lte=end_date_lte, end_date_lt=end_date_lt, updated_at_gte=updated_at_gte, updated_at_gt=updated_at_gt, updated_at_lte=updated_at_lte, updated_at_lt=updated_at_lt, duration_gte=duration_gte, duration_gt=duration_gt, duration_lte=duration_lte, duration_lt=duration_lt, state=state, pool=pool, pool_name_pattern=pool_name_pattern, pool_name_prefix_pattern=pool_name_prefix_pattern, queue=queue, queue_name_pattern=queue_name_pattern, queue_name_prefix_pattern=queue_name_prefix_pattern, executor=executor, version_number=version_number, try_number=try_number, operator=operator, operator_name_pattern=operator_name_pattern, operator_name_prefix_pattern=operator_name_prefix_pattern, map_index=map_index, rendered_map_index_pattern=rendered_map_index_pattern, rendered_map_index_prefix_pattern=rendered_map_index_prefix_pattern, limit=limit, offset=offset, order_by=order_by)
+        api_response = api_instance.get_mapped_task_instances(dag_id, dag_run_id, task_id, region_id=region_id, region_index=region_index, run_after_gte=run_after_gte, run_after_gt=run_after_gt, run_after_lte=run_after_lte, run_after_lt=run_after_lt, logical_date_gte=logical_date_gte, logical_date_gt=logical_date_gt, logical_date_lte=logical_date_lte, logical_date_lt=logical_date_lt, start_date_gte=start_date_gte, start_date_gt=start_date_gt, start_date_lte=start_date_lte, start_date_lt=start_date_lt, end_date_gte=end_date_gte, end_date_gt=end_date_gt, end_date_lte=end_date_lte, end_date_lt=end_date_lt, updated_at_gte=updated_at_gte, updated_at_gt=updated_at_gt, updated_at_lte=updated_at_lte, updated_at_lt=updated_at_lt, duration_gte=duration_gte, duration_gt=duration_gt, duration_lte=duration_lte, duration_lt=duration_lt, state=state, pool=pool, pool_name_pattern=pool_name_pattern, pool_name_prefix_pattern=pool_name_prefix_pattern, queue=queue, queue_name_pattern=queue_name_pattern, queue_name_prefix_pattern=queue_name_prefix_pattern, executor=executor, version_number=version_number, try_number=try_number, operator=operator, operator_name_pattern=operator_name_pattern, operator_name_prefix_pattern=operator_name_prefix_pattern, map_index=map_index, rendered_map_index_pattern=rendered_map_index_pattern, rendered_map_index_prefix_pattern=rendered_map_index_prefix_pattern, limit=limit, offset=offset, order_by=order_by)
         print("The response of TaskInstanceApi->get_mapped_task_instances:\n")
         pprint(api_response)
     except Exception as e:
@@ -1183,6 +1249,8 @@ Name | Type | Description  | Notes
  **dag_id** | **str**|  | 
  **dag_run_id** | **str**|  | 
  **task_id** | **str**|  | 
+ **region_id** | **UUID**|  | [optional] 
+ **region_index** | **int**|  | [optional] 
  **run_after_gte** | **datetime**|  | [optional] 
  **run_after_gt** | **datetime**|  | [optional] 
  **run_after_lte** | **datetime**|  | [optional] 
@@ -1245,6 +1313,7 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
+**400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
@@ -1253,7 +1322,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_task_instance**
-> TaskInstanceResponse get_task_instance(dag_id, dag_run_id, task_id)
+> TaskInstanceResponse get_task_instance(dag_id, dag_run_id, task_id, region_id=region_id, region_index=region_index)
 
 Get Task Instance
 
@@ -1295,10 +1364,12 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     dag_id = 'dag_id_example' # str | 
     dag_run_id = 'dag_run_id_example' # str | 
     task_id = 'task_id_example' # str | 
+    region_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID |  (optional)
+    region_index = 56 # int |  (optional)
 
     try:
         # Get Task Instance
-        api_response = api_instance.get_task_instance(dag_id, dag_run_id, task_id)
+        api_response = api_instance.get_task_instance(dag_id, dag_run_id, task_id, region_id=region_id, region_index=region_index)
         print("The response of TaskInstanceApi->get_task_instance:\n")
         pprint(api_response)
     except Exception as e:
@@ -1315,6 +1386,8 @@ Name | Type | Description  | Notes
  **dag_id** | **str**|  | 
  **dag_run_id** | **str**|  | 
  **task_id** | **str**|  | 
+ **region_id** | **UUID**|  | [optional] 
+ **region_index** | **int**|  | [optional] 
 
 ### Return type
 
@@ -1334,15 +1407,17 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
+**400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
+**409** | Conflict |  -  |
 **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_task_instance_dependencies**
-> TaskDependencyCollectionResponse get_task_instance_dependencies(dag_id, dag_run_id, task_id, map_index=map_index)
+> TaskDependencyCollectionResponse get_task_instance_dependencies(dag_id, dag_run_id, task_id, map_index=map_index, region_id=region_id, region_index=region_index)
 
 Get Task Instance Dependencies
 
@@ -1385,10 +1460,12 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     dag_run_id = 'dag_run_id_example' # str | 
     task_id = 'task_id_example' # str | 
     map_index = -1 # int |  (optional) (default to -1)
+    region_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID |  (optional)
+    region_index = 56 # int |  (optional)
 
     try:
         # Get Task Instance Dependencies
-        api_response = api_instance.get_task_instance_dependencies(dag_id, dag_run_id, task_id, map_index=map_index)
+        api_response = api_instance.get_task_instance_dependencies(dag_id, dag_run_id, task_id, map_index=map_index, region_id=region_id, region_index=region_index)
         print("The response of TaskInstanceApi->get_task_instance_dependencies:\n")
         pprint(api_response)
     except Exception as e:
@@ -1406,6 +1483,8 @@ Name | Type | Description  | Notes
  **dag_run_id** | **str**|  | 
  **task_id** | **str**|  | 
  **map_index** | **int**|  | [optional] [default to -1]
+ **region_id** | **UUID**|  | [optional] 
+ **region_index** | **int**|  | [optional] 
 
 ### Return type
 
@@ -1425,15 +1504,17 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
+**400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
+**409** | Conflict |  -  |
 **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_task_instance_dependencies_by_map_index**
-> TaskDependencyCollectionResponse get_task_instance_dependencies_by_map_index(dag_id, dag_run_id, task_id, map_index)
+> TaskDependencyCollectionResponse get_task_instance_dependencies_by_map_index(dag_id, dag_run_id, task_id, map_index, region_id=region_id, region_index=region_index)
 
 Get Task Instance Dependencies
 
@@ -1476,10 +1557,12 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     dag_run_id = 'dag_run_id_example' # str | 
     task_id = 'task_id_example' # str | 
     map_index = 56 # int | 
+    region_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID |  (optional)
+    region_index = 56 # int |  (optional)
 
     try:
         # Get Task Instance Dependencies
-        api_response = api_instance.get_task_instance_dependencies_by_map_index(dag_id, dag_run_id, task_id, map_index)
+        api_response = api_instance.get_task_instance_dependencies_by_map_index(dag_id, dag_run_id, task_id, map_index, region_id=region_id, region_index=region_index)
         print("The response of TaskInstanceApi->get_task_instance_dependencies_by_map_index:\n")
         pprint(api_response)
     except Exception as e:
@@ -1497,6 +1580,8 @@ Name | Type | Description  | Notes
  **dag_run_id** | **str**|  | 
  **task_id** | **str**|  | 
  **map_index** | **int**|  | 
+ **region_id** | **UUID**|  | [optional] 
+ **region_index** | **int**|  | [optional] 
 
 ### Return type
 
@@ -1516,19 +1601,23 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
+**400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
+**409** | Conflict |  -  |
 **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_task_instance_tries**
-> TaskInstanceHistoryCollectionResponse get_task_instance_tries(dag_id, dag_run_id, task_id, map_index=map_index)
+> TaskInstanceHistoryCollectionResponse get_task_instance_tries(dag_id, dag_run_id, task_id, map_index=map_index, region_id=region_id, region_index=region_index)
 
 Get Task Instance Tries
 
 Get list of task instances history.
+
+Tries recorded before the task had regions are not included once it has them.
 
 ### Example
 
@@ -1567,10 +1656,12 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     dag_run_id = 'dag_run_id_example' # str | 
     task_id = 'task_id_example' # str | 
     map_index = -1 # int |  (optional) (default to -1)
+    region_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID |  (optional)
+    region_index = 56 # int |  (optional)
 
     try:
         # Get Task Instance Tries
-        api_response = api_instance.get_task_instance_tries(dag_id, dag_run_id, task_id, map_index=map_index)
+        api_response = api_instance.get_task_instance_tries(dag_id, dag_run_id, task_id, map_index=map_index, region_id=region_id, region_index=region_index)
         print("The response of TaskInstanceApi->get_task_instance_tries:\n")
         pprint(api_response)
     except Exception as e:
@@ -1588,6 +1679,8 @@ Name | Type | Description  | Notes
  **dag_run_id** | **str**|  | 
  **task_id** | **str**|  | 
  **map_index** | **int**|  | [optional] [default to -1]
+ **region_id** | **UUID**|  | [optional] 
+ **region_index** | **int**|  | [optional] 
 
 ### Return type
 
@@ -1607,15 +1700,17 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
+**400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
+**409** | Conflict |  -  |
 **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_task_instance_try_details**
-> TaskInstanceHistoryResponse get_task_instance_try_details(dag_id, dag_run_id, task_id, task_try_number, map_index=map_index)
+> TaskInstanceHistoryResponse get_task_instance_try_details(dag_id, dag_run_id, task_id, task_try_number, map_index=map_index, region_id=region_id, region_index=region_index)
 
 Get Task Instance Try Details
 
@@ -1659,10 +1754,12 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     task_id = 'task_id_example' # str | 
     task_try_number = 56 # int | 
     map_index = -1 # int |  (optional) (default to -1)
+    region_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID |  (optional)
+    region_index = 56 # int |  (optional)
 
     try:
         # Get Task Instance Try Details
-        api_response = api_instance.get_task_instance_try_details(dag_id, dag_run_id, task_id, task_try_number, map_index=map_index)
+        api_response = api_instance.get_task_instance_try_details(dag_id, dag_run_id, task_id, task_try_number, map_index=map_index, region_id=region_id, region_index=region_index)
         print("The response of TaskInstanceApi->get_task_instance_try_details:\n")
         pprint(api_response)
     except Exception as e:
@@ -1681,6 +1778,8 @@ Name | Type | Description  | Notes
  **task_id** | **str**|  | 
  **task_try_number** | **int**|  | 
  **map_index** | **int**|  | [optional] [default to -1]
+ **region_id** | **UUID**|  | [optional] 
+ **region_index** | **int**|  | [optional] 
 
 ### Return type
 
@@ -1700,15 +1799,17 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
+**400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
+**409** | Conflict |  -  |
 **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_task_instances**
-> TaskInstanceCollectionResponse get_task_instances(dag_id, dag_run_id, cursor=cursor, task_id=task_id, run_after_gte=run_after_gte, run_after_gt=run_after_gt, run_after_lte=run_after_lte, run_after_lt=run_after_lt, logical_date_gte=logical_date_gte, logical_date_gt=logical_date_gt, logical_date_lte=logical_date_lte, logical_date_lt=logical_date_lt, start_date_gte=start_date_gte, start_date_gt=start_date_gt, start_date_lte=start_date_lte, start_date_lt=start_date_lt, end_date_gte=end_date_gte, end_date_gt=end_date_gt, end_date_lte=end_date_lte, end_date_lt=end_date_lt, updated_at_gte=updated_at_gte, updated_at_gt=updated_at_gt, updated_at_lte=updated_at_lte, updated_at_lt=updated_at_lt, duration_gte=duration_gte, duration_gt=duration_gt, duration_lte=duration_lte, duration_lt=duration_lt, task_display_name_pattern=task_display_name_pattern, task_display_name_prefix_pattern=task_display_name_prefix_pattern, task_group_id=task_group_id, dag_id_pattern=dag_id_pattern, dag_id_prefix_pattern=dag_id_prefix_pattern, run_id_pattern=run_id_pattern, run_id_prefix_pattern=run_id_prefix_pattern, state=state, pool=pool, pool_name_pattern=pool_name_pattern, pool_name_prefix_pattern=pool_name_prefix_pattern, queue=queue, queue_name_pattern=queue_name_pattern, queue_name_prefix_pattern=queue_name_prefix_pattern, executor=executor, version_number=version_number, try_number=try_number, operator=operator, operator_name_pattern=operator_name_pattern, operator_name_prefix_pattern=operator_name_prefix_pattern, map_index=map_index, rendered_map_index_pattern=rendered_map_index_pattern, rendered_map_index_prefix_pattern=rendered_map_index_prefix_pattern, limit=limit, offset=offset, order_by=order_by)
+> TaskInstanceCollectionResponse get_task_instances(dag_id, dag_run_id, region_id=region_id, region_index=region_index, loop_id=loop_id, iteration=iteration, cursor=cursor, task_id=task_id, run_after_gte=run_after_gte, run_after_gt=run_after_gt, run_after_lte=run_after_lte, run_after_lt=run_after_lt, logical_date_gte=logical_date_gte, logical_date_gt=logical_date_gt, logical_date_lte=logical_date_lte, logical_date_lt=logical_date_lt, start_date_gte=start_date_gte, start_date_gt=start_date_gt, start_date_lte=start_date_lte, start_date_lt=start_date_lt, end_date_gte=end_date_gte, end_date_gt=end_date_gt, end_date_lte=end_date_lte, end_date_lt=end_date_lt, updated_at_gte=updated_at_gte, updated_at_gt=updated_at_gt, updated_at_lte=updated_at_lte, updated_at_lt=updated_at_lt, duration_gte=duration_gte, duration_gt=duration_gt, duration_lte=duration_lte, duration_lt=duration_lt, task_display_name_pattern=task_display_name_pattern, task_display_name_prefix_pattern=task_display_name_prefix_pattern, task_group_id=task_group_id, dag_id_pattern=dag_id_pattern, dag_id_prefix_pattern=dag_id_prefix_pattern, run_id_pattern=run_id_pattern, run_id_prefix_pattern=run_id_prefix_pattern, state=state, pool=pool, pool_name_pattern=pool_name_pattern, pool_name_prefix_pattern=pool_name_prefix_pattern, queue=queue, queue_name_pattern=queue_name_pattern, queue_name_prefix_pattern=queue_name_prefix_pattern, executor=executor, version_number=version_number, teams=teams, try_number=try_number, operator=operator, operator_name_pattern=operator_name_pattern, operator_name_prefix_pattern=operator_name_prefix_pattern, map_index=map_index, rendered_map_index_pattern=rendered_map_index_pattern, rendered_map_index_prefix_pattern=rendered_map_index_prefix_pattern, limit=limit, offset=offset, order_by=order_by)
 
 Get Task Instances
 
@@ -1762,6 +1863,10 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     api_instance = airflow_client.client.TaskInstanceApi(api_client)
     dag_id = 'dag_id_example' # str | 
     dag_run_id = 'dag_run_id_example' # str | 
+    region_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID |  (optional)
+    region_index = 56 # int |  (optional)
+    loop_id = 'loop_id_example' # str | Task group id of a loop; matches every instance it produced. (optional)
+    iteration = 56 # int | Narrow ``loop_id`` to a single pass of that loop. Iterations count from one. (optional)
     cursor = 'cursor_example' # str | Cursor for keyset-based pagination. Pass an empty string for the first page, then use ``next_cursor`` from the response. When ``cursor`` is provided, ``offset`` is ignored. (optional)
     task_id = 'task_id_example' # str |  (optional)
     run_after_gte = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
@@ -1804,6 +1909,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     queue_name_prefix_pattern = 'queue_name_prefix_pattern_example' # str | Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\". (optional)
     executor = ['executor_example'] # List[str] |  (optional)
     version_number = [56] # List[int] |  (optional)
+    teams = ['teams_example'] # List[str] |  (optional)
     try_number = [56] # List[int] |  (optional)
     operator = ['operator_example'] # List[str] |  (optional)
     operator_name_pattern = 'operator_name_pattern_example' # str | Case-insensitive substring match (SQL `ILIKE`). Slower than `operator_name_prefix_pattern` on large tables — see \"Filtering with pattern parameters\". (optional)
@@ -1817,7 +1923,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
 
     try:
         # Get Task Instances
-        api_response = api_instance.get_task_instances(dag_id, dag_run_id, cursor=cursor, task_id=task_id, run_after_gte=run_after_gte, run_after_gt=run_after_gt, run_after_lte=run_after_lte, run_after_lt=run_after_lt, logical_date_gte=logical_date_gte, logical_date_gt=logical_date_gt, logical_date_lte=logical_date_lte, logical_date_lt=logical_date_lt, start_date_gte=start_date_gte, start_date_gt=start_date_gt, start_date_lte=start_date_lte, start_date_lt=start_date_lt, end_date_gte=end_date_gte, end_date_gt=end_date_gt, end_date_lte=end_date_lte, end_date_lt=end_date_lt, updated_at_gte=updated_at_gte, updated_at_gt=updated_at_gt, updated_at_lte=updated_at_lte, updated_at_lt=updated_at_lt, duration_gte=duration_gte, duration_gt=duration_gt, duration_lte=duration_lte, duration_lt=duration_lt, task_display_name_pattern=task_display_name_pattern, task_display_name_prefix_pattern=task_display_name_prefix_pattern, task_group_id=task_group_id, dag_id_pattern=dag_id_pattern, dag_id_prefix_pattern=dag_id_prefix_pattern, run_id_pattern=run_id_pattern, run_id_prefix_pattern=run_id_prefix_pattern, state=state, pool=pool, pool_name_pattern=pool_name_pattern, pool_name_prefix_pattern=pool_name_prefix_pattern, queue=queue, queue_name_pattern=queue_name_pattern, queue_name_prefix_pattern=queue_name_prefix_pattern, executor=executor, version_number=version_number, try_number=try_number, operator=operator, operator_name_pattern=operator_name_pattern, operator_name_prefix_pattern=operator_name_prefix_pattern, map_index=map_index, rendered_map_index_pattern=rendered_map_index_pattern, rendered_map_index_prefix_pattern=rendered_map_index_prefix_pattern, limit=limit, offset=offset, order_by=order_by)
+        api_response = api_instance.get_task_instances(dag_id, dag_run_id, region_id=region_id, region_index=region_index, loop_id=loop_id, iteration=iteration, cursor=cursor, task_id=task_id, run_after_gte=run_after_gte, run_after_gt=run_after_gt, run_after_lte=run_after_lte, run_after_lt=run_after_lt, logical_date_gte=logical_date_gte, logical_date_gt=logical_date_gt, logical_date_lte=logical_date_lte, logical_date_lt=logical_date_lt, start_date_gte=start_date_gte, start_date_gt=start_date_gt, start_date_lte=start_date_lte, start_date_lt=start_date_lt, end_date_gte=end_date_gte, end_date_gt=end_date_gt, end_date_lte=end_date_lte, end_date_lt=end_date_lt, updated_at_gte=updated_at_gte, updated_at_gt=updated_at_gt, updated_at_lte=updated_at_lte, updated_at_lt=updated_at_lt, duration_gte=duration_gte, duration_gt=duration_gt, duration_lte=duration_lte, duration_lt=duration_lt, task_display_name_pattern=task_display_name_pattern, task_display_name_prefix_pattern=task_display_name_prefix_pattern, task_group_id=task_group_id, dag_id_pattern=dag_id_pattern, dag_id_prefix_pattern=dag_id_prefix_pattern, run_id_pattern=run_id_pattern, run_id_prefix_pattern=run_id_prefix_pattern, state=state, pool=pool, pool_name_pattern=pool_name_pattern, pool_name_prefix_pattern=pool_name_prefix_pattern, queue=queue, queue_name_pattern=queue_name_pattern, queue_name_prefix_pattern=queue_name_prefix_pattern, executor=executor, version_number=version_number, teams=teams, try_number=try_number, operator=operator, operator_name_pattern=operator_name_pattern, operator_name_prefix_pattern=operator_name_prefix_pattern, map_index=map_index, rendered_map_index_pattern=rendered_map_index_pattern, rendered_map_index_prefix_pattern=rendered_map_index_prefix_pattern, limit=limit, offset=offset, order_by=order_by)
         print("The response of TaskInstanceApi->get_task_instances:\n")
         pprint(api_response)
     except Exception as e:
@@ -1833,6 +1939,10 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **dag_id** | **str**|  | 
  **dag_run_id** | **str**|  | 
+ **region_id** | **UUID**|  | [optional] 
+ **region_index** | **int**|  | [optional] 
+ **loop_id** | **str**| Task group id of a loop; matches every instance it produced. | [optional] 
+ **iteration** | **int**| Narrow &#x60;&#x60;loop_id&#x60;&#x60; to a single pass of that loop. Iterations count from one. | [optional] 
  **cursor** | **str**| Cursor for keyset-based pagination. Pass an empty string for the first page, then use &#x60;&#x60;next_cursor&#x60;&#x60; from the response. When &#x60;&#x60;cursor&#x60;&#x60; is provided, &#x60;&#x60;offset&#x60;&#x60; is ignored. | [optional] 
  **task_id** | **str**|  | [optional] 
  **run_after_gte** | **datetime**|  | [optional] 
@@ -1875,6 +1985,7 @@ Name | Type | Description  | Notes
  **queue_name_prefix_pattern** | **str**| Case-sensitive, index-friendly prefix match. See \&quot;Filtering with pattern parameters\&quot;. | [optional] 
  **executor** | [**List[str]**](str.md)|  | [optional] 
  **version_number** | [**List[int]**](int.md)|  | [optional] 
+ **teams** | [**List[str]**](str.md)|  | [optional] 
  **try_number** | [**List[int]**](int.md)|  | [optional] 
  **operator** | [**List[str]**](str.md)|  | [optional] 
  **operator_name_pattern** | **str**| Case-insensitive substring match (SQL &#x60;ILIKE&#x60;). Slower than &#x60;operator_name_prefix_pattern&#x60; on large tables — see \&quot;Filtering with pattern parameters\&quot;. | [optional] 
@@ -2003,7 +2114,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_task_group_instances**
-> TaskInstanceCollectionResponse patch_task_group_instances(dag_id, dag_run_id, group_id, patch_task_instance_body, update_mask=update_mask)
+> TaskInstanceCollectionResponse patch_task_group_instances(dag_id, dag_run_id, group_id, patch_task_instance_body, update_mask=update_mask, region_id=region_id, region_index=region_index)
 
 Patch Task Group Instances
 
@@ -2048,10 +2159,12 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     group_id = 'group_id_example' # str | 
     patch_task_instance_body = airflow_client.client.PatchTaskInstanceBody() # PatchTaskInstanceBody | 
     update_mask = ['update_mask_example'] # List[str] |  (optional)
+    region_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID |  (optional)
+    region_index = 56 # int |  (optional)
 
     try:
         # Patch Task Group Instances
-        api_response = api_instance.patch_task_group_instances(dag_id, dag_run_id, group_id, patch_task_instance_body, update_mask=update_mask)
+        api_response = api_instance.patch_task_group_instances(dag_id, dag_run_id, group_id, patch_task_instance_body, update_mask=update_mask, region_id=region_id, region_index=region_index)
         print("The response of TaskInstanceApi->patch_task_group_instances:\n")
         pprint(api_response)
     except Exception as e:
@@ -2070,6 +2183,8 @@ Name | Type | Description  | Notes
  **group_id** | **str**|  | 
  **patch_task_instance_body** | [**PatchTaskInstanceBody**](PatchTaskInstanceBody.md)|  | 
  **update_mask** | [**List[str]**](str.md)|  | [optional] 
+ **region_id** | **UUID**|  | [optional] 
+ **region_index** | **int**|  | [optional] 
 
 ### Return type
 
@@ -2099,7 +2214,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_task_group_instances_dry_run**
-> TaskInstanceCollectionResponse patch_task_group_instances_dry_run(dag_id, dag_run_id, group_id, patch_task_instance_body)
+> TaskInstanceCollectionResponse patch_task_group_instances_dry_run(dag_id, dag_run_id, group_id, patch_task_instance_body, region_id=region_id, region_index=region_index)
 
 Patch Task Group Instances Dry Run
 
@@ -2143,10 +2258,12 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     dag_run_id = 'dag_run_id_example' # str | 
     group_id = 'group_id_example' # str | 
     patch_task_instance_body = airflow_client.client.PatchTaskInstanceBody() # PatchTaskInstanceBody | 
+    region_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID |  (optional)
+    region_index = 56 # int |  (optional)
 
     try:
         # Patch Task Group Instances Dry Run
-        api_response = api_instance.patch_task_group_instances_dry_run(dag_id, dag_run_id, group_id, patch_task_instance_body)
+        api_response = api_instance.patch_task_group_instances_dry_run(dag_id, dag_run_id, group_id, patch_task_instance_body, region_id=region_id, region_index=region_index)
         print("The response of TaskInstanceApi->patch_task_group_instances_dry_run:\n")
         pprint(api_response)
     except Exception as e:
@@ -2164,6 +2281,8 @@ Name | Type | Description  | Notes
  **dag_run_id** | **str**|  | 
  **group_id** | **str**|  | 
  **patch_task_instance_body** | [**PatchTaskInstanceBody**](PatchTaskInstanceBody.md)|  | 
+ **region_id** | **UUID**|  | [optional] 
+ **region_index** | **int**|  | [optional] 
 
 ### Return type
 
@@ -2187,12 +2306,13 @@ Name | Type | Description  | Notes
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
+**409** | Conflict |  -  |
 **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_task_instance**
-> TaskInstanceCollectionResponse patch_task_instance(dag_id, dag_run_id, task_id, patch_task_instance_body, map_index=map_index, update_mask=update_mask)
+> TaskInstanceCollectionResponse patch_task_instance(dag_id, dag_run_id, task_id, patch_task_instance_body, map_index=map_index, update_mask=update_mask, region_id=region_id, region_index=region_index)
 
 Patch Task Instance
 
@@ -2238,10 +2358,12 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     patch_task_instance_body = airflow_client.client.PatchTaskInstanceBody() # PatchTaskInstanceBody | 
     map_index = 56 # int |  (optional)
     update_mask = ['update_mask_example'] # List[str] |  (optional)
+    region_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID |  (optional)
+    region_index = 56 # int |  (optional)
 
     try:
         # Patch Task Instance
-        api_response = api_instance.patch_task_instance(dag_id, dag_run_id, task_id, patch_task_instance_body, map_index=map_index, update_mask=update_mask)
+        api_response = api_instance.patch_task_instance(dag_id, dag_run_id, task_id, patch_task_instance_body, map_index=map_index, update_mask=update_mask, region_id=region_id, region_index=region_index)
         print("The response of TaskInstanceApi->patch_task_instance:\n")
         pprint(api_response)
     except Exception as e:
@@ -2261,6 +2383,8 @@ Name | Type | Description  | Notes
  **patch_task_instance_body** | [**PatchTaskInstanceBody**](PatchTaskInstanceBody.md)|  | 
  **map_index** | **int**|  | [optional] 
  **update_mask** | [**List[str]**](str.md)|  | [optional] 
+ **region_id** | **UUID**|  | [optional] 
+ **region_index** | **int**|  | [optional] 
 
 ### Return type
 
@@ -2290,7 +2414,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_task_instance_by_map_index**
-> TaskInstanceCollectionResponse patch_task_instance_by_map_index(dag_id, dag_run_id, task_id, map_index, patch_task_instance_body, update_mask=update_mask)
+> TaskInstanceCollectionResponse patch_task_instance_by_map_index(dag_id, dag_run_id, task_id, map_index, patch_task_instance_body, update_mask=update_mask, region_id=region_id, region_index=region_index)
 
 Patch Task Instance
 
@@ -2336,10 +2460,12 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     map_index = 56 # int | 
     patch_task_instance_body = airflow_client.client.PatchTaskInstanceBody() # PatchTaskInstanceBody | 
     update_mask = ['update_mask_example'] # List[str] |  (optional)
+    region_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID |  (optional)
+    region_index = 56 # int |  (optional)
 
     try:
         # Patch Task Instance
-        api_response = api_instance.patch_task_instance_by_map_index(dag_id, dag_run_id, task_id, map_index, patch_task_instance_body, update_mask=update_mask)
+        api_response = api_instance.patch_task_instance_by_map_index(dag_id, dag_run_id, task_id, map_index, patch_task_instance_body, update_mask=update_mask, region_id=region_id, region_index=region_index)
         print("The response of TaskInstanceApi->patch_task_instance_by_map_index:\n")
         pprint(api_response)
     except Exception as e:
@@ -2359,6 +2485,8 @@ Name | Type | Description  | Notes
  **map_index** | **int**|  | 
  **patch_task_instance_body** | [**PatchTaskInstanceBody**](PatchTaskInstanceBody.md)|  | 
  **update_mask** | [**List[str]**](str.md)|  | [optional] 
+ **region_id** | **UUID**|  | [optional] 
+ **region_index** | **int**|  | [optional] 
 
 ### Return type
 
@@ -2388,7 +2516,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_task_instance_dry_run**
-> TaskInstanceCollectionResponse patch_task_instance_dry_run(dag_id, dag_run_id, task_id, patch_task_instance_body, map_index=map_index, update_mask=update_mask)
+> TaskInstanceCollectionResponse patch_task_instance_dry_run(dag_id, dag_run_id, task_id, patch_task_instance_body, map_index=map_index, update_mask=update_mask, region_id=region_id, region_index=region_index)
 
 Patch Task Instance Dry Run
 
@@ -2434,10 +2562,12 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     patch_task_instance_body = airflow_client.client.PatchTaskInstanceBody() # PatchTaskInstanceBody | 
     map_index = 56 # int |  (optional)
     update_mask = ['update_mask_example'] # List[str] |  (optional)
+    region_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID |  (optional)
+    region_index = 56 # int |  (optional)
 
     try:
         # Patch Task Instance Dry Run
-        api_response = api_instance.patch_task_instance_dry_run(dag_id, dag_run_id, task_id, patch_task_instance_body, map_index=map_index, update_mask=update_mask)
+        api_response = api_instance.patch_task_instance_dry_run(dag_id, dag_run_id, task_id, patch_task_instance_body, map_index=map_index, update_mask=update_mask, region_id=region_id, region_index=region_index)
         print("The response of TaskInstanceApi->patch_task_instance_dry_run:\n")
         pprint(api_response)
     except Exception as e:
@@ -2457,6 +2587,8 @@ Name | Type | Description  | Notes
  **patch_task_instance_body** | [**PatchTaskInstanceBody**](PatchTaskInstanceBody.md)|  | 
  **map_index** | **int**|  | [optional] 
  **update_mask** | [**List[str]**](str.md)|  | [optional] 
+ **region_id** | **UUID**|  | [optional] 
+ **region_index** | **int**|  | [optional] 
 
 ### Return type
 
@@ -2480,12 +2612,13 @@ Name | Type | Description  | Notes
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
+**409** | Conflict |  -  |
 **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_task_instance_dry_run_by_map_index**
-> TaskInstanceCollectionResponse patch_task_instance_dry_run_by_map_index(dag_id, dag_run_id, task_id, map_index, patch_task_instance_body, update_mask=update_mask)
+> TaskInstanceCollectionResponse patch_task_instance_dry_run_by_map_index(dag_id, dag_run_id, task_id, map_index, patch_task_instance_body, update_mask=update_mask, region_id=region_id, region_index=region_index)
 
 Patch Task Instance Dry Run
 
@@ -2531,10 +2664,12 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     map_index = 56 # int | 
     patch_task_instance_body = airflow_client.client.PatchTaskInstanceBody() # PatchTaskInstanceBody | 
     update_mask = ['update_mask_example'] # List[str] |  (optional)
+    region_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID |  (optional)
+    region_index = 56 # int |  (optional)
 
     try:
         # Patch Task Instance Dry Run
-        api_response = api_instance.patch_task_instance_dry_run_by_map_index(dag_id, dag_run_id, task_id, map_index, patch_task_instance_body, update_mask=update_mask)
+        api_response = api_instance.patch_task_instance_dry_run_by_map_index(dag_id, dag_run_id, task_id, map_index, patch_task_instance_body, update_mask=update_mask, region_id=region_id, region_index=region_index)
         print("The response of TaskInstanceApi->patch_task_instance_dry_run_by_map_index:\n")
         pprint(api_response)
     except Exception as e:
@@ -2554,6 +2689,8 @@ Name | Type | Description  | Notes
  **map_index** | **int**|  | 
  **patch_task_instance_body** | [**PatchTaskInstanceBody**](PatchTaskInstanceBody.md)|  | 
  **update_mask** | [**List[str]**](str.md)|  | [optional] 
+ **region_id** | **UUID**|  | [optional] 
+ **region_index** | **int**|  | [optional] 
 
 ### Return type
 
@@ -2577,6 +2714,7 @@ Name | Type | Description  | Notes
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
+**409** | Conflict |  -  |
 **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -2672,7 +2810,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_hitl_detail**
-> HITLDetailResponse update_hitl_detail(dag_id, dag_run_id, task_id, map_index, update_hitl_detail_payload)
+> HITLDetailResponse update_hitl_detail(dag_id, dag_run_id, task_id, map_index, update_hitl_detail_payload, region_id=region_id, region_index=region_index)
 
 Update Hitl Detail
 
@@ -2717,10 +2855,12 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     task_id = 'task_id_example' # str | 
     map_index = 56 # int | 
     update_hitl_detail_payload = airflow_client.client.UpdateHITLDetailPayload() # UpdateHITLDetailPayload | 
+    region_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID |  (optional)
+    region_index = 56 # int |  (optional)
 
     try:
         # Update Hitl Detail
-        api_response = api_instance.update_hitl_detail(dag_id, dag_run_id, task_id, map_index, update_hitl_detail_payload)
+        api_response = api_instance.update_hitl_detail(dag_id, dag_run_id, task_id, map_index, update_hitl_detail_payload, region_id=region_id, region_index=region_index)
         print("The response of TaskInstanceApi->update_hitl_detail:\n")
         pprint(api_response)
     except Exception as e:
@@ -2739,6 +2879,8 @@ Name | Type | Description  | Notes
  **task_id** | **str**|  | 
  **map_index** | **int**|  | 
  **update_hitl_detail_payload** | [**UpdateHITLDetailPayload**](UpdateHITLDetailPayload.md)|  | 
+ **region_id** | **UUID**|  | [optional] 
+ **region_index** | **int**|  | [optional] 
 
 ### Return type
 

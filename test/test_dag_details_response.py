@@ -39,7 +39,7 @@ class TestDAGDetailsResponse(unittest.TestCase):
                 allowed_run_types = [
                     'backfill'
                     ],
-                asset_expression = { },
+                asset_expression = None,
                 bundle_name = '',
                 bundle_version = '',
                 catchup = True,
@@ -90,6 +90,7 @@ class TestDAGDetailsResponse(unittest.TestCase):
                 relative_fileloc = '',
                 render_template_as_native_obj = True,
                 rerun_with_latest_version = True,
+                scheduling_state = 'active',
                 start_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 tags = [
                     airflow_client.client.models.dag_tag_response.DagTagResponse(
@@ -97,6 +98,7 @@ class TestDAGDetailsResponse(unittest.TestCase):
                         dag_id = '', 
                         name = '', )
                     ],
+                team_name = '',
                 template_search_path = [
                     ''
                     ],
@@ -113,7 +115,6 @@ class TestDAGDetailsResponse(unittest.TestCase):
                 dag_display_name = '',
                 dag_id = '',
                 file_token = '',
-                fileloc = '',
                 has_import_errors = True,
                 has_task_concurrency_limits = True,
                 is_backfillable = True,

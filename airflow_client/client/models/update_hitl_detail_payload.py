@@ -17,6 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
@@ -30,7 +31,8 @@ class UpdateHITLDetailPayload(BaseModel):
     """ # noqa: E501
     chosen_options: Annotated[List[StrictStr], Field(min_length=1)]
     params_input: Optional[Dict[str, Any]] = None
-    __properties: ClassVar[List[str]] = ["chosen_options", "params_input"]
+    request_created_at: Optional[datetime] = None
+    __properties: ClassVar[List[str]] = ["chosen_options", "params_input", "request_created_at"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -84,7 +86,8 @@ class UpdateHITLDetailPayload(BaseModel):
 
         _obj = cls.model_validate({
             "chosen_options": obj.get("chosen_options"),
-            "params_input": obj.get("params_input")
+            "params_input": obj.get("params_input"),
+            "request_created_at": obj.get("request_created_at")
         })
         return _obj
 

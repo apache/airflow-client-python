@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **active_runs_count** | **int** |  | [optional] [default to 0]
 **allowed_run_types** | [**List[DagRunType]**](DagRunType.md) |  | [optional] 
-**asset_expression** | **Dict[str, object]** |  | [optional] 
+**asset_expression** | [**DAGDetailsResponseAssetExpression**](DAGDetailsResponseAssetExpression.md) |  | [optional] 
 **bundle_name** | **str** |  | [optional] 
 **bundle_version** | **str** |  | [optional] 
 **catchup** | **bool** |  | 
@@ -21,7 +21,7 @@ Name | Type | Description | Notes
 **doc_md** | **str** |  | [optional] 
 **end_date** | **datetime** |  | [optional] 
 **file_token** | **str** | Return file token. | [readonly] 
-**fileloc** | **str** |  | 
+**fileloc** | **str** |  | [optional] 
 **has_import_errors** | **bool** |  | 
 **has_task_concurrency_limits** | **bool** |  | 
 **is_backfillable** | **bool** | Whether this Dag&#39;s schedule supports backfilling. | [readonly] 
@@ -47,8 +47,10 @@ Name | Type | Description | Notes
 **relative_fileloc** | **str** |  | [optional] 
 **render_template_as_native_obj** | **bool** |  | 
 **rerun_with_latest_version** | **bool** |  | [optional] 
+**scheduling_state** | [**DagSchedulingState**](DagSchedulingState.md) |  | [optional] 
 **start_date** | **datetime** |  | [optional] 
 **tags** | [**List[DagTagResponse]**](DagTagResponse.md) |  | 
+**team_name** | **str** |  | [optional] 
 **template_search_path** | **List[str]** |  | [optional] 
 **timetable_description** | **str** |  | [optional] 
 **timetable_partitioned** | **bool** |  | 

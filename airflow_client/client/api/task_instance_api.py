@@ -19,6 +19,7 @@ from datetime import datetime
 from pydantic import Field, StrictBool, StrictFloat, StrictInt, StrictStr, field_validator
 from typing import Any, List, Optional, Union
 from typing_extensions import Annotated
+from uuid import UUID
 from airflow_client.client.models.bulk_body_bulk_task_instance_body import BulkBodyBulkTaskInstanceBody
 from airflow_client.client.models.bulk_response import BulkResponse
 from airflow_client.client.models.clear_task_instances_body import ClearTaskInstancesBody
@@ -304,7 +305,7 @@ class TaskInstanceApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -325,7 +326,7 @@ class TaskInstanceApi:
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -334,7 +335,7 @@ class TaskInstanceApi:
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            self.api_client._set_header(_header_params, 'Content-Type', _content_type)
         else:
             _default_content_type = (
                 self.api_client.select_header_content_type(
@@ -344,7 +345,7 @@ class TaskInstanceApi:
                 )
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                self.api_client._set_header(_header_params, 'Content-Type', _default_content_type)
 
         # authentication setting
         _auth_settings: List[str] = [
@@ -377,6 +378,8 @@ class TaskInstanceApi:
         dag_run_id: StrictStr,
         task_id: StrictStr,
         map_index: Optional[StrictInt] = None,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -402,6 +405,10 @@ class TaskInstanceApi:
         :type task_id: str
         :param map_index:
         :type map_index: int
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -429,6 +436,8 @@ class TaskInstanceApi:
             dag_run_id=dag_run_id,
             task_id=task_id,
             map_index=map_index,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -437,9 +446,11 @@ class TaskInstanceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "object",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -460,6 +471,8 @@ class TaskInstanceApi:
         dag_run_id: StrictStr,
         task_id: StrictStr,
         map_index: Optional[StrictInt] = None,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -485,6 +498,10 @@ class TaskInstanceApi:
         :type task_id: str
         :param map_index:
         :type map_index: int
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -512,6 +529,8 @@ class TaskInstanceApi:
             dag_run_id=dag_run_id,
             task_id=task_id,
             map_index=map_index,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -520,9 +539,11 @@ class TaskInstanceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "object",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -543,6 +564,8 @@ class TaskInstanceApi:
         dag_run_id: StrictStr,
         task_id: StrictStr,
         map_index: Optional[StrictInt] = None,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -568,6 +591,10 @@ class TaskInstanceApi:
         :type task_id: str
         :param map_index:
         :type map_index: int
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -595,6 +622,8 @@ class TaskInstanceApi:
             dag_run_id=dag_run_id,
             task_id=task_id,
             map_index=map_index,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -603,9 +632,11 @@ class TaskInstanceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "object",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -621,6 +652,8 @@ class TaskInstanceApi:
         dag_run_id,
         task_id,
         map_index,
+        region_id,
+        region_index,
         _request_auth,
         _content_type,
         _headers,
@@ -634,7 +667,7 @@ class TaskInstanceApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -653,13 +686,21 @@ class TaskInstanceApi:
             
             _query_params.append(('map_index', map_index))
             
+        if region_id is not None:
+            
+            _query_params.append(('region_id', region_id))
+            
+        if region_index is not None:
+            
+            _query_params.append(('region_index', region_index))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -699,6 +740,8 @@ class TaskInstanceApi:
         task_id: StrictStr,
         try_number: Annotated[int, Field(strict=True, gt=0)],
         map_index: Optional[StrictInt] = None,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -726,6 +769,10 @@ class TaskInstanceApi:
         :type try_number: int
         :param map_index:
         :type map_index: int
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -754,6 +801,8 @@ class TaskInstanceApi:
             task_id=task_id,
             try_number=try_number,
             map_index=map_index,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -766,6 +815,7 @@ class TaskInstanceApi:
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -787,6 +837,8 @@ class TaskInstanceApi:
         task_id: StrictStr,
         try_number: Annotated[int, Field(strict=True, gt=0)],
         map_index: Optional[StrictInt] = None,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -814,6 +866,10 @@ class TaskInstanceApi:
         :type try_number: int
         :param map_index:
         :type map_index: int
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -842,6 +898,8 @@ class TaskInstanceApi:
             task_id=task_id,
             try_number=try_number,
             map_index=map_index,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -854,6 +912,7 @@ class TaskInstanceApi:
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -875,6 +934,8 @@ class TaskInstanceApi:
         task_id: StrictStr,
         try_number: Annotated[int, Field(strict=True, gt=0)],
         map_index: Optional[StrictInt] = None,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -902,6 +963,10 @@ class TaskInstanceApi:
         :type try_number: int
         :param map_index:
         :type map_index: int
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -930,6 +995,8 @@ class TaskInstanceApi:
             task_id=task_id,
             try_number=try_number,
             map_index=map_index,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -942,6 +1009,7 @@ class TaskInstanceApi:
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -958,6 +1026,8 @@ class TaskInstanceApi:
         task_id,
         try_number,
         map_index,
+        region_id,
+        region_index,
         _request_auth,
         _content_type,
         _headers,
@@ -971,7 +1041,7 @@ class TaskInstanceApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -992,13 +1062,21 @@ class TaskInstanceApi:
             
             _query_params.append(('map_index', map_index))
             
+        if region_id is not None:
+            
+            _query_params.append(('region_id', region_id))
+            
+        if region_index is not None:
+            
+            _query_params.append(('region_index', region_index))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -1037,6 +1115,8 @@ class TaskInstanceApi:
         dag_run_id: StrictStr,
         task_id: StrictStr,
         map_index: Optional[StrictInt] = None,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         try_number: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
@@ -1063,6 +1143,10 @@ class TaskInstanceApi:
         :type task_id: str
         :param map_index:
         :type map_index: int
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param try_number:
         :type try_number: int
         :param _request_timeout: timeout setting for this request. If one
@@ -1092,6 +1176,8 @@ class TaskInstanceApi:
             dag_run_id=dag_run_id,
             task_id=task_id,
             map_index=map_index,
+            region_id=region_id,
+            region_index=region_index,
             try_number=try_number,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1101,9 +1187,11 @@ class TaskInstanceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ExtraLinkCollectionResponse",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -1124,6 +1212,8 @@ class TaskInstanceApi:
         dag_run_id: StrictStr,
         task_id: StrictStr,
         map_index: Optional[StrictInt] = None,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         try_number: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
@@ -1150,6 +1240,10 @@ class TaskInstanceApi:
         :type task_id: str
         :param map_index:
         :type map_index: int
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param try_number:
         :type try_number: int
         :param _request_timeout: timeout setting for this request. If one
@@ -1179,6 +1273,8 @@ class TaskInstanceApi:
             dag_run_id=dag_run_id,
             task_id=task_id,
             map_index=map_index,
+            region_id=region_id,
+            region_index=region_index,
             try_number=try_number,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1188,9 +1284,11 @@ class TaskInstanceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ExtraLinkCollectionResponse",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -1211,6 +1309,8 @@ class TaskInstanceApi:
         dag_run_id: StrictStr,
         task_id: StrictStr,
         map_index: Optional[StrictInt] = None,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         try_number: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
@@ -1237,6 +1337,10 @@ class TaskInstanceApi:
         :type task_id: str
         :param map_index:
         :type map_index: int
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param try_number:
         :type try_number: int
         :param _request_timeout: timeout setting for this request. If one
@@ -1266,6 +1370,8 @@ class TaskInstanceApi:
             dag_run_id=dag_run_id,
             task_id=task_id,
             map_index=map_index,
+            region_id=region_id,
+            region_index=region_index,
             try_number=try_number,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1275,9 +1381,11 @@ class TaskInstanceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ExtraLinkCollectionResponse",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -1293,6 +1401,8 @@ class TaskInstanceApi:
         dag_run_id,
         task_id,
         map_index,
+        region_id,
+        region_index,
         try_number,
         _request_auth,
         _content_type,
@@ -1307,7 +1417,7 @@ class TaskInstanceApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -1326,6 +1436,14 @@ class TaskInstanceApi:
             
             _query_params.append(('map_index', map_index))
             
+        if region_id is not None:
+            
+            _query_params.append(('region_id', region_id))
+            
+        if region_index is not None:
+            
+            _query_params.append(('region_index', region_index))
+            
         if try_number is not None:
             
             _query_params.append(('try_number', try_number))
@@ -1336,7 +1454,7 @@ class TaskInstanceApi:
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -1375,6 +1493,8 @@ class TaskInstanceApi:
         dag_run_id: StrictStr,
         task_id: StrictStr,
         map_index: StrictInt,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1400,6 +1520,10 @@ class TaskInstanceApi:
         :type task_id: str
         :param map_index: (required)
         :type map_index: int
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1427,6 +1551,8 @@ class TaskInstanceApi:
             dag_run_id=dag_run_id,
             task_id=task_id,
             map_index=map_index,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1435,9 +1561,11 @@ class TaskInstanceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "HITLDetail",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -1458,6 +1586,8 @@ class TaskInstanceApi:
         dag_run_id: StrictStr,
         task_id: StrictStr,
         map_index: StrictInt,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1483,6 +1613,10 @@ class TaskInstanceApi:
         :type task_id: str
         :param map_index: (required)
         :type map_index: int
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1510,6 +1644,8 @@ class TaskInstanceApi:
             dag_run_id=dag_run_id,
             task_id=task_id,
             map_index=map_index,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1518,9 +1654,11 @@ class TaskInstanceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "HITLDetail",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -1541,6 +1679,8 @@ class TaskInstanceApi:
         dag_run_id: StrictStr,
         task_id: StrictStr,
         map_index: StrictInt,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1566,6 +1706,10 @@ class TaskInstanceApi:
         :type task_id: str
         :param map_index: (required)
         :type map_index: int
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1593,6 +1737,8 @@ class TaskInstanceApi:
             dag_run_id=dag_run_id,
             task_id=task_id,
             map_index=map_index,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1601,9 +1747,11 @@ class TaskInstanceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "HITLDetail",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -1619,6 +1767,8 @@ class TaskInstanceApi:
         dag_run_id,
         task_id,
         map_index,
+        region_id,
+        region_index,
         _request_auth,
         _content_type,
         _headers,
@@ -1632,7 +1782,7 @@ class TaskInstanceApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -1649,13 +1799,21 @@ class TaskInstanceApi:
         if map_index is not None:
             _path_params['map_index'] = map_index
         # process the query parameters
+        if region_id is not None:
+            
+            _query_params.append(('region_id', region_id))
+            
+        if region_index is not None:
+            
+            _query_params.append(('region_index', region_index))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -1695,6 +1853,8 @@ class TaskInstanceApi:
         task_id: StrictStr,
         map_index: StrictInt,
         try_number: StrictInt,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1722,6 +1882,10 @@ class TaskInstanceApi:
         :type map_index: int
         :param try_number: (required)
         :type try_number: int
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1750,6 +1914,8 @@ class TaskInstanceApi:
             task_id=task_id,
             map_index=map_index,
             try_number=try_number,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1758,9 +1924,11 @@ class TaskInstanceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "HITLDetailHistory",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -1782,6 +1950,8 @@ class TaskInstanceApi:
         task_id: StrictStr,
         map_index: StrictInt,
         try_number: StrictInt,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1809,6 +1979,10 @@ class TaskInstanceApi:
         :type map_index: int
         :param try_number: (required)
         :type try_number: int
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1837,6 +2011,8 @@ class TaskInstanceApi:
             task_id=task_id,
             map_index=map_index,
             try_number=try_number,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1845,9 +2021,11 @@ class TaskInstanceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "HITLDetailHistory",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -1869,6 +2047,8 @@ class TaskInstanceApi:
         task_id: StrictStr,
         map_index: StrictInt,
         try_number: StrictInt,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1896,6 +2076,10 @@ class TaskInstanceApi:
         :type map_index: int
         :param try_number: (required)
         :type try_number: int
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1924,6 +2108,8 @@ class TaskInstanceApi:
             task_id=task_id,
             map_index=map_index,
             try_number=try_number,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1932,9 +2118,11 @@ class TaskInstanceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "HITLDetailHistory",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -1951,6 +2139,8 @@ class TaskInstanceApi:
         task_id,
         map_index,
         try_number,
+        region_id,
+        region_index,
         _request_auth,
         _content_type,
         _headers,
@@ -1964,7 +2154,7 @@ class TaskInstanceApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -1983,13 +2173,21 @@ class TaskInstanceApi:
         if try_number is not None:
             _path_params['try_number'] = try_number
         # process the query parameters
+        if region_id is not None:
+            
+            _query_params.append(('region_id', region_id))
+            
+        if region_index is not None:
+            
+            _query_params.append(('region_index', region_index))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -2026,6 +2224,8 @@ class TaskInstanceApi:
         self,
         dag_id: StrictStr,
         dag_run_id: StrictStr,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `ti_id, subject, responded_at, created_at, responded_by_user_id, responded_by_user_name, dag_id, run_id, task_display_name, run_after, rendered_map_index, task_instance_operator, task_instance_state`")] = None,
@@ -2036,6 +2236,7 @@ class TaskInstanceApi:
         task_id_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".")] = None,
         map_index: Optional[StrictInt] = None,
         state: Optional[List[StrictStr]] = None,
+        teams: Optional[List[StrictStr]] = None,
         response_received: Optional[StrictBool] = None,
         responded_by_user_id: Optional[List[StrictStr]] = None,
         responded_by_user_name: Optional[List[StrictStr]] = None,
@@ -2066,6 +2267,10 @@ class TaskInstanceApi:
         :type dag_id: str
         :param dag_run_id: (required)
         :type dag_run_id: str
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param limit:
         :type limit: int
         :param offset:
@@ -2086,6 +2291,8 @@ class TaskInstanceApi:
         :type map_index: int
         :param state:
         :type state: List[str]
+        :param teams:
+        :type teams: List[str]
         :param response_received:
         :type response_received: bool
         :param responded_by_user_id:
@@ -2129,6 +2336,8 @@ class TaskInstanceApi:
         _param = self._get_hitl_details_serialize(
             dag_id=dag_id,
             dag_run_id=dag_run_id,
+            region_id=region_id,
+            region_index=region_index,
             limit=limit,
             offset=offset,
             order_by=order_by,
@@ -2139,6 +2348,7 @@ class TaskInstanceApi:
             task_id_prefix_pattern=task_id_prefix_pattern,
             map_index=map_index,
             state=state,
+            teams=teams,
             response_received=response_received,
             responded_by_user_id=responded_by_user_id,
             responded_by_user_name=responded_by_user_name,
@@ -2156,6 +2366,7 @@ class TaskInstanceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "HITLDetailCollection",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
@@ -2176,6 +2387,8 @@ class TaskInstanceApi:
         self,
         dag_id: StrictStr,
         dag_run_id: StrictStr,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `ti_id, subject, responded_at, created_at, responded_by_user_id, responded_by_user_name, dag_id, run_id, task_display_name, run_after, rendered_map_index, task_instance_operator, task_instance_state`")] = None,
@@ -2186,6 +2399,7 @@ class TaskInstanceApi:
         task_id_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".")] = None,
         map_index: Optional[StrictInt] = None,
         state: Optional[List[StrictStr]] = None,
+        teams: Optional[List[StrictStr]] = None,
         response_received: Optional[StrictBool] = None,
         responded_by_user_id: Optional[List[StrictStr]] = None,
         responded_by_user_name: Optional[List[StrictStr]] = None,
@@ -2216,6 +2430,10 @@ class TaskInstanceApi:
         :type dag_id: str
         :param dag_run_id: (required)
         :type dag_run_id: str
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param limit:
         :type limit: int
         :param offset:
@@ -2236,6 +2454,8 @@ class TaskInstanceApi:
         :type map_index: int
         :param state:
         :type state: List[str]
+        :param teams:
+        :type teams: List[str]
         :param response_received:
         :type response_received: bool
         :param responded_by_user_id:
@@ -2279,6 +2499,8 @@ class TaskInstanceApi:
         _param = self._get_hitl_details_serialize(
             dag_id=dag_id,
             dag_run_id=dag_run_id,
+            region_id=region_id,
+            region_index=region_index,
             limit=limit,
             offset=offset,
             order_by=order_by,
@@ -2289,6 +2511,7 @@ class TaskInstanceApi:
             task_id_prefix_pattern=task_id_prefix_pattern,
             map_index=map_index,
             state=state,
+            teams=teams,
             response_received=response_received,
             responded_by_user_id=responded_by_user_id,
             responded_by_user_name=responded_by_user_name,
@@ -2306,6 +2529,7 @@ class TaskInstanceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "HITLDetailCollection",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
@@ -2326,6 +2550,8 @@ class TaskInstanceApi:
         self,
         dag_id: StrictStr,
         dag_run_id: StrictStr,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `ti_id, subject, responded_at, created_at, responded_by_user_id, responded_by_user_name, dag_id, run_id, task_display_name, run_after, rendered_map_index, task_instance_operator, task_instance_state`")] = None,
@@ -2336,6 +2562,7 @@ class TaskInstanceApi:
         task_id_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".")] = None,
         map_index: Optional[StrictInt] = None,
         state: Optional[List[StrictStr]] = None,
+        teams: Optional[List[StrictStr]] = None,
         response_received: Optional[StrictBool] = None,
         responded_by_user_id: Optional[List[StrictStr]] = None,
         responded_by_user_name: Optional[List[StrictStr]] = None,
@@ -2366,6 +2593,10 @@ class TaskInstanceApi:
         :type dag_id: str
         :param dag_run_id: (required)
         :type dag_run_id: str
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param limit:
         :type limit: int
         :param offset:
@@ -2386,6 +2617,8 @@ class TaskInstanceApi:
         :type map_index: int
         :param state:
         :type state: List[str]
+        :param teams:
+        :type teams: List[str]
         :param response_received:
         :type response_received: bool
         :param responded_by_user_id:
@@ -2429,6 +2662,8 @@ class TaskInstanceApi:
         _param = self._get_hitl_details_serialize(
             dag_id=dag_id,
             dag_run_id=dag_run_id,
+            region_id=region_id,
+            region_index=region_index,
             limit=limit,
             offset=offset,
             order_by=order_by,
@@ -2439,6 +2674,7 @@ class TaskInstanceApi:
             task_id_prefix_pattern=task_id_prefix_pattern,
             map_index=map_index,
             state=state,
+            teams=teams,
             response_received=response_received,
             responded_by_user_id=responded_by_user_id,
             responded_by_user_name=responded_by_user_name,
@@ -2456,6 +2692,7 @@ class TaskInstanceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "HITLDetailCollection",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
@@ -2471,6 +2708,8 @@ class TaskInstanceApi:
         self,
         dag_id,
         dag_run_id,
+        region_id,
+        region_index,
         limit,
         offset,
         order_by,
@@ -2481,6 +2720,7 @@ class TaskInstanceApi:
         task_id_prefix_pattern,
         map_index,
         state,
+        teams,
         response_received,
         responded_by_user_id,
         responded_by_user_name,
@@ -2501,13 +2741,14 @@ class TaskInstanceApi:
         _collection_formats: Dict[str, str] = {
             'order_by': 'multi',
             'state': 'multi',
+            'teams': 'multi',
             'responded_by_user_id': 'multi',
             'responded_by_user_name': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -2520,6 +2761,14 @@ class TaskInstanceApi:
         if dag_run_id is not None:
             _path_params['dag_run_id'] = dag_run_id
         # process the query parameters
+        if region_id is not None:
+            
+            _query_params.append(('region_id', region_id))
+            
+        if region_index is not None:
+            
+            _query_params.append(('region_index', region_index))
+            
         if limit is not None:
             
             _query_params.append(('limit', limit))
@@ -2559,6 +2808,10 @@ class TaskInstanceApi:
         if state is not None:
             
             _query_params.append(('state', state))
+            
+        if teams is not None:
+            
+            _query_params.append(('teams', teams))
             
         if response_received is not None:
             
@@ -2638,7 +2891,7 @@ class TaskInstanceApi:
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -2678,8 +2931,10 @@ class TaskInstanceApi:
         task_id: StrictStr,
         try_number: Annotated[int, Field(strict=True, ge=0)],
         full_content: Optional[StrictBool] = None,
-        map_index: Optional[StrictInt] = None,
         token: Optional[StrictStr] = None,
+        map_index: Optional[StrictInt] = None,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         accept: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -2708,10 +2963,14 @@ class TaskInstanceApi:
         :type try_number: int
         :param full_content:
         :type full_content: bool
-        :param map_index:
-        :type map_index: int
         :param token:
         :type token: str
+        :param map_index:
+        :type map_index: int
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param accept:
         :type accept: str
         :param _request_timeout: timeout setting for this request. If one
@@ -2742,8 +3001,10 @@ class TaskInstanceApi:
             task_id=task_id,
             try_number=try_number,
             full_content=full_content,
-            map_index=map_index,
             token=token,
+            map_index=map_index,
+            region_id=region_id,
+            region_index=region_index,
             accept=accept,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2753,9 +3014,11 @@ class TaskInstanceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskInstancesLogResponse",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -2777,8 +3040,10 @@ class TaskInstanceApi:
         task_id: StrictStr,
         try_number: Annotated[int, Field(strict=True, ge=0)],
         full_content: Optional[StrictBool] = None,
-        map_index: Optional[StrictInt] = None,
         token: Optional[StrictStr] = None,
+        map_index: Optional[StrictInt] = None,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         accept: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -2807,10 +3072,14 @@ class TaskInstanceApi:
         :type try_number: int
         :param full_content:
         :type full_content: bool
-        :param map_index:
-        :type map_index: int
         :param token:
         :type token: str
+        :param map_index:
+        :type map_index: int
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param accept:
         :type accept: str
         :param _request_timeout: timeout setting for this request. If one
@@ -2841,8 +3110,10 @@ class TaskInstanceApi:
             task_id=task_id,
             try_number=try_number,
             full_content=full_content,
-            map_index=map_index,
             token=token,
+            map_index=map_index,
+            region_id=region_id,
+            region_index=region_index,
             accept=accept,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2852,9 +3123,11 @@ class TaskInstanceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskInstancesLogResponse",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -2876,8 +3149,10 @@ class TaskInstanceApi:
         task_id: StrictStr,
         try_number: Annotated[int, Field(strict=True, ge=0)],
         full_content: Optional[StrictBool] = None,
-        map_index: Optional[StrictInt] = None,
         token: Optional[StrictStr] = None,
+        map_index: Optional[StrictInt] = None,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         accept: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -2906,10 +3181,14 @@ class TaskInstanceApi:
         :type try_number: int
         :param full_content:
         :type full_content: bool
-        :param map_index:
-        :type map_index: int
         :param token:
         :type token: str
+        :param map_index:
+        :type map_index: int
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param accept:
         :type accept: str
         :param _request_timeout: timeout setting for this request. If one
@@ -2940,8 +3219,10 @@ class TaskInstanceApi:
             task_id=task_id,
             try_number=try_number,
             full_content=full_content,
-            map_index=map_index,
             token=token,
+            map_index=map_index,
+            region_id=region_id,
+            region_index=region_index,
             accept=accept,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2951,9 +3232,11 @@ class TaskInstanceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskInstancesLogResponse",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -2970,8 +3253,10 @@ class TaskInstanceApi:
         task_id,
         try_number,
         full_content,
-        map_index,
         token,
+        map_index,
+        region_id,
+        region_index,
         accept,
         _request_auth,
         _content_type,
@@ -2986,7 +3271,7 @@ class TaskInstanceApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -3007,23 +3292,31 @@ class TaskInstanceApi:
             
             _query_params.append(('full_content', full_content))
             
-        if map_index is not None:
-            
-            _query_params.append(('map_index', map_index))
-            
         if token is not None:
             
             _query_params.append(('token', token))
             
+        if map_index is not None:
+            
+            _query_params.append(('map_index', map_index))
+            
+        if region_id is not None:
+            
+            _query_params.append(('region_id', region_id))
+            
+        if region_index is not None:
+            
+            _query_params.append(('region_index', region_index))
+            
         # process the header parameters
         if accept is not None:
-            _header_params['accept'] = accept
+            self.api_client._set_header(_header_params, 'accept', accept)
         # process the form parameters
         # process the body parameter
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json', 
@@ -3063,6 +3356,8 @@ class TaskInstanceApi:
         dag_run_id: StrictStr,
         task_id: StrictStr,
         map_index: StrictInt,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3088,6 +3383,10 @@ class TaskInstanceApi:
         :type task_id: str
         :param map_index: (required)
         :type map_index: int
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3115,6 +3414,8 @@ class TaskInstanceApi:
             dag_run_id=dag_run_id,
             task_id=task_id,
             map_index=map_index,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3123,9 +3424,11 @@ class TaskInstanceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskInstanceResponse",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -3146,6 +3449,8 @@ class TaskInstanceApi:
         dag_run_id: StrictStr,
         task_id: StrictStr,
         map_index: StrictInt,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3171,6 +3476,10 @@ class TaskInstanceApi:
         :type task_id: str
         :param map_index: (required)
         :type map_index: int
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3198,6 +3507,8 @@ class TaskInstanceApi:
             dag_run_id=dag_run_id,
             task_id=task_id,
             map_index=map_index,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3206,9 +3517,11 @@ class TaskInstanceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskInstanceResponse",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -3229,6 +3542,8 @@ class TaskInstanceApi:
         dag_run_id: StrictStr,
         task_id: StrictStr,
         map_index: StrictInt,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3254,6 +3569,10 @@ class TaskInstanceApi:
         :type task_id: str
         :param map_index: (required)
         :type map_index: int
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3281,6 +3600,8 @@ class TaskInstanceApi:
             dag_run_id=dag_run_id,
             task_id=task_id,
             map_index=map_index,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3289,9 +3610,11 @@ class TaskInstanceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskInstanceResponse",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -3307,6 +3630,8 @@ class TaskInstanceApi:
         dag_run_id,
         task_id,
         map_index,
+        region_id,
+        region_index,
         _request_auth,
         _content_type,
         _headers,
@@ -3320,7 +3645,7 @@ class TaskInstanceApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -3337,13 +3662,21 @@ class TaskInstanceApi:
         if map_index is not None:
             _path_params['map_index'] = map_index
         # process the query parameters
+        if region_id is not None:
+            
+            _query_params.append(('region_id', region_id))
+            
+        if region_index is not None:
+            
+            _query_params.append(('region_index', region_index))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -3382,6 +3715,8 @@ class TaskInstanceApi:
         dag_run_id: StrictStr,
         task_id: StrictStr,
         map_index: StrictInt,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3397,6 +3732,7 @@ class TaskInstanceApi:
     ) -> TaskInstanceHistoryCollectionResponse:
         """Get Mapped Task Instance Tries
 
+        Get list of task instances history for a mapped task instance.  Tries recorded before the task had regions are not included once it has them.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -3406,6 +3742,10 @@ class TaskInstanceApi:
         :type task_id: str
         :param map_index: (required)
         :type map_index: int
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3433,6 +3773,8 @@ class TaskInstanceApi:
             dag_run_id=dag_run_id,
             task_id=task_id,
             map_index=map_index,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3441,9 +3783,11 @@ class TaskInstanceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskInstanceHistoryCollectionResponse",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -3464,6 +3808,8 @@ class TaskInstanceApi:
         dag_run_id: StrictStr,
         task_id: StrictStr,
         map_index: StrictInt,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3479,6 +3825,7 @@ class TaskInstanceApi:
     ) -> ApiResponse[TaskInstanceHistoryCollectionResponse]:
         """Get Mapped Task Instance Tries
 
+        Get list of task instances history for a mapped task instance.  Tries recorded before the task had regions are not included once it has them.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -3488,6 +3835,10 @@ class TaskInstanceApi:
         :type task_id: str
         :param map_index: (required)
         :type map_index: int
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3515,6 +3866,8 @@ class TaskInstanceApi:
             dag_run_id=dag_run_id,
             task_id=task_id,
             map_index=map_index,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3523,9 +3876,11 @@ class TaskInstanceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskInstanceHistoryCollectionResponse",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -3546,6 +3901,8 @@ class TaskInstanceApi:
         dag_run_id: StrictStr,
         task_id: StrictStr,
         map_index: StrictInt,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3561,6 +3918,7 @@ class TaskInstanceApi:
     ) -> RESTResponseType:
         """Get Mapped Task Instance Tries
 
+        Get list of task instances history for a mapped task instance.  Tries recorded before the task had regions are not included once it has them.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -3570,6 +3928,10 @@ class TaskInstanceApi:
         :type task_id: str
         :param map_index: (required)
         :type map_index: int
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3597,6 +3959,8 @@ class TaskInstanceApi:
             dag_run_id=dag_run_id,
             task_id=task_id,
             map_index=map_index,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3605,9 +3969,11 @@ class TaskInstanceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskInstanceHistoryCollectionResponse",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -3623,6 +3989,8 @@ class TaskInstanceApi:
         dag_run_id,
         task_id,
         map_index,
+        region_id,
+        region_index,
         _request_auth,
         _content_type,
         _headers,
@@ -3636,7 +4004,7 @@ class TaskInstanceApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -3653,13 +4021,21 @@ class TaskInstanceApi:
         if map_index is not None:
             _path_params['map_index'] = map_index
         # process the query parameters
+        if region_id is not None:
+            
+            _query_params.append(('region_id', region_id))
+            
+        if region_index is not None:
+            
+            _query_params.append(('region_index', region_index))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -3699,6 +4075,8 @@ class TaskInstanceApi:
         task_id: StrictStr,
         task_try_number: StrictInt,
         map_index: StrictInt,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3725,6 +4103,10 @@ class TaskInstanceApi:
         :type task_try_number: int
         :param map_index: (required)
         :type map_index: int
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3753,6 +4135,8 @@ class TaskInstanceApi:
             task_id=task_id,
             task_try_number=task_try_number,
             map_index=map_index,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3761,9 +4145,11 @@ class TaskInstanceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskInstanceHistoryResponse",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -3785,6 +4171,8 @@ class TaskInstanceApi:
         task_id: StrictStr,
         task_try_number: StrictInt,
         map_index: StrictInt,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3811,6 +4199,10 @@ class TaskInstanceApi:
         :type task_try_number: int
         :param map_index: (required)
         :type map_index: int
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3839,6 +4231,8 @@ class TaskInstanceApi:
             task_id=task_id,
             task_try_number=task_try_number,
             map_index=map_index,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3847,9 +4241,11 @@ class TaskInstanceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskInstanceHistoryResponse",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -3871,6 +4267,8 @@ class TaskInstanceApi:
         task_id: StrictStr,
         task_try_number: StrictInt,
         map_index: StrictInt,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3897,6 +4295,10 @@ class TaskInstanceApi:
         :type task_try_number: int
         :param map_index: (required)
         :type map_index: int
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3925,6 +4327,8 @@ class TaskInstanceApi:
             task_id=task_id,
             task_try_number=task_try_number,
             map_index=map_index,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3933,9 +4337,11 @@ class TaskInstanceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskInstanceHistoryResponse",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -3952,6 +4358,8 @@ class TaskInstanceApi:
         task_id,
         task_try_number,
         map_index,
+        region_id,
+        region_index,
         _request_auth,
         _content_type,
         _headers,
@@ -3965,7 +4373,7 @@ class TaskInstanceApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -3984,13 +4392,21 @@ class TaskInstanceApi:
         if map_index is not None:
             _path_params['map_index'] = map_index
         # process the query parameters
+        if region_id is not None:
+            
+            _query_params.append(('region_id', region_id))
+            
+        if region_index is not None:
+            
+            _query_params.append(('region_index', region_index))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -4028,6 +4444,8 @@ class TaskInstanceApi:
         dag_id: StrictStr,
         dag_run_id: StrictStr,
         task_id: StrictStr,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         run_after_gte: Optional[datetime] = None,
         run_after_gt: Optional[datetime] = None,
         run_after_lte: Optional[datetime] = None,
@@ -4094,6 +4512,10 @@ class TaskInstanceApi:
         :type dag_run_id: str
         :param task_id: (required)
         :type task_id: str
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param run_after_gte:
         :type run_after_gte: datetime
         :param run_after_gt:
@@ -4206,6 +4628,8 @@ class TaskInstanceApi:
             dag_id=dag_id,
             dag_run_id=dag_run_id,
             task_id=task_id,
+            region_id=region_id,
+            region_index=region_index,
             run_after_gte=run_after_gte,
             run_after_gt=run_after_gt,
             run_after_lte=run_after_lte,
@@ -4257,6 +4681,7 @@ class TaskInstanceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskInstanceCollectionResponse",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
@@ -4279,6 +4704,8 @@ class TaskInstanceApi:
         dag_id: StrictStr,
         dag_run_id: StrictStr,
         task_id: StrictStr,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         run_after_gte: Optional[datetime] = None,
         run_after_gt: Optional[datetime] = None,
         run_after_lte: Optional[datetime] = None,
@@ -4345,6 +4772,10 @@ class TaskInstanceApi:
         :type dag_run_id: str
         :param task_id: (required)
         :type task_id: str
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param run_after_gte:
         :type run_after_gte: datetime
         :param run_after_gt:
@@ -4457,6 +4888,8 @@ class TaskInstanceApi:
             dag_id=dag_id,
             dag_run_id=dag_run_id,
             task_id=task_id,
+            region_id=region_id,
+            region_index=region_index,
             run_after_gte=run_after_gte,
             run_after_gt=run_after_gt,
             run_after_lte=run_after_lte,
@@ -4508,6 +4941,7 @@ class TaskInstanceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskInstanceCollectionResponse",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
@@ -4530,6 +4964,8 @@ class TaskInstanceApi:
         dag_id: StrictStr,
         dag_run_id: StrictStr,
         task_id: StrictStr,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         run_after_gte: Optional[datetime] = None,
         run_after_gt: Optional[datetime] = None,
         run_after_lte: Optional[datetime] = None,
@@ -4596,6 +5032,10 @@ class TaskInstanceApi:
         :type dag_run_id: str
         :param task_id: (required)
         :type task_id: str
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param run_after_gte:
         :type run_after_gte: datetime
         :param run_after_gt:
@@ -4708,6 +5148,8 @@ class TaskInstanceApi:
             dag_id=dag_id,
             dag_run_id=dag_run_id,
             task_id=task_id,
+            region_id=region_id,
+            region_index=region_index,
             run_after_gte=run_after_gte,
             run_after_gt=run_after_gt,
             run_after_lte=run_after_lte,
@@ -4759,6 +5201,7 @@ class TaskInstanceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskInstanceCollectionResponse",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
@@ -4776,6 +5219,8 @@ class TaskInstanceApi:
         dag_id,
         dag_run_id,
         task_id,
+        region_id,
+        region_index,
         run_after_gte,
         run_after_gt,
         run_after_lte,
@@ -4841,7 +5286,7 @@ class TaskInstanceApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -4856,6 +5301,14 @@ class TaskInstanceApi:
         if task_id is not None:
             _path_params['task_id'] = task_id
         # process the query parameters
+        if region_id is not None:
+            
+            _query_params.append(('region_id', region_id))
+            
+        if region_index is not None:
+            
+            _query_params.append(('region_index', region_index))
+            
         if run_after_gte is not None:
             if isinstance(run_after_gte, datetime):
                 _query_params.append(
@@ -5214,7 +5667,7 @@ class TaskInstanceApi:
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -5252,6 +5705,8 @@ class TaskInstanceApi:
         dag_id: StrictStr,
         dag_run_id: StrictStr,
         task_id: StrictStr,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5275,6 +5730,10 @@ class TaskInstanceApi:
         :type dag_run_id: str
         :param task_id: (required)
         :type task_id: str
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5301,6 +5760,8 @@ class TaskInstanceApi:
             dag_id=dag_id,
             dag_run_id=dag_run_id,
             task_id=task_id,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5309,9 +5770,11 @@ class TaskInstanceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskInstanceResponse",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -5331,6 +5794,8 @@ class TaskInstanceApi:
         dag_id: StrictStr,
         dag_run_id: StrictStr,
         task_id: StrictStr,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5354,6 +5819,10 @@ class TaskInstanceApi:
         :type dag_run_id: str
         :param task_id: (required)
         :type task_id: str
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5380,6 +5849,8 @@ class TaskInstanceApi:
             dag_id=dag_id,
             dag_run_id=dag_run_id,
             task_id=task_id,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5388,9 +5859,11 @@ class TaskInstanceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskInstanceResponse",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -5410,6 +5883,8 @@ class TaskInstanceApi:
         dag_id: StrictStr,
         dag_run_id: StrictStr,
         task_id: StrictStr,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5433,6 +5908,10 @@ class TaskInstanceApi:
         :type dag_run_id: str
         :param task_id: (required)
         :type task_id: str
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5459,6 +5938,8 @@ class TaskInstanceApi:
             dag_id=dag_id,
             dag_run_id=dag_run_id,
             task_id=task_id,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5467,9 +5948,11 @@ class TaskInstanceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskInstanceResponse",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -5484,6 +5967,8 @@ class TaskInstanceApi:
         dag_id,
         dag_run_id,
         task_id,
+        region_id,
+        region_index,
         _request_auth,
         _content_type,
         _headers,
@@ -5497,7 +5982,7 @@ class TaskInstanceApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -5512,13 +5997,21 @@ class TaskInstanceApi:
         if task_id is not None:
             _path_params['task_id'] = task_id
         # process the query parameters
+        if region_id is not None:
+            
+            _query_params.append(('region_id', region_id))
+            
+        if region_index is not None:
+            
+            _query_params.append(('region_index', region_index))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -5557,6 +6050,8 @@ class TaskInstanceApi:
         dag_run_id: StrictStr,
         task_id: StrictStr,
         map_index: Optional[StrictInt] = None,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5582,6 +6077,10 @@ class TaskInstanceApi:
         :type task_id: str
         :param map_index:
         :type map_index: int
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5609,6 +6108,8 @@ class TaskInstanceApi:
             dag_run_id=dag_run_id,
             task_id=task_id,
             map_index=map_index,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5617,9 +6118,11 @@ class TaskInstanceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskDependencyCollectionResponse",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -5640,6 +6143,8 @@ class TaskInstanceApi:
         dag_run_id: StrictStr,
         task_id: StrictStr,
         map_index: Optional[StrictInt] = None,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5665,6 +6170,10 @@ class TaskInstanceApi:
         :type task_id: str
         :param map_index:
         :type map_index: int
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5692,6 +6201,8 @@ class TaskInstanceApi:
             dag_run_id=dag_run_id,
             task_id=task_id,
             map_index=map_index,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5700,9 +6211,11 @@ class TaskInstanceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskDependencyCollectionResponse",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -5723,6 +6236,8 @@ class TaskInstanceApi:
         dag_run_id: StrictStr,
         task_id: StrictStr,
         map_index: Optional[StrictInt] = None,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5748,6 +6263,10 @@ class TaskInstanceApi:
         :type task_id: str
         :param map_index:
         :type map_index: int
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5775,6 +6294,8 @@ class TaskInstanceApi:
             dag_run_id=dag_run_id,
             task_id=task_id,
             map_index=map_index,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5783,9 +6304,11 @@ class TaskInstanceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskDependencyCollectionResponse",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -5801,6 +6324,8 @@ class TaskInstanceApi:
         dag_run_id,
         task_id,
         map_index,
+        region_id,
+        region_index,
         _request_auth,
         _content_type,
         _headers,
@@ -5814,7 +6339,7 @@ class TaskInstanceApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -5833,13 +6358,21 @@ class TaskInstanceApi:
             
             _query_params.append(('map_index', map_index))
             
+        if region_id is not None:
+            
+            _query_params.append(('region_id', region_id))
+            
+        if region_index is not None:
+            
+            _query_params.append(('region_index', region_index))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -5878,6 +6411,8 @@ class TaskInstanceApi:
         dag_run_id: StrictStr,
         task_id: StrictStr,
         map_index: StrictInt,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5903,6 +6438,10 @@ class TaskInstanceApi:
         :type task_id: str
         :param map_index: (required)
         :type map_index: int
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5930,6 +6469,8 @@ class TaskInstanceApi:
             dag_run_id=dag_run_id,
             task_id=task_id,
             map_index=map_index,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5938,9 +6479,11 @@ class TaskInstanceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskDependencyCollectionResponse",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -5961,6 +6504,8 @@ class TaskInstanceApi:
         dag_run_id: StrictStr,
         task_id: StrictStr,
         map_index: StrictInt,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5986,6 +6531,10 @@ class TaskInstanceApi:
         :type task_id: str
         :param map_index: (required)
         :type map_index: int
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6013,6 +6562,8 @@ class TaskInstanceApi:
             dag_run_id=dag_run_id,
             task_id=task_id,
             map_index=map_index,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6021,9 +6572,11 @@ class TaskInstanceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskDependencyCollectionResponse",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -6044,6 +6597,8 @@ class TaskInstanceApi:
         dag_run_id: StrictStr,
         task_id: StrictStr,
         map_index: StrictInt,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6069,6 +6624,10 @@ class TaskInstanceApi:
         :type task_id: str
         :param map_index: (required)
         :type map_index: int
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6096,6 +6655,8 @@ class TaskInstanceApi:
             dag_run_id=dag_run_id,
             task_id=task_id,
             map_index=map_index,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6104,9 +6665,11 @@ class TaskInstanceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskDependencyCollectionResponse",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -6122,6 +6685,8 @@ class TaskInstanceApi:
         dag_run_id,
         task_id,
         map_index,
+        region_id,
+        region_index,
         _request_auth,
         _content_type,
         _headers,
@@ -6135,7 +6700,7 @@ class TaskInstanceApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -6152,13 +6717,21 @@ class TaskInstanceApi:
         if map_index is not None:
             _path_params['map_index'] = map_index
         # process the query parameters
+        if region_id is not None:
+            
+            _query_params.append(('region_id', region_id))
+            
+        if region_index is not None:
+            
+            _query_params.append(('region_index', region_index))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -6197,6 +6770,8 @@ class TaskInstanceApi:
         dag_run_id: StrictStr,
         task_id: StrictStr,
         map_index: Optional[StrictInt] = None,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6212,7 +6787,7 @@ class TaskInstanceApi:
     ) -> TaskInstanceHistoryCollectionResponse:
         """Get Task Instance Tries
 
-        Get list of task instances history.
+        Get list of task instances history.  Tries recorded before the task had regions are not included once it has them.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -6222,6 +6797,10 @@ class TaskInstanceApi:
         :type task_id: str
         :param map_index:
         :type map_index: int
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6249,6 +6828,8 @@ class TaskInstanceApi:
             dag_run_id=dag_run_id,
             task_id=task_id,
             map_index=map_index,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6257,9 +6838,11 @@ class TaskInstanceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskInstanceHistoryCollectionResponse",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -6280,6 +6863,8 @@ class TaskInstanceApi:
         dag_run_id: StrictStr,
         task_id: StrictStr,
         map_index: Optional[StrictInt] = None,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6295,7 +6880,7 @@ class TaskInstanceApi:
     ) -> ApiResponse[TaskInstanceHistoryCollectionResponse]:
         """Get Task Instance Tries
 
-        Get list of task instances history.
+        Get list of task instances history.  Tries recorded before the task had regions are not included once it has them.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -6305,6 +6890,10 @@ class TaskInstanceApi:
         :type task_id: str
         :param map_index:
         :type map_index: int
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6332,6 +6921,8 @@ class TaskInstanceApi:
             dag_run_id=dag_run_id,
             task_id=task_id,
             map_index=map_index,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6340,9 +6931,11 @@ class TaskInstanceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskInstanceHistoryCollectionResponse",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -6363,6 +6956,8 @@ class TaskInstanceApi:
         dag_run_id: StrictStr,
         task_id: StrictStr,
         map_index: Optional[StrictInt] = None,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6378,7 +6973,7 @@ class TaskInstanceApi:
     ) -> RESTResponseType:
         """Get Task Instance Tries
 
-        Get list of task instances history.
+        Get list of task instances history.  Tries recorded before the task had regions are not included once it has them.
 
         :param dag_id: (required)
         :type dag_id: str
@@ -6388,6 +6983,10 @@ class TaskInstanceApi:
         :type task_id: str
         :param map_index:
         :type map_index: int
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6415,6 +7014,8 @@ class TaskInstanceApi:
             dag_run_id=dag_run_id,
             task_id=task_id,
             map_index=map_index,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6423,9 +7024,11 @@ class TaskInstanceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskInstanceHistoryCollectionResponse",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -6441,6 +7044,8 @@ class TaskInstanceApi:
         dag_run_id,
         task_id,
         map_index,
+        region_id,
+        region_index,
         _request_auth,
         _content_type,
         _headers,
@@ -6454,7 +7059,7 @@ class TaskInstanceApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -6473,13 +7078,21 @@ class TaskInstanceApi:
             
             _query_params.append(('map_index', map_index))
             
+        if region_id is not None:
+            
+            _query_params.append(('region_id', region_id))
+            
+        if region_index is not None:
+            
+            _query_params.append(('region_index', region_index))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -6519,6 +7132,8 @@ class TaskInstanceApi:
         task_id: StrictStr,
         task_try_number: StrictInt,
         map_index: Optional[StrictInt] = None,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6546,6 +7161,10 @@ class TaskInstanceApi:
         :type task_try_number: int
         :param map_index:
         :type map_index: int
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6574,6 +7193,8 @@ class TaskInstanceApi:
             task_id=task_id,
             task_try_number=task_try_number,
             map_index=map_index,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6582,9 +7203,11 @@ class TaskInstanceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskInstanceHistoryResponse",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -6606,6 +7229,8 @@ class TaskInstanceApi:
         task_id: StrictStr,
         task_try_number: StrictInt,
         map_index: Optional[StrictInt] = None,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6633,6 +7258,10 @@ class TaskInstanceApi:
         :type task_try_number: int
         :param map_index:
         :type map_index: int
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6661,6 +7290,8 @@ class TaskInstanceApi:
             task_id=task_id,
             task_try_number=task_try_number,
             map_index=map_index,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6669,9 +7300,11 @@ class TaskInstanceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskInstanceHistoryResponse",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -6693,6 +7326,8 @@ class TaskInstanceApi:
         task_id: StrictStr,
         task_try_number: StrictInt,
         map_index: Optional[StrictInt] = None,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6720,6 +7355,10 @@ class TaskInstanceApi:
         :type task_try_number: int
         :param map_index:
         :type map_index: int
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6748,6 +7387,8 @@ class TaskInstanceApi:
             task_id=task_id,
             task_try_number=task_try_number,
             map_index=map_index,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6756,9 +7397,11 @@ class TaskInstanceApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskInstanceHistoryResponse",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -6775,6 +7418,8 @@ class TaskInstanceApi:
         task_id,
         task_try_number,
         map_index,
+        region_id,
+        region_index,
         _request_auth,
         _content_type,
         _headers,
@@ -6788,7 +7433,7 @@ class TaskInstanceApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -6809,13 +7454,21 @@ class TaskInstanceApi:
             
             _query_params.append(('map_index', map_index))
             
+        if region_id is not None:
+            
+            _query_params.append(('region_id', region_id))
+            
+        if region_index is not None:
+            
+            _query_params.append(('region_index', region_index))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -6852,6 +7505,10 @@ class TaskInstanceApi:
         self,
         dag_id: StrictStr,
         dag_run_id: StrictStr,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
+        loop_id: Annotated[Optional[StrictStr], Field(description="Task group id of a loop; matches every instance it produced.")] = None,
+        iteration: Annotated[Optional[Annotated[int, Field(strict=True, ge=1)]], Field(description="Narrow ``loop_id`` to a single pass of that loop. Iterations count from one.")] = None,
         cursor: Annotated[Optional[StrictStr], Field(description="Cursor for keyset-based pagination. Pass an empty string for the first page, then use ``next_cursor`` from the response. When ``cursor`` is provided, ``offset`` is ignored.")] = None,
         task_id: Optional[StrictStr] = None,
         run_after_gte: Optional[datetime] = None,
@@ -6894,6 +7551,7 @@ class TaskInstanceApi:
         queue_name_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".")] = None,
         executor: Optional[List[StrictStr]] = None,
         version_number: Optional[List[StrictInt]] = None,
+        teams: Optional[List[StrictStr]] = None,
         try_number: Optional[List[StrictInt]] = None,
         operator: Optional[List[StrictStr]] = None,
         operator_name_pattern: Annotated[Optional[StrictStr], Field(description="Case-insensitive substring match (SQL `ILIKE`). Slower than `operator_name_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".")] = None,
@@ -6925,6 +7583,14 @@ class TaskInstanceApi:
         :type dag_id: str
         :param dag_run_id: (required)
         :type dag_run_id: str
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
+        :param loop_id: Task group id of a loop; matches every instance it produced.
+        :type loop_id: str
+        :param iteration: Narrow ``loop_id`` to a single pass of that loop. Iterations count from one.
+        :type iteration: int
         :param cursor: Cursor for keyset-based pagination. Pass an empty string for the first page, then use ``next_cursor`` from the response. When ``cursor`` is provided, ``offset`` is ignored.
         :type cursor: str
         :param task_id:
@@ -7009,6 +7675,8 @@ class TaskInstanceApi:
         :type executor: List[str]
         :param version_number:
         :type version_number: List[int]
+        :param teams:
+        :type teams: List[str]
         :param try_number:
         :type try_number: List[int]
         :param operator:
@@ -7054,6 +7722,10 @@ class TaskInstanceApi:
         _param = self._get_task_instances_serialize(
             dag_id=dag_id,
             dag_run_id=dag_run_id,
+            region_id=region_id,
+            region_index=region_index,
+            loop_id=loop_id,
+            iteration=iteration,
             cursor=cursor,
             task_id=task_id,
             run_after_gte=run_after_gte,
@@ -7096,6 +7768,7 @@ class TaskInstanceApi:
             queue_name_prefix_pattern=queue_name_prefix_pattern,
             executor=executor,
             version_number=version_number,
+            teams=teams,
             try_number=try_number,
             operator=operator,
             operator_name_pattern=operator_name_pattern,
@@ -7136,6 +7809,10 @@ class TaskInstanceApi:
         self,
         dag_id: StrictStr,
         dag_run_id: StrictStr,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
+        loop_id: Annotated[Optional[StrictStr], Field(description="Task group id of a loop; matches every instance it produced.")] = None,
+        iteration: Annotated[Optional[Annotated[int, Field(strict=True, ge=1)]], Field(description="Narrow ``loop_id`` to a single pass of that loop. Iterations count from one.")] = None,
         cursor: Annotated[Optional[StrictStr], Field(description="Cursor for keyset-based pagination. Pass an empty string for the first page, then use ``next_cursor`` from the response. When ``cursor`` is provided, ``offset`` is ignored.")] = None,
         task_id: Optional[StrictStr] = None,
         run_after_gte: Optional[datetime] = None,
@@ -7178,6 +7855,7 @@ class TaskInstanceApi:
         queue_name_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".")] = None,
         executor: Optional[List[StrictStr]] = None,
         version_number: Optional[List[StrictInt]] = None,
+        teams: Optional[List[StrictStr]] = None,
         try_number: Optional[List[StrictInt]] = None,
         operator: Optional[List[StrictStr]] = None,
         operator_name_pattern: Annotated[Optional[StrictStr], Field(description="Case-insensitive substring match (SQL `ILIKE`). Slower than `operator_name_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".")] = None,
@@ -7209,6 +7887,14 @@ class TaskInstanceApi:
         :type dag_id: str
         :param dag_run_id: (required)
         :type dag_run_id: str
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
+        :param loop_id: Task group id of a loop; matches every instance it produced.
+        :type loop_id: str
+        :param iteration: Narrow ``loop_id`` to a single pass of that loop. Iterations count from one.
+        :type iteration: int
         :param cursor: Cursor for keyset-based pagination. Pass an empty string for the first page, then use ``next_cursor`` from the response. When ``cursor`` is provided, ``offset`` is ignored.
         :type cursor: str
         :param task_id:
@@ -7293,6 +7979,8 @@ class TaskInstanceApi:
         :type executor: List[str]
         :param version_number:
         :type version_number: List[int]
+        :param teams:
+        :type teams: List[str]
         :param try_number:
         :type try_number: List[int]
         :param operator:
@@ -7338,6 +8026,10 @@ class TaskInstanceApi:
         _param = self._get_task_instances_serialize(
             dag_id=dag_id,
             dag_run_id=dag_run_id,
+            region_id=region_id,
+            region_index=region_index,
+            loop_id=loop_id,
+            iteration=iteration,
             cursor=cursor,
             task_id=task_id,
             run_after_gte=run_after_gte,
@@ -7380,6 +8072,7 @@ class TaskInstanceApi:
             queue_name_prefix_pattern=queue_name_prefix_pattern,
             executor=executor,
             version_number=version_number,
+            teams=teams,
             try_number=try_number,
             operator=operator,
             operator_name_pattern=operator_name_pattern,
@@ -7420,6 +8113,10 @@ class TaskInstanceApi:
         self,
         dag_id: StrictStr,
         dag_run_id: StrictStr,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
+        loop_id: Annotated[Optional[StrictStr], Field(description="Task group id of a loop; matches every instance it produced.")] = None,
+        iteration: Annotated[Optional[Annotated[int, Field(strict=True, ge=1)]], Field(description="Narrow ``loop_id`` to a single pass of that loop. Iterations count from one.")] = None,
         cursor: Annotated[Optional[StrictStr], Field(description="Cursor for keyset-based pagination. Pass an empty string for the first page, then use ``next_cursor`` from the response. When ``cursor`` is provided, ``offset`` is ignored.")] = None,
         task_id: Optional[StrictStr] = None,
         run_after_gte: Optional[datetime] = None,
@@ -7462,6 +8159,7 @@ class TaskInstanceApi:
         queue_name_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".")] = None,
         executor: Optional[List[StrictStr]] = None,
         version_number: Optional[List[StrictInt]] = None,
+        teams: Optional[List[StrictStr]] = None,
         try_number: Optional[List[StrictInt]] = None,
         operator: Optional[List[StrictStr]] = None,
         operator_name_pattern: Annotated[Optional[StrictStr], Field(description="Case-insensitive substring match (SQL `ILIKE`). Slower than `operator_name_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".")] = None,
@@ -7493,6 +8191,14 @@ class TaskInstanceApi:
         :type dag_id: str
         :param dag_run_id: (required)
         :type dag_run_id: str
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
+        :param loop_id: Task group id of a loop; matches every instance it produced.
+        :type loop_id: str
+        :param iteration: Narrow ``loop_id`` to a single pass of that loop. Iterations count from one.
+        :type iteration: int
         :param cursor: Cursor for keyset-based pagination. Pass an empty string for the first page, then use ``next_cursor`` from the response. When ``cursor`` is provided, ``offset`` is ignored.
         :type cursor: str
         :param task_id:
@@ -7577,6 +8283,8 @@ class TaskInstanceApi:
         :type executor: List[str]
         :param version_number:
         :type version_number: List[int]
+        :param teams:
+        :type teams: List[str]
         :param try_number:
         :type try_number: List[int]
         :param operator:
@@ -7622,6 +8330,10 @@ class TaskInstanceApi:
         _param = self._get_task_instances_serialize(
             dag_id=dag_id,
             dag_run_id=dag_run_id,
+            region_id=region_id,
+            region_index=region_index,
+            loop_id=loop_id,
+            iteration=iteration,
             cursor=cursor,
             task_id=task_id,
             run_after_gte=run_after_gte,
@@ -7664,6 +8376,7 @@ class TaskInstanceApi:
             queue_name_prefix_pattern=queue_name_prefix_pattern,
             executor=executor,
             version_number=version_number,
+            teams=teams,
             try_number=try_number,
             operator=operator,
             operator_name_pattern=operator_name_pattern,
@@ -7699,6 +8412,10 @@ class TaskInstanceApi:
         self,
         dag_id,
         dag_run_id,
+        region_id,
+        region_index,
+        loop_id,
+        iteration,
         cursor,
         task_id,
         run_after_gte,
@@ -7741,6 +8458,7 @@ class TaskInstanceApi:
         queue_name_prefix_pattern,
         executor,
         version_number,
+        teams,
         try_number,
         operator,
         operator_name_pattern,
@@ -7765,6 +8483,7 @@ class TaskInstanceApi:
             'queue': 'multi',
             'executor': 'multi',
             'version_number': 'multi',
+            'teams': 'multi',
             'try_number': 'multi',
             'operator': 'multi',
             'map_index': 'multi',
@@ -7773,7 +8492,7 @@ class TaskInstanceApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -7786,6 +8505,22 @@ class TaskInstanceApi:
         if dag_run_id is not None:
             _path_params['dag_run_id'] = dag_run_id
         # process the query parameters
+        if region_id is not None:
+            
+            _query_params.append(('region_id', region_id))
+            
+        if region_index is not None:
+            
+            _query_params.append(('region_index', region_index))
+            
+        if loop_id is not None:
+            
+            _query_params.append(('loop_id', loop_id))
+            
+        if iteration is not None:
+            
+            _query_params.append(('iteration', iteration))
+            
         if cursor is not None:
             
             _query_params.append(('cursor', cursor))
@@ -8134,6 +8869,10 @@ class TaskInstanceApi:
             
             _query_params.append(('version_number', version_number))
             
+        if teams is not None:
+            
+            _query_params.append(('teams', teams))
+            
         if try_number is not None:
             
             _query_params.append(('try_number', try_number))
@@ -8180,7 +8919,7 @@ class TaskInstanceApi:
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -8463,7 +9202,7 @@ class TaskInstanceApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -8484,7 +9223,7 @@ class TaskInstanceApi:
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -8493,7 +9232,7 @@ class TaskInstanceApi:
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            self.api_client._set_header(_header_params, 'Content-Type', _content_type)
         else:
             _default_content_type = (
                 self.api_client.select_header_content_type(
@@ -8503,7 +9242,7 @@ class TaskInstanceApi:
                 )
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                self.api_client._set_header(_header_params, 'Content-Type', _default_content_type)
 
         # authentication setting
         _auth_settings: List[str] = [
@@ -8537,6 +9276,8 @@ class TaskInstanceApi:
         group_id: StrictStr,
         patch_task_instance_body: PatchTaskInstanceBody,
         update_mask: Optional[List[StrictStr]] = None,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8564,6 +9305,10 @@ class TaskInstanceApi:
         :type patch_task_instance_body: PatchTaskInstanceBody
         :param update_mask:
         :type update_mask: List[str]
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -8592,6 +9337,8 @@ class TaskInstanceApi:
             group_id=group_id,
             patch_task_instance_body=patch_task_instance_body,
             update_mask=update_mask,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -8626,6 +9373,8 @@ class TaskInstanceApi:
         group_id: StrictStr,
         patch_task_instance_body: PatchTaskInstanceBody,
         update_mask: Optional[List[StrictStr]] = None,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8653,6 +9402,10 @@ class TaskInstanceApi:
         :type patch_task_instance_body: PatchTaskInstanceBody
         :param update_mask:
         :type update_mask: List[str]
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -8681,6 +9434,8 @@ class TaskInstanceApi:
             group_id=group_id,
             patch_task_instance_body=patch_task_instance_body,
             update_mask=update_mask,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -8715,6 +9470,8 @@ class TaskInstanceApi:
         group_id: StrictStr,
         patch_task_instance_body: PatchTaskInstanceBody,
         update_mask: Optional[List[StrictStr]] = None,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8742,6 +9499,10 @@ class TaskInstanceApi:
         :type patch_task_instance_body: PatchTaskInstanceBody
         :param update_mask:
         :type update_mask: List[str]
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -8770,6 +9531,8 @@ class TaskInstanceApi:
             group_id=group_id,
             patch_task_instance_body=patch_task_instance_body,
             update_mask=update_mask,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -8799,6 +9562,8 @@ class TaskInstanceApi:
         group_id,
         patch_task_instance_body,
         update_mask,
+        region_id,
+        region_index,
         _request_auth,
         _content_type,
         _headers,
@@ -8813,7 +9578,7 @@ class TaskInstanceApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -8832,6 +9597,14 @@ class TaskInstanceApi:
             
             _query_params.append(('update_mask', update_mask))
             
+        if region_id is not None:
+            
+            _query_params.append(('region_id', region_id))
+            
+        if region_index is not None:
+            
+            _query_params.append(('region_index', region_index))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -8840,7 +9613,7 @@ class TaskInstanceApi:
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -8849,7 +9622,7 @@ class TaskInstanceApi:
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            self.api_client._set_header(_header_params, 'Content-Type', _content_type)
         else:
             _default_content_type = (
                 self.api_client.select_header_content_type(
@@ -8859,7 +9632,7 @@ class TaskInstanceApi:
                 )
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                self.api_client._set_header(_header_params, 'Content-Type', _default_content_type)
 
         # authentication setting
         _auth_settings: List[str] = [
@@ -8892,6 +9665,8 @@ class TaskInstanceApi:
         dag_run_id: StrictStr,
         group_id: StrictStr,
         patch_task_instance_body: PatchTaskInstanceBody,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8917,6 +9692,10 @@ class TaskInstanceApi:
         :type group_id: str
         :param patch_task_instance_body: (required)
         :type patch_task_instance_body: PatchTaskInstanceBody
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -8944,6 +9723,8 @@ class TaskInstanceApi:
             dag_run_id=dag_run_id,
             group_id=group_id,
             patch_task_instance_body=patch_task_instance_body,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -8956,6 +9737,7 @@ class TaskInstanceApi:
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -8976,6 +9758,8 @@ class TaskInstanceApi:
         dag_run_id: StrictStr,
         group_id: StrictStr,
         patch_task_instance_body: PatchTaskInstanceBody,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9001,6 +9785,10 @@ class TaskInstanceApi:
         :type group_id: str
         :param patch_task_instance_body: (required)
         :type patch_task_instance_body: PatchTaskInstanceBody
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -9028,6 +9816,8 @@ class TaskInstanceApi:
             dag_run_id=dag_run_id,
             group_id=group_id,
             patch_task_instance_body=patch_task_instance_body,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -9040,6 +9830,7 @@ class TaskInstanceApi:
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -9060,6 +9851,8 @@ class TaskInstanceApi:
         dag_run_id: StrictStr,
         group_id: StrictStr,
         patch_task_instance_body: PatchTaskInstanceBody,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9085,6 +9878,10 @@ class TaskInstanceApi:
         :type group_id: str
         :param patch_task_instance_body: (required)
         :type patch_task_instance_body: PatchTaskInstanceBody
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -9112,6 +9909,8 @@ class TaskInstanceApi:
             dag_run_id=dag_run_id,
             group_id=group_id,
             patch_task_instance_body=patch_task_instance_body,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -9124,6 +9923,7 @@ class TaskInstanceApi:
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -9139,6 +9939,8 @@ class TaskInstanceApi:
         dag_run_id,
         group_id,
         patch_task_instance_body,
+        region_id,
+        region_index,
         _request_auth,
         _content_type,
         _headers,
@@ -9152,7 +9954,7 @@ class TaskInstanceApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -9167,6 +9969,14 @@ class TaskInstanceApi:
         if group_id is not None:
             _path_params['group_id'] = group_id
         # process the query parameters
+        if region_id is not None:
+            
+            _query_params.append(('region_id', region_id))
+            
+        if region_index is not None:
+            
+            _query_params.append(('region_index', region_index))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -9175,7 +9985,7 @@ class TaskInstanceApi:
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -9184,7 +9994,7 @@ class TaskInstanceApi:
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            self.api_client._set_header(_header_params, 'Content-Type', _content_type)
         else:
             _default_content_type = (
                 self.api_client.select_header_content_type(
@@ -9194,7 +10004,7 @@ class TaskInstanceApi:
                 )
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                self.api_client._set_header(_header_params, 'Content-Type', _default_content_type)
 
         # authentication setting
         _auth_settings: List[str] = [
@@ -9229,6 +10039,8 @@ class TaskInstanceApi:
         patch_task_instance_body: PatchTaskInstanceBody,
         map_index: Optional[StrictInt] = None,
         update_mask: Optional[List[StrictStr]] = None,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9258,6 +10070,10 @@ class TaskInstanceApi:
         :type map_index: int
         :param update_mask:
         :type update_mask: List[str]
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -9287,6 +10103,8 @@ class TaskInstanceApi:
             patch_task_instance_body=patch_task_instance_body,
             map_index=map_index,
             update_mask=update_mask,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -9322,6 +10140,8 @@ class TaskInstanceApi:
         patch_task_instance_body: PatchTaskInstanceBody,
         map_index: Optional[StrictInt] = None,
         update_mask: Optional[List[StrictStr]] = None,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9351,6 +10171,10 @@ class TaskInstanceApi:
         :type map_index: int
         :param update_mask:
         :type update_mask: List[str]
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -9380,6 +10204,8 @@ class TaskInstanceApi:
             patch_task_instance_body=patch_task_instance_body,
             map_index=map_index,
             update_mask=update_mask,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -9415,6 +10241,8 @@ class TaskInstanceApi:
         patch_task_instance_body: PatchTaskInstanceBody,
         map_index: Optional[StrictInt] = None,
         update_mask: Optional[List[StrictStr]] = None,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9444,6 +10272,10 @@ class TaskInstanceApi:
         :type map_index: int
         :param update_mask:
         :type update_mask: List[str]
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -9473,6 +10305,8 @@ class TaskInstanceApi:
             patch_task_instance_body=patch_task_instance_body,
             map_index=map_index,
             update_mask=update_mask,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -9503,6 +10337,8 @@ class TaskInstanceApi:
         patch_task_instance_body,
         map_index,
         update_mask,
+        region_id,
+        region_index,
         _request_auth,
         _content_type,
         _headers,
@@ -9517,7 +10353,7 @@ class TaskInstanceApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -9540,6 +10376,14 @@ class TaskInstanceApi:
             
             _query_params.append(('update_mask', update_mask))
             
+        if region_id is not None:
+            
+            _query_params.append(('region_id', region_id))
+            
+        if region_index is not None:
+            
+            _query_params.append(('region_index', region_index))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -9548,7 +10392,7 @@ class TaskInstanceApi:
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -9557,7 +10401,7 @@ class TaskInstanceApi:
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            self.api_client._set_header(_header_params, 'Content-Type', _content_type)
         else:
             _default_content_type = (
                 self.api_client.select_header_content_type(
@@ -9567,7 +10411,7 @@ class TaskInstanceApi:
                 )
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                self.api_client._set_header(_header_params, 'Content-Type', _default_content_type)
 
         # authentication setting
         _auth_settings: List[str] = [
@@ -9602,6 +10446,8 @@ class TaskInstanceApi:
         map_index: StrictInt,
         patch_task_instance_body: PatchTaskInstanceBody,
         update_mask: Optional[List[StrictStr]] = None,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9631,6 +10477,10 @@ class TaskInstanceApi:
         :type patch_task_instance_body: PatchTaskInstanceBody
         :param update_mask:
         :type update_mask: List[str]
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -9660,6 +10510,8 @@ class TaskInstanceApi:
             map_index=map_index,
             patch_task_instance_body=patch_task_instance_body,
             update_mask=update_mask,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -9695,6 +10547,8 @@ class TaskInstanceApi:
         map_index: StrictInt,
         patch_task_instance_body: PatchTaskInstanceBody,
         update_mask: Optional[List[StrictStr]] = None,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9724,6 +10578,10 @@ class TaskInstanceApi:
         :type patch_task_instance_body: PatchTaskInstanceBody
         :param update_mask:
         :type update_mask: List[str]
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -9753,6 +10611,8 @@ class TaskInstanceApi:
             map_index=map_index,
             patch_task_instance_body=patch_task_instance_body,
             update_mask=update_mask,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -9788,6 +10648,8 @@ class TaskInstanceApi:
         map_index: StrictInt,
         patch_task_instance_body: PatchTaskInstanceBody,
         update_mask: Optional[List[StrictStr]] = None,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9817,6 +10679,10 @@ class TaskInstanceApi:
         :type patch_task_instance_body: PatchTaskInstanceBody
         :param update_mask:
         :type update_mask: List[str]
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -9846,6 +10712,8 @@ class TaskInstanceApi:
             map_index=map_index,
             patch_task_instance_body=patch_task_instance_body,
             update_mask=update_mask,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -9876,6 +10744,8 @@ class TaskInstanceApi:
         map_index,
         patch_task_instance_body,
         update_mask,
+        region_id,
+        region_index,
         _request_auth,
         _content_type,
         _headers,
@@ -9890,7 +10760,7 @@ class TaskInstanceApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -9911,6 +10781,14 @@ class TaskInstanceApi:
             
             _query_params.append(('update_mask', update_mask))
             
+        if region_id is not None:
+            
+            _query_params.append(('region_id', region_id))
+            
+        if region_index is not None:
+            
+            _query_params.append(('region_index', region_index))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -9919,7 +10797,7 @@ class TaskInstanceApi:
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -9928,7 +10806,7 @@ class TaskInstanceApi:
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            self.api_client._set_header(_header_params, 'Content-Type', _content_type)
         else:
             _default_content_type = (
                 self.api_client.select_header_content_type(
@@ -9938,7 +10816,7 @@ class TaskInstanceApi:
                 )
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                self.api_client._set_header(_header_params, 'Content-Type', _default_content_type)
 
         # authentication setting
         _auth_settings: List[str] = [
@@ -9973,6 +10851,8 @@ class TaskInstanceApi:
         patch_task_instance_body: PatchTaskInstanceBody,
         map_index: Optional[StrictInt] = None,
         update_mask: Optional[List[StrictStr]] = None,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -10002,6 +10882,10 @@ class TaskInstanceApi:
         :type map_index: int
         :param update_mask:
         :type update_mask: List[str]
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -10031,6 +10915,8 @@ class TaskInstanceApi:
             patch_task_instance_body=patch_task_instance_body,
             map_index=map_index,
             update_mask=update_mask,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -10043,6 +10929,7 @@ class TaskInstanceApi:
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -10065,6 +10952,8 @@ class TaskInstanceApi:
         patch_task_instance_body: PatchTaskInstanceBody,
         map_index: Optional[StrictInt] = None,
         update_mask: Optional[List[StrictStr]] = None,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -10094,6 +10983,10 @@ class TaskInstanceApi:
         :type map_index: int
         :param update_mask:
         :type update_mask: List[str]
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -10123,6 +11016,8 @@ class TaskInstanceApi:
             patch_task_instance_body=patch_task_instance_body,
             map_index=map_index,
             update_mask=update_mask,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -10135,6 +11030,7 @@ class TaskInstanceApi:
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -10157,6 +11053,8 @@ class TaskInstanceApi:
         patch_task_instance_body: PatchTaskInstanceBody,
         map_index: Optional[StrictInt] = None,
         update_mask: Optional[List[StrictStr]] = None,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -10186,6 +11084,10 @@ class TaskInstanceApi:
         :type map_index: int
         :param update_mask:
         :type update_mask: List[str]
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -10215,6 +11117,8 @@ class TaskInstanceApi:
             patch_task_instance_body=patch_task_instance_body,
             map_index=map_index,
             update_mask=update_mask,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -10227,6 +11131,7 @@ class TaskInstanceApi:
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -10244,6 +11149,8 @@ class TaskInstanceApi:
         patch_task_instance_body,
         map_index,
         update_mask,
+        region_id,
+        region_index,
         _request_auth,
         _content_type,
         _headers,
@@ -10258,7 +11165,7 @@ class TaskInstanceApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -10281,6 +11188,14 @@ class TaskInstanceApi:
             
             _query_params.append(('update_mask', update_mask))
             
+        if region_id is not None:
+            
+            _query_params.append(('region_id', region_id))
+            
+        if region_index is not None:
+            
+            _query_params.append(('region_index', region_index))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -10289,7 +11204,7 @@ class TaskInstanceApi:
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -10298,7 +11213,7 @@ class TaskInstanceApi:
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            self.api_client._set_header(_header_params, 'Content-Type', _content_type)
         else:
             _default_content_type = (
                 self.api_client.select_header_content_type(
@@ -10308,7 +11223,7 @@ class TaskInstanceApi:
                 )
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                self.api_client._set_header(_header_params, 'Content-Type', _default_content_type)
 
         # authentication setting
         _auth_settings: List[str] = [
@@ -10343,6 +11258,8 @@ class TaskInstanceApi:
         map_index: StrictInt,
         patch_task_instance_body: PatchTaskInstanceBody,
         update_mask: Optional[List[StrictStr]] = None,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -10372,6 +11289,10 @@ class TaskInstanceApi:
         :type patch_task_instance_body: PatchTaskInstanceBody
         :param update_mask:
         :type update_mask: List[str]
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -10401,6 +11322,8 @@ class TaskInstanceApi:
             map_index=map_index,
             patch_task_instance_body=patch_task_instance_body,
             update_mask=update_mask,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -10413,6 +11336,7 @@ class TaskInstanceApi:
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -10435,6 +11359,8 @@ class TaskInstanceApi:
         map_index: StrictInt,
         patch_task_instance_body: PatchTaskInstanceBody,
         update_mask: Optional[List[StrictStr]] = None,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -10464,6 +11390,10 @@ class TaskInstanceApi:
         :type patch_task_instance_body: PatchTaskInstanceBody
         :param update_mask:
         :type update_mask: List[str]
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -10493,6 +11423,8 @@ class TaskInstanceApi:
             map_index=map_index,
             patch_task_instance_body=patch_task_instance_body,
             update_mask=update_mask,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -10505,6 +11437,7 @@ class TaskInstanceApi:
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -10527,6 +11460,8 @@ class TaskInstanceApi:
         map_index: StrictInt,
         patch_task_instance_body: PatchTaskInstanceBody,
         update_mask: Optional[List[StrictStr]] = None,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -10556,6 +11491,10 @@ class TaskInstanceApi:
         :type patch_task_instance_body: PatchTaskInstanceBody
         :param update_mask:
         :type update_mask: List[str]
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -10585,6 +11524,8 @@ class TaskInstanceApi:
             map_index=map_index,
             patch_task_instance_body=patch_task_instance_body,
             update_mask=update_mask,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -10597,6 +11538,7 @@ class TaskInstanceApi:
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -10614,6 +11556,8 @@ class TaskInstanceApi:
         map_index,
         patch_task_instance_body,
         update_mask,
+        region_id,
+        region_index,
         _request_auth,
         _content_type,
         _headers,
@@ -10628,7 +11572,7 @@ class TaskInstanceApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -10649,6 +11593,14 @@ class TaskInstanceApi:
             
             _query_params.append(('update_mask', update_mask))
             
+        if region_id is not None:
+            
+            _query_params.append(('region_id', region_id))
+            
+        if region_index is not None:
+            
+            _query_params.append(('region_index', region_index))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -10657,7 +11609,7 @@ class TaskInstanceApi:
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -10666,7 +11618,7 @@ class TaskInstanceApi:
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            self.api_client._set_header(_header_params, 'Content-Type', _content_type)
         else:
             _default_content_type = (
                 self.api_client.select_header_content_type(
@@ -10676,7 +11628,7 @@ class TaskInstanceApi:
                 )
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                self.api_client._set_header(_header_params, 'Content-Type', _default_content_type)
 
         # authentication setting
         _auth_settings: List[str] = [
@@ -10946,7 +11898,7 @@ class TaskInstanceApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -10965,7 +11917,7 @@ class TaskInstanceApi:
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -10974,7 +11926,7 @@ class TaskInstanceApi:
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            self.api_client._set_header(_header_params, 'Content-Type', _content_type)
         else:
             _default_content_type = (
                 self.api_client.select_header_content_type(
@@ -10984,7 +11936,7 @@ class TaskInstanceApi:
                 )
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                self.api_client._set_header(_header_params, 'Content-Type', _default_content_type)
 
         # authentication setting
         _auth_settings: List[str] = [
@@ -11018,6 +11970,8 @@ class TaskInstanceApi:
         task_id: StrictStr,
         map_index: StrictInt,
         update_hitl_detail_payload: UpdateHITLDetailPayload,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -11045,6 +11999,10 @@ class TaskInstanceApi:
         :type map_index: int
         :param update_hitl_detail_payload: (required)
         :type update_hitl_detail_payload: UpdateHITLDetailPayload
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -11073,6 +12031,8 @@ class TaskInstanceApi:
             task_id=task_id,
             map_index=map_index,
             update_hitl_detail_payload=update_hitl_detail_payload,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -11107,6 +12067,8 @@ class TaskInstanceApi:
         task_id: StrictStr,
         map_index: StrictInt,
         update_hitl_detail_payload: UpdateHITLDetailPayload,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -11134,6 +12096,10 @@ class TaskInstanceApi:
         :type map_index: int
         :param update_hitl_detail_payload: (required)
         :type update_hitl_detail_payload: UpdateHITLDetailPayload
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -11162,6 +12128,8 @@ class TaskInstanceApi:
             task_id=task_id,
             map_index=map_index,
             update_hitl_detail_payload=update_hitl_detail_payload,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -11196,6 +12164,8 @@ class TaskInstanceApi:
         task_id: StrictStr,
         map_index: StrictInt,
         update_hitl_detail_payload: UpdateHITLDetailPayload,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -11223,6 +12193,10 @@ class TaskInstanceApi:
         :type map_index: int
         :param update_hitl_detail_payload: (required)
         :type update_hitl_detail_payload: UpdateHITLDetailPayload
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -11251,6 +12225,8 @@ class TaskInstanceApi:
             task_id=task_id,
             map_index=map_index,
             update_hitl_detail_payload=update_hitl_detail_payload,
+            region_id=region_id,
+            region_index=region_index,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -11280,6 +12256,8 @@ class TaskInstanceApi:
         task_id,
         map_index,
         update_hitl_detail_payload,
+        region_id,
+        region_index,
         _request_auth,
         _content_type,
         _headers,
@@ -11293,7 +12271,7 @@ class TaskInstanceApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -11310,6 +12288,14 @@ class TaskInstanceApi:
         if map_index is not None:
             _path_params['map_index'] = map_index
         # process the query parameters
+        if region_id is not None:
+            
+            _query_params.append(('region_id', region_id))
+            
+        if region_index is not None:
+            
+            _query_params.append(('region_index', region_index))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -11318,7 +12304,7 @@ class TaskInstanceApi:
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -11327,7 +12313,7 @@ class TaskInstanceApi:
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            self.api_client._set_header(_header_params, 'Content-Type', _content_type)
         else:
             _default_content_type = (
                 self.api_client.select_header_content_type(
@@ -11337,7 +12323,7 @@ class TaskInstanceApi:
                 )
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                self.api_client._set_header(_header_params, 'Content-Type', _default_content_type)
 
         # authentication setting
         _auth_settings: List[str] = [

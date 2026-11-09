@@ -30,8 +30,9 @@ class DAGSourceResponse(BaseModel):
     content: Optional[StrictStr] = None
     dag_display_name: StrictStr
     dag_id: StrictStr
+    language: Optional[StrictStr] = None
     version_number: Optional[StrictInt] = None
-    __properties: ClassVar[List[str]] = ["content", "dag_display_name", "dag_id", "version_number"]
+    __properties: ClassVar[List[str]] = ["content", "dag_display_name", "dag_id", "language", "version_number"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -87,6 +88,7 @@ class DAGSourceResponse(BaseModel):
             "content": obj.get("content"),
             "dag_display_name": obj.get("dag_display_name"),
             "dag_id": obj.get("dag_id"),
+            "language": obj.get("language"),
             "version_number": obj.get("version_number")
         })
         return _obj

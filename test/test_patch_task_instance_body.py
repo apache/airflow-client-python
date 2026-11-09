@@ -40,7 +40,9 @@ class TestPatchTaskInstanceBody(unittest.TestCase):
                 include_past = True,
                 include_upstream = True,
                 new_state = 'removed',
-                note = ''
+                note = '',
+                region_id = '',
+                region_index = 56
             )
         else:
             return PatchTaskInstanceBody(

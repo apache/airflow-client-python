@@ -20,7 +20,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, StrictStr
 from typing import Any, ClassVar, Dict, List
-from airflow_client.client.models.dag_warning_type import DagWarningType
+from airflow_client.client.models.warning_type1 import WarningType1
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -33,7 +33,7 @@ class DAGWarningResponse(BaseModel):
     dag_id: StrictStr
     message: StrictStr
     timestamp: datetime
-    warning_type: DagWarningType
+    warning_type: WarningType1
     __properties: ClassVar[List[str]] = ["dag_display_name", "dag_id", "message", "timestamp", "warning_type"]
 
     model_config = ConfigDict(
@@ -75,6 +75,9 @@ class DAGWarningResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of warning_type
+        if self.warning_type:
+            _dict['warning_type'] = self.warning_type.to_dict()
         return _dict
 
     @classmethod
@@ -91,7 +94,7 @@ class DAGWarningResponse(BaseModel):
             "dag_id": obj.get("dag_id"),
             "message": obj.get("message"),
             "timestamp": obj.get("timestamp"),
-            "warning_type": obj.get("warning_type")
+            "warning_type": WarningType1.from_dict(obj["warning_type"]) if obj.get("warning_type") is not None else None
         })
         return _obj
 

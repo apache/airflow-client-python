@@ -26,6 +26,7 @@ Name | Type | Description | Notes
 **run_type** | [**DagRunType**](DagRunType.md) |  | 
 **start_date** | **datetime** |  | [optional] 
 **state** | [**DagRunState**](DagRunState.md) |  | 
+**team_name** | **str** |  | [optional] 
 **triggered_by** | [**DagRunTriggeredByType**](DagRunTriggeredByType.md) |  | [optional] 
 **triggering_user_name** | **str** |  | [optional] 
 

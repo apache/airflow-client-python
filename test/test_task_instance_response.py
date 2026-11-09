@@ -53,7 +53,11 @@ class TestTaskInstanceResponse(unittest.TestCase):
                 executor_config = '',
                 hostname = '',
                 id = '',
+                in_loop = True,
                 logical_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+                loop_iteration = airflow_client.client.models.loop_iteration_response.LoopIterationResponse(
+                    iteration = 1.0, 
+                    loop_id = '', ),
                 map_index = 56,
                 max_tries = 56,
                 note = '',
@@ -65,14 +69,19 @@ class TestTaskInstanceResponse(unittest.TestCase):
                 priority_weight = 56,
                 queue = '',
                 queued_when = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+                region_id = '',
+                region_index = 56,
                 rendered_fields = { },
                 rendered_map_index = '',
+                retry_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 run_after = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 scheduled_when = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 start_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 state = 'removed',
+                state_reason = '',
                 task_display_name = '',
                 task_id = '',
+                team_name = '',
                 trigger = airflow_client.client.models.trigger_response.TriggerResponse(
                     classpath = '', 
                     created_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
@@ -81,6 +90,9 @@ class TestTaskInstanceResponse(unittest.TestCase):
                     queue = '', 
                     triggerer_id = 56, ),
                 triggerer_job = airflow_client.client.models.job_response.JobResponse(
+                    bundle_names = [
+                        ''
+                        ], 
                     dag_display_name = '', 
                     dag_id = '', 
                     end_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
@@ -91,6 +103,9 @@ class TestTaskInstanceResponse(unittest.TestCase):
                     latest_heartbeat = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                     start_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                     state = '', 
+                    team_names = [
+                        ''
+                        ], 
                     unixname = '', ),
                 try_number = 56,
                 unixname = ''
@@ -102,6 +117,7 @@ class TestTaskInstanceResponse(unittest.TestCase):
                 dag_run_id = '',
                 executor_config = '',
                 id = '',
+                in_loop = True,
                 map_index = 56,
                 max_tries = 56,
                 pool = '',

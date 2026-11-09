@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **chosen_options** | **List[str]** |  | 
 **params_input** | **Dict[str, object]** |  | [optional] 
+**request_created_at** | **datetime** |  | [optional] 
 
 ## Example
 

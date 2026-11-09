@@ -15,7 +15,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import StrictStr
+from pydantic import StrictInt, StrictStr
 from typing import Any, Optional
 from airflow_client.client.models.task_collection_response import TaskCollectionResponse
 from airflow_client.client.models.task_response import TaskResponse
@@ -43,6 +43,7 @@ class TaskApi:
         self,
         dag_id: StrictStr,
         task_id: Any,
+        version_number: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -58,12 +59,14 @@ class TaskApi:
     ) -> TaskResponse:
         """Get Task
 
-        Get simplified representation of a task.
+        Get simplified representation of a task.  Pass ``version_number`` (e.g. a task instance's ``dag_version.version_number``) to get the task as defined in that Dag version. Without it the latest version is used. Returns 404 if that version of the Dag does not exist.
 
         :param dag_id: (required)
         :type dag_id: str
         :param task_id: (required)
         :type task_id: object
+        :param version_number:
+        :type version_number: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -89,6 +92,7 @@ class TaskApi:
         _param = self._get_task_serialize(
             dag_id=dag_id,
             task_id=task_id,
+            version_number=version_number,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -119,6 +123,7 @@ class TaskApi:
         self,
         dag_id: StrictStr,
         task_id: Any,
+        version_number: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -134,12 +139,14 @@ class TaskApi:
     ) -> ApiResponse[TaskResponse]:
         """Get Task
 
-        Get simplified representation of a task.
+        Get simplified representation of a task.  Pass ``version_number`` (e.g. a task instance's ``dag_version.version_number``) to get the task as defined in that Dag version. Without it the latest version is used. Returns 404 if that version of the Dag does not exist.
 
         :param dag_id: (required)
         :type dag_id: str
         :param task_id: (required)
         :type task_id: object
+        :param version_number:
+        :type version_number: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -165,6 +172,7 @@ class TaskApi:
         _param = self._get_task_serialize(
             dag_id=dag_id,
             task_id=task_id,
+            version_number=version_number,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -195,6 +203,7 @@ class TaskApi:
         self,
         dag_id: StrictStr,
         task_id: Any,
+        version_number: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -210,12 +219,14 @@ class TaskApi:
     ) -> RESTResponseType:
         """Get Task
 
-        Get simplified representation of a task.
+        Get simplified representation of a task.  Pass ``version_number`` (e.g. a task instance's ``dag_version.version_number``) to get the task as defined in that Dag version. Without it the latest version is used. Returns 404 if that version of the Dag does not exist.
 
         :param dag_id: (required)
         :type dag_id: str
         :param task_id: (required)
         :type task_id: object
+        :param version_number:
+        :type version_number: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -241,6 +252,7 @@ class TaskApi:
         _param = self._get_task_serialize(
             dag_id=dag_id,
             task_id=task_id,
+            version_number=version_number,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -266,6 +278,7 @@ class TaskApi:
         self,
         dag_id,
         task_id,
+        version_number,
         _request_auth,
         _content_type,
         _headers,
@@ -279,7 +292,7 @@ class TaskApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -292,13 +305,17 @@ class TaskApi:
         if task_id is not None:
             _path_params['task_id'] = task_id
         # process the query parameters
+        if version_number is not None:
+            
+            _query_params.append(('version_number', version_number))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -571,7 +588,7 @@ class TaskApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -592,7 +609,7 @@ class TaskApi:
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'

@@ -42,7 +42,6 @@ class JobApi:
     @validate_call
     def get_jobs(
         self,
-        is_alive: Optional[StrictBool] = None,
         start_date_gte: Optional[datetime] = None,
         start_date_gt: Optional[datetime] = None,
         start_date_lte: Optional[datetime] = None,
@@ -55,9 +54,12 @@ class JobApi:
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, dag_id, state, job_type, start_date, end_date, latest_heartbeat, executor_class, hostname, unixname`")] = None,
         job_state: Optional[StrictStr] = None,
+        dag_id: Optional[StrictStr] = None,
         job_type: Optional[StrictStr] = None,
         hostname: Optional[StrictStr] = None,
         executor_class: Optional[StrictStr] = None,
+        teams: Optional[List[StrictStr]] = None,
+        is_alive: Optional[StrictBool] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -75,8 +77,6 @@ class JobApi:
 
         Get all jobs.
 
-        :param is_alive:
-        :type is_alive: bool
         :param start_date_gte:
         :type start_date_gte: datetime
         :param start_date_gt:
@@ -101,12 +101,18 @@ class JobApi:
         :type order_by: List[str]
         :param job_state:
         :type job_state: str
+        :param dag_id:
+        :type dag_id: str
         :param job_type:
         :type job_type: str
         :param hostname:
         :type hostname: str
         :param executor_class:
         :type executor_class: str
+        :param teams:
+        :type teams: List[str]
+        :param is_alive:
+        :type is_alive: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -130,7 +136,6 @@ class JobApi:
         """ # noqa: E501
 
         _param = self._get_jobs_serialize(
-            is_alive=is_alive,
             start_date_gte=start_date_gte,
             start_date_gt=start_date_gt,
             start_date_lte=start_date_lte,
@@ -143,9 +148,12 @@ class JobApi:
             offset=offset,
             order_by=order_by,
             job_state=job_state,
+            dag_id=dag_id,
             job_type=job_type,
             hostname=hostname,
             executor_class=executor_class,
+            teams=teams,
+            is_alive=is_alive,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -173,7 +181,6 @@ class JobApi:
     @validate_call
     def get_jobs_with_http_info(
         self,
-        is_alive: Optional[StrictBool] = None,
         start_date_gte: Optional[datetime] = None,
         start_date_gt: Optional[datetime] = None,
         start_date_lte: Optional[datetime] = None,
@@ -186,9 +193,12 @@ class JobApi:
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, dag_id, state, job_type, start_date, end_date, latest_heartbeat, executor_class, hostname, unixname`")] = None,
         job_state: Optional[StrictStr] = None,
+        dag_id: Optional[StrictStr] = None,
         job_type: Optional[StrictStr] = None,
         hostname: Optional[StrictStr] = None,
         executor_class: Optional[StrictStr] = None,
+        teams: Optional[List[StrictStr]] = None,
+        is_alive: Optional[StrictBool] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -206,8 +216,6 @@ class JobApi:
 
         Get all jobs.
 
-        :param is_alive:
-        :type is_alive: bool
         :param start_date_gte:
         :type start_date_gte: datetime
         :param start_date_gt:
@@ -232,12 +240,18 @@ class JobApi:
         :type order_by: List[str]
         :param job_state:
         :type job_state: str
+        :param dag_id:
+        :type dag_id: str
         :param job_type:
         :type job_type: str
         :param hostname:
         :type hostname: str
         :param executor_class:
         :type executor_class: str
+        :param teams:
+        :type teams: List[str]
+        :param is_alive:
+        :type is_alive: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -261,7 +275,6 @@ class JobApi:
         """ # noqa: E501
 
         _param = self._get_jobs_serialize(
-            is_alive=is_alive,
             start_date_gte=start_date_gte,
             start_date_gt=start_date_gt,
             start_date_lte=start_date_lte,
@@ -274,9 +287,12 @@ class JobApi:
             offset=offset,
             order_by=order_by,
             job_state=job_state,
+            dag_id=dag_id,
             job_type=job_type,
             hostname=hostname,
             executor_class=executor_class,
+            teams=teams,
+            is_alive=is_alive,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -304,7 +320,6 @@ class JobApi:
     @validate_call
     def get_jobs_without_preload_content(
         self,
-        is_alive: Optional[StrictBool] = None,
         start_date_gte: Optional[datetime] = None,
         start_date_gt: Optional[datetime] = None,
         start_date_lte: Optional[datetime] = None,
@@ -317,9 +332,12 @@ class JobApi:
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, dag_id, state, job_type, start_date, end_date, latest_heartbeat, executor_class, hostname, unixname`")] = None,
         job_state: Optional[StrictStr] = None,
+        dag_id: Optional[StrictStr] = None,
         job_type: Optional[StrictStr] = None,
         hostname: Optional[StrictStr] = None,
         executor_class: Optional[StrictStr] = None,
+        teams: Optional[List[StrictStr]] = None,
+        is_alive: Optional[StrictBool] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -337,8 +355,6 @@ class JobApi:
 
         Get all jobs.
 
-        :param is_alive:
-        :type is_alive: bool
         :param start_date_gte:
         :type start_date_gte: datetime
         :param start_date_gt:
@@ -363,12 +379,18 @@ class JobApi:
         :type order_by: List[str]
         :param job_state:
         :type job_state: str
+        :param dag_id:
+        :type dag_id: str
         :param job_type:
         :type job_type: str
         :param hostname:
         :type hostname: str
         :param executor_class:
         :type executor_class: str
+        :param teams:
+        :type teams: List[str]
+        :param is_alive:
+        :type is_alive: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -392,7 +414,6 @@ class JobApi:
         """ # noqa: E501
 
         _param = self._get_jobs_serialize(
-            is_alive=is_alive,
             start_date_gte=start_date_gte,
             start_date_gt=start_date_gt,
             start_date_lte=start_date_lte,
@@ -405,9 +426,12 @@ class JobApi:
             offset=offset,
             order_by=order_by,
             job_state=job_state,
+            dag_id=dag_id,
             job_type=job_type,
             hostname=hostname,
             executor_class=executor_class,
+            teams=teams,
+            is_alive=is_alive,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -430,7 +454,6 @@ class JobApi:
 
     def _get_jobs_serialize(
         self,
-        is_alive,
         start_date_gte,
         start_date_gt,
         start_date_lte,
@@ -443,9 +466,12 @@ class JobApi:
         offset,
         order_by,
         job_state,
+        dag_id,
         job_type,
         hostname,
         executor_class,
+        teams,
+        is_alive,
         _request_auth,
         _content_type,
         _headers,
@@ -456,11 +482,12 @@ class JobApi:
 
         _collection_formats: Dict[str, str] = {
             'order_by': 'multi',
+            'teams': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -469,10 +496,6 @@ class JobApi:
 
         # process the path parameters
         # process the query parameters
-        if is_alive is not None:
-            
-            _query_params.append(('is_alive', is_alive))
-            
         if start_date_gte is not None:
             if isinstance(start_date_gte, datetime):
                 _query_params.append(
@@ -593,6 +616,10 @@ class JobApi:
             
             _query_params.append(('job_state', job_state))
             
+        if dag_id is not None:
+            
+            _query_params.append(('dag_id', dag_id))
+            
         if job_type is not None:
             
             _query_params.append(('job_type', job_type))
@@ -605,13 +632,21 @@ class JobApi:
             
             _query_params.append(('executor_class', executor_class))
             
+        if teams is not None:
+            
+            _query_params.append(('teams', teams))
+            
+        if is_alive is not None:
+            
+            _query_params.append(('is_alive', is_alive))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'

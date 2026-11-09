@@ -27,8 +27,10 @@ class DagWarningType(str, Enum):
     allowed enum values
     """
     ASSET_CONFLICT = 'asset conflict'
+    DUPLICATE_DAG_ID = 'duplicate dag id'
     NON_MINUS_EXISTENT_POOL = 'non-existent pool'
     RUNTIME_VARYING_VALUE = 'runtime varying value'
+    TASK_GROUP_CYCLE = 'task group cycle'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

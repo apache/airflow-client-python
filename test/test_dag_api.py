@@ -26,6 +26,13 @@ class TestDAGApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
+    def test_bulk_dags(self) -> None:
+        """Test case for bulk_dags
+
+        Bulk Dags
+        """
+        pass
+
     def test_delete_dag(self) -> None:
         """Test case for delete_dag
 

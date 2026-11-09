@@ -65,6 +65,7 @@ class TestDAGRunResponse(unittest.TestCase):
                 run_type = 'backfill',
                 start_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 state = 'queued',
+                team_name = '',
                 triggered_by = 'cli',
                 triggering_user_name = ''
             )

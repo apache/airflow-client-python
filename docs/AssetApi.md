@@ -622,7 +622,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_asset_events**
-> AssetEventCollectionResponse get_asset_events(limit=limit, offset=offset, order_by=order_by, asset_id=asset_id, source_dag_id=source_dag_id, source_task_id=source_task_id, source_run_id=source_run_id, source_map_index=source_map_index, name_pattern=name_pattern, name_prefix_pattern=name_prefix_pattern, timestamp_gte=timestamp_gte, timestamp_gt=timestamp_gt, timestamp_lte=timestamp_lte, timestamp_lt=timestamp_lt)
+> AssetEventCollectionResponse get_asset_events(limit=limit, offset=offset, order_by=order_by, asset_id=asset_id, source_dag_id=source_dag_id, source_task_id=source_task_id, source_task_instance_id=source_task_instance_id, source_run_id=source_run_id, source_map_index=source_map_index, partition_key=partition_key, partition_key_regexp_pattern=partition_key_regexp_pattern, name_pattern=name_pattern, name_prefix_pattern=name_prefix_pattern, extra=extra, timestamp_gte=timestamp_gte, timestamp_gt=timestamp_gt, timestamp_lte=timestamp_lte, timestamp_lt=timestamp_lt)
 
 Get Asset Events
 
@@ -667,10 +667,14 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     asset_id = 56 # int |  (optional)
     source_dag_id = 'source_dag_id_example' # str |  (optional)
     source_task_id = 'source_task_id_example' # str |  (optional)
+    source_task_instance_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID |  (optional)
     source_run_id = 'source_run_id_example' # str |  (optional)
     source_map_index = 56 # int |  (optional)
+    partition_key = 'partition_key_example' # str |  (optional)
+    partition_key_regexp_pattern = 'partition_key_regexp_pattern_example' # str | Filter results by matching this regular expression against the field value. (optional)
     name_pattern = 'name_pattern_example' # str | Case-insensitive substring match (SQL `ILIKE`). Slower than `name_prefix_pattern` on large tables — see \"Filtering with pattern parameters\". (optional)
     name_prefix_pattern = 'name_prefix_pattern_example' # str | Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\". (optional)
+    extra = ['extra_example'] # List[str] | Filter by JSON key-value pairs. Repeat for multiple conditions (AND logic). Format: key=value (e.g. extra=region=us&extra=env=prod). (optional)
     timestamp_gte = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
     timestamp_gt = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
     timestamp_lte = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
@@ -678,7 +682,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
 
     try:
         # Get Asset Events
-        api_response = api_instance.get_asset_events(limit=limit, offset=offset, order_by=order_by, asset_id=asset_id, source_dag_id=source_dag_id, source_task_id=source_task_id, source_run_id=source_run_id, source_map_index=source_map_index, name_pattern=name_pattern, name_prefix_pattern=name_prefix_pattern, timestamp_gte=timestamp_gte, timestamp_gt=timestamp_gt, timestamp_lte=timestamp_lte, timestamp_lt=timestamp_lt)
+        api_response = api_instance.get_asset_events(limit=limit, offset=offset, order_by=order_by, asset_id=asset_id, source_dag_id=source_dag_id, source_task_id=source_task_id, source_task_instance_id=source_task_instance_id, source_run_id=source_run_id, source_map_index=source_map_index, partition_key=partition_key, partition_key_regexp_pattern=partition_key_regexp_pattern, name_pattern=name_pattern, name_prefix_pattern=name_prefix_pattern, extra=extra, timestamp_gte=timestamp_gte, timestamp_gt=timestamp_gt, timestamp_lte=timestamp_lte, timestamp_lt=timestamp_lt)
         print("The response of AssetApi->get_asset_events:\n")
         pprint(api_response)
     except Exception as e:
@@ -698,10 +702,14 @@ Name | Type | Description  | Notes
  **asset_id** | **int**|  | [optional] 
  **source_dag_id** | **str**|  | [optional] 
  **source_task_id** | **str**|  | [optional] 
+ **source_task_instance_id** | **UUID**|  | [optional] 
  **source_run_id** | **str**|  | [optional] 
  **source_map_index** | **int**|  | [optional] 
+ **partition_key** | **str**|  | [optional] 
+ **partition_key_regexp_pattern** | **str**| Filter results by matching this regular expression against the field value. | [optional] 
  **name_pattern** | **str**| Case-insensitive substring match (SQL &#x60;ILIKE&#x60;). Slower than &#x60;name_prefix_pattern&#x60; on large tables — see \&quot;Filtering with pattern parameters\&quot;. | [optional] 
  **name_prefix_pattern** | **str**| Case-sensitive, index-friendly prefix match. See \&quot;Filtering with pattern parameters\&quot;. | [optional] 
+ **extra** | [**List[str]**](str.md)| Filter by JSON key-value pairs. Repeat for multiple conditions (AND logic). Format: key&#x3D;value (e.g. extra&#x3D;region&#x3D;us&amp;extra&#x3D;env&#x3D;prod). | [optional] 
  **timestamp_gte** | **datetime**|  | [optional] 
  **timestamp_gt** | **datetime**|  | [optional] 
  **timestamp_lte** | **datetime**|  | [optional] 
@@ -819,7 +827,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_assets**
-> AssetCollectionResponse get_assets(limit=limit, offset=offset, name_pattern=name_pattern, name_prefix_pattern=name_prefix_pattern, uri_pattern=uri_pattern, uri_prefix_pattern=uri_prefix_pattern, dag_ids=dag_ids, only_active=only_active, order_by=order_by)
+> AssetCollectionResponse get_assets(limit=limit, offset=offset, name_pattern=name_pattern, name_prefix_pattern=name_prefix_pattern, uri=uri, uri_pattern=uri_pattern, uri_prefix_pattern=uri_prefix_pattern, dag_ids=dag_ids, only_active=only_active, order_by=order_by)
 
 Get Assets
 
@@ -862,6 +870,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     offset = 0 # int |  (optional) (default to 0)
     name_pattern = 'name_pattern_example' # str | Case-insensitive substring match (SQL `ILIKE`). Slower than `name_prefix_pattern` on large tables — see \"Filtering with pattern parameters\". (optional)
     name_prefix_pattern = 'name_prefix_pattern_example' # str | Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\". (optional)
+    uri = ['uri_example'] # List[str] | Exact-match filter on the full asset URI. Compiles to an indexed equality comparison (``uri = ...``). Repeat the parameter (``?uri=a&uri=b``) to match multiple assets. (optional)
     uri_pattern = 'uri_pattern_example' # str | Case-insensitive substring match (SQL `ILIKE`). Slower than `uri_prefix_pattern` on large tables — see \"Filtering with pattern parameters\". (optional)
     uri_prefix_pattern = 'uri_prefix_pattern_example' # str | Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\". (optional)
     dag_ids = ['dag_ids_example'] # List[str] |  (optional)
@@ -870,7 +879,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
 
     try:
         # Get Assets
-        api_response = api_instance.get_assets(limit=limit, offset=offset, name_pattern=name_pattern, name_prefix_pattern=name_prefix_pattern, uri_pattern=uri_pattern, uri_prefix_pattern=uri_prefix_pattern, dag_ids=dag_ids, only_active=only_active, order_by=order_by)
+        api_response = api_instance.get_assets(limit=limit, offset=offset, name_pattern=name_pattern, name_prefix_pattern=name_prefix_pattern, uri=uri, uri_pattern=uri_pattern, uri_prefix_pattern=uri_prefix_pattern, dag_ids=dag_ids, only_active=only_active, order_by=order_by)
         print("The response of AssetApi->get_assets:\n")
         pprint(api_response)
     except Exception as e:
@@ -888,6 +897,7 @@ Name | Type | Description  | Notes
  **offset** | **int**|  | [optional] [default to 0]
  **name_pattern** | **str**| Case-insensitive substring match (SQL &#x60;ILIKE&#x60;). Slower than &#x60;name_prefix_pattern&#x60; on large tables — see \&quot;Filtering with pattern parameters\&quot;. | [optional] 
  **name_prefix_pattern** | **str**| Case-sensitive, index-friendly prefix match. See \&quot;Filtering with pattern parameters\&quot;. | [optional] 
+ **uri** | [**List[str]**](str.md)| Exact-match filter on the full asset URI. Compiles to an indexed equality comparison (&#x60;&#x60;uri &#x3D; ...&#x60;&#x60;). Repeat the parameter (&#x60;&#x60;?uri&#x3D;a&amp;uri&#x3D;b&#x60;&#x60;) to match multiple assets. | [optional] 
  **uri_pattern** | **str**| Case-insensitive substring match (SQL &#x60;ILIKE&#x60;). Slower than &#x60;uri_prefix_pattern&#x60; on large tables — see \&quot;Filtering with pattern parameters\&quot;. | [optional] 
  **uri_prefix_pattern** | **str**| Case-sensitive, index-friendly prefix match. See \&quot;Filtering with pattern parameters\&quot;. | [optional] 
  **dag_ids** | [**List[str]**](str.md)|  | [optional] 
@@ -1095,7 +1105,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **materialize_asset**
-> DAGRunResponse materialize_asset(asset_id, materialize_asset_body=materialize_asset_body)
+> DAGRunResponse materialize_asset(asset_id, materialize_asset_body)
 
 Materialize Asset
 
@@ -1136,11 +1146,11 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = airflow_client.client.AssetApi(api_client)
     asset_id = 56 # int | 
-    materialize_asset_body = airflow_client.client.MaterializeAssetBody() # MaterializeAssetBody |  (optional)
+    materialize_asset_body = airflow_client.client.MaterializeAssetBody() # MaterializeAssetBody | 
 
     try:
         # Materialize Asset
-        api_response = api_instance.materialize_asset(asset_id, materialize_asset_body=materialize_asset_body)
+        api_response = api_instance.materialize_asset(asset_id, materialize_asset_body)
         print("The response of AssetApi->materialize_asset:\n")
         pprint(api_response)
     except Exception as e:
@@ -1155,7 +1165,7 @@ with airflow_client.client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **asset_id** | **int**|  | 
- **materialize_asset_body** | [**MaterializeAssetBody**](MaterializeAssetBody.md)|  | [optional] 
+ **materialize_asset_body** | [**MaterializeAssetBody**](MaterializeAssetBody.md)|  | 
 
 ### Return type
 

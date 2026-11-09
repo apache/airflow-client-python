@@ -19,6 +19,7 @@ from datetime import datetime
 from pydantic import Field, StrictBool, StrictInt, StrictStr
 from typing import Any, List, Optional
 from typing_extensions import Annotated
+from uuid import UUID
 from airflow_client.client.models.asset_alias_collection_response import AssetAliasCollectionResponse
 from airflow_client.client.models.asset_collection_response import AssetCollectionResponse
 from airflow_client.client.models.asset_event_collection_response import AssetEventCollectionResponse
@@ -273,7 +274,7 @@ class AssetApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -290,7 +291,7 @@ class AssetApi:
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -299,7 +300,7 @@ class AssetApi:
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            self.api_client._set_header(_header_params, 'Content-Type', _content_type)
         else:
             _default_content_type = (
                 self.api_client.select_header_content_type(
@@ -309,7 +310,7 @@ class AssetApi:
                 )
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                self.api_client._set_header(_header_params, 'Content-Type', _default_content_type)
 
         # authentication setting
         _auth_settings: List[str] = [
@@ -573,7 +574,7 @@ class AssetApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -594,7 +595,7 @@ class AssetApi:
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -880,7 +881,7 @@ class AssetApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -903,7 +904,7 @@ class AssetApi:
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -1173,7 +1174,7 @@ class AssetApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -1194,7 +1195,7 @@ class AssetApi:
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -1451,7 +1452,7 @@ class AssetApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -1468,7 +1469,7 @@ class AssetApi:
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -1725,7 +1726,7 @@ class AssetApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -1742,7 +1743,7 @@ class AssetApi:
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -2052,7 +2053,7 @@ class AssetApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -2087,7 +2088,7 @@ class AssetApi:
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -2128,10 +2129,14 @@ class AssetApi:
         asset_id: Optional[StrictInt] = None,
         source_dag_id: Optional[StrictStr] = None,
         source_task_id: Optional[StrictStr] = None,
+        source_task_instance_id: Optional[UUID] = None,
         source_run_id: Optional[StrictStr] = None,
         source_map_index: Optional[StrictInt] = None,
+        partition_key: Optional[StrictStr] = None,
+        partition_key_regexp_pattern: Annotated[Optional[StrictStr], Field(description="Filter results by matching this regular expression against the field value.")] = None,
         name_pattern: Annotated[Optional[StrictStr], Field(description="Case-insensitive substring match (SQL `ILIKE`). Slower than `name_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".")] = None,
         name_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".")] = None,
+        extra: Annotated[Optional[List[StrictStr]], Field(description="Filter by JSON key-value pairs. Repeat for multiple conditions (AND logic). Format: key=value (e.g. extra=region=us&extra=env=prod).")] = None,
         timestamp_gte: Optional[datetime] = None,
         timestamp_gt: Optional[datetime] = None,
         timestamp_lte: Optional[datetime] = None,
@@ -2165,14 +2170,22 @@ class AssetApi:
         :type source_dag_id: str
         :param source_task_id:
         :type source_task_id: str
+        :param source_task_instance_id:
+        :type source_task_instance_id: UUID
         :param source_run_id:
         :type source_run_id: str
         :param source_map_index:
         :type source_map_index: int
+        :param partition_key:
+        :type partition_key: str
+        :param partition_key_regexp_pattern: Filter results by matching this regular expression against the field value.
+        :type partition_key_regexp_pattern: str
         :param name_pattern: Case-insensitive substring match (SQL `ILIKE`). Slower than `name_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".
         :type name_pattern: str
         :param name_prefix_pattern: Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".
         :type name_prefix_pattern: str
+        :param extra: Filter by JSON key-value pairs. Repeat for multiple conditions (AND logic). Format: key=value (e.g. extra=region=us&extra=env=prod).
+        :type extra: List[str]
         :param timestamp_gte:
         :type timestamp_gte: datetime
         :param timestamp_gt:
@@ -2210,10 +2223,14 @@ class AssetApi:
             asset_id=asset_id,
             source_dag_id=source_dag_id,
             source_task_id=source_task_id,
+            source_task_instance_id=source_task_instance_id,
             source_run_id=source_run_id,
             source_map_index=source_map_index,
+            partition_key=partition_key,
+            partition_key_regexp_pattern=partition_key_regexp_pattern,
             name_pattern=name_pattern,
             name_prefix_pattern=name_prefix_pattern,
+            extra=extra,
             timestamp_gte=timestamp_gte,
             timestamp_gt=timestamp_gt,
             timestamp_lte=timestamp_lte,
@@ -2251,10 +2268,14 @@ class AssetApi:
         asset_id: Optional[StrictInt] = None,
         source_dag_id: Optional[StrictStr] = None,
         source_task_id: Optional[StrictStr] = None,
+        source_task_instance_id: Optional[UUID] = None,
         source_run_id: Optional[StrictStr] = None,
         source_map_index: Optional[StrictInt] = None,
+        partition_key: Optional[StrictStr] = None,
+        partition_key_regexp_pattern: Annotated[Optional[StrictStr], Field(description="Filter results by matching this regular expression against the field value.")] = None,
         name_pattern: Annotated[Optional[StrictStr], Field(description="Case-insensitive substring match (SQL `ILIKE`). Slower than `name_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".")] = None,
         name_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".")] = None,
+        extra: Annotated[Optional[List[StrictStr]], Field(description="Filter by JSON key-value pairs. Repeat for multiple conditions (AND logic). Format: key=value (e.g. extra=region=us&extra=env=prod).")] = None,
         timestamp_gte: Optional[datetime] = None,
         timestamp_gt: Optional[datetime] = None,
         timestamp_lte: Optional[datetime] = None,
@@ -2288,14 +2309,22 @@ class AssetApi:
         :type source_dag_id: str
         :param source_task_id:
         :type source_task_id: str
+        :param source_task_instance_id:
+        :type source_task_instance_id: UUID
         :param source_run_id:
         :type source_run_id: str
         :param source_map_index:
         :type source_map_index: int
+        :param partition_key:
+        :type partition_key: str
+        :param partition_key_regexp_pattern: Filter results by matching this regular expression against the field value.
+        :type partition_key_regexp_pattern: str
         :param name_pattern: Case-insensitive substring match (SQL `ILIKE`). Slower than `name_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".
         :type name_pattern: str
         :param name_prefix_pattern: Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".
         :type name_prefix_pattern: str
+        :param extra: Filter by JSON key-value pairs. Repeat for multiple conditions (AND logic). Format: key=value (e.g. extra=region=us&extra=env=prod).
+        :type extra: List[str]
         :param timestamp_gte:
         :type timestamp_gte: datetime
         :param timestamp_gt:
@@ -2333,10 +2362,14 @@ class AssetApi:
             asset_id=asset_id,
             source_dag_id=source_dag_id,
             source_task_id=source_task_id,
+            source_task_instance_id=source_task_instance_id,
             source_run_id=source_run_id,
             source_map_index=source_map_index,
+            partition_key=partition_key,
+            partition_key_regexp_pattern=partition_key_regexp_pattern,
             name_pattern=name_pattern,
             name_prefix_pattern=name_prefix_pattern,
+            extra=extra,
             timestamp_gte=timestamp_gte,
             timestamp_gt=timestamp_gt,
             timestamp_lte=timestamp_lte,
@@ -2374,10 +2407,14 @@ class AssetApi:
         asset_id: Optional[StrictInt] = None,
         source_dag_id: Optional[StrictStr] = None,
         source_task_id: Optional[StrictStr] = None,
+        source_task_instance_id: Optional[UUID] = None,
         source_run_id: Optional[StrictStr] = None,
         source_map_index: Optional[StrictInt] = None,
+        partition_key: Optional[StrictStr] = None,
+        partition_key_regexp_pattern: Annotated[Optional[StrictStr], Field(description="Filter results by matching this regular expression against the field value.")] = None,
         name_pattern: Annotated[Optional[StrictStr], Field(description="Case-insensitive substring match (SQL `ILIKE`). Slower than `name_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".")] = None,
         name_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".")] = None,
+        extra: Annotated[Optional[List[StrictStr]], Field(description="Filter by JSON key-value pairs. Repeat for multiple conditions (AND logic). Format: key=value (e.g. extra=region=us&extra=env=prod).")] = None,
         timestamp_gte: Optional[datetime] = None,
         timestamp_gt: Optional[datetime] = None,
         timestamp_lte: Optional[datetime] = None,
@@ -2411,14 +2448,22 @@ class AssetApi:
         :type source_dag_id: str
         :param source_task_id:
         :type source_task_id: str
+        :param source_task_instance_id:
+        :type source_task_instance_id: UUID
         :param source_run_id:
         :type source_run_id: str
         :param source_map_index:
         :type source_map_index: int
+        :param partition_key:
+        :type partition_key: str
+        :param partition_key_regexp_pattern: Filter results by matching this regular expression against the field value.
+        :type partition_key_regexp_pattern: str
         :param name_pattern: Case-insensitive substring match (SQL `ILIKE`). Slower than `name_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".
         :type name_pattern: str
         :param name_prefix_pattern: Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".
         :type name_prefix_pattern: str
+        :param extra: Filter by JSON key-value pairs. Repeat for multiple conditions (AND logic). Format: key=value (e.g. extra=region=us&extra=env=prod).
+        :type extra: List[str]
         :param timestamp_gte:
         :type timestamp_gte: datetime
         :param timestamp_gt:
@@ -2456,10 +2501,14 @@ class AssetApi:
             asset_id=asset_id,
             source_dag_id=source_dag_id,
             source_task_id=source_task_id,
+            source_task_instance_id=source_task_instance_id,
             source_run_id=source_run_id,
             source_map_index=source_map_index,
+            partition_key=partition_key,
+            partition_key_regexp_pattern=partition_key_regexp_pattern,
             name_pattern=name_pattern,
             name_prefix_pattern=name_prefix_pattern,
+            extra=extra,
             timestamp_gte=timestamp_gte,
             timestamp_gt=timestamp_gt,
             timestamp_lte=timestamp_lte,
@@ -2492,10 +2541,14 @@ class AssetApi:
         asset_id,
         source_dag_id,
         source_task_id,
+        source_task_instance_id,
         source_run_id,
         source_map_index,
+        partition_key,
+        partition_key_regexp_pattern,
         name_pattern,
         name_prefix_pattern,
+        extra,
         timestamp_gte,
         timestamp_gt,
         timestamp_lte,
@@ -2510,11 +2563,12 @@ class AssetApi:
 
         _collection_formats: Dict[str, str] = {
             'order_by': 'multi',
+            'extra': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -2547,6 +2601,10 @@ class AssetApi:
             
             _query_params.append(('source_task_id', source_task_id))
             
+        if source_task_instance_id is not None:
+            
+            _query_params.append(('source_task_instance_id', source_task_instance_id))
+            
         if source_run_id is not None:
             
             _query_params.append(('source_run_id', source_run_id))
@@ -2555,6 +2613,14 @@ class AssetApi:
             
             _query_params.append(('source_map_index', source_map_index))
             
+        if partition_key is not None:
+            
+            _query_params.append(('partition_key', partition_key))
+            
+        if partition_key_regexp_pattern is not None:
+            
+            _query_params.append(('partition_key_regexp_pattern', partition_key_regexp_pattern))
+            
         if name_pattern is not None:
             
             _query_params.append(('name_pattern', name_pattern))
@@ -2562,6 +2628,10 @@ class AssetApi:
         if name_prefix_pattern is not None:
             
             _query_params.append(('name_prefix_pattern', name_prefix_pattern))
+            
+        if extra is not None:
+            
+            _query_params.append(('extra', extra))
             
         if timestamp_gte is not None:
             if isinstance(timestamp_gte, datetime):
@@ -2621,7 +2691,7 @@ class AssetApi:
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -2888,7 +2958,7 @@ class AssetApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -2909,7 +2979,7 @@ class AssetApi:
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -2948,6 +3018,7 @@ class AssetApi:
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         name_pattern: Annotated[Optional[StrictStr], Field(description="Case-insensitive substring match (SQL `ILIKE`). Slower than `name_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".")] = None,
         name_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".")] = None,
+        uri: Annotated[Optional[List[StrictStr]], Field(description="Exact-match filter on the full asset URI. Compiles to an indexed equality comparison (``uri = ...``). Repeat the parameter (``?uri=a&uri=b``) to match multiple assets.")] = None,
         uri_pattern: Annotated[Optional[StrictStr], Field(description="Case-insensitive substring match (SQL `ILIKE`). Slower than `uri_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".")] = None,
         uri_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".")] = None,
         dag_ids: Optional[List[StrictStr]] = None,
@@ -2978,6 +3049,8 @@ class AssetApi:
         :type name_pattern: str
         :param name_prefix_pattern: Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".
         :type name_prefix_pattern: str
+        :param uri: Exact-match filter on the full asset URI. Compiles to an indexed equality comparison (``uri = ...``). Repeat the parameter (``?uri=a&uri=b``) to match multiple assets.
+        :type uri: List[str]
         :param uri_pattern: Case-insensitive substring match (SQL `ILIKE`). Slower than `uri_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".
         :type uri_pattern: str
         :param uri_prefix_pattern: Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".
@@ -3015,6 +3088,7 @@ class AssetApi:
             offset=offset,
             name_pattern=name_pattern,
             name_prefix_pattern=name_prefix_pattern,
+            uri=uri,
             uri_pattern=uri_pattern,
             uri_prefix_pattern=uri_prefix_pattern,
             dag_ids=dag_ids,
@@ -3051,6 +3125,7 @@ class AssetApi:
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         name_pattern: Annotated[Optional[StrictStr], Field(description="Case-insensitive substring match (SQL `ILIKE`). Slower than `name_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".")] = None,
         name_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".")] = None,
+        uri: Annotated[Optional[List[StrictStr]], Field(description="Exact-match filter on the full asset URI. Compiles to an indexed equality comparison (``uri = ...``). Repeat the parameter (``?uri=a&uri=b``) to match multiple assets.")] = None,
         uri_pattern: Annotated[Optional[StrictStr], Field(description="Case-insensitive substring match (SQL `ILIKE`). Slower than `uri_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".")] = None,
         uri_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".")] = None,
         dag_ids: Optional[List[StrictStr]] = None,
@@ -3081,6 +3156,8 @@ class AssetApi:
         :type name_pattern: str
         :param name_prefix_pattern: Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".
         :type name_prefix_pattern: str
+        :param uri: Exact-match filter on the full asset URI. Compiles to an indexed equality comparison (``uri = ...``). Repeat the parameter (``?uri=a&uri=b``) to match multiple assets.
+        :type uri: List[str]
         :param uri_pattern: Case-insensitive substring match (SQL `ILIKE`). Slower than `uri_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".
         :type uri_pattern: str
         :param uri_prefix_pattern: Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".
@@ -3118,6 +3195,7 @@ class AssetApi:
             offset=offset,
             name_pattern=name_pattern,
             name_prefix_pattern=name_prefix_pattern,
+            uri=uri,
             uri_pattern=uri_pattern,
             uri_prefix_pattern=uri_prefix_pattern,
             dag_ids=dag_ids,
@@ -3154,6 +3232,7 @@ class AssetApi:
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         name_pattern: Annotated[Optional[StrictStr], Field(description="Case-insensitive substring match (SQL `ILIKE`). Slower than `name_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".")] = None,
         name_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".")] = None,
+        uri: Annotated[Optional[List[StrictStr]], Field(description="Exact-match filter on the full asset URI. Compiles to an indexed equality comparison (``uri = ...``). Repeat the parameter (``?uri=a&uri=b``) to match multiple assets.")] = None,
         uri_pattern: Annotated[Optional[StrictStr], Field(description="Case-insensitive substring match (SQL `ILIKE`). Slower than `uri_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".")] = None,
         uri_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".")] = None,
         dag_ids: Optional[List[StrictStr]] = None,
@@ -3184,6 +3263,8 @@ class AssetApi:
         :type name_pattern: str
         :param name_prefix_pattern: Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".
         :type name_prefix_pattern: str
+        :param uri: Exact-match filter on the full asset URI. Compiles to an indexed equality comparison (``uri = ...``). Repeat the parameter (``?uri=a&uri=b``) to match multiple assets.
+        :type uri: List[str]
         :param uri_pattern: Case-insensitive substring match (SQL `ILIKE`). Slower than `uri_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".
         :type uri_pattern: str
         :param uri_prefix_pattern: Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".
@@ -3221,6 +3302,7 @@ class AssetApi:
             offset=offset,
             name_pattern=name_pattern,
             name_prefix_pattern=name_prefix_pattern,
+            uri=uri,
             uri_pattern=uri_pattern,
             uri_prefix_pattern=uri_prefix_pattern,
             dag_ids=dag_ids,
@@ -3252,6 +3334,7 @@ class AssetApi:
         offset,
         name_pattern,
         name_prefix_pattern,
+        uri,
         uri_pattern,
         uri_prefix_pattern,
         dag_ids,
@@ -3266,13 +3349,14 @@ class AssetApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
+            'uri': 'multi',
             'dag_ids': 'multi',
             'order_by': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -3296,6 +3380,10 @@ class AssetApi:
         if name_prefix_pattern is not None:
             
             _query_params.append(('name_prefix_pattern', name_prefix_pattern))
+            
+        if uri is not None:
+            
+            _query_params.append(('uri', uri))
             
         if uri_pattern is not None:
             
@@ -3323,7 +3411,7 @@ class AssetApi:
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -3606,7 +3694,7 @@ class AssetApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -3629,7 +3717,7 @@ class AssetApi:
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -3896,7 +3984,7 @@ class AssetApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -3917,7 +4005,7 @@ class AssetApi:
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -3953,7 +4041,7 @@ class AssetApi:
     def materialize_asset(
         self,
         asset_id: StrictInt,
-        materialize_asset_body: Optional[MaterializeAssetBody] = None,
+        materialize_asset_body: MaterializeAssetBody,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3973,7 +4061,7 @@ class AssetApi:
 
         :param asset_id: (required)
         :type asset_id: int
-        :param materialize_asset_body:
+        :param materialize_asset_body: (required)
         :type materialize_asset_body: MaterializeAssetBody
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4030,7 +4118,7 @@ class AssetApi:
     def materialize_asset_with_http_info(
         self,
         asset_id: StrictInt,
-        materialize_asset_body: Optional[MaterializeAssetBody] = None,
+        materialize_asset_body: MaterializeAssetBody,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4050,7 +4138,7 @@ class AssetApi:
 
         :param asset_id: (required)
         :type asset_id: int
-        :param materialize_asset_body:
+        :param materialize_asset_body: (required)
         :type materialize_asset_body: MaterializeAssetBody
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4107,7 +4195,7 @@ class AssetApi:
     def materialize_asset_without_preload_content(
         self,
         asset_id: StrictInt,
-        materialize_asset_body: Optional[MaterializeAssetBody] = None,
+        materialize_asset_body: MaterializeAssetBody,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4127,7 +4215,7 @@ class AssetApi:
 
         :param asset_id: (required)
         :type asset_id: int
-        :param materialize_asset_body:
+        :param materialize_asset_body: (required)
         :type materialize_asset_body: MaterializeAssetBody
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4193,7 +4281,7 @@ class AssetApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -4212,7 +4300,7 @@ class AssetApi:
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -4221,7 +4309,7 @@ class AssetApi:
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            self.api_client._set_header(_header_params, 'Content-Type', _content_type)
         else:
             _default_content_type = (
                 self.api_client.select_header_content_type(
@@ -4231,7 +4319,7 @@ class AssetApi:
                 )
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                self.api_client._set_header(_header_params, 'Content-Type', _default_content_type)
 
         # authentication setting
         _auth_settings: List[str] = [

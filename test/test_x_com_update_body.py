@@ -36,6 +36,8 @@ class TestXComUpdateBody(unittest.TestCase):
         if include_optional:
             return XComUpdateBody(
                 map_index = 56,
+                region_id = '',
+                region_index = -1.0,
                 value = None
             )
         else:

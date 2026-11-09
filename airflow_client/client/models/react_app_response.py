@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,6 +27,7 @@ class ReactAppResponse(BaseModel):
     """
     Serializer for React App Plugin responses.
     """ # noqa: E501
+    applies_to: Optional[Dict[str, List[StrictStr]]] = Field(default=None, description="Serializer for the optional scoping criteria of a UI plugin.  An open map of dotted field path to the values that path may take -- not a closed set of criteria. ``{\"state\": [\"failed\"], \"dag.tags.name\": [\"ml\"]}`` scopes to failed entities of ml-tagged Dags. An unqualified path is rooted at the entity the ``destination`` is about; a path may instead name a related record (``dag``, ``dag_run``, ``task``, ``task_instance``) as its first segment. Matching is equality against the listed values, OR within a path and AND across paths, and is evaluated client-side.")
     bundle_url: StrictStr
     category: Optional[StrictStr] = None
     destination: Optional[StrictStr] = 'nav'
@@ -36,7 +37,7 @@ class ReactAppResponse(BaseModel):
     nav_top_level: Optional[StrictBool] = None
     url_route: Optional[StrictStr] = None
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["bundle_url", "category", "destination", "icon", "icon_dark_mode", "name", "nav_top_level", "url_route"]
+    __properties: ClassVar[List[str]] = ["applies_to", "bundle_url", "category", "destination", "icon", "icon_dark_mode", "name", "nav_top_level", "url_route"]
 
     @field_validator('destination')
     def destination_validate_enum(cls, value):
@@ -44,8 +45,8 @@ class ReactAppResponse(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['nav', 'dag', 'dag_run', 'task', 'task_instance', 'base', 'dashboard']):
-            raise ValueError("must be one of enum values ('nav', 'dag', 'dag_run', 'task', 'task_instance', 'base', 'dashboard')")
+        if value not in set(['nav', 'dag', 'dag_run', 'task', 'task_instance', 'asset', 'base', 'dashboard', 'dag_overview', 'task_overview']):
+            raise ValueError("must be one of enum values ('nav', 'dag', 'dag_run', 'task', 'task_instance', 'asset', 'base', 'dashboard', 'dag_overview', 'task_overview')")
         return value
 
     model_config = ConfigDict(
@@ -106,6 +107,7 @@ class ReactAppResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "applies_to": obj.get("applies_to"),
             "bundle_url": obj.get("bundle_url"),
             "category": obj.get("category"),
             "destination": obj.get("destination") if obj.get("destination") is not None else 'nav',

@@ -37,7 +37,7 @@ class TestHTTPValidationError(unittest.TestCase):
             return HTTPValidationError(
                 detail = [
                     airflow_client.client.models.validation_error.ValidationError(
-                        ctx = airflow_client.client.models.context.Context(), 
+                        ctx = { }, 
                         input = null, 
                         loc = [
                             null

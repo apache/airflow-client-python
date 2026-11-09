@@ -35,7 +35,7 @@ class DagRunAssetReference(BaseModel):
     logical_date: Optional[datetime] = None
     partition_key: Optional[StrictStr] = None
     run_id: StrictStr
-    start_date: datetime
+    start_date: Optional[datetime] = None
     state: StrictStr
     triggering: StrictBool = Field(description="Whether this asset event triggered the referenced dag run. Only a run's most recent consumed asset event triggers it; earlier consumed events are included in the run but did not trigger it.")
     __properties: ClassVar[List[str]] = ["dag_id", "data_interval_end", "data_interval_start", "end_date", "logical_date", "partition_key", "run_id", "start_date", "state", "triggering"]

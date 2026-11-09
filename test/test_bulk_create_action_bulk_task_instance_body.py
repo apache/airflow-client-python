@@ -48,6 +48,8 @@ class TestBulkCreateActionBulkTaskInstanceBody(unittest.TestCase):
                         map_index = 56, 
                         new_state = null, 
                         note = '', 
+                        region_id = '', 
+                        region_index = 56, 
                         task_id = '', )
                     ]
             )
@@ -65,6 +67,8 @@ class TestBulkCreateActionBulkTaskInstanceBody(unittest.TestCase):
                         map_index = 56, 
                         new_state = null, 
                         note = '', 
+                        region_id = '', 
+                        region_index = 56, 
                         task_id = '', )
                     ],
         )

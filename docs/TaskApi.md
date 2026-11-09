@@ -9,11 +9,15 @@ Method | HTTP request | Description
 
 
 # **get_task**
-> TaskResponse get_task(dag_id, task_id)
+> TaskResponse get_task(dag_id, task_id, version_number=version_number)
 
 Get Task
 
 Get simplified representation of a task.
+
+Pass ``version_number`` (e.g. a task instance's ``dag_version.version_number``) to get the task
+as defined in that Dag version. Without it the latest version is used. Returns 404 if that
+version of the Dag does not exist.
 
 ### Example
 
@@ -50,10 +54,11 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     api_instance = airflow_client.client.TaskApi(api_client)
     dag_id = 'dag_id_example' # str | 
     task_id = None # object | 
+    version_number = 56 # int |  (optional)
 
     try:
         # Get Task
-        api_response = api_instance.get_task(dag_id, task_id)
+        api_response = api_instance.get_task(dag_id, task_id, version_number=version_number)
         print("The response of TaskApi->get_task:\n")
         pprint(api_response)
     except Exception as e:
@@ -69,6 +74,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **dag_id** | **str**|  | 
  **task_id** | [**object**](.md)|  | 
+ **version_number** | **int**|  | [optional] 
 
 ### Return type
 

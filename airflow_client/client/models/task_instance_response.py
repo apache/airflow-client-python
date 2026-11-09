@@ -18,11 +18,12 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from uuid import UUID
 from airflow_client.client.models.dag_version_response import DagVersionResponse
 from airflow_client.client.models.job_response import JobResponse
+from airflow_client.client.models.loop_iteration_response import LoopIterationResponse
 from airflow_client.client.models.task_instance_state import TaskInstanceState
 from airflow_client.client.models.trigger_response import TriggerResponse
 from typing import Optional, Set
@@ -43,7 +44,9 @@ class TaskInstanceResponse(BaseModel):
     executor_config: StrictStr
     hostname: Optional[StrictStr] = None
     id: UUID
+    in_loop: StrictBool
     logical_date: Optional[datetime] = None
+    loop_iteration: Optional[LoopIterationResponse] = None
     map_index: StrictInt
     max_tries: StrictInt
     note: Optional[StrictStr] = None
@@ -55,19 +58,24 @@ class TaskInstanceResponse(BaseModel):
     priority_weight: Optional[StrictInt] = None
     queue: Optional[StrictStr] = None
     queued_when: Optional[datetime] = None
+    region_id: Optional[UUID] = None
+    region_index: Optional[StrictInt] = None
     rendered_fields: Optional[Dict[str, Any]] = None
     rendered_map_index: Optional[StrictStr] = None
+    retry_at: Optional[datetime] = None
     run_after: datetime
     scheduled_when: Optional[datetime] = None
     start_date: Optional[datetime] = None
     state: Optional[TaskInstanceState] = None
+    state_reason: Optional[StrictStr] = None
     task_display_name: StrictStr
     task_id: StrictStr
+    team_name: Optional[StrictStr] = None
     trigger: Optional[TriggerResponse] = None
     triggerer_job: Optional[JobResponse] = None
     try_number: StrictInt
     unixname: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["dag_display_name", "dag_id", "dag_run_id", "dag_version", "duration", "end_date", "executor", "executor_config", "hostname", "id", "logical_date", "map_index", "max_tries", "note", "operator", "operator_name", "pid", "pool", "pool_slots", "priority_weight", "queue", "queued_when", "rendered_fields", "rendered_map_index", "run_after", "scheduled_when", "start_date", "state", "task_display_name", "task_id", "trigger", "triggerer_job", "try_number", "unixname"]
+    __properties: ClassVar[List[str]] = ["dag_display_name", "dag_id", "dag_run_id", "dag_version", "duration", "end_date", "executor", "executor_config", "hostname", "id", "in_loop", "logical_date", "loop_iteration", "map_index", "max_tries", "note", "operator", "operator_name", "pid", "pool", "pool_slots", "priority_weight", "queue", "queued_when", "region_id", "region_index", "rendered_fields", "rendered_map_index", "retry_at", "run_after", "scheduled_when", "start_date", "state", "state_reason", "task_display_name", "task_id", "team_name", "trigger", "triggerer_job", "try_number", "unixname"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -111,6 +119,9 @@ class TaskInstanceResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of dag_version
         if self.dag_version:
             _dict['dag_version'] = self.dag_version.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of loop_iteration
+        if self.loop_iteration:
+            _dict['loop_iteration'] = self.loop_iteration.to_dict()
         # override the default output from pydantic by calling `to_dict()` of trigger
         if self.trigger:
             _dict['trigger'] = self.trigger.to_dict()
@@ -139,7 +150,9 @@ class TaskInstanceResponse(BaseModel):
             "executor_config": obj.get("executor_config"),
             "hostname": obj.get("hostname"),
             "id": obj.get("id"),
+            "in_loop": obj.get("in_loop"),
             "logical_date": obj.get("logical_date"),
+            "loop_iteration": LoopIterationResponse.from_dict(obj["loop_iteration"]) if obj.get("loop_iteration") is not None else None,
             "map_index": obj.get("map_index"),
             "max_tries": obj.get("max_tries"),
             "note": obj.get("note"),
@@ -151,14 +164,19 @@ class TaskInstanceResponse(BaseModel):
             "priority_weight": obj.get("priority_weight"),
             "queue": obj.get("queue"),
             "queued_when": obj.get("queued_when"),
+            "region_id": obj.get("region_id"),
+            "region_index": obj.get("region_index"),
             "rendered_fields": obj.get("rendered_fields"),
             "rendered_map_index": obj.get("rendered_map_index"),
+            "retry_at": obj.get("retry_at"),
             "run_after": obj.get("run_after"),
             "scheduled_when": obj.get("scheduled_when"),
             "start_date": obj.get("start_date"),
             "state": obj.get("state"),
+            "state_reason": obj.get("state_reason"),
             "task_display_name": obj.get("task_display_name"),
             "task_id": obj.get("task_id"),
+            "team_name": obj.get("team_name"),
             "trigger": TriggerResponse.from_dict(obj["trigger"]) if obj.get("trigger") is not None else None,
             "triggerer_job": JobResponse.from_dict(obj["triggerer_job"]) if obj.get("triggerer_job") is not None else None,
             "try_number": obj.get("try_number"),

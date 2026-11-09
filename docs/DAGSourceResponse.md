@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **content** | **str** |  | [optional] 
 **dag_display_name** | **str** |  | 
 **dag_id** | **str** |  | 
+**language** | **str** |  | [optional] 
 **version_number** | **int** |  | [optional] 
 
 ## Example

@@ -20,7 +20,9 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
+from uuid import UUID
 from airflow_client.client.models.dag_version_response import DagVersionResponse
+from airflow_client.client.models.loop_iteration_response import LoopIterationResponse
 from airflow_client.client.models.task_instance_state import TaskInstanceState
 from typing import Optional, Set
 from typing_extensions import Self
@@ -39,8 +41,11 @@ class TaskInstanceHistoryResponse(BaseModel):
     executor: Optional[StrictStr] = None
     executor_config: StrictStr
     hostname: Optional[StrictStr] = None
+    id: UUID
+    loop_iteration: Optional[LoopIterationResponse] = None
     map_index: StrictInt
     max_tries: StrictInt
+    note: Optional[StrictStr] = None
     operator: Optional[StrictStr] = None
     operator_name: Optional[StrictStr] = None
     pid: Optional[StrictInt] = None
@@ -49,14 +54,18 @@ class TaskInstanceHistoryResponse(BaseModel):
     priority_weight: Optional[StrictInt] = None
     queue: Optional[StrictStr] = None
     queued_when: Optional[datetime] = None
+    region_id: Optional[UUID] = None
+    region_index: Optional[StrictInt] = None
+    retry_at: Optional[datetime] = None
     scheduled_when: Optional[datetime] = None
     start_date: Optional[datetime] = None
     state: Optional[TaskInstanceState] = None
+    state_reason: Optional[StrictStr] = None
     task_display_name: StrictStr
     task_id: StrictStr
     try_number: StrictInt
     unixname: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["dag_display_name", "dag_id", "dag_run_id", "dag_version", "duration", "end_date", "executor", "executor_config", "hostname", "map_index", "max_tries", "operator", "operator_name", "pid", "pool", "pool_slots", "priority_weight", "queue", "queued_when", "scheduled_when", "start_date", "state", "task_display_name", "task_id", "try_number", "unixname"]
+    __properties: ClassVar[List[str]] = ["dag_display_name", "dag_id", "dag_run_id", "dag_version", "duration", "end_date", "executor", "executor_config", "hostname", "id", "loop_iteration", "map_index", "max_tries", "note", "operator", "operator_name", "pid", "pool", "pool_slots", "priority_weight", "queue", "queued_when", "region_id", "region_index", "retry_at", "scheduled_when", "start_date", "state", "state_reason", "task_display_name", "task_id", "try_number", "unixname"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -100,6 +109,9 @@ class TaskInstanceHistoryResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of dag_version
         if self.dag_version:
             _dict['dag_version'] = self.dag_version.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of loop_iteration
+        if self.loop_iteration:
+            _dict['loop_iteration'] = self.loop_iteration.to_dict()
         return _dict
 
     @classmethod
@@ -121,8 +133,11 @@ class TaskInstanceHistoryResponse(BaseModel):
             "executor": obj.get("executor"),
             "executor_config": obj.get("executor_config"),
             "hostname": obj.get("hostname"),
+            "id": obj.get("id"),
+            "loop_iteration": LoopIterationResponse.from_dict(obj["loop_iteration"]) if obj.get("loop_iteration") is not None else None,
             "map_index": obj.get("map_index"),
             "max_tries": obj.get("max_tries"),
+            "note": obj.get("note"),
             "operator": obj.get("operator"),
             "operator_name": obj.get("operator_name"),
             "pid": obj.get("pid"),
@@ -131,9 +146,13 @@ class TaskInstanceHistoryResponse(BaseModel):
             "priority_weight": obj.get("priority_weight"),
             "queue": obj.get("queue"),
             "queued_when": obj.get("queued_when"),
+            "region_id": obj.get("region_id"),
+            "region_index": obj.get("region_index"),
+            "retry_at": obj.get("retry_at"),
             "scheduled_when": obj.get("scheduled_when"),
             "start_date": obj.get("start_date"),
             "state": obj.get("state"),
+            "state_reason": obj.get("state_reason"),
             "task_display_name": obj.get("task_display_name"),
             "task_id": obj.get("task_id"),
             "try_number": obj.get("try_number"),

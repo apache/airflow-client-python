@@ -35,8 +35,17 @@ class TestDagProcessorInfoResponse(unittest.TestCase):
         model = DagProcessorInfoResponse()
         if include_optional:
             return DagProcessorInfoResponse(
+                detailed_status = 'healthy',
+                instances = [
+                    airflow_client.client.models.dag_processor_instance_info_response.DagProcessorInstanceInfoResponse(
+                        bundle_names = [
+                            ''
+                            ], 
+                        hostname = '', 
+                        latest_dag_processor_heartbeat = '', )
+                    ],
                 latest_dag_processor_heartbeat = '',
-                status = ''
+                status = 'healthy'
             )
         else:
             return DagProcessorInfoResponse(

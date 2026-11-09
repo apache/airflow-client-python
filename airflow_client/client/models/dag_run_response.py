@@ -52,9 +52,10 @@ class DAGRunResponse(BaseModel):
     run_type: DagRunType
     start_date: Optional[datetime] = None
     state: DagRunState
+    team_name: Optional[StrictStr] = None
     triggered_by: Optional[DagRunTriggeredByType] = None
     triggering_user_name: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["bundle_version", "conf", "dag_display_name", "dag_id", "dag_run_id", "dag_versions", "data_interval_end", "data_interval_start", "duration", "end_date", "last_scheduling_decision", "logical_date", "note", "partition_date", "partition_key", "queued_at", "run_after", "run_type", "start_date", "state", "triggered_by", "triggering_user_name"]
+    __properties: ClassVar[List[str]] = ["bundle_version", "conf", "dag_display_name", "dag_id", "dag_run_id", "dag_versions", "data_interval_end", "data_interval_start", "duration", "end_date", "last_scheduling_decision", "logical_date", "note", "partition_date", "partition_key", "queued_at", "run_after", "run_type", "start_date", "state", "team_name", "triggered_by", "triggering_user_name"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -133,6 +134,7 @@ class DAGRunResponse(BaseModel):
             "run_type": obj.get("run_type"),
             "start_date": obj.get("start_date"),
             "state": obj.get("state"),
+            "team_name": obj.get("team_name"),
             "triggered_by": obj.get("triggered_by"),
             "triggering_user_name": obj.get("triggering_user_name")
         })

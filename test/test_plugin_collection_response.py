@@ -72,8 +72,12 @@ class TestPluginCollectionResponse(unittest.TestCase):
                             { }
                             ], 
                         source = '', 
+                        team_name = '', 
                         timetables = [
                             ''
+                            ], 
+                        ui_actions = [
+                            null
                             ], )
                     ],
                 total_entries = 56
@@ -117,8 +121,12 @@ class TestPluginCollectionResponse(unittest.TestCase):
                             { }
                             ], 
                         source = '', 
+                        team_name = '', 
                         timetables = [
                             ''
+                            ], 
+                        ui_actions = [
+                            null
                             ], )
                     ],
                 total_entries = 56,

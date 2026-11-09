@@ -6,8 +6,10 @@ Triggerer info serializer for responses.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**detailed_status** | [**DetailedHealthStatus**](DetailedHealthStatus.md) |  | [optional] 
+**instances** | [**List[TriggererInstanceInfoResponse]**](TriggererInstanceInfoResponse.md) |  | [optional] 
 **latest_triggerer_heartbeat** | **str** |  | [optional] 
-**status** | **str** |  | [optional] 
+**status** | [**HealthStatus**](HealthStatus.md) |  | [optional] 
 
 ## Example
 

@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 
 # **clear_task_state_store**
-> clear_task_state_store(dag_id, dag_run_id, task_id, all_map_indices=all_map_indices, map_index=map_index)
+> clear_task_state_store(dag_id, dag_run_id, task_id, map_index=map_index, region_id=region_id, region_index=region_index, all_map_indices=all_map_indices)
 
 Clear Task State Store
 
@@ -57,12 +57,14 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     dag_id = 'dag_id_example' # str | 
     dag_run_id = 'dag_run_id_example' # str | 
     task_id = 'task_id_example' # str | 
-    all_map_indices = False # bool |  (optional) (default to False)
     map_index = -1 # int |  (optional) (default to -1)
+    region_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID |  (optional)
+    region_index = 56 # int |  (optional)
+    all_map_indices = False # bool |  (optional) (default to False)
 
     try:
         # Clear Task State Store
-        api_instance.clear_task_state_store(dag_id, dag_run_id, task_id, all_map_indices=all_map_indices, map_index=map_index)
+        api_instance.clear_task_state_store(dag_id, dag_run_id, task_id, map_index=map_index, region_id=region_id, region_index=region_index, all_map_indices=all_map_indices)
     except Exception as e:
         print("Exception when calling TaskStateStoreApi->clear_task_state_store: %s\n" % e)
 ```
@@ -77,8 +79,10 @@ Name | Type | Description  | Notes
  **dag_id** | **str**|  | 
  **dag_run_id** | **str**|  | 
  **task_id** | **str**|  | 
- **all_map_indices** | **bool**|  | [optional] [default to False]
  **map_index** | **int**|  | [optional] [default to -1]
+ **region_id** | **UUID**|  | [optional] 
+ **region_index** | **int**|  | [optional] 
+ **all_map_indices** | **bool**|  | [optional] [default to False]
 
 ### Return type
 
@@ -98,15 +102,17 @@ void (empty response body)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **204** | Successful Response |  -  |
+**400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
+**409** | Conflict |  -  |
 **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_task_state_store**
-> delete_task_state_store(key, dag_id, dag_run_id, task_id, map_index=map_index)
+> delete_task_state_store(key, dag_id, dag_run_id, task_id, map_index=map_index, region_id=region_id, region_index=region_index)
 
 Delete Task State Store
 
@@ -149,10 +155,12 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     dag_run_id = 'dag_run_id_example' # str | 
     task_id = 'task_id_example' # str | 
     map_index = -1 # int |  (optional) (default to -1)
+    region_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID |  (optional)
+    region_index = 56 # int |  (optional)
 
     try:
         # Delete Task State Store
-        api_instance.delete_task_state_store(key, dag_id, dag_run_id, task_id, map_index=map_index)
+        api_instance.delete_task_state_store(key, dag_id, dag_run_id, task_id, map_index=map_index, region_id=region_id, region_index=region_index)
     except Exception as e:
         print("Exception when calling TaskStateStoreApi->delete_task_state_store: %s\n" % e)
 ```
@@ -169,6 +177,8 @@ Name | Type | Description  | Notes
  **dag_run_id** | **str**|  | 
  **task_id** | **str**|  | 
  **map_index** | **int**|  | [optional] [default to -1]
+ **region_id** | **UUID**|  | [optional] 
+ **region_index** | **int**|  | [optional] 
 
 ### Return type
 
@@ -188,15 +198,17 @@ void (empty response body)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **204** | Successful Response |  -  |
+**400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
+**409** | Conflict |  -  |
 **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_task_state_store**
-> TaskStateStoreResponse get_task_state_store(key, dag_id, dag_run_id, task_id, map_index=map_index)
+> TaskStateStoreResponse get_task_state_store(key, dag_id, dag_run_id, task_id, map_index=map_index, region_id=region_id, region_index=region_index)
 
 Get Task State Store
 
@@ -240,10 +252,12 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     dag_run_id = 'dag_run_id_example' # str | 
     task_id = 'task_id_example' # str | 
     map_index = -1 # int |  (optional) (default to -1)
+    region_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID |  (optional)
+    region_index = 56 # int |  (optional)
 
     try:
         # Get Task State Store
-        api_response = api_instance.get_task_state_store(key, dag_id, dag_run_id, task_id, map_index=map_index)
+        api_response = api_instance.get_task_state_store(key, dag_id, dag_run_id, task_id, map_index=map_index, region_id=region_id, region_index=region_index)
         print("The response of TaskStateStoreApi->get_task_state_store:\n")
         pprint(api_response)
     except Exception as e:
@@ -262,6 +276,8 @@ Name | Type | Description  | Notes
  **dag_run_id** | **str**|  | 
  **task_id** | **str**|  | 
  **map_index** | **int**|  | [optional] [default to -1]
+ **region_id** | **UUID**|  | [optional] 
+ **region_index** | **int**|  | [optional] 
 
 ### Return type
 
@@ -281,15 +297,17 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
+**400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
+**409** | Conflict |  -  |
 **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_task_state_store**
-> TaskStateStoreCollectionResponse list_task_state_store(dag_id, dag_run_id, task_id, map_index=map_index, limit=limit, offset=offset)
+> TaskStateStoreCollectionResponse list_task_state_store(dag_id, dag_run_id, task_id, map_index=map_index, region_id=region_id, region_index=region_index, limit=limit, offset=offset)
 
 List Task State Store
 
@@ -332,12 +350,14 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     dag_run_id = 'dag_run_id_example' # str | 
     task_id = 'task_id_example' # str | 
     map_index = -1 # int |  (optional) (default to -1)
+    region_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID |  (optional)
+    region_index = 56 # int |  (optional)
     limit = 50 # int |  (optional) (default to 50)
     offset = 0 # int |  (optional) (default to 0)
 
     try:
         # List Task State Store
-        api_response = api_instance.list_task_state_store(dag_id, dag_run_id, task_id, map_index=map_index, limit=limit, offset=offset)
+        api_response = api_instance.list_task_state_store(dag_id, dag_run_id, task_id, map_index=map_index, region_id=region_id, region_index=region_index, limit=limit, offset=offset)
         print("The response of TaskStateStoreApi->list_task_state_store:\n")
         pprint(api_response)
     except Exception as e:
@@ -355,6 +375,8 @@ Name | Type | Description  | Notes
  **dag_run_id** | **str**|  | 
  **task_id** | **str**|  | 
  **map_index** | **int**|  | [optional] [default to -1]
+ **region_id** | **UUID**|  | [optional] 
+ **region_index** | **int**|  | [optional] 
  **limit** | **int**|  | [optional] [default to 50]
  **offset** | **int**|  | [optional] [default to 0]
 
@@ -376,14 +398,17 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
+**400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**409** | Conflict |  -  |
 **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_task_state_store**
-> object patch_task_state_store(key, dag_id, dag_run_id, task_id, task_state_store_patch_body, map_index=map_index)
+> object patch_task_state_store(key, dag_id, dag_run_id, task_id, task_state_store_patch_body, map_index=map_index, region_id=region_id, region_index=region_index)
 
 Patch Task State Store
 
@@ -428,10 +453,12 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     task_id = 'task_id_example' # str | 
     task_state_store_patch_body = airflow_client.client.TaskStateStorePatchBody() # TaskStateStorePatchBody | 
     map_index = -1 # int |  (optional) (default to -1)
+    region_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID |  (optional)
+    region_index = 56 # int |  (optional)
 
     try:
         # Patch Task State Store
-        api_response = api_instance.patch_task_state_store(key, dag_id, dag_run_id, task_id, task_state_store_patch_body, map_index=map_index)
+        api_response = api_instance.patch_task_state_store(key, dag_id, dag_run_id, task_id, task_state_store_patch_body, map_index=map_index, region_id=region_id, region_index=region_index)
         print("The response of TaskStateStoreApi->patch_task_state_store:\n")
         pprint(api_response)
     except Exception as e:
@@ -451,6 +478,8 @@ Name | Type | Description  | Notes
  **task_id** | **str**|  | 
  **task_state_store_patch_body** | [**TaskStateStorePatchBody**](TaskStateStorePatchBody.md)|  | 
  **map_index** | **int**|  | [optional] [default to -1]
+ **region_id** | **UUID**|  | [optional] 
+ **region_index** | **int**|  | [optional] 
 
 ### Return type
 
@@ -470,15 +499,17 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
+**400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
+**409** | Conflict |  -  |
 **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **set_task_state_store**
-> set_task_state_store(key, dag_id, dag_run_id, task_id, task_state_store_body, map_index=map_index)
+> set_task_state_store(key, dag_id, dag_run_id, task_id, task_state_store_body, map_index=map_index, region_id=region_id, region_index=region_index)
 
 Set Task State Store
 
@@ -523,10 +554,12 @@ with airflow_client.client.ApiClient(configuration) as api_client:
     task_id = 'task_id_example' # str | 
     task_state_store_body = airflow_client.client.TaskStateStoreBody() # TaskStateStoreBody | 
     map_index = -1 # int |  (optional) (default to -1)
+    region_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID |  (optional)
+    region_index = 56 # int |  (optional)
 
     try:
         # Set Task State Store
-        api_instance.set_task_state_store(key, dag_id, dag_run_id, task_id, task_state_store_body, map_index=map_index)
+        api_instance.set_task_state_store(key, dag_id, dag_run_id, task_id, task_state_store_body, map_index=map_index, region_id=region_id, region_index=region_index)
     except Exception as e:
         print("Exception when calling TaskStateStoreApi->set_task_state_store: %s\n" % e)
 ```
@@ -544,6 +577,8 @@ Name | Type | Description  | Notes
  **task_id** | **str**|  | 
  **task_state_store_body** | [**TaskStateStoreBody**](TaskStateStoreBody.md)|  | 
  **map_index** | **int**|  | [optional] [default to -1]
+ **region_id** | **UUID**|  | [optional] 
+ **region_index** | **int**|  | [optional] 
 
 ### Return type
 
@@ -563,9 +598,11 @@ void (empty response body)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **204** | Successful Response |  -  |
+**400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
+**409** | Conflict |  -  |
 **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

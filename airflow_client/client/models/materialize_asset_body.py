@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,16 +28,18 @@ class MaterializeAssetBody(BaseModel):
     """
     Materialize asset request.
     """ # noqa: E501
+    bundle_version: Optional[StrictStr] = None
     conf: Optional[Dict[str, Any]] = None
     dag_run_id: Optional[StrictStr] = None
     data_interval_end: Optional[datetime] = None
     data_interval_start: Optional[datetime] = None
+    drain_dag: Optional[StrictBool] = Field(default=False, description="Drain the Dag together with this run. Draining changes the whole Dag: unfinished runs can start or resume except those held by paused backfills. No scheduled runs are created, and the Dag pauses once all unfinished runs finish. Paused backfills must be resumed for draining to complete. Requires the same permission as pausing the Dag.")
     logical_date: Optional[datetime] = None
     note: Optional[StrictStr] = None
     partition_key: Optional[StrictStr] = None
     run_after: Optional[datetime] = None
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["conf", "dag_run_id", "data_interval_end", "data_interval_start", "logical_date", "note", "partition_key", "run_after"]
+    __properties: ClassVar[List[str]] = ["bundle_version", "conf", "dag_run_id", "data_interval_end", "data_interval_start", "drain_dag", "logical_date", "note", "partition_key", "run_after"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -97,10 +99,12 @@ class MaterializeAssetBody(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "bundle_version": obj.get("bundle_version"),
             "conf": obj.get("conf"),
             "dag_run_id": obj.get("dag_run_id"),
             "data_interval_end": obj.get("data_interval_end"),
             "data_interval_start": obj.get("data_interval_start"),
+            "drain_dag": obj.get("drain_dag") if obj.get("drain_dag") is not None else False,
             "logical_date": obj.get("logical_date"),
             "note": obj.get("note"),
             "partition_key": obj.get("partition_key"),

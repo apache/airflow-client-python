@@ -9,8 +9,12 @@ Name | Type | Description | Notes
 **dag_id** | **str** |  | [optional] 
 **kind** | [**AssetStateStoreWriterKind**](AssetStateStoreWriterKind.md) |  | 
 **map_index** | **int** |  | [optional] 
+**region_id** | **UUID** |  | [optional] 
+**region_index** | **int** |  | [optional] 
 **run_id** | **str** |  | [optional] 
 **task_id** | **str** |  | [optional] 
+**task_instance_id** | **UUID** |  | [optional] 
+**try_number** | **int** |  | [optional] 
 
 ## Example
 

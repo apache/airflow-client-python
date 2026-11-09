@@ -5,10 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**dag_id** | **str** |  | [optional] 
-**dag_run_id** | **str** |  | 
-**note** | **str** |  | [optional] 
-**state** | [**DagRunMutableStates**](DagRunMutableStates.md) |  | [optional] 
+**dag_id** | **str** |  | 
+**is_paused** | **bool** |  | [optional] 
+**scheduling_state** | [**DagSchedulingState**](DagSchedulingState.md) |  | [optional] 
 
 ## Example
 

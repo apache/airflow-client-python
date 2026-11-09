@@ -18,8 +18,9 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from airflow_client.client.models.reprocess_behavior import ReprocessBehavior
 from typing import Optional, Set
 from typing_extensions import Self
@@ -31,14 +32,15 @@ class BackfillPostBody(BaseModel):
     """ # noqa: E501
     dag_id: StrictStr
     dag_run_conf: Optional[Dict[str, Any]] = None
+    drain_dag: Optional[StrictBool] = Field(default=False, description="Drain the Dag together with the backfill. Draining changes the whole Dag: unfinished runs can start or resume except those held by paused backfills. No scheduled runs are created, and the Dag pauses once all unfinished runs finish. Paused backfills must be resumed for draining to complete. Requires the same permission as pausing the Dag. Ignored by the dry-run endpoint.")
     from_date: datetime
-    max_active_runs: Optional[StrictInt] = 10
+    max_active_runs: Optional[Annotated[int, Field(strict=True, ge=1)]] = 10
     reprocess_behavior: Optional[ReprocessBehavior] = None
     run_backwards: Optional[StrictBool] = False
     run_on_latest_version: Optional[StrictBool] = None
     to_date: datetime
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["dag_id", "dag_run_conf", "from_date", "max_active_runs", "reprocess_behavior", "run_backwards", "run_on_latest_version", "to_date"]
+    __properties: ClassVar[List[str]] = ["dag_id", "dag_run_conf", "drain_dag", "from_date", "max_active_runs", "reprocess_behavior", "run_backwards", "run_on_latest_version", "to_date"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -100,6 +102,7 @@ class BackfillPostBody(BaseModel):
         _obj = cls.model_validate({
             "dag_id": obj.get("dag_id"),
             "dag_run_conf": obj.get("dag_run_conf"),
+            "drain_dag": obj.get("drain_dag") if obj.get("drain_dag") is not None else False,
             "from_date": obj.get("from_date"),
             "max_active_runs": obj.get("max_active_runs") if obj.get("max_active_runs") is not None else 10,
             "reprocess_behavior": obj.get("reprocess_behavior"),

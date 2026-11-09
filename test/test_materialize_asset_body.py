@@ -35,10 +35,12 @@ class TestMaterializeAssetBody(unittest.TestCase):
         model = MaterializeAssetBody()
         if include_optional:
             return MaterializeAssetBody(
+                bundle_version = '',
                 conf = { },
                 dag_run_id = '',
                 data_interval_end = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 data_interval_start = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+                drain_dag = True,
                 logical_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 note = '',
                 partition_key = '',

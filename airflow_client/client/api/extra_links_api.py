@@ -15,8 +15,10 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import StrictInt, StrictStr
+from pydantic import Field, StrictInt, StrictStr
 from typing import Optional
+from typing_extensions import Annotated
+from uuid import UUID
 from airflow_client.client.models.extra_link_collection_response import ExtraLinkCollectionResponse
 
 from airflow_client.client.api_client import ApiClient, RequestSerialized
@@ -44,6 +46,8 @@ class ExtraLinksApi:
         dag_run_id: StrictStr,
         task_id: StrictStr,
         map_index: Optional[StrictInt] = None,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         try_number: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
@@ -70,6 +74,10 @@ class ExtraLinksApi:
         :type task_id: str
         :param map_index:
         :type map_index: int
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param try_number:
         :type try_number: int
         :param _request_timeout: timeout setting for this request. If one
@@ -99,6 +107,8 @@ class ExtraLinksApi:
             dag_run_id=dag_run_id,
             task_id=task_id,
             map_index=map_index,
+            region_id=region_id,
+            region_index=region_index,
             try_number=try_number,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -108,9 +118,11 @@ class ExtraLinksApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ExtraLinkCollectionResponse",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -131,6 +143,8 @@ class ExtraLinksApi:
         dag_run_id: StrictStr,
         task_id: StrictStr,
         map_index: Optional[StrictInt] = None,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         try_number: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
@@ -157,6 +171,10 @@ class ExtraLinksApi:
         :type task_id: str
         :param map_index:
         :type map_index: int
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param try_number:
         :type try_number: int
         :param _request_timeout: timeout setting for this request. If one
@@ -186,6 +204,8 @@ class ExtraLinksApi:
             dag_run_id=dag_run_id,
             task_id=task_id,
             map_index=map_index,
+            region_id=region_id,
+            region_index=region_index,
             try_number=try_number,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -195,9 +215,11 @@ class ExtraLinksApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ExtraLinkCollectionResponse",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -218,6 +240,8 @@ class ExtraLinksApi:
         dag_run_id: StrictStr,
         task_id: StrictStr,
         map_index: Optional[StrictInt] = None,
+        region_id: Optional[UUID] = None,
+        region_index: Optional[Annotated[int, Field(strict=True, ge=-1)]] = None,
         try_number: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
@@ -244,6 +268,10 @@ class ExtraLinksApi:
         :type task_id: str
         :param map_index:
         :type map_index: int
+        :param region_id:
+        :type region_id: UUID
+        :param region_index:
+        :type region_index: int
         :param try_number:
         :type try_number: int
         :param _request_timeout: timeout setting for this request. If one
@@ -273,6 +301,8 @@ class ExtraLinksApi:
             dag_run_id=dag_run_id,
             task_id=task_id,
             map_index=map_index,
+            region_id=region_id,
+            region_index=region_index,
             try_number=try_number,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -282,9 +312,11 @@ class ExtraLinksApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ExtraLinkCollectionResponse",
+            '400': "HTTPExceptionResponse",
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -300,6 +332,8 @@ class ExtraLinksApi:
         dag_run_id,
         task_id,
         map_index,
+        region_id,
+        region_index,
         try_number,
         _request_auth,
         _content_type,
@@ -314,7 +348,7 @@ class ExtraLinksApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -333,6 +367,14 @@ class ExtraLinksApi:
             
             _query_params.append(('map_index', map_index))
             
+        if region_id is not None:
+            
+            _query_params.append(('region_id', region_id))
+            
+        if region_index is not None:
+            
+            _query_params.append(('region_index', region_index))
+            
         if try_number is not None:
             
             _query_params.append(('try_number', try_number))
@@ -343,7 +385,7 @@ class ExtraLinksApi:
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'

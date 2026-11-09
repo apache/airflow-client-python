@@ -19,6 +19,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from airflow_client.client.models.asset_state_store_writer_kind import AssetStateStoreWriterKind
 from typing import Optional, Set
 from typing_extensions import Self
@@ -31,9 +32,13 @@ class AssetStateStoreLastUpdatedBy(BaseModel):
     dag_id: Optional[StrictStr] = None
     kind: AssetStateStoreWriterKind
     map_index: Optional[StrictInt] = None
+    region_id: Optional[UUID] = None
+    region_index: Optional[StrictInt] = None
     run_id: Optional[StrictStr] = None
     task_id: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["dag_id", "kind", "map_index", "run_id", "task_id"]
+    task_instance_id: Optional[UUID] = None
+    try_number: Optional[StrictInt] = None
+    __properties: ClassVar[List[str]] = ["dag_id", "kind", "map_index", "region_id", "region_index", "run_id", "task_id", "task_instance_id", "try_number"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -89,8 +94,12 @@ class AssetStateStoreLastUpdatedBy(BaseModel):
             "dag_id": obj.get("dag_id"),
             "kind": obj.get("kind"),
             "map_index": obj.get("map_index"),
+            "region_id": obj.get("region_id"),
+            "region_index": obj.get("region_index"),
             "run_id": obj.get("run_id"),
-            "task_id": obj.get("task_id")
+            "task_id": obj.get("task_id"),
+            "task_instance_id": obj.get("task_instance_id"),
+            "try_number": obj.get("try_number")
         })
         return _obj
 

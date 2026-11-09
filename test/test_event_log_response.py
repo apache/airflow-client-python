@@ -43,9 +43,12 @@ class TestEventLogResponse(unittest.TestCase):
                 logical_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 map_index = 56,
                 owner = '',
+                owner_display_name = '',
                 run_id = '',
                 task_display_name = '',
                 task_id = '',
+                task_instance_id = '',
+                team_name = '',
                 try_number = 56,
                 when = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f')
             )

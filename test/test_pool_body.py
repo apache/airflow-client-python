@@ -37,13 +37,13 @@ class TestPoolBody(unittest.TestCase):
             return PoolBody(
                 description = '',
                 include_deferred = True,
-                name = '',
+                name = 'o',
                 slots = -1.0,
                 team_name = ''
             )
         else:
             return PoolBody(
-                name = '',
+                name = 'o',
                 slots = -1.0,
         )
         """

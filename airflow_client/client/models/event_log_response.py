@@ -20,6 +20,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -36,12 +37,15 @@ class EventLogResponse(BaseModel):
     logical_date: Optional[datetime] = None
     map_index: Optional[StrictInt] = None
     owner: Optional[StrictStr] = None
+    owner_display_name: Optional[StrictStr] = None
     run_id: Optional[StrictStr] = None
     task_display_name: Optional[StrictStr] = None
     task_id: Optional[StrictStr] = None
+    task_instance_id: Optional[UUID] = None
+    team_name: Optional[StrictStr] = None
     try_number: Optional[StrictInt] = None
     when: datetime
-    __properties: ClassVar[List[str]] = ["dag_display_name", "dag_id", "event", "event_log_id", "extra", "logical_date", "map_index", "owner", "run_id", "task_display_name", "task_id", "try_number", "when"]
+    __properties: ClassVar[List[str]] = ["dag_display_name", "dag_id", "event", "event_log_id", "extra", "logical_date", "map_index", "owner", "owner_display_name", "run_id", "task_display_name", "task_id", "task_instance_id", "team_name", "try_number", "when"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -102,9 +106,12 @@ class EventLogResponse(BaseModel):
             "logical_date": obj.get("logical_date"),
             "map_index": obj.get("map_index"),
             "owner": obj.get("owner"),
+            "owner_display_name": obj.get("owner_display_name"),
             "run_id": obj.get("run_id"),
             "task_display_name": obj.get("task_display_name"),
             "task_id": obj.get("task_id"),
+            "task_instance_id": obj.get("task_instance_id"),
+            "team_name": obj.get("team_name"),
             "try_number": obj.get("try_number"),
             "when": obj.get("when")
         })

@@ -64,6 +64,7 @@ class TestDAGResponse(unittest.TestCase):
                     ''
                     ],
                 relative_fileloc = '',
+                scheduling_state = 'active',
                 tags = [
                     airflow_client.client.models.dag_tag_response.DagTagResponse(
                         dag_display_name = '', 
@@ -80,7 +81,6 @@ class TestDAGResponse(unittest.TestCase):
                 dag_display_name = '',
                 dag_id = '',
                 file_token = '',
-                fileloc = '',
                 has_import_errors = True,
                 has_task_concurrency_limits = True,
                 is_backfillable = True,

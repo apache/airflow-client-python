@@ -14,9 +14,12 @@ Name | Type | Description | Notes
 **logical_date** | **datetime** |  | [optional] 
 **map_index** | **int** |  | [optional] 
 **owner** | **str** |  | [optional] 
+**owner_display_name** | **str** |  | [optional] 
 **run_id** | **str** |  | [optional] 
 **task_display_name** | **str** |  | [optional] 
 **task_id** | **str** |  | [optional] 
+**task_instance_id** | **UUID** |  | [optional] 
+**team_name** | **str** |  | [optional] 
 **try_number** | **int** |  | [optional] 
 **when** | **datetime** |  | 
 

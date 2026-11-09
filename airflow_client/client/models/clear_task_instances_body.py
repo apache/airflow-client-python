@@ -21,6 +21,7 @@ from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
+from uuid import UUID
 from airflow_client.client.models.clear_task_instances_body_task_ids_inner import ClearTaskInstancesBodyTaskIdsInner
 from typing import Optional, Set
 from typing_extensions import Self
@@ -35,8 +36,10 @@ class ClearTaskInstancesBody(BaseModel):
     end_date: Optional[datetime] = None
     include_downstream: Optional[StrictBool] = False
     include_future: Optional[StrictBool] = False
+    include_later_loop_iterations: Optional[StrictBool] = Field(default=True, description="Clear later iterations when the selection includes a loop gate.")
     include_past: Optional[StrictBool] = False
     include_upstream: Optional[StrictBool] = False
+    keep_task_state: Optional[StrictBool] = Field(default=False, description="Keep the task state store entries of the cleared task instances so the next attempt resumes from them. By default they are discarded, so the task starts over.")
     note: Optional[Annotated[str, Field(strict=True, max_length=1000)]] = None
     only_failed: Optional[StrictBool] = True
     only_running: Optional[StrictBool] = False
@@ -44,8 +47,11 @@ class ClearTaskInstancesBody(BaseModel):
     reset_dag_runs: Optional[StrictBool] = True
     run_on_latest_version: Optional[StrictBool] = None
     start_date: Optional[datetime] = None
+    task_group_id: Optional[StrictStr] = None
     task_ids: Optional[List[ClearTaskInstancesBodyTaskIdsInner]] = None
-    __properties: ClassVar[List[str]] = ["dag_run_id", "dry_run", "end_date", "include_downstream", "include_future", "include_past", "include_upstream", "note", "only_failed", "only_running", "prevent_running_task", "reset_dag_runs", "run_on_latest_version", "start_date", "task_ids"]
+    task_instance_ids: Optional[Annotated[List[UUID], Field(min_length=1)]] = None
+    whole_expansion_ids: Optional[List[UUID]] = Field(default=None, description="Selected execution IDs whose entire mapped expansion should be cleared.")
+    __properties: ClassVar[List[str]] = ["dag_run_id", "dry_run", "end_date", "include_downstream", "include_future", "include_later_loop_iterations", "include_past", "include_upstream", "keep_task_state", "note", "only_failed", "only_running", "prevent_running_task", "reset_dag_runs", "run_on_latest_version", "start_date", "task_group_id", "task_ids", "task_instance_ids", "whole_expansion_ids"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -109,8 +115,10 @@ class ClearTaskInstancesBody(BaseModel):
             "end_date": obj.get("end_date"),
             "include_downstream": obj.get("include_downstream") if obj.get("include_downstream") is not None else False,
             "include_future": obj.get("include_future") if obj.get("include_future") is not None else False,
+            "include_later_loop_iterations": obj.get("include_later_loop_iterations") if obj.get("include_later_loop_iterations") is not None else True,
             "include_past": obj.get("include_past") if obj.get("include_past") is not None else False,
             "include_upstream": obj.get("include_upstream") if obj.get("include_upstream") is not None else False,
+            "keep_task_state": obj.get("keep_task_state") if obj.get("keep_task_state") is not None else False,
             "note": obj.get("note"),
             "only_failed": obj.get("only_failed") if obj.get("only_failed") is not None else True,
             "only_running": obj.get("only_running") if obj.get("only_running") is not None else False,
@@ -118,7 +126,10 @@ class ClearTaskInstancesBody(BaseModel):
             "reset_dag_runs": obj.get("reset_dag_runs") if obj.get("reset_dag_runs") is not None else True,
             "run_on_latest_version": obj.get("run_on_latest_version"),
             "start_date": obj.get("start_date"),
-            "task_ids": [ClearTaskInstancesBodyTaskIdsInner.from_dict(_item) for _item in obj["task_ids"]] if obj.get("task_ids") is not None else None
+            "task_group_id": obj.get("task_group_id"),
+            "task_ids": [ClearTaskInstancesBodyTaskIdsInner.from_dict(_item) for _item in obj["task_ids"]] if obj.get("task_ids") is not None else None,
+            "task_instance_ids": obj.get("task_instance_ids"),
+            "whole_expansion_ids": obj.get("whole_expansion_ids")
         })
         return _obj
 

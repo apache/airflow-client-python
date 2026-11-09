@@ -7,8 +7,10 @@ Import Error Response.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **bundle_name** | **str** |  | [optional] 
+**file_token** | **str** | Return a signed token identifying the file, used to request its reparse. | [readonly] 
 **filename** | **str** |  | 
 **import_error_id** | **int** |  | 
+**source_reference** | **str** |  | [optional] 
 **stack_trace** | **str** |  | 
 **timestamp** | **datetime** |  | 
 

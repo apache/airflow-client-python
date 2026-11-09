@@ -6,6 +6,7 @@ Job serializer for responses.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**bundle_names** | **List[str]** |  | [optional] 
 **dag_display_name** | **str** |  | [optional] 
 **dag_id** | **str** |  | [optional] 
 **end_date** | **datetime** |  | [optional] 
@@ -16,6 +17,7 @@ Name | Type | Description | Notes
 **latest_heartbeat** | **datetime** |  | [optional] 
 **start_date** | **datetime** |  | [optional] 
 **state** | **str** |  | [optional] 
+**team_names** | **List[str]** |  | [optional] 
 **unixname** | **str** |  | [optional] 
 
 ## Example

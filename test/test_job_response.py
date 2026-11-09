@@ -35,6 +35,9 @@ class TestJobResponse(unittest.TestCase):
         model = JobResponse()
         if include_optional:
             return JobResponse(
+                bundle_names = [
+                    ''
+                    ],
                 dag_display_name = '',
                 dag_id = '',
                 end_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
@@ -45,6 +48,9 @@ class TestJobResponse(unittest.TestCase):
                 latest_heartbeat = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 start_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 state = '',
+                team_names = [
+                    ''
+                    ],
                 unixname = ''
             )
         else:

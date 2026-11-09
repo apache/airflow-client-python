@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **source_map_index** | **int** |  | 
 **source_run_id** | **str** |  | [optional] 
 **source_task_id** | **str** |  | [optional] 
+**source_task_instance_id** | **UUID** |  | [optional] 
 **timestamp** | **datetime** |  | 
 **uri** | **str** |  | [optional] 
 

@@ -287,7 +287,7 @@ class DagRunApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -306,7 +306,7 @@ class DagRunApi:
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -315,7 +315,7 @@ class DagRunApi:
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            self.api_client._set_header(_header_params, 'Content-Type', _content_type)
         else:
             _default_content_type = (
                 self.api_client.select_header_content_type(
@@ -325,7 +325,7 @@ class DagRunApi:
                 )
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                self.api_client._set_header(_header_params, 'Content-Type', _default_content_type)
 
         # authentication setting
         _auth_settings: List[str] = [
@@ -599,7 +599,7 @@ class DagRunApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -620,7 +620,7 @@ class DagRunApi:
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -629,7 +629,7 @@ class DagRunApi:
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            self.api_client._set_header(_header_params, 'Content-Type', _content_type)
         else:
             _default_content_type = (
                 self.api_client.select_header_content_type(
@@ -639,7 +639,7 @@ class DagRunApi:
                 )
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                self.api_client._set_header(_header_params, 'Content-Type', _default_content_type)
 
         # authentication setting
         _auth_settings: List[str] = [
@@ -906,7 +906,7 @@ class DagRunApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -925,7 +925,7 @@ class DagRunApi:
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -934,7 +934,7 @@ class DagRunApi:
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            self.api_client._set_header(_header_params, 'Content-Type', _content_type)
         else:
             _default_content_type = (
                 self.api_client.select_header_content_type(
@@ -944,7 +944,7 @@ class DagRunApi:
                 )
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                self.api_client._set_header(_header_params, 'Content-Type', _default_content_type)
 
         # authentication setting
         _auth_settings: List[str] = [
@@ -1211,7 +1211,7 @@ class DagRunApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -1230,7 +1230,7 @@ class DagRunApi:
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -1239,7 +1239,7 @@ class DagRunApi:
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            self.api_client._set_header(_header_params, 'Content-Type', _content_type)
         else:
             _default_content_type = (
                 self.api_client.select_header_content_type(
@@ -1249,7 +1249,7 @@ class DagRunApi:
                 )
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                self.api_client._set_header(_header_params, 'Content-Type', _default_content_type)
 
         # authentication setting
         _auth_settings: List[str] = [
@@ -1519,7 +1519,7 @@ class DagRunApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -1538,7 +1538,7 @@ class DagRunApi:
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -1805,7 +1805,7 @@ class DagRunApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -1824,7 +1824,7 @@ class DagRunApi:
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -1894,6 +1894,9 @@ class DagRunApi:
         state: Optional[List[StrictStr]] = None,
         dag_version: Optional[List[StrictInt]] = None,
         bundle_version: Optional[StrictStr] = None,
+        teams: Optional[List[StrictStr]] = None,
+        tags: Optional[List[StrictStr]] = None,
+        tags_match_mode: Optional[StrictStr] = None,
         order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, state, dag_id, run_id, logical_date, partition_date, run_after, start_date, end_date, updated_at, conf, duration, dag_run_id`")] = None,
         run_id_pattern: Annotated[Optional[StrictStr], Field(description="Case-insensitive substring match (SQL `ILIKE`). Slower than `run_id_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".")] = None,
         run_id_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".")] = None,
@@ -1991,6 +1994,12 @@ class DagRunApi:
         :type dag_version: List[int]
         :param bundle_version:
         :type bundle_version: str
+        :param teams:
+        :type teams: List[str]
+        :param tags:
+        :type tags: List[str]
+        :param tags_match_mode:
+        :type tags_match_mode: str
         :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, state, dag_id, run_id, logical_date, partition_date, run_after, start_date, end_date, updated_at, conf, duration, dag_run_id`
         :type order_by: List[str]
         :param run_id_pattern: Case-insensitive substring match (SQL `ILIKE`). Slower than `run_id_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".
@@ -2069,6 +2078,9 @@ class DagRunApi:
             state=state,
             dag_version=dag_version,
             bundle_version=bundle_version,
+            teams=teams,
+            tags=tags,
+            tags_match_mode=tags_match_mode,
             order_by=order_by,
             run_id_pattern=run_id_pattern,
             run_id_prefix_pattern=run_id_prefix_pattern,
@@ -2142,6 +2154,9 @@ class DagRunApi:
         state: Optional[List[StrictStr]] = None,
         dag_version: Optional[List[StrictInt]] = None,
         bundle_version: Optional[StrictStr] = None,
+        teams: Optional[List[StrictStr]] = None,
+        tags: Optional[List[StrictStr]] = None,
+        tags_match_mode: Optional[StrictStr] = None,
         order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, state, dag_id, run_id, logical_date, partition_date, run_after, start_date, end_date, updated_at, conf, duration, dag_run_id`")] = None,
         run_id_pattern: Annotated[Optional[StrictStr], Field(description="Case-insensitive substring match (SQL `ILIKE`). Slower than `run_id_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".")] = None,
         run_id_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".")] = None,
@@ -2239,6 +2254,12 @@ class DagRunApi:
         :type dag_version: List[int]
         :param bundle_version:
         :type bundle_version: str
+        :param teams:
+        :type teams: List[str]
+        :param tags:
+        :type tags: List[str]
+        :param tags_match_mode:
+        :type tags_match_mode: str
         :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, state, dag_id, run_id, logical_date, partition_date, run_after, start_date, end_date, updated_at, conf, duration, dag_run_id`
         :type order_by: List[str]
         :param run_id_pattern: Case-insensitive substring match (SQL `ILIKE`). Slower than `run_id_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".
@@ -2317,6 +2338,9 @@ class DagRunApi:
             state=state,
             dag_version=dag_version,
             bundle_version=bundle_version,
+            teams=teams,
+            tags=tags,
+            tags_match_mode=tags_match_mode,
             order_by=order_by,
             run_id_pattern=run_id_pattern,
             run_id_prefix_pattern=run_id_prefix_pattern,
@@ -2390,6 +2414,9 @@ class DagRunApi:
         state: Optional[List[StrictStr]] = None,
         dag_version: Optional[List[StrictInt]] = None,
         bundle_version: Optional[StrictStr] = None,
+        teams: Optional[List[StrictStr]] = None,
+        tags: Optional[List[StrictStr]] = None,
+        tags_match_mode: Optional[StrictStr] = None,
         order_by: Annotated[Optional[List[StrictStr]], Field(description="Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, state, dag_id, run_id, logical_date, partition_date, run_after, start_date, end_date, updated_at, conf, duration, dag_run_id`")] = None,
         run_id_pattern: Annotated[Optional[StrictStr], Field(description="Case-insensitive substring match (SQL `ILIKE`). Slower than `run_id_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".")] = None,
         run_id_prefix_pattern: Annotated[Optional[StrictStr], Field(description="Case-sensitive, index-friendly prefix match. See \"Filtering with pattern parameters\".")] = None,
@@ -2487,6 +2514,12 @@ class DagRunApi:
         :type dag_version: List[int]
         :param bundle_version:
         :type bundle_version: str
+        :param teams:
+        :type teams: List[str]
+        :param tags:
+        :type tags: List[str]
+        :param tags_match_mode:
+        :type tags_match_mode: str
         :param order_by: Attributes to order by, multi criteria sort is supported. Prefix with `-` for descending order. Supported attributes: `id, state, dag_id, run_id, logical_date, partition_date, run_after, start_date, end_date, updated_at, conf, duration, dag_run_id`
         :type order_by: List[str]
         :param run_id_pattern: Case-insensitive substring match (SQL `ILIKE`). Slower than `run_id_prefix_pattern` on large tables — see \"Filtering with pattern parameters\".
@@ -2565,6 +2598,9 @@ class DagRunApi:
             state=state,
             dag_version=dag_version,
             bundle_version=bundle_version,
+            teams=teams,
+            tags=tags,
+            tags_match_mode=tags_match_mode,
             order_by=order_by,
             run_id_pattern=run_id_pattern,
             run_id_prefix_pattern=run_id_prefix_pattern,
@@ -2633,6 +2669,9 @@ class DagRunApi:
         state,
         dag_version,
         bundle_version,
+        teams,
+        tags,
+        tags_match_mode,
         order_by,
         run_id_pattern,
         run_id_prefix_pattern,
@@ -2655,12 +2694,14 @@ class DagRunApi:
             'run_type': 'multi',
             'state': 'multi',
             'dag_version': 'multi',
+            'teams': 'multi',
+            'tags': 'multi',
             'order_by': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -3005,6 +3046,18 @@ class DagRunApi:
             
             _query_params.append(('bundle_version', bundle_version))
             
+        if teams is not None:
+            
+            _query_params.append(('teams', teams))
+            
+        if tags is not None:
+            
+            _query_params.append(('tags', tags))
+            
+        if tags_match_mode is not None:
+            
+            _query_params.append(('tags_match_mode', tags_match_mode))
+            
         if order_by is not None:
             
             _query_params.append(('order_by', order_by))
@@ -3051,7 +3104,7 @@ class DagRunApi:
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -3321,7 +3374,7 @@ class DagRunApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -3340,7 +3393,7 @@ class DagRunApi:
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -3349,7 +3402,7 @@ class DagRunApi:
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            self.api_client._set_header(_header_params, 'Content-Type', _content_type)
         else:
             _default_content_type = (
                 self.api_client.select_header_content_type(
@@ -3359,7 +3412,7 @@ class DagRunApi:
                 )
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                self.api_client._set_header(_header_params, 'Content-Type', _default_content_type)
 
         # authentication setting
         _auth_settings: List[str] = [
@@ -3623,7 +3676,7 @@ class DagRunApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -3642,7 +3695,7 @@ class DagRunApi:
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -3942,7 +3995,7 @@ class DagRunApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -3967,7 +4020,7 @@ class DagRunApi:
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -3976,7 +4029,7 @@ class DagRunApi:
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            self.api_client._set_header(_header_params, 'Content-Type', _content_type)
         else:
             _default_content_type = (
                 self.api_client.select_header_content_type(
@@ -3986,7 +4039,7 @@ class DagRunApi:
                 )
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                self.api_client._set_header(_header_params, 'Content-Type', _default_content_type)
 
         # authentication setting
         _auth_settings: List[str] = [
@@ -4256,7 +4309,7 @@ class DagRunApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -4275,7 +4328,7 @@ class DagRunApi:
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json'
@@ -4284,7 +4337,7 @@ class DagRunApi:
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            self.api_client._set_header(_header_params, 'Content-Type', _content_type)
         else:
             _default_content_type = (
                 self.api_client.select_header_content_type(
@@ -4294,7 +4347,7 @@ class DagRunApi:
                 )
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                self.api_client._set_header(_header_params, 'Content-Type', _default_content_type)
 
         # authentication setting
         _auth_settings: List[str] = [
@@ -4390,6 +4443,7 @@ class DagRunApi:
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -4473,6 +4527,7 @@ class DagRunApi:
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -4556,6 +4611,7 @@ class DagRunApi:
             '401': "HTTPExceptionResponse",
             '403': "HTTPExceptionResponse",
             '404': "HTTPExceptionResponse",
+            '409': "HTTPExceptionResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -4585,7 +4641,7 @@ class DagRunApi:
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _header_params: Dict[str, Any] = self.api_client._merge_headers(_headers)
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -4612,7 +4668,7 @@ class DagRunApi:
 
 
         # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
+        if not any(key.lower() == 'accept' for key in _header_params):
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
                     'application/json', 

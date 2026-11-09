@@ -6,7 +6,8 @@ Dag Serializer for updatable bodies.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**is_paused** | **bool** |  | 
+**is_paused** | **bool** |  | [optional] 
+**scheduling_state** | [**DagSchedulingState**](DagSchedulingState.md) |  | [optional] 
 
 ## Example
 

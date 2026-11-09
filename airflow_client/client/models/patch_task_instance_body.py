@@ -17,9 +17,10 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
+from uuid import UUID
 from airflow_client.client.models.task_instance_state import TaskInstanceState
 from typing import Optional, Set
 from typing_extensions import Self
@@ -35,7 +36,9 @@ class PatchTaskInstanceBody(BaseModel):
     include_upstream: Optional[StrictBool] = False
     new_state: Optional[TaskInstanceState] = None
     note: Optional[Annotated[str, Field(strict=True, max_length=1000)]] = None
-    __properties: ClassVar[List[str]] = ["include_downstream", "include_future", "include_past", "include_upstream", "new_state", "note"]
+    region_id: Optional[UUID] = None
+    region_index: Optional[StrictInt] = None
+    __properties: ClassVar[List[str]] = ["include_downstream", "include_future", "include_past", "include_upstream", "new_state", "note", "region_id", "region_index"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -93,7 +96,9 @@ class PatchTaskInstanceBody(BaseModel):
             "include_past": obj.get("include_past") if obj.get("include_past") is not None else False,
             "include_upstream": obj.get("include_upstream") if obj.get("include_upstream") is not None else False,
             "new_state": obj.get("new_state"),
-            "note": obj.get("note")
+            "note": obj.get("note"),
+            "region_id": obj.get("region_id"),
+            "region_index": obj.get("region_index")
         })
         return _obj
 
